@@ -20,9 +20,19 @@
                 "createFinding"
               ]
             },
+            "CreateMuteConfig": {
+              "methods": [
+                "createMuteConfig"
+              ]
+            },
             "CreateNotificationConfig": {
               "methods": [
                 "createNotificationConfig"
+              ]
+            },
+            "DeleteMuteConfig": {
+              "methods": [
+                "deleteMuteConfig"
               ]
             },
             "DeleteNotificationConfig": {
@@ -33,6 +43,11 @@
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
+              ]
+            },
+            "GetMuteConfig": {
+              "methods": [
+                "getMuteConfig"
               ]
             },
             "GetNotificationConfig": {
@@ -55,6 +70,11 @@
                 "setFindingState"
               ]
             },
+            "SetMute": {
+              "methods": [
+                "setMute"
+              ]
+            },
             "SetIamPolicy": {
               "methods": [
                 "setIamPolicy"
@@ -68,6 +88,11 @@
             "UpdateFinding": {
               "methods": [
                 "updateFinding"
+              ]
+            },
+            "UpdateMuteConfig": {
+              "methods": [
+                "updateMuteConfig"
               ]
             },
             "UpdateNotificationConfig": {
@@ -88,6 +113,11 @@
             "UpdateSecurityMarks": {
               "methods": [
                 "updateSecurityMarks"
+              ]
+            },
+            "BulkMuteFindings": {
+              "methods": [
+                "bulkMuteFindings"
               ]
             },
             "RunAssetDiscovery": {
@@ -121,6 +151,13 @@
                 "listFindings",
                 "listFindingsStream",
                 "listFindingsAsync"
+              ]
+            },
+            "ListMuteConfigs": {
+              "methods": [
+                "listMuteConfigs",
+                "listMuteConfigsStream",
+                "listMuteConfigsAsync"
               ]
             },
             "ListNotificationConfigs": {
@@ -152,9 +189,19 @@
                 "createFinding"
               ]
             },
+            "CreateMuteConfig": {
+              "methods": [
+                "createMuteConfig"
+              ]
+            },
             "CreateNotificationConfig": {
               "methods": [
                 "createNotificationConfig"
+              ]
+            },
+            "DeleteMuteConfig": {
+              "methods": [
+                "deleteMuteConfig"
               ]
             },
             "DeleteNotificationConfig": {
@@ -165,6 +212,11 @@
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
+              ]
+            },
+            "GetMuteConfig": {
+              "methods": [
+                "getMuteConfig"
               ]
             },
             "GetNotificationConfig": {
@@ -187,6 +239,11 @@
                 "setFindingState"
               ]
             },
+            "SetMute": {
+              "methods": [
+                "setMute"
+              ]
+            },
             "SetIamPolicy": {
               "methods": [
                 "setIamPolicy"
@@ -200,6 +257,11 @@
             "UpdateFinding": {
               "methods": [
                 "updateFinding"
+              ]
+            },
+            "UpdateMuteConfig": {
+              "methods": [
+                "updateMuteConfig"
               ]
             },
             "UpdateNotificationConfig": {
@@ -220,6 +282,11 @@
             "UpdateSecurityMarks": {
               "methods": [
                 "updateSecurityMarks"
+              ]
+            },
+            "BulkMuteFindings": {
+              "methods": [
+                "bulkMuteFindings"
               ]
             },
             "RunAssetDiscovery": {
@@ -253,6 +320,13 @@
                 "listFindings",
                 "listFindingsStream",
                 "listFindingsAsync"
+              ]
+            },
+            "ListMuteConfigs": {
+              "methods": [
+                "listMuteConfigs",
+                "listMuteConfigsStream",
+                "listMuteConfigsAsync"
               ]
             },
             "ListNotificationConfigs": {

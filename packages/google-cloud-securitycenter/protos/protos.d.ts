@@ -626,6 +626,9 @@ export namespace google {
                     /** Finding canonicalName */
                     canonicalName?: (string|null);
 
+                    /** Finding mute */
+                    mute?: (google.cloud.securitycenter.v1.Finding.Mute|keyof typeof google.cloud.securitycenter.v1.Finding.Mute|null);
+
                     /** Finding findingClass */
                     findingClass?: (google.cloud.securitycenter.v1.Finding.FindingClass|keyof typeof google.cloud.securitycenter.v1.Finding.FindingClass|null);
 
@@ -634,6 +637,12 @@ export namespace google {
 
                     /** Finding vulnerability */
                     vulnerability?: (google.cloud.securitycenter.v1.IVulnerability|null);
+
+                    /** Finding muteUpdateTime */
+                    muteUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Finding muteInitiator */
+                    muteInitiator?: (string|null);
                 }
 
                 /** Represents a Finding. */
@@ -681,6 +690,9 @@ export namespace google {
                     /** Finding canonicalName. */
                     public canonicalName: string;
 
+                    /** Finding mute. */
+                    public mute: (google.cloud.securitycenter.v1.Finding.Mute|keyof typeof google.cloud.securitycenter.v1.Finding.Mute);
+
                     /** Finding findingClass. */
                     public findingClass: (google.cloud.securitycenter.v1.Finding.FindingClass|keyof typeof google.cloud.securitycenter.v1.Finding.FindingClass);
 
@@ -689,6 +701,12 @@ export namespace google {
 
                     /** Finding vulnerability. */
                     public vulnerability?: (google.cloud.securitycenter.v1.IVulnerability|null);
+
+                    /** Finding muteUpdateTime. */
+                    public muteUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Finding muteInitiator. */
+                    public muteInitiator: string;
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -777,6 +795,14 @@ export namespace google {
                         HIGH = 2,
                         MEDIUM = 3,
                         LOW = 4
+                    }
+
+                    /** Mute enum. */
+                    enum Mute {
+                        MUTE_UNSPECIFIED = 0,
+                        MUTED = 1,
+                        UNMUTED = 2,
+                        UNDEFINED = 4
                     }
 
                     /** FindingClass enum. */
@@ -1358,6 +1384,132 @@ export namespace google {
                         IMPACT_LOW = 2,
                         IMPACT_NONE = 3
                     }
+                }
+
+                /** Properties of a MuteConfig. */
+                interface IMuteConfig {
+
+                    /** MuteConfig name */
+                    name?: (string|null);
+
+                    /** MuteConfig displayName */
+                    displayName?: (string|null);
+
+                    /** MuteConfig description */
+                    description?: (string|null);
+
+                    /** MuteConfig filter */
+                    filter?: (string|null);
+
+                    /** MuteConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MuteConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MuteConfig mostRecentEditor */
+                    mostRecentEditor?: (string|null);
+                }
+
+                /** Represents a MuteConfig. */
+                class MuteConfig implements IMuteConfig {
+
+                    /**
+                     * Constructs a new MuteConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IMuteConfig);
+
+                    /** MuteConfig name. */
+                    public name: string;
+
+                    /** MuteConfig displayName. */
+                    public displayName: string;
+
+                    /** MuteConfig description. */
+                    public description: string;
+
+                    /** MuteConfig filter. */
+                    public filter: string;
+
+                    /** MuteConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MuteConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MuteConfig mostRecentEditor. */
+                    public mostRecentEditor: string;
+
+                    /**
+                     * Creates a new MuteConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MuteConfig instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IMuteConfig): google.cloud.securitycenter.v1.MuteConfig;
+
+                    /**
+                     * Encodes the specified MuteConfig message. Does not implicitly {@link google.cloud.securitycenter.v1.MuteConfig.verify|verify} messages.
+                     * @param message MuteConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IMuteConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MuteConfig message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.MuteConfig.verify|verify} messages.
+                     * @param message MuteConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IMuteConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MuteConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MuteConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.MuteConfig;
+
+                    /**
+                     * Decodes a MuteConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MuteConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.MuteConfig;
+
+                    /**
+                     * Verifies a MuteConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MuteConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MuteConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.MuteConfig;
+
+                    /**
+                     * Creates a plain object from a MuteConfig message. Also converts values to other types if specified.
+                     * @param message MuteConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.MuteConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MuteConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a NotificationConfig. */
@@ -2152,6 +2304,20 @@ export namespace google {
                     public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SecurityCenter;
 
                     /**
+                     * Calls BulkMuteFindings.
+                     * @param request BulkMuteFindingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public bulkMuteFindings(request: google.cloud.securitycenter.v1.IBulkMuteFindingsRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.BulkMuteFindingsCallback): void;
+
+                    /**
+                     * Calls BulkMuteFindings.
+                     * @param request BulkMuteFindingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkMuteFindings(request: google.cloud.securitycenter.v1.IBulkMuteFindingsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls CreateSource.
                      * @param request CreateSourceRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Source
@@ -2180,6 +2346,20 @@ export namespace google {
                     public createFinding(request: google.cloud.securitycenter.v1.ICreateFindingRequest): Promise<google.cloud.securitycenter.v1.Finding>;
 
                     /**
+                     * Calls CreateMuteConfig.
+                     * @param request CreateMuteConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MuteConfig
+                     */
+                    public createMuteConfig(request: google.cloud.securitycenter.v1.ICreateMuteConfigRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.CreateMuteConfigCallback): void;
+
+                    /**
+                     * Calls CreateMuteConfig.
+                     * @param request CreateMuteConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createMuteConfig(request: google.cloud.securitycenter.v1.ICreateMuteConfigRequest): Promise<google.cloud.securitycenter.v1.MuteConfig>;
+
+                    /**
                      * Calls CreateNotificationConfig.
                      * @param request CreateNotificationConfigRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and NotificationConfig
@@ -2192,6 +2372,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public createNotificationConfig(request: google.cloud.securitycenter.v1.ICreateNotificationConfigRequest): Promise<google.cloud.securitycenter.v1.NotificationConfig>;
+
+                    /**
+                     * Calls DeleteMuteConfig.
+                     * @param request DeleteMuteConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteMuteConfig(request: google.cloud.securitycenter.v1.IDeleteMuteConfigRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.DeleteMuteConfigCallback): void;
+
+                    /**
+                     * Calls DeleteMuteConfig.
+                     * @param request DeleteMuteConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteMuteConfig(request: google.cloud.securitycenter.v1.IDeleteMuteConfigRequest): Promise<google.protobuf.Empty>;
 
                     /**
                      * Calls DeleteNotificationConfig.
@@ -2220,6 +2414,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls GetMuteConfig.
+                     * @param request GetMuteConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MuteConfig
+                     */
+                    public getMuteConfig(request: google.cloud.securitycenter.v1.IGetMuteConfigRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.GetMuteConfigCallback): void;
+
+                    /**
+                     * Calls GetMuteConfig.
+                     * @param request GetMuteConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMuteConfig(request: google.cloud.securitycenter.v1.IGetMuteConfigRequest): Promise<google.cloud.securitycenter.v1.MuteConfig>;
 
                     /**
                      * Calls GetNotificationConfig.
@@ -2320,6 +2528,20 @@ export namespace google {
                     public listFindings(request: google.cloud.securitycenter.v1.IListFindingsRequest): Promise<google.cloud.securitycenter.v1.ListFindingsResponse>;
 
                     /**
+                     * Calls ListMuteConfigs.
+                     * @param request ListMuteConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMuteConfigsResponse
+                     */
+                    public listMuteConfigs(request: google.cloud.securitycenter.v1.IListMuteConfigsRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.ListMuteConfigsCallback): void;
+
+                    /**
+                     * Calls ListMuteConfigs.
+                     * @param request ListMuteConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMuteConfigs(request: google.cloud.securitycenter.v1.IListMuteConfigsRequest): Promise<google.cloud.securitycenter.v1.ListMuteConfigsResponse>;
+
+                    /**
                      * Calls ListNotificationConfigs.
                      * @param request ListNotificationConfigsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListNotificationConfigsResponse
@@ -2376,6 +2598,20 @@ export namespace google {
                     public setFindingState(request: google.cloud.securitycenter.v1.ISetFindingStateRequest): Promise<google.cloud.securitycenter.v1.Finding>;
 
                     /**
+                     * Calls SetMute.
+                     * @param request SetMuteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Finding
+                     */
+                    public setMute(request: google.cloud.securitycenter.v1.ISetMuteRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.SetMuteCallback): void;
+
+                    /**
+                     * Calls SetMute.
+                     * @param request SetMuteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setMute(request: google.cloud.securitycenter.v1.ISetMuteRequest): Promise<google.cloud.securitycenter.v1.Finding>;
+
+                    /**
                      * Calls SetIamPolicy.
                      * @param request SetIamPolicyRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Policy
@@ -2416,6 +2652,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateFinding(request: google.cloud.securitycenter.v1.IUpdateFindingRequest): Promise<google.cloud.securitycenter.v1.Finding>;
+
+                    /**
+                     * Calls UpdateMuteConfig.
+                     * @param request UpdateMuteConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MuteConfig
+                     */
+                    public updateMuteConfig(request: google.cloud.securitycenter.v1.IUpdateMuteConfigRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.UpdateMuteConfigCallback): void;
+
+                    /**
+                     * Calls UpdateMuteConfig.
+                     * @param request UpdateMuteConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateMuteConfig(request: google.cloud.securitycenter.v1.IUpdateMuteConfigRequest): Promise<google.cloud.securitycenter.v1.MuteConfig>;
 
                     /**
                      * Calls UpdateNotificationConfig.
@@ -2477,6 +2727,13 @@ export namespace google {
                 namespace SecurityCenter {
 
                     /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#bulkMuteFindings}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type BulkMuteFindingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#createSource}.
                      * @param error Error, if any
                      * @param [response] Source
@@ -2491,11 +2748,25 @@ export namespace google {
                     type CreateFindingCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.Finding) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#createMuteConfig}.
+                     * @param error Error, if any
+                     * @param [response] MuteConfig
+                     */
+                    type CreateMuteConfigCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.MuteConfig) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#createNotificationConfig}.
                      * @param error Error, if any
                      * @param [response] NotificationConfig
                      */
                     type CreateNotificationConfigCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.NotificationConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#deleteMuteConfig}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteMuteConfigCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#deleteNotificationConfig}.
@@ -2510,6 +2781,13 @@ export namespace google {
                      * @param [response] Policy
                      */
                     type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#getMuteConfig}.
+                     * @param error Error, if any
+                     * @param [response] MuteConfig
+                     */
+                    type GetMuteConfigCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.MuteConfig) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#getNotificationConfig}.
@@ -2561,6 +2839,13 @@ export namespace google {
                     type ListFindingsCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.ListFindingsResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#listMuteConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListMuteConfigsResponse
+                     */
+                    type ListMuteConfigsCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.ListMuteConfigsResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#listNotificationConfigs}.
                      * @param error Error, if any
                      * @param [response] ListNotificationConfigsResponse
@@ -2589,6 +2874,13 @@ export namespace google {
                     type SetFindingStateCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.Finding) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#setMute}.
+                     * @param error Error, if any
+                     * @param [response] Finding
+                     */
+                    type SetMuteCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.Finding) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#setIamPolicy}.
                      * @param error Error, if any
                      * @param [response] Policy
@@ -2608,6 +2900,13 @@ export namespace google {
                      * @param [response] Finding
                      */
                     type UpdateFindingCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.Finding) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#updateMuteConfig}.
+                     * @param error Error, if any
+                     * @param [response] MuteConfig
+                     */
+                    type UpdateMuteConfigCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.MuteConfig) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#updateNotificationConfig}.
@@ -2636,6 +2935,192 @@ export namespace google {
                      * @param [response] SecurityMarks
                      */
                     type UpdateSecurityMarksCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.SecurityMarks) => void;
+                }
+
+                /** Properties of a BulkMuteFindingsRequest. */
+                interface IBulkMuteFindingsRequest {
+
+                    /** BulkMuteFindingsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkMuteFindingsRequest filter */
+                    filter?: (string|null);
+
+                    /** BulkMuteFindingsRequest muteAnnotation */
+                    muteAnnotation?: (string|null);
+                }
+
+                /** Represents a BulkMuteFindingsRequest. */
+                class BulkMuteFindingsRequest implements IBulkMuteFindingsRequest {
+
+                    /**
+                     * Constructs a new BulkMuteFindingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IBulkMuteFindingsRequest);
+
+                    /** BulkMuteFindingsRequest parent. */
+                    public parent: string;
+
+                    /** BulkMuteFindingsRequest filter. */
+                    public filter: string;
+
+                    /** BulkMuteFindingsRequest muteAnnotation. */
+                    public muteAnnotation: string;
+
+                    /**
+                     * Creates a new BulkMuteFindingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkMuteFindingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IBulkMuteFindingsRequest): google.cloud.securitycenter.v1.BulkMuteFindingsRequest;
+
+                    /**
+                     * Encodes the specified BulkMuteFindingsRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.BulkMuteFindingsRequest.verify|verify} messages.
+                     * @param message BulkMuteFindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IBulkMuteFindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkMuteFindingsRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.BulkMuteFindingsRequest.verify|verify} messages.
+                     * @param message BulkMuteFindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IBulkMuteFindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkMuteFindingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkMuteFindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.BulkMuteFindingsRequest;
+
+                    /**
+                     * Decodes a BulkMuteFindingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkMuteFindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.BulkMuteFindingsRequest;
+
+                    /**
+                     * Verifies a BulkMuteFindingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkMuteFindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkMuteFindingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.BulkMuteFindingsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkMuteFindingsRequest message. Also converts values to other types if specified.
+                     * @param message BulkMuteFindingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.BulkMuteFindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkMuteFindingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BulkMuteFindingsResponse. */
+                interface IBulkMuteFindingsResponse {
+                }
+
+                /** Represents a BulkMuteFindingsResponse. */
+                class BulkMuteFindingsResponse implements IBulkMuteFindingsResponse {
+
+                    /**
+                     * Constructs a new BulkMuteFindingsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IBulkMuteFindingsResponse);
+
+                    /**
+                     * Creates a new BulkMuteFindingsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkMuteFindingsResponse instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IBulkMuteFindingsResponse): google.cloud.securitycenter.v1.BulkMuteFindingsResponse;
+
+                    /**
+                     * Encodes the specified BulkMuteFindingsResponse message. Does not implicitly {@link google.cloud.securitycenter.v1.BulkMuteFindingsResponse.verify|verify} messages.
+                     * @param message BulkMuteFindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IBulkMuteFindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkMuteFindingsResponse message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.BulkMuteFindingsResponse.verify|verify} messages.
+                     * @param message BulkMuteFindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IBulkMuteFindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkMuteFindingsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkMuteFindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.BulkMuteFindingsResponse;
+
+                    /**
+                     * Decodes a BulkMuteFindingsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkMuteFindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.BulkMuteFindingsResponse;
+
+                    /**
+                     * Verifies a BulkMuteFindingsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkMuteFindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkMuteFindingsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.BulkMuteFindingsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkMuteFindingsResponse message. Also converts values to other types if specified.
+                     * @param message BulkMuteFindingsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.BulkMuteFindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkMuteFindingsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a CreateFindingRequest. */
@@ -2735,6 +3220,108 @@ export namespace google {
 
                     /**
                      * Converts this CreateFindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateMuteConfigRequest. */
+                interface ICreateMuteConfigRequest {
+
+                    /** CreateMuteConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateMuteConfigRequest muteConfig */
+                    muteConfig?: (google.cloud.securitycenter.v1.IMuteConfig|null);
+
+                    /** CreateMuteConfigRequest muteConfigId */
+                    muteConfigId?: (string|null);
+                }
+
+                /** Represents a CreateMuteConfigRequest. */
+                class CreateMuteConfigRequest implements ICreateMuteConfigRequest {
+
+                    /**
+                     * Constructs a new CreateMuteConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ICreateMuteConfigRequest);
+
+                    /** CreateMuteConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateMuteConfigRequest muteConfig. */
+                    public muteConfig?: (google.cloud.securitycenter.v1.IMuteConfig|null);
+
+                    /** CreateMuteConfigRequest muteConfigId. */
+                    public muteConfigId: string;
+
+                    /**
+                     * Creates a new CreateMuteConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMuteConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ICreateMuteConfigRequest): google.cloud.securitycenter.v1.CreateMuteConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateMuteConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.CreateMuteConfigRequest.verify|verify} messages.
+                     * @param message CreateMuteConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ICreateMuteConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMuteConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.CreateMuteConfigRequest.verify|verify} messages.
+                     * @param message CreateMuteConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ICreateMuteConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMuteConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMuteConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.CreateMuteConfigRequest;
+
+                    /**
+                     * Decodes a CreateMuteConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMuteConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.CreateMuteConfigRequest;
+
+                    /**
+                     * Verifies a CreateMuteConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMuteConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMuteConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.CreateMuteConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateMuteConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateMuteConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.CreateMuteConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMuteConfigRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -2938,6 +3525,96 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a DeleteMuteConfigRequest. */
+                interface IDeleteMuteConfigRequest {
+
+                    /** DeleteMuteConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteMuteConfigRequest. */
+                class DeleteMuteConfigRequest implements IDeleteMuteConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteMuteConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IDeleteMuteConfigRequest);
+
+                    /** DeleteMuteConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteMuteConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteMuteConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IDeleteMuteConfigRequest): google.cloud.securitycenter.v1.DeleteMuteConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteMuteConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.DeleteMuteConfigRequest.verify|verify} messages.
+                     * @param message DeleteMuteConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IDeleteMuteConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteMuteConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.DeleteMuteConfigRequest.verify|verify} messages.
+                     * @param message DeleteMuteConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IDeleteMuteConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteMuteConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteMuteConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.DeleteMuteConfigRequest;
+
+                    /**
+                     * Decodes a DeleteMuteConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteMuteConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.DeleteMuteConfigRequest;
+
+                    /**
+                     * Verifies a DeleteMuteConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteMuteConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteMuteConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.DeleteMuteConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteMuteConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteMuteConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.DeleteMuteConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteMuteConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a DeleteNotificationConfigRequest. */
                 interface IDeleteNotificationConfigRequest {
 
@@ -3023,6 +3700,96 @@ export namespace google {
 
                     /**
                      * Converts this DeleteNotificationConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetMuteConfigRequest. */
+                interface IGetMuteConfigRequest {
+
+                    /** GetMuteConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMuteConfigRequest. */
+                class GetMuteConfigRequest implements IGetMuteConfigRequest {
+
+                    /**
+                     * Constructs a new GetMuteConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IGetMuteConfigRequest);
+
+                    /** GetMuteConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMuteConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMuteConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IGetMuteConfigRequest): google.cloud.securitycenter.v1.GetMuteConfigRequest;
+
+                    /**
+                     * Encodes the specified GetMuteConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.GetMuteConfigRequest.verify|verify} messages.
+                     * @param message GetMuteConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IGetMuteConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMuteConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.GetMuteConfigRequest.verify|verify} messages.
+                     * @param message GetMuteConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IGetMuteConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMuteConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMuteConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.GetMuteConfigRequest;
+
+                    /**
+                     * Decodes a GetMuteConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMuteConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.GetMuteConfigRequest;
+
+                    /**
+                     * Verifies a GetMuteConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMuteConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMuteConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.GetMuteConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetMuteConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetMuteConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.GetMuteConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMuteConfigRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -3857,6 +4624,204 @@ export namespace google {
 
                     /**
                      * Converts this GroupResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListMuteConfigsRequest. */
+                interface IListMuteConfigsRequest {
+
+                    /** ListMuteConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMuteConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMuteConfigsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListMuteConfigsRequest. */
+                class ListMuteConfigsRequest implements IListMuteConfigsRequest {
+
+                    /**
+                     * Constructs a new ListMuteConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IListMuteConfigsRequest);
+
+                    /** ListMuteConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListMuteConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMuteConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListMuteConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMuteConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IListMuteConfigsRequest): google.cloud.securitycenter.v1.ListMuteConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListMuteConfigsRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.ListMuteConfigsRequest.verify|verify} messages.
+                     * @param message ListMuteConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IListMuteConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMuteConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ListMuteConfigsRequest.verify|verify} messages.
+                     * @param message ListMuteConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IListMuteConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMuteConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMuteConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.ListMuteConfigsRequest;
+
+                    /**
+                     * Decodes a ListMuteConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMuteConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.ListMuteConfigsRequest;
+
+                    /**
+                     * Verifies a ListMuteConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMuteConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMuteConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.ListMuteConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListMuteConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListMuteConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.ListMuteConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMuteConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListMuteConfigsResponse. */
+                interface IListMuteConfigsResponse {
+
+                    /** ListMuteConfigsResponse muteConfigs */
+                    muteConfigs?: (google.cloud.securitycenter.v1.IMuteConfig[]|null);
+
+                    /** ListMuteConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListMuteConfigsResponse. */
+                class ListMuteConfigsResponse implements IListMuteConfigsResponse {
+
+                    /**
+                     * Constructs a new ListMuteConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IListMuteConfigsResponse);
+
+                    /** ListMuteConfigsResponse muteConfigs. */
+                    public muteConfigs: google.cloud.securitycenter.v1.IMuteConfig[];
+
+                    /** ListMuteConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListMuteConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMuteConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IListMuteConfigsResponse): google.cloud.securitycenter.v1.ListMuteConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListMuteConfigsResponse message. Does not implicitly {@link google.cloud.securitycenter.v1.ListMuteConfigsResponse.verify|verify} messages.
+                     * @param message ListMuteConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IListMuteConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMuteConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ListMuteConfigsResponse.verify|verify} messages.
+                     * @param message ListMuteConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IListMuteConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMuteConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMuteConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.ListMuteConfigsResponse;
+
+                    /**
+                     * Decodes a ListMuteConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMuteConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.ListMuteConfigsResponse;
+
+                    /**
+                     * Verifies a ListMuteConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMuteConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMuteConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.ListMuteConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListMuteConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListMuteConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.ListMuteConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMuteConfigsResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -5199,6 +6164,102 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a SetMuteRequest. */
+                interface ISetMuteRequest {
+
+                    /** SetMuteRequest name */
+                    name?: (string|null);
+
+                    /** SetMuteRequest mute */
+                    mute?: (google.cloud.securitycenter.v1.Finding.Mute|keyof typeof google.cloud.securitycenter.v1.Finding.Mute|null);
+                }
+
+                /** Represents a SetMuteRequest. */
+                class SetMuteRequest implements ISetMuteRequest {
+
+                    /**
+                     * Constructs a new SetMuteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ISetMuteRequest);
+
+                    /** SetMuteRequest name. */
+                    public name: string;
+
+                    /** SetMuteRequest mute. */
+                    public mute: (google.cloud.securitycenter.v1.Finding.Mute|keyof typeof google.cloud.securitycenter.v1.Finding.Mute);
+
+                    /**
+                     * Creates a new SetMuteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetMuteRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ISetMuteRequest): google.cloud.securitycenter.v1.SetMuteRequest;
+
+                    /**
+                     * Encodes the specified SetMuteRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.SetMuteRequest.verify|verify} messages.
+                     * @param message SetMuteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ISetMuteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetMuteRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.SetMuteRequest.verify|verify} messages.
+                     * @param message SetMuteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ISetMuteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetMuteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetMuteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.SetMuteRequest;
+
+                    /**
+                     * Decodes a SetMuteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetMuteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.SetMuteRequest;
+
+                    /**
+                     * Verifies a SetMuteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetMuteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetMuteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.SetMuteRequest;
+
+                    /**
+                     * Creates a plain object from a SetMuteRequest message. Also converts values to other types if specified.
+                     * @param message SetMuteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.SetMuteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetMuteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a RunAssetDiscoveryRequest. */
                 interface IRunAssetDiscoveryRequest {
 
@@ -5380,6 +6441,102 @@ export namespace google {
 
                     /**
                      * Converts this UpdateFindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateMuteConfigRequest. */
+                interface IUpdateMuteConfigRequest {
+
+                    /** UpdateMuteConfigRequest muteConfig */
+                    muteConfig?: (google.cloud.securitycenter.v1.IMuteConfig|null);
+
+                    /** UpdateMuteConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateMuteConfigRequest. */
+                class UpdateMuteConfigRequest implements IUpdateMuteConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateMuteConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IUpdateMuteConfigRequest);
+
+                    /** UpdateMuteConfigRequest muteConfig. */
+                    public muteConfig?: (google.cloud.securitycenter.v1.IMuteConfig|null);
+
+                    /** UpdateMuteConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateMuteConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateMuteConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IUpdateMuteConfigRequest): google.cloud.securitycenter.v1.UpdateMuteConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateMuteConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateMuteConfigRequest.verify|verify} messages.
+                     * @param message UpdateMuteConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IUpdateMuteConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateMuteConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateMuteConfigRequest.verify|verify} messages.
+                     * @param message UpdateMuteConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IUpdateMuteConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateMuteConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateMuteConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.UpdateMuteConfigRequest;
+
+                    /**
+                     * Decodes an UpdateMuteConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateMuteConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.UpdateMuteConfigRequest;
+
+                    /**
+                     * Verifies an UpdateMuteConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateMuteConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateMuteConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.UpdateMuteConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateMuteConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateMuteConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.UpdateMuteConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateMuteConfigRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

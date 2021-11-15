@@ -172,6 +172,9 @@ export class SecurityCenterClient {
       folderAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/assets/{asset}/securityMarks'
       ),
+      folderMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/muteConfigs/{mute_config}'
+      ),
       folderSourcePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/sources/{source}'
       ),
@@ -195,6 +198,9 @@ export class SecurityCenterClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/assets/{asset}/securityMarks'
         ),
+      organizationMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/muteConfigs/{mute_config}'
+      ),
       organizationSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/organizationSettings'
       ),
@@ -213,6 +219,9 @@ export class SecurityCenterClient {
       ),
       projectAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/assets/{asset}/securityMarks'
+      ),
+      projectMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/muteConfigs/{mute_config}'
       ),
       projectSourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/sources/{source}'
@@ -250,6 +259,11 @@ export class SecurityCenterClient {
         'nextPageToken',
         'listFindingsResults'
       ),
+      listMuteConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'muteConfigs'
+      ),
       listNotificationConfigs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -274,6 +288,12 @@ export class SecurityCenterClient {
         grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
       })
       .operationsClient(opts);
+    const bulkMuteFindingsResponse = protoFilesRoot.lookup(
+      '.google.cloud.securitycenter.v1.BulkMuteFindingsResponse'
+    ) as gax.protobuf.Type;
+    const bulkMuteFindingsMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const runAssetDiscoveryResponse = protoFilesRoot.lookup(
       '.google.cloud.securitycenter.v1.RunAssetDiscoveryResponse'
     ) as gax.protobuf.Type;
@@ -282,6 +302,11 @@ export class SecurityCenterClient {
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
+      bulkMuteFindings: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        bulkMuteFindingsResponse.decode.bind(bulkMuteFindingsResponse),
+        bulkMuteFindingsMetadata.decode.bind(bulkMuteFindingsMetadata)
+      ),
       runAssetDiscovery: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         runAssetDiscoveryResponse.decode.bind(runAssetDiscoveryResponse),
@@ -339,11 +364,15 @@ export class SecurityCenterClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const securityCenterStubMethods = [
+      'bulkMuteFindings',
       'createSource',
       'createFinding',
+      'createMuteConfig',
       'createNotificationConfig',
+      'deleteMuteConfig',
       'deleteNotificationConfig',
       'getIamPolicy',
+      'getMuteConfig',
       'getNotificationConfig',
       'getOrganizationSettings',
       'getSource',
@@ -351,13 +380,16 @@ export class SecurityCenterClient {
       'groupFindings',
       'listAssets',
       'listFindings',
+      'listMuteConfigs',
       'listNotificationConfigs',
       'listSources',
       'runAssetDiscovery',
       'setFindingState',
+      'setMute',
       'setIamPolicy',
       'testIamPermissions',
       'updateFinding',
+      'updateMuteConfig',
       'updateNotificationConfig',
       'updateOrganizationSettings',
       'updateSource',
@@ -643,6 +675,112 @@ export class SecurityCenterClient {
     return this.innerApiCalls.createFinding(request, options, callback);
   }
   /**
+   * Creates a mute config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the new mute configs's parent. Its format is
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
+   * @param {google.cloud.securitycenter.v1.MuteConfig} request.muteConfig
+   *   Required. The mute config being created.
+   * @param {string} request.muteConfigId
+   *   Required. Unique identifier provided by the client within the parent scope.
+   *   It must consist of lower case letters, numbers, and hyphen, with the first
+   *   character a letter, the last a letter or a number, and a 63 character
+   *   maximum.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MuteConfig]{@link google.cloud.securitycenter.v1.MuteConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.create_mute_config.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_CreateMuteConfig_async
+   */
+  createMuteConfig(
+    request?: protos.google.cloud.securitycenter.v1.ICreateMuteConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      (
+        | protos.google.cloud.securitycenter.v1.ICreateMuteConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createMuteConfig(
+    request: protos.google.cloud.securitycenter.v1.ICreateMuteConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      | protos.google.cloud.securitycenter.v1.ICreateMuteConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createMuteConfig(
+    request: protos.google.cloud.securitycenter.v1.ICreateMuteConfigRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      | protos.google.cloud.securitycenter.v1.ICreateMuteConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createMuteConfig(
+    request?: protos.google.cloud.securitycenter.v1.ICreateMuteConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IMuteConfig,
+          | protos.google.cloud.securitycenter.v1.ICreateMuteConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      | protos.google.cloud.securitycenter.v1.ICreateMuteConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      (
+        | protos.google.cloud.securitycenter.v1.ICreateMuteConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createMuteConfig(request, options, callback);
+  }
+  /**
    * Creates a notification config.
    *
    * @param {Object} request
@@ -751,6 +889,106 @@ export class SecurityCenterClient {
       options,
       callback
     );
+  }
+  /**
+   * Deletes an existing mute config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the mute config to delete. Its format is
+   *   organizations/{organization}/muteConfigs/{config_id},
+   *   folders/{folder}/muteConfigs/{config_id}, or
+   *   projects/{project}/muteConfigs/{config_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.delete_mute_config.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_DeleteMuteConfig_async
+   */
+  deleteMuteConfig(
+    request?: protos.google.cloud.securitycenter.v1.IDeleteMuteConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycenter.v1.IDeleteMuteConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteMuteConfig(
+    request: protos.google.cloud.securitycenter.v1.IDeleteMuteConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteMuteConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteMuteConfig(
+    request: protos.google.cloud.securitycenter.v1.IDeleteMuteConfigRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteMuteConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteMuteConfig(
+    request?: protos.google.cloud.securitycenter.v1.IDeleteMuteConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycenter.v1.IDeleteMuteConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteMuteConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycenter.v1.IDeleteMuteConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteMuteConfig(request, options, callback);
   }
   /**
    * Deletes a notification config.
@@ -940,6 +1178,100 @@ export class SecurityCenterClient {
       });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
+  }
+  /**
+   * Gets a mute config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the mute config to retrieve. Its format is
+   *   organizations/{organization}/muteConfigs/{config_id},
+   *   folders/{folder}/muteConfigs/{config_id}, or
+   *   projects/{project}/muteConfigs/{config_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MuteConfig]{@link google.cloud.securitycenter.v1.MuteConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.get_mute_config.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_GetMuteConfig_async
+   */
+  getMuteConfig(
+    request?: protos.google.cloud.securitycenter.v1.IGetMuteConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      protos.google.cloud.securitycenter.v1.IGetMuteConfigRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getMuteConfig(
+    request: protos.google.cloud.securitycenter.v1.IGetMuteConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      | protos.google.cloud.securitycenter.v1.IGetMuteConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getMuteConfig(
+    request: protos.google.cloud.securitycenter.v1.IGetMuteConfigRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      | protos.google.cloud.securitycenter.v1.IGetMuteConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getMuteConfig(
+    request?: protos.google.cloud.securitycenter.v1.IGetMuteConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IMuteConfig,
+          | protos.google.cloud.securitycenter.v1.IGetMuteConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      | protos.google.cloud.securitycenter.v1.IGetMuteConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      protos.google.cloud.securitycenter.v1.IGetMuteConfigRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getMuteConfig(request, options, callback);
   }
   /**
    * Gets a notification config.
@@ -1332,6 +1664,98 @@ export class SecurityCenterClient {
     return this.innerApiCalls.setFindingState(request, options, callback);
   }
   /**
+   * Updates the mute state of a finding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The relative resource name of the finding. See:
+   *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
+   *   Example:
+   *   "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}",
+   *   "folders/{folder_id}/sources/{source_id}/finding/{finding_id}",
+   *   "projects/{project_id}/sources/{source_id}/finding/{finding_id}".
+   * @param {google.cloud.securitycenter.v1.Finding.Mute} request.mute
+   *   Required. The desired state of the Mute.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Finding]{@link google.cloud.securitycenter.v1.Finding}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.set_mute.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_SetMute_async
+   */
+  setMute(
+    request?: protos.google.cloud.securitycenter.v1.ISetMuteRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IFinding,
+      protos.google.cloud.securitycenter.v1.ISetMuteRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setMute(
+    request: protos.google.cloud.securitycenter.v1.ISetMuteRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IFinding,
+      protos.google.cloud.securitycenter.v1.ISetMuteRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setMute(
+    request: protos.google.cloud.securitycenter.v1.ISetMuteRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IFinding,
+      protos.google.cloud.securitycenter.v1.ISetMuteRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setMute(
+    request?: protos.google.cloud.securitycenter.v1.ISetMuteRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IFinding,
+          | protos.google.cloud.securitycenter.v1.ISetMuteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IFinding,
+      protos.google.cloud.securitycenter.v1.ISetMuteRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IFinding,
+      protos.google.cloud.securitycenter.v1.ISetMuteRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.setMute(request, options, callback);
+  }
+  /**
    * Sets the access control policy on the specified Source.
    *
    * @param {Object} request
@@ -1613,6 +2037,106 @@ export class SecurityCenterClient {
       });
     this.initialize();
     return this.innerApiCalls.updateFinding(request, options, callback);
+  }
+  /**
+   * Updates a mute config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securitycenter.v1.MuteConfig} request.muteConfig
+   *   Required. The mute config being updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to be updated.
+   *   If empty all mutable fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MuteConfig]{@link google.cloud.securitycenter.v1.MuteConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.update_mute_config.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_UpdateMuteConfig_async
+   */
+  updateMuteConfig(
+    request?: protos.google.cloud.securitycenter.v1.IUpdateMuteConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      (
+        | protos.google.cloud.securitycenter.v1.IUpdateMuteConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateMuteConfig(
+    request: protos.google.cloud.securitycenter.v1.IUpdateMuteConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      | protos.google.cloud.securitycenter.v1.IUpdateMuteConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateMuteConfig(
+    request: protos.google.cloud.securitycenter.v1.IUpdateMuteConfigRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      | protos.google.cloud.securitycenter.v1.IUpdateMuteConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateMuteConfig(
+    request?: protos.google.cloud.securitycenter.v1.IUpdateMuteConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IMuteConfig,
+          | protos.google.cloud.securitycenter.v1.IUpdateMuteConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      | protos.google.cloud.securitycenter.v1.IUpdateMuteConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IMuteConfig,
+      (
+        | protos.google.cloud.securitycenter.v1.IUpdateMuteConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'mute_config.name': request.muteConfig!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateMuteConfig(request, options, callback);
   }
   /**
    *
@@ -2029,6 +2553,171 @@ export class SecurityCenterClient {
     return this.innerApiCalls.updateSecurityMarks(request, options, callback);
   }
 
+  /**
+   * Kicks off an LRO to bulk mute findings for a parent based on a filter. The
+   * parent can be either an organization, folder or project. The findings
+   * matched by the filter will be muted after the LRO is done.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, at which bulk action needs to be applied. Its format is
+   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   "projects/[project_id]".
+   * @param {string} request.filter
+   *   Expression that identifies findings that should be updated.
+   *   The expression is a list of zero or more restrictions combined
+   *   via logical operators `AND` and `OR`. Parentheses are supported, and `OR`
+   *   has higher precedence than `AND`.
+   *
+   *   Restrictions have the form `<field> <operator> <value>` and may have a
+   *   `-` character in front of them to indicate negation. The fields map to
+   *   those defined in the corresponding resource.
+   *
+   *   The supported operators are:
+   *
+   *   * `=` for all value types.
+   *   * `>`, `<`, `>=`, `<=` for integer values.
+   *   * `:`, meaning substring matching, for strings.
+   *
+   *   The supported value types are:
+   *
+   *   * string literals in quotes.
+   *   * integer literals without quotes.
+   *   * boolean literals `true` and `false` without quotes.
+   * @param {string} request.muteAnnotation
+   *   This can be a mute configuration name or any identifier for mute/unmute
+   *   of findings based on the filter.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.bulk_mute_findings.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_BulkMuteFindings_async
+   */
+  bulkMuteFindings(
+    request?: protos.google.cloud.securitycenter.v1.IBulkMuteFindingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securitycenter.v1.IBulkMuteFindingsResponse,
+        protos.google.protobuf.IEmpty
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  bulkMuteFindings(
+    request: protos.google.cloud.securitycenter.v1.IBulkMuteFindingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securitycenter.v1.IBulkMuteFindingsResponse,
+        protos.google.protobuf.IEmpty
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bulkMuteFindings(
+    request: protos.google.cloud.securitycenter.v1.IBulkMuteFindingsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securitycenter.v1.IBulkMuteFindingsResponse,
+        protos.google.protobuf.IEmpty
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bulkMuteFindings(
+    request?: protos.google.cloud.securitycenter.v1.IBulkMuteFindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securitycenter.v1.IBulkMuteFindingsResponse,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securitycenter.v1.IBulkMuteFindingsResponse,
+        protos.google.protobuf.IEmpty
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securitycenter.v1.IBulkMuteFindingsResponse,
+        protos.google.protobuf.IEmpty
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.bulkMuteFindings(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `bulkMuteFindings()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.bulk_mute_findings.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_BulkMuteFindings_async
+   */
+  async checkBulkMuteFindingsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securitycenter.v1.BulkMuteFindingsResponse,
+      protos.google.protobuf.Empty
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.bulkMuteFindings,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securitycenter.v1.BulkMuteFindingsResponse,
+      protos.google.protobuf.Empty
+    >;
+  }
   /**
    * Runs asset discovery. The discovery is tracked with a long-running
    * operation.
@@ -4427,6 +5116,222 @@ export class SecurityCenterClient {
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.ListFindingsResponse.IListFindingsResult>;
   }
   /**
+   * Lists mute configs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns the collection of mute configs. Its format is
+   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   "projects/[project_id]".
+   * @param {number} request.pageSize
+   *   The maximum number of configs to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListMuteConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMuteConfigs` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [MuteConfig]{@link google.cloud.securitycenter.v1.MuteConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMuteConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listMuteConfigs(
+    request?: protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IMuteConfig[],
+      protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest | null,
+      protos.google.cloud.securitycenter.v1.IListMuteConfigsResponse
+    ]
+  >;
+  listMuteConfigs(
+    request: protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest,
+      | protos.google.cloud.securitycenter.v1.IListMuteConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IMuteConfig
+    >
+  ): void;
+  listMuteConfigs(
+    request: protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest,
+      | protos.google.cloud.securitycenter.v1.IListMuteConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IMuteConfig
+    >
+  ): void;
+  listMuteConfigs(
+    request?: protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest,
+          | protos.google.cloud.securitycenter.v1.IListMuteConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IMuteConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest,
+      | protos.google.cloud.securitycenter.v1.IListMuteConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IMuteConfig
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IMuteConfig[],
+      protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest | null,
+      protos.google.cloud.securitycenter.v1.IListMuteConfigsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listMuteConfigs(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns the collection of mute configs. Its format is
+   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   "projects/[project_id]".
+   * @param {number} request.pageSize
+   *   The maximum number of configs to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListMuteConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMuteConfigs` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [MuteConfig]{@link google.cloud.securitycenter.v1.MuteConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMuteConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listMuteConfigsStream(
+    request?: protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listMuteConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listMuteConfigs.createStream(
+      this.innerApiCalls.listMuteConfigs as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listMuteConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns the collection of mute configs. Its format is
+   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   "projects/[project_id]".
+   * @param {number} request.pageSize
+   *   The maximum number of configs to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListMuteConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMuteConfigs` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [MuteConfig]{@link google.cloud.securitycenter.v1.MuteConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.list_mute_configs.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_ListMuteConfigs_async
+   */
+  listMuteConfigsAsync(
+    request?: protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1.IMuteConfig> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listMuteConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listMuteConfigs.asyncIterate(
+      this.innerApiCalls['listMuteConfigs'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IMuteConfig>;
+  }
+  /**
    * Lists notification configs.
    *
    * @param {Object} request
@@ -4922,6 +5827,46 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified folderMuteConfig resource name string.
+   *
+   * @param {string} folder
+   * @param {string} mute_config
+   * @returns {string} Resource name string.
+   */
+  folderMuteConfigPath(folder: string, muteConfig: string) {
+    return this.pathTemplates.folderMuteConfigPathTemplate.render({
+      folder: folder,
+      mute_config: muteConfig,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderMuteConfig resource.
+   *
+   * @param {string} folderMuteConfigName
+   *   A fully-qualified path representing folder_mute_config resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderMuteConfigName(folderMuteConfigName: string) {
+    return this.pathTemplates.folderMuteConfigPathTemplate.match(
+      folderMuteConfigName
+    ).folder;
+  }
+
+  /**
+   * Parse the mute_config from FolderMuteConfig resource.
+   *
+   * @param {string} folderMuteConfigName
+   *   A fully-qualified path representing folder_mute_config resource.
+   * @returns {string} A string representing the mute_config.
+   */
+  matchMuteConfigFromFolderMuteConfigName(folderMuteConfigName: string) {
+    return this.pathTemplates.folderMuteConfigPathTemplate.match(
+      folderMuteConfigName
+    ).mute_config;
+  }
+
+  /**
    * Return a fully-qualified folderSource resource name string.
    *
    * @param {string} folder
@@ -5234,6 +6179,50 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified organizationMuteConfig resource name string.
+   *
+   * @param {string} organization
+   * @param {string} mute_config
+   * @returns {string} Resource name string.
+   */
+  organizationMuteConfigPath(organization: string, muteConfig: string) {
+    return this.pathTemplates.organizationMuteConfigPathTemplate.render({
+      organization: organization,
+      mute_config: muteConfig,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationMuteConfig resource.
+   *
+   * @param {string} organizationMuteConfigName
+   *   A fully-qualified path representing organization_mute_config resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationMuteConfigName(
+    organizationMuteConfigName: string
+  ) {
+    return this.pathTemplates.organizationMuteConfigPathTemplate.match(
+      organizationMuteConfigName
+    ).organization;
+  }
+
+  /**
+   * Parse the mute_config from OrganizationMuteConfig resource.
+   *
+   * @param {string} organizationMuteConfigName
+   *   A fully-qualified path representing organization_mute_config resource.
+   * @returns {string} A string representing the mute_config.
+   */
+  matchMuteConfigFromOrganizationMuteConfigName(
+    organizationMuteConfigName: string
+  ) {
+    return this.pathTemplates.organizationMuteConfigPathTemplate.match(
+      organizationMuteConfigName
+    ).mute_config;
+  }
+
+  /**
    * Return a fully-qualified organizationSettings resource name string.
    *
    * @param {string} organization
@@ -5512,6 +6501,46 @@ export class SecurityCenterClient {
     return this.pathTemplates.projectAssetSecurityMarksPathTemplate.match(
       projectAssetSecurityMarksName
     ).asset;
+  }
+
+  /**
+   * Return a fully-qualified projectMuteConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} mute_config
+   * @returns {string} Resource name string.
+   */
+  projectMuteConfigPath(project: string, muteConfig: string) {
+    return this.pathTemplates.projectMuteConfigPathTemplate.render({
+      project: project,
+      mute_config: muteConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectMuteConfig resource.
+   *
+   * @param {string} projectMuteConfigName
+   *   A fully-qualified path representing project_mute_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectMuteConfigName(projectMuteConfigName: string) {
+    return this.pathTemplates.projectMuteConfigPathTemplate.match(
+      projectMuteConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the mute_config from ProjectMuteConfig resource.
+   *
+   * @param {string} projectMuteConfigName
+   *   A fully-qualified path representing project_mute_config resource.
+   * @returns {string} A string representing the mute_config.
+   */
+  matchMuteConfigFromProjectMuteConfigName(projectMuteConfigName: string) {
+    return this.pathTemplates.projectMuteConfigPathTemplate.match(
+      projectMuteConfigName
+    ).mute_config;
   }
 
   /**

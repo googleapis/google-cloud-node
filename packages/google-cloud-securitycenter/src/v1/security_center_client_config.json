@@ -20,6 +20,10 @@
         }
       },
       "methods": {
+        "BulkMuteFindings": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateSource": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -30,8 +34,16 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "CreateMuteConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateNotificationConfig": {
           "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteMuteConfig": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -43,6 +55,10 @@
         "GetIamPolicy": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "GetMuteConfig": {
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetNotificationConfig": {
@@ -80,6 +96,10 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "ListMuteConfigs": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListNotificationConfigs": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
@@ -100,6 +120,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "SetMute": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "SetIamPolicy": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -112,6 +136,10 @@
         },
         "UpdateFinding": {
           "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateMuteConfig": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

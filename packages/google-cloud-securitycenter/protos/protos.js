@@ -1562,9 +1562,12 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] Finding createTime
                          * @property {google.cloud.securitycenter.v1.Finding.Severity|null} [severity] Finding severity
                          * @property {string|null} [canonicalName] Finding canonicalName
+                         * @property {google.cloud.securitycenter.v1.Finding.Mute|null} [mute] Finding mute
                          * @property {google.cloud.securitycenter.v1.Finding.FindingClass|null} [findingClass] Finding findingClass
                          * @property {google.cloud.securitycenter.v1.IIndicator|null} [indicator] Finding indicator
                          * @property {google.cloud.securitycenter.v1.IVulnerability|null} [vulnerability] Finding vulnerability
+                         * @property {google.protobuf.ITimestamp|null} [muteUpdateTime] Finding muteUpdateTime
+                         * @property {string|null} [muteInitiator] Finding muteInitiator
                          */
     
                         /**
@@ -1680,6 +1683,14 @@
                         Finding.prototype.canonicalName = "";
     
                         /**
+                         * Finding mute.
+                         * @member {google.cloud.securitycenter.v1.Finding.Mute} mute
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.mute = 0;
+    
+                        /**
                          * Finding findingClass.
                          * @member {google.cloud.securitycenter.v1.Finding.FindingClass} findingClass
                          * @memberof google.cloud.securitycenter.v1.Finding
@@ -1702,6 +1713,22 @@
                          * @instance
                          */
                         Finding.prototype.vulnerability = null;
+    
+                        /**
+                         * Finding muteUpdateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} muteUpdateTime
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.muteUpdateTime = null;
+    
+                        /**
+                         * Finding muteInitiator.
+                         * @member {string} muteInitiator
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.muteInitiator = "";
     
                         /**
                          * Creates a new Finding instance using the specified properties.
@@ -1754,12 +1781,18 @@
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.severity);
                             if (message.canonicalName != null && Object.hasOwnProperty.call(message, "canonicalName"))
                                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.canonicalName);
+                            if (message.mute != null && Object.hasOwnProperty.call(message, "mute"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).int32(message.mute);
                             if (message.findingClass != null && Object.hasOwnProperty.call(message, "findingClass"))
                                 writer.uint32(/* id 17, wireType 0 =*/136).int32(message.findingClass);
                             if (message.indicator != null && Object.hasOwnProperty.call(message, "indicator"))
                                 $root.google.cloud.securitycenter.v1.Indicator.encode(message.indicator, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             if (message.vulnerability != null && Object.hasOwnProperty.call(message, "vulnerability"))
                                 $root.google.cloud.securitycenter.v1.Vulnerability.encode(message.vulnerability, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.muteUpdateTime != null && Object.hasOwnProperty.call(message, "muteUpdateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.muteUpdateTime, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.muteInitiator != null && Object.hasOwnProperty.call(message, "muteInitiator"))
+                                writer.uint32(/* id 28, wireType 2 =*/226).string(message.muteInitiator);
                             return writer;
                         };
     
@@ -1849,6 +1882,9 @@
                                 case 14:
                                     message.canonicalName = reader.string();
                                     break;
+                                case 15:
+                                    message.mute = reader.int32();
+                                    break;
                                 case 17:
                                     message.findingClass = reader.int32();
                                     break;
@@ -1857,6 +1893,12 @@
                                     break;
                                 case 20:
                                     message.vulnerability = $root.google.cloud.securitycenter.v1.Vulnerability.decode(reader, reader.uint32());
+                                    break;
+                                case 21:
+                                    message.muteUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 28:
+                                    message.muteInitiator = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1956,6 +1998,16 @@
                             if (message.canonicalName != null && message.hasOwnProperty("canonicalName"))
                                 if (!$util.isString(message.canonicalName))
                                     return "canonicalName: string expected";
+                            if (message.mute != null && message.hasOwnProperty("mute"))
+                                switch (message.mute) {
+                                default:
+                                    return "mute: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 4:
+                                    break;
+                                }
                             if (message.findingClass != null && message.hasOwnProperty("findingClass"))
                                 switch (message.findingClass) {
                                 default:
@@ -1977,6 +2029,14 @@
                                 if (error)
                                     return "vulnerability." + error;
                             }
+                            if (message.muteUpdateTime != null && message.hasOwnProperty("muteUpdateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.muteUpdateTime);
+                                if (error)
+                                    return "muteUpdateTime." + error;
+                            }
+                            if (message.muteInitiator != null && message.hasOwnProperty("muteInitiator"))
+                                if (!$util.isString(message.muteInitiator))
+                                    return "muteInitiator: string expected";
                             return null;
                         };
     
@@ -2065,6 +2125,24 @@
                             }
                             if (object.canonicalName != null)
                                 message.canonicalName = String(object.canonicalName);
+                            switch (object.mute) {
+                            case "MUTE_UNSPECIFIED":
+                            case 0:
+                                message.mute = 0;
+                                break;
+                            case "MUTED":
+                            case 1:
+                                message.mute = 1;
+                                break;
+                            case "UNMUTED":
+                            case 2:
+                                message.mute = 2;
+                                break;
+                            case "UNDEFINED":
+                            case 4:
+                                message.mute = 4;
+                                break;
+                            }
                             switch (object.findingClass) {
                             case "FINDING_CLASS_UNSPECIFIED":
                             case 0:
@@ -2097,6 +2175,13 @@
                                     throw TypeError(".google.cloud.securitycenter.v1.Finding.vulnerability: object expected");
                                 message.vulnerability = $root.google.cloud.securitycenter.v1.Vulnerability.fromObject(object.vulnerability);
                             }
+                            if (object.muteUpdateTime != null) {
+                                if (typeof object.muteUpdateTime !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.muteUpdateTime: object expected");
+                                message.muteUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.muteUpdateTime);
+                            }
+                            if (object.muteInitiator != null)
+                                message.muteInitiator = String(object.muteInitiator);
                             return message;
                         };
     
@@ -2127,9 +2212,12 @@
                                 object.createTime = null;
                                 object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
                                 object.canonicalName = "";
+                                object.mute = options.enums === String ? "MUTE_UNSPECIFIED" : 0;
                                 object.findingClass = options.enums === String ? "FINDING_CLASS_UNSPECIFIED" : 0;
                                 object.indicator = null;
                                 object.vulnerability = null;
+                                object.muteUpdateTime = null;
+                                object.muteInitiator = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2159,12 +2247,18 @@
                                 object.severity = options.enums === String ? $root.google.cloud.securitycenter.v1.Finding.Severity[message.severity] : message.severity;
                             if (message.canonicalName != null && message.hasOwnProperty("canonicalName"))
                                 object.canonicalName = message.canonicalName;
+                            if (message.mute != null && message.hasOwnProperty("mute"))
+                                object.mute = options.enums === String ? $root.google.cloud.securitycenter.v1.Finding.Mute[message.mute] : message.mute;
                             if (message.findingClass != null && message.hasOwnProperty("findingClass"))
                                 object.findingClass = options.enums === String ? $root.google.cloud.securitycenter.v1.Finding.FindingClass[message.findingClass] : message.findingClass;
                             if (message.indicator != null && message.hasOwnProperty("indicator"))
                                 object.indicator = $root.google.cloud.securitycenter.v1.Indicator.toObject(message.indicator, options);
                             if (message.vulnerability != null && message.hasOwnProperty("vulnerability"))
                                 object.vulnerability = $root.google.cloud.securitycenter.v1.Vulnerability.toObject(message.vulnerability, options);
+                            if (message.muteUpdateTime != null && message.hasOwnProperty("muteUpdateTime"))
+                                object.muteUpdateTime = $root.google.protobuf.Timestamp.toObject(message.muteUpdateTime, options);
+                            if (message.muteInitiator != null && message.hasOwnProperty("muteInitiator"))
+                                object.muteInitiator = message.muteInitiator;
                             return object;
                         };
     
@@ -2212,6 +2306,24 @@
                             values[valuesById[2] = "HIGH"] = 2;
                             values[valuesById[3] = "MEDIUM"] = 3;
                             values[valuesById[4] = "LOW"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * Mute enum.
+                         * @name google.cloud.securitycenter.v1.Finding.Mute
+                         * @enum {number}
+                         * @property {number} MUTE_UNSPECIFIED=0 MUTE_UNSPECIFIED value
+                         * @property {number} MUTED=1 MUTED value
+                         * @property {number} UNMUTED=2 UNMUTED value
+                         * @property {number} UNDEFINED=4 UNDEFINED value
+                         */
+                        Finding.Mute = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MUTE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MUTED"] = 1;
+                            values[valuesById[2] = "UNMUTED"] = 2;
+                            values[valuesById[4] = "UNDEFINED"] = 4;
                             return values;
                         })();
     
@@ -3781,6 +3893,336 @@
                         })();
     
                         return Cvssv3;
+                    })();
+    
+                    v1.MuteConfig = (function() {
+    
+                        /**
+                         * Properties of a MuteConfig.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IMuteConfig
+                         * @property {string|null} [name] MuteConfig name
+                         * @property {string|null} [displayName] MuteConfig displayName
+                         * @property {string|null} [description] MuteConfig description
+                         * @property {string|null} [filter] MuteConfig filter
+                         * @property {google.protobuf.ITimestamp|null} [createTime] MuteConfig createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] MuteConfig updateTime
+                         * @property {string|null} [mostRecentEditor] MuteConfig mostRecentEditor
+                         */
+    
+                        /**
+                         * Constructs a new MuteConfig.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a MuteConfig.
+                         * @implements IMuteConfig
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IMuteConfig=} [properties] Properties to set
+                         */
+                        function MuteConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MuteConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @instance
+                         */
+                        MuteConfig.prototype.name = "";
+    
+                        /**
+                         * MuteConfig displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @instance
+                         */
+                        MuteConfig.prototype.displayName = "";
+    
+                        /**
+                         * MuteConfig description.
+                         * @member {string} description
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @instance
+                         */
+                        MuteConfig.prototype.description = "";
+    
+                        /**
+                         * MuteConfig filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @instance
+                         */
+                        MuteConfig.prototype.filter = "";
+    
+                        /**
+                         * MuteConfig createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @instance
+                         */
+                        MuteConfig.prototype.createTime = null;
+    
+                        /**
+                         * MuteConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @instance
+                         */
+                        MuteConfig.prototype.updateTime = null;
+    
+                        /**
+                         * MuteConfig mostRecentEditor.
+                         * @member {string} mostRecentEditor
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @instance
+                         */
+                        MuteConfig.prototype.mostRecentEditor = "";
+    
+                        /**
+                         * Creates a new MuteConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IMuteConfig=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.MuteConfig} MuteConfig instance
+                         */
+                        MuteConfig.create = function create(properties) {
+                            return new MuteConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MuteConfig message. Does not implicitly {@link google.cloud.securitycenter.v1.MuteConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IMuteConfig} message MuteConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MuteConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.mostRecentEditor != null && Object.hasOwnProperty.call(message, "mostRecentEditor"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.mostRecentEditor);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MuteConfig message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.MuteConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IMuteConfig} message MuteConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MuteConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MuteConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.MuteConfig} MuteConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MuteConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.MuteConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                case 5:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.mostRecentEditor = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MuteConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.MuteConfig} MuteConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MuteConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MuteConfig message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MuteConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.mostRecentEditor != null && message.hasOwnProperty("mostRecentEditor"))
+                                if (!$util.isString(message.mostRecentEditor))
+                                    return "mostRecentEditor: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MuteConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.MuteConfig} MuteConfig
+                         */
+                        MuteConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.MuteConfig)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.MuteConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.MuteConfig.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.MuteConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.mostRecentEditor != null)
+                                message.mostRecentEditor = String(object.mostRecentEditor);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MuteConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.MuteConfig} message MuteConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MuteConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.description = "";
+                                object.filter = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.mostRecentEditor = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.mostRecentEditor != null && message.hasOwnProperty("mostRecentEditor"))
+                                object.mostRecentEditor = message.mostRecentEditor;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MuteConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.MuteConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MuteConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MuteConfig;
                     })();
     
                     v1.NotificationConfig = (function() {
@@ -5722,6 +6164,39 @@
                         };
     
                         /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#bulkMuteFindings}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef BulkMuteFindingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls BulkMuteFindings.
+                         * @function bulkMuteFindings
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IBulkMuteFindingsRequest} request BulkMuteFindingsRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.BulkMuteFindingsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.bulkMuteFindings = function bulkMuteFindings(request, callback) {
+                            return this.rpcCall(bulkMuteFindings, $root.google.cloud.securitycenter.v1.BulkMuteFindingsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "BulkMuteFindings" });
+    
+                        /**
+                         * Calls BulkMuteFindings.
+                         * @function bulkMuteFindings
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IBulkMuteFindingsRequest} request BulkMuteFindingsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#createSource}.
                          * @memberof google.cloud.securitycenter.v1.SecurityCenter
                          * @typedef CreateSourceCallback
@@ -5788,6 +6263,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#createMuteConfig}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef CreateMuteConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.MuteConfig} [response] MuteConfig
+                         */
+    
+                        /**
+                         * Calls CreateMuteConfig.
+                         * @function createMuteConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.ICreateMuteConfigRequest} request CreateMuteConfigRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.CreateMuteConfigCallback} callback Node-style callback called with the error, if any, and MuteConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.createMuteConfig = function createMuteConfig(request, callback) {
+                            return this.rpcCall(createMuteConfig, $root.google.cloud.securitycenter.v1.CreateMuteConfigRequest, $root.google.cloud.securitycenter.v1.MuteConfig, request, callback);
+                        }, "name", { value: "CreateMuteConfig" });
+    
+                        /**
+                         * Calls CreateMuteConfig.
+                         * @function createMuteConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.ICreateMuteConfigRequest} request CreateMuteConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.MuteConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#createNotificationConfig}.
                          * @memberof google.cloud.securitycenter.v1.SecurityCenter
                          * @typedef CreateNotificationConfigCallback
@@ -5817,6 +6325,39 @@
                          * @instance
                          * @param {google.cloud.securitycenter.v1.ICreateNotificationConfigRequest} request CreateNotificationConfigRequest message or plain object
                          * @returns {Promise<google.cloud.securitycenter.v1.NotificationConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#deleteMuteConfig}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef DeleteMuteConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteMuteConfig.
+                         * @function deleteMuteConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IDeleteMuteConfigRequest} request DeleteMuteConfigRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.DeleteMuteConfigCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.deleteMuteConfig = function deleteMuteConfig(request, callback) {
+                            return this.rpcCall(deleteMuteConfig, $root.google.cloud.securitycenter.v1.DeleteMuteConfigRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteMuteConfig" });
+    
+                        /**
+                         * Calls DeleteMuteConfig.
+                         * @function deleteMuteConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IDeleteMuteConfigRequest} request DeleteMuteConfigRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
                          * @variation 2
                          */
     
@@ -5883,6 +6424,39 @@
                          * @instance
                          * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
                          * @returns {Promise<google.iam.v1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#getMuteConfig}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef GetMuteConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.MuteConfig} [response] MuteConfig
+                         */
+    
+                        /**
+                         * Calls GetMuteConfig.
+                         * @function getMuteConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IGetMuteConfigRequest} request GetMuteConfigRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.GetMuteConfigCallback} callback Node-style callback called with the error, if any, and MuteConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.getMuteConfig = function getMuteConfig(request, callback) {
+                            return this.rpcCall(getMuteConfig, $root.google.cloud.securitycenter.v1.GetMuteConfigRequest, $root.google.cloud.securitycenter.v1.MuteConfig, request, callback);
+                        }, "name", { value: "GetMuteConfig" });
+    
+                        /**
+                         * Calls GetMuteConfig.
+                         * @function getMuteConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IGetMuteConfigRequest} request GetMuteConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.MuteConfig>} Promise
                          * @variation 2
                          */
     
@@ -6118,6 +6692,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#listMuteConfigs}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef ListMuteConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.ListMuteConfigsResponse} [response] ListMuteConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListMuteConfigs.
+                         * @function listMuteConfigs
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IListMuteConfigsRequest} request ListMuteConfigsRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.ListMuteConfigsCallback} callback Node-style callback called with the error, if any, and ListMuteConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.listMuteConfigs = function listMuteConfigs(request, callback) {
+                            return this.rpcCall(listMuteConfigs, $root.google.cloud.securitycenter.v1.ListMuteConfigsRequest, $root.google.cloud.securitycenter.v1.ListMuteConfigsResponse, request, callback);
+                        }, "name", { value: "ListMuteConfigs" });
+    
+                        /**
+                         * Calls ListMuteConfigs.
+                         * @function listMuteConfigs
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IListMuteConfigsRequest} request ListMuteConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.ListMuteConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#listNotificationConfigs}.
                          * @memberof google.cloud.securitycenter.v1.SecurityCenter
                          * @typedef ListNotificationConfigsCallback
@@ -6250,6 +6857,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#setMute}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef SetMuteCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.Finding} [response] Finding
+                         */
+    
+                        /**
+                         * Calls SetMute.
+                         * @function setMute
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.ISetMuteRequest} request SetMuteRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.SetMuteCallback} callback Node-style callback called with the error, if any, and Finding
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.setMute = function setMute(request, callback) {
+                            return this.rpcCall(setMute, $root.google.cloud.securitycenter.v1.SetMuteRequest, $root.google.cloud.securitycenter.v1.Finding, request, callback);
+                        }, "name", { value: "SetMute" });
+    
+                        /**
+                         * Calls SetMute.
+                         * @function setMute
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.ISetMuteRequest} request SetMuteRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.Finding>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#setIamPolicy}.
                          * @memberof google.cloud.securitycenter.v1.SecurityCenter
                          * @typedef SetIamPolicyCallback
@@ -6345,6 +6985,39 @@
                          * @instance
                          * @param {google.cloud.securitycenter.v1.IUpdateFindingRequest} request UpdateFindingRequest message or plain object
                          * @returns {Promise<google.cloud.securitycenter.v1.Finding>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#updateMuteConfig}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef UpdateMuteConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.MuteConfig} [response] MuteConfig
+                         */
+    
+                        /**
+                         * Calls UpdateMuteConfig.
+                         * @function updateMuteConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IUpdateMuteConfigRequest} request UpdateMuteConfigRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.UpdateMuteConfigCallback} callback Node-style callback called with the error, if any, and MuteConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.updateMuteConfig = function updateMuteConfig(request, callback) {
+                            return this.rpcCall(updateMuteConfig, $root.google.cloud.securitycenter.v1.UpdateMuteConfigRequest, $root.google.cloud.securitycenter.v1.MuteConfig, request, callback);
+                        }, "name", { value: "UpdateMuteConfig" });
+    
+                        /**
+                         * Calls UpdateMuteConfig.
+                         * @function updateMuteConfig
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IUpdateMuteConfigRequest} request UpdateMuteConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.MuteConfig>} Promise
                          * @variation 2
                          */
     
@@ -6481,6 +7154,398 @@
                          */
     
                         return SecurityCenter;
+                    })();
+    
+                    v1.BulkMuteFindingsRequest = (function() {
+    
+                        /**
+                         * Properties of a BulkMuteFindingsRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IBulkMuteFindingsRequest
+                         * @property {string|null} [parent] BulkMuteFindingsRequest parent
+                         * @property {string|null} [filter] BulkMuteFindingsRequest filter
+                         * @property {string|null} [muteAnnotation] BulkMuteFindingsRequest muteAnnotation
+                         */
+    
+                        /**
+                         * Constructs a new BulkMuteFindingsRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a BulkMuteFindingsRequest.
+                         * @implements IBulkMuteFindingsRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IBulkMuteFindingsRequest=} [properties] Properties to set
+                         */
+                        function BulkMuteFindingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BulkMuteFindingsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsRequest
+                         * @instance
+                         */
+                        BulkMuteFindingsRequest.prototype.parent = "";
+    
+                        /**
+                         * BulkMuteFindingsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsRequest
+                         * @instance
+                         */
+                        BulkMuteFindingsRequest.prototype.filter = "";
+    
+                        /**
+                         * BulkMuteFindingsRequest muteAnnotation.
+                         * @member {string} muteAnnotation
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsRequest
+                         * @instance
+                         */
+                        BulkMuteFindingsRequest.prototype.muteAnnotation = "";
+    
+                        /**
+                         * Creates a new BulkMuteFindingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IBulkMuteFindingsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.BulkMuteFindingsRequest} BulkMuteFindingsRequest instance
+                         */
+                        BulkMuteFindingsRequest.create = function create(properties) {
+                            return new BulkMuteFindingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkMuteFindingsRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.BulkMuteFindingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IBulkMuteFindingsRequest} message BulkMuteFindingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkMuteFindingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            if (message.muteAnnotation != null && Object.hasOwnProperty.call(message, "muteAnnotation"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.muteAnnotation);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkMuteFindingsRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.BulkMuteFindingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IBulkMuteFindingsRequest} message BulkMuteFindingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkMuteFindingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkMuteFindingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.BulkMuteFindingsRequest} BulkMuteFindingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkMuteFindingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.BulkMuteFindingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.filter = reader.string();
+                                    break;
+                                case 3:
+                                    message.muteAnnotation = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkMuteFindingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.BulkMuteFindingsRequest} BulkMuteFindingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkMuteFindingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkMuteFindingsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkMuteFindingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.muteAnnotation != null && message.hasOwnProperty("muteAnnotation"))
+                                if (!$util.isString(message.muteAnnotation))
+                                    return "muteAnnotation: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkMuteFindingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.BulkMuteFindingsRequest} BulkMuteFindingsRequest
+                         */
+                        BulkMuteFindingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.BulkMuteFindingsRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.BulkMuteFindingsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.muteAnnotation != null)
+                                message.muteAnnotation = String(object.muteAnnotation);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkMuteFindingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.BulkMuteFindingsRequest} message BulkMuteFindingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkMuteFindingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.muteAnnotation = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.muteAnnotation != null && message.hasOwnProperty("muteAnnotation"))
+                                object.muteAnnotation = message.muteAnnotation;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BulkMuteFindingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkMuteFindingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BulkMuteFindingsRequest;
+                    })();
+    
+                    v1.BulkMuteFindingsResponse = (function() {
+    
+                        /**
+                         * Properties of a BulkMuteFindingsResponse.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IBulkMuteFindingsResponse
+                         */
+    
+                        /**
+                         * Constructs a new BulkMuteFindingsResponse.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a BulkMuteFindingsResponse.
+                         * @implements IBulkMuteFindingsResponse
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IBulkMuteFindingsResponse=} [properties] Properties to set
+                         */
+                        function BulkMuteFindingsResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new BulkMuteFindingsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IBulkMuteFindingsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.BulkMuteFindingsResponse} BulkMuteFindingsResponse instance
+                         */
+                        BulkMuteFindingsResponse.create = function create(properties) {
+                            return new BulkMuteFindingsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkMuteFindingsResponse message. Does not implicitly {@link google.cloud.securitycenter.v1.BulkMuteFindingsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IBulkMuteFindingsResponse} message BulkMuteFindingsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkMuteFindingsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkMuteFindingsResponse message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.BulkMuteFindingsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IBulkMuteFindingsResponse} message BulkMuteFindingsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkMuteFindingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkMuteFindingsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.BulkMuteFindingsResponse} BulkMuteFindingsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkMuteFindingsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.BulkMuteFindingsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkMuteFindingsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.BulkMuteFindingsResponse} BulkMuteFindingsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkMuteFindingsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkMuteFindingsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkMuteFindingsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkMuteFindingsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.BulkMuteFindingsResponse} BulkMuteFindingsResponse
+                         */
+                        BulkMuteFindingsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.BulkMuteFindingsResponse)
+                                return object;
+                            return new $root.google.cloud.securitycenter.v1.BulkMuteFindingsResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkMuteFindingsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.BulkMuteFindingsResponse} message BulkMuteFindingsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkMuteFindingsResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this BulkMuteFindingsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.BulkMuteFindingsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkMuteFindingsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BulkMuteFindingsResponse;
                     })();
     
                     v1.CreateFindingRequest = (function() {
@@ -6718,6 +7783,243 @@
                         };
     
                         return CreateFindingRequest;
+                    })();
+    
+                    v1.CreateMuteConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateMuteConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface ICreateMuteConfigRequest
+                         * @property {string|null} [parent] CreateMuteConfigRequest parent
+                         * @property {google.cloud.securitycenter.v1.IMuteConfig|null} [muteConfig] CreateMuteConfigRequest muteConfig
+                         * @property {string|null} [muteConfigId] CreateMuteConfigRequest muteConfigId
+                         */
+    
+                        /**
+                         * Constructs a new CreateMuteConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a CreateMuteConfigRequest.
+                         * @implements ICreateMuteConfigRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.ICreateMuteConfigRequest=} [properties] Properties to set
+                         */
+                        function CreateMuteConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateMuteConfigRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.securitycenter.v1.CreateMuteConfigRequest
+                         * @instance
+                         */
+                        CreateMuteConfigRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateMuteConfigRequest muteConfig.
+                         * @member {google.cloud.securitycenter.v1.IMuteConfig|null|undefined} muteConfig
+                         * @memberof google.cloud.securitycenter.v1.CreateMuteConfigRequest
+                         * @instance
+                         */
+                        CreateMuteConfigRequest.prototype.muteConfig = null;
+    
+                        /**
+                         * CreateMuteConfigRequest muteConfigId.
+                         * @member {string} muteConfigId
+                         * @memberof google.cloud.securitycenter.v1.CreateMuteConfigRequest
+                         * @instance
+                         */
+                        CreateMuteConfigRequest.prototype.muteConfigId = "";
+    
+                        /**
+                         * Creates a new CreateMuteConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.CreateMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICreateMuteConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.CreateMuteConfigRequest} CreateMuteConfigRequest instance
+                         */
+                        CreateMuteConfigRequest.create = function create(properties) {
+                            return new CreateMuteConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMuteConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.CreateMuteConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.CreateMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICreateMuteConfigRequest} message CreateMuteConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMuteConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.muteConfig != null && Object.hasOwnProperty.call(message, "muteConfig"))
+                                $root.google.cloud.securitycenter.v1.MuteConfig.encode(message.muteConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.muteConfigId != null && Object.hasOwnProperty.call(message, "muteConfigId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.muteConfigId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMuteConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.CreateMuteConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.CreateMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICreateMuteConfigRequest} message CreateMuteConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMuteConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateMuteConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.CreateMuteConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.CreateMuteConfigRequest} CreateMuteConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMuteConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.CreateMuteConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.muteConfig = $root.google.cloud.securitycenter.v1.MuteConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.muteConfigId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateMuteConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.CreateMuteConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.CreateMuteConfigRequest} CreateMuteConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMuteConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateMuteConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.CreateMuteConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateMuteConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.muteConfig != null && message.hasOwnProperty("muteConfig")) {
+                                var error = $root.google.cloud.securitycenter.v1.MuteConfig.verify(message.muteConfig);
+                                if (error)
+                                    return "muteConfig." + error;
+                            }
+                            if (message.muteConfigId != null && message.hasOwnProperty("muteConfigId"))
+                                if (!$util.isString(message.muteConfigId))
+                                    return "muteConfigId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateMuteConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.CreateMuteConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.CreateMuteConfigRequest} CreateMuteConfigRequest
+                         */
+                        CreateMuteConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.CreateMuteConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.CreateMuteConfigRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.muteConfig != null) {
+                                if (typeof object.muteConfig !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.CreateMuteConfigRequest.muteConfig: object expected");
+                                message.muteConfig = $root.google.cloud.securitycenter.v1.MuteConfig.fromObject(object.muteConfig);
+                            }
+                            if (object.muteConfigId != null)
+                                message.muteConfigId = String(object.muteConfigId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateMuteConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.CreateMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.CreateMuteConfigRequest} message CreateMuteConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateMuteConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.muteConfig = null;
+                                object.muteConfigId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.muteConfig != null && message.hasOwnProperty("muteConfig"))
+                                object.muteConfig = $root.google.cloud.securitycenter.v1.MuteConfig.toObject(message.muteConfig, options);
+                            if (message.muteConfigId != null && message.hasOwnProperty("muteConfigId"))
+                                object.muteConfigId = message.muteConfigId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateMuteConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.CreateMuteConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateMuteConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateMuteConfigRequest;
                     })();
     
                     v1.CreateNotificationConfigRequest = (function() {
@@ -7172,6 +8474,193 @@
                         return CreateSourceRequest;
                     })();
     
+                    v1.DeleteMuteConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteMuteConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IDeleteMuteConfigRequest
+                         * @property {string|null} [name] DeleteMuteConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteMuteConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a DeleteMuteConfigRequest.
+                         * @implements IDeleteMuteConfigRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IDeleteMuteConfigRequest=} [properties] Properties to set
+                         */
+                        function DeleteMuteConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteMuteConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.DeleteMuteConfigRequest
+                         * @instance
+                         */
+                        DeleteMuteConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteMuteConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.DeleteMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IDeleteMuteConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.DeleteMuteConfigRequest} DeleteMuteConfigRequest instance
+                         */
+                        DeleteMuteConfigRequest.create = function create(properties) {
+                            return new DeleteMuteConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteMuteConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.DeleteMuteConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.DeleteMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IDeleteMuteConfigRequest} message DeleteMuteConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteMuteConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteMuteConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.DeleteMuteConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.DeleteMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IDeleteMuteConfigRequest} message DeleteMuteConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteMuteConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteMuteConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.DeleteMuteConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.DeleteMuteConfigRequest} DeleteMuteConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteMuteConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.DeleteMuteConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteMuteConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.DeleteMuteConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.DeleteMuteConfigRequest} DeleteMuteConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteMuteConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteMuteConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.DeleteMuteConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteMuteConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteMuteConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.DeleteMuteConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.DeleteMuteConfigRequest} DeleteMuteConfigRequest
+                         */
+                        DeleteMuteConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.DeleteMuteConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.DeleteMuteConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteMuteConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.DeleteMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.DeleteMuteConfigRequest} message DeleteMuteConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteMuteConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteMuteConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.DeleteMuteConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteMuteConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteMuteConfigRequest;
+                    })();
+    
                     v1.DeleteNotificationConfigRequest = (function() {
     
                         /**
@@ -7357,6 +8846,193 @@
                         };
     
                         return DeleteNotificationConfigRequest;
+                    })();
+    
+                    v1.GetMuteConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMuteConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IGetMuteConfigRequest
+                         * @property {string|null} [name] GetMuteConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMuteConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a GetMuteConfigRequest.
+                         * @implements IGetMuteConfigRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IGetMuteConfigRequest=} [properties] Properties to set
+                         */
+                        function GetMuteConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMuteConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.GetMuteConfigRequest
+                         * @instance
+                         */
+                        GetMuteConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMuteConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.GetMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IGetMuteConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.GetMuteConfigRequest} GetMuteConfigRequest instance
+                         */
+                        GetMuteConfigRequest.create = function create(properties) {
+                            return new GetMuteConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMuteConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.GetMuteConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.GetMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IGetMuteConfigRequest} message GetMuteConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMuteConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMuteConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.GetMuteConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.GetMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IGetMuteConfigRequest} message GetMuteConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMuteConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMuteConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.GetMuteConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.GetMuteConfigRequest} GetMuteConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMuteConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.GetMuteConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMuteConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.GetMuteConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.GetMuteConfigRequest} GetMuteConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMuteConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMuteConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.GetMuteConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMuteConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMuteConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.GetMuteConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.GetMuteConfigRequest} GetMuteConfigRequest
+                         */
+                        GetMuteConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.GetMuteConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.GetMuteConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMuteConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.GetMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.GetMuteConfigRequest} message GetMuteConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMuteConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMuteConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.GetMuteConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMuteConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetMuteConfigRequest;
                     })();
     
                     v1.GetNotificationConfigRequest = (function() {
@@ -9406,6 +11082,469 @@
                         };
     
                         return GroupResult;
+                    })();
+    
+                    v1.ListMuteConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListMuteConfigsRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IListMuteConfigsRequest
+                         * @property {string|null} [parent] ListMuteConfigsRequest parent
+                         * @property {number|null} [pageSize] ListMuteConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListMuteConfigsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListMuteConfigsRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a ListMuteConfigsRequest.
+                         * @implements IListMuteConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IListMuteConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListMuteConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMuteConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsRequest
+                         * @instance
+                         */
+                        ListMuteConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListMuteConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsRequest
+                         * @instance
+                         */
+                        ListMuteConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListMuteConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsRequest
+                         * @instance
+                         */
+                        ListMuteConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListMuteConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListMuteConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.ListMuteConfigsRequest} ListMuteConfigsRequest instance
+                         */
+                        ListMuteConfigsRequest.create = function create(properties) {
+                            return new ListMuteConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMuteConfigsRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.ListMuteConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListMuteConfigsRequest} message ListMuteConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMuteConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMuteConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ListMuteConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListMuteConfigsRequest} message ListMuteConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMuteConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMuteConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.ListMuteConfigsRequest} ListMuteConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMuteConfigsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.ListMuteConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMuteConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.ListMuteConfigsRequest} ListMuteConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMuteConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMuteConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMuteConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMuteConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.ListMuteConfigsRequest} ListMuteConfigsRequest
+                         */
+                        ListMuteConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.ListMuteConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.ListMuteConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMuteConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ListMuteConfigsRequest} message ListMuteConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMuteConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMuteConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMuteConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListMuteConfigsRequest;
+                    })();
+    
+                    v1.ListMuteConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListMuteConfigsResponse.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IListMuteConfigsResponse
+                         * @property {Array.<google.cloud.securitycenter.v1.IMuteConfig>|null} [muteConfigs] ListMuteConfigsResponse muteConfigs
+                         * @property {string|null} [nextPageToken] ListMuteConfigsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListMuteConfigsResponse.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a ListMuteConfigsResponse.
+                         * @implements IListMuteConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IListMuteConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListMuteConfigsResponse(properties) {
+                            this.muteConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMuteConfigsResponse muteConfigs.
+                         * @member {Array.<google.cloud.securitycenter.v1.IMuteConfig>} muteConfigs
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsResponse
+                         * @instance
+                         */
+                        ListMuteConfigsResponse.prototype.muteConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListMuteConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsResponse
+                         * @instance
+                         */
+                        ListMuteConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListMuteConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListMuteConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.ListMuteConfigsResponse} ListMuteConfigsResponse instance
+                         */
+                        ListMuteConfigsResponse.create = function create(properties) {
+                            return new ListMuteConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMuteConfigsResponse message. Does not implicitly {@link google.cloud.securitycenter.v1.ListMuteConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListMuteConfigsResponse} message ListMuteConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMuteConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.muteConfigs != null && message.muteConfigs.length)
+                                for (var i = 0; i < message.muteConfigs.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.MuteConfig.encode(message.muteConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMuteConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ListMuteConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IListMuteConfigsResponse} message ListMuteConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMuteConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMuteConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.ListMuteConfigsResponse} ListMuteConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMuteConfigsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.ListMuteConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.muteConfigs && message.muteConfigs.length))
+                                        message.muteConfigs = [];
+                                    message.muteConfigs.push($root.google.cloud.securitycenter.v1.MuteConfig.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMuteConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.ListMuteConfigsResponse} ListMuteConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMuteConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMuteConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMuteConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.muteConfigs != null && message.hasOwnProperty("muteConfigs")) {
+                                if (!Array.isArray(message.muteConfigs))
+                                    return "muteConfigs: array expected";
+                                for (var i = 0; i < message.muteConfigs.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.MuteConfig.verify(message.muteConfigs[i]);
+                                    if (error)
+                                        return "muteConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMuteConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.ListMuteConfigsResponse} ListMuteConfigsResponse
+                         */
+                        ListMuteConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.ListMuteConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.ListMuteConfigsResponse();
+                            if (object.muteConfigs) {
+                                if (!Array.isArray(object.muteConfigs))
+                                    throw TypeError(".google.cloud.securitycenter.v1.ListMuteConfigsResponse.muteConfigs: array expected");
+                                message.muteConfigs = [];
+                                for (var i = 0; i < object.muteConfigs.length; ++i) {
+                                    if (typeof object.muteConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.ListMuteConfigsResponse.muteConfigs: object expected");
+                                    message.muteConfigs[i] = $root.google.cloud.securitycenter.v1.MuteConfig.fromObject(object.muteConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMuteConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ListMuteConfigsResponse} message ListMuteConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMuteConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.muteConfigs = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.muteConfigs && message.muteConfigs.length) {
+                                object.muteConfigs = [];
+                                for (var j = 0; j < message.muteConfigs.length; ++j)
+                                    object.muteConfigs[j] = $root.google.cloud.securitycenter.v1.MuteConfig.toObject(message.muteConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMuteConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.ListMuteConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMuteConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListMuteConfigsResponse;
                     })();
     
                     v1.ListNotificationConfigsRequest = (function() {
@@ -12775,6 +14914,239 @@
                         return SetFindingStateRequest;
                     })();
     
+                    v1.SetMuteRequest = (function() {
+    
+                        /**
+                         * Properties of a SetMuteRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface ISetMuteRequest
+                         * @property {string|null} [name] SetMuteRequest name
+                         * @property {google.cloud.securitycenter.v1.Finding.Mute|null} [mute] SetMuteRequest mute
+                         */
+    
+                        /**
+                         * Constructs a new SetMuteRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a SetMuteRequest.
+                         * @implements ISetMuteRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.ISetMuteRequest=} [properties] Properties to set
+                         */
+                        function SetMuteRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SetMuteRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.SetMuteRequest
+                         * @instance
+                         */
+                        SetMuteRequest.prototype.name = "";
+    
+                        /**
+                         * SetMuteRequest mute.
+                         * @member {google.cloud.securitycenter.v1.Finding.Mute} mute
+                         * @memberof google.cloud.securitycenter.v1.SetMuteRequest
+                         * @instance
+                         */
+                        SetMuteRequest.prototype.mute = 0;
+    
+                        /**
+                         * Creates a new SetMuteRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.SetMuteRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ISetMuteRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.SetMuteRequest} SetMuteRequest instance
+                         */
+                        SetMuteRequest.create = function create(properties) {
+                            return new SetMuteRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SetMuteRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.SetMuteRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.SetMuteRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ISetMuteRequest} message SetMuteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SetMuteRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.mute != null && Object.hasOwnProperty.call(message, "mute"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.mute);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SetMuteRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.SetMuteRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.SetMuteRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ISetMuteRequest} message SetMuteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SetMuteRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SetMuteRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.SetMuteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.SetMuteRequest} SetMuteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SetMuteRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.SetMuteRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.mute = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SetMuteRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.SetMuteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.SetMuteRequest} SetMuteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SetMuteRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SetMuteRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.SetMuteRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SetMuteRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.mute != null && message.hasOwnProperty("mute"))
+                                switch (message.mute) {
+                                default:
+                                    return "mute: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SetMuteRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.SetMuteRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.SetMuteRequest} SetMuteRequest
+                         */
+                        SetMuteRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.SetMuteRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.SetMuteRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.mute) {
+                            case "MUTE_UNSPECIFIED":
+                            case 0:
+                                message.mute = 0;
+                                break;
+                            case "MUTED":
+                            case 1:
+                                message.mute = 1;
+                                break;
+                            case "UNMUTED":
+                            case 2:
+                                message.mute = 2;
+                                break;
+                            case "UNDEFINED":
+                            case 4:
+                                message.mute = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SetMuteRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.SetMuteRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.SetMuteRequest} message SetMuteRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SetMuteRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.mute = options.enums === String ? "MUTE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.mute != null && message.hasOwnProperty("mute"))
+                                object.mute = options.enums === String ? $root.google.cloud.securitycenter.v1.Finding.Mute[message.mute] : message.mute;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SetMuteRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.SetMuteRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SetMuteRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SetMuteRequest;
+                    })();
+    
                     v1.RunAssetDiscoveryRequest = (function() {
     
                         /**
@@ -13180,6 +15552,226 @@
                         };
     
                         return UpdateFindingRequest;
+                    })();
+    
+                    v1.UpdateMuteConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateMuteConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IUpdateMuteConfigRequest
+                         * @property {google.cloud.securitycenter.v1.IMuteConfig|null} [muteConfig] UpdateMuteConfigRequest muteConfig
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateMuteConfigRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateMuteConfigRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents an UpdateMuteConfigRequest.
+                         * @implements IUpdateMuteConfigRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IUpdateMuteConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateMuteConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateMuteConfigRequest muteConfig.
+                         * @member {google.cloud.securitycenter.v1.IMuteConfig|null|undefined} muteConfig
+                         * @memberof google.cloud.securitycenter.v1.UpdateMuteConfigRequest
+                         * @instance
+                         */
+                        UpdateMuteConfigRequest.prototype.muteConfig = null;
+    
+                        /**
+                         * UpdateMuteConfigRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.securitycenter.v1.UpdateMuteConfigRequest
+                         * @instance
+                         */
+                        UpdateMuteConfigRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateMuteConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.UpdateMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IUpdateMuteConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.UpdateMuteConfigRequest} UpdateMuteConfigRequest instance
+                         */
+                        UpdateMuteConfigRequest.create = function create(properties) {
+                            return new UpdateMuteConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateMuteConfigRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateMuteConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.UpdateMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IUpdateMuteConfigRequest} message UpdateMuteConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateMuteConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.muteConfig != null && Object.hasOwnProperty.call(message, "muteConfig"))
+                                $root.google.cloud.securitycenter.v1.MuteConfig.encode(message.muteConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateMuteConfigRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateMuteConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.UpdateMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IUpdateMuteConfigRequest} message UpdateMuteConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateMuteConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateMuteConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.UpdateMuteConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.UpdateMuteConfigRequest} UpdateMuteConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateMuteConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.UpdateMuteConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.muteConfig = $root.google.cloud.securitycenter.v1.MuteConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateMuteConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.UpdateMuteConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.UpdateMuteConfigRequest} UpdateMuteConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateMuteConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateMuteConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.UpdateMuteConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateMuteConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.muteConfig != null && message.hasOwnProperty("muteConfig")) {
+                                var error = $root.google.cloud.securitycenter.v1.MuteConfig.verify(message.muteConfig);
+                                if (error)
+                                    return "muteConfig." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateMuteConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.UpdateMuteConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.UpdateMuteConfigRequest} UpdateMuteConfigRequest
+                         */
+                        UpdateMuteConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.UpdateMuteConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.UpdateMuteConfigRequest();
+                            if (object.muteConfig != null) {
+                                if (typeof object.muteConfig !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.UpdateMuteConfigRequest.muteConfig: object expected");
+                                message.muteConfig = $root.google.cloud.securitycenter.v1.MuteConfig.fromObject(object.muteConfig);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.UpdateMuteConfigRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateMuteConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.UpdateMuteConfigRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.UpdateMuteConfigRequest} message UpdateMuteConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateMuteConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.muteConfig = null;
+                                object.updateMask = null;
+                            }
+                            if (message.muteConfig != null && message.hasOwnProperty("muteConfig"))
+                                object.muteConfig = $root.google.cloud.securitycenter.v1.MuteConfig.toObject(message.muteConfig, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateMuteConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.UpdateMuteConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateMuteConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateMuteConfigRequest;
                     })();
     
                     v1.UpdateNotificationConfigRequest = (function() {

@@ -1,0 +1,78 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+'use strict';
+
+function main(parent) {
+  // [START securitycenter_v1_generated_SecurityCenter_BulkMuteFindings_async]
+  /**
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  /**
+   *  Required. The parent, at which bulk action needs to be applied. Its format is
+   *  "organizations/[organization_id]", "folders/[folder_id]",
+   *  "projects/[project_id]".
+   */
+  // const parent = 'abc123'
+  /**
+   *  Expression that identifies findings that should be updated.
+   *  The expression is a list of zero or more restrictions combined
+   *  via logical operators `AND` and `OR`. Parentheses are supported, and `OR`
+   *  has higher precedence than `AND`.
+   *  Restrictions have the form `<field> <operator> <value>` and may have a
+   *  `-` character in front of them to indicate negation. The fields map to
+   *  those defined in the corresponding resource.
+   *  The supported operators are:
+   *  * `=` for all value types.
+   *  * `>`, `<`, `>=`, `<=` for integer values.
+   *  * `:`, meaning substring matching, for strings.
+   *  The supported value types are:
+   *  * string literals in quotes.
+   *  * integer literals without quotes.
+   *  * boolean literals `true` and `false` without quotes.
+   */
+  // const filter = 'abc123'
+  /**
+   *  This can be a mute configuration name or any identifier for mute/unmute
+   *  of findings based on the filter.
+   */
+  // const muteAnnotation = 'abc123'
+
+  // Imports the Securitycenter library
+  const {SecurityCenterClient} = require('@google-cloud/security-center').v1;
+
+  // Instantiates a client
+  const securitycenterClient = new SecurityCenterClient();
+
+  async function callBulkMuteFindings() {
+    // Construct request
+    const request = {
+      parent,
+    };
+
+    // Run request
+    const [operation] = await securitycenterClient.bulkMuteFindings(request);
+    const [response] = await operation.promise();
+    console.log(response);
+  }
+
+  callBulkMuteFindings();
+  // [END securitycenter_v1_generated_SecurityCenter_BulkMuteFindings_async]
+}
+
+process.on('unhandledRejection', err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
+main(...process.argv.slice(2));

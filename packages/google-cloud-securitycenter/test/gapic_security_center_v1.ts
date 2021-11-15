@@ -449,6 +449,117 @@ describe('v1.SecurityCenterClient', () => {
     });
   });
 
+  describe('createMuteConfig', () => {
+    it('invokes createMuteConfig without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.CreateMuteConfigRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.MuteConfig()
+      );
+      client.innerApiCalls.createMuteConfig = stubSimpleCall(expectedResponse);
+      const [response] = await client.createMuteConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createMuteConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createMuteConfig without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.CreateMuteConfigRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.MuteConfig()
+      );
+      client.innerApiCalls.createMuteConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createMuteConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.IMuteConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createMuteConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createMuteConfig with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.CreateMuteConfigRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createMuteConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createMuteConfig(request), expectedError);
+      assert(
+        (client.innerApiCalls.createMuteConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('createNotificationConfig', () => {
     it('invokes createNotificationConfig without error', async () => {
       const client = new securitycenterModule.v1.SecurityCenterClient({
@@ -558,6 +669,117 @@ describe('v1.SecurityCenterClient', () => {
       );
       assert(
         (client.innerApiCalls.createNotificationConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('deleteMuteConfig', () => {
+    it('invokes deleteMuteConfig without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.DeleteMuteConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteMuteConfig = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteMuteConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteMuteConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteMuteConfig without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.DeleteMuteConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteMuteConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteMuteConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteMuteConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteMuteConfig with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.DeleteMuteConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteMuteConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteMuteConfig(request), expectedError);
+      assert(
+        (client.innerApiCalls.deleteMuteConfig as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -784,6 +1006,117 @@ describe('v1.SecurityCenterClient', () => {
       await assert.rejects(client.getIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('getMuteConfig', () => {
+    it('invokes getMuteConfig without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetMuteConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.MuteConfig()
+      );
+      client.innerApiCalls.getMuteConfig = stubSimpleCall(expectedResponse);
+      const [response] = await client.getMuteConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getMuteConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getMuteConfig without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetMuteConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.MuteConfig()
+      );
+      client.innerApiCalls.getMuteConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getMuteConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.IMuteConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getMuteConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getMuteConfig with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetMuteConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getMuteConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getMuteConfig(request), expectedError);
+      assert(
+        (client.innerApiCalls.getMuteConfig as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1239,6 +1572,114 @@ describe('v1.SecurityCenterClient', () => {
     });
   });
 
+  describe('setMute', () => {
+    it('invokes setMute without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SetMuteRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.Finding()
+      );
+      client.innerApiCalls.setMute = stubSimpleCall(expectedResponse);
+      const [response] = await client.setMute(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setMute as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setMute without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SetMuteRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.Finding()
+      );
+      client.innerApiCalls.setMute =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setMute(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.IFinding | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setMute as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes setMute with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SetMuteRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setMute = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.setMute(request), expectedError);
+      assert(
+        (client.innerApiCalls.setMute as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new securitycenterModule.v1.SecurityCenterClient({
@@ -1570,6 +2011,120 @@ describe('v1.SecurityCenterClient', () => {
       await assert.rejects(client.updateFinding(request), expectedError);
       assert(
         (client.innerApiCalls.updateFinding as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('updateMuteConfig', () => {
+    it('invokes updateMuteConfig without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateMuteConfigRequest()
+      );
+      request.muteConfig = {};
+      request.muteConfig.name = '';
+      const expectedHeaderRequestParams = 'mute_config.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.MuteConfig()
+      );
+      client.innerApiCalls.updateMuteConfig = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateMuteConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateMuteConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateMuteConfig without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateMuteConfigRequest()
+      );
+      request.muteConfig = {};
+      request.muteConfig.name = '';
+      const expectedHeaderRequestParams = 'mute_config.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.MuteConfig()
+      );
+      client.innerApiCalls.updateMuteConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateMuteConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.IMuteConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateMuteConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateMuteConfig with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateMuteConfigRequest()
+      );
+      request.muteConfig = {};
+      request.muteConfig.name = '';
+      const expectedHeaderRequestParams = 'mute_config.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateMuteConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateMuteConfig(request), expectedError);
+      assert(
+        (client.innerApiCalls.updateMuteConfig as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -2038,6 +2593,200 @@ describe('v1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+  });
+
+  describe('bulkMuteFindings', () => {
+    it('invokes bulkMuteFindings without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.BulkMuteFindingsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.bulkMuteFindings =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.bulkMuteFindings(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.bulkMuteFindings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes bulkMuteFindings without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.BulkMuteFindingsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.bulkMuteFindings =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.bulkMuteFindings(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.securitycenter.v1.IBulkMuteFindingsResponse,
+              protos.google.protobuf.IEmpty
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.securitycenter.v1.IBulkMuteFindingsResponse,
+        protos.google.protobuf.IEmpty
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.bulkMuteFindings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes bulkMuteFindings with call error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.BulkMuteFindingsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bulkMuteFindings = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.bulkMuteFindings(request), expectedError);
+      assert(
+        (client.innerApiCalls.bulkMuteFindings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes bulkMuteFindings with LRO error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.BulkMuteFindingsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bulkMuteFindings = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.bulkMuteFindings(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.bulkMuteFindings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkBulkMuteFindingsProgress without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBulkMuteFindingsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBulkMuteFindingsProgress with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBulkMuteFindingsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -3493,6 +4242,314 @@ describe('v1.SecurityCenterClient', () => {
     });
   });
 
+  describe('listMuteConfigs', () => {
+    it('invokes listMuteConfigs without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListMuteConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.MuteConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.MuteConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.MuteConfig()
+        ),
+      ];
+      client.innerApiCalls.listMuteConfigs = stubSimpleCall(expectedResponse);
+      const [response] = await client.listMuteConfigs(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listMuteConfigs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listMuteConfigs without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListMuteConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.MuteConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.MuteConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.MuteConfig()
+        ),
+      ];
+      client.innerApiCalls.listMuteConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listMuteConfigs(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.IMuteConfig[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listMuteConfigs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listMuteConfigs with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListMuteConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listMuteConfigs = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listMuteConfigs(request), expectedError);
+      assert(
+        (client.innerApiCalls.listMuteConfigs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listMuteConfigsStream without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListMuteConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.MuteConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.MuteConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.MuteConfig()
+        ),
+      ];
+      client.descriptors.page.listMuteConfigs.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listMuteConfigsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securitycenter.v1.MuteConfig[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.securitycenter.v1.MuteConfig) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listMuteConfigs.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMuteConfigs, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listMuteConfigs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listMuteConfigsStream with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListMuteConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMuteConfigs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listMuteConfigsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securitycenter.v1.MuteConfig[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.securitycenter.v1.MuteConfig) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listMuteConfigs.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMuteConfigs, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listMuteConfigs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listMuteConfigs without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListMuteConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.MuteConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.MuteConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.MuteConfig()
+        ),
+      ];
+      client.descriptors.page.listMuteConfigs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securitycenter.v1.IMuteConfig[] = [];
+      const iterable = client.listMuteConfigsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listMuteConfigs with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListMuteConfigsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMuteConfigs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listMuteConfigsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.securitycenter.v1.IMuteConfig[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('listNotificationConfigs', () => {
     it('invokes listNotificationConfigs without error', async () => {
       const client = new securitycenterModule.v1.SecurityCenterClient({
@@ -4246,6 +5303,61 @@ describe('v1.SecurityCenterClient', () => {
       });
     });
 
+    describe('folderMuteConfig', () => {
+      const fakePath = '/rendered/path/folderMuteConfig';
+      const expectedParameters = {
+        folder: 'folderValue',
+        mute_config: 'muteConfigValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderMuteConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.folderMuteConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('folderMuteConfigPath', () => {
+        const result = client.folderMuteConfigPath(
+          'folderValue',
+          'muteConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderMuteConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderMuteConfigName', () => {
+        const result = client.matchFolderFromFolderMuteConfigName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (client.pathTemplates.folderMuteConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMuteConfigFromFolderMuteConfigName', () => {
+        const result = client.matchMuteConfigFromFolderMuteConfigName(fakePath);
+        assert.strictEqual(result, 'muteConfigValue');
+        assert(
+          (client.pathTemplates.folderMuteConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('folderSource', () => {
       const fakePath = '/rendered/path/folderSource';
       const expectedParameters = {
@@ -4674,6 +5786,69 @@ describe('v1.SecurityCenterClient', () => {
       });
     });
 
+    describe('organizationMuteConfig', () => {
+      const fakePath = '/rendered/path/organizationMuteConfig';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        mute_config: 'muteConfigValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationMuteConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.organizationMuteConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationMuteConfigPath', () => {
+        const result = client.organizationMuteConfigPath(
+          'organizationValue',
+          'muteConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationMuteConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationMuteConfigName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationMuteConfigName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationMuteConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMuteConfigFromOrganizationMuteConfigName', () => {
+        const result =
+          client.matchMuteConfigFromOrganizationMuteConfigName(fakePath);
+        assert.strictEqual(result, 'muteConfigValue');
+        assert(
+          (
+            client.pathTemplates.organizationMuteConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('organizationSettings', () => {
       const fakePath = '/rendered/path/organizationSettings';
       const expectedParameters = {
@@ -5051,6 +6226,68 @@ describe('v1.SecurityCenterClient', () => {
         assert(
           (
             client.pathTemplates.projectAssetSecurityMarksPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectMuteConfig', () => {
+      const fakePath = '/rendered/path/projectMuteConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        mute_config: 'muteConfigValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectMuteConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectMuteConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectMuteConfigPath', () => {
+        const result = client.projectMuteConfigPath(
+          'projectValue',
+          'muteConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectMuteConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectMuteConfigName', () => {
+        const result = client.matchProjectFromProjectMuteConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectMuteConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMuteConfigFromProjectMuteConfigName', () => {
+        const result =
+          client.matchMuteConfigFromProjectMuteConfigName(fakePath);
+        assert.strictEqual(result, 'muteConfigValue');
+        assert(
+          (
+            client.pathTemplates.projectMuteConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

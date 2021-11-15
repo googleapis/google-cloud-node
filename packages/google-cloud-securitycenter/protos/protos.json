@@ -203,6 +203,10 @@
                           "type": "string",
                           "id": 14
                         },
+                        "mute": {
+                          "type": "Mute",
+                          "id": 15
+                        },
                         "findingClass": {
                           "type": "FindingClass",
                           "id": 17
@@ -214,6 +218,17 @@
                         "vulnerability": {
                           "type": "Vulnerability",
                           "id": 20
+                        },
+                        "muteUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "muteInitiator": {
+                          "type": "string",
+                          "id": 28
                         }
                       },
                       "nested": {
@@ -231,6 +246,14 @@
                             "HIGH": 2,
                             "MEDIUM": 3,
                             "LOW": 4
+                          }
+                        },
+                        "Mute": {
+                          "values": {
+                            "MUTE_UNSPECIFIED": 0,
+                            "MUTED": 1,
+                            "UNMUTED": 2,
+                            "UNDEFINED": 4
                           }
                         },
                         "FindingClass": {
@@ -379,6 +402,57 @@
                             "IMPACT_HIGH": 1,
                             "IMPACT_LOW": 2,
                             "IMPACT_NONE": 3
+                          }
+                        }
+                      }
+                    },
+                    "MuteConfig": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/MuteConfig",
+                        "(google.api.resource).pattern": "projects/{project}/muteConfigs/{mute_config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "mostRecentEditor": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -574,6 +648,46 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
+                        "BulkMuteFindings": {
+                          "requestType": "BulkMuteFindingsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*}/findings:bulkMute",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/findings:bulkMute",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.securitycenter.v1.BulkMuteFindingsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.protobuf.Empty"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*}/findings:bulkMute",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{parent=folders/*}/findings:bulkMute",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=projects/*}/findings:bulkMute",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.securitycenter.v1.BulkMuteFindingsResponse",
+                                "metadata_type": "google.protobuf.Empty"
+                              }
+                            }
+                          ]
+                        },
                         "CreateSource": {
                           "requestType": "CreateSourceRequest",
                           "responseType": "Source",
@@ -614,6 +728,41 @@
                             }
                           ]
                         },
+                        "CreateMuteConfig": {
+                          "requestType": "CreateMuteConfigRequest",
+                          "responseType": "MuteConfig",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*}/muteConfigs",
+                            "(google.api.http).body": "mute_config",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/muteConfigs",
+                            "(google.api.http).additional_bindings.body": "mute_config",
+                            "(google.api.method_signature)": "parent,mute_config,mute_config_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*}/muteConfigs",
+                                "body": "mute_config",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{parent=folders/*}/muteConfigs",
+                                    "body": "mute_config"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=projects/*}/muteConfigs",
+                                    "body": "mute_config"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,mute_config"
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,mute_config,mute_config_id"
+                            }
+                          ]
+                        },
                         "CreateNotificationConfig": {
                           "requestType": "CreateNotificationConfigRequest",
                           "responseType": "NotificationConfig",
@@ -634,6 +783,33 @@
                             },
                             {
                               "(google.api.method_signature)": "parent,notification_config"
+                            }
+                          ]
+                        },
+                        "DeleteMuteConfig": {
+                          "requestType": "DeleteMuteConfigRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=organizations/*/muteConfigs/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/muteConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=organizations/*/muteConfigs/*}",
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v1/{name=folders/*/muteConfigs/*}"
+                                  },
+                                  {
+                                    "delete": "/v1/{name=projects/*/muteConfigs/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -672,6 +848,33 @@
                             },
                             {
                               "(google.api.method_signature)": "resource"
+                            }
+                          ]
+                        },
+                        "GetMuteConfig": {
+                          "requestType": "GetMuteConfigRequest",
+                          "responseType": "MuteConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/muteConfigs/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/muteConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/muteConfigs/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/muteConfigs/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=projects/*/muteConfigs/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -835,6 +1038,33 @@
                             }
                           ]
                         },
+                        "ListMuteConfigs": {
+                          "requestType": "ListMuteConfigsRequest",
+                          "responseType": "ListMuteConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*}/muteConfigs",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*}/muteConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*}/muteConfigs",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*}/muteConfigs"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=projects/*}/muteConfigs"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
                         "ListNotificationConfigs": {
                           "requestType": "ListNotificationConfigsRequest",
                           "responseType": "ListNotificationConfigsResponse",
@@ -940,6 +1170,38 @@
                             }
                           ]
                         },
+                        "SetMute": {
+                          "requestType": "SetMuteRequest",
+                          "responseType": "Finding",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=organizations/*/sources/*/findings/*}:setMute",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/sources/*/findings/*}:setMute",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,mute"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=organizations/*/sources/*/findings/*}:setMute",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{name=folders/*/sources/*/findings/*}:setMute",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{name=projects/*/sources/*/findings/*}:setMute",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,mute"
+                            }
+                          ]
+                        },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
                           "responseType": "google.iam.v1.Policy",
@@ -1009,6 +1271,38 @@
                             },
                             {
                               "(google.api.method_signature)": "finding"
+                            }
+                          ]
+                        },
+                        "UpdateMuteConfig": {
+                          "requestType": "UpdateMuteConfigRequest",
+                          "responseType": "MuteConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{mute_config.name=organizations/*/muteConfigs/*}",
+                            "(google.api.http).body": "mute_config",
+                            "(google.api.http).additional_bindings.patch": "/v1/{mute_config.name=projects/*/muteConfigs/*}",
+                            "(google.api.http).additional_bindings.body": "mute_config",
+                            "(google.api.method_signature)": "mute_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{mute_config.name=organizations/*/muteConfigs/*}",
+                                "body": "mute_config",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{mute_config.name=folders/*/muteConfigs/*}",
+                                    "body": "mute_config"
+                                  },
+                                  {
+                                    "patch": "/v1/{mute_config.name=projects/*/muteConfigs/*}",
+                                    "body": "mute_config"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "mute_config,update_mask"
                             }
                           ]
                         },
@@ -1121,6 +1415,32 @@
                         }
                       }
                     },
+                    "BulkMuteFindingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "*"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "muteAnnotation": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
+                        }
+                      }
+                    },
+                    "BulkMuteFindingsResponse": {
+                      "fields": {}
+                    },
                     "CreateFindingRequest": {
                       "fields": {
                         "parent": {
@@ -1140,6 +1460,32 @@
                         },
                         "finding": {
                           "type": "Finding",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateMuteConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/MuteConfig"
+                          }
+                        },
+                        "muteConfig": {
+                          "type": "MuteConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "muteConfigId": {
+                          "type": "string",
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
@@ -1192,6 +1538,18 @@
                         }
                       }
                     },
+                    "DeleteMuteConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/MuteConfig"
+                          }
+                        }
+                      }
+                    },
                     "DeleteNotificationConfigRequest": {
                       "fields": {
                         "name": {
@@ -1200,6 +1558,18 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "securitycenter.googleapis.com/NotificationConfig"
+                          }
+                        }
+                      }
+                    },
+                    "GetMuteConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/MuteConfig"
                           }
                         }
                       }
@@ -1369,6 +1739,39 @@
                         },
                         "count": {
                           "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListMuteConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/MuteConfig"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListMuteConfigsResponse": {
+                      "fields": {
+                        "muteConfigs": {
+                          "rule": "repeated",
+                          "type": "MuteConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
                           "id": 2
                         }
                       }
@@ -1680,6 +2083,25 @@
                         }
                       }
                     },
+                    "SetMuteRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/Finding"
+                          }
+                        },
+                        "mute": {
+                          "type": "Finding.Mute",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "RunAssetDiscoveryRequest": {
                       "fields": {
                         "parent": {
@@ -1696,6 +2118,21 @@
                       "fields": {
                         "finding": {
                           "type": "Finding",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateMuteConfigRequest": {
+                      "fields": {
+                        "muteConfig": {
+                          "type": "MuteConfig",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
