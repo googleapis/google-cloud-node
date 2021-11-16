@@ -13,35 +13,61 @@
 
 'use strict';
 
-async function main(projectId = 'my-project') {
-  // [START nodejs_storage_transfer_quickstart]
-  // Imports the Google Cloud client library
+async function main(projectId = 'my-project', gcsSourceBucket, gcsSinkBucket) {
+  // [START storagetransfer_quickstart]
 
-  // remove this line after package is released
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // Your project id
+  // const projectId = 'my-project'
+
+  // The ID of the GCS bucket to transfer data from
+  // const gcsSourceBucket = 'my-source-bucket'
+
+  // The ID of the GCS bucket to transfer data to
+  // const gcsSinkBucket = 'my-sink-bucket'
+
+  // Imports the Google Cloud client library
   const {
     StorageTransferServiceClient,
   } = require('@google-cloud/storage-transfer');
 
-  // TODO(developer): replace with your prefered project ID.
-  // const projectId = 'my-project'
-
   // Creates a client
   const client = new StorageTransferServiceClient();
 
-  async function listTransferJobs() {
-    const iterable = client.listTransferJobsAsync({
-      filter: JSON.stringify({
-        projectId,
-        jobNames: ['transferJobs/*'],
-      }),
-    });
-    for await (const response of iterable) {
-      // process response
-      console.info(response);
-    }
+  async function quickstart() {
+    // Creates a request to transfer from the source bucket to
+    // the sink bucket
+    const createRequest = {
+      transferJob: {
+        projectId: projectId,
+        transferSpec: {
+          gcsDataSource: {bucketName: gcsSourceBucket},
+          gcsDataSink: {bucketName: gcsSinkBucket},
+        },
+        status: 'ENABLED',
+      },
+    };
+
+    // Runs the request and creates the job
+    const response = await client.createTransferJob(createRequest);
+
+    const jobName = response[0].name;
+
+    const runRequest = {
+      jobName: jobName,
+      projectId: projectId,
+    };
+    await client.runTransferJob(runRequest);
+
+    console.log(
+      `Created and ran a transfer job from ${gcsSourceBucket} to ${gcsSinkBucket} with name ${jobName}`
+    );
   }
-  listTransferJobs();
-  // [END nodejs_storage_transfer_quickstart]
+
+  quickstart();
+  // [END storagetransfer_quickstart]
 }
 
 main(...process.argv.slice(2)).catch(err => {
