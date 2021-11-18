@@ -469,8 +469,15 @@ export class Storage extends Service {
    */
   acl: typeof Storage.acl;
 
-  getBucketsStream: () => Readable;
-  getHmacKeysStream: () => Readable;
+  getBucketsStream(): Readable {
+    // placeholder body, overwritten in constructor
+    return new Readable();
+  }
+
+  getHmacKeysStream(): Readable {
+    // placeholder body, overwritten in constructor
+    return new Readable();
+  }
 
   retryOptions: RetryOptions;
 
