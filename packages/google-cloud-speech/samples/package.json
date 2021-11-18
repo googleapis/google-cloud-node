@@ -18,7 +18,11 @@
     "@google-cloud/speech": "^4.9.0",
     "@google-cloud/storage": "^5.0.0",
     "chalk": "^4.0.0",
+    "fs.promises": "^0.1.2",
+    "google-proto-files": "^2.5.0",
     "node-record-lpcm16": "^1.0.1",
+    "proto3-json-serializer": "^0.1.6",
+    "protobufjs": "^6.11.2",
     "sox": "^0.1.0",
     "yargs": "^16.0.0"
   },
