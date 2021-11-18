@@ -30,6 +30,9 @@
   * [List_deployments](#list_deployments)
   * [List_realms](#list_realms)
   * [Create Game Server Realm](#create-game-server-realm)
+  * [Update_cluster](#update_cluster)
+  * [Update_deployment](#update_deployment)
+  * [Update_realm](#update_realm)
   * [Update_rollout_default](#update_rollout_default)
   * [Update_rollout_override](#update_rollout_override)
   * [Update_rollout_remove_default](#update_rollout_remove_default)
@@ -351,6 +354,57 @@ __Usage:__
 
 
 `node quickstart.js <project_id> <location> <realmId>`
+
+
+-----
+
+
+
+
+### Update_cluster
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/update_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update_cluster.js`
+
+
+-----
+
+
+
+
+### Update_deployment
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/update_deployment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_deployment.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update_deployment.js`
+
+
+-----
+
+
+
+
+### Update_realm
+
+View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/update_realm.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_realm.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update_realm.js`
 
 
 -----
