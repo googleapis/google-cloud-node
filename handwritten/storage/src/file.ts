@@ -1272,7 +1272,7 @@ class File extends ServiceObject<File> {
 
     const throughStream = streamEvents(new PassThrough());
 
-    let isServedCompressed = true;
+    let isCompressed = true;
     let crc32c = true;
     let md5 = false;
 
@@ -1379,7 +1379,7 @@ class File extends ServiceObject<File> {
         rawResponseStream.on('error', onComplete);
 
         const headers = rawResponseStream.toJSON().headers;
-        isServedCompressed = headers['content-encoding'] === 'gzip';
+        isCompressed = headers['content-encoding'] === 'gzip';
         const throughStreams: Writable[] = [];
 
         if (shouldRunValidation) {
@@ -1400,7 +1400,7 @@ class File extends ServiceObject<File> {
           throughStreams.push(validateStream);
         }
 
-        if (isServedCompressed && options.decompress) {
+        if (isCompressed && options.decompress) {
           throughStreams.push(zlib.createGunzip());
         }
 
@@ -1440,21 +1440,11 @@ class File extends ServiceObject<File> {
           return;
         }
 
-        // TODO(https://github.com/googleapis/nodejs-storage/issues/709):
-        // Remove once the backend issue is fixed.
-        // If object is stored compressed (having
-        // metadata.contentEncoding === 'gzip') and was served decompressed,
-        // then skip checksum validation because the remote checksum is computed
-        // against the compressed version of the object.
-        if (!isServedCompressed) {
+        if (!isCompressed) {
           try {
             await this.getMetadata({userProject: options.userProject});
           } catch (e) {
             throughStream.destroy(e);
-            return;
-          }
-          if (this.metadata.contentEncoding === 'gzip') {
-            throughStream.end();
             return;
           }
         }
