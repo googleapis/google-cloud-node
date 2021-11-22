@@ -1903,6 +1903,121 @@ describe('v1.SecurityCenterClient', () => {
     });
   });
 
+  describe('updateExternalSystem', () => {
+    it('invokes updateExternalSystem without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateExternalSystemRequest()
+      );
+      request.externalSystem = {};
+      request.externalSystem.name = '';
+      const expectedHeaderRequestParams = 'external_system.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ExternalSystem()
+      );
+      client.innerApiCalls.updateExternalSystem =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateExternalSystem(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateExternalSystem as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateExternalSystem without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateExternalSystemRequest()
+      );
+      request.externalSystem = {};
+      request.externalSystem.name = '';
+      const expectedHeaderRequestParams = 'external_system.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ExternalSystem()
+      );
+      client.innerApiCalls.updateExternalSystem =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateExternalSystem(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.IExternalSystem | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateExternalSystem as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateExternalSystem with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateExternalSystemRequest()
+      );
+      request.externalSystem = {};
+      request.externalSystem.name = '';
+      const expectedHeaderRequestParams = 'external_system.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateExternalSystem = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateExternalSystem(request), expectedError);
+      assert(
+        (client.innerApiCalls.updateExternalSystem as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('updateFinding', () => {
     it('invokes updateFinding without error', async () => {
       const client = new securitycenterModule.v1.SecurityCenterClient({
@@ -5483,6 +5598,103 @@ describe('v1.SecurityCenterClient', () => {
       });
     });
 
+    describe('folderSourceFindingExternalsystem', () => {
+      const fakePath = '/rendered/path/folderSourceFindingExternalsystem';
+      const expectedParameters = {
+        folder: 'folderValue',
+        source: 'sourceValue',
+        finding: 'findingValue',
+        externalsystem: 'externalsystemValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('folderSourceFindingExternalsystemPath', () => {
+        const result = client.folderSourceFindingExternalsystemPath(
+          'folderValue',
+          'sourceValue',
+          'findingValue',
+          'externalsystemValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderSourceFindingExternalsystemPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderSourceFindingExternalsystemName', () => {
+        const result =
+          client.matchFolderFromFolderSourceFindingExternalsystemName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderSourceFindingExternalsystemPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSourceFromFolderSourceFindingExternalsystemName', () => {
+        const result =
+          client.matchSourceFromFolderSourceFindingExternalsystemName(fakePath);
+        assert.strictEqual(result, 'sourceValue');
+        assert(
+          (
+            client.pathTemplates.folderSourceFindingExternalsystemPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFindingFromFolderSourceFindingExternalsystemName', () => {
+        const result =
+          client.matchFindingFromFolderSourceFindingExternalsystemName(
+            fakePath
+          );
+        assert.strictEqual(result, 'findingValue');
+        assert(
+          (
+            client.pathTemplates.folderSourceFindingExternalsystemPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExternalsystemFromFolderSourceFindingExternalsystemName', () => {
+        const result =
+          client.matchExternalsystemFromFolderSourceFindingExternalsystemName(
+            fakePath
+          );
+        assert.strictEqual(result, 'externalsystemValue');
+        assert(
+          (
+            client.pathTemplates.folderSourceFindingExternalsystemPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('folderSourceFindingSecurityMarks', () => {
       const fakePath = '/rendered/path/folderSourceFindingSecurityMarks';
       const expectedParameters = {
@@ -6035,6 +6247,112 @@ describe('v1.SecurityCenterClient', () => {
       });
     });
 
+    describe('organizationSourceFindingExternalsystem', () => {
+      const fakePath = '/rendered/path/organizationSourceFindingExternalsystem';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        source: 'sourceValue',
+        finding: 'findingValue',
+        externalsystem: 'externalsystemValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationSourceFindingExternalsystemPath', () => {
+        const result = client.organizationSourceFindingExternalsystemPath(
+          'organizationValue',
+          'sourceValue',
+          'findingValue',
+          'externalsystemValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationSourceFindingExternalsystemPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationSourceFindingExternalsystemName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationSourceFindingExternalsystemName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSourceFindingExternalsystemPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSourceFromOrganizationSourceFindingExternalsystemName', () => {
+        const result =
+          client.matchSourceFromOrganizationSourceFindingExternalsystemName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sourceValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSourceFindingExternalsystemPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFindingFromOrganizationSourceFindingExternalsystemName', () => {
+        const result =
+          client.matchFindingFromOrganizationSourceFindingExternalsystemName(
+            fakePath
+          );
+        assert.strictEqual(result, 'findingValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSourceFindingExternalsystemPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExternalsystemFromOrganizationSourceFindingExternalsystemName', () => {
+        const result =
+          client.matchExternalsystemFromOrganizationSourceFindingExternalsystemName(
+            fakePath
+          );
+        assert.strictEqual(result, 'externalsystemValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSourceFindingExternalsystemPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('organizationSourceFindingSecurityMarks', () => {
       const fakePath = '/rendered/path/organizationSourceFindingSecurityMarks';
       const expectedParameters = {
@@ -6415,6 +6733,107 @@ describe('v1.SecurityCenterClient', () => {
         assert(
           (
             client.pathTemplates.projectSourceFindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectSourceFindingExternalsystem', () => {
+      const fakePath = '/rendered/path/projectSourceFindingExternalsystem';
+      const expectedParameters = {
+        project: 'projectValue',
+        source: 'sourceValue',
+        finding: 'findingValue',
+        externalsystem: 'externalsystemValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectSourceFindingExternalsystemPath', () => {
+        const result = client.projectSourceFindingExternalsystemPath(
+          'projectValue',
+          'sourceValue',
+          'findingValue',
+          'externalsystemValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingExternalsystemPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectSourceFindingExternalsystemName', () => {
+        const result =
+          client.matchProjectFromProjectSourceFindingExternalsystemName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingExternalsystemPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSourceFromProjectSourceFindingExternalsystemName', () => {
+        const result =
+          client.matchSourceFromProjectSourceFindingExternalsystemName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sourceValue');
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingExternalsystemPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFindingFromProjectSourceFindingExternalsystemName', () => {
+        const result =
+          client.matchFindingFromProjectSourceFindingExternalsystemName(
+            fakePath
+          );
+        assert.strictEqual(result, 'findingValue');
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingExternalsystemPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExternalsystemFromProjectSourceFindingExternalsystemName', () => {
+        const result =
+          client.matchExternalsystemFromProjectSourceFindingExternalsystemName(
+            fakePath
+          );
+        assert.strictEqual(result, 'externalsystemValue');
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingExternalsystemPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

@@ -1544,6 +1544,304 @@
                         return SecurityMarks;
                     })();
     
+                    v1.ExternalSystem = (function() {
+    
+                        /**
+                         * Properties of an ExternalSystem.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IExternalSystem
+                         * @property {string|null} [name] ExternalSystem name
+                         * @property {Array.<string>|null} [assignees] ExternalSystem assignees
+                         * @property {string|null} [externalUid] ExternalSystem externalUid
+                         * @property {string|null} [status] ExternalSystem status
+                         * @property {google.protobuf.ITimestamp|null} [externalSystemUpdateTime] ExternalSystem externalSystemUpdateTime
+                         */
+    
+                        /**
+                         * Constructs a new ExternalSystem.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents an ExternalSystem.
+                         * @implements IExternalSystem
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IExternalSystem=} [properties] Properties to set
+                         */
+                        function ExternalSystem(properties) {
+                            this.assignees = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExternalSystem name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @instance
+                         */
+                        ExternalSystem.prototype.name = "";
+    
+                        /**
+                         * ExternalSystem assignees.
+                         * @member {Array.<string>} assignees
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @instance
+                         */
+                        ExternalSystem.prototype.assignees = $util.emptyArray;
+    
+                        /**
+                         * ExternalSystem externalUid.
+                         * @member {string} externalUid
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @instance
+                         */
+                        ExternalSystem.prototype.externalUid = "";
+    
+                        /**
+                         * ExternalSystem status.
+                         * @member {string} status
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @instance
+                         */
+                        ExternalSystem.prototype.status = "";
+    
+                        /**
+                         * ExternalSystem externalSystemUpdateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} externalSystemUpdateTime
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @instance
+                         */
+                        ExternalSystem.prototype.externalSystemUpdateTime = null;
+    
+                        /**
+                         * Creates a new ExternalSystem instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IExternalSystem=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.ExternalSystem} ExternalSystem instance
+                         */
+                        ExternalSystem.create = function create(properties) {
+                            return new ExternalSystem(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExternalSystem message. Does not implicitly {@link google.cloud.securitycenter.v1.ExternalSystem.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IExternalSystem} message ExternalSystem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExternalSystem.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.assignees != null && message.assignees.length)
+                                for (var i = 0; i < message.assignees.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.assignees[i]);
+                            if (message.externalUid != null && Object.hasOwnProperty.call(message, "externalUid"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.externalUid);
+                            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.status);
+                            if (message.externalSystemUpdateTime != null && Object.hasOwnProperty.call(message, "externalSystemUpdateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.externalSystemUpdateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExternalSystem message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ExternalSystem.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IExternalSystem} message ExternalSystem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExternalSystem.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExternalSystem message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.ExternalSystem} ExternalSystem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExternalSystem.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.ExternalSystem();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.assignees && message.assignees.length))
+                                        message.assignees = [];
+                                    message.assignees.push(reader.string());
+                                    break;
+                                case 3:
+                                    message.externalUid = reader.string();
+                                    break;
+                                case 4:
+                                    message.status = reader.string();
+                                    break;
+                                case 5:
+                                    message.externalSystemUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExternalSystem message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.ExternalSystem} ExternalSystem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExternalSystem.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExternalSystem message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExternalSystem.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.assignees != null && message.hasOwnProperty("assignees")) {
+                                if (!Array.isArray(message.assignees))
+                                    return "assignees: array expected";
+                                for (var i = 0; i < message.assignees.length; ++i)
+                                    if (!$util.isString(message.assignees[i]))
+                                        return "assignees: string[] expected";
+                            }
+                            if (message.externalUid != null && message.hasOwnProperty("externalUid"))
+                                if (!$util.isString(message.externalUid))
+                                    return "externalUid: string expected";
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                if (!$util.isString(message.status))
+                                    return "status: string expected";
+                            if (message.externalSystemUpdateTime != null && message.hasOwnProperty("externalSystemUpdateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.externalSystemUpdateTime);
+                                if (error)
+                                    return "externalSystemUpdateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExternalSystem message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.ExternalSystem} ExternalSystem
+                         */
+                        ExternalSystem.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.ExternalSystem)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.ExternalSystem();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.assignees) {
+                                if (!Array.isArray(object.assignees))
+                                    throw TypeError(".google.cloud.securitycenter.v1.ExternalSystem.assignees: array expected");
+                                message.assignees = [];
+                                for (var i = 0; i < object.assignees.length; ++i)
+                                    message.assignees[i] = String(object.assignees[i]);
+                            }
+                            if (object.externalUid != null)
+                                message.externalUid = String(object.externalUid);
+                            if (object.status != null)
+                                message.status = String(object.status);
+                            if (object.externalSystemUpdateTime != null) {
+                                if (typeof object.externalSystemUpdateTime !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.ExternalSystem.externalSystemUpdateTime: object expected");
+                                message.externalSystemUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.externalSystemUpdateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExternalSystem message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ExternalSystem} message ExternalSystem
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExternalSystem.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.assignees = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.externalUid = "";
+                                object.status = "";
+                                object.externalSystemUpdateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.assignees && message.assignees.length) {
+                                object.assignees = [];
+                                for (var j = 0; j < message.assignees.length; ++j)
+                                    object.assignees[j] = message.assignees[j];
+                            }
+                            if (message.externalUid != null && message.hasOwnProperty("externalUid"))
+                                object.externalUid = message.externalUid;
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = message.status;
+                            if (message.externalSystemUpdateTime != null && message.hasOwnProperty("externalSystemUpdateTime"))
+                                object.externalSystemUpdateTime = $root.google.protobuf.Timestamp.toObject(message.externalSystemUpdateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExternalSystem to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.ExternalSystem
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExternalSystem.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExternalSystem;
+                    })();
+    
                     v1.Finding = (function() {
     
                         /**
@@ -1567,6 +1865,7 @@
                          * @property {google.cloud.securitycenter.v1.IIndicator|null} [indicator] Finding indicator
                          * @property {google.cloud.securitycenter.v1.IVulnerability|null} [vulnerability] Finding vulnerability
                          * @property {google.protobuf.ITimestamp|null} [muteUpdateTime] Finding muteUpdateTime
+                         * @property {Object.<string,google.cloud.securitycenter.v1.IExternalSystem>|null} [externalSystems] Finding externalSystems
                          * @property {string|null} [muteInitiator] Finding muteInitiator
                          */
     
@@ -1580,6 +1879,7 @@
                          */
                         function Finding(properties) {
                             this.sourceProperties = {};
+                            this.externalSystems = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1723,6 +2023,14 @@
                         Finding.prototype.muteUpdateTime = null;
     
                         /**
+                         * Finding externalSystems.
+                         * @member {Object.<string,google.cloud.securitycenter.v1.IExternalSystem>} externalSystems
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.externalSystems = $util.emptyObject;
+    
+                        /**
                          * Finding muteInitiator.
                          * @member {string} muteInitiator
                          * @memberof google.cloud.securitycenter.v1.Finding
@@ -1791,6 +2099,11 @@
                                 $root.google.cloud.securitycenter.v1.Vulnerability.encode(message.vulnerability, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.muteUpdateTime != null && Object.hasOwnProperty.call(message, "muteUpdateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.muteUpdateTime, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.externalSystems != null && Object.hasOwnProperty.call(message, "externalSystems"))
+                                for (var keys = Object.keys(message.externalSystems), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 22, wireType 2 =*/178).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.securitycenter.v1.ExternalSystem.encode(message.externalSystems[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
                             if (message.muteInitiator != null && Object.hasOwnProperty.call(message, "muteInitiator"))
                                 writer.uint32(/* id 28, wireType 2 =*/226).string(message.muteInitiator);
                             return writer;
@@ -1896,6 +2209,28 @@
                                     break;
                                 case 21:
                                     message.muteUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 22:
+                                    if (message.externalSystems === $util.emptyObject)
+                                        message.externalSystems = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.securitycenter.v1.ExternalSystem.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.externalSystems[key] = value;
                                     break;
                                 case 28:
                                     message.muteInitiator = reader.string();
@@ -2033,6 +2368,16 @@
                                 var error = $root.google.protobuf.Timestamp.verify(message.muteUpdateTime);
                                 if (error)
                                     return "muteUpdateTime." + error;
+                            }
+                            if (message.externalSystems != null && message.hasOwnProperty("externalSystems")) {
+                                if (!$util.isObject(message.externalSystems))
+                                    return "externalSystems: object expected";
+                                var key = Object.keys(message.externalSystems);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.ExternalSystem.verify(message.externalSystems[key[i]]);
+                                    if (error)
+                                        return "externalSystems." + error;
+                                }
                             }
                             if (message.muteInitiator != null && message.hasOwnProperty("muteInitiator"))
                                 if (!$util.isString(message.muteInitiator))
@@ -2180,6 +2525,16 @@
                                     throw TypeError(".google.cloud.securitycenter.v1.Finding.muteUpdateTime: object expected");
                                 message.muteUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.muteUpdateTime);
                             }
+                            if (object.externalSystems) {
+                                if (typeof object.externalSystems !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.externalSystems: object expected");
+                                message.externalSystems = {};
+                                for (var keys = Object.keys(object.externalSystems), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.externalSystems[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Finding.externalSystems: object expected");
+                                    message.externalSystems[keys[i]] = $root.google.cloud.securitycenter.v1.ExternalSystem.fromObject(object.externalSystems[keys[i]]);
+                                }
+                            }
                             if (object.muteInitiator != null)
                                 message.muteInitiator = String(object.muteInitiator);
                             return message;
@@ -2198,8 +2553,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.sourceProperties = {};
+                                object.externalSystems = {};
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.parent = "";
@@ -2257,6 +2614,11 @@
                                 object.vulnerability = $root.google.cloud.securitycenter.v1.Vulnerability.toObject(message.vulnerability, options);
                             if (message.muteUpdateTime != null && message.hasOwnProperty("muteUpdateTime"))
                                 object.muteUpdateTime = $root.google.protobuf.Timestamp.toObject(message.muteUpdateTime, options);
+                            if (message.externalSystems && (keys2 = Object.keys(message.externalSystems)).length) {
+                                object.externalSystems = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.externalSystems[keys2[j]] = $root.google.cloud.securitycenter.v1.ExternalSystem.toObject(message.externalSystems[keys2[j]], options);
+                            }
                             if (message.muteInitiator != null && message.hasOwnProperty("muteInitiator"))
                                 object.muteInitiator = message.muteInitiator;
                             return object;
@@ -6952,6 +7314,39 @@
                          * @instance
                          * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
                          * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#updateExternalSystem}.
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @typedef UpdateExternalSystemCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycenter.v1.ExternalSystem} [response] ExternalSystem
+                         */
+    
+                        /**
+                         * Calls UpdateExternalSystem.
+                         * @function updateExternalSystem
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IUpdateExternalSystemRequest} request UpdateExternalSystemRequest message or plain object
+                         * @param {google.cloud.securitycenter.v1.SecurityCenter.UpdateExternalSystemCallback} callback Node-style callback called with the error, if any, and ExternalSystem
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenter.prototype.updateExternalSystem = function updateExternalSystem(request, callback) {
+                            return this.rpcCall(updateExternalSystem, $root.google.cloud.securitycenter.v1.UpdateExternalSystemRequest, $root.google.cloud.securitycenter.v1.ExternalSystem, request, callback);
+                        }, "name", { value: "UpdateExternalSystem" });
+    
+                        /**
+                         * Calls UpdateExternalSystem.
+                         * @function updateExternalSystem
+                         * @memberof google.cloud.securitycenter.v1.SecurityCenter
+                         * @instance
+                         * @param {google.cloud.securitycenter.v1.IUpdateExternalSystemRequest} request UpdateExternalSystemRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycenter.v1.ExternalSystem>} Promise
                          * @variation 2
                          */
     
@@ -15332,6 +15727,226 @@
                         };
     
                         return RunAssetDiscoveryRequest;
+                    })();
+    
+                    v1.UpdateExternalSystemRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateExternalSystemRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IUpdateExternalSystemRequest
+                         * @property {google.cloud.securitycenter.v1.IExternalSystem|null} [externalSystem] UpdateExternalSystemRequest externalSystem
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateExternalSystemRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateExternalSystemRequest.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents an UpdateExternalSystemRequest.
+                         * @implements IUpdateExternalSystemRequest
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IUpdateExternalSystemRequest=} [properties] Properties to set
+                         */
+                        function UpdateExternalSystemRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateExternalSystemRequest externalSystem.
+                         * @member {google.cloud.securitycenter.v1.IExternalSystem|null|undefined} externalSystem
+                         * @memberof google.cloud.securitycenter.v1.UpdateExternalSystemRequest
+                         * @instance
+                         */
+                        UpdateExternalSystemRequest.prototype.externalSystem = null;
+    
+                        /**
+                         * UpdateExternalSystemRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.securitycenter.v1.UpdateExternalSystemRequest
+                         * @instance
+                         */
+                        UpdateExternalSystemRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateExternalSystemRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.UpdateExternalSystemRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IUpdateExternalSystemRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.UpdateExternalSystemRequest} UpdateExternalSystemRequest instance
+                         */
+                        UpdateExternalSystemRequest.create = function create(properties) {
+                            return new UpdateExternalSystemRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateExternalSystemRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateExternalSystemRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.UpdateExternalSystemRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IUpdateExternalSystemRequest} message UpdateExternalSystemRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateExternalSystemRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.externalSystem != null && Object.hasOwnProperty.call(message, "externalSystem"))
+                                $root.google.cloud.securitycenter.v1.ExternalSystem.encode(message.externalSystem, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateExternalSystemRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateExternalSystemRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.UpdateExternalSystemRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IUpdateExternalSystemRequest} message UpdateExternalSystemRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateExternalSystemRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateExternalSystemRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.UpdateExternalSystemRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.UpdateExternalSystemRequest} UpdateExternalSystemRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateExternalSystemRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.UpdateExternalSystemRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.externalSystem = $root.google.cloud.securitycenter.v1.ExternalSystem.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateExternalSystemRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.UpdateExternalSystemRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.UpdateExternalSystemRequest} UpdateExternalSystemRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateExternalSystemRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateExternalSystemRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.UpdateExternalSystemRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateExternalSystemRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.externalSystem != null && message.hasOwnProperty("externalSystem")) {
+                                var error = $root.google.cloud.securitycenter.v1.ExternalSystem.verify(message.externalSystem);
+                                if (error)
+                                    return "externalSystem." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateExternalSystemRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.UpdateExternalSystemRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.UpdateExternalSystemRequest} UpdateExternalSystemRequest
+                         */
+                        UpdateExternalSystemRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.UpdateExternalSystemRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.UpdateExternalSystemRequest();
+                            if (object.externalSystem != null) {
+                                if (typeof object.externalSystem !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.UpdateExternalSystemRequest.externalSystem: object expected");
+                                message.externalSystem = $root.google.cloud.securitycenter.v1.ExternalSystem.fromObject(object.externalSystem);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.UpdateExternalSystemRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateExternalSystemRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.UpdateExternalSystemRequest
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.UpdateExternalSystemRequest} message UpdateExternalSystemRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateExternalSystemRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.externalSystem = null;
+                                object.updateMask = null;
+                            }
+                            if (message.externalSystem != null && message.hasOwnProperty("externalSystem"))
+                                object.externalSystem = $root.google.cloud.securitycenter.v1.ExternalSystem.toObject(message.externalSystem, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateExternalSystemRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.UpdateExternalSystemRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateExternalSystemRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateExternalSystemRequest;
                     })();
     
                     v1.UpdateFindingRequest = (function() {

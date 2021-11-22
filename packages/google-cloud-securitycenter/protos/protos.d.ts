@@ -587,6 +587,120 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of an ExternalSystem. */
+                interface IExternalSystem {
+
+                    /** ExternalSystem name */
+                    name?: (string|null);
+
+                    /** ExternalSystem assignees */
+                    assignees?: (string[]|null);
+
+                    /** ExternalSystem externalUid */
+                    externalUid?: (string|null);
+
+                    /** ExternalSystem status */
+                    status?: (string|null);
+
+                    /** ExternalSystem externalSystemUpdateTime */
+                    externalSystemUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an ExternalSystem. */
+                class ExternalSystem implements IExternalSystem {
+
+                    /**
+                     * Constructs a new ExternalSystem.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IExternalSystem);
+
+                    /** ExternalSystem name. */
+                    public name: string;
+
+                    /** ExternalSystem assignees. */
+                    public assignees: string[];
+
+                    /** ExternalSystem externalUid. */
+                    public externalUid: string;
+
+                    /** ExternalSystem status. */
+                    public status: string;
+
+                    /** ExternalSystem externalSystemUpdateTime. */
+                    public externalSystemUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ExternalSystem instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExternalSystem instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IExternalSystem): google.cloud.securitycenter.v1.ExternalSystem;
+
+                    /**
+                     * Encodes the specified ExternalSystem message. Does not implicitly {@link google.cloud.securitycenter.v1.ExternalSystem.verify|verify} messages.
+                     * @param message ExternalSystem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IExternalSystem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExternalSystem message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ExternalSystem.verify|verify} messages.
+                     * @param message ExternalSystem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IExternalSystem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExternalSystem message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExternalSystem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.ExternalSystem;
+
+                    /**
+                     * Decodes an ExternalSystem message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExternalSystem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.ExternalSystem;
+
+                    /**
+                     * Verifies an ExternalSystem message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExternalSystem message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExternalSystem
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.ExternalSystem;
+
+                    /**
+                     * Creates a plain object from an ExternalSystem message. Also converts values to other types if specified.
+                     * @param message ExternalSystem
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.ExternalSystem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExternalSystem to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a Finding. */
                 interface IFinding {
 
@@ -640,6 +754,9 @@ export namespace google {
 
                     /** Finding muteUpdateTime */
                     muteUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Finding externalSystems */
+                    externalSystems?: ({ [k: string]: google.cloud.securitycenter.v1.IExternalSystem }|null);
 
                     /** Finding muteInitiator */
                     muteInitiator?: (string|null);
@@ -704,6 +821,9 @@ export namespace google {
 
                     /** Finding muteUpdateTime. */
                     public muteUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Finding externalSystems. */
+                    public externalSystems: { [k: string]: google.cloud.securitycenter.v1.IExternalSystem };
 
                     /** Finding muteInitiator. */
                     public muteInitiator: string;
@@ -2640,6 +2760,20 @@ export namespace google {
                     public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
 
                     /**
+                     * Calls UpdateExternalSystem.
+                     * @param request UpdateExternalSystemRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ExternalSystem
+                     */
+                    public updateExternalSystem(request: google.cloud.securitycenter.v1.IUpdateExternalSystemRequest, callback: google.cloud.securitycenter.v1.SecurityCenter.UpdateExternalSystemCallback): void;
+
+                    /**
+                     * Calls UpdateExternalSystem.
+                     * @param request UpdateExternalSystemRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateExternalSystem(request: google.cloud.securitycenter.v1.IUpdateExternalSystemRequest): Promise<google.cloud.securitycenter.v1.ExternalSystem>;
+
+                    /**
                      * Calls UpdateFinding.
                      * @param request UpdateFindingRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Finding
@@ -2893,6 +3027,13 @@ export namespace google {
                      * @param [response] TestIamPermissionsResponse
                      */
                     type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#updateExternalSystem}.
+                     * @param error Error, if any
+                     * @param [response] ExternalSystem
+                     */
+                    type UpdateExternalSystemCallback = (error: (Error|null), response?: google.cloud.securitycenter.v1.ExternalSystem) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.securitycenter.v1.SecurityCenter#updateFinding}.
@@ -6345,6 +6486,102 @@ export namespace google {
 
                     /**
                      * Converts this RunAssetDiscoveryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateExternalSystemRequest. */
+                interface IUpdateExternalSystemRequest {
+
+                    /** UpdateExternalSystemRequest externalSystem */
+                    externalSystem?: (google.cloud.securitycenter.v1.IExternalSystem|null);
+
+                    /** UpdateExternalSystemRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateExternalSystemRequest. */
+                class UpdateExternalSystemRequest implements IUpdateExternalSystemRequest {
+
+                    /**
+                     * Constructs a new UpdateExternalSystemRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IUpdateExternalSystemRequest);
+
+                    /** UpdateExternalSystemRequest externalSystem. */
+                    public externalSystem?: (google.cloud.securitycenter.v1.IExternalSystem|null);
+
+                    /** UpdateExternalSystemRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateExternalSystemRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateExternalSystemRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IUpdateExternalSystemRequest): google.cloud.securitycenter.v1.UpdateExternalSystemRequest;
+
+                    /**
+                     * Encodes the specified UpdateExternalSystemRequest message. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateExternalSystemRequest.verify|verify} messages.
+                     * @param message UpdateExternalSystemRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IUpdateExternalSystemRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateExternalSystemRequest message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.UpdateExternalSystemRequest.verify|verify} messages.
+                     * @param message UpdateExternalSystemRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IUpdateExternalSystemRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateExternalSystemRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateExternalSystemRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.UpdateExternalSystemRequest;
+
+                    /**
+                     * Decodes an UpdateExternalSystemRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateExternalSystemRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.UpdateExternalSystemRequest;
+
+                    /**
+                     * Verifies an UpdateExternalSystemRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateExternalSystemRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateExternalSystemRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.UpdateExternalSystemRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateExternalSystemRequest message. Also converts values to other types if specified.
+                     * @param message UpdateExternalSystemRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.UpdateExternalSystemRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateExternalSystemRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

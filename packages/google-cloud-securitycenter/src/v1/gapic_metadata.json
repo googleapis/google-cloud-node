@@ -85,6 +85,11 @@
                 "testIamPermissions"
               ]
             },
+            "UpdateExternalSystem": {
+              "methods": [
+                "updateExternalSystem"
+              ]
+            },
             "UpdateFinding": {
               "methods": [
                 "updateFinding"
@@ -252,6 +257,11 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "UpdateExternalSystem": {
+              "methods": [
+                "updateExternalSystem"
               ]
             },
             "UpdateFinding": {

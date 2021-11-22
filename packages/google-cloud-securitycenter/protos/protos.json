@@ -145,6 +145,35 @@
                         }
                       }
                     },
+                    "ExternalSystem": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/ExternalSystem",
+                        "(google.api.resource).pattern": "projects/{project}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "assignees": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "externalUid": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "status": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "externalSystemUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        }
+                      }
+                    },
                     "Finding": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/Finding",
@@ -222,6 +251,14 @@
                         "muteUpdateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "externalSystems": {
+                          "keyType": "string",
+                          "type": "ExternalSystem",
+                          "id": 22,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1242,6 +1279,38 @@
                             }
                           ]
                         },
+                        "UpdateExternalSystem": {
+                          "requestType": "UpdateExternalSystemRequest",
+                          "responseType": "ExternalSystem",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{external_system.name=organizations/*/sources/*/findings/*/externalSystems/*}",
+                            "(google.api.http).body": "external_system",
+                            "(google.api.http).additional_bindings.patch": "/v1/{external_system.name=projects/*/sources/*/findings/*/externalSystems/*}",
+                            "(google.api.http).additional_bindings.body": "external_system",
+                            "(google.api.method_signature)": "external_system,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{external_system.name=organizations/*/sources/*/findings/*/externalSystems/*}",
+                                "body": "external_system",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{external_system.name=folders/*/sources/*/findings/*/externalSystems/*}",
+                                    "body": "external_system"
+                                  },
+                                  {
+                                    "patch": "/v1/{external_system.name=projects/*/sources/*/findings/*/externalSystems/*}",
+                                    "body": "external_system"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "external_system,update_mask"
+                            }
+                          ]
+                        },
                         "UpdateFinding": {
                           "requestType": "UpdateFindingRequest",
                           "responseType": "Finding",
@@ -2111,6 +2180,21 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
                           }
+                        }
+                      }
+                    },
+                    "UpdateExternalSystemRequest": {
+                      "fields": {
+                        "externalSystem": {
+                          "type": "ExternalSystem",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
                         }
                       }
                     },

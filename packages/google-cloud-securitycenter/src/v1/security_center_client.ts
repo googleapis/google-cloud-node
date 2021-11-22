@@ -181,6 +181,10 @@ export class SecurityCenterClient {
       folderSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/sources/{source}/findings/{finding}'
       ),
+      folderSourceFindingExternalsystemPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}'
+        ),
       folderSourceFindingSecurityMarksPathTemplate:
         new this._gaxModule.PathTemplate(
           'folders/{folder}/sources/{source}/findings/{finding}/securityMarks'
@@ -210,6 +214,10 @@ export class SecurityCenterClient {
       organizationSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}/findings/{finding}'
       ),
+      organizationSourceFindingExternalsystemPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}'
+        ),
       organizationSourceFindingSecurityMarksPathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/sources/{source}/findings/{finding}/securityMarks'
@@ -229,6 +237,10 @@ export class SecurityCenterClient {
       projectSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/sources/{source}/findings/{finding}'
       ),
+      projectSourceFindingExternalsystemPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}'
+        ),
       projectSourceFindingSecurityMarksPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/sources/{source}/findings/{finding}/securityMarks'
@@ -388,6 +400,7 @@ export class SecurityCenterClient {
       'setMute',
       'setIamPolicy',
       'testIamPermissions',
+      'updateExternalSystem',
       'updateFinding',
       'updateMuteConfig',
       'updateNotificationConfig',
@@ -1932,6 +1945,107 @@ export class SecurityCenterClient {
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
+  }
+  /**
+   * Updates external system. This is for a given finding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securitycenter.v1.ExternalSystem} request.externalSystem
+   *   Required. The external system resource to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The FieldMask to use when updating the external system resource.
+   *
+   *   If empty all mutable fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ExternalSystem]{@link google.cloud.securitycenter.v1.ExternalSystem}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.update_external_system.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_UpdateExternalSystem_async
+   */
+  updateExternalSystem(
+    request?: protos.google.cloud.securitycenter.v1.IUpdateExternalSystemRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IExternalSystem,
+      (
+        | protos.google.cloud.securitycenter.v1.IUpdateExternalSystemRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateExternalSystem(
+    request: protos.google.cloud.securitycenter.v1.IUpdateExternalSystemRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IExternalSystem,
+      | protos.google.cloud.securitycenter.v1.IUpdateExternalSystemRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateExternalSystem(
+    request: protos.google.cloud.securitycenter.v1.IUpdateExternalSystemRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IExternalSystem,
+      | protos.google.cloud.securitycenter.v1.IUpdateExternalSystemRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateExternalSystem(
+    request?: protos.google.cloud.securitycenter.v1.IUpdateExternalSystemRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IExternalSystem,
+          | protos.google.cloud.securitycenter.v1.IUpdateExternalSystemRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IExternalSystem,
+      | protos.google.cloud.securitycenter.v1.IUpdateExternalSystemRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IExternalSystem,
+      (
+        | protos.google.cloud.securitycenter.v1.IUpdateExternalSystemRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'external_system.name': request.externalSystem!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateExternalSystem(request, options, callback);
   }
   /**
    * Creates or updates a finding. The corresponding source must exist for a
@@ -5960,6 +6074,91 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified folderSourceFindingExternalsystem resource name string.
+   *
+   * @param {string} folder
+   * @param {string} source
+   * @param {string} finding
+   * @param {string} externalsystem
+   * @returns {string} Resource name string.
+   */
+  folderSourceFindingExternalsystemPath(
+    folder: string,
+    source: string,
+    finding: string,
+    externalsystem: string
+  ) {
+    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.render(
+      {
+        folder: folder,
+        source: source,
+        finding: finding,
+        externalsystem: externalsystem,
+      }
+    );
+  }
+
+  /**
+   * Parse the folder from FolderSourceFindingExternalsystem resource.
+   *
+   * @param {string} folderSourceFindingExternalsystemName
+   *   A fully-qualified path representing folder_source_finding_externalsystem resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderSourceFindingExternalsystemName(
+    folderSourceFindingExternalsystemName: string
+  ) {
+    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match(
+      folderSourceFindingExternalsystemName
+    ).folder;
+  }
+
+  /**
+   * Parse the source from FolderSourceFindingExternalsystem resource.
+   *
+   * @param {string} folderSourceFindingExternalsystemName
+   *   A fully-qualified path representing folder_source_finding_externalsystem resource.
+   * @returns {string} A string representing the source.
+   */
+  matchSourceFromFolderSourceFindingExternalsystemName(
+    folderSourceFindingExternalsystemName: string
+  ) {
+    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match(
+      folderSourceFindingExternalsystemName
+    ).source;
+  }
+
+  /**
+   * Parse the finding from FolderSourceFindingExternalsystem resource.
+   *
+   * @param {string} folderSourceFindingExternalsystemName
+   *   A fully-qualified path representing folder_source_finding_externalsystem resource.
+   * @returns {string} A string representing the finding.
+   */
+  matchFindingFromFolderSourceFindingExternalsystemName(
+    folderSourceFindingExternalsystemName: string
+  ) {
+    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match(
+      folderSourceFindingExternalsystemName
+    ).finding;
+  }
+
+  /**
+   * Parse the externalsystem from FolderSourceFindingExternalsystem resource.
+   *
+   * @param {string} folderSourceFindingExternalsystemName
+   *   A fully-qualified path representing folder_source_finding_externalsystem resource.
+   * @returns {string} A string representing the externalsystem.
+   */
+  matchExternalsystemFromFolderSourceFindingExternalsystemName(
+    folderSourceFindingExternalsystemName: string
+  ) {
+    return this.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match(
+      folderSourceFindingExternalsystemName
+    ).externalsystem;
+  }
+
+  /**
    * Return a fully-qualified folderSourceFindingSecurityMarks resource name string.
    *
    * @param {string} folder
@@ -6355,6 +6554,91 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified organizationSourceFindingExternalsystem resource name string.
+   *
+   * @param {string} organization
+   * @param {string} source
+   * @param {string} finding
+   * @param {string} externalsystem
+   * @returns {string} Resource name string.
+   */
+  organizationSourceFindingExternalsystemPath(
+    organization: string,
+    source: string,
+    finding: string,
+    externalsystem: string
+  ) {
+    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.render(
+      {
+        organization: organization,
+        source: source,
+        finding: finding,
+        externalsystem: externalsystem,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationSourceFindingExternalsystem resource.
+   *
+   * @param {string} organizationSourceFindingExternalsystemName
+   *   A fully-qualified path representing organization_source_finding_externalsystem resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSourceFindingExternalsystemName(
+    organizationSourceFindingExternalsystemName: string
+  ) {
+    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match(
+      organizationSourceFindingExternalsystemName
+    ).organization;
+  }
+
+  /**
+   * Parse the source from OrganizationSourceFindingExternalsystem resource.
+   *
+   * @param {string} organizationSourceFindingExternalsystemName
+   *   A fully-qualified path representing organization_source_finding_externalsystem resource.
+   * @returns {string} A string representing the source.
+   */
+  matchSourceFromOrganizationSourceFindingExternalsystemName(
+    organizationSourceFindingExternalsystemName: string
+  ) {
+    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match(
+      organizationSourceFindingExternalsystemName
+    ).source;
+  }
+
+  /**
+   * Parse the finding from OrganizationSourceFindingExternalsystem resource.
+   *
+   * @param {string} organizationSourceFindingExternalsystemName
+   *   A fully-qualified path representing organization_source_finding_externalsystem resource.
+   * @returns {string} A string representing the finding.
+   */
+  matchFindingFromOrganizationSourceFindingExternalsystemName(
+    organizationSourceFindingExternalsystemName: string
+  ) {
+    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match(
+      organizationSourceFindingExternalsystemName
+    ).finding;
+  }
+
+  /**
+   * Parse the externalsystem from OrganizationSourceFindingExternalsystem resource.
+   *
+   * @param {string} organizationSourceFindingExternalsystemName
+   *   A fully-qualified path representing organization_source_finding_externalsystem resource.
+   * @returns {string} A string representing the externalsystem.
+   */
+  matchExternalsystemFromOrganizationSourceFindingExternalsystemName(
+    organizationSourceFindingExternalsystemName: string
+  ) {
+    return this.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match(
+      organizationSourceFindingExternalsystemName
+    ).externalsystem;
+  }
+
+  /**
    * Return a fully-qualified organizationSourceFindingSecurityMarks resource name string.
    *
    * @param {string} organization
@@ -6634,6 +6918,91 @@ export class SecurityCenterClient {
     return this.pathTemplates.projectSourceFindingPathTemplate.match(
       projectSourceFindingName
     ).finding;
+  }
+
+  /**
+   * Return a fully-qualified projectSourceFindingExternalsystem resource name string.
+   *
+   * @param {string} project
+   * @param {string} source
+   * @param {string} finding
+   * @param {string} externalsystem
+   * @returns {string} Resource name string.
+   */
+  projectSourceFindingExternalsystemPath(
+    project: string,
+    source: string,
+    finding: string,
+    externalsystem: string
+  ) {
+    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.render(
+      {
+        project: project,
+        source: source,
+        finding: finding,
+        externalsystem: externalsystem,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectSourceFindingExternalsystem resource.
+   *
+   * @param {string} projectSourceFindingExternalsystemName
+   *   A fully-qualified path representing project_source_finding_externalsystem resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectSourceFindingExternalsystemName(
+    projectSourceFindingExternalsystemName: string
+  ) {
+    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match(
+      projectSourceFindingExternalsystemName
+    ).project;
+  }
+
+  /**
+   * Parse the source from ProjectSourceFindingExternalsystem resource.
+   *
+   * @param {string} projectSourceFindingExternalsystemName
+   *   A fully-qualified path representing project_source_finding_externalsystem resource.
+   * @returns {string} A string representing the source.
+   */
+  matchSourceFromProjectSourceFindingExternalsystemName(
+    projectSourceFindingExternalsystemName: string
+  ) {
+    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match(
+      projectSourceFindingExternalsystemName
+    ).source;
+  }
+
+  /**
+   * Parse the finding from ProjectSourceFindingExternalsystem resource.
+   *
+   * @param {string} projectSourceFindingExternalsystemName
+   *   A fully-qualified path representing project_source_finding_externalsystem resource.
+   * @returns {string} A string representing the finding.
+   */
+  matchFindingFromProjectSourceFindingExternalsystemName(
+    projectSourceFindingExternalsystemName: string
+  ) {
+    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match(
+      projectSourceFindingExternalsystemName
+    ).finding;
+  }
+
+  /**
+   * Parse the externalsystem from ProjectSourceFindingExternalsystem resource.
+   *
+   * @param {string} projectSourceFindingExternalsystemName
+   *   A fully-qualified path representing project_source_finding_externalsystem resource.
+   * @returns {string} A string representing the externalsystem.
+   */
+  matchExternalsystemFromProjectSourceFindingExternalsystemName(
+    projectSourceFindingExternalsystemName: string
+  ) {
+    return this.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match(
+      projectSourceFindingExternalsystemName
+    ).externalsystem;
   }
 
   /**
