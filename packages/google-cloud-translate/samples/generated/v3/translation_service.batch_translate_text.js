@@ -67,7 +67,7 @@ function main(
    *  If 2 input configs match to the same file (that is, same input path),
    *  we don't generate output for duplicate inputs.
    */
-  // const outputConfig = ''
+  // const outputConfig = {}
   /**
    *  Optional. Glossaries to be applied for translation.
    *  It's keyed by target language code.
@@ -90,7 +90,7 @@ function main(
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function batchTranslateText() {
+  async function callBatchTranslateText() {
     // Construct request
     const request = {
       parent,
@@ -106,7 +106,7 @@ function main(
     console.log(response);
   }
 
-  batchTranslateText();
+  callBatchTranslateText();
   // [END translate_v3_generated_TranslationService_BatchTranslateText_async]
 }
 

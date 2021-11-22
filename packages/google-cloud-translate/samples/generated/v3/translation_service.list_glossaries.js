@@ -30,7 +30,7 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  Optional. A token identifying a page of results the server should return.
-   *  Typically, this is the value of [ListGlossariesResponse.next_page_token]
+   *  Typically, this is the value of ListGlossariesResponse.next_page_token
    *  returned from the previous call to `ListGlossaries` method.
    *  The first page is returned if `page_token`is empty or missing.
    */
@@ -61,7 +61,7 @@ function main(parent) {
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function listGlossaries() {
+  async function callListGlossaries() {
     // Construct request
     const request = {
       parent,
@@ -74,7 +74,7 @@ function main(parent) {
     }
   }
 
-  listGlossaries();
+  callListGlossaries();
   // [END translate_v3_generated_TranslationService_ListGlossaries_async]
 }
 

@@ -57,7 +57,7 @@ function main(
    *  If 2 input configs match to the same file (that is, same input path),
    *  we don't generate output for duplicate inputs.
    */
-  // const outputConfig = ''
+  // const outputConfig = {}
   /**
    *  Optional. The models to use for translation. Map's key is target language
    *  code. Map's value is the model name. Value can be a built-in general model,
@@ -93,7 +93,7 @@ function main(
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function batchTranslateDocument() {
+  async function callBatchTranslateDocument() {
     // Construct request
     const request = {
       parent,
@@ -109,7 +109,7 @@ function main(
     console.log(response);
   }
 
-  batchTranslateDocument();
+  callBatchTranslateDocument();
   // [END translate_v3beta1_generated_TranslationService_BatchTranslateDocument_async]
 }
 

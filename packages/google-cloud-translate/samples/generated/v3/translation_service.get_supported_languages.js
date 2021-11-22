@@ -55,7 +55,7 @@ function main(parent) {
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function getSupportedLanguages() {
+  async function callGetSupportedLanguages() {
     // Construct request
     const request = {
       parent,
@@ -66,7 +66,7 @@ function main(parent) {
     console.log(response);
   }
 
-  getSupportedLanguages();
+  callGetSupportedLanguages();
   // [END translate_v3_generated_TranslationService_GetSupportedLanguages_async]
 }
 

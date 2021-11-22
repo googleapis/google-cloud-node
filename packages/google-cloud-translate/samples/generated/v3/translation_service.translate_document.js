@@ -47,7 +47,7 @@ function main(parent, targetLanguageCode, documentInputConfig) {
   /**
    *  Required. Input configurations.
    */
-  // const documentInputConfig = ''
+  // const documentInputConfig = {}
   /**
    *  Optional. Output configurations.
    *  Defines if the output file should be stored within Cloud Storage as well
@@ -55,7 +55,7 @@ function main(parent, targetLanguageCode, documentInputConfig) {
    *  only be returned through a byte-stream and its output mime type will be
    *  the same as the input file's mime type.
    */
-  // const documentOutputConfig = ''
+  // const documentOutputConfig = {}
   /**
    *  Optional. The `model` type requested for this translation.
    *  The format depends on model type:
@@ -72,7 +72,7 @@ function main(parent, targetLanguageCode, documentInputConfig) {
    *  region (have the same location-id) as the model, otherwise an
    *  INVALID_ARGUMENT (400) error is returned.
    */
-  // const glossaryConfig = ''
+  // const glossaryConfig = {}
   /**
    *  Optional. The labels with user-defined metadata for the request.
    *  Label keys and values can be no longer than 63 characters (Unicode
@@ -90,7 +90,7 @@ function main(parent, targetLanguageCode, documentInputConfig) {
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function translateDocument() {
+  async function callTranslateDocument() {
     // Construct request
     const request = {
       parent,
@@ -103,7 +103,7 @@ function main(parent, targetLanguageCode, documentInputConfig) {
     console.log(response);
   }
 
-  translateDocument();
+  callTranslateDocument();
   // [END translate_v3_generated_TranslationService_TranslateDocument_async]
 }
 

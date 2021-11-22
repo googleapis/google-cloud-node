@@ -26,7 +26,7 @@ function main(parent, glossary) {
   /**
    *  Required. The glossary to create.
    */
-  // const glossary = ''
+  // const glossary = {}
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3beta1;
@@ -34,7 +34,7 @@ function main(parent, glossary) {
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function createGlossary() {
+  async function callCreateGlossary() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, glossary) {
     console.log(response);
   }
 
-  createGlossary();
+  callCreateGlossary();
   // [END translate_v3beta1_generated_TranslationService_CreateGlossary_async]
 }
 

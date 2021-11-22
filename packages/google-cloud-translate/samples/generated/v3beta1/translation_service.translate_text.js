@@ -75,7 +75,7 @@ function main(contents, targetLanguageCode, parent) {
    *  within the same region (have the same location-id) as the model, otherwise
    *  an INVALID_ARGUMENT (400) error is returned.
    */
-  // const glossaryConfig = ''
+  // const glossaryConfig = {}
   /**
    *  Optional. The labels with user-defined metadata for the request.
    *  Label keys and values can be no longer than 63 characters
@@ -92,7 +92,7 @@ function main(contents, targetLanguageCode, parent) {
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function translateText() {
+  async function callTranslateText() {
     // Construct request
     const request = {
       contents,
@@ -105,7 +105,7 @@ function main(contents, targetLanguageCode, parent) {
     console.log(response);
   }
 
-  translateText();
+  callTranslateText();
   // [END translate_v3beta1_generated_TranslationService_TranslateText_async]
 }
 

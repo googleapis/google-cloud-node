@@ -30,7 +30,7 @@ function main(name) {
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function deleteGlossary() {
+  async function callDeleteGlossary() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteGlossary();
+  callDeleteGlossary();
   // [END translate_v3_generated_TranslationService_DeleteGlossary_async]
 }
 
