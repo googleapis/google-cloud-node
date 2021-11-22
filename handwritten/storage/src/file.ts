@@ -2144,11 +2144,12 @@ class File extends ServiceObject<File> {
     const fileStream = this.createReadStream(options);
 
     if (destination) {
-      fileStream
-        .on('error', callback)
-        .pipe(fs.createWriteStream(destination))
-        .on('error', callback)
-        .on('finish', callback);
+      fileStream.on('error', callback).once('data', data => {
+        // We know that the file exists the server
+        const writable = fs.createWriteStream(destination);
+        writable.write(data);
+        fileStream.pipe(writable).on('error', callback).on('finish', callback);
+      });
     } else {
       getStream
         .buffer(fileStream)

@@ -2697,6 +2697,61 @@ describe('File', () => {
         });
       });
 
+      it('should process the entire stream', done => {
+        tmp.setGracefulCleanup();
+        tmp.file(async (err, tmpFilePath) => {
+          assert.ifError(err);
+
+          const fileContents = 'abcdefghijklmnopqrstuvwxyz';
+
+          fileReadStream.on('resume', () => {
+            fileReadStream.emit('data', fileContents);
+            fileReadStream.emit('data', fileContents);
+            setImmediate(() => {
+              fileReadStream.emit('end');
+            });
+          });
+
+          file.download({destination: tmpFilePath}, (err: Error) => {
+            assert.ifError(err);
+            fs.readFile(tmpFilePath, (err, tmpFileContents) => {
+              assert.ifError(err);
+              assert.strictEqual(
+                fileContents + fileContents,
+                tmpFileContents.toString()
+              );
+              done();
+            });
+          });
+        });
+      });
+
+      it('file contents should remain unchanged if file nonexistent', done => {
+        tmp.setGracefulCleanup();
+        tmp.file(async (err, tmpFilePath) => {
+          assert.ifError(err);
+
+          const fileContents = 'file contents that should remain unchanged';
+          fs.writeFileSync(tmpFilePath, fileContents, 'utf-8');
+
+          const error = new Error('Error.');
+          fileReadStream.on('resume', () => {
+            setImmediate(() => {
+              fileReadStream.emit('error', error);
+            });
+          });
+
+          file.download({destination: tmpFilePath}, (err: Error) => {
+            assert.strictEqual(err, error);
+            fs.readFile(tmpFilePath, (err, tmpFileContents) => {
+              assert.ifError(err);
+              assert.strictEqual(fileContents, tmpFileContents.toString());
+              done();
+            });
+          });
+        });
+      });
+
       it('should execute callback with error', done => {
         tmp.setGracefulCleanup();
         tmp.file((err, tmpFilePath) => {
