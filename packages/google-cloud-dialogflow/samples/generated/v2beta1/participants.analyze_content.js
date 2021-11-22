@@ -46,6 +46,10 @@ function main(participant) {
    */
   // const queryParams = {}
   /**
+   *  Parameters for a human assist query.
+   */
+  // const assistQueryParams = {}
+  /**
    *  Optional. The send time of the message from end user or human agent's
    *  perspective. It is used for identifying the same message under one
    *  participant.

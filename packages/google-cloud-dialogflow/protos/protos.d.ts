@@ -27452,6 +27452,18 @@ export namespace google {
                     }
                 }
 
+                /** AudioEncoding enum. */
+                enum AudioEncoding {
+                    AUDIO_ENCODING_UNSPECIFIED = 0,
+                    AUDIO_ENCODING_LINEAR_16 = 1,
+                    AUDIO_ENCODING_FLAC = 2,
+                    AUDIO_ENCODING_MULAW = 3,
+                    AUDIO_ENCODING_AMR = 4,
+                    AUDIO_ENCODING_AMR_WB = 5,
+                    AUDIO_ENCODING_OGG_OPUS = 6,
+                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
+                }
+
                 /** Properties of a SpeechContext. */
                 interface ISpeechContext {
 
@@ -27546,18 +27558,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** AudioEncoding enum. */
-                enum AudioEncoding {
-                    AUDIO_ENCODING_UNSPECIFIED = 0,
-                    AUDIO_ENCODING_LINEAR_16 = 1,
-                    AUDIO_ENCODING_FLAC = 2,
-                    AUDIO_ENCODING_MULAW = 3,
-                    AUDIO_ENCODING_AMR = 4,
-                    AUDIO_ENCODING_AMR_WB = 5,
-                    AUDIO_ENCODING_OGG_OPUS = 6,
-                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                 }
 
                 /** Properties of a SpeechWordInfo. */
@@ -30428,6 +30428,9 @@ export namespace google {
 
                     /** Participant obfuscatedExternalUserId */
                     obfuscatedExternalUserId?: (string|null);
+
+                    /** Participant documentsMetadataFilters */
+                    documentsMetadataFilters?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Participant. */
@@ -30447,6 +30450,9 @@ export namespace google {
 
                     /** Participant obfuscatedExternalUserId. */
                     public obfuscatedExternalUserId: string;
+
+                    /** Participant documentsMetadataFilters. */
+                    public documentsMetadataFilters: { [k: string]: string };
 
                     /**
                      * Creates a new Participant instance using the specified properties.
@@ -31499,6 +31505,96 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an AssistQueryParameters. */
+                interface IAssistQueryParameters {
+
+                    /** AssistQueryParameters documentsMetadataFilters */
+                    documentsMetadataFilters?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents an AssistQueryParameters. */
+                class AssistQueryParameters implements IAssistQueryParameters {
+
+                    /**
+                     * Constructs a new AssistQueryParameters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IAssistQueryParameters);
+
+                    /** AssistQueryParameters documentsMetadataFilters. */
+                    public documentsMetadataFilters: { [k: string]: string };
+
+                    /**
+                     * Creates a new AssistQueryParameters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AssistQueryParameters instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IAssistQueryParameters): google.cloud.dialogflow.v2beta1.AssistQueryParameters;
+
+                    /**
+                     * Encodes the specified AssistQueryParameters message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.AssistQueryParameters.verify|verify} messages.
+                     * @param message AssistQueryParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IAssistQueryParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AssistQueryParameters message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.AssistQueryParameters.verify|verify} messages.
+                     * @param message AssistQueryParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IAssistQueryParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AssistQueryParameters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AssistQueryParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.AssistQueryParameters;
+
+                    /**
+                     * Decodes an AssistQueryParameters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AssistQueryParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.AssistQueryParameters;
+
+                    /**
+                     * Verifies an AssistQueryParameters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AssistQueryParameters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AssistQueryParameters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.AssistQueryParameters;
+
+                    /**
+                     * Creates a plain object from an AssistQueryParameters message. Also converts values to other types if specified.
+                     * @param message AssistQueryParameters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.AssistQueryParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AssistQueryParameters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an AnalyzeContentRequest. */
                 interface IAnalyzeContentRequest {
 
@@ -31516,6 +31612,9 @@ export namespace google {
 
                     /** AnalyzeContentRequest queryParams */
                     queryParams?: (google.cloud.dialogflow.v2beta1.IQueryParameters|null);
+
+                    /** AnalyzeContentRequest assistQueryParams */
+                    assistQueryParams?: (google.cloud.dialogflow.v2beta1.IAssistQueryParameters|null);
 
                     /** AnalyzeContentRequest messageSendTime */
                     messageSendTime?: (google.protobuf.ITimestamp|null);
@@ -31547,6 +31646,9 @@ export namespace google {
 
                     /** AnalyzeContentRequest queryParams. */
                     public queryParams?: (google.cloud.dialogflow.v2beta1.IQueryParameters|null);
+
+                    /** AnalyzeContentRequest assistQueryParams. */
+                    public assistQueryParams?: (google.cloud.dialogflow.v2beta1.IAssistQueryParameters|null);
 
                     /** AnalyzeContentRequest messageSendTime. */
                     public messageSendTime?: (google.protobuf.ITimestamp|null);
@@ -32500,6 +32602,9 @@ export namespace google {
 
                     /** SuggestArticlesRequest contextSize */
                     contextSize?: (number|null);
+
+                    /** SuggestArticlesRequest assistQueryParams */
+                    assistQueryParams?: (google.cloud.dialogflow.v2beta1.IAssistQueryParameters|null);
                 }
 
                 /** Represents a SuggestArticlesRequest. */
@@ -32519,6 +32624,9 @@ export namespace google {
 
                     /** SuggestArticlesRequest contextSize. */
                     public contextSize: number;
+
+                    /** SuggestArticlesRequest assistQueryParams. */
+                    public assistQueryParams?: (google.cloud.dialogflow.v2beta1.IAssistQueryParameters|null);
 
                     /**
                      * Creates a new SuggestArticlesRequest instance using the specified properties.
@@ -32704,6 +32812,9 @@ export namespace google {
 
                     /** SuggestFaqAnswersRequest contextSize */
                     contextSize?: (number|null);
+
+                    /** SuggestFaqAnswersRequest assistQueryParams */
+                    assistQueryParams?: (google.cloud.dialogflow.v2beta1.IAssistQueryParameters|null);
                 }
 
                 /** Represents a SuggestFaqAnswersRequest. */
@@ -32723,6 +32834,9 @@ export namespace google {
 
                     /** SuggestFaqAnswersRequest contextSize. */
                     public contextSize: number;
+
+                    /** SuggestFaqAnswersRequest assistQueryParams. */
+                    public assistQueryParams?: (google.cloud.dialogflow.v2beta1.IAssistQueryParameters|null);
 
                     /**
                      * Creates a new SuggestFaqAnswersRequest instance using the specified properties.

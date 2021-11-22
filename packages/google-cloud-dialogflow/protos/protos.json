@@ -8706,6 +8706,18 @@
                         }
                       }
                     },
+                    "AudioEncoding": {
+                      "values": {
+                        "AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "AUDIO_ENCODING_LINEAR_16": 1,
+                        "AUDIO_ENCODING_FLAC": 2,
+                        "AUDIO_ENCODING_MULAW": 3,
+                        "AUDIO_ENCODING_AMR": 4,
+                        "AUDIO_ENCODING_AMR_WB": 5,
+                        "AUDIO_ENCODING_OGG_OPUS": 6,
+                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                      }
+                    },
                     "SpeechContext": {
                       "fields": {
                         "phrases": {
@@ -8717,18 +8729,6 @@
                           "type": "float",
                           "id": 2
                         }
-                      }
-                    },
-                    "AudioEncoding": {
-                      "values": {
-                        "AUDIO_ENCODING_UNSPECIFIED": 0,
-                        "AUDIO_ENCODING_LINEAR_16": 1,
-                        "AUDIO_ENCODING_FLAC": 2,
-                        "AUDIO_ENCODING_MULAW": 3,
-                        "AUDIO_ENCODING_AMR": 4,
-                        "AUDIO_ENCODING_AMR_WB": 5,
-                        "AUDIO_ENCODING_OGG_OPUS": 6,
-                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
                       }
                     },
                     "SpeechWordInfo": {
@@ -9700,6 +9700,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "documentsMetadataFilters": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -9971,6 +9979,15 @@
                         }
                       }
                     },
+                    "AssistQueryParameters": {
+                      "fields": {
+                        "documentsMetadataFilters": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "AnalyzeContentRequest": {
                       "oneofs": {
                         "input": {
@@ -10004,6 +10021,10 @@
                         "queryParams": {
                           "type": "QueryParameters",
                           "id": 9
+                        },
+                        "assistQueryParams": {
+                          "type": "AssistQueryParameters",
+                          "id": 14
                         },
                         "messageSendTime": {
                           "type": "google.protobuf.Timestamp",
@@ -10211,6 +10232,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "assistQueryParams": {
+                          "type": "AssistQueryParameters",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10252,6 +10280,13 @@
                         "contextSize": {
                           "type": "int32",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "assistQueryParams": {
+                          "type": "AssistQueryParameters",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
