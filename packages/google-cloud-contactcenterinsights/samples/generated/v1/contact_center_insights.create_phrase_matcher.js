@@ -20,10 +20,10 @@ function main(parent, phraseMatcher) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource of the phrase matcher. Required. The location
-   *  to create a phrase matcher for. Format: `projects/<Project
-   *  ID>/locations/<Location ID>` or `projects/<Project
-   *  Number>/locations/<Location ID>`
+   *  Required. The parent resource of the phrase matcher. Required. The location to create
+   *  a phrase matcher for.
+   *  Format: `projects/<Project ID>/locations/<Location ID>` or
+   *  `projects/<Project Number>/locations/<Location ID>`
    */
   // const parent = 'abc123'
   /**

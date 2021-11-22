@@ -472,8 +472,8 @@ export class ContactCenterInsightsClient {
    *   component of the conversation's resource name. If no ID is specified, a
    *   server-generated ID will be used.
    *
-   *   This value should be 4-32 characters and must match the regular
-   *   expression /^{@link 0-9|a-z0-9-]{4,32}$/. Valid characters are /[a-z}-/
+   *   This value should be 4-64 characters and must match the regular
+   *   expression `^{@link 0-9|a-z0-9-]{4,64}$`. Valid characters are `[a-z}-`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1744,10 +1744,10 @@ export class ContactCenterInsightsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource of the phrase matcher. Required. The location
-   *   to create a phrase matcher for. Format: `projects/<Project
-   *   ID>/locations/<Location ID>` or `projects/<Project
-   *   Number>/locations/<Location ID>`
+   *   Required. The parent resource of the phrase matcher. Required. The location to create
+   *   a phrase matcher for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>` or
+   *   `projects/<Project Number>/locations/<Location ID>`
    * @param {google.cloud.contactcenterinsights.v1.PhraseMatcher} request.phraseMatcher
    *   Required. The phrase matcher resource to create.
    * @param {object} [options]
