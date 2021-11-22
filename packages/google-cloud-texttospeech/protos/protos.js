@@ -380,6 +380,8 @@
                      * @property {number} LINEAR16=1 LINEAR16 value
                      * @property {number} MP3=2 MP3 value
                      * @property {number} OGG_OPUS=3 OGG_OPUS value
+                     * @property {number} MULAW=5 MULAW value
+                     * @property {number} ALAW=6 ALAW value
                      */
                     v1.AudioEncoding = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -387,6 +389,8 @@
                         values[valuesById[1] = "LINEAR16"] = 1;
                         values[valuesById[2] = "MP3"] = 2;
                         values[valuesById[3] = "OGG_OPUS"] = 3;
+                        values[valuesById[5] = "MULAW"] = 5;
+                        values[valuesById[6] = "ALAW"] = 6;
                         return values;
                     })();
     
@@ -1839,6 +1843,8 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.speakingRate != null && message.hasOwnProperty("speakingRate"))
@@ -1891,6 +1897,14 @@
                             case "OGG_OPUS":
                             case 3:
                                 message.audioEncoding = 3;
+                                break;
+                            case "MULAW":
+                            case 5:
+                                message.audioEncoding = 5;
+                                break;
+                            case "ALAW":
+                            case 6:
+                                message.audioEncoding = 6;
                                 break;
                             }
                             if (object.speakingRate != null)

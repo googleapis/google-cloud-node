@@ -15,7 +15,9 @@
                     "java_outer_classname": "TextToSpeechProto",
                     "java_package": "com.google.cloud.texttospeech.v1",
                     "php_namespace": "Google\\Cloud\\TextToSpeech\\V1",
-                    "ruby_package": "Google::Cloud::TextToSpeech::V1"
+                    "ruby_package": "Google::Cloud::TextToSpeech::V1",
+                    "(google.api.resource_definition).type": "automl.googleapis.com/Model",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/models/{model}"
                   },
                   "nested": {
                     "TextToSpeech": {
@@ -88,7 +90,9 @@
                         "AUDIO_ENCODING_UNSPECIFIED": 0,
                         "LINEAR16": 1,
                         "MP3": 2,
-                        "OGG_OPUS": 3
+                        "OGG_OPUS": 3,
+                        "MULAW": 5,
+                        "ALAW": 6
                       }
                     },
                     "ListVoicesResponse": {
