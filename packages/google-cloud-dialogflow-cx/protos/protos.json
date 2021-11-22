@@ -2155,18 +2155,6 @@
                             }
                           }
                         },
-                        "AudioEncoding": {
-                          "values": {
-                            "AUDIO_ENCODING_UNSPECIFIED": 0,
-                            "AUDIO_ENCODING_LINEAR_16": 1,
-                            "AUDIO_ENCODING_FLAC": 2,
-                            "AUDIO_ENCODING_MULAW": 3,
-                            "AUDIO_ENCODING_AMR": 4,
-                            "AUDIO_ENCODING_AMR_WB": 5,
-                            "AUDIO_ENCODING_OGG_OPUS": 6,
-                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
-                          }
-                        },
                         "SpeechWordInfo": {
                           "fields": {
                             "word": {
@@ -2185,6 +2173,18 @@
                               "type": "float",
                               "id": 4
                             }
+                          }
+                        },
+                        "AudioEncoding": {
+                          "values": {
+                            "AUDIO_ENCODING_UNSPECIFIED": 0,
+                            "AUDIO_ENCODING_LINEAR_16": 1,
+                            "AUDIO_ENCODING_FLAC": 2,
+                            "AUDIO_ENCODING_MULAW": 3,
+                            "AUDIO_ENCODING_AMR": 4,
+                            "AUDIO_ENCODING_AMR_WB": 5,
+                            "AUDIO_ENCODING_OGG_OPUS": 6,
+                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
                           }
                         },
                         "InputAudioConfig": {
@@ -6645,6 +6645,26 @@
                                   }
                                 }
                               ]
+                            },
+                            "CompareVersions": {
+                              "requestType": "CompareVersionsRequest",
+                              "responseType": "CompareVersionsResponse",
+                              "options": {
+                                "(google.api.http).post": "/v3/{base_version=projects/*/locations/*/agents/*/flows/*/versions/*}:compareVersions",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "base_version"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{base_version=projects/*/locations/*/agents/*/flows/*/versions/*}:compareVersions",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "base_version"
+                                }
+                              ]
                             }
                           }
                         },
@@ -6823,6 +6843,46 @@
                             }
                           }
                         },
+                        "CompareVersionsRequest": {
+                          "fields": {
+                            "baseVersion": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Version"
+                              }
+                            },
+                            "targetVersion": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Version"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "CompareVersionsResponse": {
+                          "fields": {
+                            "baseVersionContentJson": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "targetVersionContentJson": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "compareTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3
+                            }
+                          }
+                        },
                         "Webhooks": {
                           "options": {
                             "(google.api.default_host)": "dialogflow.googleapis.com",
@@ -6995,6 +7055,14 @@
                                   "keyType": "string",
                                   "type": "string",
                                   "id": 4
+                                },
+                                "allowedCaCerts": {
+                                  "rule": "repeated",
+                                  "type": "bytes",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             },

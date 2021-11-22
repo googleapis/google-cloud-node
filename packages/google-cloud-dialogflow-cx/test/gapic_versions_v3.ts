@@ -561,6 +561,117 @@ describe('v3.VersionsClient', () => {
     });
   });
 
+  describe('compareVersions', () => {
+    it('invokes compareVersions without error', async () => {
+      const client = new versionsModule.v3.VersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.CompareVersionsRequest()
+      );
+      request.baseVersion = '';
+      const expectedHeaderRequestParams = 'base_version=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.CompareVersionsResponse()
+      );
+      client.innerApiCalls.compareVersions = stubSimpleCall(expectedResponse);
+      const [response] = await client.compareVersions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.compareVersions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes compareVersions without error using callback', async () => {
+      const client = new versionsModule.v3.VersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.CompareVersionsRequest()
+      );
+      request.baseVersion = '';
+      const expectedHeaderRequestParams = 'base_version=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.CompareVersionsResponse()
+      );
+      client.innerApiCalls.compareVersions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.compareVersions(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.cx.v3.ICompareVersionsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.compareVersions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes compareVersions with error', async () => {
+      const client = new versionsModule.v3.VersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.CompareVersionsRequest()
+      );
+      request.baseVersion = '';
+      const expectedHeaderRequestParams = 'base_version=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.compareVersions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.compareVersions(request), expectedError);
+      assert(
+        (client.innerApiCalls.compareVersions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('createVersion', () => {
     it('invokes createVersion without error', async () => {
       const client = new versionsModule.v3.VersionsClient({

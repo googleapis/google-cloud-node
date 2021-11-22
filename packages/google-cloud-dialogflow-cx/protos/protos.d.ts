@@ -7748,18 +7748,6 @@ export namespace google {
                         }
                     }
 
-                    /** AudioEncoding enum. */
-                    enum AudioEncoding {
-                        AUDIO_ENCODING_UNSPECIFIED = 0,
-                        AUDIO_ENCODING_LINEAR_16 = 1,
-                        AUDIO_ENCODING_FLAC = 2,
-                        AUDIO_ENCODING_MULAW = 3,
-                        AUDIO_ENCODING_AMR = 4,
-                        AUDIO_ENCODING_AMR_WB = 5,
-                        AUDIO_ENCODING_OGG_OPUS = 6,
-                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
-                    }
-
                     /** Properties of a SpeechWordInfo. */
                     interface ISpeechWordInfo {
 
@@ -7866,6 +7854,18 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+                    }
+
+                    /** AudioEncoding enum. */
+                    enum AudioEncoding {
+                        AUDIO_ENCODING_UNSPECIFIED = 0,
+                        AUDIO_ENCODING_LINEAR_16 = 1,
+                        AUDIO_ENCODING_FLAC = 2,
+                        AUDIO_ENCODING_MULAW = 3,
+                        AUDIO_ENCODING_AMR = 4,
+                        AUDIO_ENCODING_AMR_WB = 5,
+                        AUDIO_ENCODING_OGG_OPUS = 6,
+                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                     }
 
                     /** Properties of an InputAudioConfig. */
@@ -24408,6 +24408,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public loadVersion(request: google.cloud.dialogflow.cx.v3.ILoadVersionRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls CompareVersions.
+                         * @param request CompareVersionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and CompareVersionsResponse
+                         */
+                        public compareVersions(request: google.cloud.dialogflow.cx.v3.ICompareVersionsRequest, callback: google.cloud.dialogflow.cx.v3.Versions.CompareVersionsCallback): void;
+
+                        /**
+                         * Calls CompareVersions.
+                         * @param request CompareVersionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public compareVersions(request: google.cloud.dialogflow.cx.v3.ICompareVersionsRequest): Promise<google.cloud.dialogflow.cx.v3.CompareVersionsResponse>;
                     }
 
                     namespace Versions {
@@ -24453,6 +24467,13 @@ export namespace google {
                          * @param [response] Operation
                          */
                         type LoadVersionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Versions#compareVersions}.
+                         * @param error Error, if any
+                         * @param [response] CompareVersionsResponse
+                         */
+                        type CompareVersionsCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.CompareVersionsResponse) => void;
                     }
 
                     /** Properties of a CreateVersionOperationMetadata. */
@@ -25342,6 +25363,210 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** Properties of a CompareVersionsRequest. */
+                    interface ICompareVersionsRequest {
+
+                        /** CompareVersionsRequest baseVersion */
+                        baseVersion?: (string|null);
+
+                        /** CompareVersionsRequest targetVersion */
+                        targetVersion?: (string|null);
+
+                        /** CompareVersionsRequest languageCode */
+                        languageCode?: (string|null);
+                    }
+
+                    /** Represents a CompareVersionsRequest. */
+                    class CompareVersionsRequest implements ICompareVersionsRequest {
+
+                        /**
+                         * Constructs a new CompareVersionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICompareVersionsRequest);
+
+                        /** CompareVersionsRequest baseVersion. */
+                        public baseVersion: string;
+
+                        /** CompareVersionsRequest targetVersion. */
+                        public targetVersion: string;
+
+                        /** CompareVersionsRequest languageCode. */
+                        public languageCode: string;
+
+                        /**
+                         * Creates a new CompareVersionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CompareVersionsRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICompareVersionsRequest): google.cloud.dialogflow.cx.v3.CompareVersionsRequest;
+
+                        /**
+                         * Encodes the specified CompareVersionsRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CompareVersionsRequest.verify|verify} messages.
+                         * @param message CompareVersionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ICompareVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CompareVersionsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CompareVersionsRequest.verify|verify} messages.
+                         * @param message CompareVersionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICompareVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CompareVersionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CompareVersionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CompareVersionsRequest;
+
+                        /**
+                         * Decodes a CompareVersionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CompareVersionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CompareVersionsRequest;
+
+                        /**
+                         * Verifies a CompareVersionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CompareVersionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CompareVersionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CompareVersionsRequest;
+
+                        /**
+                         * Creates a plain object from a CompareVersionsRequest message. Also converts values to other types if specified.
+                         * @param message CompareVersionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.CompareVersionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CompareVersionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a CompareVersionsResponse. */
+                    interface ICompareVersionsResponse {
+
+                        /** CompareVersionsResponse baseVersionContentJson */
+                        baseVersionContentJson?: (string|null);
+
+                        /** CompareVersionsResponse targetVersionContentJson */
+                        targetVersionContentJson?: (string|null);
+
+                        /** CompareVersionsResponse compareTime */
+                        compareTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a CompareVersionsResponse. */
+                    class CompareVersionsResponse implements ICompareVersionsResponse {
+
+                        /**
+                         * Constructs a new CompareVersionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICompareVersionsResponse);
+
+                        /** CompareVersionsResponse baseVersionContentJson. */
+                        public baseVersionContentJson: string;
+
+                        /** CompareVersionsResponse targetVersionContentJson. */
+                        public targetVersionContentJson: string;
+
+                        /** CompareVersionsResponse compareTime. */
+                        public compareTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new CompareVersionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CompareVersionsResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICompareVersionsResponse): google.cloud.dialogflow.cx.v3.CompareVersionsResponse;
+
+                        /**
+                         * Encodes the specified CompareVersionsResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CompareVersionsResponse.verify|verify} messages.
+                         * @param message CompareVersionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ICompareVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CompareVersionsResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CompareVersionsResponse.verify|verify} messages.
+                         * @param message CompareVersionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICompareVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CompareVersionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CompareVersionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CompareVersionsResponse;
+
+                        /**
+                         * Decodes a CompareVersionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CompareVersionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CompareVersionsResponse;
+
+                        /**
+                         * Verifies a CompareVersionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CompareVersionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CompareVersionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CompareVersionsResponse;
+
+                        /**
+                         * Creates a plain object from a CompareVersionsResponse message. Also converts values to other types if specified.
+                         * @param message CompareVersionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.CompareVersionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CompareVersionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
                     /** Represents a Webhooks */
                     class Webhooks extends $protobuf.rpc.Service {
 
@@ -25610,6 +25835,9 @@ export namespace google {
 
                             /** GenericWebService requestHeaders */
                             requestHeaders?: ({ [k: string]: string }|null);
+
+                            /** GenericWebService allowedCaCerts */
+                            allowedCaCerts?: (Uint8Array[]|null);
                         }
 
                         /** Represents a GenericWebService. */
@@ -25632,6 +25860,9 @@ export namespace google {
 
                             /** GenericWebService requestHeaders. */
                             public requestHeaders: { [k: string]: string };
+
+                            /** GenericWebService allowedCaCerts. */
+                            public allowedCaCerts: Uint8Array[];
 
                             /**
                              * Creates a new GenericWebService instance using the specified properties.

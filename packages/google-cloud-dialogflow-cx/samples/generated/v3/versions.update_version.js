@@ -24,8 +24,8 @@ function main(version, updateMask) {
    */
   // const version = {}
   /**
-   *  Required. The mask to control which fields get updated. Currently only `description`
-   *  and `display_name` can be updated.
+   *  Required. The mask to control which fields get updated. Currently only
+   *  `description` and `display_name` can be updated.
    */
   // const updateMask = {}
 

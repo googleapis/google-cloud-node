@@ -20,9 +20,9 @@ function main(parent, version) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Flow google.cloud.dialogflow.cx.v3.Flow  to create an Version google.cloud.dialogflow.cx.v3.Version  for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/flows/<Flow ID>`.
+   *  Required. The Flow google.cloud.dialogflow.cx.v3.Flow  to create an
+   *  Version google.cloud.dialogflow.cx.v3.Version  for. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    */
   // const parent = 'abc123'
   /**
