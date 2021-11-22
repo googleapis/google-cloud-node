@@ -30,6 +30,7 @@ const storage = new Storage();
 const cwd = path.join(__dirname, '..');
 const bucketName = generateName();
 const bucket = storage.bucket(bucketName);
+const fileContents = 'these-are-my-contents';
 const fileName = 'test.txt';
 const movedFileName = 'test2.txt';
 const copiedFileName = 'test3.txt';
@@ -60,6 +61,24 @@ describe('file', () => {
       `node uploadFile.js ${bucketName} ${filePath} ${fileName}`
     );
     assert.match(output, new RegExp(`${filePath} uploaded to ${bucketName}`));
+    const [exists] = await bucket.file(fileName).exists();
+    assert.strictEqual(exists, true);
+  });
+
+  it('should upload a file without authentication using resumable strategy', async () => {
+    const output = execSync(
+      `node uploadWithoutAuthenticationResumable.js ${bucketName} ${fileContents} ${fileName}`
+    );
+    assert.match(output, new RegExp(`${fileName} uploaded to ${bucketName}`));
+    const [exists] = await bucket.file(fileName).exists();
+    assert.strictEqual(exists, true);
+  });
+
+  it('should upload a file without authentication using signed url strategy', async () => {
+    const output = execSync(
+      `node uploadWithoutAuthenticationSignedUrl.js ${bucketName} ${fileContents} ${fileName}`
+    );
+    assert.match(output, new RegExp(`${fileName} uploaded to ${bucketName}`));
     const [exists] = await bucket.file(fileName).exists();
     assert.strictEqual(exists, true);
   });
