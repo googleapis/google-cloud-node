@@ -536,7 +536,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "hub": {
@@ -671,7 +671,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "spoke": {

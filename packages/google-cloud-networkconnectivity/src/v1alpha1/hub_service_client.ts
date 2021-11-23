@@ -433,6 +433,23 @@ export class HubServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets details of a single Hub.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the Hub resource to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Hub]{@link google.cloud.networkconnectivity.v1alpha1.Hub}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.get_hub.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_GetHub_async
+   */
   getHub(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest,
     options?: CallOptions
@@ -467,23 +484,6 @@ export class HubServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details of a single Hub.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the Hub resource to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Hub]{@link google.cloud.networkconnectivity.v1alpha1.Hub}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getHub(request);
-   */
   getHub(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest,
     optionsOrCallback?:
@@ -530,6 +530,23 @@ export class HubServiceClient {
     this.initialize();
     return this.innerApiCalls.getHub(request, options, callback);
   }
+  /**
+   * Gets details of a single Spoke.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of Spoke resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Spoke]{@link google.cloud.networkconnectivity.v1alpha1.Spoke}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.get_spoke.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_GetSpoke_async
+   */
   getSpoke(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest,
     options?: CallOptions
@@ -564,23 +581,6 @@ export class HubServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details of a single Spoke.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of Spoke resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Spoke]{@link google.cloud.networkconnectivity.v1alpha1.Spoke}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getSpoke(request);
-   */
   getSpoke(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest,
     optionsOrCallback?:
@@ -628,6 +628,43 @@ export class HubServiceClient {
     return this.innerApiCalls.getSpoke(request, options, callback);
   }
 
+  /**
+   * Creates a new Hub in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource's name of the Hub.
+   * @param {string} [request.hubId]
+   *   Optional. Unique id for the Hub to create.
+   * @param {google.cloud.networkconnectivity.v1alpha1.Hub} request.hub
+   *   Required. Initial values for a new Hub.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and t
+   *   he request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.create_hub.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateHub_async
+   */
   createHub(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.ICreateHubRequest,
     options?: CallOptions
@@ -664,44 +701,6 @@ export class HubServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new Hub in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource's name of the Hub.
-   * @param {string} [request.hubId]
-   *   Optional. Unique id for the Hub to create.
-   * @param {google.cloud.networkconnectivity.v1alpha1.Hub} request.hub
-   *   Required. Initial values for a new Hub.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createHub(request);
-   * const [response] = await operation.promise();
-   */
   createHub(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.ICreateHubRequest,
     optionsOrCallback?:
@@ -759,11 +758,8 @@ export class HubServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateHubProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.create_hub.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateHub_async
    */
   async checkCreateHubProgress(
     name: string
@@ -787,42 +783,6 @@ export class HubServiceClient {
       protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
     >;
   }
-  updateHub(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  updateHub(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateHub(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates the parameters of a single Hub.
    *
@@ -859,10 +819,45 @@ export class HubServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateHub(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.update_hub.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateHub_async
    */
+  updateHub(
+    request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
+        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateHub(
+    request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
+        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateHub(
+    request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
+        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateHub(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
     optionsOrCallback?:
@@ -920,11 +915,8 @@ export class HubServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateHubProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.update_hub.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateHub_async
    */
   async checkUpdateHubProgress(
     name: string
@@ -948,6 +940,39 @@ export class HubServiceClient {
       protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
     >;
   }
+  /**
+   * Deletes a single Hub.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Hub to delete.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and t
+   *   he request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_hub.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteHub_async
+   */
   deleteHub(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteHubRequest,
     options?: CallOptions
@@ -984,40 +1009,6 @@ export class HubServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a single Hub.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Hub to delete.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteHub(request);
-   * const [response] = await operation.promise();
-   */
   deleteHub(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteHubRequest,
     optionsOrCallback?:
@@ -1075,11 +1066,8 @@ export class HubServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteHubProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_hub.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteHub_async
    */
   async checkDeleteHubProgress(
     name: string
@@ -1103,6 +1091,43 @@ export class HubServiceClient {
       protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
     >;
   }
+  /**
+   * Creates a new Spoke in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent's resource name of the Spoke.
+   * @param {string} [request.spokeId]
+   *   Optional. Unique id for the Spoke to create.
+   * @param {google.cloud.networkconnectivity.v1alpha1.Spoke} request.spoke
+   *   Required. Initial values for a new Hub.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and t
+   *   he request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.create_spoke.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateSpoke_async
+   */
   createSpoke(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.ICreateSpokeRequest,
     options?: CallOptions
@@ -1139,44 +1164,6 @@ export class HubServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new Spoke in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent's resource name of the Spoke.
-   * @param {string} [request.spokeId]
-   *   Optional. Unique id for the Spoke to create.
-   * @param {google.cloud.networkconnectivity.v1alpha1.Spoke} request.spoke
-   *   Required. Initial values for a new Hub.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createSpoke(request);
-   * const [response] = await operation.promise();
-   */
   createSpoke(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.ICreateSpokeRequest,
     optionsOrCallback?:
@@ -1234,11 +1221,8 @@ export class HubServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateSpokeProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.create_spoke.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateSpoke_async
    */
   async checkCreateSpokeProgress(
     name: string
@@ -1262,42 +1246,6 @@ export class HubServiceClient {
       protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
     >;
   }
-  updateSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  updateSpoke(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSpoke(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates the parameters of a single Spoke.
    *
@@ -1334,10 +1282,45 @@ export class HubServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateSpoke(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.update_spoke.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateSpoke_async
    */
+  updateSpoke(
+    request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
+        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateSpoke(
+    request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
+        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSpoke(
+    request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
+        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateSpoke(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
     optionsOrCallback?:
@@ -1395,11 +1378,8 @@ export class HubServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateSpokeProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.update_spoke.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateSpoke_async
    */
   async checkUpdateSpokeProgress(
     name: string
@@ -1423,6 +1403,39 @@ export class HubServiceClient {
       protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
     >;
   }
+  /**
+   * Deletes a single Spoke.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Spoke to delete.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and t
+   *   he request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_spoke.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteSpoke_async
+   */
   deleteSpoke(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteSpokeRequest,
     options?: CallOptions
@@ -1459,40 +1472,6 @@ export class HubServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a single Spoke.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Spoke to delete.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteSpoke(request);
-   * const [response] = await operation.promise();
-   */
   deleteSpoke(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteSpokeRequest,
     optionsOrCallback?:
@@ -1550,11 +1529,8 @@ export class HubServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteSpokeProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_spoke.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteSpoke_async
    */
   async checkDeleteSpokeProgress(
     name: string
@@ -1578,6 +1554,34 @@ export class HubServiceClient {
       protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
     >;
   }
+  /**
+   * Lists Hubs in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource's name.
+   * @param {number} request.pageSize
+   *   The maximum number of results per page that should be returned.
+   * @param {string} request.pageToken
+   *   The page token.
+   * @param {string} request.filter
+   *   A filter expression that filters the results listed in the response.
+   * @param {string} request.orderBy
+   *   Sort the results by a certain order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Hub]{@link google.cloud.networkconnectivity.v1alpha1.Hub}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listHubsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listHubs(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
     options?: CallOptions
@@ -1609,34 +1613,6 @@ export class HubServiceClient {
       protos.google.cloud.networkconnectivity.v1alpha1.IHub
     >
   ): void;
-  /**
-   * Lists Hubs in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource's name.
-   * @param {number} request.pageSize
-   *   The maximum number of results per page that should be returned.
-   * @param {string} request.pageToken
-   *   The page token.
-   * @param {string} request.filter
-   *   A filter expression that filters the results listed in the response.
-   * @param {string} request.orderBy
-   *   Sort the results by a certain order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Hub]{@link google.cloud.networkconnectivity.v1alpha1.Hub}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listHubsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listHubs(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
     optionsOrCallback?:
@@ -1719,7 +1695,8 @@ export class HubServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listHubs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listHubs.createStream(
       this.innerApiCalls.listHubs as gax.GaxCall,
@@ -1754,11 +1731,8 @@ export class HubServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listHubsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.list_hubs.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_ListHubs_async
    */
   listHubsAsync(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
@@ -1772,8 +1746,8 @@ export class HubServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listHubs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listHubs.asyncIterate(
       this.innerApiCalls['listHubs'] as GaxCall,
@@ -1781,6 +1755,34 @@ export class HubServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.networkconnectivity.v1alpha1.IHub>;
   }
+  /**
+   * Lists Spokes in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent's resource name.
+   * @param {number} request.pageSize
+   *   The maximum number of results per page that should be returned.
+   * @param {string} request.pageToken
+   *   The page token.
+   * @param {string} request.filter
+   *   A filter expression that filters the results listed in the response.
+   * @param {string} request.orderBy
+   *   Sort the results by a certain order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Spoke]{@link google.cloud.networkconnectivity.v1alpha1.Spoke}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSpokesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listSpokes(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
     options?: CallOptions
@@ -1812,34 +1814,6 @@ export class HubServiceClient {
       protos.google.cloud.networkconnectivity.v1alpha1.ISpoke
     >
   ): void;
-  /**
-   * Lists Spokes in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent's resource name.
-   * @param {number} request.pageSize
-   *   The maximum number of results per page that should be returned.
-   * @param {string} request.pageToken
-   *   The page token.
-   * @param {string} request.filter
-   *   A filter expression that filters the results listed in the response.
-   * @param {string} request.orderBy
-   *   Sort the results by a certain order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Spoke]{@link google.cloud.networkconnectivity.v1alpha1.Spoke}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSpokesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listSpokes(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
     optionsOrCallback?:
@@ -1922,7 +1896,8 @@ export class HubServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSpokes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSpokes.createStream(
       this.innerApiCalls.listSpokes as gax.GaxCall,
@@ -1957,11 +1932,8 @@ export class HubServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listSpokesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha1/hub_service.list_spokes.js</caption>
+   * region_tag:networkconnectivity_v1alpha1_generated_HubService_ListSpokes_async
    */
   listSpokesAsync(
     request?: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
@@ -1975,8 +1947,8 @@ export class HubServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSpokes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSpokes.asyncIterate(
       this.innerApiCalls['listSpokes'] as GaxCall,
