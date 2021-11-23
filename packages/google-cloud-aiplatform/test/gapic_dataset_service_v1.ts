@@ -4153,6 +4153,379 @@ describe('v1.DatasetServiceClient', () => {
       });
     });
 
+    describe('tensorboard', () => {
+      const fakePath = '/rendered/path/tensorboard';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+      };
+      const client = new datasetserviceModule.v1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tensorboardPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardPath', () => {
+        const result = client.tensorboardPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardName', () => {
+        const result = client.matchProjectFromTensorboardName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardName', () => {
+        const result = client.matchLocationFromTensorboardName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardName', () => {
+        const result = client.matchTensorboardFromTensorboardName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboardExperiment', () => {
+      const fakePath = '/rendered/path/tensorboardExperiment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+        experiment: 'experimentValue',
+      };
+      const client = new datasetserviceModule.v1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tensorboardExperimentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardExperimentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardExperimentPath', () => {
+        const result = client.tensorboardExperimentPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue',
+          'experimentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardExperimentName', () => {
+        const result =
+          client.matchProjectFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardExperimentName', () => {
+        const result =
+          client.matchLocationFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardExperimentName', () => {
+        const result =
+          client.matchTensorboardFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromTensorboardExperimentName', () => {
+        const result =
+          client.matchExperimentFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboardRun', () => {
+      const fakePath = '/rendered/path/tensorboardRun';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+        experiment: 'experimentValue',
+        run: 'runValue',
+      };
+      const client = new datasetserviceModule.v1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tensorboardRunPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardRunPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardRunPath', () => {
+        const result = client.tensorboardRunPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue',
+          'experimentValue',
+          'runValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardRunName', () => {
+        const result = client.matchProjectFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardRunName', () => {
+        const result = client.matchLocationFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardRunName', () => {
+        const result = client.matchTensorboardFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromTensorboardRunName', () => {
+        const result = client.matchExperimentFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRunFromTensorboardRunName', () => {
+        const result = client.matchRunFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'runValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboardTimeSeries', () => {
+      const fakePath = '/rendered/path/tensorboardTimeSeries';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+        experiment: 'experimentValue',
+        run: 'runValue',
+        time_series: 'timeSeriesValue',
+      };
+      const client = new datasetserviceModule.v1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tensorboardTimeSeriesPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardTimeSeriesPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardTimeSeriesPath', () => {
+        const result = client.tensorboardTimeSeriesPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue',
+          'experimentValue',
+          'runValue',
+          'timeSeriesValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardTimeSeriesName', () => {
+        const result =
+          client.matchProjectFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardTimeSeriesName', () => {
+        const result =
+          client.matchLocationFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardTimeSeriesName', () => {
+        const result =
+          client.matchTensorboardFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromTensorboardTimeSeriesName', () => {
+        const result =
+          client.matchExperimentFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRunFromTensorboardTimeSeriesName', () => {
+        const result = client.matchRunFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'runValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTimeSeriesFromTensorboardTimeSeriesName', () => {
+        const result =
+          client.matchTimeSeriesFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'timeSeriesValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('trainingPipeline', () => {
       const fakePath = '/rendered/path/trainingPipeline';
       const expectedParameters = {

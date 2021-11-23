@@ -30,6 +30,7 @@ import {
   PipelineServiceClient,
   PredictionServiceClient,
   SpecialistPoolServiceClient,
+  TensorboardServiceClient,
   VizierServiceClient,
 } from '@google-cloud/aiplatform';
 
@@ -81,6 +82,9 @@ function doStuffWithSpecialistPoolServiceClient(
 ) {
   client.close();
 }
+function doStuffWithTensorboardServiceClient(client: TensorboardServiceClient) {
+  client.close();
+}
 function doStuffWithVizierServiceClient(client: VizierServiceClient) {
   client.close();
 }
@@ -128,6 +132,9 @@ function main() {
   // check that the client instance can be created
   const specialistPoolServiceClient = new SpecialistPoolServiceClient();
   doStuffWithSpecialistPoolServiceClient(specialistPoolServiceClient);
+  // check that the client instance can be created
+  const tensorboardServiceClient = new TensorboardServiceClient();
+  doStuffWithTensorboardServiceClient(tensorboardServiceClient);
   // check that the client instance can be created
   const vizierServiceClient = new VizierServiceClient();
   doStuffWithVizierServiceClient(vizierServiceClient);

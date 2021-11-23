@@ -49,6 +49,8 @@ type FeaturestoreOnlineServingServiceClient =
   v1.FeaturestoreOnlineServingServiceClient;
 const MetadataServiceClient = v1.MetadataServiceClient;
 type MetadataServiceClient = v1.MetadataServiceClient;
+const TensorboardServiceClient = v1.TensorboardServiceClient;
+type TensorboardServiceClient = v1.TensorboardServiceClient;
 
 export {
   v1beta1,
@@ -67,6 +69,7 @@ export {
   FeaturestoreServiceClient,
   FeaturestoreOnlineServingServiceClient,
   MetadataServiceClient,
+  TensorboardServiceClient,
 };
 export default {
   v1beta1,
@@ -85,6 +88,7 @@ export default {
   FeaturestoreServiceClient,
   FeaturestoreOnlineServingServiceClient,
   MetadataServiceClient,
+  TensorboardServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};

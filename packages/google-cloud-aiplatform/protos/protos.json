@@ -1630,6 +1630,14 @@
                           "type": "GcsDestination",
                           "id": 6
                         },
+                        "tensorboard": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        },
                         "enableWebAccess": {
                           "type": "bool",
                           "id": 10,
@@ -13769,6 +13777,1665 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 2
+                        }
+                      }
+                    },
+                    "Tensorboard": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/Tensorboard",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/tensorboards/{tensorboard}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 11
+                        },
+                        "blobStoragePathPrefix": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "runCount": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "TimeSeriesData": {
+                      "fields": {
+                        "tensorboardTimeSeriesId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "valueType": {
+                          "type": "TensorboardTimeSeries.ValueType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "values": {
+                          "rule": "repeated",
+                          "type": "TimeSeriesDataPoint",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TimeSeriesDataPoint": {
+                      "oneofs": {
+                        "value": {
+                          "oneof": [
+                            "scalar",
+                            "tensor",
+                            "blobs"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "scalar": {
+                          "type": "Scalar",
+                          "id": 3
+                        },
+                        "tensor": {
+                          "type": "TensorboardTensor",
+                          "id": 4
+                        },
+                        "blobs": {
+                          "type": "TensorboardBlobSequence",
+                          "id": 5
+                        },
+                        "wallTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "step": {
+                          "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Scalar": {
+                      "fields": {
+                        "value": {
+                          "type": "double",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TensorboardTensor": {
+                      "fields": {
+                        "value": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "versionNumber": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TensorboardBlobSequence": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "TensorboardBlob",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TensorboardBlob": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "data": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TensorboardTimeSeries": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/TensorboardTimeSeries",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "valueType": {
+                          "type": "ValueType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "pluginName": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "pluginData": {
+                          "type": "bytes",
+                          "id": 9
+                        },
+                        "metadata": {
+                          "type": "Metadata",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Metadata": {
+                          "fields": {
+                            "maxStep": {
+                              "type": "int64",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "maxWallTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "maxBlobSequenceLength": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "ValueType": {
+                          "values": {
+                            "VALUE_TYPE_UNSPECIFIED": 0,
+                            "SCALAR": 1,
+                            "TENSOR": 2,
+                            "BLOB_SEQUENCE": 3
+                          }
+                        }
+                      }
+                    },
+                    "TensorboardExperiment": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/TensorboardExperiment",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "source": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "TensorboardRun": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/TensorboardRun",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "TensorboardService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only"
+                      },
+                      "methods": {
+                        "CreateTensorboard": {
+                          "requestType": "CreateTensorboardRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/tensorboards",
+                            "(google.api.http).body": "tensorboard",
+                            "(google.api.method_signature)": "parent,tensorboard",
+                            "(google.longrunning.operation_info).response_type": "Tensorboard",
+                            "(google.longrunning.operation_info).metadata_type": "CreateTensorboardOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/tensorboards",
+                                "body": "tensorboard"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,tensorboard"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Tensorboard",
+                                "metadata_type": "CreateTensorboardOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetTensorboard": {
+                          "requestType": "GetTensorboardRequest",
+                          "responseType": "Tensorboard",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/tensorboards/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/tensorboards/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateTensorboard": {
+                          "requestType": "UpdateTensorboardRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{tensorboard.name=projects/*/locations/*/tensorboards/*}",
+                            "(google.api.http).body": "tensorboard",
+                            "(google.api.method_signature)": "tensorboard,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Tensorboard",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateTensorboardOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{tensorboard.name=projects/*/locations/*/tensorboards/*}",
+                                "body": "tensorboard"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Tensorboard",
+                                "metadata_type": "UpdateTensorboardOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListTensorboards": {
+                          "requestType": "ListTensorboardsRequest",
+                          "responseType": "ListTensorboardsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/tensorboards",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/tensorboards"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteTensorboard": {
+                          "requestType": "DeleteTensorboardRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/tensorboards/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/tensorboards/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateTensorboardExperiment": {
+                          "requestType": "CreateTensorboardExperimentRequest",
+                          "responseType": "TensorboardExperiment",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/tensorboards/*}/experiments",
+                            "(google.api.http).body": "tensorboard_experiment",
+                            "(google.api.method_signature)": "parent,tensorboard_experiment,tensorboard_experiment_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/tensorboards/*}/experiments",
+                                "body": "tensorboard_experiment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,tensorboard_experiment,tensorboard_experiment_id"
+                            }
+                          ]
+                        },
+                        "GetTensorboardExperiment": {
+                          "requestType": "GetTensorboardExperimentRequest",
+                          "responseType": "TensorboardExperiment",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateTensorboardExperiment": {
+                          "requestType": "UpdateTensorboardExperimentRequest",
+                          "responseType": "TensorboardExperiment",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{tensorboard_experiment.name=projects/*/locations/*/tensorboards/*/experiments/*}",
+                            "(google.api.http).body": "tensorboard_experiment",
+                            "(google.api.method_signature)": "tensorboard_experiment,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{tensorboard_experiment.name=projects/*/locations/*/tensorboards/*/experiments/*}",
+                                "body": "tensorboard_experiment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard_experiment,update_mask"
+                            }
+                          ]
+                        },
+                        "ListTensorboardExperiments": {
+                          "requestType": "ListTensorboardExperimentsRequest",
+                          "responseType": "ListTensorboardExperimentsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/tensorboards/*}/experiments",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/tensorboards/*}/experiments"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteTensorboardExperiment": {
+                          "requestType": "DeleteTensorboardExperimentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateTensorboardRun": {
+                          "requestType": "CreateTensorboardRunRequest",
+                          "responseType": "TensorboardRun",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/tensorboards/*/experiments/*}/runs",
+                            "(google.api.http).body": "tensorboard_run",
+                            "(google.api.method_signature)": "parent,tensorboard_run,tensorboard_run_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/tensorboards/*/experiments/*}/runs",
+                                "body": "tensorboard_run"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,tensorboard_run,tensorboard_run_id"
+                            }
+                          ]
+                        },
+                        "BatchCreateTensorboardRuns": {
+                          "requestType": "BatchCreateTensorboardRunsRequest",
+                          "responseType": "BatchCreateTensorboardRunsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/tensorboards/*/experiments/*}/runs:batchCreate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/tensorboards/*/experiments/*}/runs:batchCreate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        },
+                        "GetTensorboardRun": {
+                          "requestType": "GetTensorboardRunRequest",
+                          "responseType": "TensorboardRun",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateTensorboardRun": {
+                          "requestType": "UpdateTensorboardRunRequest",
+                          "responseType": "TensorboardRun",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{tensorboard_run.name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}",
+                            "(google.api.http).body": "tensorboard_run",
+                            "(google.api.method_signature)": "tensorboard_run,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{tensorboard_run.name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}",
+                                "body": "tensorboard_run"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard_run,update_mask"
+                            }
+                          ]
+                        },
+                        "ListTensorboardRuns": {
+                          "requestType": "ListTensorboardRunsRequest",
+                          "responseType": "ListTensorboardRunsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/tensorboards/*/experiments/*}/runs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/tensorboards/*/experiments/*}/runs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteTensorboardRun": {
+                          "requestType": "DeleteTensorboardRunRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "BatchCreateTensorboardTimeSeries": {
+                          "requestType": "BatchCreateTensorboardTimeSeriesRequest",
+                          "responseType": "BatchCreateTensorboardTimeSeriesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/tensorboards/*/experiments/*}/runs/*/timeSeries:batchCreate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/tensorboards/*/experiments/*}/runs/*/timeSeries:batchCreate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        },
+                        "CreateTensorboardTimeSeries": {
+                          "requestType": "CreateTensorboardTimeSeriesRequest",
+                          "responseType": "TensorboardTimeSeries",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/timeSeries",
+                            "(google.api.http).body": "tensorboard_time_series",
+                            "(google.api.method_signature)": "parent,tensorboard_time_series"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/timeSeries",
+                                "body": "tensorboard_time_series"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,tensorboard_time_series"
+                            }
+                          ]
+                        },
+                        "GetTensorboardTimeSeries": {
+                          "requestType": "GetTensorboardTimeSeriesRequest",
+                          "responseType": "TensorboardTimeSeries",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateTensorboardTimeSeries": {
+                          "requestType": "UpdateTensorboardTimeSeriesRequest",
+                          "responseType": "TensorboardTimeSeries",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{tensorboard_time_series.name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}",
+                            "(google.api.http).body": "tensorboard_time_series",
+                            "(google.api.method_signature)": "tensorboard_time_series,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{tensorboard_time_series.name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}",
+                                "body": "tensorboard_time_series"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard_time_series,update_mask"
+                            }
+                          ]
+                        },
+                        "ListTensorboardTimeSeries": {
+                          "requestType": "ListTensorboardTimeSeriesRequest",
+                          "responseType": "ListTensorboardTimeSeriesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/timeSeries",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/timeSeries"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteTensorboardTimeSeries": {
+                          "requestType": "DeleteTensorboardTimeSeriesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "BatchReadTensorboardTimeSeriesData": {
+                          "requestType": "BatchReadTensorboardTimeSeriesDataRequest",
+                          "responseType": "BatchReadTensorboardTimeSeriesDataResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{tensorboard=projects/*/locations/*/tensorboards/*}/experiments/*/runs/*/timeSeries:batchRead",
+                            "(google.api.method_signature)": "tensorboard"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{tensorboard=projects/*/locations/*/tensorboards/*}/experiments/*/runs/*/timeSeries:batchRead"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard"
+                            }
+                          ]
+                        },
+                        "ReadTensorboardTimeSeriesData": {
+                          "requestType": "ReadTensorboardTimeSeriesDataRequest",
+                          "responseType": "ReadTensorboardTimeSeriesDataResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{tensorboard_time_series=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}:read",
+                            "(google.api.method_signature)": "tensorboard_time_series"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{tensorboard_time_series=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}:read"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard_time_series"
+                            }
+                          ]
+                        },
+                        "ReadTensorboardBlobData": {
+                          "requestType": "ReadTensorboardBlobDataRequest",
+                          "responseType": "ReadTensorboardBlobDataResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).get": "/v1/{time_series=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}:readBlobData",
+                            "(google.api.method_signature)": "time_series"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{time_series=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}:readBlobData"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "time_series"
+                            }
+                          ]
+                        },
+                        "WriteTensorboardExperimentData": {
+                          "requestType": "WriteTensorboardExperimentDataRequest",
+                          "responseType": "WriteTensorboardExperimentDataResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{tensorboard_experiment=projects/*/locations/*/tensorboards/*/experiments/*}:write",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "tensorboard_experiment,write_run_data_requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{tensorboard_experiment=projects/*/locations/*/tensorboards/*/experiments/*}:write",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard_experiment,write_run_data_requests"
+                            }
+                          ]
+                        },
+                        "WriteTensorboardRunData": {
+                          "requestType": "WriteTensorboardRunDataRequest",
+                          "responseType": "WriteTensorboardRunDataResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{tensorboard_run=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}:write",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "tensorboard_run,time_series_data"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{tensorboard_run=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}:write",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard_run,time_series_data"
+                            }
+                          ]
+                        },
+                        "ExportTensorboardTimeSeriesData": {
+                          "requestType": "ExportTensorboardTimeSeriesDataRequest",
+                          "responseType": "ExportTensorboardTimeSeriesDataResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{tensorboard_time_series=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}:exportTensorboardTimeSeries",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "tensorboard_time_series"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{tensorboard_time_series=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}:exportTensorboardTimeSeries",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard_time_series"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateTensorboardRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        },
+                        "tensorboard": {
+                          "type": "Tensorboard",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetTensorboardRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        }
+                      }
+                    },
+                    "ListTensorboardsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListTensorboardsResponse": {
+                      "fields": {
+                        "tensorboards": {
+                          "rule": "repeated",
+                          "type": "Tensorboard",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateTensorboardRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tensorboard": {
+                          "type": "Tensorboard",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteTensorboardRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        }
+                      }
+                    },
+                    "CreateTensorboardExperimentRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardExperiment"
+                          }
+                        },
+                        "tensorboardExperiment": {
+                          "type": "TensorboardExperiment",
+                          "id": 2
+                        },
+                        "tensorboardExperimentId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetTensorboardExperimentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardExperiment"
+                          }
+                        }
+                      }
+                    },
+                    "ListTensorboardExperimentsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "aiplatform.googleapis.com/TensorboardExperiment"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListTensorboardExperimentsResponse": {
+                      "fields": {
+                        "tensorboardExperiments": {
+                          "rule": "repeated",
+                          "type": "TensorboardExperiment",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateTensorboardExperimentRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tensorboardExperiment": {
+                          "type": "TensorboardExperiment",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteTensorboardExperimentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardExperiment"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateTensorboardRunsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardExperiment"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "CreateTensorboardRunRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateTensorboardRunsResponse": {
+                      "fields": {
+                        "tensorboardRuns": {
+                          "rule": "repeated",
+                          "type": "TensorboardRun",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CreateTensorboardRunRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardRun"
+                          }
+                        },
+                        "tensorboardRun": {
+                          "type": "TensorboardRun",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tensorboardRunId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetTensorboardRunRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardRun"
+                          }
+                        }
+                      }
+                    },
+                    "ReadTensorboardBlobDataRequest": {
+                      "fields": {
+                        "timeSeries": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardTimeSeries"
+                          }
+                        },
+                        "blobIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ReadTensorboardBlobDataResponse": {
+                      "fields": {
+                        "blobs": {
+                          "rule": "repeated",
+                          "type": "TensorboardBlob",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListTensorboardRunsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "aiplatform.googleapis.com/TensorboardRun"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListTensorboardRunsResponse": {
+                      "fields": {
+                        "tensorboardRuns": {
+                          "rule": "repeated",
+                          "type": "TensorboardRun",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateTensorboardRunRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tensorboardRun": {
+                          "type": "TensorboardRun",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteTensorboardRunRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardRun"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateTensorboardTimeSeriesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardExperiment"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "CreateTensorboardTimeSeriesRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateTensorboardTimeSeriesResponse": {
+                      "fields": {
+                        "tensorboardTimeSeries": {
+                          "rule": "repeated",
+                          "type": "TensorboardTimeSeries",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CreateTensorboardTimeSeriesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardTimeSeries"
+                          }
+                        },
+                        "tensorboardTimeSeriesId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tensorboardTimeSeries": {
+                          "type": "TensorboardTimeSeries",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetTensorboardTimeSeriesRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardTimeSeries"
+                          }
+                        }
+                      }
+                    },
+                    "ListTensorboardTimeSeriesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "aiplatform.googleapis.com/TensorboardTimeSeries"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListTensorboardTimeSeriesResponse": {
+                      "fields": {
+                        "tensorboardTimeSeries": {
+                          "rule": "repeated",
+                          "type": "TensorboardTimeSeries",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateTensorboardTimeSeriesRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tensorboardTimeSeries": {
+                          "type": "TensorboardTimeSeries",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteTensorboardTimeSeriesRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardTimeSeries"
+                          }
+                        }
+                      }
+                    },
+                    "BatchReadTensorboardTimeSeriesDataRequest": {
+                      "fields": {
+                        "tensorboard": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        },
+                        "timeSeries": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardTimeSeries"
+                          }
+                        }
+                      }
+                    },
+                    "BatchReadTensorboardTimeSeriesDataResponse": {
+                      "fields": {
+                        "timeSeriesData": {
+                          "rule": "repeated",
+                          "type": "TimeSeriesData",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ReadTensorboardTimeSeriesDataRequest": {
+                      "fields": {
+                        "tensorboardTimeSeries": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardTimeSeries"
+                          }
+                        },
+                        "maxDataPoints": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ReadTensorboardTimeSeriesDataResponse": {
+                      "fields": {
+                        "timeSeriesData": {
+                          "type": "TimeSeriesData",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "WriteTensorboardExperimentDataRequest": {
+                      "fields": {
+                        "tensorboardExperiment": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardExperiment"
+                          }
+                        },
+                        "writeRunDataRequests": {
+                          "rule": "repeated",
+                          "type": "WriteTensorboardRunDataRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "WriteTensorboardExperimentDataResponse": {
+                      "fields": {}
+                    },
+                    "WriteTensorboardRunDataRequest": {
+                      "fields": {
+                        "tensorboardRun": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardRun"
+                          }
+                        },
+                        "timeSeriesData": {
+                          "rule": "repeated",
+                          "type": "TimeSeriesData",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "WriteTensorboardRunDataResponse": {
+                      "fields": {}
+                    },
+                    "ExportTensorboardTimeSeriesDataRequest": {
+                      "fields": {
+                        "tensorboardTimeSeries": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardTimeSeries"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ExportTensorboardTimeSeriesDataResponse": {
+                      "fields": {
+                        "timeSeriesDataPoints": {
+                          "rule": "repeated",
+                          "type": "TimeSeriesDataPoint",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateTensorboardOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateTensorboardOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
                         }
                       }
                     },

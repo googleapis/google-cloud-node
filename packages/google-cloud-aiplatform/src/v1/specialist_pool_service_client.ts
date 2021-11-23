@@ -254,6 +254,18 @@ export class SpecialistPoolServiceClient {
       studyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/studies/{study}'
       ),
+      tensorboardPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}'
+      ),
+      tensorboardExperimentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}'
+      ),
+      tensorboardRunPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}'
+      ),
+      tensorboardTimeSeriesPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}'
+      ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
       ),
@@ -2870,6 +2882,345 @@ export class SpecialistPoolServiceClient {
    */
   matchStudyFromStudyName(studyName: string) {
     return this.pathTemplates.studyPathTemplate.match(studyName).study;
+  }
+
+  /**
+   * Return a fully-qualified tensorboard resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tensorboard
+   * @returns {string} Resource name string.
+   */
+  tensorboardPath(project: string, location: string, tensorboard: string) {
+    return this.pathTemplates.tensorboardPathTemplate.render({
+      project: project,
+      location: location,
+      tensorboard: tensorboard,
+    });
+  }
+
+  /**
+   * Parse the project from Tensorboard resource.
+   *
+   * @param {string} tensorboardName
+   *   A fully-qualified path representing Tensorboard resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTensorboardName(tensorboardName: string) {
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Tensorboard resource.
+   *
+   * @param {string} tensorboardName
+   *   A fully-qualified path representing Tensorboard resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTensorboardName(tensorboardName: string) {
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .location;
+  }
+
+  /**
+   * Parse the tensorboard from Tensorboard resource.
+   *
+   * @param {string} tensorboardName
+   *   A fully-qualified path representing Tensorboard resource.
+   * @returns {string} A string representing the tensorboard.
+   */
+  matchTensorboardFromTensorboardName(tensorboardName: string) {
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .tensorboard;
+  }
+
+  /**
+   * Return a fully-qualified tensorboardExperiment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tensorboard
+   * @param {string} experiment
+   * @returns {string} Resource name string.
+   */
+  tensorboardExperimentPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.render({
+      project: project,
+      location: location,
+      tensorboard: tensorboard,
+      experiment: experiment,
+    });
+  }
+
+  /**
+   * Parse the project from TensorboardExperiment resource.
+   *
+   * @param {string} tensorboardExperimentName
+   *   A fully-qualified path representing TensorboardExperiment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTensorboardExperimentName(tensorboardExperimentName: string) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TensorboardExperiment resource.
+   *
+   * @param {string} tensorboardExperimentName
+   *   A fully-qualified path representing TensorboardExperiment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).location;
+  }
+
+  /**
+   * Parse the tensorboard from TensorboardExperiment resource.
+   *
+   * @param {string} tensorboardExperimentName
+   *   A fully-qualified path representing TensorboardExperiment resource.
+   * @returns {string} A string representing the tensorboard.
+   */
+  matchTensorboardFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).tensorboard;
+  }
+
+  /**
+   * Parse the experiment from TensorboardExperiment resource.
+   *
+   * @param {string} tensorboardExperimentName
+   *   A fully-qualified path representing TensorboardExperiment resource.
+   * @returns {string} A string representing the experiment.
+   */
+  matchExperimentFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).experiment;
+  }
+
+  /**
+   * Return a fully-qualified tensorboardRun resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tensorboard
+   * @param {string} experiment
+   * @param {string} run
+   * @returns {string} Resource name string.
+   */
+  tensorboardRunPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string,
+    run: string
+  ) {
+    return this.pathTemplates.tensorboardRunPathTemplate.render({
+      project: project,
+      location: location,
+      tensorboard: tensorboard,
+      experiment: experiment,
+      run: run,
+    });
+  }
+
+  /**
+   * Parse the project from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).location;
+  }
+
+  /**
+   * Parse the tensorboard from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the tensorboard.
+   */
+  matchTensorboardFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).tensorboard;
+  }
+
+  /**
+   * Parse the experiment from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the experiment.
+   */
+  matchExperimentFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).experiment;
+  }
+
+  /**
+   * Parse the run from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the run.
+   */
+  matchRunFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).run;
+  }
+
+  /**
+   * Return a fully-qualified tensorboardTimeSeries resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tensorboard
+   * @param {string} experiment
+   * @param {string} run
+   * @param {string} time_series
+   * @returns {string} Resource name string.
+   */
+  tensorboardTimeSeriesPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string,
+    run: string,
+    timeSeries: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.render({
+      project: project,
+      location: location,
+      tensorboard: tensorboard,
+      experiment: experiment,
+      run: run,
+      time_series: timeSeries,
+    });
+  }
+
+  /**
+   * Parse the project from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).location;
+  }
+
+  /**
+   * Parse the tensorboard from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the tensorboard.
+   */
+  matchTensorboardFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).tensorboard;
+  }
+
+  /**
+   * Parse the experiment from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the experiment.
+   */
+  matchExperimentFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).experiment;
+  }
+
+  /**
+   * Parse the run from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the run.
+   */
+  matchRunFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).run;
+  }
+
+  /**
+   * Parse the time_series from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the time_series.
+   */
+  matchTimeSeriesFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).time_series;
   }
 
   /**
