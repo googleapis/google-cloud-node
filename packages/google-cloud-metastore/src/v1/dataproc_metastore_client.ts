@@ -485,6 +485,26 @@ export class DataprocMetastoreClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets the details of a single service.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The relative resource name of the metastore service to retrieve, in the
+   *   following form:
+   *
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Service]{@link google.cloud.metastore.v1.Service}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.get_service.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_GetService_async
+   */
   getService(
     request?: protos.google.cloud.metastore.v1.IGetServiceRequest,
     options?: CallOptions
@@ -512,26 +532,6 @@ export class DataprocMetastoreClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the details of a single service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The relative resource name of the metastore service to retrieve, in the
-   *   following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Service]{@link google.cloud.metastore.v1.Service}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getService(request);
-   */
   getService(
     request?: protos.google.cloud.metastore.v1.IGetServiceRequest,
     optionsOrCallback?:
@@ -573,6 +573,26 @@ export class DataprocMetastoreClient {
     this.initialize();
     return this.innerApiCalls.getService(request, options, callback);
   }
+  /**
+   * Gets details of a single import.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The relative resource name of the metadata import to retrieve, in the
+   *   following form:
+   *
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{import_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MetadataImport]{@link google.cloud.metastore.v1.MetadataImport}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.get_metadata_import.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_GetMetadataImport_async
+   */
   getMetadataImport(
     request?: protos.google.cloud.metastore.v1.IGetMetadataImportRequest,
     options?: CallOptions
@@ -604,26 +624,6 @@ export class DataprocMetastoreClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details of a single import.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The relative resource name of the metadata import to retrieve, in the
-   *   following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{import_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [MetadataImport]{@link google.cloud.metastore.v1.MetadataImport}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getMetadataImport(request);
-   */
   getMetadataImport(
     request?: protos.google.cloud.metastore.v1.IGetMetadataImportRequest,
     optionsOrCallback?:
@@ -667,6 +667,26 @@ export class DataprocMetastoreClient {
     this.initialize();
     return this.innerApiCalls.getMetadataImport(request, options, callback);
   }
+  /**
+   * Gets details of a single backup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The relative resource name of the backup to retrieve, in the
+   *   following form:
+   *
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Backup]{@link google.cloud.metastore.v1.Backup}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.get_backup.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_GetBackup_async
+   */
   getBackup(
     request?: protos.google.cloud.metastore.v1.IGetBackupRequest,
     options?: CallOptions
@@ -694,26 +714,6 @@ export class DataprocMetastoreClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details of a single backup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The relative resource name of the backup to retrieve, in the
-   *   following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Backup]{@link google.cloud.metastore.v1.Backup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getBackup(request);
-   */
   getBackup(
     request?: protos.google.cloud.metastore.v1.IGetBackupRequest,
     optionsOrCallback?:
@@ -754,42 +754,6 @@ export class DataprocMetastoreClient {
     return this.innerApiCalls.getBackup(request, options, callback);
   }
 
-  createService(
-    request?: protos.google.cloud.metastore.v1.ICreateServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1.IService,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  createService(
-    request: protos.google.cloud.metastore.v1.ICreateServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IService,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createService(
-    request: protos.google.cloud.metastore.v1.ICreateServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IService,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a metastore service in a project and location.
    *
@@ -833,10 +797,45 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.createService(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.create_service.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_CreateService_async
    */
+  createService(
+    request?: protos.google.cloud.metastore.v1.ICreateServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1.IService,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createService(
+    request: protos.google.cloud.metastore.v1.ICreateServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IService,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createService(
+    request: protos.google.cloud.metastore.v1.ICreateServiceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IService,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createService(
     request?: protos.google.cloud.metastore.v1.ICreateServiceRequest,
     optionsOrCallback?:
@@ -894,11 +893,8 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateServiceProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.create_service.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_CreateService_async
    */
   async checkCreateServiceProgress(
     name: string
@@ -922,42 +918,6 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1.OperationMetadata
     >;
   }
-  updateService(
-    request?: protos.google.cloud.metastore.v1.IUpdateServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1.IService,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  updateService(
-    request: protos.google.cloud.metastore.v1.IUpdateServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IService,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateService(
-    request: protos.google.cloud.metastore.v1.IUpdateServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IService,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates the parameters of a single service.
    *
@@ -996,10 +956,45 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateService(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.update_service.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_UpdateService_async
    */
+  updateService(
+    request?: protos.google.cloud.metastore.v1.IUpdateServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1.IService,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateService(
+    request: protos.google.cloud.metastore.v1.IUpdateServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IService,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateService(
+    request: protos.google.cloud.metastore.v1.IUpdateServiceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IService,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateService(
     request?: protos.google.cloud.metastore.v1.IUpdateServiceRequest,
     optionsOrCallback?:
@@ -1057,11 +1052,8 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateServiceProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.update_service.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_UpdateService_async
    */
   async checkUpdateServiceProgress(
     name: string
@@ -1085,6 +1077,41 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1.OperationMetadata
     >;
   }
+  /**
+   * Deletes a single service.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The relative resource name of the metastore service to delete, in the
+   *   following form:
+   *
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
+   *   request if it has completed. The server will ignore subsequent requests
+   *   that provide a duplicate request ID for at least 60 minutes after the first
+   *   request.
+   *
+   *   For example, if an initial request times out, followed by another request
+   *   with the same request ID, the server ignores the second request to prevent
+   *   the creation of duplicate commitments.
+   *
+   *   The request ID must be a valid
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.delete_service.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_DeleteService_async
+   */
   deleteService(
     request?: protos.google.cloud.metastore.v1.IDeleteServiceRequest,
     options?: CallOptions
@@ -1121,42 +1148,6 @@ export class DataprocMetastoreClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a single service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The relative resource name of the metastore service to delete, in the
-   *   following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
-   *
-   *   For example, if an initial request times out, followed by another request
-   *   with the same request ID, the server ignores the second request to prevent
-   *   the creation of duplicate commitments.
-   *
-   *   The request ID must be a valid
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
-   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteService(request);
-   * const [response] = await operation.promise();
-   */
   deleteService(
     request?: protos.google.cloud.metastore.v1.IDeleteServiceRequest,
     optionsOrCallback?:
@@ -1214,11 +1205,8 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteServiceProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.delete_service.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_DeleteService_async
    */
   async checkDeleteServiceProgress(
     name: string
@@ -1242,42 +1230,6 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1.OperationMetadata
     >;
   }
-  createMetadataImport(
-    request?: protos.google.cloud.metastore.v1.ICreateMetadataImportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1.IMetadataImport,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  createMetadataImport(
-    request: protos.google.cloud.metastore.v1.ICreateMetadataImportRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IMetadataImport,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createMetadataImport(
-    request: protos.google.cloud.metastore.v1.ICreateMetadataImportRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IMetadataImport,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a new MetadataImport in a given project and location.
    *
@@ -1321,10 +1273,45 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.createMetadataImport(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.create_metadata_import.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_CreateMetadataImport_async
    */
+  createMetadataImport(
+    request?: protos.google.cloud.metastore.v1.ICreateMetadataImportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1.IMetadataImport,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createMetadataImport(
+    request: protos.google.cloud.metastore.v1.ICreateMetadataImportRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IMetadataImport,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createMetadataImport(
+    request: protos.google.cloud.metastore.v1.ICreateMetadataImportRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IMetadataImport,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createMetadataImport(
     request?: protos.google.cloud.metastore.v1.ICreateMetadataImportRequest,
     optionsOrCallback?:
@@ -1382,11 +1369,8 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateMetadataImportProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.create_metadata_import.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_CreateMetadataImport_async
    */
   async checkCreateMetadataImportProgress(
     name: string
@@ -1410,42 +1394,6 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1.OperationMetadata
     >;
   }
-  updateMetadataImport(
-    request?: protos.google.cloud.metastore.v1.IUpdateMetadataImportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1.IMetadataImport,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  updateMetadataImport(
-    request: protos.google.cloud.metastore.v1.IUpdateMetadataImportRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IMetadataImport,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateMetadataImport(
-    request: protos.google.cloud.metastore.v1.IUpdateMetadataImportRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IMetadataImport,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates a single import.
    * Only the description field of MetadataImport is supported to be updated.
@@ -1485,10 +1433,45 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateMetadataImport(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.update_metadata_import.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_UpdateMetadataImport_async
    */
+  updateMetadataImport(
+    request?: protos.google.cloud.metastore.v1.IUpdateMetadataImportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1.IMetadataImport,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateMetadataImport(
+    request: protos.google.cloud.metastore.v1.IUpdateMetadataImportRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IMetadataImport,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateMetadataImport(
+    request: protos.google.cloud.metastore.v1.IUpdateMetadataImportRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IMetadataImport,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateMetadataImport(
     request?: protos.google.cloud.metastore.v1.IUpdateMetadataImportRequest,
     optionsOrCallback?:
@@ -1546,11 +1529,8 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateMetadataImportProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.update_metadata_import.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_UpdateMetadataImport_async
    */
   async checkUpdateMetadataImportProgress(
     name: string
@@ -1574,42 +1554,6 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1.OperationMetadata
     >;
   }
-  exportMetadata(
-    request?: protos.google.cloud.metastore.v1.IExportMetadataRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1.IMetadataExport,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  exportMetadata(
-    request: protos.google.cloud.metastore.v1.IExportMetadataRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IMetadataExport,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  exportMetadata(
-    request: protos.google.cloud.metastore.v1.IExportMetadataRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IMetadataExport,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Exports metadata from a service.
    *
@@ -1648,10 +1592,45 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.exportMetadata(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.export_metadata.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_ExportMetadata_async
    */
+  exportMetadata(
+    request?: protos.google.cloud.metastore.v1.IExportMetadataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1.IMetadataExport,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  exportMetadata(
+    request: protos.google.cloud.metastore.v1.IExportMetadataRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IMetadataExport,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportMetadata(
+    request: protos.google.cloud.metastore.v1.IExportMetadataRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IMetadataExport,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   exportMetadata(
     request?: protos.google.cloud.metastore.v1.IExportMetadataRequest,
     optionsOrCallback?:
@@ -1709,11 +1688,8 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkExportMetadataProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.export_metadata.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_ExportMetadata_async
    */
   async checkExportMetadataProgress(
     name: string
@@ -1737,42 +1713,6 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1.OperationMetadata
     >;
   }
-  restoreService(
-    request?: protos.google.cloud.metastore.v1.IRestoreServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1.IRestore,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  restoreService(
-    request: protos.google.cloud.metastore.v1.IRestoreServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IRestore,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  restoreService(
-    request: protos.google.cloud.metastore.v1.IRestoreServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IRestore,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Restores a service from a backup.
    *
@@ -1812,10 +1752,45 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.restoreService(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.restore_service.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_RestoreService_async
    */
+  restoreService(
+    request?: protos.google.cloud.metastore.v1.IRestoreServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1.IRestore,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  restoreService(
+    request: protos.google.cloud.metastore.v1.IRestoreServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IRestore,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restoreService(
+    request: protos.google.cloud.metastore.v1.IRestoreServiceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IRestore,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   restoreService(
     request?: protos.google.cloud.metastore.v1.IRestoreServiceRequest,
     optionsOrCallback?:
@@ -1873,11 +1848,8 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkRestoreServiceProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.restore_service.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_RestoreService_async
    */
   async checkRestoreServiceProgress(
     name: string
@@ -1901,42 +1873,6 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1.OperationMetadata
     >;
   }
-  createBackup(
-    request?: protos.google.cloud.metastore.v1.ICreateBackupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1.IBackup,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  createBackup(
-    request: protos.google.cloud.metastore.v1.ICreateBackupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IBackup,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createBackup(
-    request: protos.google.cloud.metastore.v1.ICreateBackupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1.IBackup,
-        protos.google.cloud.metastore.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a new backup in a given project and location.
    *
@@ -1979,10 +1915,45 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.createBackup(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.create_backup.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_CreateBackup_async
    */
+  createBackup(
+    request?: protos.google.cloud.metastore.v1.ICreateBackupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1.IBackup,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createBackup(
+    request: protos.google.cloud.metastore.v1.ICreateBackupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IBackup,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createBackup(
+    request: protos.google.cloud.metastore.v1.ICreateBackupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IBackup,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createBackup(
     request?: protos.google.cloud.metastore.v1.ICreateBackupRequest,
     optionsOrCallback?:
@@ -2040,11 +2011,8 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateBackupProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.create_backup.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_CreateBackup_async
    */
   async checkCreateBackupProgress(
     name: string
@@ -2068,6 +2036,41 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1.OperationMetadata
     >;
   }
+  /**
+   * Deletes a single backup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The relative resource name of the backup to delete, in the
+   *   following form:
+   *
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
+   *   request if it has completed. The server will ignore subsequent requests
+   *   that provide a duplicate request ID for at least 60 minutes after the first
+   *   request.
+   *
+   *   For example, if an initial request times out, followed by another request
+   *   with the same request ID, the server ignores the second request to prevent
+   *   the creation of duplicate commitments.
+   *
+   *   The request ID must be a valid
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.delete_backup.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_DeleteBackup_async
+   */
   deleteBackup(
     request?: protos.google.cloud.metastore.v1.IDeleteBackupRequest,
     options?: CallOptions
@@ -2104,42 +2107,6 @@ export class DataprocMetastoreClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a single backup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The relative resource name of the backup to delete, in the
-   *   following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
-   *
-   *   For example, if an initial request times out, followed by another request
-   *   with the same request ID, the server ignores the second request to prevent
-   *   the creation of duplicate commitments.
-   *
-   *   The request ID must be a valid
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
-   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteBackup(request);
-   * const [response] = await operation.promise();
-   */
   deleteBackup(
     request?: protos.google.cloud.metastore.v1.IDeleteBackupRequest,
     optionsOrCallback?:
@@ -2197,11 +2164,8 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteBackupProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.delete_backup.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_DeleteBackup_async
    */
   async checkDeleteBackupProgress(
     name: string
@@ -2225,33 +2189,6 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1.OperationMetadata
     >;
   }
-  listServices(
-    request?: protos.google.cloud.metastore.v1.IListServicesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1.IService[],
-      protos.google.cloud.metastore.v1.IListServicesRequest | null,
-      protos.google.cloud.metastore.v1.IListServicesResponse
-    ]
-  >;
-  listServices(
-    request: protos.google.cloud.metastore.v1.IListServicesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.metastore.v1.IListServicesRequest,
-      protos.google.cloud.metastore.v1.IListServicesResponse | null | undefined,
-      protos.google.cloud.metastore.v1.IService
-    >
-  ): void;
-  listServices(
-    request: protos.google.cloud.metastore.v1.IListServicesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.metastore.v1.IListServicesRequest,
-      protos.google.cloud.metastore.v1.IListServicesResponse | null | undefined,
-      protos.google.cloud.metastore.v1.IService
-    >
-  ): void;
   /**
    * Lists services in a project and location.
    *
@@ -2294,6 +2231,33 @@ export class DataprocMetastoreClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listServices(
+    request?: protos.google.cloud.metastore.v1.IListServicesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.metastore.v1.IService[],
+      protos.google.cloud.metastore.v1.IListServicesRequest | null,
+      protos.google.cloud.metastore.v1.IListServicesResponse
+    ]
+  >;
+  listServices(
+    request: protos.google.cloud.metastore.v1.IListServicesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.metastore.v1.IListServicesRequest,
+      protos.google.cloud.metastore.v1.IListServicesResponse | null | undefined,
+      protos.google.cloud.metastore.v1.IService
+    >
+  ): void;
+  listServices(
+    request: protos.google.cloud.metastore.v1.IListServicesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.metastore.v1.IListServicesRequest,
+      protos.google.cloud.metastore.v1.IListServicesResponse | null | undefined,
+      protos.google.cloud.metastore.v1.IService
+    >
+  ): void;
   listServices(
     request?: protos.google.cloud.metastore.v1.IListServicesRequest,
     optionsOrCallback?:
@@ -2388,7 +2352,8 @@ export class DataprocMetastoreClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listServices'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as gax.GaxCall,
@@ -2437,11 +2402,8 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listServicesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.list_services.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_ListServices_async
    */
   listServicesAsync(
     request?: protos.google.cloud.metastore.v1.IListServicesRequest,
@@ -2455,8 +2417,8 @@ export class DataprocMetastoreClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listServices'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
@@ -2464,37 +2426,6 @@ export class DataprocMetastoreClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.metastore.v1.IService>;
   }
-  listMetadataImports(
-    request?: protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1.IMetadataImport[],
-      protos.google.cloud.metastore.v1.IListMetadataImportsRequest | null,
-      protos.google.cloud.metastore.v1.IListMetadataImportsResponse
-    ]
-  >;
-  listMetadataImports(
-    request: protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
-      | protos.google.cloud.metastore.v1.IListMetadataImportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.metastore.v1.IMetadataImport
-    >
-  ): void;
-  listMetadataImports(
-    request: protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
-      | protos.google.cloud.metastore.v1.IListMetadataImportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.metastore.v1.IMetadataImport
-    >
-  ): void;
   /**
    * Lists imports in a service.
    *
@@ -2537,6 +2468,37 @@ export class DataprocMetastoreClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listMetadataImports(
+    request?: protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.metastore.v1.IMetadataImport[],
+      protos.google.cloud.metastore.v1.IListMetadataImportsRequest | null,
+      protos.google.cloud.metastore.v1.IListMetadataImportsResponse
+    ]
+  >;
+  listMetadataImports(
+    request: protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
+      | protos.google.cloud.metastore.v1.IListMetadataImportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.metastore.v1.IMetadataImport
+    >
+  ): void;
+  listMetadataImports(
+    request: protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
+      | protos.google.cloud.metastore.v1.IListMetadataImportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.metastore.v1.IMetadataImport
+    >
+  ): void;
   listMetadataImports(
     request?: protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
     optionsOrCallback?:
@@ -2633,7 +2595,8 @@ export class DataprocMetastoreClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listMetadataImports'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMetadataImports.createStream(
       this.innerApiCalls.listMetadataImports as gax.GaxCall,
@@ -2682,11 +2645,8 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listMetadataImportsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.list_metadata_imports.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_ListMetadataImports_async
    */
   listMetadataImportsAsync(
     request?: protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
@@ -2700,8 +2660,8 @@ export class DataprocMetastoreClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listMetadataImports'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMetadataImports.asyncIterate(
       this.innerApiCalls['listMetadataImports'] as GaxCall,
@@ -2709,33 +2669,6 @@ export class DataprocMetastoreClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.metastore.v1.IMetadataImport>;
   }
-  listBackups(
-    request?: protos.google.cloud.metastore.v1.IListBackupsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1.IBackup[],
-      protos.google.cloud.metastore.v1.IListBackupsRequest | null,
-      protos.google.cloud.metastore.v1.IListBackupsResponse
-    ]
-  >;
-  listBackups(
-    request: protos.google.cloud.metastore.v1.IListBackupsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.metastore.v1.IListBackupsRequest,
-      protos.google.cloud.metastore.v1.IListBackupsResponse | null | undefined,
-      protos.google.cloud.metastore.v1.IBackup
-    >
-  ): void;
-  listBackups(
-    request: protos.google.cloud.metastore.v1.IListBackupsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.metastore.v1.IListBackupsRequest,
-      protos.google.cloud.metastore.v1.IListBackupsResponse | null | undefined,
-      protos.google.cloud.metastore.v1.IBackup
-    >
-  ): void;
   /**
    * Lists backups in a service.
    *
@@ -2778,6 +2711,33 @@ export class DataprocMetastoreClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listBackups(
+    request?: protos.google.cloud.metastore.v1.IListBackupsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.metastore.v1.IBackup[],
+      protos.google.cloud.metastore.v1.IListBackupsRequest | null,
+      protos.google.cloud.metastore.v1.IListBackupsResponse
+    ]
+  >;
+  listBackups(
+    request: protos.google.cloud.metastore.v1.IListBackupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.metastore.v1.IListBackupsRequest,
+      protos.google.cloud.metastore.v1.IListBackupsResponse | null | undefined,
+      protos.google.cloud.metastore.v1.IBackup
+    >
+  ): void;
+  listBackups(
+    request: protos.google.cloud.metastore.v1.IListBackupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.metastore.v1.IListBackupsRequest,
+      protos.google.cloud.metastore.v1.IListBackupsResponse | null | undefined,
+      protos.google.cloud.metastore.v1.IBackup
+    >
+  ): void;
   listBackups(
     request?: protos.google.cloud.metastore.v1.IListBackupsRequest,
     optionsOrCallback?:
@@ -2872,7 +2832,8 @@ export class DataprocMetastoreClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listBackups'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as gax.GaxCall,
@@ -2921,11 +2882,8 @@ export class DataprocMetastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listBackupsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/dataproc_metastore.list_backups.js</caption>
+   * region_tag:metastore_v1_generated_DataprocMetastore_ListBackups_async
    */
   listBackupsAsync(
     request?: protos.google.cloud.metastore.v1.IListBackupsRequest,
@@ -2939,8 +2897,8 @@ export class DataprocMetastoreClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listBackups'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
