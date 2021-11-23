@@ -384,6 +384,24 @@ export class GkeHubClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets details of a single Feature.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The Feature resource name in the format
+   *   `projects/* /locations/* /features/*`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Feature]{@link google.cloud.gkehub.v1beta.Feature}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/gke_hub.get_feature.js</caption>
+   * region_tag:gkehub_v1beta_generated_GkeHub_GetFeature_async
+   */
   getFeature(
     request?: protos.google.cloud.gkehub.v1beta.IGetFeatureRequest,
     options?: CallOptions
@@ -411,24 +429,6 @@ export class GkeHubClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details of a single Feature.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The Feature resource name in the format
-   *   `projects/* /locations/* /features/*`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Feature]{@link google.cloud.gkehub.v1beta.Feature}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getFeature(request);
-   */
   getFeature(
     request?: protos.google.cloud.gkehub.v1beta.IGetFeatureRequest,
     optionsOrCallback?:
@@ -471,6 +471,44 @@ export class GkeHubClient {
     return this.innerApiCalls.getFeature(request, options, callback);
   }
 
+  /**
+   * Adds a new Feature.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent (project and location) where the Feature will be created.
+   *   Specified in the format `projects/* /locations/*`.
+   * @param {string} request.featureId
+   *   The ID of the feature to create.
+   * @param {google.cloud.gkehub.v1beta.Feature} request.resource
+   *   The Feature resource to create.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/gke_hub.create_feature.js</caption>
+   * region_tag:gkehub_v1beta_generated_GkeHub_CreateFeature_async
+   */
   createFeature(
     request?: protos.google.cloud.gkehub.v1beta.ICreateFeatureRequest,
     options?: CallOptions
@@ -507,45 +545,6 @@ export class GkeHubClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Adds a new Feature.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The parent (project and location) where the Feature will be created.
-   *   Specified in the format `projects/* /locations/*`.
-   * @param {string} request.featureId
-   *   The ID of the feature to create.
-   * @param {google.cloud.gkehub.v1beta.Feature} request.resource
-   *   The Feature resource to create.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createFeature(request);
-   * const [response] = await operation.promise();
-   */
   createFeature(
     request?: protos.google.cloud.gkehub.v1beta.ICreateFeatureRequest,
     optionsOrCallback?:
@@ -603,11 +602,8 @@ export class GkeHubClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateFeatureProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta/gke_hub.create_feature.js</caption>
+   * region_tag:gkehub_v1beta_generated_GkeHub_CreateFeature_async
    */
   async checkCreateFeatureProgress(
     name: string
@@ -631,6 +627,44 @@ export class GkeHubClient {
       protos.google.cloud.gkehub.v1beta.OperationMetadata
     >;
   }
+  /**
+   * Removes a Feature.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The Feature resource name in the format
+   *   `projects/* /locations/* /features/*`.
+   * @param {boolean} request.force
+   *   If set to true, the delete will ignore any outstanding resources for
+   *   this Feature (that is, `FeatureState.has_resources` is set to true). These
+   *   resources will NOT be cleaned up or modified in any way.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/gke_hub.delete_feature.js</caption>
+   * region_tag:gkehub_v1beta_generated_GkeHub_DeleteFeature_async
+   */
   deleteFeature(
     request?: protos.google.cloud.gkehub.v1beta.IDeleteFeatureRequest,
     options?: CallOptions
@@ -667,45 +701,6 @@ export class GkeHubClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Removes a Feature.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The Feature resource name in the format
-   *   `projects/* /locations/* /features/*`.
-   * @param {boolean} request.force
-   *   If set to true, the delete will ignore any outstanding resources for
-   *   this Feature (that is, `FeatureState.has_resources` is set to true). These
-   *   resources will NOT be cleaned up or modified in any way.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteFeature(request);
-   * const [response] = await operation.promise();
-   */
   deleteFeature(
     request?: protos.google.cloud.gkehub.v1beta.IDeleteFeatureRequest,
     optionsOrCallback?:
@@ -763,11 +758,8 @@ export class GkeHubClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteFeatureProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta/gke_hub.delete_feature.js</caption>
+   * region_tag:gkehub_v1beta_generated_GkeHub_DeleteFeature_async
    */
   async checkDeleteFeatureProgress(
     name: string
@@ -791,42 +783,6 @@ export class GkeHubClient {
       protos.google.cloud.gkehub.v1beta.OperationMetadata
     >;
   }
-  updateFeature(
-    request?: protos.google.cloud.gkehub.v1beta.IUpdateFeatureRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gkehub.v1beta.IFeature,
-        protos.google.cloud.gkehub.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  updateFeature(
-    request: protos.google.cloud.gkehub.v1beta.IUpdateFeatureRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gkehub.v1beta.IFeature,
-        protos.google.cloud.gkehub.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFeature(
-    request: protos.google.cloud.gkehub.v1beta.IUpdateFeatureRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gkehub.v1beta.IFeature,
-        protos.google.cloud.gkehub.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates an existing Feature.
    *
@@ -869,10 +825,45 @@ export class GkeHubClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateFeature(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1beta/gke_hub.update_feature.js</caption>
+   * region_tag:gkehub_v1beta_generated_GkeHub_UpdateFeature_async
    */
+  updateFeature(
+    request?: protos.google.cloud.gkehub.v1beta.IUpdateFeatureRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1beta.IFeature,
+        protos.google.cloud.gkehub.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateFeature(
+    request: protos.google.cloud.gkehub.v1beta.IUpdateFeatureRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1beta.IFeature,
+        protos.google.cloud.gkehub.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateFeature(
+    request: protos.google.cloud.gkehub.v1beta.IUpdateFeatureRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1beta.IFeature,
+        protos.google.cloud.gkehub.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateFeature(
     request?: protos.google.cloud.gkehub.v1beta.IUpdateFeatureRequest,
     optionsOrCallback?:
@@ -930,11 +921,8 @@ export class GkeHubClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateFeatureProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta/gke_hub.update_feature.js</caption>
+   * region_tag:gkehub_v1beta_generated_GkeHub_UpdateFeature_async
    */
   async checkUpdateFeatureProgress(
     name: string
@@ -958,37 +946,6 @@ export class GkeHubClient {
       protos.google.cloud.gkehub.v1beta.OperationMetadata
     >;
   }
-  listFeatures(
-    request?: protos.google.cloud.gkehub.v1beta.IListFeaturesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkehub.v1beta.IFeature[],
-      protos.google.cloud.gkehub.v1beta.IListFeaturesRequest | null,
-      protos.google.cloud.gkehub.v1beta.IListFeaturesResponse
-    ]
-  >;
-  listFeatures(
-    request: protos.google.cloud.gkehub.v1beta.IListFeaturesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gkehub.v1beta.IListFeaturesRequest,
-      | protos.google.cloud.gkehub.v1beta.IListFeaturesResponse
-      | null
-      | undefined,
-      protos.google.cloud.gkehub.v1beta.IFeature
-    >
-  ): void;
-  listFeatures(
-    request: protos.google.cloud.gkehub.v1beta.IListFeaturesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gkehub.v1beta.IListFeaturesRequest,
-      | protos.google.cloud.gkehub.v1beta.IListFeaturesResponse
-      | null
-      | undefined,
-      protos.google.cloud.gkehub.v1beta.IFeature
-    >
-  ): void;
   /**
    * Lists Features in a given project and location.
    *
@@ -1038,6 +995,37 @@ export class GkeHubClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listFeatures(
+    request?: protos.google.cloud.gkehub.v1beta.IListFeaturesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1beta.IFeature[],
+      protos.google.cloud.gkehub.v1beta.IListFeaturesRequest | null,
+      protos.google.cloud.gkehub.v1beta.IListFeaturesResponse
+    ]
+  >;
+  listFeatures(
+    request: protos.google.cloud.gkehub.v1beta.IListFeaturesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1beta.IListFeaturesRequest,
+      | protos.google.cloud.gkehub.v1beta.IListFeaturesResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1beta.IFeature
+    >
+  ): void;
+  listFeatures(
+    request: protos.google.cloud.gkehub.v1beta.IListFeaturesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1beta.IListFeaturesRequest,
+      | protos.google.cloud.gkehub.v1beta.IListFeaturesResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1beta.IFeature
+    >
+  ): void;
   listFeatures(
     request?: protos.google.cloud.gkehub.v1beta.IListFeaturesRequest,
     optionsOrCallback?:
@@ -1141,7 +1129,8 @@ export class GkeHubClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listFeatures'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFeatures.createStream(
       this.innerApiCalls.listFeatures as gax.GaxCall,
@@ -1197,11 +1186,8 @@ export class GkeHubClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listFeaturesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta/gke_hub.list_features.js</caption>
+   * region_tag:gkehub_v1beta_generated_GkeHub_ListFeatures_async
    */
   listFeaturesAsync(
     request?: protos.google.cloud.gkehub.v1beta.IListFeaturesRequest,
@@ -1215,8 +1201,8 @@ export class GkeHubClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listFeatures'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFeatures.asyncIterate(
       this.innerApiCalls['listFeatures'] as GaxCall,
