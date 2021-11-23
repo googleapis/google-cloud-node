@@ -317,6 +317,31 @@ export class DocumentUnderstandingServiceClient {
   // -- Service calls --
   // -------------------
 
+  /**
+   * LRO endpoint to batch process many documents.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number[]} request.requests
+   *   Required. Individual requests for each document.
+   * @param {string} request.parent
+   *   Target project and location to make a call.
+   *
+   *   Format: `projects/{project-id}/locations/{location-id}`.
+   *
+   *   If no location is specified, a region will be chosen automatically.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/document_understanding_service.batch_process_documents.js</caption>
+   * region_tag:documentai_v1beta1_generated_DocumentUnderstandingService_BatchProcessDocuments_async
+   */
   batchProcessDocuments(
     request?: protos.google.cloud.documentai.v1beta1.IBatchProcessDocumentsRequest,
     options?: CallOptions
@@ -353,32 +378,6 @@ export class DocumentUnderstandingServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * LRO endpoint to batch process many documents.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number[]} request.requests
-   *   Required. Individual requests for each document.
-   * @param {string} request.parent
-   *   Target project and location to make a call.
-   *
-   *   Format: `projects/{project-id}/locations/{location-id}`.
-   *
-   *   If no location is specified, a region will be chosen automatically.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.batchProcessDocuments(request);
-   * const [response] = await operation.promise();
-   */
   batchProcessDocuments(
     request?: protos.google.cloud.documentai.v1beta1.IBatchProcessDocumentsRequest,
     optionsOrCallback?:
@@ -436,11 +435,8 @@ export class DocumentUnderstandingServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkBatchProcessDocumentsProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/document_understanding_service.batch_process_documents.js</caption>
+   * region_tag:documentai_v1beta1_generated_DocumentUnderstandingService_BatchProcessDocuments_async
    */
   async checkBatchProcessDocumentsProgress(
     name: string

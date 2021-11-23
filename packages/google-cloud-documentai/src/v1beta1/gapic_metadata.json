@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.documentai.v1beta1",
-  "libraryPackage": "documentai",
+  "libraryPackage": "@google-cloud/documentai",
   "services": {
     "DocumentUnderstandingService": {
       "clients": {

@@ -345,6 +345,30 @@ export class DocumentProcessorServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Processes a single document.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.documentai.v1.Document} request.inlineDocument
+   *   An inline document proto.
+   * @param {google.cloud.documentai.v1.RawDocument} request.rawDocument
+   *   A raw document content (bytes).
+   * @param {string} request.name
+   *   Required. The processor resource name.
+   * @param {boolean} request.skipHumanReview
+   *   Whether Human Review feature should be skipped for this request. Default to
+   *   false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ProcessResponse]{@link google.cloud.documentai.v1.ProcessResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/document_processor_service.process_document.js</caption>
+   * region_tag:documentai_v1_generated_DocumentProcessorService_ProcessDocument_async
+   */
   processDocument(
     request?: protos.google.cloud.documentai.v1.IProcessRequest,
     options?: CallOptions
@@ -372,30 +396,6 @@ export class DocumentProcessorServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Processes a single document.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.documentai.v1.Document} request.inlineDocument
-   *   An inline document proto.
-   * @param {google.cloud.documentai.v1.RawDocument} request.rawDocument
-   *   A raw document content (bytes).
-   * @param {string} request.name
-   *   Required. The processor resource name.
-   * @param {boolean} request.skipHumanReview
-   *   Whether Human Review feature should be skipped for this request. Default to
-   *   false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ProcessResponse]{@link google.cloud.documentai.v1.ProcessResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.processDocument(request);
-   */
   processDocument(
     request?: protos.google.cloud.documentai.v1.IProcessRequest,
     optionsOrCallback?:
@@ -436,6 +436,33 @@ export class DocumentProcessorServiceClient {
     return this.innerApiCalls.processDocument(request, options, callback);
   }
 
+  /**
+   * LRO endpoint to batch process many documents. The output is written
+   * to Cloud Storage as JSON in the [Document] format.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The processor resource name.
+   * @param {google.cloud.documentai.v1.BatchDocumentsInputConfig} request.inputDocuments
+   *   The input documents for batch process.
+   * @param {google.cloud.documentai.v1.DocumentOutputConfig} request.documentOutputConfig
+   *   The overall output config for batch process.
+   * @param {boolean} request.skipHumanReview
+   *   Whether Human Review feature should be skipped for this request. Default to
+   *   false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/document_processor_service.batch_process_documents.js</caption>
+   * region_tag:documentai_v1_generated_DocumentProcessorService_BatchProcessDocuments_async
+   */
   batchProcessDocuments(
     request?: protos.google.cloud.documentai.v1.IBatchProcessRequest,
     options?: CallOptions
@@ -472,34 +499,6 @@ export class DocumentProcessorServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * LRO endpoint to batch process many documents. The output is written
-   * to Cloud Storage as JSON in the [Document] format.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The processor resource name.
-   * @param {google.cloud.documentai.v1.BatchDocumentsInputConfig} request.inputDocuments
-   *   The input documents for batch process.
-   * @param {google.cloud.documentai.v1.DocumentOutputConfig} request.documentOutputConfig
-   *   The overall output config for batch process.
-   * @param {boolean} request.skipHumanReview
-   *   Whether Human Review feature should be skipped for this request. Default to
-   *   false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.batchProcessDocuments(request);
-   * const [response] = await operation.promise();
-   */
   batchProcessDocuments(
     request?: protos.google.cloud.documentai.v1.IBatchProcessRequest,
     optionsOrCallback?:
@@ -557,11 +556,8 @@ export class DocumentProcessorServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkBatchProcessDocumentsProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/document_processor_service.batch_process_documents.js</caption>
+   * region_tag:documentai_v1_generated_DocumentProcessorService_BatchProcessDocuments_async
    */
   async checkBatchProcessDocumentsProgress(
     name: string
@@ -585,6 +581,33 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1.BatchProcessMetadata
     >;
   }
+  /**
+   * Send a document for Human Review. The input document should be processed by
+   * the specified processor.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.documentai.v1.Document} request.inlineDocument
+   *   An inline document proto.
+   * @param {string} request.humanReviewConfig
+   *   Required. The resource name of the HumanReviewConfig that the document will be
+   *   reviewed with.
+   * @param {boolean} request.enableSchemaValidation
+   *   Whether the validation should be performed on the ad-hoc review request.
+   * @param {google.cloud.documentai.v1.ReviewDocumentRequest.Priority} request.priority
+   *   The priority of the human review task.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/document_processor_service.review_document.js</caption>
+   * region_tag:documentai_v1_generated_DocumentProcessorService_ReviewDocument_async
+   */
   reviewDocument(
     request?: protos.google.cloud.documentai.v1.IReviewDocumentRequest,
     options?: CallOptions
@@ -621,34 +644,6 @@ export class DocumentProcessorServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Send a document for Human Review. The input document should be processed by
-   * the specified processor.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.documentai.v1.Document} request.inlineDocument
-   *   An inline document proto.
-   * @param {string} request.humanReviewConfig
-   *   Required. The resource name of the HumanReviewConfig that the document will be
-   *   reviewed with.
-   * @param {boolean} request.enableSchemaValidation
-   *   Whether the validation should be performed on the ad-hoc review request.
-   * @param {google.cloud.documentai.v1.ReviewDocumentRequest.Priority} request.priority
-   *   The priority of the human review task.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.reviewDocument(request);
-   * const [response] = await operation.promise();
-   */
   reviewDocument(
     request?: protos.google.cloud.documentai.v1.IReviewDocumentRequest,
     optionsOrCallback?:
@@ -706,11 +701,8 @@ export class DocumentProcessorServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkReviewDocumentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/document_processor_service.review_document.js</caption>
+   * region_tag:documentai_v1_generated_DocumentProcessorService_ReviewDocument_async
    */
   async checkReviewDocumentProgress(
     name: string

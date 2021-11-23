@@ -411,6 +411,32 @@ export class DocumentProcessorServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Processes a single document.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.documentai.v1beta3.Document} request.inlineDocument
+   *   An inline document proto.
+   * @param {google.cloud.documentai.v1beta3.RawDocument} request.rawDocument
+   *   A raw document content (bytes).
+   * @param {string} request.name
+   *   Required. The processor resource name.
+   * @param {google.cloud.documentai.v1beta3.Document} request.document
+   *   The document payload, the [content] and [mime_type] fields must be set.
+   * @param {boolean} request.skipHumanReview
+   *   Whether Human Review feature should be skipped for this request. Default to
+   *   false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ProcessResponse]{@link google.cloud.documentai.v1beta3.ProcessResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.process_document.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_ProcessDocument_async
+   */
   processDocument(
     request?: protos.google.cloud.documentai.v1beta3.IProcessRequest,
     options?: CallOptions
@@ -438,32 +464,6 @@ export class DocumentProcessorServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Processes a single document.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.documentai.v1beta3.Document} request.inlineDocument
-   *   An inline document proto.
-   * @param {google.cloud.documentai.v1beta3.RawDocument} request.rawDocument
-   *   A raw document content (bytes).
-   * @param {string} request.name
-   *   Required. The processor resource name.
-   * @param {google.cloud.documentai.v1beta3.Document} request.document
-   *   The document payload, the [content] and [mime_type] fields must be set.
-   * @param {boolean} request.skipHumanReview
-   *   Whether Human Review feature should be skipped for this request. Default to
-   *   false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ProcessResponse]{@link google.cloud.documentai.v1beta3.ProcessResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.processDocument(request);
-   */
   processDocument(
     request?: protos.google.cloud.documentai.v1beta3.IProcessRequest,
     optionsOrCallback?:
@@ -505,6 +505,24 @@ export class DocumentProcessorServiceClient {
     this.initialize();
     return this.innerApiCalls.processDocument(request, options, callback);
   }
+  /**
+   * Fetches processor types.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project of processor type to list.
+   *   Format: projects/{project}/locations/{location}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [FetchProcessorTypesResponse]{@link google.cloud.documentai.v1beta3.FetchProcessorTypesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.fetch_processor_types.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_FetchProcessorTypes_async
+   */
   fetchProcessorTypes(
     request?: protos.google.cloud.documentai.v1beta3.IFetchProcessorTypesRequest,
     options?: CallOptions
@@ -539,24 +557,6 @@ export class DocumentProcessorServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Fetches processor types.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project of processor type to list.
-   *   Format: projects/{project}/locations/{location}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [FetchProcessorTypesResponse]{@link google.cloud.documentai.v1beta3.FetchProcessorTypesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.fetchProcessorTypes(request);
-   */
   fetchProcessorTypes(
     request?: protos.google.cloud.documentai.v1beta3.IFetchProcessorTypesRequest,
     optionsOrCallback?:
@@ -603,6 +603,28 @@ export class DocumentProcessorServiceClient {
     this.initialize();
     return this.innerApiCalls.fetchProcessorTypes(request, options, callback);
   }
+  /**
+   * Creates a processor from the type processor that the user chose.
+   * The processor will be at "ENABLED" state by default after its creation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) under which to create the processor.
+   *   Format: projects/{project}/locations/{location}
+   * @param {google.cloud.documentai.v1beta3.Processor} request.processor
+   *   Required. The processor to be created, requires [processor_type] and [display_name]
+   *   to be set. Also, the processor is under CMEK if CMEK fields are set.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Processor]{@link google.cloud.documentai.v1beta3.Processor}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.create_processor.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_CreateProcessor_async
+   */
   createProcessor(
     request?: protos.google.cloud.documentai.v1beta3.ICreateProcessorRequest,
     options?: CallOptions
@@ -637,28 +659,6 @@ export class DocumentProcessorServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a processor from the type processor that the user chose.
-   * The processor will be at "ENABLED" state by default after its creation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent (project and location) under which to create the processor.
-   *   Format: projects/{project}/locations/{location}
-   * @param {google.cloud.documentai.v1beta3.Processor} request.processor
-   *   Required. The processor to be created, requires [processor_type] and [display_name]
-   *   to be set. Also, the processor is under CMEK if CMEK fields are set.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Processor]{@link google.cloud.documentai.v1beta3.Processor}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createProcessor(request);
-   */
   createProcessor(
     request?: protos.google.cloud.documentai.v1beta3.ICreateProcessorRequest,
     optionsOrCallback?:
@@ -706,6 +706,37 @@ export class DocumentProcessorServiceClient {
     return this.innerApiCalls.createProcessor(request, options, callback);
   }
 
+  /**
+   * LRO endpoint to batch process many documents. The output is written
+   * to Cloud Storage as JSON in the [Document] format.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The processor resource name.
+   * @param {number[]} request.inputConfigs
+   *   The input config for each single document in the batch process.
+   * @param {google.cloud.documentai.v1beta3.BatchProcessRequest.BatchOutputConfig} request.outputConfig
+   *   The overall output config for batch process.
+   * @param {google.cloud.documentai.v1beta3.BatchDocumentsInputConfig} request.inputDocuments
+   *   The input documents for batch process.
+   * @param {google.cloud.documentai.v1beta3.DocumentOutputConfig} request.documentOutputConfig
+   *   The overall output config for batch process.
+   * @param {boolean} request.skipHumanReview
+   *   Whether Human Review feature should be skipped for this request. Default to
+   *   false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.batch_process_documents.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_BatchProcessDocuments_async
+   */
   batchProcessDocuments(
     request?: protos.google.cloud.documentai.v1beta3.IBatchProcessRequest,
     options?: CallOptions
@@ -742,38 +773,6 @@ export class DocumentProcessorServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * LRO endpoint to batch process many documents. The output is written
-   * to Cloud Storage as JSON in the [Document] format.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The processor resource name.
-   * @param {number[]} request.inputConfigs
-   *   The input config for each single document in the batch process.
-   * @param {google.cloud.documentai.v1beta3.BatchProcessRequest.BatchOutputConfig} request.outputConfig
-   *   The overall output config for batch process.
-   * @param {google.cloud.documentai.v1beta3.BatchDocumentsInputConfig} request.inputDocuments
-   *   The input documents for batch process.
-   * @param {google.cloud.documentai.v1beta3.DocumentOutputConfig} request.documentOutputConfig
-   *   The overall output config for batch process.
-   * @param {boolean} request.skipHumanReview
-   *   Whether Human Review feature should be skipped for this request. Default to
-   *   false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.batchProcessDocuments(request);
-   * const [response] = await operation.promise();
-   */
   batchProcessDocuments(
     request?: protos.google.cloud.documentai.v1beta3.IBatchProcessRequest,
     optionsOrCallback?:
@@ -831,11 +830,8 @@ export class DocumentProcessorServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkBatchProcessDocumentsProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.batch_process_documents.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_BatchProcessDocuments_async
    */
   async checkBatchProcessDocumentsProgress(
     name: string
@@ -859,6 +855,26 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1beta3.BatchProcessMetadata
     >;
   }
+  /**
+   * Deletes the processor, unloads all deployed model artifacts if it was
+   * enabled and then deletes all artifacts associated with this processor.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The processor resource name to be deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.delete_processor.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_DeleteProcessor_async
+   */
   deleteProcessor(
     request?: protos.google.cloud.documentai.v1beta3.IDeleteProcessorRequest,
     options?: CallOptions
@@ -895,27 +911,6 @@ export class DocumentProcessorServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the processor, unloads all deployed model artifacts if it was
-   * enabled and then deletes all artifacts associated with this processor.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The processor resource name to be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteProcessor(request);
-   * const [response] = await operation.promise();
-   */
   deleteProcessor(
     request?: protos.google.cloud.documentai.v1beta3.IDeleteProcessorRequest,
     optionsOrCallback?:
@@ -973,11 +968,8 @@ export class DocumentProcessorServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteProcessorProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.delete_processor.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_DeleteProcessor_async
    */
   async checkDeleteProcessorProgress(
     name: string
@@ -1001,6 +993,25 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1beta3.DeleteProcessorMetadata
     >;
   }
+  /**
+   * Enables a processor
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The processor resource name to be enabled.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.enable_processor.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_EnableProcessor_async
+   */
   enableProcessor(
     request?: protos.google.cloud.documentai.v1beta3.IEnableProcessorRequest,
     options?: CallOptions
@@ -1037,26 +1048,6 @@ export class DocumentProcessorServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Enables a processor
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The processor resource name to be enabled.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.enableProcessor(request);
-   * const [response] = await operation.promise();
-   */
   enableProcessor(
     request?: protos.google.cloud.documentai.v1beta3.IEnableProcessorRequest,
     optionsOrCallback?:
@@ -1114,11 +1105,8 @@ export class DocumentProcessorServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkEnableProcessorProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.enable_processor.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_EnableProcessor_async
    */
   async checkEnableProcessorProgress(
     name: string
@@ -1142,6 +1130,25 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1beta3.EnableProcessorMetadata
     >;
   }
+  /**
+   * Disables a processor
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The processor resource name to be disabled.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.disable_processor.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_DisableProcessor_async
+   */
   disableProcessor(
     request?: protos.google.cloud.documentai.v1beta3.IDisableProcessorRequest,
     options?: CallOptions
@@ -1178,26 +1185,6 @@ export class DocumentProcessorServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Disables a processor
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The processor resource name to be disabled.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.disableProcessor(request);
-   * const [response] = await operation.promise();
-   */
   disableProcessor(
     request?: protos.google.cloud.documentai.v1beta3.IDisableProcessorRequest,
     optionsOrCallback?:
@@ -1255,11 +1242,8 @@ export class DocumentProcessorServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDisableProcessorProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.disable_processor.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_DisableProcessor_async
    */
   async checkDisableProcessorProgress(
     name: string
@@ -1283,6 +1267,35 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1beta3.DisableProcessorMetadata
     >;
   }
+  /**
+   * Send a document for Human Review. The input document should be processed by
+   * the specified processor.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.documentai.v1beta3.Document} request.inlineDocument
+   *   An inline document proto.
+   * @param {string} request.humanReviewConfig
+   *   Required. The resource name of the HumanReviewConfig that the document will be
+   *   reviewed with.
+   * @param {google.cloud.documentai.v1beta3.Document} request.document
+   *   The document that needs human review.
+   * @param {boolean} request.enableSchemaValidation
+   *   Whether the validation should be performed on the ad-hoc review request.
+   * @param {google.cloud.documentai.v1beta3.ReviewDocumentRequest.Priority} request.priority
+   *   The priority of the human review task.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.review_document.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_ReviewDocument_async
+   */
   reviewDocument(
     request?: protos.google.cloud.documentai.v1beta3.IReviewDocumentRequest,
     options?: CallOptions
@@ -1319,36 +1332,6 @@ export class DocumentProcessorServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Send a document for Human Review. The input document should be processed by
-   * the specified processor.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.documentai.v1beta3.Document} request.inlineDocument
-   *   An inline document proto.
-   * @param {string} request.humanReviewConfig
-   *   Required. The resource name of the HumanReviewConfig that the document will be
-   *   reviewed with.
-   * @param {google.cloud.documentai.v1beta3.Document} request.document
-   *   The document that needs human review.
-   * @param {boolean} request.enableSchemaValidation
-   *   Whether the validation should be performed on the ad-hoc review request.
-   * @param {google.cloud.documentai.v1beta3.ReviewDocumentRequest.Priority} request.priority
-   *   The priority of the human review task.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.reviewDocument(request);
-   * const [response] = await operation.promise();
-   */
   reviewDocument(
     request?: protos.google.cloud.documentai.v1beta3.IReviewDocumentRequest,
     optionsOrCallback?:
@@ -1406,11 +1389,8 @@ export class DocumentProcessorServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkReviewDocumentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.review_document.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_ReviewDocument_async
    */
   async checkReviewDocumentProgress(
     name: string
@@ -1434,6 +1414,34 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata
     >;
   }
+  /**
+   * Lists all processors which belong to this project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) which owns this collection of Processors.
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} request.pageSize
+   *   The maximum number of processors to return.
+   *   If unspecified, at most 50 processors will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} request.pageToken
+   *   We will return the processors sorted by creation time. The page token
+   *   will point to the next processor.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Processor]{@link google.cloud.documentai.v1beta3.Processor}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listProcessorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listProcessors(
     request?: protos.google.cloud.documentai.v1beta3.IListProcessorsRequest,
     options?: CallOptions
@@ -1465,34 +1473,6 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1beta3.IProcessor
     >
   ): void;
-  /**
-   * Lists all processors which belong to this project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent (project and location) which owns this collection of Processors.
-   *   Format: projects/{project}/locations/{location}
-   * @param {number} request.pageSize
-   *   The maximum number of processors to return.
-   *   If unspecified, at most 50 processors will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
-   * @param {string} request.pageToken
-   *   We will return the processors sorted by creation time. The page token
-   *   will point to the next processor.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Processor]{@link google.cloud.documentai.v1beta3.Processor}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listProcessorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listProcessors(
     request?: protos.google.cloud.documentai.v1beta3.IListProcessorsRequest,
     optionsOrCallback?:
@@ -1575,7 +1555,8 @@ export class DocumentProcessorServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listProcessors'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProcessors.createStream(
       this.innerApiCalls.listProcessors as gax.GaxCall,
@@ -1610,11 +1591,8 @@ export class DocumentProcessorServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listProcessorsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.list_processors.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_ListProcessors_async
    */
   listProcessorsAsync(
     request?: protos.google.cloud.documentai.v1beta3.IListProcessorsRequest,
@@ -1628,8 +1606,8 @@ export class DocumentProcessorServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listProcessors'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProcessors.asyncIterate(
       this.innerApiCalls['listProcessors'] as GaxCall,
