@@ -63,7 +63,7 @@
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "ImportUserEvents": {
-          "timeout_millis": 300000,
+          "timeout_millis": 600000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "49abb7cadc111ff8dd551b61fcad123362c8d090"
         },
