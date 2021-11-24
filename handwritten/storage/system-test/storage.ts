@@ -2502,6 +2502,33 @@ describe('storage', () => {
       });
     });
 
+    it('should skip validation if file is served decompressed', async () => {
+      const filename = 'logo-gzipped.png';
+      await bucket.upload(FILES.logo.path, {destination: filename, gzip: true});
+
+      tmp.setGracefulCleanup();
+      const {name: tmpFilePath} = tmp.fileSync();
+
+      const file = bucket.file(filename);
+
+      await new Promise((resolve, reject) => {
+        file
+          .createReadStream()
+          .on('error', reject)
+          .on('response', raw => {
+            assert.strictEqual(
+              raw.toJSON().headers['content-encoding'],
+              undefined
+            );
+          })
+          .pipe(fs.createWriteStream(tmpFilePath))
+          .on('error', reject)
+          .on('finish', resolve);
+      });
+
+      await file.delete();
+    });
+
     describe('simple write', () => {
       it('should save arbitrary data', done => {
         const file = bucket.file('TestFile');

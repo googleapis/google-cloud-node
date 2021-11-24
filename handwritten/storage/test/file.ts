@@ -1387,6 +1387,24 @@ describe('File', () => {
         file.requestStream = getFakeSuccessfulRequest(data);
       });
 
+      describe('server decompression', () => {
+        it('should skip validation if file was stored compressed', done => {
+          file.metadata.contentEncoding = 'gzip';
+
+          const validateStub = sinon.stub().returns(true);
+          fakeValidationStream.test = validateStub;
+
+          file
+            .createReadStream({validation: 'crc32c'})
+            .on('error', done)
+            .on('end', () => {
+              assert(validateStub.notCalled);
+              done();
+            })
+            .resume();
+        });
+      });
+
       it('should emit errors from the validation stream', done => {
         const error = new Error('Error.');
 
