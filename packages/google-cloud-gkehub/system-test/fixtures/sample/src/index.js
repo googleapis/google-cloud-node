@@ -20,8 +20,7 @@
 const gkehub = require('@google-cloud/gke-hub');
 
 function main() {
-  const gkeHubMembershipServiceClient =
-    new gkehub.GkeHubMembershipServiceClient();
+  const gkeHubClient = new gkehub.GkeHubClient();
 }
 
 main();

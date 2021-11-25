@@ -16,19 +16,17 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {GkeHubMembershipServiceClient} from '@google-cloud/gke-hub';
+import {GkeHubClient} from '@google-cloud/gke-hub';
 
 // check that the client class type name can be used
-function doStuffWithGkeHubMembershipServiceClient(
-  client: GkeHubMembershipServiceClient
-) {
+function doStuffWithGkeHubClient(client: GkeHubClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const gkeHubMembershipServiceClient = new GkeHubMembershipServiceClient();
-  doStuffWithGkeHubMembershipServiceClient(gkeHubMembershipServiceClient);
+  const gkeHubClient = new GkeHubClient();
+  doStuffWithGkeHubClient(gkeHubClient);
 }
 
 main();

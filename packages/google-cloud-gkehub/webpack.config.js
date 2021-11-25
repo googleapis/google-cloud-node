@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'GkeHubMembershipService',
-    filename: './gke-hub-membership-service.js',
+    library: 'GkeHub',
+    filename: './gke-hub.js',
   },
   node: {
     child_process: 'empty',

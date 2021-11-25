@@ -17,14 +17,14 @@ async function main(projectId, location) {
   // [START nodejs_gke_hub_quickstart]
 
   // Imports the Google Cloud client library
-  const {GkeHubMembershipServiceClient} = require('@google-cloud/gke-hub');
+  const {GkeHubClient} = require('@google-cloud/gke-hub');
 
   // TODO(developer): replace with your preferred values.
   // const projectId = 'my-project'
   // const location = 'global'
 
   // Creates a client
-  const client = new GkeHubMembershipServiceClient();
+  const client = new GkeHubClient();
 
   async function listMemberships() {
     const memberships = await client.listMemberships({
