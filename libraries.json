@@ -441,6 +441,21 @@
     "support_documentation": "https://cloud.google.com/game-servers/docs/getting-support"
   },
   {
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gke-hub/latest",
+    "api_id": "gkehub.googleapis.com",
+    "distribution_name": "@google-cloud/gke-hub",
+    "release_level": "ga",
+    "default_version": "v1",
+    "language": "nodejs",
+    "name_pretty": "GKE Hub",
+    "repo": "googleapis/nodejs-gke-hub",
+    "product_documentation": "https://cloud.google.com/anthos/gke",
+    "requires_billing": true,
+    "name": "gke-hub",
+    "issue_tracker": "https://github.com/googleapis/nodejs-gke-hub/issues",
+    "support_documentation": "https://cloud.google.com/anthos/gke"
+  },
+  {
     "name": "bigquery",
     "name_pretty": "Google BigQuery",
     "product_documentation": "https://cloud.google.com/bigquery",
@@ -1584,21 +1599,6 @@
     "api_id": "clouderrorreporting.googleapis.com",
     "codeowner_team": "@googleapis/api-logging",
     "support_documentation": "https://cloud.google.com/error-reporting"
-  },
-  {
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gke-hub/latest",
-    "api_id": "gkehub.googleapis.com",
-    "distribution_name": "@google-cloud/gke-hub",
-    "release_level": "beta",
-    "default_version": "v1beta1",
-    "language": "nodejs",
-    "name_pretty": "GKE Hub",
-    "repo": "googleapis/nodejs-gke-hub",
-    "product_documentation": "https://cloud.google.com/anthos/gke",
-    "requires_billing": true,
-    "name": "gke-hub",
-    "issue_tracker": "https://github.com/googleapis/nodejs-gke-hub/issues",
-    "support_documentation": "https://cloud.google.com/anthos/gke"
   },
   {
     "client_documentation": "https://googleapis.dev/nodejs/analytics-admin/latest/index.html",
