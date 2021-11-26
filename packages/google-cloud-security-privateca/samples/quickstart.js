@@ -13,8 +13,6 @@
 
 'use strict';
 
-// eslint-disable-next-line no-unused-vars
-const thing = 'hello';
 async function main(projectId, location, name) {
   // [START cloud_certificate_authority_quickstart]
   // Imports the Google Cloud client library
@@ -31,7 +29,7 @@ async function main(projectId, location, name) {
 
   async function listCertificates() {
     const res = await client.listCertificates({
-      parent: `projects/${projectId}/locations/${location}/certificateAuthorities/${name}`,
+      parent: `projects/${projectId}/locations/${location}/caPools/${name}`,
     });
     return res;
   }
