@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.2](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.4.1...v1.4.2) (2021-11-23)
+
+
+### Bug Fixes
+
+* Mark a couple networkconnectivity API fields as required, to match implemented behavior ([308e54f](https://www.github.com/googleapis/nodejs-network-connectivity/commit/308e54fbb9785ac4c77afd833f05c9f9683211ea))
+
 ### [1.4.1](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.4.0...v1.4.1) (2021-09-08)
 
 
