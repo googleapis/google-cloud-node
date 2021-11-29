@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-retail/compare/v1.4.0...v1.5.0) (2021-11-23)
+
+
+### Features
+
+* update grpc service config settings to reflect correct API deadlines ([0f24f0e](https://www.github.com/googleapis/nodejs-retail/commit/0f24f0e42c0cb3430935487fe6569873cfdb6860))
+* update grpc service config settings to reflect correct API deadlines ([#117](https://www.github.com/googleapis/nodejs-retail/issues/117)) ([0f24f0e](https://www.github.com/googleapis/nodejs-retail/commit/0f24f0e42c0cb3430935487fe6569873cfdb6860))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-retail/compare/v1.3.0...v1.4.0) (2021-11-04)
 
 
