@@ -118,7 +118,7 @@ function excecuteScenario(testCase: RetryTestCase) {
         let bucket: Bucket;
         let file: File;
         let notification: Notification;
-        let creationResult: any;
+        let creationResult: {id: string};
         let storage: Storage;
         let hmacKey: HmacKey;
         before(async () => {
