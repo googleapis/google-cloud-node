@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [5.8.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.7.0...v5.8.0) (2021-11-22)
+
+
+### Features
+
+* Added a new API method UpdateExternalSystem, which enables updating a finding w/ external system metadata. External systems are a child resource under finding, and are housed on the finding itself, and can also be filtered on in Notifications, the ListFindings and GroupFindings API ([3917f97](https://www.github.com/googleapis/nodejs-security-center/commit/3917f978d8d645d08024d28c7045a4d5481782dd))
+
 ## [5.7.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.6.0...v5.7.0) (2021-11-15)
 
 
