@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.4.0...v2.0.0) (2021-11-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* v1 of API renames GkeHubMembershipServiceClient to GkeHubClient
+* make v1 the default version of the API (#88)
+
+### Features
+
+* make v1 the default version of the API ([#88](https://www.github.com/googleapis/nodejs-gke-hub/issues/88)) ([55702e6](https://www.github.com/googleapis/nodejs-gke-hub/commit/55702e66424430a442f1cc36ec4d766e8f677df3))
+
+
+### Code Refactoring
+
+* v1 of API renames GkeHubMembershipServiceClient to GkeHubClient ([55702e6](https://www.github.com/googleapis/nodejs-gke-hub/commit/55702e66424430a442f1cc36ec4d766e8f677df3))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.3.0...v1.4.0) (2021-09-02)
 
 
