@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.5.0...v3.0.0) (2021-11-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* v1 removes methods 'restoreCertificateAuthority', 'scheduleDeleteCertificateAuthority', 'getReusableConfig', 'listReusableConfigs'
+* resource paths have changed for some methods, e.g., certificateAuthorities becomes caPools
+* default to v1 of the API (#88)
+
+### Features
+
+* default to v1 of the API ([#88](https://www.github.com/googleapis/nodejs-security-private-ca/issues/88)) ([a52d838](https://www.github.com/googleapis/nodejs-security-private-ca/commit/a52d8381e371f73ef21b22a8faa389235c58c5a8))
+
+
+### Code Refactoring
+
+* resource paths have changed for some methods, e.g., certificateAuthorities becomes caPools ([a52d838](https://www.github.com/googleapis/nodejs-security-private-ca/commit/a52d8381e371f73ef21b22a8faa389235c58c5a8))
+* v1 removes methods 'restoreCertificateAuthority', 'scheduleDeleteCertificateAuthority', 'getReusableConfig', 'listReusableConfigs' ([a52d838](https://www.github.com/googleapis/nodejs-security-private-ca/commit/a52d8381e371f73ef21b22a8faa389235c58c5a8))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.4.1...v2.5.0) (2021-10-06)
 
 
