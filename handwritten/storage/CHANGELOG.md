@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.16.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.16.0...v5.16.1) (2021-11-29)
+
+
+### Bug Fixes
+
+* change properties with function value to methods ([#1715](https://www.github.com/googleapis/nodejs-storage/issues/1715)) ([c365254](https://www.github.com/googleapis/nodejs-storage/commit/c36525402da8e748971473b1cdd2423e8fd953e1))
+* revert skip validation ([#1718](https://www.github.com/googleapis/nodejs-storage/issues/1718)) ([0c75e33](https://www.github.com/googleapis/nodejs-storage/commit/0c75e33eb0291aa7dfc704c86733f4c0dc78d322))
+* stop File.download from truncating output file on failure ([#1720](https://www.github.com/googleapis/nodejs-storage/issues/1720)) ([d77979b](https://www.github.com/googleapis/nodejs-storage/commit/d77979b1003dbb89cd9d4725330de50b1f8d9262))
+
 ## [5.16.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.15.5...v5.16.0) (2021-11-09)
 
 
