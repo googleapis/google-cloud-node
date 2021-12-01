@@ -47,6 +47,14 @@ interface RetryTestCase {
   expectSuccess: boolean;
 }
 
+interface ConformanceTestCreationResult {
+  id: string;
+}
+
+interface ConformanceTestResult {
+  completed: boolean;
+}
+
 type LibraryMethodsModuleType = typeof import('./libraryMethods');
 
 const retryTestCases: RetryTestCase[] = testFile.retryStrategyTests;
@@ -248,22 +256,24 @@ function generateName(storageMethodString: String, bucketOrFile: string) {
 async function createTestBenchRetryTest(
   instructions: String[],
   methodName: string
-) {
+): Promise<ConformanceTestCreationResult> {
   const requestBody = {instructions: {[methodName]: instructions}};
   const response = await fetch(`${TESTBENCH_HOST}retry_test`, {
     method: 'POST',
     body: JSON.stringify(requestBody),
     headers: {'Content-Type': 'application/json'},
   });
-  return response.json();
+  return response.json() as Promise<ConformanceTestCreationResult>;
 }
 
-async function getTestBenchRetryTest(testId: string) {
+async function getTestBenchRetryTest(
+  testId: string
+): Promise<ConformanceTestResult> {
   const response = await fetch(`${TESTBENCH_HOST}retry_test/${testId}`, {
     method: 'GET',
   });
 
-  return response.json();
+  return response.json() as Promise<ConformanceTestResult>;
 }
 
 function shortUUID() {
