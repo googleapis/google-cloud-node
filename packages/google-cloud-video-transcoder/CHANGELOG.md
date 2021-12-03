@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.8.1](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.8.0...v1.8.1) (2021-12-02)
+
+
+### Bug Fixes
+
+* add backoff for test retries and get job state queries ([#131](https://www.github.com/googleapis/nodejs-video-transcoder/issues/131)) ([63bba1e](https://www.github.com/googleapis/nodejs-video-transcoder/commit/63bba1ede86c96b3dc1ba2a7616c249525188d9f))
+
 ## [1.8.0](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.7.2...v1.8.0) (2021-11-11)
 
 
