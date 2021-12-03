@@ -4979,6 +4979,7 @@
                          * @property {string|null} [parent] ExportInsightsDataRequest parent
                          * @property {string|null} [filter] ExportInsightsDataRequest filter
                          * @property {string|null} [kmsKey] ExportInsightsDataRequest kmsKey
+                         * @property {google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition|null} [writeDisposition] ExportInsightsDataRequest writeDisposition
                          */
     
                         /**
@@ -5028,6 +5029,14 @@
                          */
                         ExportInsightsDataRequest.prototype.kmsKey = "";
     
+                        /**
+                         * ExportInsightsDataRequest writeDisposition.
+                         * @member {google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition} writeDisposition
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest
+                         * @instance
+                         */
+                        ExportInsightsDataRequest.prototype.writeDisposition = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -5074,6 +5083,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
                             if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.kmsKey);
+                            if (message.writeDisposition != null && Object.hasOwnProperty.call(message, "writeDisposition"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.writeDisposition);
                             return writer;
                         };
     
@@ -5119,6 +5130,9 @@
                                     break;
                                 case 4:
                                     message.kmsKey = reader.string();
+                                    break;
+                                case 5:
+                                    message.writeDisposition = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5173,6 +5187,15 @@
                             if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
                                 if (!$util.isString(message.kmsKey))
                                     return "kmsKey: string expected";
+                            if (message.writeDisposition != null && message.hasOwnProperty("writeDisposition"))
+                                switch (message.writeDisposition) {
+                                default:
+                                    return "writeDisposition: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -5199,6 +5222,20 @@
                                 message.filter = String(object.filter);
                             if (object.kmsKey != null)
                                 message.kmsKey = String(object.kmsKey);
+                            switch (object.writeDisposition) {
+                            case "WRITE_DISPOSITION_UNSPECIFIED":
+                            case 0:
+                                message.writeDisposition = 0;
+                                break;
+                            case "WRITE_TRUNCATE":
+                            case 1:
+                                message.writeDisposition = 1;
+                                break;
+                            case "WRITE_APPEND":
+                            case 2:
+                                message.writeDisposition = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -5219,6 +5256,7 @@
                                 object.parent = "";
                                 object.filter = "";
                                 object.kmsKey = "";
+                                object.writeDisposition = options.enums === String ? "WRITE_DISPOSITION_UNSPECIFIED" : 0;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -5231,6 +5269,8 @@
                                 object.filter = message.filter;
                             if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
                                 object.kmsKey = message.kmsKey;
+                            if (message.writeDisposition != null && message.hasOwnProperty("writeDisposition"))
+                                object.writeDisposition = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition[message.writeDisposition] : message.writeDisposition;
                             return object;
                         };
     
@@ -5475,6 +5515,22 @@
                             };
     
                             return BigQueryDestination;
+                        })();
+    
+                        /**
+                         * WriteDisposition enum.
+                         * @name google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition
+                         * @enum {number}
+                         * @property {number} WRITE_DISPOSITION_UNSPECIFIED=0 WRITE_DISPOSITION_UNSPECIFIED value
+                         * @property {number} WRITE_TRUNCATE=1 WRITE_TRUNCATE value
+                         * @property {number} WRITE_APPEND=2 WRITE_APPEND value
+                         */
+                        ExportInsightsDataRequest.WriteDisposition = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "WRITE_DISPOSITION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "WRITE_TRUNCATE"] = 1;
+                            values[valuesById[2] = "WRITE_APPEND"] = 2;
+                            return values;
                         })();
     
                         return ExportInsightsDataRequest;

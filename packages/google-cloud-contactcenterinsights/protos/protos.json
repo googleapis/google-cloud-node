@@ -961,6 +961,10 @@
                         "kmsKey": {
                           "type": "string",
                           "id": 4
+                        },
+                        "writeDisposition": {
+                          "type": "WriteDisposition",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -981,6 +985,13 @@
                               "type": "string",
                               "id": 2
                             }
+                          }
+                        },
+                        "WriteDisposition": {
+                          "values": {
+                            "WRITE_DISPOSITION_UNSPECIFIED": 0,
+                            "WRITE_TRUNCATE": 1,
+                            "WRITE_APPEND": 2
                           }
                         }
                       }

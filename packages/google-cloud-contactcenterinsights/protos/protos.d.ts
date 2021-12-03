@@ -2288,6 +2288,9 @@ export namespace google {
 
                     /** ExportInsightsDataRequest kmsKey */
                     kmsKey?: (string|null);
+
+                    /** ExportInsightsDataRequest writeDisposition */
+                    writeDisposition?: (google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition|keyof typeof google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition|null);
                 }
 
                 /** Represents an ExportInsightsDataRequest. */
@@ -2310,6 +2313,9 @@ export namespace google {
 
                     /** ExportInsightsDataRequest kmsKey. */
                     public kmsKey: string;
+
+                    /** ExportInsightsDataRequest writeDisposition. */
+                    public writeDisposition: (google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition|keyof typeof google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition);
 
                     /** ExportInsightsDataRequest destination. */
                     public destination?: "bigQueryDestination";
@@ -2487,6 +2493,13 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+                    }
+
+                    /** WriteDisposition enum. */
+                    enum WriteDisposition {
+                        WRITE_DISPOSITION_UNSPECIFIED = 0,
+                        WRITE_TRUNCATE = 1,
+                        WRITE_APPEND = 2
                     }
                 }
 

@@ -2586,6 +2586,8 @@ export class ContactCenterInsightsClient {
    *   A fully qualified KMS key name for BigQuery tables protected by CMEK.
    *   Format:
    *   projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}/cryptoKeyVersions/{version}
+   * @param {google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition} request.writeDisposition
+   *   Options for what to do if the destination table already exists.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
