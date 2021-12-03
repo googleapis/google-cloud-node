@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-dlp/compare/v3.2.1...v3.3.0) (2021-12-03)
+
+
+### Features
+
+* added deidentify replacement dictionaries feat: added field for BigQuery inspect template inclusion lists feat: added field to support infotype versioning ([#667](https://www.github.com/googleapis/nodejs-dlp/issues/667)) ([7f8b9d6](https://www.github.com/googleapis/nodejs-dlp/commit/7f8b9d6dc33837f5b93a0b2269ca79572520b14c))
+
 ### [3.2.1](https://www.github.com/googleapis/nodejs-dlp/compare/v3.2.0...v3.2.1) (2021-11-03)
 
 
