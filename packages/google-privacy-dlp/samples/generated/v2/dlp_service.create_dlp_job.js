@@ -35,11 +35,12 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Set to control what and how to inspect.
+   *  An inspection job scans a storage repository for InfoTypes.
    */
   // const inspectJob = {}
   /**
-   *  Set to choose what metric to calculate.
+   *  A risk analysis job calculates re-identification risk metrics for a
+   *  BigQuery table.
    */
   // const riskJob = {}
   /**

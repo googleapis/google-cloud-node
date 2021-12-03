@@ -66,7 +66,7 @@ function main(parent) {
    *  * Restrictions can be combined by `AND` or `OR` logical operators. A
    *  sequence of restrictions implicitly uses `AND`.
    *  * A restriction has the form of `{field} {operator} {value}`.
-   *  * Supported fields/values for inspect jobs:
+   *  * Supported fields/values for inspect triggers:
    *      - `status` - HEALTHY|PAUSED|CANCELLED
    *      - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
    *      - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
@@ -81,6 +81,10 @@ function main(parent) {
    *  The length of this field should be no more than 500 characters.
    */
   // const filter = 'abc123'
+  /**
+   *  The type of jobs. Will use `DlpJobType.INSPECT` if not set.
+   */
+  // const type = {}
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;

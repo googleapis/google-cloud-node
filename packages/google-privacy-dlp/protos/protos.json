@@ -465,7 +465,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/jobTriggers",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/jobTriggers",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=organizations/*/locations/*}/jobTriggers",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,job_trigger"
                           },
@@ -474,10 +474,16 @@
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*}/jobTriggers",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v2/{parent=projects/*/locations/*}/jobTriggers",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2/{parent=projects/*/locations/*}/jobTriggers",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=organizations/*/locations/*}/jobTriggers",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -491,7 +497,7 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{name=projects/*/jobTriggers/*}",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
+                            "(google.api.http).additional_bindings.patch": "/v2/{name=organizations/*/locations/*/jobTriggers/*}",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,job_trigger,update_mask"
                           },
@@ -500,10 +506,16 @@
                               "(google.api.http)": {
                                 "patch": "/v2/{name=projects/*/jobTriggers/*}",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "patch": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "patch": "/v2/{name=organizations/*/locations/*/jobTriggers/*}",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -536,16 +548,21 @@
                           "responseType": "JobTrigger",
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/jobTriggers/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=organizations/*/locations/*/jobTriggers/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{name=projects/*/jobTriggers/*}",
-                                "additional_bindings": {
-                                  "get": "/v2/{name=projects/*/locations/*/jobTriggers/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{name=projects/*/locations/*/jobTriggers/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=organizations/*/locations/*/jobTriggers/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -558,16 +575,21 @@
                           "responseType": "ListJobTriggersResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*}/jobTriggers",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/jobTriggers",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*/locations/*}/jobTriggers",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{parent=projects/*}/jobTriggers",
-                                "additional_bindings": {
-                                  "get": "/v2/{parent=projects/*/locations/*}/jobTriggers"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=projects/*/locations/*}/jobTriggers"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=organizations/*/locations/*}/jobTriggers"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -580,16 +602,21 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/jobTriggers/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=organizations/*/locations/*/jobTriggers/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "delete": "/v2/{name=projects/*/jobTriggers/*}",
-                                "additional_bindings": {
-                                  "delete": "/v2/{name=projects/*/locations/*/jobTriggers/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v2/{name=projects/*/locations/*/jobTriggers/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=organizations/*/locations/*/jobTriggers/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -653,16 +680,21 @@
                           "responseType": "ListDlpJobsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*}/dlpJobs",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/dlpJobs",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*/locations/*}/dlpJobs",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{parent=projects/*}/dlpJobs",
-                                "additional_bindings": {
-                                  "get": "/v2/{parent=projects/*/locations/*}/dlpJobs"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=projects/*/locations/*}/dlpJobs"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=organizations/*/locations/*}/dlpJobs"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -1237,6 +1269,10 @@
                           "options": {
                             "(google.api.resource_reference).type": "dlp.googleapis.com/DlpJob"
                           }
+                        },
+                        "findingId": {
+                          "type": "string",
+                          "id": 15
                         }
                       }
                     },
@@ -2593,7 +2629,8 @@
                             "timePartConfig",
                             "cryptoHashConfig",
                             "dateShiftConfig",
-                            "cryptoDeterministicConfig"
+                            "cryptoDeterministicConfig",
+                            "replaceDictionaryConfig"
                           ]
                         }
                       },
@@ -2641,6 +2678,10 @@
                         "cryptoDeterministicConfig": {
                           "type": "CryptoDeterministicConfig",
                           "id": 12
+                        },
+                        "replaceDictionaryConfig": {
+                          "type": "ReplaceDictionaryConfig",
+                          "id": 13
                         }
                       }
                     },
@@ -2693,6 +2734,21 @@
                       "fields": {
                         "newValue": {
                           "type": "Value",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ReplaceDictionaryConfig": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "wordList"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "wordList": {
+                          "type": "CustomInfoType.Dictionary.WordList",
                           "id": 1
                         }
                       }
@@ -3714,6 +3770,10 @@
                           "type": "string",
                           "id": 5
                         },
+                        "type": {
+                          "type": "DlpJobType",
+                          "id": 6
+                        },
                         "locationId": {
                           "type": "string",
                           "id": 7
@@ -4416,6 +4476,10 @@
                         "name": {
                           "type": "string",
                           "id": 1
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -4759,6 +4823,11 @@
                           "rule": "repeated",
                           "type": "FieldId",
                           "id": 5
+                        },
+                        "includedFields": {
+                          "rule": "repeated",
+                          "type": "FieldId",
+                          "id": 7
                         }
                       },
                       "nested": {

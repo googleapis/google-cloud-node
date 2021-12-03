@@ -2039,6 +2039,9 @@ export namespace google {
 
                     /** Finding jobName */
                     jobName?: (string|null);
+
+                    /** Finding findingId */
+                    findingId?: (string|null);
                 }
 
                 /** Represents a Finding. */
@@ -2085,6 +2088,9 @@ export namespace google {
 
                     /** Finding jobName. */
                     public jobName: string;
+
+                    /** Finding findingId. */
+                    public findingId: string;
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -9417,6 +9423,9 @@ export namespace google {
 
                     /** PrimitiveTransformation cryptoDeterministicConfig */
                     cryptoDeterministicConfig?: (google.privacy.dlp.v2.ICryptoDeterministicConfig|null);
+
+                    /** PrimitiveTransformation replaceDictionaryConfig */
+                    replaceDictionaryConfig?: (google.privacy.dlp.v2.IReplaceDictionaryConfig|null);
                 }
 
                 /** Represents a PrimitiveTransformation. */
@@ -9461,8 +9470,11 @@ export namespace google {
                     /** PrimitiveTransformation cryptoDeterministicConfig. */
                     public cryptoDeterministicConfig?: (google.privacy.dlp.v2.ICryptoDeterministicConfig|null);
 
+                    /** PrimitiveTransformation replaceDictionaryConfig. */
+                    public replaceDictionaryConfig?: (google.privacy.dlp.v2.IReplaceDictionaryConfig|null);
+
                     /** PrimitiveTransformation transformation. */
-                    public transformation?: ("replaceConfig"|"redactConfig"|"characterMaskConfig"|"cryptoReplaceFfxFpeConfig"|"fixedSizeBucketingConfig"|"bucketingConfig"|"replaceWithInfoTypeConfig"|"timePartConfig"|"cryptoHashConfig"|"dateShiftConfig"|"cryptoDeterministicConfig");
+                    public transformation?: ("replaceConfig"|"redactConfig"|"characterMaskConfig"|"cryptoReplaceFfxFpeConfig"|"fixedSizeBucketingConfig"|"bucketingConfig"|"replaceWithInfoTypeConfig"|"timePartConfig"|"cryptoHashConfig"|"dateShiftConfig"|"cryptoDeterministicConfig"|"replaceDictionaryConfig");
 
                     /**
                      * Creates a new PrimitiveTransformation instance using the specified properties.
@@ -9916,6 +9928,99 @@ export namespace google {
 
                     /**
                      * Converts this ReplaceValueConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ReplaceDictionaryConfig. */
+                interface IReplaceDictionaryConfig {
+
+                    /** ReplaceDictionaryConfig wordList */
+                    wordList?: (google.privacy.dlp.v2.CustomInfoType.Dictionary.IWordList|null);
+                }
+
+                /** Represents a ReplaceDictionaryConfig. */
+                class ReplaceDictionaryConfig implements IReplaceDictionaryConfig {
+
+                    /**
+                     * Constructs a new ReplaceDictionaryConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IReplaceDictionaryConfig);
+
+                    /** ReplaceDictionaryConfig wordList. */
+                    public wordList?: (google.privacy.dlp.v2.CustomInfoType.Dictionary.IWordList|null);
+
+                    /** ReplaceDictionaryConfig type. */
+                    public type?: "wordList";
+
+                    /**
+                     * Creates a new ReplaceDictionaryConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReplaceDictionaryConfig instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IReplaceDictionaryConfig): google.privacy.dlp.v2.ReplaceDictionaryConfig;
+
+                    /**
+                     * Encodes the specified ReplaceDictionaryConfig message. Does not implicitly {@link google.privacy.dlp.v2.ReplaceDictionaryConfig.verify|verify} messages.
+                     * @param message ReplaceDictionaryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IReplaceDictionaryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReplaceDictionaryConfig message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ReplaceDictionaryConfig.verify|verify} messages.
+                     * @param message ReplaceDictionaryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IReplaceDictionaryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReplaceDictionaryConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReplaceDictionaryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ReplaceDictionaryConfig;
+
+                    /**
+                     * Decodes a ReplaceDictionaryConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReplaceDictionaryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ReplaceDictionaryConfig;
+
+                    /**
+                     * Verifies a ReplaceDictionaryConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReplaceDictionaryConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReplaceDictionaryConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ReplaceDictionaryConfig;
+
+                    /**
+                     * Creates a plain object from a ReplaceDictionaryConfig message. Also converts values to other types if specified.
+                     * @param message ReplaceDictionaryConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ReplaceDictionaryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReplaceDictionaryConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -14983,6 +15088,9 @@ export namespace google {
                     /** ListJobTriggersRequest filter */
                     filter?: (string|null);
 
+                    /** ListJobTriggersRequest type */
+                    type?: (google.privacy.dlp.v2.DlpJobType|keyof typeof google.privacy.dlp.v2.DlpJobType|null);
+
                     /** ListJobTriggersRequest locationId */
                     locationId?: (string|null);
                 }
@@ -15010,6 +15118,9 @@ export namespace google {
 
                     /** ListJobTriggersRequest filter. */
                     public filter: string;
+
+                    /** ListJobTriggersRequest type. */
+                    public type: (google.privacy.dlp.v2.DlpJobType|keyof typeof google.privacy.dlp.v2.DlpJobType);
 
                     /** ListJobTriggersRequest locationId. */
                     public locationId: string;
@@ -18490,6 +18601,9 @@ export namespace google {
 
                     /** InfoType name */
                     name?: (string|null);
+
+                    /** InfoType version */
+                    version?: (string|null);
                 }
 
                 /** Represents an InfoType. */
@@ -18503,6 +18617,9 @@ export namespace google {
 
                     /** InfoType name. */
                     public name: string;
+
+                    /** InfoType version. */
+                    public version: string;
 
                     /**
                      * Creates a new InfoType instance using the specified properties.
@@ -20490,6 +20607,9 @@ export namespace google {
 
                     /** BigQueryOptions excludedFields */
                     excludedFields?: (google.privacy.dlp.v2.IFieldId[]|null);
+
+                    /** BigQueryOptions includedFields */
+                    includedFields?: (google.privacy.dlp.v2.IFieldId[]|null);
                 }
 
                 /** Represents a BigQueryOptions. */
@@ -20518,6 +20638,9 @@ export namespace google {
 
                     /** BigQueryOptions excludedFields. */
                     public excludedFields: google.privacy.dlp.v2.IFieldId[];
+
+                    /** BigQueryOptions includedFields. */
+                    public includedFields: google.privacy.dlp.v2.IFieldId[];
 
                     /**
                      * Creates a new BigQueryOptions instance using the specified properties.
