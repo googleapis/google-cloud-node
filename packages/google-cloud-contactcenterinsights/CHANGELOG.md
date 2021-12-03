@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.9.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.8.0...v1.9.0) (2021-12-03)
+
+
+### Features
+
+* Add WriteDisposition to BigQuery Export API ([#80](https://www.github.com/googleapis/nodejs-contact-center-insights/issues/80)) ([3f19a63](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/3f19a63fc121ab3ba94661755f62a3f9ae855913))
+* remove feature flag disable_issue_modeling ([#78](https://www.github.com/googleapis/nodejs-contact-center-insights/issues/78)) ([594fc6d](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/594fc6d150cca28f8d4b2230a705b56cd65d156d))
+
 ## [1.8.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.7.0...v1.8.0) (2021-11-08)
 
 
