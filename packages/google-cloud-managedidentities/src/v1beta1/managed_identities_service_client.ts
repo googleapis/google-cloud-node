@@ -62,6 +62,7 @@ export class ManagedIdentitiesServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   managedIdentitiesServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -160,6 +161,21 @@ export class ManagedIdentitiesServiceClient {
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      domainPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/domains/{domain}'
+      ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+    };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
@@ -421,7 +437,7 @@ export class ManagedIdentitiesServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The domain resource name using the form:
+   *   Required. The domain resource name using the form:
    *   `projects/{project_id}/locations/global/domains/{domain_name}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -519,7 +535,7 @@ export class ManagedIdentitiesServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The domain resource name using the form:
+   *   Required. The domain resource name using the form:
    *   `projects/{project_id}/locations/global/domains/{domain_name}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -618,21 +634,21 @@ export class ManagedIdentitiesServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The resource project name and location using the form:
+   *   Required. The resource project name and location using the form:
    *   `projects/{project_id}/locations/global`
    * @param {string} request.domainName
-   *   A domain name, e.g. mydomain.myorg.com, with the following restrictions:
+   *   Required. A domain name, e.g. mydomain.myorg.com, with the following restrictions:
    *    * Must contain only lowercase letters, numbers, periods and hyphens.
    *    * Must start with a letter.
    *    * Must contain between 2-64 characters.
    *    * Must end with a number or a letter.
    *    * Must not start with period.
-   *    * First segement length (mydomain form example above) shouldn't exceed
+   *    * First segment length (mydomain form example above) shouldn't exceed
    *      15 chars.
    *    * The last segment cannot be fully numeric.
    *    * Must be unique within the customer project.
    * @param {google.cloud.managedidentities.v1beta1.Domain} request.domain
-   *   A Managed Identity domain resource.
+   *   Required. A Managed Identity domain resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -773,14 +789,15 @@ export class ManagedIdentitiesServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Mask of fields to update. At least one path must be supplied in this
+   *   Required. Mask of fields to update. At least one path must be supplied in this
    *   field. The elements of the repeated paths field may only include
    *   fields from {@link google.cloud.managedidentities.v1beta1.Domain|Domain}:
    *    * `labels`
    *    * `locations`
    *    * `authorized_networks`
+   *    * `audit_logs_enabled`
    * @param {google.cloud.managedidentities.v1beta1.Domain} request.domain
-   *   Domain message with updated fields. Only supported fields specified in
+   *   Required. Domain message with updated fields. Only supported fields specified in
    *   update_mask are updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -918,7 +935,7 @@ export class ManagedIdentitiesServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The domain resource name using the form:
+   *   Required. The domain resource name using the form:
    *   `projects/{project_id}/locations/global/domains/{domain_name}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1056,10 +1073,10 @@ export class ManagedIdentitiesServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource domain name, project name and location using the form:
+   *   Required. The resource domain name, project name and location using the form:
    *   `projects/{project_id}/locations/global/domains/{domain_name}`
    * @param {google.cloud.managedidentities.v1beta1.Trust} request.trust
-   *   The domain trust resource.
+   *   Required. The domain trust resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1196,13 +1213,13 @@ export class ManagedIdentitiesServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource domain name, project name and location using the form:
+   *   Required. The resource domain name, project name and location using the form:
    *   `projects/{project_id}/locations/global/domains/{domain_name}`
    * @param {string} request.targetDomainName
-   *   The fully-qualified target domain name which will be in trust with current
+   *   Required. The fully-qualified target domain name which will be in trust with current
    *   domain.
    * @param {string[]} request.targetDnsIpAddresses
-   *   The target DNS server IP addresses to resolve the remote domain involved
+   *   Required. The target DNS server IP addresses to resolve the remote domain involved
    *   in the trust.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1340,10 +1357,10 @@ export class ManagedIdentitiesServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource domain name, project name, and location using the form:
+   *   Required. The resource domain name, project name, and location using the form:
    *   `projects/{project_id}/locations/global/domains/{domain_name}`
    * @param {google.cloud.managedidentities.v1beta1.Trust} request.trust
-   *   The domain trust resource to removed.
+   *   Required. The domain trust resource to removed.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1481,10 +1498,10 @@ export class ManagedIdentitiesServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource domain name, project name, and location using the form:
+   *   Required. The resource domain name, project name, and location using the form:
    *   `projects/{project_id}/locations/global/domains/{domain_name}`
    * @param {google.cloud.managedidentities.v1beta1.Trust} request.trust
-   *   The domain trust to validate trust state for.
+   *   Required. The domain trust to validate trust state for.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1848,6 +1865,117 @@ export class ManagedIdentitiesServiceClient {
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.managedidentities.v1beta1.IDomain>;
+  }
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified domain resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} domain
+   * @returns {string} Resource name string.
+   */
+  domainPath(project: string, location: string, domain: string) {
+    return this.pathTemplates.domainPathTemplate.render({
+      project: project,
+      location: location,
+      domain: domain,
+    });
+  }
+
+  /**
+   * Parse the project from Domain resource.
+   *
+   * @param {string} domainName
+   *   A fully-qualified path representing Domain resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDomainName(domainName: string) {
+    return this.pathTemplates.domainPathTemplate.match(domainName).project;
+  }
+
+  /**
+   * Parse the location from Domain resource.
+   *
+   * @param {string} domainName
+   *   A fully-qualified path representing Domain resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDomainName(domainName: string) {
+    return this.pathTemplates.domainPathTemplate.match(domainName).location;
+  }
+
+  /**
+   * Parse the domain from Domain resource.
+   *
+   * @param {string} domainName
+   *   A fully-qualified path representing Domain resource.
+   * @returns {string} A string representing the domain.
+   */
+  matchDomainFromDomainName(domainName: string) {
+    return this.pathTemplates.domainPathTemplate.match(domainName).domain;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**

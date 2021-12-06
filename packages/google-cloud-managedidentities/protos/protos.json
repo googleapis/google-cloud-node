@@ -797,6 +797,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/global}/domains",
                             "(google.api.http).body": "domain",
+                            "(google.api.method_signature)": "parent,domain_name,domain",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
                           },
@@ -806,6 +807,9 @@
                                 "post": "/v1beta1/{parent=projects/*/locations/global}/domains",
                                 "body": "domain"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,domain_name,domain"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -820,7 +824,8 @@
                           "responseType": "ResetAdminPasswordResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/global/domains/*}:resetAdminPassword",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
@@ -828,6 +833,9 @@
                                 "post": "/v1beta1/{name=projects/*/locations/global/domains/*}:resetAdminPassword",
                                 "body": "*"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -835,13 +843,17 @@
                           "requestType": "ListDomainsRequest",
                           "responseType": "ListDomainsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/global}/domains"
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/global}/domains",
+                            "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v1beta1/{parent=projects/*/locations/global}/domains"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         },
@@ -849,13 +861,17 @@
                           "requestType": "GetDomainRequest",
                           "responseType": "Domain",
                           "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/global/domains/*}"
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/global/domains/*}",
+                            "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v1beta1/{name=projects/*/locations/global/domains/*}"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -865,6 +881,7 @@
                           "options": {
                             "(google.api.http).patch": "/v1beta1/{domain.name=projects/*/locations/global/domains/*}",
                             "(google.api.http).body": "domain",
+                            "(google.api.method_signature)": "domain,update_mask",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
                           },
@@ -874,6 +891,9 @@
                                 "patch": "/v1beta1/{domain.name=projects/*/locations/global/domains/*}",
                                 "body": "domain"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "domain,update_mask"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -888,6 +908,7 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/global/domains/*}",
+                            "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
                           },
@@ -896,6 +917,9 @@
                               "(google.api.http)": {
                                 "delete": "/v1beta1/{name=projects/*/locations/global/domains/*}"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -911,6 +935,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/global/domains/*}:attachTrust",
                             "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,trust",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
                           },
@@ -920,6 +945,9 @@
                                 "post": "/v1beta1/{name=projects/*/locations/global/domains/*}:attachTrust",
                                 "body": "*"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,trust"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -935,6 +963,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/global/domains/*}:reconfigureTrust",
                             "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,target_domain_name,target_dns_ip_addresses",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
                           },
@@ -944,6 +973,9 @@
                                 "post": "/v1beta1/{name=projects/*/locations/global/domains/*}:reconfigureTrust",
                                 "body": "*"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,target_domain_name,target_dns_ip_addresses"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -959,6 +991,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/global/domains/*}:detachTrust",
                             "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,trust",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
                           },
@@ -968,6 +1001,9 @@
                                 "post": "/v1beta1/{name=projects/*/locations/global/domains/*}:detachTrust",
                                 "body": "*"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,trust"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -983,6 +1019,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/global/domains/*}:validateTrust",
                             "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,trust",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
                           },
@@ -992,6 +1029,9 @@
                                 "post": "/v1beta1/{name=projects/*/locations/global/domains/*}:validateTrust",
                                 "body": "*"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,trust"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -1053,15 +1093,25 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "managedidentities.googleapis.com/Domain"
+                          }
                         },
                         "domainName": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "domain": {
                           "type": "Domain",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1069,7 +1119,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedidentities.googleapis.com/Domain"
+                          }
                         }
                       }
                     },
@@ -1085,7 +1139,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "managedidentities.googleapis.com/Domain"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -1127,7 +1185,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedidentities.googleapis.com/Domain"
+                          }
                         }
                       }
                     },
@@ -1135,11 +1197,17 @@
                       "fields": {
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "domain": {
                           "type": "Domain",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1147,7 +1215,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedidentities.googleapis.com/Domain"
+                          }
                         }
                       }
                     },
@@ -1155,11 +1227,18 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedidentities.googleapis.com/Domain"
+                          }
                         },
                         "trust": {
                           "type": "Trust",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1167,16 +1246,26 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedidentities.googleapis.com/Domain"
+                          }
                         },
                         "targetDomainName": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "targetDnsIpAddresses": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1184,11 +1273,18 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedidentities.googleapis.com/Domain"
+                          }
                         },
                         "trust": {
                           "type": "Trust",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1196,67 +1292,114 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedidentities.googleapis.com/Domain"
+                          }
                         },
                         "trust": {
                           "type": "Trust",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
                     "Domain": {
+                      "options": {
+                        "(google.api.resource).type": "managedidentities.googleapis.com/Domain",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/domains/{domain}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "labels": {
                           "keyType": "string",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "authorizedNetworks": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "reservedIpRange": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "locations": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "admin": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "fqdn": {
                           "type": "string",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "state": {
                           "type": "State",
-                          "id": 13
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "statusMessage": {
                           "type": "string",
-                          "id": 14
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "trusts": {
                           "rule": "repeated",
                           "type": "Trust",
-                          "id": 15
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1299,27 +1442,45 @@
                         },
                         "trustHandshakeSecret": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "state": {
                           "type": "State",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "stateDescription": {
                           "type": "string",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "lastTrustHeartbeatTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {

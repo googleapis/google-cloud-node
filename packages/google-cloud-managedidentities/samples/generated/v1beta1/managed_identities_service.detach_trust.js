@@ -14,18 +14,18 @@
 
 'use strict';
 
-function main() {
+function main(name, trust) {
   // [START managedidentities_v1beta1_generated_ManagedIdentitiesService_DetachTrust_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The resource domain name, project name, and location using the form:
+   *  Required. The resource domain name, project name, and location using the form:
    *  `projects/{project_id}/locations/global/domains/{domain_name}`
    */
   // const name = 'abc123'
   /**
-   *  The domain trust resource to removed.
+   *  Required. The domain trust resource to removed.
    */
   // const trust = {}
 
@@ -38,7 +38,10 @@ function main() {
 
   async function callDetachTrust() {
     // Construct request
-    const request = {};
+    const request = {
+      name,
+      trust,
+    };
 
     // Run request
     const [operation] = await managedidentitiesClient.detachTrust(request);

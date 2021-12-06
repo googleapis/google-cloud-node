@@ -14,7 +14,7 @@
 
 'use strict';
 
-function main() {
+function main(parent) {
   // [START managedidentities_v1beta1_generated_ManagedIdentitiesService_ListDomains_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -60,7 +60,9 @@ function main() {
 
   async function callListDomains() {
     // Construct request
-    const request = {};
+    const request = {
+      parent,
+    };
 
     // Run request
     const iterable = await managedidentitiesClient.listDomainsAsync(request);

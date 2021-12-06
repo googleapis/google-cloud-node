@@ -14,23 +14,23 @@
 
 'use strict';
 
-function main() {
+function main(name, targetDomainName, targetDnsIpAddresses) {
   // [START managedidentities_v1beta1_generated_ManagedIdentitiesService_ReconfigureTrust_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The resource domain name, project name and location using the form:
+   *  Required. The resource domain name, project name and location using the form:
    *  `projects/{project_id}/locations/global/domains/{domain_name}`
    */
   // const name = 'abc123'
   /**
-   *  The fully-qualified target domain name which will be in trust with current
+   *  Required. The fully-qualified target domain name which will be in trust with current
    *  domain.
    */
   // const targetDomainName = 'abc123'
   /**
-   *  The target DNS server IP addresses to resolve the remote domain involved
+   *  Required. The target DNS server IP addresses to resolve the remote domain involved
    *  in the trust.
    */
   // const targetDnsIpAddresses = 'abc123'
@@ -44,7 +44,11 @@ function main() {
 
   async function callReconfigureTrust() {
     // Construct request
-    const request = {};
+    const request = {
+      name,
+      targetDomainName,
+      targetDnsIpAddresses,
+    };
 
     // Run request
     const [operation] = await managedidentitiesClient.reconfigureTrust(request);
