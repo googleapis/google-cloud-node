@@ -623,11 +623,17 @@ export namespace google {
                     /** RecognitionConfig languageCode */
                     languageCode?: (string|null);
 
+                    /** RecognitionConfig alternativeLanguageCodes */
+                    alternativeLanguageCodes?: (string[]|null);
+
                     /** RecognitionConfig maxAlternatives */
                     maxAlternatives?: (number|null);
 
                     /** RecognitionConfig profanityFilter */
                     profanityFilter?: (boolean|null);
+
+                    /** RecognitionConfig adaptation */
+                    adaptation?: (google.cloud.speech.v1.ISpeechAdaptation|null);
 
                     /** RecognitionConfig speechContexts */
                     speechContexts?: (google.cloud.speech.v1.ISpeechContext[]|null);
@@ -635,8 +641,17 @@ export namespace google {
                     /** RecognitionConfig enableWordTimeOffsets */
                     enableWordTimeOffsets?: (boolean|null);
 
+                    /** RecognitionConfig enableWordConfidence */
+                    enableWordConfidence?: (boolean|null);
+
                     /** RecognitionConfig enableAutomaticPunctuation */
                     enableAutomaticPunctuation?: (boolean|null);
+
+                    /** RecognitionConfig enableSpokenPunctuation */
+                    enableSpokenPunctuation?: (google.protobuf.IBoolValue|null);
+
+                    /** RecognitionConfig enableSpokenEmojis */
+                    enableSpokenEmojis?: (google.protobuf.IBoolValue|null);
 
                     /** RecognitionConfig diarizationConfig */
                     diarizationConfig?: (google.cloud.speech.v1.ISpeakerDiarizationConfig|null);
@@ -675,11 +690,17 @@ export namespace google {
                     /** RecognitionConfig languageCode. */
                     public languageCode: string;
 
+                    /** RecognitionConfig alternativeLanguageCodes. */
+                    public alternativeLanguageCodes: string[];
+
                     /** RecognitionConfig maxAlternatives. */
                     public maxAlternatives: number;
 
                     /** RecognitionConfig profanityFilter. */
                     public profanityFilter: boolean;
+
+                    /** RecognitionConfig adaptation. */
+                    public adaptation?: (google.cloud.speech.v1.ISpeechAdaptation|null);
 
                     /** RecognitionConfig speechContexts. */
                     public speechContexts: google.cloud.speech.v1.ISpeechContext[];
@@ -687,8 +708,17 @@ export namespace google {
                     /** RecognitionConfig enableWordTimeOffsets. */
                     public enableWordTimeOffsets: boolean;
 
+                    /** RecognitionConfig enableWordConfidence. */
+                    public enableWordConfidence: boolean;
+
                     /** RecognitionConfig enableAutomaticPunctuation. */
                     public enableAutomaticPunctuation: boolean;
+
+                    /** RecognitionConfig enableSpokenPunctuation. */
+                    public enableSpokenPunctuation?: (google.protobuf.IBoolValue|null);
+
+                    /** RecognitionConfig enableSpokenEmojis. */
+                    public enableSpokenEmojis?: (google.protobuf.IBoolValue|null);
 
                     /** RecognitionConfig diarizationConfig. */
                     public diarizationConfig?: (google.cloud.speech.v1.ISpeakerDiarizationConfig|null);
@@ -784,7 +814,8 @@ export namespace google {
                         AMR = 4,
                         AMR_WB = 5,
                         OGG_OPUS = 6,
-                        SPEEX_WITH_HEADER_BYTE = 7
+                        SPEEX_WITH_HEADER_BYTE = 7,
+                        WEBM_OPUS = 9
                     }
                 }
 
@@ -1075,6 +1106,9 @@ export namespace google {
 
                     /** SpeechContext phrases */
                     phrases?: (string[]|null);
+
+                    /** SpeechContext boost */
+                    boost?: (number|null);
                 }
 
                 /** Represents a SpeechContext. */
@@ -1088,6 +1122,9 @@ export namespace google {
 
                     /** SpeechContext phrases. */
                     public phrases: string[];
+
+                    /** SpeechContext boost. */
+                    public boost: number;
 
                     /**
                      * Creates a new SpeechContext instance using the specified properties.
@@ -1363,6 +1400,12 @@ export namespace google {
 
                     /** LongRunningRecognizeResponse totalBilledTime */
                     totalBilledTime?: (google.protobuf.IDuration|null);
+
+                    /** LongRunningRecognizeResponse outputConfig */
+                    outputConfig?: (google.cloud.speech.v1.ITranscriptOutputConfig|null);
+
+                    /** LongRunningRecognizeResponse outputError */
+                    outputError?: (google.rpc.IStatus|null);
                 }
 
                 /** Represents a LongRunningRecognizeResponse. */
@@ -1379,6 +1422,12 @@ export namespace google {
 
                     /** LongRunningRecognizeResponse totalBilledTime. */
                     public totalBilledTime?: (google.protobuf.IDuration|null);
+
+                    /** LongRunningRecognizeResponse outputConfig. */
+                    public outputConfig?: (google.cloud.speech.v1.ITranscriptOutputConfig|null);
+
+                    /** LongRunningRecognizeResponse outputError. */
+                    public outputError?: (google.rpc.IStatus|null);
 
                     /**
                      * Creates a new LongRunningRecognizeResponse instance using the specified properties.
@@ -1804,6 +1853,12 @@ export namespace google {
 
                     /** SpeechRecognitionResult channelTag */
                     channelTag?: (number|null);
+
+                    /** SpeechRecognitionResult resultEndTime */
+                    resultEndTime?: (google.protobuf.IDuration|null);
+
+                    /** SpeechRecognitionResult languageCode */
+                    languageCode?: (string|null);
                 }
 
                 /** Represents a SpeechRecognitionResult. */
@@ -1820,6 +1875,12 @@ export namespace google {
 
                     /** SpeechRecognitionResult channelTag. */
                     public channelTag: number;
+
+                    /** SpeechRecognitionResult resultEndTime. */
+                    public resultEndTime?: (google.protobuf.IDuration|null);
+
+                    /** SpeechRecognitionResult languageCode. */
+                    public languageCode: string;
 
                     /**
                      * Creates a new SpeechRecognitionResult instance using the specified properties.
@@ -2006,6 +2067,9 @@ export namespace google {
                     /** WordInfo word */
                     word?: (string|null);
 
+                    /** WordInfo confidence */
+                    confidence?: (number|null);
+
                     /** WordInfo speakerTag */
                     speakerTag?: (number|null);
                 }
@@ -2027,6 +2091,9 @@ export namespace google {
 
                     /** WordInfo word. */
                     public word: string;
+
+                    /** WordInfo confidence. */
+                    public confidence: number;
 
                     /** WordInfo speakerTag. */
                     public speakerTag: number;
@@ -2097,6 +2164,504 @@ export namespace google {
 
                     /**
                      * Converts this WordInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CustomClass. */
+                interface ICustomClass {
+
+                    /** CustomClass name */
+                    name?: (string|null);
+
+                    /** CustomClass customClassId */
+                    customClassId?: (string|null);
+
+                    /** CustomClass items */
+                    items?: (google.cloud.speech.v1.CustomClass.IClassItem[]|null);
+                }
+
+                /** Represents a CustomClass. */
+                class CustomClass implements ICustomClass {
+
+                    /**
+                     * Constructs a new CustomClass.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v1.ICustomClass);
+
+                    /** CustomClass name. */
+                    public name: string;
+
+                    /** CustomClass customClassId. */
+                    public customClassId: string;
+
+                    /** CustomClass items. */
+                    public items: google.cloud.speech.v1.CustomClass.IClassItem[];
+
+                    /**
+                     * Creates a new CustomClass instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomClass instance
+                     */
+                    public static create(properties?: google.cloud.speech.v1.ICustomClass): google.cloud.speech.v1.CustomClass;
+
+                    /**
+                     * Encodes the specified CustomClass message. Does not implicitly {@link google.cloud.speech.v1.CustomClass.verify|verify} messages.
+                     * @param message CustomClass message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v1.ICustomClass, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomClass message, length delimited. Does not implicitly {@link google.cloud.speech.v1.CustomClass.verify|verify} messages.
+                     * @param message CustomClass message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v1.ICustomClass, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomClass message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomClass
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1.CustomClass;
+
+                    /**
+                     * Decodes a CustomClass message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomClass
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1.CustomClass;
+
+                    /**
+                     * Verifies a CustomClass message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomClass message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomClass
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1.CustomClass;
+
+                    /**
+                     * Creates a plain object from a CustomClass message. Also converts values to other types if specified.
+                     * @param message CustomClass
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v1.CustomClass, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomClass to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace CustomClass {
+
+                    /** Properties of a ClassItem. */
+                    interface IClassItem {
+
+                        /** ClassItem value */
+                        value?: (string|null);
+                    }
+
+                    /** Represents a ClassItem. */
+                    class ClassItem implements IClassItem {
+
+                        /**
+                         * Constructs a new ClassItem.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.speech.v1.CustomClass.IClassItem);
+
+                        /** ClassItem value. */
+                        public value: string;
+
+                        /**
+                         * Creates a new ClassItem instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClassItem instance
+                         */
+                        public static create(properties?: google.cloud.speech.v1.CustomClass.IClassItem): google.cloud.speech.v1.CustomClass.ClassItem;
+
+                        /**
+                         * Encodes the specified ClassItem message. Does not implicitly {@link google.cloud.speech.v1.CustomClass.ClassItem.verify|verify} messages.
+                         * @param message ClassItem message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.speech.v1.CustomClass.IClassItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClassItem message, length delimited. Does not implicitly {@link google.cloud.speech.v1.CustomClass.ClassItem.verify|verify} messages.
+                         * @param message ClassItem message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.speech.v1.CustomClass.IClassItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClassItem message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClassItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1.CustomClass.ClassItem;
+
+                        /**
+                         * Decodes a ClassItem message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClassItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1.CustomClass.ClassItem;
+
+                        /**
+                         * Verifies a ClassItem message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClassItem message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClassItem
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1.CustomClass.ClassItem;
+
+                        /**
+                         * Creates a plain object from a ClassItem message. Also converts values to other types if specified.
+                         * @param message ClassItem
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.speech.v1.CustomClass.ClassItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClassItem to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a PhraseSet. */
+                interface IPhraseSet {
+
+                    /** PhraseSet name */
+                    name?: (string|null);
+
+                    /** PhraseSet phrases */
+                    phrases?: (google.cloud.speech.v1.PhraseSet.IPhrase[]|null);
+
+                    /** PhraseSet boost */
+                    boost?: (number|null);
+                }
+
+                /** Represents a PhraseSet. */
+                class PhraseSet implements IPhraseSet {
+
+                    /**
+                     * Constructs a new PhraseSet.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v1.IPhraseSet);
+
+                    /** PhraseSet name. */
+                    public name: string;
+
+                    /** PhraseSet phrases. */
+                    public phrases: google.cloud.speech.v1.PhraseSet.IPhrase[];
+
+                    /** PhraseSet boost. */
+                    public boost: number;
+
+                    /**
+                     * Creates a new PhraseSet instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PhraseSet instance
+                     */
+                    public static create(properties?: google.cloud.speech.v1.IPhraseSet): google.cloud.speech.v1.PhraseSet;
+
+                    /**
+                     * Encodes the specified PhraseSet message. Does not implicitly {@link google.cloud.speech.v1.PhraseSet.verify|verify} messages.
+                     * @param message PhraseSet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v1.IPhraseSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PhraseSet message, length delimited. Does not implicitly {@link google.cloud.speech.v1.PhraseSet.verify|verify} messages.
+                     * @param message PhraseSet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v1.IPhraseSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PhraseSet message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PhraseSet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1.PhraseSet;
+
+                    /**
+                     * Decodes a PhraseSet message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PhraseSet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1.PhraseSet;
+
+                    /**
+                     * Verifies a PhraseSet message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PhraseSet message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PhraseSet
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1.PhraseSet;
+
+                    /**
+                     * Creates a plain object from a PhraseSet message. Also converts values to other types if specified.
+                     * @param message PhraseSet
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v1.PhraseSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PhraseSet to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace PhraseSet {
+
+                    /** Properties of a Phrase. */
+                    interface IPhrase {
+
+                        /** Phrase value */
+                        value?: (string|null);
+
+                        /** Phrase boost */
+                        boost?: (number|null);
+                    }
+
+                    /** Represents a Phrase. */
+                    class Phrase implements IPhrase {
+
+                        /**
+                         * Constructs a new Phrase.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.speech.v1.PhraseSet.IPhrase);
+
+                        /** Phrase value. */
+                        public value: string;
+
+                        /** Phrase boost. */
+                        public boost: number;
+
+                        /**
+                         * Creates a new Phrase instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Phrase instance
+                         */
+                        public static create(properties?: google.cloud.speech.v1.PhraseSet.IPhrase): google.cloud.speech.v1.PhraseSet.Phrase;
+
+                        /**
+                         * Encodes the specified Phrase message. Does not implicitly {@link google.cloud.speech.v1.PhraseSet.Phrase.verify|verify} messages.
+                         * @param message Phrase message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.speech.v1.PhraseSet.IPhrase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Phrase message, length delimited. Does not implicitly {@link google.cloud.speech.v1.PhraseSet.Phrase.verify|verify} messages.
+                         * @param message Phrase message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.speech.v1.PhraseSet.IPhrase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Phrase message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Phrase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1.PhraseSet.Phrase;
+
+                        /**
+                         * Decodes a Phrase message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Phrase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1.PhraseSet.Phrase;
+
+                        /**
+                         * Verifies a Phrase message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Phrase message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Phrase
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1.PhraseSet.Phrase;
+
+                        /**
+                         * Creates a plain object from a Phrase message. Also converts values to other types if specified.
+                         * @param message Phrase
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.speech.v1.PhraseSet.Phrase, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Phrase to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a SpeechAdaptation. */
+                interface ISpeechAdaptation {
+
+                    /** SpeechAdaptation phraseSets */
+                    phraseSets?: (google.cloud.speech.v1.IPhraseSet[]|null);
+
+                    /** SpeechAdaptation phraseSetReferences */
+                    phraseSetReferences?: (string[]|null);
+
+                    /** SpeechAdaptation customClasses */
+                    customClasses?: (google.cloud.speech.v1.ICustomClass[]|null);
+                }
+
+                /** Represents a SpeechAdaptation. */
+                class SpeechAdaptation implements ISpeechAdaptation {
+
+                    /**
+                     * Constructs a new SpeechAdaptation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v1.ISpeechAdaptation);
+
+                    /** SpeechAdaptation phraseSets. */
+                    public phraseSets: google.cloud.speech.v1.IPhraseSet[];
+
+                    /** SpeechAdaptation phraseSetReferences. */
+                    public phraseSetReferences: string[];
+
+                    /** SpeechAdaptation customClasses. */
+                    public customClasses: google.cloud.speech.v1.ICustomClass[];
+
+                    /**
+                     * Creates a new SpeechAdaptation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpeechAdaptation instance
+                     */
+                    public static create(properties?: google.cloud.speech.v1.ISpeechAdaptation): google.cloud.speech.v1.SpeechAdaptation;
+
+                    /**
+                     * Encodes the specified SpeechAdaptation message. Does not implicitly {@link google.cloud.speech.v1.SpeechAdaptation.verify|verify} messages.
+                     * @param message SpeechAdaptation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v1.ISpeechAdaptation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpeechAdaptation message, length delimited. Does not implicitly {@link google.cloud.speech.v1.SpeechAdaptation.verify|verify} messages.
+                     * @param message SpeechAdaptation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v1.ISpeechAdaptation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpeechAdaptation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpeechAdaptation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1.SpeechAdaptation;
+
+                    /**
+                     * Decodes a SpeechAdaptation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpeechAdaptation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1.SpeechAdaptation;
+
+                    /**
+                     * Verifies a SpeechAdaptation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpeechAdaptation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpeechAdaptation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1.SpeechAdaptation;
+
+                    /**
+                     * Creates a plain object from a SpeechAdaptation message. Also converts values to other types if specified.
+                     * @param message SpeechAdaptation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v1.SpeechAdaptation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpeechAdaptation to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -10081,6 +10646,102 @@ export namespace google {
             }
         }
 
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of an Any. */
         interface IAny {
 
@@ -10352,102 +11013,6 @@ export namespace google {
 
             /**
              * Converts this Empty to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };

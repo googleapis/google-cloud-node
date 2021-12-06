@@ -512,4 +512,134 @@ describe('v1.SpeechClient', () => {
       );
     });
   });
+
+  describe('Path templates', () => {
+    describe('customClass', () => {
+      const fakePath = '/rendered/path/customClass';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        custom_class: 'customClassValue',
+      };
+      const client = new speechModule.v1.SpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.customClassPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.customClassPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('customClassPath', () => {
+        const result = client.customClassPath(
+          'projectValue',
+          'locationValue',
+          'customClassValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.customClassPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCustomClassName', () => {
+        const result = client.matchProjectFromCustomClassName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.customClassPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCustomClassName', () => {
+        const result = client.matchLocationFromCustomClassName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.customClassPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCustomClassFromCustomClassName', () => {
+        const result = client.matchCustomClassFromCustomClassName(fakePath);
+        assert.strictEqual(result, 'customClassValue');
+        assert(
+          (client.pathTemplates.customClassPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('phraseSet', () => {
+      const fakePath = '/rendered/path/phraseSet';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        phrase_set: 'phraseSetValue',
+      };
+      const client = new speechModule.v1.SpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.phraseSetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.phraseSetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('phraseSetPath', () => {
+        const result = client.phraseSetPath(
+          'projectValue',
+          'locationValue',
+          'phraseSetValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.phraseSetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPhraseSetName', () => {
+        const result = client.matchProjectFromPhraseSetName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.phraseSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPhraseSetName', () => {
+        const result = client.matchLocationFromPhraseSetName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.phraseSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPhraseSetFromPhraseSetName', () => {
+        const result = client.matchPhraseSetFromPhraseSetName(fakePath);
+        assert.strictEqual(result, 'phraseSetValue');
+        assert(
+          (client.pathTemplates.phraseSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+  });
 });

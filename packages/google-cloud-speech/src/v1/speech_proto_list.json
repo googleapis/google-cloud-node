@@ -1,3 +1,4 @@
 [
-  "../../protos/google/cloud/speech/v1/cloud_speech.proto"
+  "../../protos/google/cloud/speech/v1/cloud_speech.proto",
+  "../../protos/google/cloud/speech/v1/resource.proto"
 ]
