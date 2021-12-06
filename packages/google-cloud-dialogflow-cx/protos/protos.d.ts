@@ -5687,6 +5687,9 @@ export namespace google {
 
                         /** ResponseMessage mixedAudio */
                         mixedAudio?: (google.cloud.dialogflow.cx.v3.ResponseMessage.IMixedAudio|null);
+
+                        /** ResponseMessage telephonyTransferCall */
+                        telephonyTransferCall?: (google.cloud.dialogflow.cx.v3.ResponseMessage.ITelephonyTransferCall|null);
                     }
 
                     /** Represents a ResponseMessage. */
@@ -5722,8 +5725,11 @@ export namespace google {
                         /** ResponseMessage mixedAudio. */
                         public mixedAudio?: (google.cloud.dialogflow.cx.v3.ResponseMessage.IMixedAudio|null);
 
+                        /** ResponseMessage telephonyTransferCall. */
+                        public telephonyTransferCall?: (google.cloud.dialogflow.cx.v3.ResponseMessage.ITelephonyTransferCall|null);
+
                         /** ResponseMessage message. */
-                        public message?: ("text"|"payload"|"conversationSuccess"|"outputAudioText"|"liveAgentHandoff"|"endInteraction"|"playAudio"|"mixedAudio");
+                        public message?: ("text"|"payload"|"conversationSuccess"|"outputAudioText"|"liveAgentHandoff"|"endInteraction"|"playAudio"|"mixedAudio"|"telephonyTransferCall");
 
                         /**
                          * Creates a new ResponseMessage instance using the specified properties.
@@ -6555,6 +6561,99 @@ export namespace google {
                                  */
                                 public toJSON(): { [k: string]: any };
                             }
+                        }
+
+                        /** Properties of a TelephonyTransferCall. */
+                        interface ITelephonyTransferCall {
+
+                            /** TelephonyTransferCall phoneNumber */
+                            phoneNumber?: (string|null);
+                        }
+
+                        /** Represents a TelephonyTransferCall. */
+                        class TelephonyTransferCall implements ITelephonyTransferCall {
+
+                            /**
+                             * Constructs a new TelephonyTransferCall.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.ResponseMessage.ITelephonyTransferCall);
+
+                            /** TelephonyTransferCall phoneNumber. */
+                            public phoneNumber?: (string|null);
+
+                            /** TelephonyTransferCall endpoint. */
+                            public endpoint?: "phoneNumber";
+
+                            /**
+                             * Creates a new TelephonyTransferCall instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TelephonyTransferCall instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.ResponseMessage.ITelephonyTransferCall): google.cloud.dialogflow.cx.v3.ResponseMessage.TelephonyTransferCall;
+
+                            /**
+                             * Encodes the specified TelephonyTransferCall message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ResponseMessage.TelephonyTransferCall.verify|verify} messages.
+                             * @param message TelephonyTransferCall message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.ResponseMessage.ITelephonyTransferCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TelephonyTransferCall message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ResponseMessage.TelephonyTransferCall.verify|verify} messages.
+                             * @param message TelephonyTransferCall message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ResponseMessage.ITelephonyTransferCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TelephonyTransferCall message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TelephonyTransferCall
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ResponseMessage.TelephonyTransferCall;
+
+                            /**
+                             * Decodes a TelephonyTransferCall message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TelephonyTransferCall
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ResponseMessage.TelephonyTransferCall;
+
+                            /**
+                             * Verifies a TelephonyTransferCall message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TelephonyTransferCall message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TelephonyTransferCall
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ResponseMessage.TelephonyTransferCall;
+
+                            /**
+                             * Creates a plain object from a TelephonyTransferCall message. Also converts values to other types if specified.
+                             * @param message TelephonyTransferCall
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.ResponseMessage.TelephonyTransferCall, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TelephonyTransferCall to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
                         }
                     }
 
@@ -7748,6 +7847,18 @@ export namespace google {
                         }
                     }
 
+                    /** AudioEncoding enum. */
+                    enum AudioEncoding {
+                        AUDIO_ENCODING_UNSPECIFIED = 0,
+                        AUDIO_ENCODING_LINEAR_16 = 1,
+                        AUDIO_ENCODING_FLAC = 2,
+                        AUDIO_ENCODING_MULAW = 3,
+                        AUDIO_ENCODING_AMR = 4,
+                        AUDIO_ENCODING_AMR_WB = 5,
+                        AUDIO_ENCODING_OGG_OPUS = 6,
+                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
+                    }
+
                     /** Properties of a SpeechWordInfo. */
                     interface ISpeechWordInfo {
 
@@ -7854,18 +7965,6 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
-                    }
-
-                    /** AudioEncoding enum. */
-                    enum AudioEncoding {
-                        AUDIO_ENCODING_UNSPECIFIED = 0,
-                        AUDIO_ENCODING_LINEAR_16 = 1,
-                        AUDIO_ENCODING_FLAC = 2,
-                        AUDIO_ENCODING_MULAW = 3,
-                        AUDIO_ENCODING_AMR = 4,
-                        AUDIO_ENCODING_AMR_WB = 5,
-                        AUDIO_ENCODING_OGG_OPUS = 6,
-                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                     }
 
                     /** Properties of an InputAudioConfig. */
@@ -22052,6 +22151,2253 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** Represents a Webhooks */
+                    class Webhooks extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new Webhooks service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new Webhooks service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Webhooks;
+
+                        /**
+                         * Calls ListWebhooks.
+                         * @param request ListWebhooksRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListWebhooksResponse
+                         */
+                        public listWebhooks(request: google.cloud.dialogflow.cx.v3.IListWebhooksRequest, callback: google.cloud.dialogflow.cx.v3.Webhooks.ListWebhooksCallback): void;
+
+                        /**
+                         * Calls ListWebhooks.
+                         * @param request ListWebhooksRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listWebhooks(request: google.cloud.dialogflow.cx.v3.IListWebhooksRequest): Promise<google.cloud.dialogflow.cx.v3.ListWebhooksResponse>;
+
+                        /**
+                         * Calls GetWebhook.
+                         * @param request GetWebhookRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Webhook
+                         */
+                        public getWebhook(request: google.cloud.dialogflow.cx.v3.IGetWebhookRequest, callback: google.cloud.dialogflow.cx.v3.Webhooks.GetWebhookCallback): void;
+
+                        /**
+                         * Calls GetWebhook.
+                         * @param request GetWebhookRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getWebhook(request: google.cloud.dialogflow.cx.v3.IGetWebhookRequest): Promise<google.cloud.dialogflow.cx.v3.Webhook>;
+
+                        /**
+                         * Calls CreateWebhook.
+                         * @param request CreateWebhookRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Webhook
+                         */
+                        public createWebhook(request: google.cloud.dialogflow.cx.v3.ICreateWebhookRequest, callback: google.cloud.dialogflow.cx.v3.Webhooks.CreateWebhookCallback): void;
+
+                        /**
+                         * Calls CreateWebhook.
+                         * @param request CreateWebhookRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createWebhook(request: google.cloud.dialogflow.cx.v3.ICreateWebhookRequest): Promise<google.cloud.dialogflow.cx.v3.Webhook>;
+
+                        /**
+                         * Calls UpdateWebhook.
+                         * @param request UpdateWebhookRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Webhook
+                         */
+                        public updateWebhook(request: google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest, callback: google.cloud.dialogflow.cx.v3.Webhooks.UpdateWebhookCallback): void;
+
+                        /**
+                         * Calls UpdateWebhook.
+                         * @param request UpdateWebhookRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateWebhook(request: google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest): Promise<google.cloud.dialogflow.cx.v3.Webhook>;
+
+                        /**
+                         * Calls DeleteWebhook.
+                         * @param request DeleteWebhookRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteWebhook(request: google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest, callback: google.cloud.dialogflow.cx.v3.Webhooks.DeleteWebhookCallback): void;
+
+                        /**
+                         * Calls DeleteWebhook.
+                         * @param request DeleteWebhookRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteWebhook(request: google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest): Promise<google.protobuf.Empty>;
+                    }
+
+                    namespace Webhooks {
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Webhooks#listWebhooks}.
+                         * @param error Error, if any
+                         * @param [response] ListWebhooksResponse
+                         */
+                        type ListWebhooksCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.ListWebhooksResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Webhooks#getWebhook}.
+                         * @param error Error, if any
+                         * @param [response] Webhook
+                         */
+                        type GetWebhookCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Webhook) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Webhooks#createWebhook}.
+                         * @param error Error, if any
+                         * @param [response] Webhook
+                         */
+                        type CreateWebhookCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Webhook) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Webhooks#updateWebhook}.
+                         * @param error Error, if any
+                         * @param [response] Webhook
+                         */
+                        type UpdateWebhookCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Webhook) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Webhooks#deleteWebhook}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteWebhookCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                    }
+
+                    /** Properties of a Webhook. */
+                    interface IWebhook {
+
+                        /** Webhook name */
+                        name?: (string|null);
+
+                        /** Webhook displayName */
+                        displayName?: (string|null);
+
+                        /** Webhook genericWebService */
+                        genericWebService?: (google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService|null);
+
+                        /** Webhook serviceDirectory */
+                        serviceDirectory?: (google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig|null);
+
+                        /** Webhook timeout */
+                        timeout?: (google.protobuf.IDuration|null);
+
+                        /** Webhook disabled */
+                        disabled?: (boolean|null);
+                    }
+
+                    /** Represents a Webhook. */
+                    class Webhook implements IWebhook {
+
+                        /**
+                         * Constructs a new Webhook.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IWebhook);
+
+                        /** Webhook name. */
+                        public name: string;
+
+                        /** Webhook displayName. */
+                        public displayName: string;
+
+                        /** Webhook genericWebService. */
+                        public genericWebService?: (google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService|null);
+
+                        /** Webhook serviceDirectory. */
+                        public serviceDirectory?: (google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig|null);
+
+                        /** Webhook timeout. */
+                        public timeout?: (google.protobuf.IDuration|null);
+
+                        /** Webhook disabled. */
+                        public disabled: boolean;
+
+                        /** Webhook webhook. */
+                        public webhook?: ("genericWebService"|"serviceDirectory");
+
+                        /**
+                         * Creates a new Webhook instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Webhook instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IWebhook): google.cloud.dialogflow.cx.v3.Webhook;
+
+                        /**
+                         * Encodes the specified Webhook message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.verify|verify} messages.
+                         * @param message Webhook message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IWebhook, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Webhook message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.verify|verify} messages.
+                         * @param message Webhook message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IWebhook, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Webhook message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Webhook
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Webhook;
+
+                        /**
+                         * Decodes a Webhook message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Webhook
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Webhook;
+
+                        /**
+                         * Verifies a Webhook message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Webhook message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Webhook
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Webhook;
+
+                        /**
+                         * Creates a plain object from a Webhook message. Also converts values to other types if specified.
+                         * @param message Webhook
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.Webhook, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Webhook to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Webhook {
+
+                        /** Properties of a GenericWebService. */
+                        interface IGenericWebService {
+
+                            /** GenericWebService uri */
+                            uri?: (string|null);
+
+                            /** GenericWebService username */
+                            username?: (string|null);
+
+                            /** GenericWebService password */
+                            password?: (string|null);
+
+                            /** GenericWebService requestHeaders */
+                            requestHeaders?: ({ [k: string]: string }|null);
+
+                            /** GenericWebService allowedCaCerts */
+                            allowedCaCerts?: (Uint8Array[]|null);
+                        }
+
+                        /** Represents a GenericWebService. */
+                        class GenericWebService implements IGenericWebService {
+
+                            /**
+                             * Constructs a new GenericWebService.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService);
+
+                            /** GenericWebService uri. */
+                            public uri: string;
+
+                            /** GenericWebService username. */
+                            public username: string;
+
+                            /** GenericWebService password. */
+                            public password: string;
+
+                            /** GenericWebService requestHeaders. */
+                            public requestHeaders: { [k: string]: string };
+
+                            /** GenericWebService allowedCaCerts. */
+                            public allowedCaCerts: Uint8Array[];
+
+                            /**
+                             * Creates a new GenericWebService instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GenericWebService instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService;
+
+                            /**
+                             * Encodes the specified GenericWebService message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.verify|verify} messages.
+                             * @param message GenericWebService message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GenericWebService message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.verify|verify} messages.
+                             * @param message GenericWebService message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GenericWebService message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GenericWebService
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService;
+
+                            /**
+                             * Decodes a GenericWebService message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GenericWebService
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService;
+
+                            /**
+                             * Verifies a GenericWebService message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GenericWebService message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GenericWebService
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService;
+
+                            /**
+                             * Creates a plain object from a GenericWebService message. Also converts values to other types if specified.
+                             * @param message GenericWebService
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GenericWebService to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of a ServiceDirectoryConfig. */
+                        interface IServiceDirectoryConfig {
+
+                            /** ServiceDirectoryConfig service */
+                            service?: (string|null);
+
+                            /** ServiceDirectoryConfig genericWebService */
+                            genericWebService?: (google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService|null);
+                        }
+
+                        /** Represents a ServiceDirectoryConfig. */
+                        class ServiceDirectoryConfig implements IServiceDirectoryConfig {
+
+                            /**
+                             * Constructs a new ServiceDirectoryConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig);
+
+                            /** ServiceDirectoryConfig service. */
+                            public service: string;
+
+                            /** ServiceDirectoryConfig genericWebService. */
+                            public genericWebService?: (google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService|null);
+
+                            /**
+                             * Creates a new ServiceDirectoryConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ServiceDirectoryConfig instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig): google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig;
+
+                            /**
+                             * Encodes the specified ServiceDirectoryConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig.verify|verify} messages.
+                             * @param message ServiceDirectoryConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ServiceDirectoryConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig.verify|verify} messages.
+                             * @param message ServiceDirectoryConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ServiceDirectoryConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ServiceDirectoryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig;
+
+                            /**
+                             * Decodes a ServiceDirectoryConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ServiceDirectoryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig;
+
+                            /**
+                             * Verifies a ServiceDirectoryConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ServiceDirectoryConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ServiceDirectoryConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig;
+
+                            /**
+                             * Creates a plain object from a ServiceDirectoryConfig message. Also converts values to other types if specified.
+                             * @param message ServiceDirectoryConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ServiceDirectoryConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a ListWebhooksRequest. */
+                    interface IListWebhooksRequest {
+
+                        /** ListWebhooksRequest parent */
+                        parent?: (string|null);
+
+                        /** ListWebhooksRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListWebhooksRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListWebhooksRequest. */
+                    class ListWebhooksRequest implements IListWebhooksRequest {
+
+                        /**
+                         * Constructs a new ListWebhooksRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListWebhooksRequest);
+
+                        /** ListWebhooksRequest parent. */
+                        public parent: string;
+
+                        /** ListWebhooksRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListWebhooksRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListWebhooksRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListWebhooksRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListWebhooksRequest): google.cloud.dialogflow.cx.v3.ListWebhooksRequest;
+
+                        /**
+                         * Encodes the specified ListWebhooksRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListWebhooksRequest.verify|verify} messages.
+                         * @param message ListWebhooksRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListWebhooksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListWebhooksRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListWebhooksRequest.verify|verify} messages.
+                         * @param message ListWebhooksRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListWebhooksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListWebhooksRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListWebhooksRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListWebhooksRequest;
+
+                        /**
+                         * Decodes a ListWebhooksRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListWebhooksRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListWebhooksRequest;
+
+                        /**
+                         * Verifies a ListWebhooksRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListWebhooksRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListWebhooksRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListWebhooksRequest;
+
+                        /**
+                         * Creates a plain object from a ListWebhooksRequest message. Also converts values to other types if specified.
+                         * @param message ListWebhooksRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListWebhooksRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListWebhooksRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListWebhooksResponse. */
+                    interface IListWebhooksResponse {
+
+                        /** ListWebhooksResponse webhooks */
+                        webhooks?: (google.cloud.dialogflow.cx.v3.IWebhook[]|null);
+
+                        /** ListWebhooksResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListWebhooksResponse. */
+                    class ListWebhooksResponse implements IListWebhooksResponse {
+
+                        /**
+                         * Constructs a new ListWebhooksResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListWebhooksResponse);
+
+                        /** ListWebhooksResponse webhooks. */
+                        public webhooks: google.cloud.dialogflow.cx.v3.IWebhook[];
+
+                        /** ListWebhooksResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListWebhooksResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListWebhooksResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListWebhooksResponse): google.cloud.dialogflow.cx.v3.ListWebhooksResponse;
+
+                        /**
+                         * Encodes the specified ListWebhooksResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListWebhooksResponse.verify|verify} messages.
+                         * @param message ListWebhooksResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListWebhooksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListWebhooksResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListWebhooksResponse.verify|verify} messages.
+                         * @param message ListWebhooksResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListWebhooksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListWebhooksResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListWebhooksResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListWebhooksResponse;
+
+                        /**
+                         * Decodes a ListWebhooksResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListWebhooksResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListWebhooksResponse;
+
+                        /**
+                         * Verifies a ListWebhooksResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListWebhooksResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListWebhooksResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListWebhooksResponse;
+
+                        /**
+                         * Creates a plain object from a ListWebhooksResponse message. Also converts values to other types if specified.
+                         * @param message ListWebhooksResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListWebhooksResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListWebhooksResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a GetWebhookRequest. */
+                    interface IGetWebhookRequest {
+
+                        /** GetWebhookRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetWebhookRequest. */
+                    class GetWebhookRequest implements IGetWebhookRequest {
+
+                        /**
+                         * Constructs a new GetWebhookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IGetWebhookRequest);
+
+                        /** GetWebhookRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetWebhookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetWebhookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IGetWebhookRequest): google.cloud.dialogflow.cx.v3.GetWebhookRequest;
+
+                        /**
+                         * Encodes the specified GetWebhookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetWebhookRequest.verify|verify} messages.
+                         * @param message GetWebhookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IGetWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetWebhookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetWebhookRequest.verify|verify} messages.
+                         * @param message GetWebhookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IGetWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetWebhookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetWebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.GetWebhookRequest;
+
+                        /**
+                         * Decodes a GetWebhookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetWebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.GetWebhookRequest;
+
+                        /**
+                         * Verifies a GetWebhookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetWebhookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetWebhookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.GetWebhookRequest;
+
+                        /**
+                         * Creates a plain object from a GetWebhookRequest message. Also converts values to other types if specified.
+                         * @param message GetWebhookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.GetWebhookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetWebhookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a CreateWebhookRequest. */
+                    interface ICreateWebhookRequest {
+
+                        /** CreateWebhookRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateWebhookRequest webhook */
+                        webhook?: (google.cloud.dialogflow.cx.v3.IWebhook|null);
+                    }
+
+                    /** Represents a CreateWebhookRequest. */
+                    class CreateWebhookRequest implements ICreateWebhookRequest {
+
+                        /**
+                         * Constructs a new CreateWebhookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICreateWebhookRequest);
+
+                        /** CreateWebhookRequest parent. */
+                        public parent: string;
+
+                        /** CreateWebhookRequest webhook. */
+                        public webhook?: (google.cloud.dialogflow.cx.v3.IWebhook|null);
+
+                        /**
+                         * Creates a new CreateWebhookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateWebhookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICreateWebhookRequest): google.cloud.dialogflow.cx.v3.CreateWebhookRequest;
+
+                        /**
+                         * Encodes the specified CreateWebhookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreateWebhookRequest.verify|verify} messages.
+                         * @param message CreateWebhookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ICreateWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateWebhookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreateWebhookRequest.verify|verify} messages.
+                         * @param message CreateWebhookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICreateWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateWebhookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateWebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CreateWebhookRequest;
+
+                        /**
+                         * Decodes a CreateWebhookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateWebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CreateWebhookRequest;
+
+                        /**
+                         * Verifies a CreateWebhookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateWebhookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateWebhookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CreateWebhookRequest;
+
+                        /**
+                         * Creates a plain object from a CreateWebhookRequest message. Also converts values to other types if specified.
+                         * @param message CreateWebhookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.CreateWebhookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateWebhookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an UpdateWebhookRequest. */
+                    interface IUpdateWebhookRequest {
+
+                        /** UpdateWebhookRequest webhook */
+                        webhook?: (google.cloud.dialogflow.cx.v3.IWebhook|null);
+
+                        /** UpdateWebhookRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateWebhookRequest. */
+                    class UpdateWebhookRequest implements IUpdateWebhookRequest {
+
+                        /**
+                         * Constructs a new UpdateWebhookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest);
+
+                        /** UpdateWebhookRequest webhook. */
+                        public webhook?: (google.cloud.dialogflow.cx.v3.IWebhook|null);
+
+                        /** UpdateWebhookRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateWebhookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateWebhookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest): google.cloud.dialogflow.cx.v3.UpdateWebhookRequest;
+
+                        /**
+                         * Encodes the specified UpdateWebhookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UpdateWebhookRequest.verify|verify} messages.
+                         * @param message UpdateWebhookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateWebhookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UpdateWebhookRequest.verify|verify} messages.
+                         * @param message UpdateWebhookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateWebhookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateWebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.UpdateWebhookRequest;
+
+                        /**
+                         * Decodes an UpdateWebhookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateWebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.UpdateWebhookRequest;
+
+                        /**
+                         * Verifies an UpdateWebhookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateWebhookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateWebhookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.UpdateWebhookRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateWebhookRequest message. Also converts values to other types if specified.
+                         * @param message UpdateWebhookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.UpdateWebhookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateWebhookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a DeleteWebhookRequest. */
+                    interface IDeleteWebhookRequest {
+
+                        /** DeleteWebhookRequest name */
+                        name?: (string|null);
+
+                        /** DeleteWebhookRequest force */
+                        force?: (boolean|null);
+                    }
+
+                    /** Represents a DeleteWebhookRequest. */
+                    class DeleteWebhookRequest implements IDeleteWebhookRequest {
+
+                        /**
+                         * Constructs a new DeleteWebhookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest);
+
+                        /** DeleteWebhookRequest name. */
+                        public name: string;
+
+                        /** DeleteWebhookRequest force. */
+                        public force: boolean;
+
+                        /**
+                         * Creates a new DeleteWebhookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteWebhookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest): google.cloud.dialogflow.cx.v3.DeleteWebhookRequest;
+
+                        /**
+                         * Encodes the specified DeleteWebhookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeleteWebhookRequest.verify|verify} messages.
+                         * @param message DeleteWebhookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteWebhookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeleteWebhookRequest.verify|verify} messages.
+                         * @param message DeleteWebhookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteWebhookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteWebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.DeleteWebhookRequest;
+
+                        /**
+                         * Decodes a DeleteWebhookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteWebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.DeleteWebhookRequest;
+
+                        /**
+                         * Verifies a DeleteWebhookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteWebhookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteWebhookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.DeleteWebhookRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteWebhookRequest message. Also converts values to other types if specified.
+                         * @param message DeleteWebhookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.DeleteWebhookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteWebhookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a WebhookRequest. */
+                    interface IWebhookRequest {
+
+                        /** WebhookRequest detectIntentResponseId */
+                        detectIntentResponseId?: (string|null);
+
+                        /** WebhookRequest text */
+                        text?: (string|null);
+
+                        /** WebhookRequest triggerIntent */
+                        triggerIntent?: (string|null);
+
+                        /** WebhookRequest transcript */
+                        transcript?: (string|null);
+
+                        /** WebhookRequest triggerEvent */
+                        triggerEvent?: (string|null);
+
+                        /** WebhookRequest languageCode */
+                        languageCode?: (string|null);
+
+                        /** WebhookRequest fulfillmentInfo */
+                        fulfillmentInfo?: (google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo|null);
+
+                        /** WebhookRequest intentInfo */
+                        intentInfo?: (google.cloud.dialogflow.cx.v3.WebhookRequest.IIntentInfo|null);
+
+                        /** WebhookRequest pageInfo */
+                        pageInfo?: (google.cloud.dialogflow.cx.v3.IPageInfo|null);
+
+                        /** WebhookRequest sessionInfo */
+                        sessionInfo?: (google.cloud.dialogflow.cx.v3.ISessionInfo|null);
+
+                        /** WebhookRequest messages */
+                        messages?: (google.cloud.dialogflow.cx.v3.IResponseMessage[]|null);
+
+                        /** WebhookRequest payload */
+                        payload?: (google.protobuf.IStruct|null);
+
+                        /** WebhookRequest sentimentAnalysisResult */
+                        sentimentAnalysisResult?: (google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult|null);
+                    }
+
+                    /** Represents a WebhookRequest. */
+                    class WebhookRequest implements IWebhookRequest {
+
+                        /**
+                         * Constructs a new WebhookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IWebhookRequest);
+
+                        /** WebhookRequest detectIntentResponseId. */
+                        public detectIntentResponseId: string;
+
+                        /** WebhookRequest text. */
+                        public text?: (string|null);
+
+                        /** WebhookRequest triggerIntent. */
+                        public triggerIntent?: (string|null);
+
+                        /** WebhookRequest transcript. */
+                        public transcript?: (string|null);
+
+                        /** WebhookRequest triggerEvent. */
+                        public triggerEvent?: (string|null);
+
+                        /** WebhookRequest languageCode. */
+                        public languageCode: string;
+
+                        /** WebhookRequest fulfillmentInfo. */
+                        public fulfillmentInfo?: (google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo|null);
+
+                        /** WebhookRequest intentInfo. */
+                        public intentInfo?: (google.cloud.dialogflow.cx.v3.WebhookRequest.IIntentInfo|null);
+
+                        /** WebhookRequest pageInfo. */
+                        public pageInfo?: (google.cloud.dialogflow.cx.v3.IPageInfo|null);
+
+                        /** WebhookRequest sessionInfo. */
+                        public sessionInfo?: (google.cloud.dialogflow.cx.v3.ISessionInfo|null);
+
+                        /** WebhookRequest messages. */
+                        public messages: google.cloud.dialogflow.cx.v3.IResponseMessage[];
+
+                        /** WebhookRequest payload. */
+                        public payload?: (google.protobuf.IStruct|null);
+
+                        /** WebhookRequest sentimentAnalysisResult. */
+                        public sentimentAnalysisResult?: (google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult|null);
+
+                        /** WebhookRequest query. */
+                        public query?: ("text"|"triggerIntent"|"transcript"|"triggerEvent");
+
+                        /**
+                         * Creates a new WebhookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WebhookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IWebhookRequest): google.cloud.dialogflow.cx.v3.WebhookRequest;
+
+                        /**
+                         * Encodes the specified WebhookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.verify|verify} messages.
+                         * @param message WebhookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WebhookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.verify|verify} messages.
+                         * @param message WebhookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WebhookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookRequest;
+
+                        /**
+                         * Decodes a WebhookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookRequest;
+
+                        /**
+                         * Verifies a WebhookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WebhookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WebhookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookRequest;
+
+                        /**
+                         * Creates a plain object from a WebhookRequest message. Also converts values to other types if specified.
+                         * @param message WebhookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WebhookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace WebhookRequest {
+
+                        /** Properties of a FulfillmentInfo. */
+                        interface IFulfillmentInfo {
+
+                            /** FulfillmentInfo tag */
+                            tag?: (string|null);
+                        }
+
+                        /** Represents a FulfillmentInfo. */
+                        class FulfillmentInfo implements IFulfillmentInfo {
+
+                            /**
+                             * Constructs a new FulfillmentInfo.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo);
+
+                            /** FulfillmentInfo tag. */
+                            public tag: string;
+
+                            /**
+                             * Creates a new FulfillmentInfo instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FulfillmentInfo instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo): google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo;
+
+                            /**
+                             * Encodes the specified FulfillmentInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo.verify|verify} messages.
+                             * @param message FulfillmentInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FulfillmentInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo.verify|verify} messages.
+                             * @param message FulfillmentInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FulfillmentInfo message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FulfillmentInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo;
+
+                            /**
+                             * Decodes a FulfillmentInfo message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FulfillmentInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo;
+
+                            /**
+                             * Verifies a FulfillmentInfo message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FulfillmentInfo message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FulfillmentInfo
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo;
+
+                            /**
+                             * Creates a plain object from a FulfillmentInfo message. Also converts values to other types if specified.
+                             * @param message FulfillmentInfo
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FulfillmentInfo to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of an IntentInfo. */
+                        interface IIntentInfo {
+
+                            /** IntentInfo lastMatchedIntent */
+                            lastMatchedIntent?: (string|null);
+
+                            /** IntentInfo displayName */
+                            displayName?: (string|null);
+
+                            /** IntentInfo parameters */
+                            parameters?: ({ [k: string]: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IIntentParameterValue }|null);
+
+                            /** IntentInfo confidence */
+                            confidence?: (number|null);
+                        }
+
+                        /** Represents an IntentInfo. */
+                        class IntentInfo implements IIntentInfo {
+
+                            /**
+                             * Constructs a new IntentInfo.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.IIntentInfo);
+
+                            /** IntentInfo lastMatchedIntent. */
+                            public lastMatchedIntent: string;
+
+                            /** IntentInfo displayName. */
+                            public displayName: string;
+
+                            /** IntentInfo parameters. */
+                            public parameters: { [k: string]: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IIntentParameterValue };
+
+                            /** IntentInfo confidence. */
+                            public confidence: number;
+
+                            /**
+                             * Creates a new IntentInfo instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns IntentInfo instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.IIntentInfo): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo;
+
+                            /**
+                             * Encodes the specified IntentInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.verify|verify} messages.
+                             * @param message IntentInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IIntentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified IntentInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.verify|verify} messages.
+                             * @param message IntentInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IIntentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an IntentInfo message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns IntentInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo;
+
+                            /**
+                             * Decodes an IntentInfo message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns IntentInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo;
+
+                            /**
+                             * Verifies an IntentInfo message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an IntentInfo message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns IntentInfo
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo;
+
+                            /**
+                             * Creates a plain object from an IntentInfo message. Also converts values to other types if specified.
+                             * @param message IntentInfo
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this IntentInfo to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace IntentInfo {
+
+                            /** Properties of an IntentParameterValue. */
+                            interface IIntentParameterValue {
+
+                                /** IntentParameterValue originalValue */
+                                originalValue?: (string|null);
+
+                                /** IntentParameterValue resolvedValue */
+                                resolvedValue?: (google.protobuf.IValue|null);
+                            }
+
+                            /** Represents an IntentParameterValue. */
+                            class IntentParameterValue implements IIntentParameterValue {
+
+                                /**
+                                 * Constructs a new IntentParameterValue.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IIntentParameterValue);
+
+                                /** IntentParameterValue originalValue. */
+                                public originalValue: string;
+
+                                /** IntentParameterValue resolvedValue. */
+                                public resolvedValue?: (google.protobuf.IValue|null);
+
+                                /**
+                                 * Creates a new IntentParameterValue instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns IntentParameterValue instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IIntentParameterValue): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue;
+
+                                /**
+                                 * Encodes the specified IntentParameterValue message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue.verify|verify} messages.
+                                 * @param message IntentParameterValue message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IIntentParameterValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified IntentParameterValue message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue.verify|verify} messages.
+                                 * @param message IntentParameterValue message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IIntentParameterValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an IntentParameterValue message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns IntentParameterValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue;
+
+                                /**
+                                 * Decodes an IntentParameterValue message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns IntentParameterValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue;
+
+                                /**
+                                 * Verifies an IntentParameterValue message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an IntentParameterValue message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns IntentParameterValue
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue;
+
+                                /**
+                                 * Creates a plain object from an IntentParameterValue message. Also converts values to other types if specified.
+                                 * @param message IntentParameterValue
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this IntentParameterValue to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+                        }
+
+                        /** Properties of a SentimentAnalysisResult. */
+                        interface ISentimentAnalysisResult {
+
+                            /** SentimentAnalysisResult score */
+                            score?: (number|null);
+
+                            /** SentimentAnalysisResult magnitude */
+                            magnitude?: (number|null);
+                        }
+
+                        /** Represents a SentimentAnalysisResult. */
+                        class SentimentAnalysisResult implements ISentimentAnalysisResult {
+
+                            /**
+                             * Constructs a new SentimentAnalysisResult.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult);
+
+                            /** SentimentAnalysisResult score. */
+                            public score: number;
+
+                            /** SentimentAnalysisResult magnitude. */
+                            public magnitude: number;
+
+                            /**
+                             * Creates a new SentimentAnalysisResult instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SentimentAnalysisResult instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult): google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult;
+
+                            /**
+                             * Encodes the specified SentimentAnalysisResult message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult.verify|verify} messages.
+                             * @param message SentimentAnalysisResult message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SentimentAnalysisResult message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult.verify|verify} messages.
+                             * @param message SentimentAnalysisResult message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SentimentAnalysisResult message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SentimentAnalysisResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult;
+
+                            /**
+                             * Decodes a SentimentAnalysisResult message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SentimentAnalysisResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult;
+
+                            /**
+                             * Verifies a SentimentAnalysisResult message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SentimentAnalysisResult message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SentimentAnalysisResult
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult;
+
+                            /**
+                             * Creates a plain object from a SentimentAnalysisResult message. Also converts values to other types if specified.
+                             * @param message SentimentAnalysisResult
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SentimentAnalysisResult to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a WebhookResponse. */
+                    interface IWebhookResponse {
+
+                        /** WebhookResponse fulfillmentResponse */
+                        fulfillmentResponse?: (google.cloud.dialogflow.cx.v3.WebhookResponse.IFulfillmentResponse|null);
+
+                        /** WebhookResponse pageInfo */
+                        pageInfo?: (google.cloud.dialogflow.cx.v3.IPageInfo|null);
+
+                        /** WebhookResponse sessionInfo */
+                        sessionInfo?: (google.cloud.dialogflow.cx.v3.ISessionInfo|null);
+
+                        /** WebhookResponse payload */
+                        payload?: (google.protobuf.IStruct|null);
+
+                        /** WebhookResponse targetPage */
+                        targetPage?: (string|null);
+
+                        /** WebhookResponse targetFlow */
+                        targetFlow?: (string|null);
+                    }
+
+                    /** Represents a WebhookResponse. */
+                    class WebhookResponse implements IWebhookResponse {
+
+                        /**
+                         * Constructs a new WebhookResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IWebhookResponse);
+
+                        /** WebhookResponse fulfillmentResponse. */
+                        public fulfillmentResponse?: (google.cloud.dialogflow.cx.v3.WebhookResponse.IFulfillmentResponse|null);
+
+                        /** WebhookResponse pageInfo. */
+                        public pageInfo?: (google.cloud.dialogflow.cx.v3.IPageInfo|null);
+
+                        /** WebhookResponse sessionInfo. */
+                        public sessionInfo?: (google.cloud.dialogflow.cx.v3.ISessionInfo|null);
+
+                        /** WebhookResponse payload. */
+                        public payload?: (google.protobuf.IStruct|null);
+
+                        /** WebhookResponse targetPage. */
+                        public targetPage?: (string|null);
+
+                        /** WebhookResponse targetFlow. */
+                        public targetFlow?: (string|null);
+
+                        /** WebhookResponse transition. */
+                        public transition?: ("targetPage"|"targetFlow");
+
+                        /**
+                         * Creates a new WebhookResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WebhookResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IWebhookResponse): google.cloud.dialogflow.cx.v3.WebhookResponse;
+
+                        /**
+                         * Encodes the specified WebhookResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookResponse.verify|verify} messages.
+                         * @param message WebhookResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IWebhookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WebhookResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookResponse.verify|verify} messages.
+                         * @param message WebhookResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IWebhookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WebhookResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WebhookResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookResponse;
+
+                        /**
+                         * Decodes a WebhookResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WebhookResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookResponse;
+
+                        /**
+                         * Verifies a WebhookResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WebhookResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WebhookResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookResponse;
+
+                        /**
+                         * Creates a plain object from a WebhookResponse message. Also converts values to other types if specified.
+                         * @param message WebhookResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WebhookResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace WebhookResponse {
+
+                        /** Properties of a FulfillmentResponse. */
+                        interface IFulfillmentResponse {
+
+                            /** FulfillmentResponse messages */
+                            messages?: (google.cloud.dialogflow.cx.v3.IResponseMessage[]|null);
+
+                            /** FulfillmentResponse mergeBehavior */
+                            mergeBehavior?: (google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse.MergeBehavior|keyof typeof google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse.MergeBehavior|null);
+                        }
+
+                        /** Represents a FulfillmentResponse. */
+                        class FulfillmentResponse implements IFulfillmentResponse {
+
+                            /**
+                             * Constructs a new FulfillmentResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.WebhookResponse.IFulfillmentResponse);
+
+                            /** FulfillmentResponse messages. */
+                            public messages: google.cloud.dialogflow.cx.v3.IResponseMessage[];
+
+                            /** FulfillmentResponse mergeBehavior. */
+                            public mergeBehavior: (google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse.MergeBehavior|keyof typeof google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse.MergeBehavior);
+
+                            /**
+                             * Creates a new FulfillmentResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FulfillmentResponse instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.WebhookResponse.IFulfillmentResponse): google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse;
+
+                            /**
+                             * Encodes the specified FulfillmentResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse.verify|verify} messages.
+                             * @param message FulfillmentResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.WebhookResponse.IFulfillmentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FulfillmentResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse.verify|verify} messages.
+                             * @param message FulfillmentResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.WebhookResponse.IFulfillmentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FulfillmentResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FulfillmentResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse;
+
+                            /**
+                             * Decodes a FulfillmentResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FulfillmentResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse;
+
+                            /**
+                             * Verifies a FulfillmentResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FulfillmentResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FulfillmentResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse;
+
+                            /**
+                             * Creates a plain object from a FulfillmentResponse message. Also converts values to other types if specified.
+                             * @param message FulfillmentResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FulfillmentResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace FulfillmentResponse {
+
+                            /** MergeBehavior enum. */
+                            enum MergeBehavior {
+                                MERGE_BEHAVIOR_UNSPECIFIED = 0,
+                                APPEND = 1,
+                                REPLACE = 2
+                            }
+                        }
+                    }
+
+                    /** Properties of a PageInfo. */
+                    interface IPageInfo {
+
+                        /** PageInfo currentPage */
+                        currentPage?: (string|null);
+
+                        /** PageInfo formInfo */
+                        formInfo?: (google.cloud.dialogflow.cx.v3.PageInfo.IFormInfo|null);
+                    }
+
+                    /** Represents a PageInfo. */
+                    class PageInfo implements IPageInfo {
+
+                        /**
+                         * Constructs a new PageInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IPageInfo);
+
+                        /** PageInfo currentPage. */
+                        public currentPage: string;
+
+                        /** PageInfo formInfo. */
+                        public formInfo?: (google.cloud.dialogflow.cx.v3.PageInfo.IFormInfo|null);
+
+                        /**
+                         * Creates a new PageInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PageInfo instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IPageInfo): google.cloud.dialogflow.cx.v3.PageInfo;
+
+                        /**
+                         * Encodes the specified PageInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PageInfo.verify|verify} messages.
+                         * @param message PageInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IPageInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PageInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PageInfo.verify|verify} messages.
+                         * @param message PageInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IPageInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PageInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PageInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.PageInfo;
+
+                        /**
+                         * Decodes a PageInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PageInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.PageInfo;
+
+                        /**
+                         * Verifies a PageInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PageInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PageInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.PageInfo;
+
+                        /**
+                         * Creates a plain object from a PageInfo message. Also converts values to other types if specified.
+                         * @param message PageInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.PageInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PageInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace PageInfo {
+
+                        /** Properties of a FormInfo. */
+                        interface IFormInfo {
+
+                            /** FormInfo parameterInfo */
+                            parameterInfo?: (google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.IParameterInfo[]|null);
+                        }
+
+                        /** Represents a FormInfo. */
+                        class FormInfo implements IFormInfo {
+
+                            /**
+                             * Constructs a new FormInfo.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.PageInfo.IFormInfo);
+
+                            /** FormInfo parameterInfo. */
+                            public parameterInfo: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.IParameterInfo[];
+
+                            /**
+                             * Creates a new FormInfo instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FormInfo instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.PageInfo.IFormInfo): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo;
+
+                            /**
+                             * Encodes the specified FormInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.verify|verify} messages.
+                             * @param message FormInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.PageInfo.IFormInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FormInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.verify|verify} messages.
+                             * @param message FormInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.PageInfo.IFormInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FormInfo message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FormInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo;
+
+                            /**
+                             * Decodes a FormInfo message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FormInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo;
+
+                            /**
+                             * Verifies a FormInfo message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FormInfo message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FormInfo
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo;
+
+                            /**
+                             * Creates a plain object from a FormInfo message. Also converts values to other types if specified.
+                             * @param message FormInfo
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FormInfo to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace FormInfo {
+
+                            /** Properties of a ParameterInfo. */
+                            interface IParameterInfo {
+
+                                /** ParameterInfo displayName */
+                                displayName?: (string|null);
+
+                                /** ParameterInfo required */
+                                required?: (boolean|null);
+
+                                /** ParameterInfo state */
+                                state?: (google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo.ParameterState|keyof typeof google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo.ParameterState|null);
+
+                                /** ParameterInfo value */
+                                value?: (google.protobuf.IValue|null);
+
+                                /** ParameterInfo justCollected */
+                                justCollected?: (boolean|null);
+                            }
+
+                            /** Represents a ParameterInfo. */
+                            class ParameterInfo implements IParameterInfo {
+
+                                /**
+                                 * Constructs a new ParameterInfo.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.IParameterInfo);
+
+                                /** ParameterInfo displayName. */
+                                public displayName: string;
+
+                                /** ParameterInfo required. */
+                                public required: boolean;
+
+                                /** ParameterInfo state. */
+                                public state: (google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo.ParameterState|keyof typeof google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo.ParameterState);
+
+                                /** ParameterInfo value. */
+                                public value?: (google.protobuf.IValue|null);
+
+                                /** ParameterInfo justCollected. */
+                                public justCollected: boolean;
+
+                                /**
+                                 * Creates a new ParameterInfo instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ParameterInfo instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.IParameterInfo): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo;
+
+                                /**
+                                 * Encodes the specified ParameterInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo.verify|verify} messages.
+                                 * @param message ParameterInfo message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.IParameterInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ParameterInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo.verify|verify} messages.
+                                 * @param message ParameterInfo message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.IParameterInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ParameterInfo message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ParameterInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo;
+
+                                /**
+                                 * Decodes a ParameterInfo message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ParameterInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo;
+
+                                /**
+                                 * Verifies a ParameterInfo message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ParameterInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ParameterInfo
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo;
+
+                                /**
+                                 * Creates a plain object from a ParameterInfo message. Also converts values to other types if specified.
+                                 * @param message ParameterInfo
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ParameterInfo to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            namespace ParameterInfo {
+
+                                /** ParameterState enum. */
+                                enum ParameterState {
+                                    PARAMETER_STATE_UNSPECIFIED = 0,
+                                    EMPTY = 1,
+                                    INVALID = 2,
+                                    FILLED = 3
+                                }
+                            }
+                        }
+                    }
+
+                    /** Properties of a SessionInfo. */
+                    interface ISessionInfo {
+
+                        /** SessionInfo session */
+                        session?: (string|null);
+
+                        /** SessionInfo parameters */
+                        parameters?: ({ [k: string]: google.protobuf.IValue }|null);
+                    }
+
+                    /** Represents a SessionInfo. */
+                    class SessionInfo implements ISessionInfo {
+
+                        /**
+                         * Constructs a new SessionInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ISessionInfo);
+
+                        /** SessionInfo session. */
+                        public session: string;
+
+                        /** SessionInfo parameters. */
+                        public parameters: { [k: string]: google.protobuf.IValue };
+
+                        /**
+                         * Creates a new SessionInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SessionInfo instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ISessionInfo): google.cloud.dialogflow.cx.v3.SessionInfo;
+
+                        /**
+                         * Encodes the specified SessionInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SessionInfo.verify|verify} messages.
+                         * @param message SessionInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ISessionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SessionInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SessionInfo.verify|verify} messages.
+                         * @param message SessionInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ISessionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SessionInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SessionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.SessionInfo;
+
+                        /**
+                         * Decodes a SessionInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SessionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.SessionInfo;
+
+                        /**
+                         * Verifies a SessionInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SessionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SessionInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.SessionInfo;
+
+                        /**
+                         * Creates a plain object from a SessionInfo message. Also converts values to other types if specified.
+                         * @param message SessionInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.SessionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SessionInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
                     /** Represents an Experiments */
                     class Experiments extends $protobuf.rpc.Service {
 
@@ -25562,2253 +27908,6 @@ export namespace google {
 
                         /**
                          * Converts this CompareVersionsResponse to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Represents a Webhooks */
-                    class Webhooks extends $protobuf.rpc.Service {
-
-                        /**
-                         * Constructs a new Webhooks service.
-                         * @param rpcImpl RPC implementation
-                         * @param [requestDelimited=false] Whether requests are length-delimited
-                         * @param [responseDelimited=false] Whether responses are length-delimited
-                         */
-                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                        /**
-                         * Creates new Webhooks service using the specified rpc implementation.
-                         * @param rpcImpl RPC implementation
-                         * @param [requestDelimited=false] Whether requests are length-delimited
-                         * @param [responseDelimited=false] Whether responses are length-delimited
-                         * @returns RPC service. Useful where requests and/or responses are streamed.
-                         */
-                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Webhooks;
-
-                        /**
-                         * Calls ListWebhooks.
-                         * @param request ListWebhooksRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and ListWebhooksResponse
-                         */
-                        public listWebhooks(request: google.cloud.dialogflow.cx.v3.IListWebhooksRequest, callback: google.cloud.dialogflow.cx.v3.Webhooks.ListWebhooksCallback): void;
-
-                        /**
-                         * Calls ListWebhooks.
-                         * @param request ListWebhooksRequest message or plain object
-                         * @returns Promise
-                         */
-                        public listWebhooks(request: google.cloud.dialogflow.cx.v3.IListWebhooksRequest): Promise<google.cloud.dialogflow.cx.v3.ListWebhooksResponse>;
-
-                        /**
-                         * Calls GetWebhook.
-                         * @param request GetWebhookRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and Webhook
-                         */
-                        public getWebhook(request: google.cloud.dialogflow.cx.v3.IGetWebhookRequest, callback: google.cloud.dialogflow.cx.v3.Webhooks.GetWebhookCallback): void;
-
-                        /**
-                         * Calls GetWebhook.
-                         * @param request GetWebhookRequest message or plain object
-                         * @returns Promise
-                         */
-                        public getWebhook(request: google.cloud.dialogflow.cx.v3.IGetWebhookRequest): Promise<google.cloud.dialogflow.cx.v3.Webhook>;
-
-                        /**
-                         * Calls CreateWebhook.
-                         * @param request CreateWebhookRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and Webhook
-                         */
-                        public createWebhook(request: google.cloud.dialogflow.cx.v3.ICreateWebhookRequest, callback: google.cloud.dialogflow.cx.v3.Webhooks.CreateWebhookCallback): void;
-
-                        /**
-                         * Calls CreateWebhook.
-                         * @param request CreateWebhookRequest message or plain object
-                         * @returns Promise
-                         */
-                        public createWebhook(request: google.cloud.dialogflow.cx.v3.ICreateWebhookRequest): Promise<google.cloud.dialogflow.cx.v3.Webhook>;
-
-                        /**
-                         * Calls UpdateWebhook.
-                         * @param request UpdateWebhookRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and Webhook
-                         */
-                        public updateWebhook(request: google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest, callback: google.cloud.dialogflow.cx.v3.Webhooks.UpdateWebhookCallback): void;
-
-                        /**
-                         * Calls UpdateWebhook.
-                         * @param request UpdateWebhookRequest message or plain object
-                         * @returns Promise
-                         */
-                        public updateWebhook(request: google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest): Promise<google.cloud.dialogflow.cx.v3.Webhook>;
-
-                        /**
-                         * Calls DeleteWebhook.
-                         * @param request DeleteWebhookRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and Empty
-                         */
-                        public deleteWebhook(request: google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest, callback: google.cloud.dialogflow.cx.v3.Webhooks.DeleteWebhookCallback): void;
-
-                        /**
-                         * Calls DeleteWebhook.
-                         * @param request DeleteWebhookRequest message or plain object
-                         * @returns Promise
-                         */
-                        public deleteWebhook(request: google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest): Promise<google.protobuf.Empty>;
-                    }
-
-                    namespace Webhooks {
-
-                        /**
-                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Webhooks#listWebhooks}.
-                         * @param error Error, if any
-                         * @param [response] ListWebhooksResponse
-                         */
-                        type ListWebhooksCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.ListWebhooksResponse) => void;
-
-                        /**
-                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Webhooks#getWebhook}.
-                         * @param error Error, if any
-                         * @param [response] Webhook
-                         */
-                        type GetWebhookCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Webhook) => void;
-
-                        /**
-                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Webhooks#createWebhook}.
-                         * @param error Error, if any
-                         * @param [response] Webhook
-                         */
-                        type CreateWebhookCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Webhook) => void;
-
-                        /**
-                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Webhooks#updateWebhook}.
-                         * @param error Error, if any
-                         * @param [response] Webhook
-                         */
-                        type UpdateWebhookCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Webhook) => void;
-
-                        /**
-                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Webhooks#deleteWebhook}.
-                         * @param error Error, if any
-                         * @param [response] Empty
-                         */
-                        type DeleteWebhookCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-                    }
-
-                    /** Properties of a Webhook. */
-                    interface IWebhook {
-
-                        /** Webhook name */
-                        name?: (string|null);
-
-                        /** Webhook displayName */
-                        displayName?: (string|null);
-
-                        /** Webhook genericWebService */
-                        genericWebService?: (google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService|null);
-
-                        /** Webhook serviceDirectory */
-                        serviceDirectory?: (google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig|null);
-
-                        /** Webhook timeout */
-                        timeout?: (google.protobuf.IDuration|null);
-
-                        /** Webhook disabled */
-                        disabled?: (boolean|null);
-                    }
-
-                    /** Represents a Webhook. */
-                    class Webhook implements IWebhook {
-
-                        /**
-                         * Constructs a new Webhook.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3.IWebhook);
-
-                        /** Webhook name. */
-                        public name: string;
-
-                        /** Webhook displayName. */
-                        public displayName: string;
-
-                        /** Webhook genericWebService. */
-                        public genericWebService?: (google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService|null);
-
-                        /** Webhook serviceDirectory. */
-                        public serviceDirectory?: (google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig|null);
-
-                        /** Webhook timeout. */
-                        public timeout?: (google.protobuf.IDuration|null);
-
-                        /** Webhook disabled. */
-                        public disabled: boolean;
-
-                        /** Webhook webhook. */
-                        public webhook?: ("genericWebService"|"serviceDirectory");
-
-                        /**
-                         * Creates a new Webhook instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Webhook instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3.IWebhook): google.cloud.dialogflow.cx.v3.Webhook;
-
-                        /**
-                         * Encodes the specified Webhook message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.verify|verify} messages.
-                         * @param message Webhook message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3.IWebhook, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Webhook message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.verify|verify} messages.
-                         * @param message Webhook message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IWebhook, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a Webhook message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Webhook
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Webhook;
-
-                        /**
-                         * Decodes a Webhook message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Webhook
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Webhook;
-
-                        /**
-                         * Verifies a Webhook message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a Webhook message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Webhook
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Webhook;
-
-                        /**
-                         * Creates a plain object from a Webhook message. Also converts values to other types if specified.
-                         * @param message Webhook
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3.Webhook, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Webhook to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    namespace Webhook {
-
-                        /** Properties of a GenericWebService. */
-                        interface IGenericWebService {
-
-                            /** GenericWebService uri */
-                            uri?: (string|null);
-
-                            /** GenericWebService username */
-                            username?: (string|null);
-
-                            /** GenericWebService password */
-                            password?: (string|null);
-
-                            /** GenericWebService requestHeaders */
-                            requestHeaders?: ({ [k: string]: string }|null);
-
-                            /** GenericWebService allowedCaCerts */
-                            allowedCaCerts?: (Uint8Array[]|null);
-                        }
-
-                        /** Represents a GenericWebService. */
-                        class GenericWebService implements IGenericWebService {
-
-                            /**
-                             * Constructs a new GenericWebService.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService);
-
-                            /** GenericWebService uri. */
-                            public uri: string;
-
-                            /** GenericWebService username. */
-                            public username: string;
-
-                            /** GenericWebService password. */
-                            public password: string;
-
-                            /** GenericWebService requestHeaders. */
-                            public requestHeaders: { [k: string]: string };
-
-                            /** GenericWebService allowedCaCerts. */
-                            public allowedCaCerts: Uint8Array[];
-
-                            /**
-                             * Creates a new GenericWebService instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns GenericWebService instance
-                             */
-                            public static create(properties?: google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService;
-
-                            /**
-                             * Encodes the specified GenericWebService message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.verify|verify} messages.
-                             * @param message GenericWebService message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified GenericWebService message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.verify|verify} messages.
-                             * @param message GenericWebService message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a GenericWebService message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns GenericWebService
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService;
-
-                            /**
-                             * Decodes a GenericWebService message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns GenericWebService
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService;
-
-                            /**
-                             * Verifies a GenericWebService message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a GenericWebService message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns GenericWebService
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService;
-
-                            /**
-                             * Creates a plain object from a GenericWebService message. Also converts values to other types if specified.
-                             * @param message GenericWebService
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this GenericWebService to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-
-                        /** Properties of a ServiceDirectoryConfig. */
-                        interface IServiceDirectoryConfig {
-
-                            /** ServiceDirectoryConfig service */
-                            service?: (string|null);
-
-                            /** ServiceDirectoryConfig genericWebService */
-                            genericWebService?: (google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService|null);
-                        }
-
-                        /** Represents a ServiceDirectoryConfig. */
-                        class ServiceDirectoryConfig implements IServiceDirectoryConfig {
-
-                            /**
-                             * Constructs a new ServiceDirectoryConfig.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig);
-
-                            /** ServiceDirectoryConfig service. */
-                            public service: string;
-
-                            /** ServiceDirectoryConfig genericWebService. */
-                            public genericWebService?: (google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService|null);
-
-                            /**
-                             * Creates a new ServiceDirectoryConfig instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns ServiceDirectoryConfig instance
-                             */
-                            public static create(properties?: google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig): google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig;
-
-                            /**
-                             * Encodes the specified ServiceDirectoryConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig.verify|verify} messages.
-                             * @param message ServiceDirectoryConfig message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified ServiceDirectoryConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig.verify|verify} messages.
-                             * @param message ServiceDirectoryConfig message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a ServiceDirectoryConfig message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns ServiceDirectoryConfig
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig;
-
-                            /**
-                             * Decodes a ServiceDirectoryConfig message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns ServiceDirectoryConfig
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig;
-
-                            /**
-                             * Verifies a ServiceDirectoryConfig message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a ServiceDirectoryConfig message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns ServiceDirectoryConfig
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig;
-
-                            /**
-                             * Creates a plain object from a ServiceDirectoryConfig message. Also converts values to other types if specified.
-                             * @param message ServiceDirectoryConfig
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this ServiceDirectoryConfig to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-                    }
-
-                    /** Properties of a ListWebhooksRequest. */
-                    interface IListWebhooksRequest {
-
-                        /** ListWebhooksRequest parent */
-                        parent?: (string|null);
-
-                        /** ListWebhooksRequest pageSize */
-                        pageSize?: (number|null);
-
-                        /** ListWebhooksRequest pageToken */
-                        pageToken?: (string|null);
-                    }
-
-                    /** Represents a ListWebhooksRequest. */
-                    class ListWebhooksRequest implements IListWebhooksRequest {
-
-                        /**
-                         * Constructs a new ListWebhooksRequest.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListWebhooksRequest);
-
-                        /** ListWebhooksRequest parent. */
-                        public parent: string;
-
-                        /** ListWebhooksRequest pageSize. */
-                        public pageSize: number;
-
-                        /** ListWebhooksRequest pageToken. */
-                        public pageToken: string;
-
-                        /**
-                         * Creates a new ListWebhooksRequest instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ListWebhooksRequest instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListWebhooksRequest): google.cloud.dialogflow.cx.v3.ListWebhooksRequest;
-
-                        /**
-                         * Encodes the specified ListWebhooksRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListWebhooksRequest.verify|verify} messages.
-                         * @param message ListWebhooksRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3.IListWebhooksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ListWebhooksRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListWebhooksRequest.verify|verify} messages.
-                         * @param message ListWebhooksRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListWebhooksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ListWebhooksRequest message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ListWebhooksRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListWebhooksRequest;
-
-                        /**
-                         * Decodes a ListWebhooksRequest message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ListWebhooksRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListWebhooksRequest;
-
-                        /**
-                         * Verifies a ListWebhooksRequest message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ListWebhooksRequest message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ListWebhooksRequest
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListWebhooksRequest;
-
-                        /**
-                         * Creates a plain object from a ListWebhooksRequest message. Also converts values to other types if specified.
-                         * @param message ListWebhooksRequest
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListWebhooksRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ListWebhooksRequest to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a ListWebhooksResponse. */
-                    interface IListWebhooksResponse {
-
-                        /** ListWebhooksResponse webhooks */
-                        webhooks?: (google.cloud.dialogflow.cx.v3.IWebhook[]|null);
-
-                        /** ListWebhooksResponse nextPageToken */
-                        nextPageToken?: (string|null);
-                    }
-
-                    /** Represents a ListWebhooksResponse. */
-                    class ListWebhooksResponse implements IListWebhooksResponse {
-
-                        /**
-                         * Constructs a new ListWebhooksResponse.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListWebhooksResponse);
-
-                        /** ListWebhooksResponse webhooks. */
-                        public webhooks: google.cloud.dialogflow.cx.v3.IWebhook[];
-
-                        /** ListWebhooksResponse nextPageToken. */
-                        public nextPageToken: string;
-
-                        /**
-                         * Creates a new ListWebhooksResponse instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ListWebhooksResponse instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListWebhooksResponse): google.cloud.dialogflow.cx.v3.ListWebhooksResponse;
-
-                        /**
-                         * Encodes the specified ListWebhooksResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListWebhooksResponse.verify|verify} messages.
-                         * @param message ListWebhooksResponse message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3.IListWebhooksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ListWebhooksResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListWebhooksResponse.verify|verify} messages.
-                         * @param message ListWebhooksResponse message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListWebhooksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ListWebhooksResponse message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ListWebhooksResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListWebhooksResponse;
-
-                        /**
-                         * Decodes a ListWebhooksResponse message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ListWebhooksResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListWebhooksResponse;
-
-                        /**
-                         * Verifies a ListWebhooksResponse message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ListWebhooksResponse message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ListWebhooksResponse
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListWebhooksResponse;
-
-                        /**
-                         * Creates a plain object from a ListWebhooksResponse message. Also converts values to other types if specified.
-                         * @param message ListWebhooksResponse
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListWebhooksResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ListWebhooksResponse to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a GetWebhookRequest. */
-                    interface IGetWebhookRequest {
-
-                        /** GetWebhookRequest name */
-                        name?: (string|null);
-                    }
-
-                    /** Represents a GetWebhookRequest. */
-                    class GetWebhookRequest implements IGetWebhookRequest {
-
-                        /**
-                         * Constructs a new GetWebhookRequest.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3.IGetWebhookRequest);
-
-                        /** GetWebhookRequest name. */
-                        public name: string;
-
-                        /**
-                         * Creates a new GetWebhookRequest instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns GetWebhookRequest instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3.IGetWebhookRequest): google.cloud.dialogflow.cx.v3.GetWebhookRequest;
-
-                        /**
-                         * Encodes the specified GetWebhookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetWebhookRequest.verify|verify} messages.
-                         * @param message GetWebhookRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3.IGetWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified GetWebhookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetWebhookRequest.verify|verify} messages.
-                         * @param message GetWebhookRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IGetWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a GetWebhookRequest message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns GetWebhookRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.GetWebhookRequest;
-
-                        /**
-                         * Decodes a GetWebhookRequest message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns GetWebhookRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.GetWebhookRequest;
-
-                        /**
-                         * Verifies a GetWebhookRequest message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a GetWebhookRequest message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns GetWebhookRequest
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.GetWebhookRequest;
-
-                        /**
-                         * Creates a plain object from a GetWebhookRequest message. Also converts values to other types if specified.
-                         * @param message GetWebhookRequest
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3.GetWebhookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this GetWebhookRequest to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a CreateWebhookRequest. */
-                    interface ICreateWebhookRequest {
-
-                        /** CreateWebhookRequest parent */
-                        parent?: (string|null);
-
-                        /** CreateWebhookRequest webhook */
-                        webhook?: (google.cloud.dialogflow.cx.v3.IWebhook|null);
-                    }
-
-                    /** Represents a CreateWebhookRequest. */
-                    class CreateWebhookRequest implements ICreateWebhookRequest {
-
-                        /**
-                         * Constructs a new CreateWebhookRequest.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICreateWebhookRequest);
-
-                        /** CreateWebhookRequest parent. */
-                        public parent: string;
-
-                        /** CreateWebhookRequest webhook. */
-                        public webhook?: (google.cloud.dialogflow.cx.v3.IWebhook|null);
-
-                        /**
-                         * Creates a new CreateWebhookRequest instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns CreateWebhookRequest instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICreateWebhookRequest): google.cloud.dialogflow.cx.v3.CreateWebhookRequest;
-
-                        /**
-                         * Encodes the specified CreateWebhookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreateWebhookRequest.verify|verify} messages.
-                         * @param message CreateWebhookRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3.ICreateWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified CreateWebhookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreateWebhookRequest.verify|verify} messages.
-                         * @param message CreateWebhookRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICreateWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a CreateWebhookRequest message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns CreateWebhookRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CreateWebhookRequest;
-
-                        /**
-                         * Decodes a CreateWebhookRequest message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns CreateWebhookRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CreateWebhookRequest;
-
-                        /**
-                         * Verifies a CreateWebhookRequest message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a CreateWebhookRequest message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns CreateWebhookRequest
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CreateWebhookRequest;
-
-                        /**
-                         * Creates a plain object from a CreateWebhookRequest message. Also converts values to other types if specified.
-                         * @param message CreateWebhookRequest
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3.CreateWebhookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this CreateWebhookRequest to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of an UpdateWebhookRequest. */
-                    interface IUpdateWebhookRequest {
-
-                        /** UpdateWebhookRequest webhook */
-                        webhook?: (google.cloud.dialogflow.cx.v3.IWebhook|null);
-
-                        /** UpdateWebhookRequest updateMask */
-                        updateMask?: (google.protobuf.IFieldMask|null);
-                    }
-
-                    /** Represents an UpdateWebhookRequest. */
-                    class UpdateWebhookRequest implements IUpdateWebhookRequest {
-
-                        /**
-                         * Constructs a new UpdateWebhookRequest.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest);
-
-                        /** UpdateWebhookRequest webhook. */
-                        public webhook?: (google.cloud.dialogflow.cx.v3.IWebhook|null);
-
-                        /** UpdateWebhookRequest updateMask. */
-                        public updateMask?: (google.protobuf.IFieldMask|null);
-
-                        /**
-                         * Creates a new UpdateWebhookRequest instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns UpdateWebhookRequest instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest): google.cloud.dialogflow.cx.v3.UpdateWebhookRequest;
-
-                        /**
-                         * Encodes the specified UpdateWebhookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UpdateWebhookRequest.verify|verify} messages.
-                         * @param message UpdateWebhookRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified UpdateWebhookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UpdateWebhookRequest.verify|verify} messages.
-                         * @param message UpdateWebhookRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an UpdateWebhookRequest message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns UpdateWebhookRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.UpdateWebhookRequest;
-
-                        /**
-                         * Decodes an UpdateWebhookRequest message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns UpdateWebhookRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.UpdateWebhookRequest;
-
-                        /**
-                         * Verifies an UpdateWebhookRequest message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an UpdateWebhookRequest message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns UpdateWebhookRequest
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.UpdateWebhookRequest;
-
-                        /**
-                         * Creates a plain object from an UpdateWebhookRequest message. Also converts values to other types if specified.
-                         * @param message UpdateWebhookRequest
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3.UpdateWebhookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this UpdateWebhookRequest to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a DeleteWebhookRequest. */
-                    interface IDeleteWebhookRequest {
-
-                        /** DeleteWebhookRequest name */
-                        name?: (string|null);
-
-                        /** DeleteWebhookRequest force */
-                        force?: (boolean|null);
-                    }
-
-                    /** Represents a DeleteWebhookRequest. */
-                    class DeleteWebhookRequest implements IDeleteWebhookRequest {
-
-                        /**
-                         * Constructs a new DeleteWebhookRequest.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest);
-
-                        /** DeleteWebhookRequest name. */
-                        public name: string;
-
-                        /** DeleteWebhookRequest force. */
-                        public force: boolean;
-
-                        /**
-                         * Creates a new DeleteWebhookRequest instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns DeleteWebhookRequest instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest): google.cloud.dialogflow.cx.v3.DeleteWebhookRequest;
-
-                        /**
-                         * Encodes the specified DeleteWebhookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeleteWebhookRequest.verify|verify} messages.
-                         * @param message DeleteWebhookRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified DeleteWebhookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeleteWebhookRequest.verify|verify} messages.
-                         * @param message DeleteWebhookRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a DeleteWebhookRequest message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns DeleteWebhookRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.DeleteWebhookRequest;
-
-                        /**
-                         * Decodes a DeleteWebhookRequest message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns DeleteWebhookRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.DeleteWebhookRequest;
-
-                        /**
-                         * Verifies a DeleteWebhookRequest message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a DeleteWebhookRequest message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns DeleteWebhookRequest
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.DeleteWebhookRequest;
-
-                        /**
-                         * Creates a plain object from a DeleteWebhookRequest message. Also converts values to other types if specified.
-                         * @param message DeleteWebhookRequest
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3.DeleteWebhookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this DeleteWebhookRequest to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a WebhookRequest. */
-                    interface IWebhookRequest {
-
-                        /** WebhookRequest detectIntentResponseId */
-                        detectIntentResponseId?: (string|null);
-
-                        /** WebhookRequest text */
-                        text?: (string|null);
-
-                        /** WebhookRequest triggerIntent */
-                        triggerIntent?: (string|null);
-
-                        /** WebhookRequest transcript */
-                        transcript?: (string|null);
-
-                        /** WebhookRequest triggerEvent */
-                        triggerEvent?: (string|null);
-
-                        /** WebhookRequest languageCode */
-                        languageCode?: (string|null);
-
-                        /** WebhookRequest fulfillmentInfo */
-                        fulfillmentInfo?: (google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo|null);
-
-                        /** WebhookRequest intentInfo */
-                        intentInfo?: (google.cloud.dialogflow.cx.v3.WebhookRequest.IIntentInfo|null);
-
-                        /** WebhookRequest pageInfo */
-                        pageInfo?: (google.cloud.dialogflow.cx.v3.IPageInfo|null);
-
-                        /** WebhookRequest sessionInfo */
-                        sessionInfo?: (google.cloud.dialogflow.cx.v3.ISessionInfo|null);
-
-                        /** WebhookRequest messages */
-                        messages?: (google.cloud.dialogflow.cx.v3.IResponseMessage[]|null);
-
-                        /** WebhookRequest payload */
-                        payload?: (google.protobuf.IStruct|null);
-
-                        /** WebhookRequest sentimentAnalysisResult */
-                        sentimentAnalysisResult?: (google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult|null);
-                    }
-
-                    /** Represents a WebhookRequest. */
-                    class WebhookRequest implements IWebhookRequest {
-
-                        /**
-                         * Constructs a new WebhookRequest.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3.IWebhookRequest);
-
-                        /** WebhookRequest detectIntentResponseId. */
-                        public detectIntentResponseId: string;
-
-                        /** WebhookRequest text. */
-                        public text?: (string|null);
-
-                        /** WebhookRequest triggerIntent. */
-                        public triggerIntent?: (string|null);
-
-                        /** WebhookRequest transcript. */
-                        public transcript?: (string|null);
-
-                        /** WebhookRequest triggerEvent. */
-                        public triggerEvent?: (string|null);
-
-                        /** WebhookRequest languageCode. */
-                        public languageCode: string;
-
-                        /** WebhookRequest fulfillmentInfo. */
-                        public fulfillmentInfo?: (google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo|null);
-
-                        /** WebhookRequest intentInfo. */
-                        public intentInfo?: (google.cloud.dialogflow.cx.v3.WebhookRequest.IIntentInfo|null);
-
-                        /** WebhookRequest pageInfo. */
-                        public pageInfo?: (google.cloud.dialogflow.cx.v3.IPageInfo|null);
-
-                        /** WebhookRequest sessionInfo. */
-                        public sessionInfo?: (google.cloud.dialogflow.cx.v3.ISessionInfo|null);
-
-                        /** WebhookRequest messages. */
-                        public messages: google.cloud.dialogflow.cx.v3.IResponseMessage[];
-
-                        /** WebhookRequest payload. */
-                        public payload?: (google.protobuf.IStruct|null);
-
-                        /** WebhookRequest sentimentAnalysisResult. */
-                        public sentimentAnalysisResult?: (google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult|null);
-
-                        /** WebhookRequest query. */
-                        public query?: ("text"|"triggerIntent"|"transcript"|"triggerEvent");
-
-                        /**
-                         * Creates a new WebhookRequest instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns WebhookRequest instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3.IWebhookRequest): google.cloud.dialogflow.cx.v3.WebhookRequest;
-
-                        /**
-                         * Encodes the specified WebhookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.verify|verify} messages.
-                         * @param message WebhookRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3.IWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified WebhookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.verify|verify} messages.
-                         * @param message WebhookRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a WebhookRequest message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns WebhookRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookRequest;
-
-                        /**
-                         * Decodes a WebhookRequest message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns WebhookRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookRequest;
-
-                        /**
-                         * Verifies a WebhookRequest message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a WebhookRequest message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns WebhookRequest
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookRequest;
-
-                        /**
-                         * Creates a plain object from a WebhookRequest message. Also converts values to other types if specified.
-                         * @param message WebhookRequest
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this WebhookRequest to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    namespace WebhookRequest {
-
-                        /** Properties of a FulfillmentInfo. */
-                        interface IFulfillmentInfo {
-
-                            /** FulfillmentInfo tag */
-                            tag?: (string|null);
-                        }
-
-                        /** Represents a FulfillmentInfo. */
-                        class FulfillmentInfo implements IFulfillmentInfo {
-
-                            /**
-                             * Constructs a new FulfillmentInfo.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo);
-
-                            /** FulfillmentInfo tag. */
-                            public tag: string;
-
-                            /**
-                             * Creates a new FulfillmentInfo instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns FulfillmentInfo instance
-                             */
-                            public static create(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo): google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo;
-
-                            /**
-                             * Encodes the specified FulfillmentInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo.verify|verify} messages.
-                             * @param message FulfillmentInfo message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified FulfillmentInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo.verify|verify} messages.
-                             * @param message FulfillmentInfo message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a FulfillmentInfo message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns FulfillmentInfo
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo;
-
-                            /**
-                             * Decodes a FulfillmentInfo message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns FulfillmentInfo
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo;
-
-                            /**
-                             * Verifies a FulfillmentInfo message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a FulfillmentInfo message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns FulfillmentInfo
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo;
-
-                            /**
-                             * Creates a plain object from a FulfillmentInfo message. Also converts values to other types if specified.
-                             * @param message FulfillmentInfo
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this FulfillmentInfo to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-
-                        /** Properties of an IntentInfo. */
-                        interface IIntentInfo {
-
-                            /** IntentInfo lastMatchedIntent */
-                            lastMatchedIntent?: (string|null);
-
-                            /** IntentInfo displayName */
-                            displayName?: (string|null);
-
-                            /** IntentInfo parameters */
-                            parameters?: ({ [k: string]: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IIntentParameterValue }|null);
-
-                            /** IntentInfo confidence */
-                            confidence?: (number|null);
-                        }
-
-                        /** Represents an IntentInfo. */
-                        class IntentInfo implements IIntentInfo {
-
-                            /**
-                             * Constructs a new IntentInfo.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.IIntentInfo);
-
-                            /** IntentInfo lastMatchedIntent. */
-                            public lastMatchedIntent: string;
-
-                            /** IntentInfo displayName. */
-                            public displayName: string;
-
-                            /** IntentInfo parameters. */
-                            public parameters: { [k: string]: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IIntentParameterValue };
-
-                            /** IntentInfo confidence. */
-                            public confidence: number;
-
-                            /**
-                             * Creates a new IntentInfo instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns IntentInfo instance
-                             */
-                            public static create(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.IIntentInfo): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo;
-
-                            /**
-                             * Encodes the specified IntentInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.verify|verify} messages.
-                             * @param message IntentInfo message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IIntentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified IntentInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.verify|verify} messages.
-                             * @param message IntentInfo message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IIntentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes an IntentInfo message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns IntentInfo
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo;
-
-                            /**
-                             * Decodes an IntentInfo message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns IntentInfo
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo;
-
-                            /**
-                             * Verifies an IntentInfo message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates an IntentInfo message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns IntentInfo
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo;
-
-                            /**
-                             * Creates a plain object from an IntentInfo message. Also converts values to other types if specified.
-                             * @param message IntentInfo
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this IntentInfo to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-
-                        namespace IntentInfo {
-
-                            /** Properties of an IntentParameterValue. */
-                            interface IIntentParameterValue {
-
-                                /** IntentParameterValue originalValue */
-                                originalValue?: (string|null);
-
-                                /** IntentParameterValue resolvedValue */
-                                resolvedValue?: (google.protobuf.IValue|null);
-                            }
-
-                            /** Represents an IntentParameterValue. */
-                            class IntentParameterValue implements IIntentParameterValue {
-
-                                /**
-                                 * Constructs a new IntentParameterValue.
-                                 * @param [properties] Properties to set
-                                 */
-                                constructor(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IIntentParameterValue);
-
-                                /** IntentParameterValue originalValue. */
-                                public originalValue: string;
-
-                                /** IntentParameterValue resolvedValue. */
-                                public resolvedValue?: (google.protobuf.IValue|null);
-
-                                /**
-                                 * Creates a new IntentParameterValue instance using the specified properties.
-                                 * @param [properties] Properties to set
-                                 * @returns IntentParameterValue instance
-                                 */
-                                public static create(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IIntentParameterValue): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue;
-
-                                /**
-                                 * Encodes the specified IntentParameterValue message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue.verify|verify} messages.
-                                 * @param message IntentParameterValue message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encode(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IIntentParameterValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Encodes the specified IntentParameterValue message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue.verify|verify} messages.
-                                 * @param message IntentParameterValue message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IIntentParameterValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Decodes an IntentParameterValue message from the specified reader or buffer.
-                                 * @param reader Reader or buffer to decode from
-                                 * @param [length] Message length if known beforehand
-                                 * @returns IntentParameterValue
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue;
-
-                                /**
-                                 * Decodes an IntentParameterValue message from the specified reader or buffer, length delimited.
-                                 * @param reader Reader or buffer to decode from
-                                 * @returns IntentParameterValue
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue;
-
-                                /**
-                                 * Verifies an IntentParameterValue message.
-                                 * @param message Plain object to verify
-                                 * @returns `null` if valid, otherwise the reason why it is not
-                                 */
-                                public static verify(message: { [k: string]: any }): (string|null);
-
-                                /**
-                                 * Creates an IntentParameterValue message from a plain object. Also converts values to their respective internal types.
-                                 * @param object Plain object
-                                 * @returns IntentParameterValue
-                                 */
-                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue;
-
-                                /**
-                                 * Creates a plain object from an IntentParameterValue message. Also converts values to other types if specified.
-                                 * @param message IntentParameterValue
-                                 * @param [options] Conversion options
-                                 * @returns Plain object
-                                 */
-                                public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookRequest.IntentInfo.IntentParameterValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                /**
-                                 * Converts this IntentParameterValue to JSON.
-                                 * @returns JSON object
-                                 */
-                                public toJSON(): { [k: string]: any };
-                            }
-                        }
-
-                        /** Properties of a SentimentAnalysisResult. */
-                        interface ISentimentAnalysisResult {
-
-                            /** SentimentAnalysisResult score */
-                            score?: (number|null);
-
-                            /** SentimentAnalysisResult magnitude */
-                            magnitude?: (number|null);
-                        }
-
-                        /** Represents a SentimentAnalysisResult. */
-                        class SentimentAnalysisResult implements ISentimentAnalysisResult {
-
-                            /**
-                             * Constructs a new SentimentAnalysisResult.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult);
-
-                            /** SentimentAnalysisResult score. */
-                            public score: number;
-
-                            /** SentimentAnalysisResult magnitude. */
-                            public magnitude: number;
-
-                            /**
-                             * Creates a new SentimentAnalysisResult instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns SentimentAnalysisResult instance
-                             */
-                            public static create(properties?: google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult): google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult;
-
-                            /**
-                             * Encodes the specified SentimentAnalysisResult message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult.verify|verify} messages.
-                             * @param message SentimentAnalysisResult message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified SentimentAnalysisResult message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult.verify|verify} messages.
-                             * @param message SentimentAnalysisResult message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a SentimentAnalysisResult message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns SentimentAnalysisResult
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult;
-
-                            /**
-                             * Decodes a SentimentAnalysisResult message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns SentimentAnalysisResult
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult;
-
-                            /**
-                             * Verifies a SentimentAnalysisResult message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a SentimentAnalysisResult message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns SentimentAnalysisResult
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult;
-
-                            /**
-                             * Creates a plain object from a SentimentAnalysisResult message. Also converts values to other types if specified.
-                             * @param message SentimentAnalysisResult
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookRequest.SentimentAnalysisResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this SentimentAnalysisResult to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-                    }
-
-                    /** Properties of a WebhookResponse. */
-                    interface IWebhookResponse {
-
-                        /** WebhookResponse fulfillmentResponse */
-                        fulfillmentResponse?: (google.cloud.dialogflow.cx.v3.WebhookResponse.IFulfillmentResponse|null);
-
-                        /** WebhookResponse pageInfo */
-                        pageInfo?: (google.cloud.dialogflow.cx.v3.IPageInfo|null);
-
-                        /** WebhookResponse sessionInfo */
-                        sessionInfo?: (google.cloud.dialogflow.cx.v3.ISessionInfo|null);
-
-                        /** WebhookResponse payload */
-                        payload?: (google.protobuf.IStruct|null);
-
-                        /** WebhookResponse targetPage */
-                        targetPage?: (string|null);
-
-                        /** WebhookResponse targetFlow */
-                        targetFlow?: (string|null);
-                    }
-
-                    /** Represents a WebhookResponse. */
-                    class WebhookResponse implements IWebhookResponse {
-
-                        /**
-                         * Constructs a new WebhookResponse.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3.IWebhookResponse);
-
-                        /** WebhookResponse fulfillmentResponse. */
-                        public fulfillmentResponse?: (google.cloud.dialogflow.cx.v3.WebhookResponse.IFulfillmentResponse|null);
-
-                        /** WebhookResponse pageInfo. */
-                        public pageInfo?: (google.cloud.dialogflow.cx.v3.IPageInfo|null);
-
-                        /** WebhookResponse sessionInfo. */
-                        public sessionInfo?: (google.cloud.dialogflow.cx.v3.ISessionInfo|null);
-
-                        /** WebhookResponse payload. */
-                        public payload?: (google.protobuf.IStruct|null);
-
-                        /** WebhookResponse targetPage. */
-                        public targetPage?: (string|null);
-
-                        /** WebhookResponse targetFlow. */
-                        public targetFlow?: (string|null);
-
-                        /** WebhookResponse transition. */
-                        public transition?: ("targetPage"|"targetFlow");
-
-                        /**
-                         * Creates a new WebhookResponse instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns WebhookResponse instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3.IWebhookResponse): google.cloud.dialogflow.cx.v3.WebhookResponse;
-
-                        /**
-                         * Encodes the specified WebhookResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookResponse.verify|verify} messages.
-                         * @param message WebhookResponse message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3.IWebhookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified WebhookResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookResponse.verify|verify} messages.
-                         * @param message WebhookResponse message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IWebhookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a WebhookResponse message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns WebhookResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookResponse;
-
-                        /**
-                         * Decodes a WebhookResponse message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns WebhookResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookResponse;
-
-                        /**
-                         * Verifies a WebhookResponse message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a WebhookResponse message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns WebhookResponse
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookResponse;
-
-                        /**
-                         * Creates a plain object from a WebhookResponse message. Also converts values to other types if specified.
-                         * @param message WebhookResponse
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this WebhookResponse to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    namespace WebhookResponse {
-
-                        /** Properties of a FulfillmentResponse. */
-                        interface IFulfillmentResponse {
-
-                            /** FulfillmentResponse messages */
-                            messages?: (google.cloud.dialogflow.cx.v3.IResponseMessage[]|null);
-
-                            /** FulfillmentResponse mergeBehavior */
-                            mergeBehavior?: (google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse.MergeBehavior|keyof typeof google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse.MergeBehavior|null);
-                        }
-
-                        /** Represents a FulfillmentResponse. */
-                        class FulfillmentResponse implements IFulfillmentResponse {
-
-                            /**
-                             * Constructs a new FulfillmentResponse.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.dialogflow.cx.v3.WebhookResponse.IFulfillmentResponse);
-
-                            /** FulfillmentResponse messages. */
-                            public messages: google.cloud.dialogflow.cx.v3.IResponseMessage[];
-
-                            /** FulfillmentResponse mergeBehavior. */
-                            public mergeBehavior: (google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse.MergeBehavior|keyof typeof google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse.MergeBehavior);
-
-                            /**
-                             * Creates a new FulfillmentResponse instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns FulfillmentResponse instance
-                             */
-                            public static create(properties?: google.cloud.dialogflow.cx.v3.WebhookResponse.IFulfillmentResponse): google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse;
-
-                            /**
-                             * Encodes the specified FulfillmentResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse.verify|verify} messages.
-                             * @param message FulfillmentResponse message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.dialogflow.cx.v3.WebhookResponse.IFulfillmentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified FulfillmentResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse.verify|verify} messages.
-                             * @param message FulfillmentResponse message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.WebhookResponse.IFulfillmentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a FulfillmentResponse message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns FulfillmentResponse
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse;
-
-                            /**
-                             * Decodes a FulfillmentResponse message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns FulfillmentResponse
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse;
-
-                            /**
-                             * Verifies a FulfillmentResponse message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a FulfillmentResponse message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns FulfillmentResponse
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse;
-
-                            /**
-                             * Creates a plain object from a FulfillmentResponse message. Also converts values to other types if specified.
-                             * @param message FulfillmentResponse
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this FulfillmentResponse to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-
-                        namespace FulfillmentResponse {
-
-                            /** MergeBehavior enum. */
-                            enum MergeBehavior {
-                                MERGE_BEHAVIOR_UNSPECIFIED = 0,
-                                APPEND = 1,
-                                REPLACE = 2
-                            }
-                        }
-                    }
-
-                    /** Properties of a PageInfo. */
-                    interface IPageInfo {
-
-                        /** PageInfo currentPage */
-                        currentPage?: (string|null);
-
-                        /** PageInfo formInfo */
-                        formInfo?: (google.cloud.dialogflow.cx.v3.PageInfo.IFormInfo|null);
-                    }
-
-                    /** Represents a PageInfo. */
-                    class PageInfo implements IPageInfo {
-
-                        /**
-                         * Constructs a new PageInfo.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3.IPageInfo);
-
-                        /** PageInfo currentPage. */
-                        public currentPage: string;
-
-                        /** PageInfo formInfo. */
-                        public formInfo?: (google.cloud.dialogflow.cx.v3.PageInfo.IFormInfo|null);
-
-                        /**
-                         * Creates a new PageInfo instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns PageInfo instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3.IPageInfo): google.cloud.dialogflow.cx.v3.PageInfo;
-
-                        /**
-                         * Encodes the specified PageInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PageInfo.verify|verify} messages.
-                         * @param message PageInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3.IPageInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified PageInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PageInfo.verify|verify} messages.
-                         * @param message PageInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IPageInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a PageInfo message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns PageInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.PageInfo;
-
-                        /**
-                         * Decodes a PageInfo message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns PageInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.PageInfo;
-
-                        /**
-                         * Verifies a PageInfo message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a PageInfo message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns PageInfo
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.PageInfo;
-
-                        /**
-                         * Creates a plain object from a PageInfo message. Also converts values to other types if specified.
-                         * @param message PageInfo
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3.PageInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this PageInfo to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    namespace PageInfo {
-
-                        /** Properties of a FormInfo. */
-                        interface IFormInfo {
-
-                            /** FormInfo parameterInfo */
-                            parameterInfo?: (google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.IParameterInfo[]|null);
-                        }
-
-                        /** Represents a FormInfo. */
-                        class FormInfo implements IFormInfo {
-
-                            /**
-                             * Constructs a new FormInfo.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.dialogflow.cx.v3.PageInfo.IFormInfo);
-
-                            /** FormInfo parameterInfo. */
-                            public parameterInfo: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.IParameterInfo[];
-
-                            /**
-                             * Creates a new FormInfo instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns FormInfo instance
-                             */
-                            public static create(properties?: google.cloud.dialogflow.cx.v3.PageInfo.IFormInfo): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo;
-
-                            /**
-                             * Encodes the specified FormInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.verify|verify} messages.
-                             * @param message FormInfo message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.dialogflow.cx.v3.PageInfo.IFormInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified FormInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.verify|verify} messages.
-                             * @param message FormInfo message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.PageInfo.IFormInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a FormInfo message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns FormInfo
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo;
-
-                            /**
-                             * Decodes a FormInfo message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns FormInfo
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo;
-
-                            /**
-                             * Verifies a FormInfo message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a FormInfo message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns FormInfo
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo;
-
-                            /**
-                             * Creates a plain object from a FormInfo message. Also converts values to other types if specified.
-                             * @param message FormInfo
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this FormInfo to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-
-                        namespace FormInfo {
-
-                            /** Properties of a ParameterInfo. */
-                            interface IParameterInfo {
-
-                                /** ParameterInfo displayName */
-                                displayName?: (string|null);
-
-                                /** ParameterInfo required */
-                                required?: (boolean|null);
-
-                                /** ParameterInfo state */
-                                state?: (google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo.ParameterState|keyof typeof google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo.ParameterState|null);
-
-                                /** ParameterInfo value */
-                                value?: (google.protobuf.IValue|null);
-
-                                /** ParameterInfo justCollected */
-                                justCollected?: (boolean|null);
-                            }
-
-                            /** Represents a ParameterInfo. */
-                            class ParameterInfo implements IParameterInfo {
-
-                                /**
-                                 * Constructs a new ParameterInfo.
-                                 * @param [properties] Properties to set
-                                 */
-                                constructor(properties?: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.IParameterInfo);
-
-                                /** ParameterInfo displayName. */
-                                public displayName: string;
-
-                                /** ParameterInfo required. */
-                                public required: boolean;
-
-                                /** ParameterInfo state. */
-                                public state: (google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo.ParameterState|keyof typeof google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo.ParameterState);
-
-                                /** ParameterInfo value. */
-                                public value?: (google.protobuf.IValue|null);
-
-                                /** ParameterInfo justCollected. */
-                                public justCollected: boolean;
-
-                                /**
-                                 * Creates a new ParameterInfo instance using the specified properties.
-                                 * @param [properties] Properties to set
-                                 * @returns ParameterInfo instance
-                                 */
-                                public static create(properties?: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.IParameterInfo): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo;
-
-                                /**
-                                 * Encodes the specified ParameterInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo.verify|verify} messages.
-                                 * @param message ParameterInfo message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encode(message: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.IParameterInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Encodes the specified ParameterInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo.verify|verify} messages.
-                                 * @param message ParameterInfo message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.IParameterInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Decodes a ParameterInfo message from the specified reader or buffer.
-                                 * @param reader Reader or buffer to decode from
-                                 * @param [length] Message length if known beforehand
-                                 * @returns ParameterInfo
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo;
-
-                                /**
-                                 * Decodes a ParameterInfo message from the specified reader or buffer, length delimited.
-                                 * @param reader Reader or buffer to decode from
-                                 * @returns ParameterInfo
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo;
-
-                                /**
-                                 * Verifies a ParameterInfo message.
-                                 * @param message Plain object to verify
-                                 * @returns `null` if valid, otherwise the reason why it is not
-                                 */
-                                public static verify(message: { [k: string]: any }): (string|null);
-
-                                /**
-                                 * Creates a ParameterInfo message from a plain object. Also converts values to their respective internal types.
-                                 * @param object Plain object
-                                 * @returns ParameterInfo
-                                 */
-                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo;
-
-                                /**
-                                 * Creates a plain object from a ParameterInfo message. Also converts values to other types if specified.
-                                 * @param message ParameterInfo
-                                 * @param [options] Conversion options
-                                 * @returns Plain object
-                                 */
-                                public static toObject(message: google.cloud.dialogflow.cx.v3.PageInfo.FormInfo.ParameterInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                /**
-                                 * Converts this ParameterInfo to JSON.
-                                 * @returns JSON object
-                                 */
-                                public toJSON(): { [k: string]: any };
-                            }
-
-                            namespace ParameterInfo {
-
-                                /** ParameterState enum. */
-                                enum ParameterState {
-                                    PARAMETER_STATE_UNSPECIFIED = 0,
-                                    EMPTY = 1,
-                                    INVALID = 2,
-                                    FILLED = 3
-                                }
-                            }
-                        }
-                    }
-
-                    /** Properties of a SessionInfo. */
-                    interface ISessionInfo {
-
-                        /** SessionInfo session */
-                        session?: (string|null);
-
-                        /** SessionInfo parameters */
-                        parameters?: ({ [k: string]: google.protobuf.IValue }|null);
-                    }
-
-                    /** Represents a SessionInfo. */
-                    class SessionInfo implements ISessionInfo {
-
-                        /**
-                         * Constructs a new SessionInfo.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3.ISessionInfo);
-
-                        /** SessionInfo session. */
-                        public session: string;
-
-                        /** SessionInfo parameters. */
-                        public parameters: { [k: string]: google.protobuf.IValue };
-
-                        /**
-                         * Creates a new SessionInfo instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns SessionInfo instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3.ISessionInfo): google.cloud.dialogflow.cx.v3.SessionInfo;
-
-                        /**
-                         * Encodes the specified SessionInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SessionInfo.verify|verify} messages.
-                         * @param message SessionInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3.ISessionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified SessionInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SessionInfo.verify|verify} messages.
-                         * @param message SessionInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ISessionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a SessionInfo message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns SessionInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.SessionInfo;
-
-                        /**
-                         * Decodes a SessionInfo message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns SessionInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.SessionInfo;
-
-                        /**
-                         * Verifies a SessionInfo message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a SessionInfo message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns SessionInfo
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.SessionInfo;
-
-                        /**
-                         * Creates a plain object from a SessionInfo message. Also converts values to other types if specified.
-                         * @param message SessionInfo
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3.SessionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this SessionInfo to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };

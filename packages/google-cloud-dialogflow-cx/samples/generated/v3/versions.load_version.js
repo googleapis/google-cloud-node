@@ -20,9 +20,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Version google.cloud.dialogflow.cx.v3.Version  to be loaded
-   *  to draft flow. Format:
-   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
+   *  Required. The Version google.cloud.dialogflow.cx.v3.Version  to be loaded to draft flow.
+   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *  ID>/flows/<Flow ID>/versions/<Version ID>`.
    */
   // const name = 'abc123'
   /**

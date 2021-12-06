@@ -21,8 +21,8 @@ function main(name) {
    */
   /**
    *  Required. The name of the Version google.cloud.dialogflow.cx.v3.Version.
-   *  Format:
-   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
+   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *  ID>/flows/<Flow ID>/versions/<Version ID>`.
    */
   // const name = 'abc123'
 
