@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.1.1...v1.1.2) (2021-12-06)
+
+
+### Bug Fixes
+
+* **v1beta1:** proper field annotations ([#95](https://www.github.com/googleapis/nodejs-managed-identities/issues/95)) ([a4e06d7](https://www.github.com/googleapis/nodejs-managed-identities/commit/a4e06d791fd4e990a71d059ed44a3e30c9b1f1d6))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.1.0...v1.1.1) (2021-09-08)
 
 
