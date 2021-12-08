@@ -2095,6 +2095,121 @@ describe('v1.InstancesClient', () => {
     });
   });
 
+  describe('sendDiagnosticInterrupt', () => {
+    it('invokes sendDiagnosticInterrupt without error', async () => {
+      const client = new instancesModule.v1.InstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceResponse()
+      );
+      client.innerApiCalls.sendDiagnosticInterrupt =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.sendDiagnosticInterrupt(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.sendDiagnosticInterrupt as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes sendDiagnosticInterrupt without error using callback', async () => {
+      const client = new instancesModule.v1.InstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceResponse()
+      );
+      client.innerApiCalls.sendDiagnosticInterrupt =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.sendDiagnosticInterrupt(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.ISendDiagnosticInterruptInstanceResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.sendDiagnosticInterrupt as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes sendDiagnosticInterrupt with error', async () => {
+      const client = new instancesModule.v1.InstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.sendDiagnosticInterrupt = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.sendDiagnosticInterrupt(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.sendDiagnosticInterrupt as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('setDeletionProtection', () => {
     it('invokes setDeletionProtection without error', async () => {
       const client = new instancesModule.v1.InstancesClient({

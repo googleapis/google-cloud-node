@@ -1093,7 +1093,7 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertFirewallPolicyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1116,7 +1116,7 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertFirewallPolicyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1155,7 +1155,7 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertFirewallPolicyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -1177,7 +1177,7 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAssociationsFirewallPolicyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPoliciesListAssociationsResponse()
       );
@@ -1200,7 +1200,7 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAssociationsFirewallPolicyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.FirewallPoliciesListAssociationsResponse()
       );
@@ -1239,7 +1239,7 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAssociationsFirewallPolicyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listAssociations = stubSimpleCall(
         undefined,
@@ -2031,7 +2031,7 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallPoliciesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.FirewallPolicy()
@@ -2062,7 +2062,7 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallPoliciesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.FirewallPolicy()
@@ -2108,7 +2108,7 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallPoliciesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);

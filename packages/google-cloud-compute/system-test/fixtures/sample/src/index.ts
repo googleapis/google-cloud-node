@@ -35,6 +35,7 @@ import {
   GlobalOrganizationOperationsClient,
   GlobalPublicDelegatedPrefixesClient,
   HealthChecksClient,
+  ImageFamilyViewsClient,
   ImagesClient,
   InstanceGroupManagersClient,
   InstanceGroupsClient,
@@ -78,6 +79,7 @@ import {
   RoutersClient,
   RoutesClient,
   SecurityPoliciesClient,
+  ServiceAttachmentsClient,
   SnapshotsClient,
   SslCertificatesClient,
   SslPoliciesClient,
@@ -160,6 +162,9 @@ function doStuffWithGlobalPublicDelegatedPrefixesClient(
   client.close();
 }
 function doStuffWithHealthChecksClient(client: HealthChecksClient) {
+  client.close();
+}
+function doStuffWithImageFamilyViewsClient(client: ImageFamilyViewsClient) {
   client.close();
 }
 function doStuffWithImagesClient(client: ImagesClient) {
@@ -321,6 +326,9 @@ function doStuffWithRoutesClient(client: RoutesClient) {
 function doStuffWithSecurityPoliciesClient(client: SecurityPoliciesClient) {
   client.close();
 }
+function doStuffWithServiceAttachmentsClient(client: ServiceAttachmentsClient) {
+  client.close();
+}
 function doStuffWithSnapshotsClient(client: SnapshotsClient) {
   client.close();
 }
@@ -437,6 +445,9 @@ function main() {
   // check that the client instance can be created
   const healthChecksClient = new HealthChecksClient();
   doStuffWithHealthChecksClient(healthChecksClient);
+  // check that the client instance can be created
+  const imageFamilyViewsClient = new ImageFamilyViewsClient();
+  doStuffWithImageFamilyViewsClient(imageFamilyViewsClient);
   // check that the client instance can be created
   const imagesClient = new ImagesClient();
   doStuffWithImagesClient(imagesClient);
@@ -575,6 +586,9 @@ function main() {
   // check that the client instance can be created
   const securityPoliciesClient = new SecurityPoliciesClient();
   doStuffWithSecurityPoliciesClient(securityPoliciesClient);
+  // check that the client instance can be created
+  const serviceAttachmentsClient = new ServiceAttachmentsClient();
+  doStuffWithServiceAttachmentsClient(serviceAttachmentsClient);
   // check that the client instance can be created
   const snapshotsClient = new SnapshotsClient();
   doStuffWithSnapshotsClient(snapshotsClient);

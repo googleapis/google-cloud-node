@@ -14,6 +14,12 @@
 docker:
   image: gcr.io/cloud-devrel-public-resources/owlbot-nodejs:latest
 
+deep-remove-regex:
+  - /owl-bot-staging
+
+deep-copy-regex:
+  - source: /google/cloud/compute/(.*)/.*-nodejs/(.*)
+    dest: /owl-bot-staging/$1/$2
 
 begin-after-commit-hash: efb563da184f479fabf98da24f969494944d059b
 

@@ -474,7 +474,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
@@ -502,7 +502,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
@@ -545,7 +545,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);

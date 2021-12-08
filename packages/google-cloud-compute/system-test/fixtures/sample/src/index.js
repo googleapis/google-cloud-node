@@ -41,6 +41,7 @@ function main() {
   const globalPublicDelegatedPrefixesClient =
     new compute.GlobalPublicDelegatedPrefixesClient();
   const healthChecksClient = new compute.HealthChecksClient();
+  const imageFamilyViewsClient = new compute.ImageFamilyViewsClient();
   const imagesClient = new compute.ImagesClient();
   const instanceGroupManagersClient = new compute.InstanceGroupManagersClient();
   const instanceGroupsClient = new compute.InstanceGroupsClient();
@@ -93,6 +94,7 @@ function main() {
   const routersClient = new compute.RoutersClient();
   const routesClient = new compute.RoutesClient();
   const securityPoliciesClient = new compute.SecurityPoliciesClient();
+  const serviceAttachmentsClient = new compute.ServiceAttachmentsClient();
   const snapshotsClient = new compute.SnapshotsClient();
   const sslCertificatesClient = new compute.SslCertificatesClient();
   const sslPoliciesClient = new compute.SslPoliciesClient();
