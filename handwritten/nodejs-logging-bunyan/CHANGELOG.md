@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v3.1.1...v3.2.0) (2021-12-09)
+
+
+### Features
+
+* add eslintignore for sameple generated code ([#1302](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/1302)) ([#574](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/574)) ([10c6371](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/10c63713d659f36f45eeb23adba554ed159623a5))
+
 ### [3.1.1](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v3.1.0...v3.1.1) (2021-09-08)
 
 
