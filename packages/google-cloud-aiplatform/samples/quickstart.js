@@ -18,14 +18,14 @@
  * TODO: add an actual quickstart example.
  */
 async function main() {
-  // [START aiplatform_quickstart]
+  // [START aiplatform_quickstart_sample]
   const {DatasetServiceClient} = require('@google-cloud/aiplatform');
   const client = new DatasetServiceClient();
 
   // Do something with DatasetServiceClient.
   console.info(client);
 
-  // [END aiplatform_quickstart]
+  // [END aiplatform_quickstart_sample]
 }
 
 process.on('unhandledRejection', err => {
