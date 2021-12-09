@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-tasks/compare/v2.4.2...v2.5.0) (2021-12-09)
+
+
+### Features
+
+* add eslintignore for sameple generated code ([#1302](https://www.github.com/googleapis/nodejs-tasks/issues/1302)) ([#582](https://www.github.com/googleapis/nodejs-tasks/issues/582)) ([bf99e4e](https://www.github.com/googleapis/nodejs-tasks/commit/bf99e4ecc1c46cfd84893ef0ab097d27f26f9139))
+
 ### [2.4.2](https://www.github.com/googleapis/nodejs-tasks/compare/v2.4.1...v2.4.2) (2021-09-10)
 
 
