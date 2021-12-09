@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [3.4.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.3.1...v3.4.0) (2021-12-09)
+
+
+### Features
+
+* adds support for MULAW and ALAW audio encoding ([#565](https://www.github.com/googleapis/nodejs-text-to-speech/issues/565)) ([cf7cb74](https://www.github.com/googleapis/nodejs-text-to-speech/commit/cf7cb74655a5bd1cfc13b670a4b620ac8dd78138))
+* update v1beta1 proto ([#562](https://www.github.com/googleapis/nodejs-text-to-speech/issues/562)) ([0d78e6c](https://www.github.com/googleapis/nodejs-text-to-speech/commit/0d78e6c87e51c040c5f35064b53f96d1353f93b9))
+
 ### [3.3.1](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.3.0...v3.3.1) (2021-09-10)
 
 
