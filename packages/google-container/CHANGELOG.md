@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [2.6.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.5.0...v2.6.0) (2021-12-09)
+
+
+### Features
+
+* add eslintignore for sameple generated code ([#1302](https://www.github.com/googleapis/nodejs-cloud-container/issues/1302)) ([#497](https://www.github.com/googleapis/nodejs-cloud-container/issues/497)) ([cea38ea](https://www.github.com/googleapis/nodejs-cloud-container/commit/cea38ea9c7b515d133853492ce48de22c843c985))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.4.4...v2.5.0) (2021-08-23)
 
 
