@@ -2654,8 +2654,11 @@ export class FeaturestoreServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.aiplatform.v1beta1.ExportFeatureValuesRequest.SnapshotExport} request.snapshotExport
-   *   Exports Feature values of all entities of the EntityType as of a snapshot
-   *   time.
+   *   Exports the latest Feature values of all entities of the EntityType
+   *   within a time range.
+   * @param {google.cloud.aiplatform.v1beta1.ExportFeatureValuesRequest.FullExport} request.fullExport
+   *   Exports all historical values of all entities of the EntityType within a
+   *   time range
    * @param {string} request.entityType
    *   Required. The resource name of the EntityType from which to export Feature values.
    *   Format:

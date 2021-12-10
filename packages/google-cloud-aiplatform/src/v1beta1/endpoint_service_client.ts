@@ -678,6 +678,15 @@ export class EndpointServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {google.cloud.aiplatform.v1beta1.Endpoint} request.endpoint
    *   Required. The Endpoint to create.
+   * @param {string} request.endpointId
+   *   Immutable. The ID to use for endpoint, which will become the final
+   *   component of the endpoint resource name.
+   *   If not provided, Vertex AI will generate a value for this ID.
+   *
+   *   This value should be 1-10 characters, and valid characters are /[0-9]/.
+   *   When using HTTP/JSON, this field is populated based on a query string
+   *   argument, such as `?endpoint_id=12345`. This is the fallback for fields
+   *   that are not included in either the URI or the body.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

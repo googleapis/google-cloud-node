@@ -110,6 +110,7 @@
   "../../protos/google/cloud/aiplatform/v1beta1/tensorboard_time_series.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/training_pipeline.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/types.proto",
+  "../../protos/google/cloud/aiplatform/v1beta1/unmanaged_container_model.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/user_action_reference.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/value.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/vizier_service.proto"

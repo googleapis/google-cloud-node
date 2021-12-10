@@ -315,6 +315,12 @@ export class IndexEndpointServiceClient {
     const undeployIndexMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.UndeployIndexOperationMetadata'
     ) as gax.protobuf.Type;
+    const mutateDeployedIndexResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.MutateDeployedIndexResponse'
+    ) as gax.protobuf.Type;
+    const mutateDeployedIndexMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.MutateDeployedIndexOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createIndexEndpoint: new this._gaxModule.LongrunningDescriptor(
@@ -336,6 +342,11 @@ export class IndexEndpointServiceClient {
         this.operationsClient,
         undeployIndexResponse.decode.bind(undeployIndexResponse),
         undeployIndexMetadata.decode.bind(undeployIndexMetadata)
+      ),
+      mutateDeployedIndex: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        mutateDeployedIndexResponse.decode.bind(mutateDeployedIndexResponse),
+        mutateDeployedIndexMetadata.decode.bind(mutateDeployedIndexMetadata)
       ),
     };
 
@@ -397,6 +408,7 @@ export class IndexEndpointServiceClient {
       'deleteIndexEndpoint',
       'deployIndex',
       'undeployIndex',
+      'mutateDeployedIndex',
     ];
     for (const methodName of indexEndpointServiceStubMethods) {
       const callPromise = this.indexEndpointServiceStub.then(
@@ -1243,6 +1255,149 @@ export class IndexEndpointServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.UndeployIndexResponse,
       protos.google.cloud.aiplatform.v1beta1.UndeployIndexOperationMetadata
+    >;
+  }
+  /**
+   * Update an existing DeployedIndex under an IndexEndpoint.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.indexEndpoint
+   *   Required. The name of the IndexEndpoint resource into which to deploy an Index.
+   *   Format:
+   *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
+   * @param {google.cloud.aiplatform.v1beta1.DeployedIndex} request.deployedIndex
+   *   Required. The DeployedIndex to be updated within the IndexEndpoint.
+   *   Currently, the updatable fields are {@link automatic_resources|DeployedIndex}
+   *   and {@link dedicated_resources|DeployedIndex}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/index_endpoint_service.mutate_deployed_index.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_IndexEndpointService_MutateDeployedIndex_async
+   */
+  mutateDeployedIndex(
+    request?: protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexResponse,
+        protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  mutateDeployedIndex(
+    request: protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexResponse,
+        protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  mutateDeployedIndex(
+    request: protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexResponse,
+        protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  mutateDeployedIndex(
+    request?: protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexResponse,
+            protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexResponse,
+        protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexResponse,
+        protos.google.cloud.aiplatform.v1beta1.IMutateDeployedIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        index_endpoint: request.indexEndpoint || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.mutateDeployedIndex(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `mutateDeployedIndex()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/index_endpoint_service.mutate_deployed_index.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_IndexEndpointService_MutateDeployedIndex_async
+   */
+  async checkMutateDeployedIndexProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.MutateDeployedIndexResponse,
+      protos.google.cloud.aiplatform.v1beta1.MutateDeployedIndexOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.mutateDeployedIndex,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.MutateDeployedIndexResponse,
+      protos.google.cloud.aiplatform.v1beta1.MutateDeployedIndexOperationMetadata
     >;
   }
   /**

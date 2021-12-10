@@ -489,7 +489,15 @@ export class PredictionServiceClient {
     return this.innerApiCalls.predict(request, options, callback);
   }
   /**
-   * Perform an online prediction with arbitrary http payload.
+   * Perform an online prediction with an arbitrary HTTP payload.
+   *
+   * The response includes the following HTTP headers:
+   *
+   * * `X-Vertex-AI-Endpoint-Id`: ID of the {@link google.cloud.aiplatform.v1beta1.Endpoint|Endpoint} that served this
+   * prediction.
+   *
+   * * `X-Vertex-AI-Deployed-Model-Id`: ID of the Endpoint's {@link google.cloud.aiplatform.v1beta1.DeployedModel|DeployedModel}
+   * that served this prediction.
    *
    * @param {Object} request
    *   The request object that will be sent.

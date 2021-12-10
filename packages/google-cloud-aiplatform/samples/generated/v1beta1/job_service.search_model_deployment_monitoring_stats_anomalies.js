@@ -27,7 +27,7 @@ function main(modelDeploymentMonitoringJob, deployedModelId, objectives) {
   // const modelDeploymentMonitoringJob = 'abc123'
   /**
    *  Required. The DeployedModel ID of the
-   *  google.cloud.aiplatform.master.ModelDeploymentMonitoringObjectiveConfig.deployed_model_id.
+   *  ModelDeploymentMonitoringObjectiveConfig.deployed_model_id.
    */
   // const deployedModelId = 'abc123'
   /**

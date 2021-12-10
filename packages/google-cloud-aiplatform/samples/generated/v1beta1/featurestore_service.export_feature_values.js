@@ -20,10 +20,15 @@ function main(entityType, destination, featureSelector) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Exports Feature values of all entities of the EntityType as of a snapshot
-   *  time.
+   *  Exports the latest Feature values of all entities of the EntityType
+   *  within a time range.
    */
   // const snapshotExport = {}
+  /**
+   *  Exports all historical values of all entities of the EntityType within a
+   *  time range
+   */
+  // const fullExport = {}
   /**
    *  Required. The resource name of the EntityType from which to export Feature values.
    *  Format:

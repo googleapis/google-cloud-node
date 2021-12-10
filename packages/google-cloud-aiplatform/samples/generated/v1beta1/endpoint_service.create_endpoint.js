@@ -14,7 +14,7 @@
 
 'use strict';
 
-function main(parent, endpoint) {
+function main(parent, endpoint, endpointId) {
   // [START aiplatform_v1beta1_generated_EndpointService_CreateEndpoint_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -28,6 +28,16 @@ function main(parent, endpoint) {
    *  Required. The Endpoint to create.
    */
   // const endpoint = {}
+  /**
+   *  Immutable. The ID to use for endpoint, which will become the final
+   *  component of the endpoint resource name.
+   *  If not provided, Vertex AI will generate a value for this ID.
+   *  This value should be 1-10 characters, and valid characters are /[0-9]/.
+   *  When using HTTP/JSON, this field is populated based on a query string
+   *  argument, such as `?endpoint_id=12345`. This is the fallback for fields
+   *  that are not included in either the URI or the body.
+   */
+  // const endpointId = 'abc123'
 
   // Imports the Aiplatform library
   const {EndpointServiceClient} = require('@google-cloud/aiplatform').v1beta1;
@@ -40,6 +50,7 @@ function main(parent, endpoint) {
     const request = {
       parent,
       endpoint,
+      endpointId,
     };
 
     // Run request
