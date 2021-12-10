@@ -48,6 +48,7 @@ objects to users via direct download.
   * [Download Encrypted File](#download-encrypted-file)
   * [Download File](#download-file)
   * [Download File Using Requester Pays](#download-file-using-requester-pays)
+  * [Download Into Memory](#download-into-memory)
   * [Storage Download Public File.](#storage-download-public-file.)
   * [Enable Bucket Lifecycle Management](#enable-bucket-lifecycle-management)
   * [Storage Enable Bucket Versioning.](#storage-enable-bucket-versioning.)
@@ -116,6 +117,7 @@ objects to users via direct download.
   * [Upload Encrypted File](#upload-encrypted-file)
   * [Upload File](#upload-file)
   * [Upload File With Kms Key](#upload-file-with-kms-key)
+  * [Upload From Memory](#upload-from-memory)
   * [Upload Without Authentication Resumable](#upload-without-authentication-resumable)
   * [Upload Without Authentication Signed Url](#upload-without-authentication-signed-url)
   * [View Bucket Iam Members](#view-bucket-iam-members)
@@ -660,6 +662,23 @@ __Usage:__
 
 
 `node samples/downloadFileUsingRequesterPays.js`
+
+
+-----
+
+
+
+
+### Download Into Memory
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/downloadIntoMemory.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/downloadIntoMemory.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/downloadIntoMemory.js`
 
 
 -----
@@ -1850,6 +1869,23 @@ __Usage:__
 
 
 `node samples/uploadFileWithKmsKey.js`
+
+
+-----
+
+
+
+
+### Upload From Memory
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/uploadFromMemory.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/uploadFromMemory.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/uploadFromMemory.js`
 
 
 -----

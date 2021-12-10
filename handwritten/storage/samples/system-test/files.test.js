@@ -32,6 +32,7 @@ const bucketName = generateName();
 const bucket = storage.bucket(bucketName);
 const fileContents = 'these-are-my-contents';
 const fileName = 'test.txt';
+const memoryFileName = 'testmemory.txt';
 const movedFileName = 'test2.txt';
 const copiedFileName = 'test3.txt';
 const renamedFileName = 'test4.txt';
@@ -62,6 +63,20 @@ describe('file', () => {
     );
     assert.match(output, new RegExp(`${filePath} uploaded to ${bucketName}`));
     const [exists] = await bucket.file(fileName).exists();
+    assert.strictEqual(exists, true);
+  });
+
+  it('should upload a file from memory', async () => {
+    const output = execSync(
+      `node uploadFromMemory.js ${bucketName} ${fileContents} ${memoryFileName}`
+    );
+    assert.match(
+      output,
+      new RegExp(
+        `${memoryFileName} with contents ${fileContents} uploaded to ${bucketName}.`
+      )
+    );
+    const [exists] = await bucket.file(memoryFileName).exists();
     assert.strictEqual(exists, true);
   });
 
@@ -160,6 +175,18 @@ describe('file', () => {
       )
     );
     fs.statSync(downloadFilePath);
+  });
+
+  it('should download a file into memory', () => {
+    const output = execSync(
+      `node downloadIntoMemory.js ${bucketName} ${memoryFileName}`
+    );
+    assert.match(
+      output,
+      new RegExp(
+        `Contents of gs://${bucketName}/${memoryFileName} are ${fileContents}.`
+      )
+    );
   });
 
   it('should download a file using a stream', () => {
