@@ -919,6 +919,8 @@
                                         return "reasons: enum value[] expected";
                                     case 0:
                                     case 1:
+                                    case 8:
+                                    case 9:
                                     case 2:
                                     case 7:
                                     case 3:
@@ -984,6 +986,14 @@
                                     case "CHARGEBACK":
                                     case 1:
                                         message.reasons[i] = 1;
+                                        break;
+                                    case "CHARGEBACK_FRAUD":
+                                    case 8:
+                                        message.reasons[i] = 8;
+                                        break;
+                                    case "CHARGEBACK_DISPUTE":
+                                    case 9:
+                                        message.reasons[i] = 9;
                                         break;
                                     case "PAYMENT_HEURISTICS":
                                     case 2:
@@ -1096,6 +1106,8 @@
                          * @enum {number}
                          * @property {number} REASON_UNSPECIFIED=0 REASON_UNSPECIFIED value
                          * @property {number} CHARGEBACK=1 CHARGEBACK value
+                         * @property {number} CHARGEBACK_FRAUD=8 CHARGEBACK_FRAUD value
+                         * @property {number} CHARGEBACK_DISPUTE=9 CHARGEBACK_DISPUTE value
                          * @property {number} PAYMENT_HEURISTICS=2 PAYMENT_HEURISTICS value
                          * @property {number} INITIATED_TWO_FACTOR=7 INITIATED_TWO_FACTOR value
                          * @property {number} PASSED_TWO_FACTOR=3 PASSED_TWO_FACTOR value
@@ -1107,6 +1119,8 @@
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "REASON_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "CHARGEBACK"] = 1;
+                            values[valuesById[8] = "CHARGEBACK_FRAUD"] = 8;
+                            values[valuesById[9] = "CHARGEBACK_DISPUTE"] = 9;
                             values[valuesById[2] = "PAYMENT_HEURISTICS"] = 2;
                             values[valuesById[7] = "INITIATED_TWO_FACTOR"] = 7;
                             values[valuesById[3] = "PASSED_TWO_FACTOR"] = 3;

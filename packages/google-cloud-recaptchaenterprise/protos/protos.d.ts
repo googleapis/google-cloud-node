@@ -521,6 +521,8 @@ export namespace google {
                     enum Reason {
                         REASON_UNSPECIFIED = 0,
                         CHARGEBACK = 1,
+                        CHARGEBACK_FRAUD = 8,
+                        CHARGEBACK_DISPUTE = 9,
                         PAYMENT_HEURISTICS = 2,
                         INITIATED_TWO_FACTOR = 7,
                         PASSED_TWO_FACTOR = 3,
