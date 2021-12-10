@@ -1644,6 +1644,7 @@
     "requires_billing": true,
     "library_type": "GAPIC_AUTO",
     "codeowner_team": "@googleapis/api-compute",
+    "default_version": "v1",
     "support_documentation": "https://cloud.google.com/compute/docs/getting-support"
   },
   {
