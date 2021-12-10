@@ -778,6 +778,15 @@ export namespace google {
 
                     /** Workload resourceSettings */
                     resourceSettings?: (google.cloud.assuredworkloads.v1.Workload.IResourceSettings[]|null);
+
+                    /** Workload kajEnrollmentState */
+                    kajEnrollmentState?: (google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState|keyof typeof google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState|null);
+
+                    /** Workload enableSovereignControls */
+                    enableSovereignControls?: (boolean|null);
+
+                    /** Workload saaEnrollmentResponse */
+                    saaEnrollmentResponse?: (google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse|null);
                 }
 
                 /** Represents a Workload. */
@@ -821,6 +830,15 @@ export namespace google {
 
                     /** Workload resourceSettings. */
                     public resourceSettings: google.cloud.assuredworkloads.v1.Workload.IResourceSettings[];
+
+                    /** Workload kajEnrollmentState. */
+                    public kajEnrollmentState: (google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState|keyof typeof google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState);
+
+                    /** Workload enableSovereignControls. */
+                    public enableSovereignControls: boolean;
+
+                    /** Workload saaEnrollmentResponse. */
+                    public saaEnrollmentResponse?: (google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse|null);
 
                     /**
                      * Creates a new Workload instance using the specified properties.
@@ -1200,6 +1218,124 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** Properties of a SaaEnrollmentResponse. */
+                    interface ISaaEnrollmentResponse {
+
+                        /** SaaEnrollmentResponse setupStatus */
+                        setupStatus?: (google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState|keyof typeof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState|null);
+
+                        /** SaaEnrollmentResponse setupErrors */
+                        setupErrors?: (google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError[]|null);
+                    }
+
+                    /** Represents a SaaEnrollmentResponse. */
+                    class SaaEnrollmentResponse implements ISaaEnrollmentResponse {
+
+                        /**
+                         * Constructs a new SaaEnrollmentResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse);
+
+                        /** SaaEnrollmentResponse setupStatus. */
+                        public setupStatus?: (google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState|keyof typeof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState|null);
+
+                        /** SaaEnrollmentResponse setupErrors. */
+                        public setupErrors: google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError[];
+
+                        /** SaaEnrollmentResponse _setupStatus. */
+                        public _setupStatus?: "setupStatus";
+
+                        /**
+                         * Creates a new SaaEnrollmentResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SaaEnrollmentResponse instance
+                         */
+                        public static create(properties?: google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse): google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse;
+
+                        /**
+                         * Encodes the specified SaaEnrollmentResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.verify|verify} messages.
+                         * @param message SaaEnrollmentResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SaaEnrollmentResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.verify|verify} messages.
+                         * @param message SaaEnrollmentResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SaaEnrollmentResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SaaEnrollmentResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse;
+
+                        /**
+                         * Decodes a SaaEnrollmentResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SaaEnrollmentResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse;
+
+                        /**
+                         * Verifies a SaaEnrollmentResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SaaEnrollmentResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SaaEnrollmentResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse;
+
+                        /**
+                         * Creates a plain object from a SaaEnrollmentResponse message. Also converts values to other types if specified.
+                         * @param message SaaEnrollmentResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SaaEnrollmentResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace SaaEnrollmentResponse {
+
+                        /** SetupState enum. */
+                        enum SetupState {
+                            SETUP_STATE_UNSPECIFIED = 0,
+                            STATUS_PENDING = 1,
+                            STATUS_COMPLETE = 2
+                        }
+
+                        /** SetupError enum. */
+                        enum SetupError {
+                            SETUP_ERROR_UNSPECIFIED = 0,
+                            ERROR_INVALID_BASE_SETUP = 1,
+                            ERROR_MISSING_EXTERNAL_SIGNING_KEY = 2,
+                            ERROR_NOT_ALL_SERVICES_ENROLLED = 3,
+                            ERROR_SETUP_CHECK_FAILED = 4
+                        }
+                    }
+
                     /** ComplianceRegime enum. */
                     enum ComplianceRegime {
                         COMPLIANCE_REGIME_UNSPECIFIED = 0,
@@ -1212,6 +1348,13 @@ export namespace google {
                         HITRUST = 7,
                         EU_REGIONS_AND_SUPPORT = 8,
                         CA_REGIONS_AND_SUPPORT = 9
+                    }
+
+                    /** KajEnrollmentState enum. */
+                    enum KajEnrollmentState {
+                        KAJ_ENROLLMENT_STATE_UNSPECIFIED = 0,
+                        KAJ_ENROLLMENT_STATE_PENDING = 1,
+                        KAJ_ENROLLMENT_STATE_COMPLETE = 2
                     }
                 }
 
@@ -2091,6 +2234,15 @@ export namespace google {
 
                     /** Workload resourceSettings */
                     resourceSettings?: (google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings[]|null);
+
+                    /** Workload kajEnrollmentState */
+                    kajEnrollmentState?: (google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState|keyof typeof google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState|null);
+
+                    /** Workload enableSovereignControls */
+                    enableSovereignControls?: (boolean|null);
+
+                    /** Workload saaEnrollmentResponse */
+                    saaEnrollmentResponse?: (google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse|null);
                 }
 
                 /** Represents a Workload. */
@@ -2146,6 +2298,15 @@ export namespace google {
 
                     /** Workload resourceSettings. */
                     public resourceSettings: google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings[];
+
+                    /** Workload kajEnrollmentState. */
+                    public kajEnrollmentState: (google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState|keyof typeof google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState);
+
+                    /** Workload enableSovereignControls. */
+                    public enableSovereignControls: boolean;
+
+                    /** Workload saaEnrollmentResponse. */
+                    public saaEnrollmentResponse?: (google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse|null);
 
                     /** Workload complianceRegimeSettings. */
                     public complianceRegimeSettings?: ("il4Settings"|"cjisSettings"|"fedrampHighSettings"|"fedrampModerateSettings");
@@ -2889,6 +3050,124 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** Properties of a SaaEnrollmentResponse. */
+                    interface ISaaEnrollmentResponse {
+
+                        /** SaaEnrollmentResponse setupStatus */
+                        setupStatus?: (google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupState|keyof typeof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupState|null);
+
+                        /** SaaEnrollmentResponse setupErrors */
+                        setupErrors?: (google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupError[]|null);
+                    }
+
+                    /** Represents a SaaEnrollmentResponse. */
+                    class SaaEnrollmentResponse implements ISaaEnrollmentResponse {
+
+                        /**
+                         * Constructs a new SaaEnrollmentResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse);
+
+                        /** SaaEnrollmentResponse setupStatus. */
+                        public setupStatus?: (google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupState|keyof typeof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupState|null);
+
+                        /** SaaEnrollmentResponse setupErrors. */
+                        public setupErrors: google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupError[];
+
+                        /** SaaEnrollmentResponse _setupStatus. */
+                        public _setupStatus?: "setupStatus";
+
+                        /**
+                         * Creates a new SaaEnrollmentResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SaaEnrollmentResponse instance
+                         */
+                        public static create(properties?: google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse): google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse;
+
+                        /**
+                         * Encodes the specified SaaEnrollmentResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.verify|verify} messages.
+                         * @param message SaaEnrollmentResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SaaEnrollmentResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.verify|verify} messages.
+                         * @param message SaaEnrollmentResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SaaEnrollmentResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SaaEnrollmentResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse;
+
+                        /**
+                         * Decodes a SaaEnrollmentResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SaaEnrollmentResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse;
+
+                        /**
+                         * Verifies a SaaEnrollmentResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SaaEnrollmentResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SaaEnrollmentResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse;
+
+                        /**
+                         * Creates a plain object from a SaaEnrollmentResponse message. Also converts values to other types if specified.
+                         * @param message SaaEnrollmentResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SaaEnrollmentResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace SaaEnrollmentResponse {
+
+                        /** SetupState enum. */
+                        enum SetupState {
+                            SETUP_STATE_UNSPECIFIED = 0,
+                            STATUS_PENDING = 1,
+                            STATUS_COMPLETE = 2
+                        }
+
+                        /** SetupError enum. */
+                        enum SetupError {
+                            SETUP_ERROR_UNSPECIFIED = 0,
+                            ERROR_INVALID_BASE_SETUP = 1,
+                            ERROR_MISSING_EXTERNAL_SIGNING_KEY = 2,
+                            ERROR_NOT_ALL_SERVICES_ENROLLED = 3,
+                            ERROR_SETUP_CHECK_FAILED = 4
+                        }
+                    }
+
                     /** ComplianceRegime enum. */
                     enum ComplianceRegime {
                         COMPLIANCE_REGIME_UNSPECIFIED = 0,
@@ -2901,6 +3180,13 @@ export namespace google {
                         HITRUST = 7,
                         EU_REGIONS_AND_SUPPORT = 8,
                         CA_REGIONS_AND_SUPPORT = 9
+                    }
+
+                    /** KajEnrollmentState enum. */
+                    enum KajEnrollmentState {
+                        KAJ_ENROLLMENT_STATE_UNSPECIFIED = 0,
+                        KAJ_ENROLLMENT_STATE_PENDING = 1,
+                        KAJ_ENROLLMENT_STATE_COMPLETE = 2
                     }
                 }
 

@@ -1622,6 +1622,9 @@
                          * @property {string|null} [provisionedResourcesParent] Workload provisionedResourcesParent
                          * @property {google.cloud.assuredworkloads.v1.Workload.IKMSSettings|null} [kmsSettings] Workload kmsSettings
                          * @property {Array.<google.cloud.assuredworkloads.v1.Workload.IResourceSettings>|null} [resourceSettings] Workload resourceSettings
+                         * @property {google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState|null} [kajEnrollmentState] Workload kajEnrollmentState
+                         * @property {boolean|null} [enableSovereignControls] Workload enableSovereignControls
+                         * @property {google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse|null} [saaEnrollmentResponse] Workload saaEnrollmentResponse
                          */
     
                         /**
@@ -1731,6 +1734,30 @@
                         Workload.prototype.resourceSettings = $util.emptyArray;
     
                         /**
+                         * Workload kajEnrollmentState.
+                         * @member {google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState} kajEnrollmentState
+                         * @memberof google.cloud.assuredworkloads.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.kajEnrollmentState = 0;
+    
+                        /**
+                         * Workload enableSovereignControls.
+                         * @member {boolean} enableSovereignControls
+                         * @memberof google.cloud.assuredworkloads.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.enableSovereignControls = false;
+    
+                        /**
+                         * Workload saaEnrollmentResponse.
+                         * @member {google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse|null|undefined} saaEnrollmentResponse
+                         * @memberof google.cloud.assuredworkloads.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.saaEnrollmentResponse = null;
+    
+                        /**
                          * Creates a new Workload instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.assuredworkloads.v1.Workload
@@ -1779,6 +1806,12 @@
                             if (message.resourceSettings != null && message.resourceSettings.length)
                                 for (var i = 0; i < message.resourceSettings.length; ++i)
                                     $root.google.cloud.assuredworkloads.v1.Workload.ResourceSettings.encode(message.resourceSettings[i], writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.kajEnrollmentState != null && Object.hasOwnProperty.call(message, "kajEnrollmentState"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).int32(message.kajEnrollmentState);
+                            if (message.enableSovereignControls != null && Object.hasOwnProperty.call(message, "enableSovereignControls"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).bool(message.enableSovereignControls);
+                            if (message.saaEnrollmentResponse != null && Object.hasOwnProperty.call(message, "saaEnrollmentResponse"))
+                                $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.encode(message.saaEnrollmentResponse, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             return writer;
                         };
     
@@ -1868,6 +1901,15 @@
                                     if (!(message.resourceSettings && message.resourceSettings.length))
                                         message.resourceSettings = [];
                                     message.resourceSettings.push($root.google.cloud.assuredworkloads.v1.Workload.ResourceSettings.decode(reader, reader.uint32()));
+                                    break;
+                                case 17:
+                                    message.kajEnrollmentState = reader.int32();
+                                    break;
+                                case 18:
+                                    message.enableSovereignControls = reader.bool();
+                                    break;
+                                case 20:
+                                    message.saaEnrollmentResponse = $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1970,6 +2012,23 @@
                                     if (error)
                                         return "resourceSettings." + error;
                                 }
+                            }
+                            if (message.kajEnrollmentState != null && message.hasOwnProperty("kajEnrollmentState"))
+                                switch (message.kajEnrollmentState) {
+                                default:
+                                    return "kajEnrollmentState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.enableSovereignControls != null && message.hasOwnProperty("enableSovereignControls"))
+                                if (typeof message.enableSovereignControls !== "boolean")
+                                    return "enableSovereignControls: boolean expected";
+                            if (message.saaEnrollmentResponse != null && message.hasOwnProperty("saaEnrollmentResponse")) {
+                                var error = $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.verify(message.saaEnrollmentResponse);
+                                if (error)
+                                    return "saaEnrollmentResponse." + error;
                             }
                             return null;
                         };
@@ -2075,6 +2134,27 @@
                                     message.resourceSettings[i] = $root.google.cloud.assuredworkloads.v1.Workload.ResourceSettings.fromObject(object.resourceSettings[i]);
                                 }
                             }
+                            switch (object.kajEnrollmentState) {
+                            case "KAJ_ENROLLMENT_STATE_UNSPECIFIED":
+                            case 0:
+                                message.kajEnrollmentState = 0;
+                                break;
+                            case "KAJ_ENROLLMENT_STATE_PENDING":
+                            case 1:
+                                message.kajEnrollmentState = 1;
+                                break;
+                            case "KAJ_ENROLLMENT_STATE_COMPLETE":
+                            case 2:
+                                message.kajEnrollmentState = 2;
+                                break;
+                            }
+                            if (object.enableSovereignControls != null)
+                                message.enableSovereignControls = Boolean(object.enableSovereignControls);
+                            if (object.saaEnrollmentResponse != null) {
+                                if (typeof object.saaEnrollmentResponse !== "object")
+                                    throw TypeError(".google.cloud.assuredworkloads.v1.Workload.saaEnrollmentResponse: object expected");
+                                message.saaEnrollmentResponse = $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.fromObject(object.saaEnrollmentResponse);
+                            }
                             return message;
                         };
     
@@ -2106,6 +2186,9 @@
                                 object.etag = "";
                                 object.provisionedResourcesParent = "";
                                 object.kmsSettings = null;
+                                object.kajEnrollmentState = options.enums === String ? "KAJ_ENROLLMENT_STATE_UNSPECIFIED" : 0;
+                                object.enableSovereignControls = false;
+                                object.saaEnrollmentResponse = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2139,6 +2222,12 @@
                                 for (var j = 0; j < message.resourceSettings.length; ++j)
                                     object.resourceSettings[j] = $root.google.cloud.assuredworkloads.v1.Workload.ResourceSettings.toObject(message.resourceSettings[j], options);
                             }
+                            if (message.kajEnrollmentState != null && message.hasOwnProperty("kajEnrollmentState"))
+                                object.kajEnrollmentState = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState[message.kajEnrollmentState] : message.kajEnrollmentState;
+                            if (message.enableSovereignControls != null && message.hasOwnProperty("enableSovereignControls"))
+                                object.enableSovereignControls = message.enableSovereignControls;
+                            if (message.saaEnrollmentResponse != null && message.hasOwnProperty("saaEnrollmentResponse"))
+                                object.saaEnrollmentResponse = $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.toObject(message.saaEnrollmentResponse, options);
                             return object;
                         };
     
@@ -2893,6 +2982,342 @@
                             return ResourceSettings;
                         })();
     
+                        Workload.SaaEnrollmentResponse = (function() {
+    
+                            /**
+                             * Properties of a SaaEnrollmentResponse.
+                             * @memberof google.cloud.assuredworkloads.v1.Workload
+                             * @interface ISaaEnrollmentResponse
+                             * @property {google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState|null} [setupStatus] SaaEnrollmentResponse setupStatus
+                             * @property {Array.<google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError>|null} [setupErrors] SaaEnrollmentResponse setupErrors
+                             */
+    
+                            /**
+                             * Constructs a new SaaEnrollmentResponse.
+                             * @memberof google.cloud.assuredworkloads.v1.Workload
+                             * @classdesc Represents a SaaEnrollmentResponse.
+                             * @implements ISaaEnrollmentResponse
+                             * @constructor
+                             * @param {google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse=} [properties] Properties to set
+                             */
+                            function SaaEnrollmentResponse(properties) {
+                                this.setupErrors = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SaaEnrollmentResponse setupStatus.
+                             * @member {google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState|null|undefined} setupStatus
+                             * @memberof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse
+                             * @instance
+                             */
+                            SaaEnrollmentResponse.prototype.setupStatus = null;
+    
+                            /**
+                             * SaaEnrollmentResponse setupErrors.
+                             * @member {Array.<google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError>} setupErrors
+                             * @memberof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse
+                             * @instance
+                             */
+                            SaaEnrollmentResponse.prototype.setupErrors = $util.emptyArray;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SaaEnrollmentResponse _setupStatus.
+                             * @member {"setupStatus"|undefined} _setupStatus
+                             * @memberof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse
+                             * @instance
+                             */
+                            Object.defineProperty(SaaEnrollmentResponse.prototype, "_setupStatus", {
+                                get: $util.oneOfGetter($oneOfFields = ["setupStatus"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SaaEnrollmentResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse=} [properties] Properties to set
+                             * @returns {google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse} SaaEnrollmentResponse instance
+                             */
+                            SaaEnrollmentResponse.create = function create(properties) {
+                                return new SaaEnrollmentResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SaaEnrollmentResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse} message SaaEnrollmentResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SaaEnrollmentResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.setupStatus != null && Object.hasOwnProperty.call(message, "setupStatus"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.setupStatus);
+                                if (message.setupErrors != null && message.setupErrors.length) {
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                    for (var i = 0; i < message.setupErrors.length; ++i)
+                                        writer.int32(message.setupErrors[i]);
+                                    writer.ldelim();
+                                }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SaaEnrollmentResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse} message SaaEnrollmentResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SaaEnrollmentResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SaaEnrollmentResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse} SaaEnrollmentResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SaaEnrollmentResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.setupStatus = reader.int32();
+                                        break;
+                                    case 2:
+                                        if (!(message.setupErrors && message.setupErrors.length))
+                                            message.setupErrors = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.setupErrors.push(reader.int32());
+                                        } else
+                                            message.setupErrors.push(reader.int32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SaaEnrollmentResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse} SaaEnrollmentResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SaaEnrollmentResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SaaEnrollmentResponse message.
+                             * @function verify
+                             * @memberof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SaaEnrollmentResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.setupStatus != null && message.hasOwnProperty("setupStatus")) {
+                                    properties._setupStatus = 1;
+                                    switch (message.setupStatus) {
+                                    default:
+                                        return "setupStatus: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                }
+                                if (message.setupErrors != null && message.hasOwnProperty("setupErrors")) {
+                                    if (!Array.isArray(message.setupErrors))
+                                        return "setupErrors: array expected";
+                                    for (var i = 0; i < message.setupErrors.length; ++i)
+                                        switch (message.setupErrors[i]) {
+                                        default:
+                                            return "setupErrors: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                            break;
+                                        }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SaaEnrollmentResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse} SaaEnrollmentResponse
+                             */
+                            SaaEnrollmentResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse)
+                                    return object;
+                                var message = new $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse();
+                                switch (object.setupStatus) {
+                                case "SETUP_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.setupStatus = 0;
+                                    break;
+                                case "STATUS_PENDING":
+                                case 1:
+                                    message.setupStatus = 1;
+                                    break;
+                                case "STATUS_COMPLETE":
+                                case 2:
+                                    message.setupStatus = 2;
+                                    break;
+                                }
+                                if (object.setupErrors) {
+                                    if (!Array.isArray(object.setupErrors))
+                                        throw TypeError(".google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.setupErrors: array expected");
+                                    message.setupErrors = [];
+                                    for (var i = 0; i < object.setupErrors.length; ++i)
+                                        switch (object.setupErrors[i]) {
+                                        default:
+                                        case "SETUP_ERROR_UNSPECIFIED":
+                                        case 0:
+                                            message.setupErrors[i] = 0;
+                                            break;
+                                        case "ERROR_INVALID_BASE_SETUP":
+                                        case 1:
+                                            message.setupErrors[i] = 1;
+                                            break;
+                                        case "ERROR_MISSING_EXTERNAL_SIGNING_KEY":
+                                        case 2:
+                                            message.setupErrors[i] = 2;
+                                            break;
+                                        case "ERROR_NOT_ALL_SERVICES_ENROLLED":
+                                        case 3:
+                                            message.setupErrors[i] = 3;
+                                            break;
+                                        case "ERROR_SETUP_CHECK_FAILED":
+                                        case 4:
+                                            message.setupErrors[i] = 4;
+                                            break;
+                                        }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SaaEnrollmentResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse} message SaaEnrollmentResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SaaEnrollmentResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.setupErrors = [];
+                                if (message.setupStatus != null && message.hasOwnProperty("setupStatus")) {
+                                    object.setupStatus = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState[message.setupStatus] : message.setupStatus;
+                                    if (options.oneofs)
+                                        object._setupStatus = "setupStatus";
+                                }
+                                if (message.setupErrors && message.setupErrors.length) {
+                                    object.setupErrors = [];
+                                    for (var j = 0; j < message.setupErrors.length; ++j)
+                                        object.setupErrors[j] = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError[message.setupErrors[j]] : message.setupErrors[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SaaEnrollmentResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SaaEnrollmentResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * SetupState enum.
+                             * @name google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState
+                             * @enum {number}
+                             * @property {number} SETUP_STATE_UNSPECIFIED=0 SETUP_STATE_UNSPECIFIED value
+                             * @property {number} STATUS_PENDING=1 STATUS_PENDING value
+                             * @property {number} STATUS_COMPLETE=2 STATUS_COMPLETE value
+                             */
+                            SaaEnrollmentResponse.SetupState = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "SETUP_STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "STATUS_PENDING"] = 1;
+                                values[valuesById[2] = "STATUS_COMPLETE"] = 2;
+                                return values;
+                            })();
+    
+                            /**
+                             * SetupError enum.
+                             * @name google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError
+                             * @enum {number}
+                             * @property {number} SETUP_ERROR_UNSPECIFIED=0 SETUP_ERROR_UNSPECIFIED value
+                             * @property {number} ERROR_INVALID_BASE_SETUP=1 ERROR_INVALID_BASE_SETUP value
+                             * @property {number} ERROR_MISSING_EXTERNAL_SIGNING_KEY=2 ERROR_MISSING_EXTERNAL_SIGNING_KEY value
+                             * @property {number} ERROR_NOT_ALL_SERVICES_ENROLLED=3 ERROR_NOT_ALL_SERVICES_ENROLLED value
+                             * @property {number} ERROR_SETUP_CHECK_FAILED=4 ERROR_SETUP_CHECK_FAILED value
+                             */
+                            SaaEnrollmentResponse.SetupError = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "SETUP_ERROR_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ERROR_INVALID_BASE_SETUP"] = 1;
+                                values[valuesById[2] = "ERROR_MISSING_EXTERNAL_SIGNING_KEY"] = 2;
+                                values[valuesById[3] = "ERROR_NOT_ALL_SERVICES_ENROLLED"] = 3;
+                                values[valuesById[4] = "ERROR_SETUP_CHECK_FAILED"] = 4;
+                                return values;
+                            })();
+    
+                            return SaaEnrollmentResponse;
+                        })();
+    
                         /**
                          * ComplianceRegime enum.
                          * @name google.cloud.assuredworkloads.v1.Workload.ComplianceRegime
@@ -2920,6 +3345,22 @@
                             values[valuesById[7] = "HITRUST"] = 7;
                             values[valuesById[8] = "EU_REGIONS_AND_SUPPORT"] = 8;
                             values[valuesById[9] = "CA_REGIONS_AND_SUPPORT"] = 9;
+                            return values;
+                        })();
+    
+                        /**
+                         * KajEnrollmentState enum.
+                         * @name google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState
+                         * @enum {number}
+                         * @property {number} KAJ_ENROLLMENT_STATE_UNSPECIFIED=0 KAJ_ENROLLMENT_STATE_UNSPECIFIED value
+                         * @property {number} KAJ_ENROLLMENT_STATE_PENDING=1 KAJ_ENROLLMENT_STATE_PENDING value
+                         * @property {number} KAJ_ENROLLMENT_STATE_COMPLETE=2 KAJ_ENROLLMENT_STATE_COMPLETE value
+                         */
+                        Workload.KajEnrollmentState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "KAJ_ENROLLMENT_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "KAJ_ENROLLMENT_STATE_PENDING"] = 1;
+                            values[valuesById[2] = "KAJ_ENROLLMENT_STATE_COMPLETE"] = 2;
                             return values;
                         })();
     
@@ -4810,6 +5251,9 @@
                          * @property {string|null} [provisionedResourcesParent] Workload provisionedResourcesParent
                          * @property {google.cloud.assuredworkloads.v1beta1.Workload.IKMSSettings|null} [kmsSettings] Workload kmsSettings
                          * @property {Array.<google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings>|null} [resourceSettings] Workload resourceSettings
+                         * @property {google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState|null} [kajEnrollmentState] Workload kajEnrollmentState
+                         * @property {boolean|null} [enableSovereignControls] Workload enableSovereignControls
+                         * @property {google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse|null} [saaEnrollmentResponse] Workload saaEnrollmentResponse
                          */
     
                         /**
@@ -4950,6 +5394,30 @@
                          */
                         Workload.prototype.resourceSettings = $util.emptyArray;
     
+                        /**
+                         * Workload kajEnrollmentState.
+                         * @member {google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState} kajEnrollmentState
+                         * @memberof google.cloud.assuredworkloads.v1beta1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.kajEnrollmentState = 0;
+    
+                        /**
+                         * Workload enableSovereignControls.
+                         * @member {boolean} enableSovereignControls
+                         * @memberof google.cloud.assuredworkloads.v1beta1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.enableSovereignControls = false;
+    
+                        /**
+                         * Workload saaEnrollmentResponse.
+                         * @member {google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse|null|undefined} saaEnrollmentResponse
+                         * @memberof google.cloud.assuredworkloads.v1beta1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.saaEnrollmentResponse = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -5021,6 +5489,12 @@
                             if (message.resourceSettings != null && message.resourceSettings.length)
                                 for (var i = 0; i < message.resourceSettings.length; ++i)
                                     $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.encode(message.resourceSettings[i], writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.kajEnrollmentState != null && Object.hasOwnProperty.call(message, "kajEnrollmentState"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).int32(message.kajEnrollmentState);
+                            if (message.enableSovereignControls != null && Object.hasOwnProperty.call(message, "enableSovereignControls"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).bool(message.enableSovereignControls);
+                            if (message.saaEnrollmentResponse != null && Object.hasOwnProperty.call(message, "saaEnrollmentResponse"))
+                                $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.encode(message.saaEnrollmentResponse, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             return writer;
                         };
     
@@ -5122,6 +5596,15 @@
                                     if (!(message.resourceSettings && message.resourceSettings.length))
                                         message.resourceSettings = [];
                                     message.resourceSettings.push($root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.decode(reader, reader.uint32()));
+                                    break;
+                                case 17:
+                                    message.kajEnrollmentState = reader.int32();
+                                    break;
+                                case 18:
+                                    message.enableSovereignControls = reader.bool();
+                                    break;
+                                case 20:
+                                    message.saaEnrollmentResponse = $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5264,6 +5747,23 @@
                                         return "resourceSettings." + error;
                                 }
                             }
+                            if (message.kajEnrollmentState != null && message.hasOwnProperty("kajEnrollmentState"))
+                                switch (message.kajEnrollmentState) {
+                                default:
+                                    return "kajEnrollmentState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.enableSovereignControls != null && message.hasOwnProperty("enableSovereignControls"))
+                                if (typeof message.enableSovereignControls !== "boolean")
+                                    return "enableSovereignControls: boolean expected";
+                            if (message.saaEnrollmentResponse != null && message.hasOwnProperty("saaEnrollmentResponse")) {
+                                var error = $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.verify(message.saaEnrollmentResponse);
+                                if (error)
+                                    return "saaEnrollmentResponse." + error;
+                            }
                             return null;
                         };
     
@@ -5388,6 +5888,27 @@
                                     message.resourceSettings[i] = $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.fromObject(object.resourceSettings[i]);
                                 }
                             }
+                            switch (object.kajEnrollmentState) {
+                            case "KAJ_ENROLLMENT_STATE_UNSPECIFIED":
+                            case 0:
+                                message.kajEnrollmentState = 0;
+                                break;
+                            case "KAJ_ENROLLMENT_STATE_PENDING":
+                            case 1:
+                                message.kajEnrollmentState = 1;
+                                break;
+                            case "KAJ_ENROLLMENT_STATE_COMPLETE":
+                            case 2:
+                                message.kajEnrollmentState = 2;
+                                break;
+                            }
+                            if (object.enableSovereignControls != null)
+                                message.enableSovereignControls = Boolean(object.enableSovereignControls);
+                            if (object.saaEnrollmentResponse != null) {
+                                if (typeof object.saaEnrollmentResponse !== "object")
+                                    throw TypeError(".google.cloud.assuredworkloads.v1beta1.Workload.saaEnrollmentResponse: object expected");
+                                message.saaEnrollmentResponse = $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.fromObject(object.saaEnrollmentResponse);
+                            }
                             return message;
                         };
     
@@ -5419,6 +5940,9 @@
                                 object.etag = "";
                                 object.provisionedResourcesParent = "";
                                 object.kmsSettings = null;
+                                object.kajEnrollmentState = options.enums === String ? "KAJ_ENROLLMENT_STATE_UNSPECIFIED" : 0;
+                                object.enableSovereignControls = false;
+                                object.saaEnrollmentResponse = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5472,6 +5996,12 @@
                                 for (var j = 0; j < message.resourceSettings.length; ++j)
                                     object.resourceSettings[j] = $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.toObject(message.resourceSettings[j], options);
                             }
+                            if (message.kajEnrollmentState != null && message.hasOwnProperty("kajEnrollmentState"))
+                                object.kajEnrollmentState = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState[message.kajEnrollmentState] : message.kajEnrollmentState;
+                            if (message.enableSovereignControls != null && message.hasOwnProperty("enableSovereignControls"))
+                                object.enableSovereignControls = message.enableSovereignControls;
+                            if (message.saaEnrollmentResponse != null && message.hasOwnProperty("saaEnrollmentResponse"))
+                                object.saaEnrollmentResponse = $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.toObject(message.saaEnrollmentResponse, options);
                             return object;
                         };
     
@@ -7006,6 +7536,342 @@
                             return ResourceSettings;
                         })();
     
+                        Workload.SaaEnrollmentResponse = (function() {
+    
+                            /**
+                             * Properties of a SaaEnrollmentResponse.
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload
+                             * @interface ISaaEnrollmentResponse
+                             * @property {google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupState|null} [setupStatus] SaaEnrollmentResponse setupStatus
+                             * @property {Array.<google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupError>|null} [setupErrors] SaaEnrollmentResponse setupErrors
+                             */
+    
+                            /**
+                             * Constructs a new SaaEnrollmentResponse.
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload
+                             * @classdesc Represents a SaaEnrollmentResponse.
+                             * @implements ISaaEnrollmentResponse
+                             * @constructor
+                             * @param {google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse=} [properties] Properties to set
+                             */
+                            function SaaEnrollmentResponse(properties) {
+                                this.setupErrors = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SaaEnrollmentResponse setupStatus.
+                             * @member {google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupState|null|undefined} setupStatus
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse
+                             * @instance
+                             */
+                            SaaEnrollmentResponse.prototype.setupStatus = null;
+    
+                            /**
+                             * SaaEnrollmentResponse setupErrors.
+                             * @member {Array.<google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupError>} setupErrors
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse
+                             * @instance
+                             */
+                            SaaEnrollmentResponse.prototype.setupErrors = $util.emptyArray;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SaaEnrollmentResponse _setupStatus.
+                             * @member {"setupStatus"|undefined} _setupStatus
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse
+                             * @instance
+                             */
+                            Object.defineProperty(SaaEnrollmentResponse.prototype, "_setupStatus", {
+                                get: $util.oneOfGetter($oneOfFields = ["setupStatus"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SaaEnrollmentResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse=} [properties] Properties to set
+                             * @returns {google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse} SaaEnrollmentResponse instance
+                             */
+                            SaaEnrollmentResponse.create = function create(properties) {
+                                return new SaaEnrollmentResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SaaEnrollmentResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse} message SaaEnrollmentResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SaaEnrollmentResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.setupStatus != null && Object.hasOwnProperty.call(message, "setupStatus"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.setupStatus);
+                                if (message.setupErrors != null && message.setupErrors.length) {
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                    for (var i = 0; i < message.setupErrors.length; ++i)
+                                        writer.int32(message.setupErrors[i]);
+                                    writer.ldelim();
+                                }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SaaEnrollmentResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse} message SaaEnrollmentResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SaaEnrollmentResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SaaEnrollmentResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse} SaaEnrollmentResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SaaEnrollmentResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.setupStatus = reader.int32();
+                                        break;
+                                    case 2:
+                                        if (!(message.setupErrors && message.setupErrors.length))
+                                            message.setupErrors = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.setupErrors.push(reader.int32());
+                                        } else
+                                            message.setupErrors.push(reader.int32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SaaEnrollmentResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse} SaaEnrollmentResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SaaEnrollmentResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SaaEnrollmentResponse message.
+                             * @function verify
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SaaEnrollmentResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.setupStatus != null && message.hasOwnProperty("setupStatus")) {
+                                    properties._setupStatus = 1;
+                                    switch (message.setupStatus) {
+                                    default:
+                                        return "setupStatus: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                }
+                                if (message.setupErrors != null && message.hasOwnProperty("setupErrors")) {
+                                    if (!Array.isArray(message.setupErrors))
+                                        return "setupErrors: array expected";
+                                    for (var i = 0; i < message.setupErrors.length; ++i)
+                                        switch (message.setupErrors[i]) {
+                                        default:
+                                            return "setupErrors: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                            break;
+                                        }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SaaEnrollmentResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse} SaaEnrollmentResponse
+                             */
+                            SaaEnrollmentResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse)
+                                    return object;
+                                var message = new $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse();
+                                switch (object.setupStatus) {
+                                case "SETUP_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.setupStatus = 0;
+                                    break;
+                                case "STATUS_PENDING":
+                                case 1:
+                                    message.setupStatus = 1;
+                                    break;
+                                case "STATUS_COMPLETE":
+                                case 2:
+                                    message.setupStatus = 2;
+                                    break;
+                                }
+                                if (object.setupErrors) {
+                                    if (!Array.isArray(object.setupErrors))
+                                        throw TypeError(".google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.setupErrors: array expected");
+                                    message.setupErrors = [];
+                                    for (var i = 0; i < object.setupErrors.length; ++i)
+                                        switch (object.setupErrors[i]) {
+                                        default:
+                                        case "SETUP_ERROR_UNSPECIFIED":
+                                        case 0:
+                                            message.setupErrors[i] = 0;
+                                            break;
+                                        case "ERROR_INVALID_BASE_SETUP":
+                                        case 1:
+                                            message.setupErrors[i] = 1;
+                                            break;
+                                        case "ERROR_MISSING_EXTERNAL_SIGNING_KEY":
+                                        case 2:
+                                            message.setupErrors[i] = 2;
+                                            break;
+                                        case "ERROR_NOT_ALL_SERVICES_ENROLLED":
+                                        case 3:
+                                            message.setupErrors[i] = 3;
+                                            break;
+                                        case "ERROR_SETUP_CHECK_FAILED":
+                                        case 4:
+                                            message.setupErrors[i] = 4;
+                                            break;
+                                        }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SaaEnrollmentResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse} message SaaEnrollmentResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SaaEnrollmentResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.setupErrors = [];
+                                if (message.setupStatus != null && message.hasOwnProperty("setupStatus")) {
+                                    object.setupStatus = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupState[message.setupStatus] : message.setupStatus;
+                                    if (options.oneofs)
+                                        object._setupStatus = "setupStatus";
+                                }
+                                if (message.setupErrors && message.setupErrors.length) {
+                                    object.setupErrors = [];
+                                    for (var j = 0; j < message.setupErrors.length; ++j)
+                                        object.setupErrors[j] = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupError[message.setupErrors[j]] : message.setupErrors[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SaaEnrollmentResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SaaEnrollmentResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * SetupState enum.
+                             * @name google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupState
+                             * @enum {number}
+                             * @property {number} SETUP_STATE_UNSPECIFIED=0 SETUP_STATE_UNSPECIFIED value
+                             * @property {number} STATUS_PENDING=1 STATUS_PENDING value
+                             * @property {number} STATUS_COMPLETE=2 STATUS_COMPLETE value
+                             */
+                            SaaEnrollmentResponse.SetupState = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "SETUP_STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "STATUS_PENDING"] = 1;
+                                values[valuesById[2] = "STATUS_COMPLETE"] = 2;
+                                return values;
+                            })();
+    
+                            /**
+                             * SetupError enum.
+                             * @name google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupError
+                             * @enum {number}
+                             * @property {number} SETUP_ERROR_UNSPECIFIED=0 SETUP_ERROR_UNSPECIFIED value
+                             * @property {number} ERROR_INVALID_BASE_SETUP=1 ERROR_INVALID_BASE_SETUP value
+                             * @property {number} ERROR_MISSING_EXTERNAL_SIGNING_KEY=2 ERROR_MISSING_EXTERNAL_SIGNING_KEY value
+                             * @property {number} ERROR_NOT_ALL_SERVICES_ENROLLED=3 ERROR_NOT_ALL_SERVICES_ENROLLED value
+                             * @property {number} ERROR_SETUP_CHECK_FAILED=4 ERROR_SETUP_CHECK_FAILED value
+                             */
+                            SaaEnrollmentResponse.SetupError = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "SETUP_ERROR_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ERROR_INVALID_BASE_SETUP"] = 1;
+                                values[valuesById[2] = "ERROR_MISSING_EXTERNAL_SIGNING_KEY"] = 2;
+                                values[valuesById[3] = "ERROR_NOT_ALL_SERVICES_ENROLLED"] = 3;
+                                values[valuesById[4] = "ERROR_SETUP_CHECK_FAILED"] = 4;
+                                return values;
+                            })();
+    
+                            return SaaEnrollmentResponse;
+                        })();
+    
                         /**
                          * ComplianceRegime enum.
                          * @name google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime
@@ -7033,6 +7899,22 @@
                             values[valuesById[7] = "HITRUST"] = 7;
                             values[valuesById[8] = "EU_REGIONS_AND_SUPPORT"] = 8;
                             values[valuesById[9] = "CA_REGIONS_AND_SUPPORT"] = 9;
+                            return values;
+                        })();
+    
+                        /**
+                         * KajEnrollmentState enum.
+                         * @name google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState
+                         * @enum {number}
+                         * @property {number} KAJ_ENROLLMENT_STATE_UNSPECIFIED=0 KAJ_ENROLLMENT_STATE_UNSPECIFIED value
+                         * @property {number} KAJ_ENROLLMENT_STATE_PENDING=1 KAJ_ENROLLMENT_STATE_PENDING value
+                         * @property {number} KAJ_ENROLLMENT_STATE_COMPLETE=2 KAJ_ENROLLMENT_STATE_COMPLETE value
+                         */
+                        Workload.KajEnrollmentState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "KAJ_ENROLLMENT_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "KAJ_ENROLLMENT_STATE_PENDING"] = 1;
+                            values[valuesById[2] = "KAJ_ENROLLMENT_STATE_COMPLETE"] = 2;
                             return values;
                         })();
     

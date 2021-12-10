@@ -326,6 +326,27 @@
                           "options": {
                             "(google.api.field_behavior)": "INPUT_ONLY"
                           }
+                        },
+                        "kajEnrollmentState": {
+                          "type": "KajEnrollmentState",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "enableSovereignControls": {
+                          "type": "bool",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "saaEnrollmentResponse": {
+                          "type": "SaaEnrollmentResponse",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -385,6 +406,47 @@
                             }
                           }
                         },
+                        "SaaEnrollmentResponse": {
+                          "oneofs": {
+                            "_setupStatus": {
+                              "oneof": [
+                                "setupStatus"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "setupStatus": {
+                              "type": "SetupState",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "setupErrors": {
+                              "rule": "repeated",
+                              "type": "SetupError",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "SetupState": {
+                              "values": {
+                                "SETUP_STATE_UNSPECIFIED": 0,
+                                "STATUS_PENDING": 1,
+                                "STATUS_COMPLETE": 2
+                              }
+                            },
+                            "SetupError": {
+                              "values": {
+                                "SETUP_ERROR_UNSPECIFIED": 0,
+                                "ERROR_INVALID_BASE_SETUP": 1,
+                                "ERROR_MISSING_EXTERNAL_SIGNING_KEY": 2,
+                                "ERROR_NOT_ALL_SERVICES_ENROLLED": 3,
+                                "ERROR_SETUP_CHECK_FAILED": 4
+                              }
+                            }
+                          }
+                        },
                         "ComplianceRegime": {
                           "values": {
                             "COMPLIANCE_REGIME_UNSPECIFIED": 0,
@@ -397,6 +459,13 @@
                             "HITRUST": 7,
                             "EU_REGIONS_AND_SUPPORT": 8,
                             "CA_REGIONS_AND_SUPPORT": 9
+                          }
+                        },
+                        "KajEnrollmentState": {
+                          "values": {
+                            "KAJ_ENROLLMENT_STATE_UNSPECIFIED": 0,
+                            "KAJ_ENROLLMENT_STATE_PENDING": 1,
+                            "KAJ_ENROLLMENT_STATE_COMPLETE": 2
                           }
                         }
                       }
@@ -797,6 +866,27 @@
                           "options": {
                             "(google.api.field_behavior)": "INPUT_ONLY"
                           }
+                        },
+                        "kajEnrollmentState": {
+                          "type": "KajEnrollmentState",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "enableSovereignControls": {
+                          "type": "bool",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "saaEnrollmentResponse": {
+                          "type": "SaaEnrollmentResponse",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -913,6 +1003,47 @@
                             }
                           }
                         },
+                        "SaaEnrollmentResponse": {
+                          "oneofs": {
+                            "_setupStatus": {
+                              "oneof": [
+                                "setupStatus"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "setupStatus": {
+                              "type": "SetupState",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "setupErrors": {
+                              "rule": "repeated",
+                              "type": "SetupError",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "SetupState": {
+                              "values": {
+                                "SETUP_STATE_UNSPECIFIED": 0,
+                                "STATUS_PENDING": 1,
+                                "STATUS_COMPLETE": 2
+                              }
+                            },
+                            "SetupError": {
+                              "values": {
+                                "SETUP_ERROR_UNSPECIFIED": 0,
+                                "ERROR_INVALID_BASE_SETUP": 1,
+                                "ERROR_MISSING_EXTERNAL_SIGNING_KEY": 2,
+                                "ERROR_NOT_ALL_SERVICES_ENROLLED": 3,
+                                "ERROR_SETUP_CHECK_FAILED": 4
+                              }
+                            }
+                          }
+                        },
                         "ComplianceRegime": {
                           "values": {
                             "COMPLIANCE_REGIME_UNSPECIFIED": 0,
@@ -925,6 +1056,13 @@
                             "HITRUST": 7,
                             "EU_REGIONS_AND_SUPPORT": 8,
                             "CA_REGIONS_AND_SUPPORT": 9
+                          }
+                        },
+                        "KajEnrollmentState": {
+                          "values": {
+                            "KAJ_ENROLLMENT_STATE_UNSPECIFIED": 0,
+                            "KAJ_ENROLLMENT_STATE_PENDING": 1,
+                            "KAJ_ENROLLMENT_STATE_COMPLETE": 2
                           }
                         }
                       }

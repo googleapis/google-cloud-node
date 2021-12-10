@@ -572,8 +572,8 @@ export class AssuredWorkloadsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the Workload to fetch. This is the workloads's
-   *   relative path in the API, formatted as
+   *   Required. The resource name of the Workload to fetch. This is the
+   *   workloads's relative path in the API, formatted as
    *   "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
    *   For example,
    *   "organizations/123/locations/us-east1/workloads/assured-workload-1".
@@ -673,8 +673,8 @@ export class AssuredWorkloadsServiceClient {
    * @param {google.cloud.assuredworkloads.v1.Workload} request.workload
    *   Required. Assured Workload to create
    * @param {string} [request.externalId]
-   *   Optional. A identifier associated with the workload and underlying projects which
-   *   allows for the break down of billing costs for a workload. The value
+   *   Optional. A identifier associated with the workload and underlying projects
+   *   which allows for the break down of billing costs for a workload. The value
    *   provided for the identifier will add a label to the workload and contained
    *   projects with the identifier as the value.
    * @param {object} [options]
