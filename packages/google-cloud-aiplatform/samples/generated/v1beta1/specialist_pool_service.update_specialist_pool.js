@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(specialistPool, updateMask) {
@@ -29,8 +30,7 @@ function main(specialistPool, updateMask) {
   // const updateMask = {}
 
   // Imports the Aiplatform library
-  const {SpecialistPoolServiceClient} =
-    require('@google-cloud/aiplatform').v1beta1;
+  const {SpecialistPoolServiceClient} = require('@google-cloud/aiplatform').v1beta1;
 
   // Instantiates a client
   const aiplatformClient = new SpecialistPoolServiceClient();

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(location) {
@@ -108,7 +109,7 @@ function main(location) {
     // Run request
     const iterable = await aiplatformClient.searchFeaturesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

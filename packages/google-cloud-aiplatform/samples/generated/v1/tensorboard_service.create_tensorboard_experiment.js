@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, tensorboardExperimentId) {
@@ -51,9 +52,7 @@ function main(parent, tensorboardExperimentId) {
     };
 
     // Run request
-    const response = await aiplatformClient.createTensorboardExperiment(
-      request
-    );
+    const response = await aiplatformClient.createTensorboardExperiment(request);
     console.log(response);
   }
 

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(updateMask, tensorboardTimeSeries) {
@@ -50,9 +51,7 @@ function main(updateMask, tensorboardTimeSeries) {
     };
 
     // Run request
-    const response = await aiplatformClient.updateTensorboardTimeSeries(
-      request
-    );
+    const response = await aiplatformClient.updateTensorboardTimeSeries(request);
     console.log(response);
   }
 

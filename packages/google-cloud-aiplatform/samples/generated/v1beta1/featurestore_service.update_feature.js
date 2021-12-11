@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(feature) {
@@ -43,8 +44,7 @@ function main(feature) {
   // const updateMask = {}
 
   // Imports the Aiplatform library
-  const {FeaturestoreServiceClient} =
-    require('@google-cloud/aiplatform').v1beta1;
+  const {FeaturestoreServiceClient} = require('@google-cloud/aiplatform').v1beta1;
 
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();

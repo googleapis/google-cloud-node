@@ -1266,6 +1266,206 @@ describe('v1.IndexEndpointServiceClient', () => {
     });
   });
 
+  describe('mutateDeployedIndex', () => {
+    it('invokes mutateDeployedIndex without error', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.MutateDeployedIndexRequest()
+      );
+      request.indexEndpoint = '';
+      const expectedHeaderRequestParams = 'index_endpoint=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.mutateDeployedIndex =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.mutateDeployedIndex(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.mutateDeployedIndex as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes mutateDeployedIndex without error using callback', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.MutateDeployedIndexRequest()
+      );
+      request.indexEndpoint = '';
+      const expectedHeaderRequestParams = 'index_endpoint=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.mutateDeployedIndex =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.mutateDeployedIndex(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1.IMutateDeployedIndexResponse,
+              protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1.IMutateDeployedIndexResponse,
+        protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.mutateDeployedIndex as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes mutateDeployedIndex with call error', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.MutateDeployedIndexRequest()
+      );
+      request.indexEndpoint = '';
+      const expectedHeaderRequestParams = 'index_endpoint=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.mutateDeployedIndex = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.mutateDeployedIndex(request), expectedError);
+      assert(
+        (client.innerApiCalls.mutateDeployedIndex as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes mutateDeployedIndex with LRO error', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.MutateDeployedIndexRequest()
+      );
+      request.indexEndpoint = '';
+      const expectedHeaderRequestParams = 'index_endpoint=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.mutateDeployedIndex = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.mutateDeployedIndex(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.mutateDeployedIndex as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkMutateDeployedIndexProgress without error', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkMutateDeployedIndexProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkMutateDeployedIndexProgress with error', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkMutateDeployedIndexProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listIndexEndpoints', () => {
     it('invokes listIndexEndpoints without error', async () => {
       const client =

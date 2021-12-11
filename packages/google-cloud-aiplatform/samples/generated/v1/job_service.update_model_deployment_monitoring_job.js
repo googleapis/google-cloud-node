@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(modelDeploymentMonitoringJob, updateMask) {
@@ -67,8 +68,7 @@ function main(modelDeploymentMonitoringJob, updateMask) {
     };
 
     // Run request
-    const [operation] =
-      await aiplatformClient.updateModelDeploymentMonitoringJob(request);
+    const [operation] = await aiplatformClient.updateModelDeploymentMonitoringJob(request);
     const [response] = await operation.promise();
     console.log(response);
   }

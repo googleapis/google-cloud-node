@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, tensorboardTimeSeries) {
@@ -52,9 +53,7 @@ function main(parent, tensorboardTimeSeries) {
     };
 
     // Run request
-    const response = await aiplatformClient.createTensorboardTimeSeries(
-      request
-    );
+    const response = await aiplatformClient.createTensorboardTimeSeries(request);
     console.log(response);
   }
 

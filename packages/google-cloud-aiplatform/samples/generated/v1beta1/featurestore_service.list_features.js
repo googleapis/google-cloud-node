@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -76,7 +77,7 @@ function main(parent) {
    */
   // const readMask = {}
   /**
-   *  If set, return the most recent ListFeaturesRequest.latest_stats_count google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count
+   *  If set, return the most recent ListFeaturesRequest.latest_stats_count google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count 
    *  of stats for each Feature in response. Valid value is 0, 10. If number of
    *  stats exists < ListFeaturesRequest.latest_stats_count google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count, return all
    *  existing stats.
@@ -84,8 +85,7 @@ function main(parent) {
   // const latestStatsCount = 1234
 
   // Imports the Aiplatform library
-  const {FeaturestoreServiceClient} =
-    require('@google-cloud/aiplatform').v1beta1;
+  const {FeaturestoreServiceClient} = require('@google-cloud/aiplatform').v1beta1;
 
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
@@ -99,7 +99,7 @@ function main(parent) {
     // Run request
     const iterable = await aiplatformClient.listFeaturesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, modelDeploymentMonitoringJob) {
@@ -43,9 +44,7 @@ function main(parent, modelDeploymentMonitoringJob) {
     };
 
     // Run request
-    const response = await aiplatformClient.createModelDeploymentMonitoringJob(
-      request
-    );
+    const response = await aiplatformClient.createModelDeploymentMonitoringJob(request);
     console.log(response);
   }
 

@@ -995,8 +995,9 @@ export class ModelServiceClient {
   /**
    * Deletes a Model.
    *
-   * Model can only be deleted if there are no {@link |DeployedModels} created
-   * from it.
+   * A model cannot be deleted if any {@link google.cloud.aiplatform.v1.Endpoint|Endpoint} resource has a
+   * {@link google.cloud.aiplatform.v1.DeployedModel|DeployedModel} based on the model in its
+   * {@link google.cloud.aiplatform.v1.Endpoint.deployed_models|deployed_models} field.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1134,7 +1135,7 @@ export class ModelServiceClient {
     >;
   }
   /**
-   * Exports a trained, exportable, Model to a location specified by the
+   * Exports a trained, exportable Model to a location specified by the
    * user. A Model is considered to be exportable if it has at least one
    * {@link google.cloud.aiplatform.v1.Model.supported_export_formats|supported export format}.
    *

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(context) {
@@ -53,9 +54,7 @@ function main(context) {
     };
 
     // Run request
-    const response = await aiplatformClient.addContextArtifactsAndExecutions(
-      request
-    );
+    const response = await aiplatformClient.addContextArtifactsAndExecutions(request);
     console.log(response);
   }
 

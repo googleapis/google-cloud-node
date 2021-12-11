@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(tensorboard, timeSeries) {
@@ -47,9 +48,7 @@ function main(tensorboard, timeSeries) {
     };
 
     // Run request
-    const response = await aiplatformClient.batchReadTensorboardTimeSeriesData(
-      request
-    );
+    const response = await aiplatformClient.batchReadTensorboardTimeSeriesData(request);
     console.log(response);
   }
 

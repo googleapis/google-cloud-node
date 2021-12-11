@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(tensorboardExperiment, writeRunDataRequests) {
@@ -31,8 +32,7 @@ function main(tensorboardExperiment, writeRunDataRequests) {
   // const writeRunDataRequests = 1234
 
   // Imports the Aiplatform library
-  const {TensorboardServiceClient} =
-    require('@google-cloud/aiplatform').v1beta1;
+  const {TensorboardServiceClient} = require('@google-cloud/aiplatform').v1beta1;
 
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
@@ -45,9 +45,7 @@ function main(tensorboardExperiment, writeRunDataRequests) {
     };
 
     // Run request
-    const response = await aiplatformClient.writeTensorboardExperimentData(
-      request
-    );
+    const response = await aiplatformClient.writeTensorboardExperimentData(request);
     console.log(response);
   }
 

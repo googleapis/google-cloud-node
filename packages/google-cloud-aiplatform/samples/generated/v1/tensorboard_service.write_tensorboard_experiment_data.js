@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(tensorboardExperiment, writeRunDataRequests) {
@@ -44,9 +45,7 @@ function main(tensorboardExperiment, writeRunDataRequests) {
     };
 
     // Run request
-    const response = await aiplatformClient.writeTensorboardExperimentData(
-      request
-    );
+    const response = await aiplatformClient.writeTensorboardExperimentData(request);
     console.log(response);
   }
 

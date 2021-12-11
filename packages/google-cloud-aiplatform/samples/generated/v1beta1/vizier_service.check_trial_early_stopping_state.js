@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(trialName) {
@@ -39,9 +40,7 @@ function main(trialName) {
     };
 
     // Run request
-    const [operation] = await aiplatformClient.checkTrialEarlyStoppingState(
-      request
-    );
+    const [operation] = await aiplatformClient.checkTrialEarlyStoppingState(request);
     const [response] = await operation.promise();
     console.log(response);
   }

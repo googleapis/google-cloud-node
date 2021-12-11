@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(entityType, entityId, featureSelector) {
@@ -39,8 +40,7 @@ function main(entityType, entityId, featureSelector) {
   // const featureSelector = {}
 
   // Imports the Aiplatform library
-  const {FeaturestoreOnlineServingServiceClient} =
-    require('@google-cloud/aiplatform').v1beta1;
+  const {FeaturestoreOnlineServingServiceClient} = require('@google-cloud/aiplatform').v1beta1;
 
   // Instantiates a client
   const aiplatformClient = new FeaturestoreOnlineServingServiceClient();

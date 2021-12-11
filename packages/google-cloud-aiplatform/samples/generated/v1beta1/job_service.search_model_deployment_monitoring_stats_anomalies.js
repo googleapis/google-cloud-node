@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(modelDeploymentMonitoringJob, deployedModelId, objectives) {
@@ -47,7 +48,7 @@ function main(modelDeploymentMonitoringJob, deployedModelId, objectives) {
   // const pageSize = 1234
   /**
    *  A page token received from a previous
-   *  JobService.SearchModelDeploymentMonitoringStatsAnomalies google.cloud.aiplatform.v1beta1.JobService.SearchModelDeploymentMonitoringStatsAnomalies
+   *  JobService.SearchModelDeploymentMonitoringStatsAnomalies google.cloud.aiplatform.v1beta1.JobService.SearchModelDeploymentMonitoringStatsAnomalies 
    *  call.
    */
   // const pageToken = 'abc123'
@@ -77,12 +78,9 @@ function main(modelDeploymentMonitoringJob, deployedModelId, objectives) {
     };
 
     // Run request
-    const iterable =
-      await aiplatformClient.searchModelDeploymentMonitoringStatsAnomaliesAsync(
-        request
-      );
+    const iterable = await aiplatformClient.searchModelDeploymentMonitoringStatsAnomaliesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

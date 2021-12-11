@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(entityType, entityIds, featureSelector) {
@@ -41,8 +42,7 @@ function main(entityType, entityIds, featureSelector) {
   // const featureSelector = {}
 
   // Imports the Aiplatform library
-  const {FeaturestoreOnlineServingServiceClient} =
-    require('@google-cloud/aiplatform').v1;
+  const {FeaturestoreOnlineServingServiceClient} = require('@google-cloud/aiplatform').v1;
 
   // Instantiates a client
   const aiplatformClient = new FeaturestoreOnlineServingServiceClient();
@@ -57,15 +57,9 @@ function main(entityType, entityIds, featureSelector) {
 
     // Run request
     const stream = await aiplatformClient.streamingReadFeatureValues(request);
-    stream.on('data', response => {
-      console.log(response);
-    });
-    stream.on('error', err => {
-      throw err;
-    });
-    stream.on('end', () => {
-      /* API call completed */
-    });
+    stream.on('data', (response) => { console.log(response) });
+    stream.on('error', (err) => { throw(err) });
+    stream.on('end', () => { /* API call completed */ });
   }
 
   callStreamingReadFeatureValues();

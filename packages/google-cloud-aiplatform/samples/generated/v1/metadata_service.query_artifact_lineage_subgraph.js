@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(artifact) {
@@ -72,9 +73,7 @@ function main(artifact) {
     };
 
     // Run request
-    const response = await aiplatformClient.queryArtifactLineageSubgraph(
-      request
-    );
+    const response = await aiplatformClient.queryArtifactLineageSubgraph(request);
     console.log(response);
   }
 

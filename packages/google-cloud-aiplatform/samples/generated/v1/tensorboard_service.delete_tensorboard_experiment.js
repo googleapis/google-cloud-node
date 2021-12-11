@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -39,9 +40,7 @@ function main(name) {
     };
 
     // Run request
-    const [operation] = await aiplatformClient.deleteTensorboardExperiment(
-      request
-    );
+    const [operation] = await aiplatformClient.deleteTensorboardExperiment(request);
     const [response] = await operation.promise();
     console.log(response);
   }

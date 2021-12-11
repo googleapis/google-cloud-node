@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -31,7 +32,7 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  A page token, received from a previous MetadataService.ListContexts google.cloud.aiplatform.v1.MetadataService.ListContexts
+   *  A page token, received from a previous MetadataService.ListContexts google.cloud.aiplatform.v1.MetadataService.ListContexts 
    *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other provided parameters must match the call that
    *  provided the page token. (Otherwise the request will fail with
@@ -84,7 +85,7 @@ function main(parent) {
     // Run request
     const iterable = await aiplatformClient.listContextsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

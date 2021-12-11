@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(updateMask, tensorboardExperiment) {
@@ -36,8 +37,7 @@ function main(updateMask, tensorboardExperiment) {
   // const tensorboardExperiment = {}
 
   // Imports the Aiplatform library
-  const {TensorboardServiceClient} =
-    require('@google-cloud/aiplatform').v1beta1;
+  const {TensorboardServiceClient} = require('@google-cloud/aiplatform').v1beta1;
 
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
@@ -50,9 +50,7 @@ function main(updateMask, tensorboardExperiment) {
     };
 
     // Run request
-    const response = await aiplatformClient.updateTensorboardExperiment(
-      request
-    );
+    const response = await aiplatformClient.updateTensorboardExperiment(request);
     console.log(response);
   }
 

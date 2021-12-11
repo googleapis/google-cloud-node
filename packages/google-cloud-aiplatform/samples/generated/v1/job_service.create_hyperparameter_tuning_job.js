@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, hyperparameterTuningJob) {
@@ -43,9 +44,7 @@ function main(parent, hyperparameterTuningJob) {
     };
 
     // Run request
-    const response = await aiplatformClient.createHyperparameterTuningJob(
-      request
-    );
+    const response = await aiplatformClient.createHyperparameterTuningJob(request);
     console.log(response);
   }
 
