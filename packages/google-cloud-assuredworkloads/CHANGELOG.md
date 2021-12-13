@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v2.0.0...v2.1.0) (2021-12-10)
+
+
+### Features
+
+* EU Regions and Support With Sovereign Controls ([#125](https://www.github.com/googleapis/nodejs-assured-workloads/issues/125)) ([29706fc](https://www.github.com/googleapis/nodejs-assured-workloads/commit/29706fc359d17fbb85af1d91fcdecf638be52a8a))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.8.0...v2.0.0) (2021-10-14)
 
 
