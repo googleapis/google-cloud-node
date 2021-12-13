@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.14.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.13.0...v1.14.0) (2021-12-11)
+
+
+### Features
+
+* add enable_private_service_connect field to Endpoint ([#238](https://www.github.com/googleapis/nodejs-ai-platform/issues/238)) ([bac788d](https://www.github.com/googleapis/nodejs-ai-platform/commit/bac788d9e229927d3c9b30178523084ce45db14f))
+* add enable_private_service_connect field to Endpoint ([#239](https://www.github.com/googleapis/nodejs-ai-platform/issues/239)) ([e9cbc46](https://www.github.com/googleapis/nodejs-ai-platform/commit/e9cbc460a7af44b8dbbe038b37a33dbd1050928a))
+* add endpoint_id to CreateEndpointRequest and method signature to CreateEndpoint ([e9cbc46](https://www.github.com/googleapis/nodejs-ai-platform/commit/e9cbc460a7af44b8dbbe038b37a33dbd1050928a))
+* add id field to DeployedModel ([e9cbc46](https://www.github.com/googleapis/nodejs-ai-platform/commit/e9cbc460a7af44b8dbbe038b37a33dbd1050928a))
+* add method signature to CreateFeatureStore, CreateEntityType, CreateFeature ([e9cbc46](https://www.github.com/googleapis/nodejs-ai-platform/commit/e9cbc460a7af44b8dbbe038b37a33dbd1050928a))
+* add network and enable_private_service_connect to IndexEndpoint ([e9cbc46](https://www.github.com/googleapis/nodejs-ai-platform/commit/e9cbc460a7af44b8dbbe038b37a33dbd1050928a))
+* add service_attachment field to PrivateEndpoints ([e9cbc46](https://www.github.com/googleapis/nodejs-ai-platform/commit/e9cbc460a7af44b8dbbe038b37a33dbd1050928a))
+* add service_attachment to IndexPrivateEndpoints ([e9cbc46](https://www.github.com/googleapis/nodejs-ai-platform/commit/e9cbc460a7af44b8dbbe038b37a33dbd1050928a))
+* add stratified_split field to training_pipeline InputDataConfig ([e9cbc46](https://www.github.com/googleapis/nodejs-ai-platform/commit/e9cbc460a7af44b8dbbe038b37a33dbd1050928a))
+* Exposing a field for v1 CustomJob-Tensorboard integration. ([03881ff](https://www.github.com/googleapis/nodejs-ai-platform/commit/03881ff26fbbd72a81cbf0d162178e8d6aadeaac))
+* Tensorboard v1 protos release ([#234](https://www.github.com/googleapis/nodejs-ai-platform/issues/234)) ([03881ff](https://www.github.com/googleapis/nodejs-ai-platform/commit/03881ff26fbbd72a81cbf0d162178e8d6aadeaac))
+
 ## [1.13.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.12.0...v1.13.0) (2021-11-11)
 
 
