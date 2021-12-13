@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [4.6.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.5.0...v4.6.0) (2021-12-13)
+
+
+### Features
+
+* add eslintignore for sameple generated code ([#1302](https://www.github.com/googleapis/nodejs-dialogflow/issues/1302)) ([#905](https://www.github.com/googleapis/nodejs-dialogflow/issues/905)) ([b5dfbed](https://www.github.com/googleapis/nodejs-dialogflow/commit/b5dfbeda80f61d374ac021c90ca0e3325d9d2081))
+* added support to configure security settings, language code and time zone on conversation profile ([#895](https://www.github.com/googleapis/nodejs-dialogflow/issues/895)) ([aa2ccf7](https://www.github.com/googleapis/nodejs-dialogflow/commit/aa2ccf73e35d37350f62df997bad7fd3dd0e15bf))
+* support document metadata filter in article suggestion ([#900](https://www.github.com/googleapis/nodejs-dialogflow/issues/900)) ([6801270](https://www.github.com/googleapis/nodejs-dialogflow/commit/680127075e92ad9b4147af22ed97804cf9ae524a))
+* support document metadata filter in article suggestion and smart reply model in human agent assistant ([#899](https://www.github.com/googleapis/nodejs-dialogflow/issues/899)) ([f823aa3](https://www.github.com/googleapis/nodejs-dialogflow/commit/f823aa3e63ffee33a90b7fb02962cfa16af042be))
+
 ## [4.5.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.4.0...v4.5.0) (2021-10-11)
 
 
