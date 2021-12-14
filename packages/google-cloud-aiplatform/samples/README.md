@@ -31,7 +31,6 @@ machine learning development lifecycle.
   * [Create-dataset-video](#create-dataset-video)
   * [Create-dataset](#create-dataset)
   * [Create-endpoint](#create-endpoint)
-  * [Create-hyperparameter-tuning-job-sample](#create-hyperparameter-tuning-job-sample)
   * [Create-hyperparameter-tuning-job](#create-hyperparameter-tuning-job)
   * [Create-training-pipeline-image-classification](#create-training-pipeline-image-classification)
   * [Create-training-pipeline-image-object-detection](#create-training-pipeline-image-object-detection)
@@ -373,23 +372,6 @@ __Usage:__
 
 
 `node samples/create-endpoint.js`
-
-
------
-
-
-
-
-### Create-hyperparameter-tuning-job-sample
-
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-hyperparameter-tuning-job-sample.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-hyperparameter-tuning-job-sample.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/create-hyperparameter-tuning-job-sample.js`
 
 
 -----
