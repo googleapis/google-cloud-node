@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v3.1.0...v3.2.0) (2021-12-14)
+
+
+### Features
+
+* add eslintignore for sameple generated code ([#1302](https://www.github.com/googleapis/nodejs-document-ai/issues/1302)) ([#286](https://www.github.com/googleapis/nodejs-document-ai/issues/286)) ([2baf637](https://www.github.com/googleapis/nodejs-document-ai/commit/2baf63798501748096b8e17500789e067ec66edd))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v3.0.2...v3.1.0) (2021-09-21)
 
 
