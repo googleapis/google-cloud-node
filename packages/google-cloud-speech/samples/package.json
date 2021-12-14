@@ -17,7 +17,7 @@
   "dependencies": {
     "@google-cloud/speech": "^4.9.0",
     "@google-cloud/storage": "^5.0.0",
-    "chalk": "^4.0.0",
+    "chalk": "^5.0.0",
     "fs.promises": "^0.1.2",
     "google-proto-files": "^2.5.0",
     "node-record-lpcm16": "^1.0.1",
