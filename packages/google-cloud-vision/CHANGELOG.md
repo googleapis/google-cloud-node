@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+### [2.4.1](https://www.github.com/googleapis/nodejs-vision/compare/v2.4.0...v2.4.1) (2021-12-14)
+
+
+### Bug Fixes
+
+* comment about gcsUri ([#967](https://www.github.com/googleapis/nodejs-vision/issues/967)) ([abc4044](https://www.github.com/googleapis/nodejs-vision/commit/abc4044dc972746292dad107009bc67223b88f86))
+* **deps:** update dependency redis to v4 ([#966](https://www.github.com/googleapis/nodejs-vision/issues/966)) ([1584e4e](https://www.github.com/googleapis/nodejs-vision/commit/1584e4e65f56f66a968472f6b7dabf23393dc3f4))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.8...v2.4.0) (2021-09-09)
 
 
