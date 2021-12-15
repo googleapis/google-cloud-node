@@ -856,9 +856,8 @@ export class ParticipantsClient {
    *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
    * @param {number} request.contextSize
    *   Max number of messages prior to and including
-   *   {@link google.cloud.dialogflow.v2.SuggestArticlesRequest.latest_message|latest_message}
-   *   to use as context when compiling the suggestion. By default 20 and at
-   *   most 50.
+   *   {@link google.cloud.dialogflow.v2.SuggestArticlesRequest.latest_message|latest_message} to use as context
+   *   when compiling the suggestion. By default 20 and at most 50.
    * @param {google.cloud.dialogflow.v2.AssistQueryParameters} request.assistQueryParams
    *   Parameters for a human assist query.
    * @param {object} [options]

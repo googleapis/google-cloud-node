@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -34,7 +35,7 @@ function main(parent) {
   // const latestMessage = 'abc123'
   /**
    *  Optional. Max number of messages prior to and including
-   *  latest_message google.cloud.dialogflow.v2beta1.SuggestArticlesRequest.latest_message
+   *  latest_message google.cloud.dialogflow.v2beta1.SuggestArticlesRequest.latest_message 
    *  to use as context when compiling the suggestion. By default 20 and at
    *  most 50.
    */

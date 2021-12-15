@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(session, queryInput) {
@@ -96,17 +97,11 @@ function main(session, queryInput) {
 
     // Run request
     const stream = await dialogflowClient.streamingDetectIntent();
-    stream.on('data', response => {
-      console.log(response);
-    });
-    stream.on('error', err => {
-      throw err;
-    });
-    stream.on('end', () => {
-      /* API call completed */
-    });
+    stream.on('data', (response) => { console.log(response) });
+    stream.on('error', (err) => { throw(err) });
+    stream.on('end', () => { /* API call completed */ });
     stream.write(request);
-    stream.end();
+    stream.end(); 
   }
 
   callStreamingDetectIntent();

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, conversationProfile) {
@@ -30,8 +31,7 @@ function main(parent, conversationProfile) {
   // const conversationProfile = {}
 
   // Imports the Dialogflow library
-  const {ConversationProfilesClient} =
-    require('@google-cloud/dialogflow').v2beta1;
+  const {ConversationProfilesClient} = require('@google-cloud/dialogflow').v2beta1;
 
   // Instantiates a client
   const dialogflowClient = new ConversationProfilesClient();

@@ -1775,10 +1775,7 @@
                       "fields": {
                         "speechModelVariant": {
                           "type": "SpeechModelVariant",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 1
                         }
                       }
                     },

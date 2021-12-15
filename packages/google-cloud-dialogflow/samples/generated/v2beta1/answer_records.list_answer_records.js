@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -33,7 +34,7 @@ function main() {
   // const pageSize = 1234
   /**
    *  Optional. The
-   *  ListAnswerRecordsResponse.next_page_token google.cloud.dialogflow.v2beta1.ListAnswerRecordsResponse.next_page_token
+   *  ListAnswerRecordsResponse.next_page_token google.cloud.dialogflow.v2beta1.ListAnswerRecordsResponse.next_page_token 
    *  value returned from a previous list request used to continue listing on
    *  the next page.
    */
@@ -47,12 +48,13 @@ function main() {
 
   async function callListAnswerRecords() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const iterable = await dialogflowClient.listAnswerRecordsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

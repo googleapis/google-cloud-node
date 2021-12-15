@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -35,8 +36,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Dialogflow library
-  const {ConversationProfilesClient} =
-    require('@google-cloud/dialogflow').v2beta1;
+  const {ConversationProfilesClient} = require('@google-cloud/dialogflow').v2beta1;
 
   // Instantiates a client
   const dialogflowClient = new ConversationProfilesClient();
@@ -48,11 +48,9 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dialogflowClient.listConversationProfilesAsync(
-      request
-    );
+    const iterable = await dialogflowClient.listConversationProfilesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

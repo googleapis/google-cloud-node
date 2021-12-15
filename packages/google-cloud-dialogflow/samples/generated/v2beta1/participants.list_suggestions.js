@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -53,12 +54,13 @@ function main() {
 
   async function callListSuggestions() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const iterable = await dialogflowClient.listSuggestionsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

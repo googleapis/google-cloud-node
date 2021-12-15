@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, sessionEntityType) {
@@ -41,8 +42,7 @@ function main(parent, sessionEntityType) {
   // const sessionEntityType = {}
 
   // Imports the Dialogflow library
-  const {SessionEntityTypesClient} =
-    require('@google-cloud/dialogflow').v2beta1;
+  const {SessionEntityTypesClient} = require('@google-cloud/dialogflow').v2beta1;
 
   // Instantiates a client
   const dialogflowClient = new SessionEntityTypesClient();
