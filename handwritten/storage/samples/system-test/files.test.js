@@ -41,6 +41,8 @@ const kmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_US;
 const filePath = path.join(cwd, 'resources', fileName);
 const folderPath = path.join(cwd, 'resources');
 const downloadFilePath = path.join(cwd, 'downloaded.txt');
+const startByte = 0;
+const endByte = 20;
 
 const fileContent = fs.readFileSync(filePath, 'utf-8');
 
@@ -197,6 +199,19 @@ describe('file', () => {
       output,
       new RegExp(
         `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath}.`
+      )
+    );
+    fs.statSync(downloadFilePath);
+  });
+
+  it('should download a file using a given byte range', () => {
+    const output = execSync(
+      `node downloadByteRange.js ${bucketName} ${fileName} ${startByte} ${endByte} ${downloadFilePath}`
+    );
+    assert.match(
+      output,
+      new RegExp(
+        `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath} from byte ${startByte} to byte ${endByte}.`
       )
     );
     fs.statSync(downloadFilePath);

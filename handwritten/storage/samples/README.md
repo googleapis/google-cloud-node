@@ -45,6 +45,7 @@ objects to users via direct download.
   * [Disable Default Event Based Hold](#disable-default-event-based-hold)
   * [Disable Requester Pays](#disable-requester-pays)
   * [Disable Uniform Bucket Level Access](#disable-uniform-bucket-level-access)
+  * [Download Byte Range](#download-byte-range)
   * [Download Encrypted File](#download-encrypted-file)
   * [Download File](#download-file)
   * [Download File Using Requester Pays](#download-file-using-requester-pays)
@@ -611,6 +612,23 @@ __Usage:__
 
 
 `node samples/disableUniformBucketLevelAccess.js`
+
+
+-----
+
+
+
+
+### Download Byte Range
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/downloadByteRange.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/downloadByteRange.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/downloadByteRange.js`
 
 
 -----

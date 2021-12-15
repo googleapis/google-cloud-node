@@ -2310,6 +2310,9 @@ describe('storage', () => {
   });
 
   describe('write, read, and remove files', () => {
+    const FILE_DOWNLOAD_START_BYTE = 0;
+    const FILE_DOWNLOAD_END_BYTE = 20;
+
     before(async () => {
       function setHash(filesKey: string) {
         const file = FILES[filesKey];
@@ -2439,6 +2442,24 @@ describe('storage', () => {
           assert.strictEqual(String(fileContents), String(remoteContents));
           done();
         });
+      });
+    });
+
+    it('should download the specified bytes of a file', done => {
+      const fileContents = fs.readFileSync(FILES.big.path);
+      bucket.upload(FILES.big.path, (err: Error | null, file?: File | null) => {
+        assert.ifError(err);
+        file!.download(
+          {start: FILE_DOWNLOAD_START_BYTE, end: FILE_DOWNLOAD_END_BYTE},
+          (err, remoteContents) => {
+            assert.ifError(err);
+            assert.strictEqual(
+              String(fileContents).slice(0, 20),
+              String(remoteContents)
+            );
+            done();
+          }
+        );
       });
     });
 
