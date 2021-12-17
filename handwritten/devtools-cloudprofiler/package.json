@@ -50,7 +50,7 @@
     "@types/node": "^16.0.0",
     "@types/pretty-ms": "^4.0.0",
     "@types/sinon": "^10.0.0",
-    "@types/tmp": "0.2.2",
+    "@types/tmp": "0.2.3",
     "c8": "^7.0.0",
     "codecov": "^3.0.0",
     "gts": "^2.0.0",
