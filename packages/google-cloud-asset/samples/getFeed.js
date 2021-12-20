@@ -35,9 +35,9 @@ async function main(feedName) {
     const result = await client.getFeed(request);
     // Do things with with the response.
     console.log(util.inspect(result, {depth: null}));
-    // [END asset_quickstart_get_feed]
   }
   getFeed();
+  // [END asset_quickstart_get_feed]
 }
 
 main(...process.argv.slice(2)).catch(err => {
