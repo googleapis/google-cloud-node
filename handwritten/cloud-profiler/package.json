@@ -29,6 +29,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@google-cloud/common": "^3.0.0",
+    "@google-cloud/logging-min": "^9.6.3",
     "@types/console-log-level": "^1.4.0",
     "@types/semver": "^7.0.0",
     "console-log-level": "^1.4.0",

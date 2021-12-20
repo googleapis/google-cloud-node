@@ -236,7 +236,7 @@ export async function startLocal(config: Config = {}): Promise<void> {
   setInterval(() => {
     const curTime = Date.now();
     const {rss, heapTotal, heapUsed} = process.memoryUsage();
-    logger.debug(
+    const debugInfo = [
       new Date().toISOString(),
       'rss',
       (rss / (1024 * 1024)).toFixed(3),
@@ -252,8 +252,9 @@ export async function startLocal(config: Config = {}): Promise<void> {
       'profiles/s,',
       'time profile collection rate',
       ((timeProfileCount * 1000) / (curTime - prevLogTime)).toFixed(3),
-      'profiles/s'
-    );
+      'profiles/s',
+    ].map(v => v + '');
+    logger.debug(debugInfo.join(' '));
 
     heapProfileCount = 0;
     timeProfileCount = 0;
