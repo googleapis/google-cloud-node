@@ -18,5 +18,5 @@ deep-remove-regex:
   - /owl-bot-staging
 
 deep-copy-regex:
-  - source: /google/cloud/eventarc/(.*)/.*-nodejs/(.*)
+  - source: /google/cloud/eventarc/(v.*)/.*-nodejs/(.*)
     dest: /owl-bot-staging/$1/$2
