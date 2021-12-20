@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, customMetric) {
@@ -29,8 +30,7 @@ function main(parent, customMetric) {
   // const customMetric = {}
 
   // Imports the Admin library
-  const {AnalyticsAdminServiceClient} =
-    require('@google-analytics/admin').v1alpha;
+  const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
 
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();

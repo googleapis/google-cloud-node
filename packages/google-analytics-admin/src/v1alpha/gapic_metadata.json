@@ -140,16 +140,6 @@
                 "updateAndroidAppDataStream"
               ]
             },
-            "GetEnhancedMeasurementSettings": {
-              "methods": [
-                "getEnhancedMeasurementSettings"
-              ]
-            },
-            "UpdateEnhancedMeasurementSettings": {
-              "methods": [
-                "updateEnhancedMeasurementSettings"
-              ]
-            },
             "CreateFirebaseLink": {
               "methods": [
                 "createFirebaseLink"
@@ -203,6 +193,11 @@
             "UpdateMeasurementProtocolSecret": {
               "methods": [
                 "updateMeasurementProtocolSecret"
+              ]
+            },
+            "AcknowledgeUserDataCollection": {
+              "methods": [
+                "acknowledgeUserDataCollection"
               ]
             },
             "GetGoogleSignalsSettings": {
@@ -325,6 +320,26 @@
                 "updateDataRetentionSettings"
               ]
             },
+            "CreateDataStream": {
+              "methods": [
+                "createDataStream"
+              ]
+            },
+            "DeleteDataStream": {
+              "methods": [
+                "deleteDataStream"
+              ]
+            },
+            "UpdateDataStream": {
+              "methods": [
+                "updateDataStream"
+              ]
+            },
+            "GetDataStream": {
+              "methods": [
+                "getDataStream"
+              ]
+            },
             "ListAccounts": {
               "methods": [
                 "listAccounts",
@@ -442,6 +457,13 @@
                 "listCustomMetrics",
                 "listCustomMetricsStream",
                 "listCustomMetricsAsync"
+              ]
+            },
+            "ListDataStreams": {
+              "methods": [
+                "listDataStreams",
+                "listDataStreamsStream",
+                "listDataStreamsAsync"
               ]
             }
           }
@@ -579,16 +601,6 @@
                 "updateAndroidAppDataStream"
               ]
             },
-            "GetEnhancedMeasurementSettings": {
-              "methods": [
-                "getEnhancedMeasurementSettings"
-              ]
-            },
-            "UpdateEnhancedMeasurementSettings": {
-              "methods": [
-                "updateEnhancedMeasurementSettings"
-              ]
-            },
             "CreateFirebaseLink": {
               "methods": [
                 "createFirebaseLink"
@@ -642,6 +654,11 @@
             "UpdateMeasurementProtocolSecret": {
               "methods": [
                 "updateMeasurementProtocolSecret"
+              ]
+            },
+            "AcknowledgeUserDataCollection": {
+              "methods": [
+                "acknowledgeUserDataCollection"
               ]
             },
             "GetGoogleSignalsSettings": {
@@ -764,6 +781,26 @@
                 "updateDataRetentionSettings"
               ]
             },
+            "CreateDataStream": {
+              "methods": [
+                "createDataStream"
+              ]
+            },
+            "DeleteDataStream": {
+              "methods": [
+                "deleteDataStream"
+              ]
+            },
+            "UpdateDataStream": {
+              "methods": [
+                "updateDataStream"
+              ]
+            },
+            "GetDataStream": {
+              "methods": [
+                "getDataStream"
+              ]
+            },
             "ListAccounts": {
               "methods": [
                 "listAccounts",
@@ -881,6 +918,13 @@
                 "listCustomMetrics",
                 "listCustomMetricsStream",
                 "listCustomMetricsAsync"
+              ]
+            },
+            "ListDataStreams": {
+              "methods": [
+                "listDataStreams",
+                "listDataStreamsStream",
+                "listDataStreamsAsync"
               ]
             }
           }

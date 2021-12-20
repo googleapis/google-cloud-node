@@ -15,24 +15,19 @@
 
 'use strict';
 
-function main(parent, names) {
-  // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchGetUserLinks_async]
+function main(parent, dataStream) {
+  // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateDataStream_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The account or property that all user links in the request are
-   *  for. The parent of all provided values for the 'names' field must match
-   *  this field.
-   *  Example format: accounts/1234
+   *  Required. Example format: properties/1234
    */
   // const parent = 'abc123'
   /**
-   *  Required. The names of the user links to retrieve.
-   *  A maximum of 1000 user links can be retrieved in a batch.
-   *  Format: accounts/{accountId}/userLinks/{userLinkId}
+   *  Required. The DataStream to create.
    */
-  // const names = 'abc123'
+  // const dataStream = {}
 
   // Imports the Admin library
   const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
@@ -40,20 +35,20 @@ function main(parent, names) {
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();
 
-  async function callBatchGetUserLinks() {
+  async function callCreateDataStream() {
     // Construct request
     const request = {
       parent,
-      names,
+      dataStream,
     };
 
     // Run request
-    const response = await adminClient.batchGetUserLinks(request);
+    const response = await adminClient.createDataStream(request);
     console.log(response);
   }
 
-  callBatchGetUserLinks();
-  // [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchGetUserLinks_async]
+  callCreateDataStream();
+  // [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateDataStream_async]
 }
 
 process.on('unhandledRejection', err => {

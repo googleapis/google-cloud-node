@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -30,15 +31,15 @@ function main() {
   // const redirectUri = 'abc123'
 
   // Imports the Admin library
-  const {AnalyticsAdminServiceClient} =
-    require('@google-analytics/admin').v1alpha;
+  const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
 
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();
 
   async function callProvisionAccountTicket() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const response = await adminClient.provisionAccountTicket(request);

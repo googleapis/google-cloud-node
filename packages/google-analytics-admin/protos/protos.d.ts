@@ -523,34 +523,6 @@ export namespace google {
                     public listAndroidAppDataStreams(request: google.analytics.admin.v1alpha.IListAndroidAppDataStreamsRequest): Promise<google.analytics.admin.v1alpha.ListAndroidAppDataStreamsResponse>;
 
                     /**
-                     * Calls GetEnhancedMeasurementSettings.
-                     * @param request GetEnhancedMeasurementSettingsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and EnhancedMeasurementSettings
-                     */
-                    public getEnhancedMeasurementSettings(request: google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetEnhancedMeasurementSettingsCallback): void;
-
-                    /**
-                     * Calls GetEnhancedMeasurementSettings.
-                     * @param request GetEnhancedMeasurementSettingsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getEnhancedMeasurementSettings(request: google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest): Promise<google.analytics.admin.v1alpha.EnhancedMeasurementSettings>;
-
-                    /**
-                     * Calls UpdateEnhancedMeasurementSettings.
-                     * @param request UpdateEnhancedMeasurementSettingsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and EnhancedMeasurementSettings
-                     */
-                    public updateEnhancedMeasurementSettings(request: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateEnhancedMeasurementSettingsCallback): void;
-
-                    /**
-                     * Calls UpdateEnhancedMeasurementSettings.
-                     * @param request UpdateEnhancedMeasurementSettingsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public updateEnhancedMeasurementSettings(request: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest): Promise<google.analytics.admin.v1alpha.EnhancedMeasurementSettings>;
-
-                    /**
                      * Calls CreateFirebaseLink.
                      * @param request CreateFirebaseLinkRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and FirebaseLink
@@ -745,6 +717,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateMeasurementProtocolSecret(request: google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest): Promise<google.analytics.admin.v1alpha.MeasurementProtocolSecret>;
+
+                    /**
+                     * Calls AcknowledgeUserDataCollection.
+                     * @param request AcknowledgeUserDataCollectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AcknowledgeUserDataCollectionResponse
+                     */
+                    public acknowledgeUserDataCollection(request: google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.AcknowledgeUserDataCollectionCallback): void;
+
+                    /**
+                     * Calls AcknowledgeUserDataCollection.
+                     * @param request AcknowledgeUserDataCollectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public acknowledgeUserDataCollection(request: google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest): Promise<google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse>;
 
                     /**
                      * Calls SearchChangeHistoryEvents.
@@ -1165,6 +1151,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateDataRetentionSettings(request: google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest): Promise<google.analytics.admin.v1alpha.DataRetentionSettings>;
+
+                    /**
+                     * Calls CreateDataStream.
+                     * @param request CreateDataStreamRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataStream
+                     */
+                    public createDataStream(request: google.analytics.admin.v1alpha.ICreateDataStreamRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.CreateDataStreamCallback): void;
+
+                    /**
+                     * Calls CreateDataStream.
+                     * @param request CreateDataStreamRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDataStream(request: google.analytics.admin.v1alpha.ICreateDataStreamRequest): Promise<google.analytics.admin.v1alpha.DataStream>;
+
+                    /**
+                     * Calls DeleteDataStream.
+                     * @param request DeleteDataStreamRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDataStream(request: google.analytics.admin.v1alpha.IDeleteDataStreamRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteDataStreamCallback): void;
+
+                    /**
+                     * Calls DeleteDataStream.
+                     * @param request DeleteDataStreamRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDataStream(request: google.analytics.admin.v1alpha.IDeleteDataStreamRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateDataStream.
+                     * @param request UpdateDataStreamRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataStream
+                     */
+                    public updateDataStream(request: google.analytics.admin.v1alpha.IUpdateDataStreamRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateDataStreamCallback): void;
+
+                    /**
+                     * Calls UpdateDataStream.
+                     * @param request UpdateDataStreamRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDataStream(request: google.analytics.admin.v1alpha.IUpdateDataStreamRequest): Promise<google.analytics.admin.v1alpha.DataStream>;
+
+                    /**
+                     * Calls ListDataStreams.
+                     * @param request ListDataStreamsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDataStreamsResponse
+                     */
+                    public listDataStreams(request: google.analytics.admin.v1alpha.IListDataStreamsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListDataStreamsCallback): void;
+
+                    /**
+                     * Calls ListDataStreams.
+                     * @param request ListDataStreamsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDataStreams(request: google.analytics.admin.v1alpha.IListDataStreamsRequest): Promise<google.analytics.admin.v1alpha.ListDataStreamsResponse>;
+
+                    /**
+                     * Calls GetDataStream.
+                     * @param request GetDataStreamRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataStream
+                     */
+                    public getDataStream(request: google.analytics.admin.v1alpha.IGetDataStreamRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetDataStreamCallback): void;
+
+                    /**
+                     * Calls GetDataStream.
+                     * @param request GetDataStreamRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDataStream(request: google.analytics.admin.v1alpha.IGetDataStreamRequest): Promise<google.analytics.admin.v1alpha.DataStream>;
                 }
 
                 namespace AnalyticsAdminService {
@@ -1408,20 +1464,6 @@ export namespace google {
                     type ListAndroidAppDataStreamsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListAndroidAppDataStreamsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getEnhancedMeasurementSettings}.
-                     * @param error Error, if any
-                     * @param [response] EnhancedMeasurementSettings
-                     */
-                    type GetEnhancedMeasurementSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.EnhancedMeasurementSettings) => void;
-
-                    /**
-                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateEnhancedMeasurementSettings}.
-                     * @param error Error, if any
-                     * @param [response] EnhancedMeasurementSettings
-                     */
-                    type UpdateEnhancedMeasurementSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.EnhancedMeasurementSettings) => void;
-
-                    /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createFirebaseLink}.
                      * @param error Error, if any
                      * @param [response] FirebaseLink
@@ -1518,6 +1560,13 @@ export namespace google {
                      * @param [response] MeasurementProtocolSecret
                      */
                     type UpdateMeasurementProtocolSecretCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.MeasurementProtocolSecret) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#acknowledgeUserDataCollection}.
+                     * @param error Error, if any
+                     * @param [response] AcknowledgeUserDataCollectionResponse
+                     */
+                    type AcknowledgeUserDataCollectionCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#searchChangeHistoryEvents}.
@@ -1728,6 +1777,41 @@ export namespace google {
                      * @param [response] DataRetentionSettings
                      */
                     type UpdateDataRetentionSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DataRetentionSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createDataStream}.
+                     * @param error Error, if any
+                     * @param [response] DataStream
+                     */
+                    type CreateDataStreamCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DataStream) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#deleteDataStream}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDataStreamCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateDataStream}.
+                     * @param error Error, if any
+                     * @param [response] DataStream
+                     */
+                    type UpdateDataStreamCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DataStream) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listDataStreams}.
+                     * @param error Error, if any
+                     * @param [response] ListDataStreamsResponse
+                     */
+                    type ListDataStreamsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListDataStreamsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getDataStream}.
+                     * @param error Error, if any
+                     * @param [response] DataStream
+                     */
+                    type GetDataStreamCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DataStream) => void;
                 }
 
                 /** Properties of a GetAccountRequest. */
@@ -5906,192 +5990,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a GetEnhancedMeasurementSettingsRequest. */
-                interface IGetEnhancedMeasurementSettingsRequest {
-
-                    /** GetEnhancedMeasurementSettingsRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a GetEnhancedMeasurementSettingsRequest. */
-                class GetEnhancedMeasurementSettingsRequest implements IGetEnhancedMeasurementSettingsRequest {
-
-                    /**
-                     * Constructs a new GetEnhancedMeasurementSettingsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest);
-
-                    /** GetEnhancedMeasurementSettingsRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new GetEnhancedMeasurementSettingsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetEnhancedMeasurementSettingsRequest instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest): google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest;
-
-                    /**
-                     * Encodes the specified GetEnhancedMeasurementSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest.verify|verify} messages.
-                     * @param message GetEnhancedMeasurementSettingsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetEnhancedMeasurementSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest.verify|verify} messages.
-                     * @param message GetEnhancedMeasurementSettingsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetEnhancedMeasurementSettingsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetEnhancedMeasurementSettingsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest;
-
-                    /**
-                     * Decodes a GetEnhancedMeasurementSettingsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetEnhancedMeasurementSettingsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest;
-
-                    /**
-                     * Verifies a GetEnhancedMeasurementSettingsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetEnhancedMeasurementSettingsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetEnhancedMeasurementSettingsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest;
-
-                    /**
-                     * Creates a plain object from a GetEnhancedMeasurementSettingsRequest message. Also converts values to other types if specified.
-                     * @param message GetEnhancedMeasurementSettingsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetEnhancedMeasurementSettingsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an UpdateEnhancedMeasurementSettingsRequest. */
-                interface IUpdateEnhancedMeasurementSettingsRequest {
-
-                    /** UpdateEnhancedMeasurementSettingsRequest enhancedMeasurementSettings */
-                    enhancedMeasurementSettings?: (google.analytics.admin.v1alpha.IEnhancedMeasurementSettings|null);
-
-                    /** UpdateEnhancedMeasurementSettingsRequest updateMask */
-                    updateMask?: (google.protobuf.IFieldMask|null);
-                }
-
-                /** Represents an UpdateEnhancedMeasurementSettingsRequest. */
-                class UpdateEnhancedMeasurementSettingsRequest implements IUpdateEnhancedMeasurementSettingsRequest {
-
-                    /**
-                     * Constructs a new UpdateEnhancedMeasurementSettingsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest);
-
-                    /** UpdateEnhancedMeasurementSettingsRequest enhancedMeasurementSettings. */
-                    public enhancedMeasurementSettings?: (google.analytics.admin.v1alpha.IEnhancedMeasurementSettings|null);
-
-                    /** UpdateEnhancedMeasurementSettingsRequest updateMask. */
-                    public updateMask?: (google.protobuf.IFieldMask|null);
-
-                    /**
-                     * Creates a new UpdateEnhancedMeasurementSettingsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UpdateEnhancedMeasurementSettingsRequest instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest): google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest;
-
-                    /**
-                     * Encodes the specified UpdateEnhancedMeasurementSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest.verify|verify} messages.
-                     * @param message UpdateEnhancedMeasurementSettingsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UpdateEnhancedMeasurementSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest.verify|verify} messages.
-                     * @param message UpdateEnhancedMeasurementSettingsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UpdateEnhancedMeasurementSettingsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UpdateEnhancedMeasurementSettingsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest;
-
-                    /**
-                     * Decodes an UpdateEnhancedMeasurementSettingsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UpdateEnhancedMeasurementSettingsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest;
-
-                    /**
-                     * Verifies an UpdateEnhancedMeasurementSettingsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UpdateEnhancedMeasurementSettingsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UpdateEnhancedMeasurementSettingsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest;
-
-                    /**
-                     * Creates a plain object from an UpdateEnhancedMeasurementSettingsRequest message. Also converts values to other types if specified.
-                     * @param message UpdateEnhancedMeasurementSettingsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UpdateEnhancedMeasurementSettingsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Properties of a CreateFirebaseLinkRequest. */
                 interface ICreateFirebaseLinkRequest {
 
@@ -7323,6 +7221,186 @@ export namespace google {
 
                     /**
                      * Converts this ListAccountSummariesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AcknowledgeUserDataCollectionRequest. */
+                interface IAcknowledgeUserDataCollectionRequest {
+
+                    /** AcknowledgeUserDataCollectionRequest property */
+                    property?: (string|null);
+
+                    /** AcknowledgeUserDataCollectionRequest acknowledgement */
+                    acknowledgement?: (string|null);
+                }
+
+                /** Represents an AcknowledgeUserDataCollectionRequest. */
+                class AcknowledgeUserDataCollectionRequest implements IAcknowledgeUserDataCollectionRequest {
+
+                    /**
+                     * Constructs a new AcknowledgeUserDataCollectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest);
+
+                    /** AcknowledgeUserDataCollectionRequest property. */
+                    public property: string;
+
+                    /** AcknowledgeUserDataCollectionRequest acknowledgement. */
+                    public acknowledgement: string;
+
+                    /**
+                     * Creates a new AcknowledgeUserDataCollectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AcknowledgeUserDataCollectionRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest): google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest;
+
+                    /**
+                     * Encodes the specified AcknowledgeUserDataCollectionRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest.verify|verify} messages.
+                     * @param message AcknowledgeUserDataCollectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AcknowledgeUserDataCollectionRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest.verify|verify} messages.
+                     * @param message AcknowledgeUserDataCollectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AcknowledgeUserDataCollectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AcknowledgeUserDataCollectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest;
+
+                    /**
+                     * Decodes an AcknowledgeUserDataCollectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AcknowledgeUserDataCollectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest;
+
+                    /**
+                     * Verifies an AcknowledgeUserDataCollectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AcknowledgeUserDataCollectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AcknowledgeUserDataCollectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest;
+
+                    /**
+                     * Creates a plain object from an AcknowledgeUserDataCollectionRequest message. Also converts values to other types if specified.
+                     * @param message AcknowledgeUserDataCollectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AcknowledgeUserDataCollectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AcknowledgeUserDataCollectionResponse. */
+                interface IAcknowledgeUserDataCollectionResponse {
+                }
+
+                /** Represents an AcknowledgeUserDataCollectionResponse. */
+                class AcknowledgeUserDataCollectionResponse implements IAcknowledgeUserDataCollectionResponse {
+
+                    /**
+                     * Constructs a new AcknowledgeUserDataCollectionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionResponse);
+
+                    /**
+                     * Creates a new AcknowledgeUserDataCollectionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AcknowledgeUserDataCollectionResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionResponse): google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse;
+
+                    /**
+                     * Encodes the specified AcknowledgeUserDataCollectionResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse.verify|verify} messages.
+                     * @param message AcknowledgeUserDataCollectionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AcknowledgeUserDataCollectionResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse.verify|verify} messages.
+                     * @param message AcknowledgeUserDataCollectionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AcknowledgeUserDataCollectionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AcknowledgeUserDataCollectionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse;
+
+                    /**
+                     * Decodes an AcknowledgeUserDataCollectionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AcknowledgeUserDataCollectionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse;
+
+                    /**
+                     * Verifies an AcknowledgeUserDataCollectionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AcknowledgeUserDataCollectionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AcknowledgeUserDataCollectionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse;
+
+                    /**
+                     * Creates a plain object from an AcknowledgeUserDataCollectionResponse message. Also converts values to other types if specified.
+                     * @param message AcknowledgeUserDataCollectionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AcknowledgeUserDataCollectionResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -11432,6 +11510,576 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a CreateDataStreamRequest. */
+                interface ICreateDataStreamRequest {
+
+                    /** CreateDataStreamRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDataStreamRequest dataStream */
+                    dataStream?: (google.analytics.admin.v1alpha.IDataStream|null);
+                }
+
+                /** Represents a CreateDataStreamRequest. */
+                class CreateDataStreamRequest implements ICreateDataStreamRequest {
+
+                    /**
+                     * Constructs a new CreateDataStreamRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ICreateDataStreamRequest);
+
+                    /** CreateDataStreamRequest parent. */
+                    public parent: string;
+
+                    /** CreateDataStreamRequest dataStream. */
+                    public dataStream?: (google.analytics.admin.v1alpha.IDataStream|null);
+
+                    /**
+                     * Creates a new CreateDataStreamRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDataStreamRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ICreateDataStreamRequest): google.analytics.admin.v1alpha.CreateDataStreamRequest;
+
+                    /**
+                     * Encodes the specified CreateDataStreamRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateDataStreamRequest.verify|verify} messages.
+                     * @param message CreateDataStreamRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ICreateDataStreamRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDataStreamRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateDataStreamRequest.verify|verify} messages.
+                     * @param message CreateDataStreamRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateDataStreamRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDataStreamRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDataStreamRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateDataStreamRequest;
+
+                    /**
+                     * Decodes a CreateDataStreamRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDataStreamRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateDataStreamRequest;
+
+                    /**
+                     * Verifies a CreateDataStreamRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDataStreamRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDataStreamRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateDataStreamRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDataStreamRequest message. Also converts values to other types if specified.
+                     * @param message CreateDataStreamRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.CreateDataStreamRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDataStreamRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteDataStreamRequest. */
+                interface IDeleteDataStreamRequest {
+
+                    /** DeleteDataStreamRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteDataStreamRequest. */
+                class DeleteDataStreamRequest implements IDeleteDataStreamRequest {
+
+                    /**
+                     * Constructs a new DeleteDataStreamRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IDeleteDataStreamRequest);
+
+                    /** DeleteDataStreamRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteDataStreamRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDataStreamRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IDeleteDataStreamRequest): google.analytics.admin.v1alpha.DeleteDataStreamRequest;
+
+                    /**
+                     * Encodes the specified DeleteDataStreamRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteDataStreamRequest.verify|verify} messages.
+                     * @param message DeleteDataStreamRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IDeleteDataStreamRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDataStreamRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteDataStreamRequest.verify|verify} messages.
+                     * @param message DeleteDataStreamRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IDeleteDataStreamRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDataStreamRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDataStreamRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DeleteDataStreamRequest;
+
+                    /**
+                     * Decodes a DeleteDataStreamRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDataStreamRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DeleteDataStreamRequest;
+
+                    /**
+                     * Verifies a DeleteDataStreamRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDataStreamRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDataStreamRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DeleteDataStreamRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDataStreamRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDataStreamRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.DeleteDataStreamRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDataStreamRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateDataStreamRequest. */
+                interface IUpdateDataStreamRequest {
+
+                    /** UpdateDataStreamRequest dataStream */
+                    dataStream?: (google.analytics.admin.v1alpha.IDataStream|null);
+
+                    /** UpdateDataStreamRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateDataStreamRequest. */
+                class UpdateDataStreamRequest implements IUpdateDataStreamRequest {
+
+                    /**
+                     * Constructs a new UpdateDataStreamRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateDataStreamRequest);
+
+                    /** UpdateDataStreamRequest dataStream. */
+                    public dataStream?: (google.analytics.admin.v1alpha.IDataStream|null);
+
+                    /** UpdateDataStreamRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateDataStreamRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDataStreamRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateDataStreamRequest): google.analytics.admin.v1alpha.UpdateDataStreamRequest;
+
+                    /**
+                     * Encodes the specified UpdateDataStreamRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateDataStreamRequest.verify|verify} messages.
+                     * @param message UpdateDataStreamRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateDataStreamRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDataStreamRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateDataStreamRequest.verify|verify} messages.
+                     * @param message UpdateDataStreamRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateDataStreamRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDataStreamRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDataStreamRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateDataStreamRequest;
+
+                    /**
+                     * Decodes an UpdateDataStreamRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDataStreamRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateDataStreamRequest;
+
+                    /**
+                     * Verifies an UpdateDataStreamRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDataStreamRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDataStreamRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateDataStreamRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDataStreamRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDataStreamRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateDataStreamRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDataStreamRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListDataStreamsRequest. */
+                interface IListDataStreamsRequest {
+
+                    /** ListDataStreamsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDataStreamsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDataStreamsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListDataStreamsRequest. */
+                class ListDataStreamsRequest implements IListDataStreamsRequest {
+
+                    /**
+                     * Constructs a new ListDataStreamsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListDataStreamsRequest);
+
+                    /** ListDataStreamsRequest parent. */
+                    public parent: string;
+
+                    /** ListDataStreamsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDataStreamsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListDataStreamsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataStreamsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListDataStreamsRequest): google.analytics.admin.v1alpha.ListDataStreamsRequest;
+
+                    /**
+                     * Encodes the specified ListDataStreamsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListDataStreamsRequest.verify|verify} messages.
+                     * @param message ListDataStreamsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListDataStreamsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataStreamsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListDataStreamsRequest.verify|verify} messages.
+                     * @param message ListDataStreamsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListDataStreamsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataStreamsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataStreamsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListDataStreamsRequest;
+
+                    /**
+                     * Decodes a ListDataStreamsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataStreamsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListDataStreamsRequest;
+
+                    /**
+                     * Verifies a ListDataStreamsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataStreamsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataStreamsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListDataStreamsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDataStreamsRequest message. Also converts values to other types if specified.
+                     * @param message ListDataStreamsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListDataStreamsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataStreamsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListDataStreamsResponse. */
+                interface IListDataStreamsResponse {
+
+                    /** ListDataStreamsResponse dataStreams */
+                    dataStreams?: (google.analytics.admin.v1alpha.IDataStream[]|null);
+
+                    /** ListDataStreamsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDataStreamsResponse. */
+                class ListDataStreamsResponse implements IListDataStreamsResponse {
+
+                    /**
+                     * Constructs a new ListDataStreamsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListDataStreamsResponse);
+
+                    /** ListDataStreamsResponse dataStreams. */
+                    public dataStreams: google.analytics.admin.v1alpha.IDataStream[];
+
+                    /** ListDataStreamsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDataStreamsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataStreamsResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListDataStreamsResponse): google.analytics.admin.v1alpha.ListDataStreamsResponse;
+
+                    /**
+                     * Encodes the specified ListDataStreamsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListDataStreamsResponse.verify|verify} messages.
+                     * @param message ListDataStreamsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListDataStreamsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataStreamsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListDataStreamsResponse.verify|verify} messages.
+                     * @param message ListDataStreamsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListDataStreamsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataStreamsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataStreamsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListDataStreamsResponse;
+
+                    /**
+                     * Decodes a ListDataStreamsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataStreamsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListDataStreamsResponse;
+
+                    /**
+                     * Verifies a ListDataStreamsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataStreamsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataStreamsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListDataStreamsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDataStreamsResponse message. Also converts values to other types if specified.
+                     * @param message ListDataStreamsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListDataStreamsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataStreamsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetDataStreamRequest. */
+                interface IGetDataStreamRequest {
+
+                    /** GetDataStreamRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDataStreamRequest. */
+                class GetDataStreamRequest implements IGetDataStreamRequest {
+
+                    /**
+                     * Constructs a new GetDataStreamRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetDataStreamRequest);
+
+                    /** GetDataStreamRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDataStreamRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDataStreamRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetDataStreamRequest): google.analytics.admin.v1alpha.GetDataStreamRequest;
+
+                    /**
+                     * Encodes the specified GetDataStreamRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetDataStreamRequest.verify|verify} messages.
+                     * @param message GetDataStreamRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetDataStreamRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDataStreamRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetDataStreamRequest.verify|verify} messages.
+                     * @param message GetDataStreamRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetDataStreamRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDataStreamRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDataStreamRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetDataStreamRequest;
+
+                    /**
+                     * Decodes a GetDataStreamRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDataStreamRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetDataStreamRequest;
+
+                    /**
+                     * Verifies a GetDataStreamRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDataStreamRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDataStreamRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetDataStreamRequest;
+
+                    /**
+                     * Creates a plain object from a GetDataStreamRequest message. Also converts values to other types if specified.
+                     * @param message GetDataStreamRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetDataStreamRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDataStreamRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** IndustryCategory enum. */
                 enum IndustryCategory {
                     INDUSTRY_CATEGORY_UNSPECIFIED = 0,
@@ -11501,7 +12149,9 @@ export namespace google {
                     MEASUREMENT_PROTOCOL_SECRET = 10,
                     CUSTOM_DIMENSION = 11,
                     CUSTOM_METRIC = 12,
-                    DATA_RETENTION_SETTINGS = 13
+                    DATA_RETENTION_SETTINGS = 13,
+                    DISPLAY_VIDEO_360_ADVERTISER_LINK = 14,
+                    DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL = 15
                 }
 
                 /** GoogleSignalsState enum. */
@@ -11691,6 +12341,9 @@ export namespace google {
 
                     /** Property expireTime */
                     expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Property account */
+                    account?: (string|null);
                 }
 
                 /** Represents a Property. */
@@ -11734,6 +12387,9 @@ export namespace google {
 
                     /** Property expireTime. */
                     public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Property account. */
+                    public account: string;
 
                     /**
                      * Creates a new Property instance using the specified properties.
@@ -12172,6 +12828,446 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a DataStream. */
+                interface IDataStream {
+
+                    /** DataStream webStreamData */
+                    webStreamData?: (google.analytics.admin.v1alpha.DataStream.IWebStreamData|null);
+
+                    /** DataStream androidAppStreamData */
+                    androidAppStreamData?: (google.analytics.admin.v1alpha.DataStream.IAndroidAppStreamData|null);
+
+                    /** DataStream iosAppStreamData */
+                    iosAppStreamData?: (google.analytics.admin.v1alpha.DataStream.IIosAppStreamData|null);
+
+                    /** DataStream name */
+                    name?: (string|null);
+
+                    /** DataStream type */
+                    type?: (google.analytics.admin.v1alpha.DataStream.DataStreamType|keyof typeof google.analytics.admin.v1alpha.DataStream.DataStreamType|null);
+
+                    /** DataStream displayName */
+                    displayName?: (string|null);
+
+                    /** DataStream createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataStream updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DataStream. */
+                class DataStream implements IDataStream {
+
+                    /**
+                     * Constructs a new DataStream.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IDataStream);
+
+                    /** DataStream webStreamData. */
+                    public webStreamData?: (google.analytics.admin.v1alpha.DataStream.IWebStreamData|null);
+
+                    /** DataStream androidAppStreamData. */
+                    public androidAppStreamData?: (google.analytics.admin.v1alpha.DataStream.IAndroidAppStreamData|null);
+
+                    /** DataStream iosAppStreamData. */
+                    public iosAppStreamData?: (google.analytics.admin.v1alpha.DataStream.IIosAppStreamData|null);
+
+                    /** DataStream name. */
+                    public name: string;
+
+                    /** DataStream type. */
+                    public type: (google.analytics.admin.v1alpha.DataStream.DataStreamType|keyof typeof google.analytics.admin.v1alpha.DataStream.DataStreamType);
+
+                    /** DataStream displayName. */
+                    public displayName: string;
+
+                    /** DataStream createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataStream updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataStream streamData. */
+                    public streamData?: ("webStreamData"|"androidAppStreamData"|"iosAppStreamData");
+
+                    /**
+                     * Creates a new DataStream instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataStream instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IDataStream): google.analytics.admin.v1alpha.DataStream;
+
+                    /**
+                     * Encodes the specified DataStream message. Does not implicitly {@link google.analytics.admin.v1alpha.DataStream.verify|verify} messages.
+                     * @param message DataStream message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IDataStream, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataStream message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DataStream.verify|verify} messages.
+                     * @param message DataStream message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IDataStream, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataStream message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataStream
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DataStream;
+
+                    /**
+                     * Decodes a DataStream message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataStream
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DataStream;
+
+                    /**
+                     * Verifies a DataStream message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataStream message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataStream
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DataStream;
+
+                    /**
+                     * Creates a plain object from a DataStream message. Also converts values to other types if specified.
+                     * @param message DataStream
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.DataStream, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataStream to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace DataStream {
+
+                    /** Properties of a WebStreamData. */
+                    interface IWebStreamData {
+
+                        /** WebStreamData measurementId */
+                        measurementId?: (string|null);
+
+                        /** WebStreamData firebaseAppId */
+                        firebaseAppId?: (string|null);
+
+                        /** WebStreamData defaultUri */
+                        defaultUri?: (string|null);
+                    }
+
+                    /** Represents a WebStreamData. */
+                    class WebStreamData implements IWebStreamData {
+
+                        /**
+                         * Constructs a new WebStreamData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.DataStream.IWebStreamData);
+
+                        /** WebStreamData measurementId. */
+                        public measurementId: string;
+
+                        /** WebStreamData firebaseAppId. */
+                        public firebaseAppId: string;
+
+                        /** WebStreamData defaultUri. */
+                        public defaultUri: string;
+
+                        /**
+                         * Creates a new WebStreamData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WebStreamData instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.DataStream.IWebStreamData): google.analytics.admin.v1alpha.DataStream.WebStreamData;
+
+                        /**
+                         * Encodes the specified WebStreamData message. Does not implicitly {@link google.analytics.admin.v1alpha.DataStream.WebStreamData.verify|verify} messages.
+                         * @param message WebStreamData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.DataStream.IWebStreamData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WebStreamData message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DataStream.WebStreamData.verify|verify} messages.
+                         * @param message WebStreamData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.DataStream.IWebStreamData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WebStreamData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WebStreamData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DataStream.WebStreamData;
+
+                        /**
+                         * Decodes a WebStreamData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WebStreamData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DataStream.WebStreamData;
+
+                        /**
+                         * Verifies a WebStreamData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WebStreamData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WebStreamData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DataStream.WebStreamData;
+
+                        /**
+                         * Creates a plain object from a WebStreamData message. Also converts values to other types if specified.
+                         * @param message WebStreamData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.DataStream.WebStreamData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WebStreamData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an AndroidAppStreamData. */
+                    interface IAndroidAppStreamData {
+
+                        /** AndroidAppStreamData firebaseAppId */
+                        firebaseAppId?: (string|null);
+
+                        /** AndroidAppStreamData packageName */
+                        packageName?: (string|null);
+                    }
+
+                    /** Represents an AndroidAppStreamData. */
+                    class AndroidAppStreamData implements IAndroidAppStreamData {
+
+                        /**
+                         * Constructs a new AndroidAppStreamData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.DataStream.IAndroidAppStreamData);
+
+                        /** AndroidAppStreamData firebaseAppId. */
+                        public firebaseAppId: string;
+
+                        /** AndroidAppStreamData packageName. */
+                        public packageName: string;
+
+                        /**
+                         * Creates a new AndroidAppStreamData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AndroidAppStreamData instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.DataStream.IAndroidAppStreamData): google.analytics.admin.v1alpha.DataStream.AndroidAppStreamData;
+
+                        /**
+                         * Encodes the specified AndroidAppStreamData message. Does not implicitly {@link google.analytics.admin.v1alpha.DataStream.AndroidAppStreamData.verify|verify} messages.
+                         * @param message AndroidAppStreamData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.DataStream.IAndroidAppStreamData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AndroidAppStreamData message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DataStream.AndroidAppStreamData.verify|verify} messages.
+                         * @param message AndroidAppStreamData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.DataStream.IAndroidAppStreamData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AndroidAppStreamData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AndroidAppStreamData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DataStream.AndroidAppStreamData;
+
+                        /**
+                         * Decodes an AndroidAppStreamData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AndroidAppStreamData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DataStream.AndroidAppStreamData;
+
+                        /**
+                         * Verifies an AndroidAppStreamData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AndroidAppStreamData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AndroidAppStreamData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DataStream.AndroidAppStreamData;
+
+                        /**
+                         * Creates a plain object from an AndroidAppStreamData message. Also converts values to other types if specified.
+                         * @param message AndroidAppStreamData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.DataStream.AndroidAppStreamData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AndroidAppStreamData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an IosAppStreamData. */
+                    interface IIosAppStreamData {
+
+                        /** IosAppStreamData firebaseAppId */
+                        firebaseAppId?: (string|null);
+
+                        /** IosAppStreamData bundleId */
+                        bundleId?: (string|null);
+                    }
+
+                    /** Represents an IosAppStreamData. */
+                    class IosAppStreamData implements IIosAppStreamData {
+
+                        /**
+                         * Constructs a new IosAppStreamData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.DataStream.IIosAppStreamData);
+
+                        /** IosAppStreamData firebaseAppId. */
+                        public firebaseAppId: string;
+
+                        /** IosAppStreamData bundleId. */
+                        public bundleId: string;
+
+                        /**
+                         * Creates a new IosAppStreamData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IosAppStreamData instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.DataStream.IIosAppStreamData): google.analytics.admin.v1alpha.DataStream.IosAppStreamData;
+
+                        /**
+                         * Encodes the specified IosAppStreamData message. Does not implicitly {@link google.analytics.admin.v1alpha.DataStream.IosAppStreamData.verify|verify} messages.
+                         * @param message IosAppStreamData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.DataStream.IIosAppStreamData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IosAppStreamData message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DataStream.IosAppStreamData.verify|verify} messages.
+                         * @param message IosAppStreamData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.DataStream.IIosAppStreamData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IosAppStreamData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IosAppStreamData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DataStream.IosAppStreamData;
+
+                        /**
+                         * Decodes an IosAppStreamData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IosAppStreamData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DataStream.IosAppStreamData;
+
+                        /**
+                         * Verifies an IosAppStreamData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IosAppStreamData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IosAppStreamData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DataStream.IosAppStreamData;
+
+                        /**
+                         * Creates a plain object from an IosAppStreamData message. Also converts values to other types if specified.
+                         * @param message IosAppStreamData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.DataStream.IosAppStreamData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IosAppStreamData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** DataStreamType enum. */
+                    enum DataStreamType {
+                        DATA_STREAM_TYPE_UNSPECIFIED = 0,
+                        WEB_DATA_STREAM = 1,
+                        ANDROID_APP_DATA_STREAM = 2,
+                        IOS_APP_DATA_STREAM = 3
+                    }
+                }
+
                 /** Properties of a UserLink. */
                 interface IUserLink {
 
@@ -12377,162 +13473,6 @@ export namespace google {
 
                     /**
                      * Converts this AuditUserLink to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an EnhancedMeasurementSettings. */
-                interface IEnhancedMeasurementSettings {
-
-                    /** EnhancedMeasurementSettings name */
-                    name?: (string|null);
-
-                    /** EnhancedMeasurementSettings streamEnabled */
-                    streamEnabled?: (boolean|null);
-
-                    /** EnhancedMeasurementSettings pageViewsEnabled */
-                    pageViewsEnabled?: (boolean|null);
-
-                    /** EnhancedMeasurementSettings scrollsEnabled */
-                    scrollsEnabled?: (boolean|null);
-
-                    /** EnhancedMeasurementSettings outboundClicksEnabled */
-                    outboundClicksEnabled?: (boolean|null);
-
-                    /** EnhancedMeasurementSettings siteSearchEnabled */
-                    siteSearchEnabled?: (boolean|null);
-
-                    /** EnhancedMeasurementSettings videoEngagementEnabled */
-                    videoEngagementEnabled?: (boolean|null);
-
-                    /** EnhancedMeasurementSettings fileDownloadsEnabled */
-                    fileDownloadsEnabled?: (boolean|null);
-
-                    /** EnhancedMeasurementSettings pageLoadsEnabled */
-                    pageLoadsEnabled?: (boolean|null);
-
-                    /** EnhancedMeasurementSettings pageChangesEnabled */
-                    pageChangesEnabled?: (boolean|null);
-
-                    /** EnhancedMeasurementSettings searchQueryParameter */
-                    searchQueryParameter?: (string|null);
-
-                    /** EnhancedMeasurementSettings uriQueryParameter */
-                    uriQueryParameter?: (string|null);
-                }
-
-                /** Represents an EnhancedMeasurementSettings. */
-                class EnhancedMeasurementSettings implements IEnhancedMeasurementSettings {
-
-                    /**
-                     * Constructs a new EnhancedMeasurementSettings.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.IEnhancedMeasurementSettings);
-
-                    /** EnhancedMeasurementSettings name. */
-                    public name: string;
-
-                    /** EnhancedMeasurementSettings streamEnabled. */
-                    public streamEnabled: boolean;
-
-                    /** EnhancedMeasurementSettings pageViewsEnabled. */
-                    public pageViewsEnabled: boolean;
-
-                    /** EnhancedMeasurementSettings scrollsEnabled. */
-                    public scrollsEnabled: boolean;
-
-                    /** EnhancedMeasurementSettings outboundClicksEnabled. */
-                    public outboundClicksEnabled: boolean;
-
-                    /** EnhancedMeasurementSettings siteSearchEnabled. */
-                    public siteSearchEnabled: boolean;
-
-                    /** EnhancedMeasurementSettings videoEngagementEnabled. */
-                    public videoEngagementEnabled: boolean;
-
-                    /** EnhancedMeasurementSettings fileDownloadsEnabled. */
-                    public fileDownloadsEnabled: boolean;
-
-                    /** EnhancedMeasurementSettings pageLoadsEnabled. */
-                    public pageLoadsEnabled: boolean;
-
-                    /** EnhancedMeasurementSettings pageChangesEnabled. */
-                    public pageChangesEnabled: boolean;
-
-                    /** EnhancedMeasurementSettings searchQueryParameter. */
-                    public searchQueryParameter: string;
-
-                    /** EnhancedMeasurementSettings uriQueryParameter. */
-                    public uriQueryParameter: string;
-
-                    /**
-                     * Creates a new EnhancedMeasurementSettings instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns EnhancedMeasurementSettings instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.IEnhancedMeasurementSettings): google.analytics.admin.v1alpha.EnhancedMeasurementSettings;
-
-                    /**
-                     * Encodes the specified EnhancedMeasurementSettings message. Does not implicitly {@link google.analytics.admin.v1alpha.EnhancedMeasurementSettings.verify|verify} messages.
-                     * @param message EnhancedMeasurementSettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.IEnhancedMeasurementSettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified EnhancedMeasurementSettings message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.EnhancedMeasurementSettings.verify|verify} messages.
-                     * @param message EnhancedMeasurementSettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IEnhancedMeasurementSettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an EnhancedMeasurementSettings message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns EnhancedMeasurementSettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.EnhancedMeasurementSettings;
-
-                    /**
-                     * Decodes an EnhancedMeasurementSettings message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns EnhancedMeasurementSettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.EnhancedMeasurementSettings;
-
-                    /**
-                     * Verifies an EnhancedMeasurementSettings message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an EnhancedMeasurementSettings message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns EnhancedMeasurementSettings
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.EnhancedMeasurementSettings;
-
-                    /**
-                     * Creates a plain object from an EnhancedMeasurementSettings message. Also converts values to other types if specified.
-                     * @param message EnhancedMeasurementSettings
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.EnhancedMeasurementSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this EnhancedMeasurementSettings to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

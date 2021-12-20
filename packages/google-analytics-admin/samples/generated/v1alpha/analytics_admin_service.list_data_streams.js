@@ -15,24 +15,28 @@
 
 'use strict';
 
-function main(parent, names) {
-  // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchGetUserLinks_async]
+function main(parent) {
+  // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListDataStreams_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The account or property that all user links in the request are
-   *  for. The parent of all provided values for the 'names' field must match
-   *  this field.
-   *  Example format: accounts/1234
+   *  Required. Example format: properties/1234
    */
   // const parent = 'abc123'
   /**
-   *  Required. The names of the user links to retrieve.
-   *  A maximum of 1000 user links can be retrieved in a batch.
-   *  Format: accounts/{accountId}/userLinks/{userLinkId}
+   *  The maximum number of resources to return.
+   *  If unspecified, at most 50 resources will be returned.
+   *  The maximum value is 200 (higher values will be coerced to the maximum).
    */
-  // const names = 'abc123'
+  // const pageSize = 1234
+  /**
+   *  A page token, received from a previous `ListDataStreams` call.
+   *  Provide this to retrieve the subsequent page.
+   *  When paginating, all other parameters provided to `ListDataStreams` must
+   *  match the call that provided the page token.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Admin library
   const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
@@ -40,20 +44,21 @@ function main(parent, names) {
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();
 
-  async function callBatchGetUserLinks() {
+  async function callListDataStreams() {
     // Construct request
     const request = {
       parent,
-      names,
     };
 
     // Run request
-    const response = await adminClient.batchGetUserLinks(request);
-    console.log(response);
+    const iterable = await adminClient.listDataStreamsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callBatchGetUserLinks();
-  // [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchGetUserLinks_async]
+  callListDataStreams();
+  // [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListDataStreams_async]
 }
 
 process.on('unhandledRejection', err => {

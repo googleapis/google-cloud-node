@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, displayVideo_360AdvertiserLinkProposal) {
@@ -29,8 +30,7 @@ function main(parent, displayVideo_360AdvertiserLinkProposal) {
   // const displayVideo_360AdvertiserLinkProposal = {}
 
   // Imports the Admin library
-  const {AnalyticsAdminServiceClient} =
-    require('@google-analytics/admin').v1alpha;
+  const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
 
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();
@@ -43,8 +43,7 @@ function main(parent, displayVideo_360AdvertiserLinkProposal) {
     };
 
     // Run request
-    const response =
-      await adminClient.createDisplayVideo360AdvertiserLinkProposal(request);
+    const response = await adminClient.createDisplayVideo360AdvertiserLinkProposal(request);
     console.log(response);
   }
 

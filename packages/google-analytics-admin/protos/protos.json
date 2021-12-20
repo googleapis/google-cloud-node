@@ -676,44 +676,6 @@
                             }
                           ]
                         },
-                        "GetEnhancedMeasurementSettings": {
-                          "requestType": "GetEnhancedMeasurementSettingsRequest",
-                          "responseType": "EnhancedMeasurementSettings",
-                          "options": {
-                            "(google.api.http).get": "/v1alpha/{name=properties/*/webDataStreams/*/enhancedMeasurementSettings}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1alpha/{name=properties/*/webDataStreams/*/enhancedMeasurementSettings}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "UpdateEnhancedMeasurementSettings": {
-                          "requestType": "UpdateEnhancedMeasurementSettingsRequest",
-                          "responseType": "EnhancedMeasurementSettings",
-                          "options": {
-                            "(google.api.http).patch": "/v1alpha/{enhanced_measurement_settings.name=properties/*/webDataStreams/*/enhancedMeasurementSettings}",
-                            "(google.api.http).body": "enhanced_measurement_settings",
-                            "(google.api.method_signature)": "enhanced_measurement_settings,update_mask"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1alpha/{enhanced_measurement_settings.name=properties/*/webDataStreams/*/enhancedMeasurementSettings}",
-                                "body": "enhanced_measurement_settings"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "enhanced_measurement_settings,update_mask"
-                            }
-                          ]
-                        },
                         "CreateFirebaseLink": {
                           "requestType": "CreateFirebaseLinkRequest",
                           "responseType": "FirebaseLink",
@@ -1024,6 +986,22 @@
                             },
                             {
                               "(google.api.method_signature)": "measurement_protocol_secret,update_mask"
+                            }
+                          ]
+                        },
+                        "AcknowledgeUserDataCollection": {
+                          "requestType": "AcknowledgeUserDataCollectionRequest",
+                          "responseType": "AcknowledgeUserDataCollectionResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{property=properties/*}:acknowledgeUserDataCollection",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{property=properties/*}:acknowledgeUserDataCollection",
+                                "body": "*"
+                              }
                             }
                           ]
                         },
@@ -1582,6 +1560,100 @@
                             },
                             {
                               "(google.api.method_signature)": "data_retention_settings,update_mask"
+                            }
+                          ]
+                        },
+                        "CreateDataStream": {
+                          "requestType": "CreateDataStreamRequest",
+                          "responseType": "DataStream",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/dataStreams",
+                            "(google.api.http).body": "data_stream",
+                            "(google.api.method_signature)": "parent,data_stream"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/dataStreams",
+                                "body": "data_stream"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,data_stream"
+                            }
+                          ]
+                        },
+                        "DeleteDataStream": {
+                          "requestType": "DeleteDataStreamRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/dataStreams/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/dataStreams/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateDataStream": {
+                          "requestType": "UpdateDataStreamRequest",
+                          "responseType": "DataStream",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{data_stream.name=properties/*/dataStreams/*}",
+                            "(google.api.http).body": "data_stream",
+                            "(google.api.method_signature)": "data_stream,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{data_stream.name=properties/*/dataStreams/*}",
+                                "body": "data_stream"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "data_stream,update_mask"
+                            }
+                          ]
+                        },
+                        "ListDataStreams": {
+                          "requestType": "ListDataStreamsRequest",
+                          "responseType": "ListDataStreamsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/dataStreams",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/dataStreams"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetDataStream": {
+                          "requestType": "GetDataStreamRequest",
+                          "responseType": "DataStream",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/dataStreams/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/dataStreams/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         }
@@ -2253,36 +2325,6 @@
                         }
                       }
                     },
-                    "GetEnhancedMeasurementSettingsRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/EnhancedMeasurementSettings"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateEnhancedMeasurementSettingsRequest": {
-                      "fields": {
-                        "enhancedMeasurementSettings": {
-                          "type": "EnhancedMeasurementSettings",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
                     "CreateFirebaseLinkRequest": {
                       "fields": {
                         "parent": {
@@ -2474,6 +2516,28 @@
                           "id": 2
                         }
                       }
+                    },
+                    "AcknowledgeUserDataCollectionRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Property"
+                          }
+                        },
+                        "acknowledgement": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AcknowledgeUserDataCollectionResponse": {
+                      "fields": {}
                     },
                     "SearchChangeHistoryEventsRequest": {
                       "fields": {
@@ -3168,6 +3232,97 @@
                         }
                       }
                     },
+                    "CreateDataStreamRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/DataStream"
+                          }
+                        },
+                        "dataStream": {
+                          "type": "DataStream",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteDataStreamRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/DataStream"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateDataStreamRequest": {
+                      "fields": {
+                        "dataStream": {
+                          "type": "DataStream",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListDataStreamsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/DataStream"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListDataStreamsResponse": {
+                      "fields": {
+                        "dataStreams": {
+                          "rule": "repeated",
+                          "type": "DataStream",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetDataStreamRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/DataStream"
+                          }
+                        }
+                      }
+                    },
                     "IndustryCategory": {
                       "values": {
                         "INDUSTRY_CATEGORY_UNSPECIFIED": 0,
@@ -3237,7 +3392,9 @@
                         "MEASUREMENT_PROTOCOL_SECRET": 10,
                         "CUSTOM_DIMENSION": 11,
                         "CUSTOM_METRIC": 12,
-                        "DATA_RETENTION_SETTINGS": 13
+                        "DATA_RETENTION_SETTINGS": 13,
+                        "DISPLAY_VIDEO_360_ADVERTISER_LINK": 14,
+                        "DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL": 15
                       }
                     },
                     "GoogleSignalsState": {
@@ -3395,6 +3552,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "account": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Account"
+                          }
                         }
                       }
                     },
@@ -3549,6 +3714,138 @@
                         }
                       }
                     },
+                    "DataStream": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/DataStream",
+                        "(google.api.resource).pattern": "properties/{property}/dataStreams/{data_stream}"
+                      },
+                      "oneofs": {
+                        "streamData": {
+                          "oneof": [
+                            "webStreamData",
+                            "androidAppStreamData",
+                            "iosAppStreamData"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "webStreamData": {
+                          "type": "WebStreamData",
+                          "id": 6
+                        },
+                        "androidAppStreamData": {
+                          "type": "AndroidAppStreamData",
+                          "id": 7
+                        },
+                        "iosAppStreamData": {
+                          "type": "IosAppStreamData",
+                          "id": 8
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "type": {
+                          "type": "DataStreamType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "WebStreamData": {
+                          "fields": {
+                            "measurementId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "firebaseAppId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "defaultUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            }
+                          }
+                        },
+                        "AndroidAppStreamData": {
+                          "fields": {
+                            "firebaseAppId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "packageName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            }
+                          }
+                        },
+                        "IosAppStreamData": {
+                          "fields": {
+                            "firebaseAppId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "bundleId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DataStreamType": {
+                          "values": {
+                            "DATA_STREAM_TYPE_UNSPECIFIED": 0,
+                            "WEB_DATA_STREAM": 1,
+                            "ANDROID_APP_DATA_STREAM": 2,
+                            "IOS_APP_DATA_STREAM": 3
+                          }
+                        }
+                      }
+                    },
                     "UserLink": {
                       "options": {
                         "(google.api.resource).type": "analyticsadmin.googleapis.com/UserLink",
@@ -3595,74 +3892,6 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 4
-                        }
-                      }
-                    },
-                    "EnhancedMeasurementSettings": {
-                      "options": {
-                        "(google.api.resource).type": "analyticsadmin.googleapis.com/EnhancedMeasurementSettings",
-                        "(google.api.resource).pattern": "properties/{property}/webDataStreams/{web_data_stream}/enhancedMeasurementSettings"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "streamEnabled": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "pageViewsEnabled": {
-                          "type": "bool",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "scrollsEnabled": {
-                          "type": "bool",
-                          "id": 4
-                        },
-                        "outboundClicksEnabled": {
-                          "type": "bool",
-                          "id": 5
-                        },
-                        "siteSearchEnabled": {
-                          "type": "bool",
-                          "id": 7
-                        },
-                        "videoEngagementEnabled": {
-                          "type": "bool",
-                          "id": 9
-                        },
-                        "fileDownloadsEnabled": {
-                          "type": "bool",
-                          "id": 10
-                        },
-                        "pageLoadsEnabled": {
-                          "type": "bool",
-                          "id": 12,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "pageChangesEnabled": {
-                          "type": "bool",
-                          "id": 13
-                        },
-                        "searchQueryParameter": {
-                          "type": "string",
-                          "id": 16,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "uriQueryParameter": {
-                          "type": "string",
-                          "id": 17
                         }
                       }
                     },

@@ -15,24 +15,21 @@
 
 'use strict';
 
-function main(parent, names) {
-  // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchGetUserLinks_async]
+function main(updateMask) {
+  // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateDataStream_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The account or property that all user links in the request are
-   *  for. The parent of all provided values for the 'names' field must match
-   *  this field.
-   *  Example format: accounts/1234
+   *  The DataStream to update
    */
-  // const parent = 'abc123'
+  // const dataStream = {}
   /**
-   *  Required. The names of the user links to retrieve.
-   *  A maximum of 1000 user links can be retrieved in a batch.
-   *  Format: accounts/{accountId}/userLinks/{userLinkId}
+   *  Required. The list of fields to be updated. Omitted fields will not be updated.
+   *  To replace the entire entity, use one path with the string "*" to match
+   *  all fields.
    */
-  // const names = 'abc123'
+  // const updateMask = {}
 
   // Imports the Admin library
   const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
@@ -40,20 +37,19 @@ function main(parent, names) {
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();
 
-  async function callBatchGetUserLinks() {
+  async function callUpdateDataStream() {
     // Construct request
     const request = {
-      parent,
-      names,
+      updateMask,
     };
 
     // Run request
-    const response = await adminClient.batchGetUserLinks(request);
+    const response = await adminClient.updateDataStream(request);
     console.log(response);
   }
 
-  callBatchGetUserLinks();
-  // [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchGetUserLinks_async]
+  callUpdateDataStream();
+  // [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateDataStream_async]
 }
 
 process.on('unhandledRejection', err => {

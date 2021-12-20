@@ -192,6 +192,9 @@ export class AnalyticsAdminServiceClient {
       dataSharingSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/dataSharingSettings'
       ),
+      dataStreamPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/dataStreams/{data_stream}'
+      ),
       displayVideo360AdvertiserLinkPathTemplate:
         new this._gaxModule.PathTemplate(
           'properties/{property}/displayVideo360AdvertiserLinks/{display_video_360_advertiser_link}'
@@ -200,9 +203,6 @@ export class AnalyticsAdminServiceClient {
         new this._gaxModule.PathTemplate(
           'properties/{property}/displayVideo360AdvertiserLinkProposals/{display_video_360_advertiser_link_proposal}'
         ),
-      enhancedMeasurementSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'properties/{property}/webDataStreams/{web_data_stream}/enhancedMeasurementSettings'
-      ),
       firebaseLinkPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/firebaseLinks/{firebase_link}'
       ),
@@ -322,6 +322,11 @@ export class AnalyticsAdminServiceClient {
         'nextPageToken',
         'customMetrics'
       ),
+      listDataStreams: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dataStreams'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -409,8 +414,6 @@ export class AnalyticsAdminServiceClient {
       'deleteAndroidAppDataStream',
       'updateAndroidAppDataStream',
       'listAndroidAppDataStreams',
-      'getEnhancedMeasurementSettings',
-      'updateEnhancedMeasurementSettings',
       'createFirebaseLink',
       'deleteFirebaseLink',
       'listFirebaseLinks',
@@ -425,6 +428,7 @@ export class AnalyticsAdminServiceClient {
       'createMeasurementProtocolSecret',
       'deleteMeasurementProtocolSecret',
       'updateMeasurementProtocolSecret',
+      'acknowledgeUserDataCollection',
       'searchChangeHistoryEvents',
       'getGoogleSignalsSettings',
       'updateGoogleSignalsSettings',
@@ -455,6 +459,11 @@ export class AnalyticsAdminServiceClient {
       'getCustomMetric',
       'getDataRetentionSettings',
       'updateDataRetentionSettings',
+      'createDataStream',
+      'deleteDataStream',
+      'updateDataStream',
+      'listDataStreams',
+      'getDataStream',
     ];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
@@ -3130,221 +3139,6 @@ export class AnalyticsAdminServiceClient {
     );
   }
   /**
-   * Returns the singleton enhanced measurement settings for this web stream.
-   * Note that the stream must enable enhanced measurement for these settings to
-   * take effect.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the settings to lookup.
-   *   Format:
-   *   properties/{property_id}/webDataStreams/{stream_id}/enhancedMeasurementSettings
-   *   Example: "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [EnhancedMeasurementSettings]{@link google.analytics.admin.v1alpha.EnhancedMeasurementSettings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_enhanced_measurement_settings.js</caption>
-   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetEnhancedMeasurementSettings_async
-   */
-  getEnhancedMeasurementSettings(
-    request?: protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
-      (
-        | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  getEnhancedMeasurementSettings(
-    request: protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
-      | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEnhancedMeasurementSettings(
-    request: protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest,
-    callback: Callback<
-      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
-      | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEnhancedMeasurementSettings(
-    request?: protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
-          | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
-      | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
-      (
-        | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getEnhancedMeasurementSettings(
-      request,
-      options,
-      callback
-    );
-  }
-  /**
-   * Updates the singleton enhanced measurement settings for this web stream.
-   * Note that the stream must enable enhanced measurement for these settings to
-   * take effect.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.analytics.admin.v1alpha.EnhancedMeasurementSettings} request.enhancedMeasurementSettings
-   *   Required. The settings to update.
-   *   The `name` field is used to identify the settings to be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Field names must be in snake case
-   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-   *   the entire entity, use one path with the string "*" to match all fields.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [EnhancedMeasurementSettings]{@link google.analytics.admin.v1alpha.EnhancedMeasurementSettings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_enhanced_measurement_settings.js</caption>
-   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateEnhancedMeasurementSettings_async
-   */
-  updateEnhancedMeasurementSettings(
-    request?: protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
-      (
-        | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  updateEnhancedMeasurementSettings(
-    request: protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
-      | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEnhancedMeasurementSettings(
-    request: protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest,
-    callback: Callback<
-      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
-      | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEnhancedMeasurementSettings(
-    request?: protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
-          | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
-      | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
-      (
-        | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'enhanced_measurement_settings.name':
-          request.enhancedMeasurementSettings!.name || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.updateEnhancedMeasurementSettings(
-      request,
-      options,
-      callback
-    );
-  }
-  /**
    * Creates a FirebaseLink.
    *
    * Properties can have at most one FirebaseLink.
@@ -4461,6 +4255,119 @@ export class AnalyticsAdminServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateMeasurementProtocolSecret(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Acknowledges the terms of user data collection for the specified property.
+   *
+   * This acknowledgement must be completed (either in the Google Analytics UI
+   * or via this API) before MeasurementProtocolSecret resources may be created.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   Required. The property for which to acknowledge user data collection.
+   * @param {string} request.acknowledgement
+   *   Required. An acknowledgement that the caller of this method understands the terms
+   *   of user data collection.
+   *
+   *   This field must contain the exact value:
+   *   "I acknowledge that I have the necessary privacy disclosures and rights
+   *   from my end users for the collection and processing of their data,
+   *   including the association of such data with the visitation information
+   *   Google Analytics collects from my site and/or app property."
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AcknowledgeUserDataCollectionResponse]{@link google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.acknowledge_user_data_collection.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_AcknowledgeUserDataCollection_async
+   */
+  acknowledgeUserDataCollection(
+    request?: protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  acknowledgeUserDataCollection(
+    request: protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionResponse,
+      | protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  acknowledgeUserDataCollection(
+    request: protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionResponse,
+      | protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  acknowledgeUserDataCollection(
+    request?: protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionResponse,
+          | protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionResponse,
+      | protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        property: request.property || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.acknowledgeUserDataCollection(
       request,
       options,
       callback
@@ -6908,6 +6815,396 @@ export class AnalyticsAdminServiceClient {
       options,
       callback
     );
+  }
+  /**
+   * Creates a DataStream.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {google.analytics.admin.v1alpha.DataStream} request.dataStream
+   *   Required. The DataStream to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [DataStream]{@link google.analytics.admin.v1alpha.DataStream}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_data_stream.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateDataStream_async
+   */
+  createDataStream(
+    request?: protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createDataStream(
+    request: protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      | protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDataStream(
+    request: protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      | protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDataStream(
+    request?: protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDataStream,
+          | protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      | protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createDataStream(request, options, callback);
+  }
+  /**
+   * Deletes a DataStream on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DataStream to delete.
+   *   Example format: properties/1234/dataStreams/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_data_stream.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteDataStream_async
+   */
+  deleteDataStream(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteDataStream(
+    request: protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDataStream(
+    request: protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDataStream(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteDataStream(request, options, callback);
+  }
+  /**
+   * Updates a DataStream on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.DataStream} request.dataStream
+   *   The DataStream to update
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match
+   *   all fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [DataStream]{@link google.analytics.admin.v1alpha.DataStream}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_data_stream.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateDataStream_async
+   */
+  updateDataStream(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateDataStream(
+    request: protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      | protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDataStream(
+    request: protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      | protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDataStream(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDataStream,
+          | protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      | protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'data_stream.name': request.dataStream!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateDataStream(request, options, callback);
+  }
+  /**
+   * Lookup for a single DataStream.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DataStream to get.
+   *   Example format: properties/1234/dataStreams/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [DataStream]{@link google.analytics.admin.v1alpha.DataStream}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_data_stream.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetDataStream_async
+   */
+  getDataStream(
+    request?: protos.google.analytics.admin.v1alpha.IGetDataStreamRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      protos.google.analytics.admin.v1alpha.IGetDataStreamRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getDataStream(
+    request: protos.google.analytics.admin.v1alpha.IGetDataStreamRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      | protos.google.analytics.admin.v1alpha.IGetDataStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDataStream(
+    request: protos.google.analytics.admin.v1alpha.IGetDataStreamRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      | protos.google.analytics.admin.v1alpha.IGetDataStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDataStream(
+    request?: protos.google.analytics.admin.v1alpha.IGetDataStreamRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDataStream,
+          | protos.google.analytics.admin.v1alpha.IGetDataStreamRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      | protos.google.analytics.admin.v1alpha.IGetDataStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IDataStream,
+      protos.google.analytics.admin.v1alpha.IGetDataStreamRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getDataStream(request, options, callback);
   }
 
   /**
@@ -10582,6 +10879,213 @@ export class AnalyticsAdminServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.ICustomMetric>;
   }
+  /**
+   * Lists DataStreams on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListDataStreams` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDataStreams` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [DataStream]{@link google.analytics.admin.v1alpha.DataStream}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDataStreamsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listDataStreams(
+    request?: protos.google.analytics.admin.v1alpha.IListDataStreamsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IDataStream[],
+      protos.google.analytics.admin.v1alpha.IListDataStreamsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListDataStreamsResponse
+    ]
+  >;
+  listDataStreams(
+    request: protos.google.analytics.admin.v1alpha.IListDataStreamsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListDataStreamsRequest,
+      | protos.google.analytics.admin.v1alpha.IListDataStreamsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IDataStream
+    >
+  ): void;
+  listDataStreams(
+    request: protos.google.analytics.admin.v1alpha.IListDataStreamsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListDataStreamsRequest,
+      | protos.google.analytics.admin.v1alpha.IListDataStreamsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IDataStream
+    >
+  ): void;
+  listDataStreams(
+    request?: protos.google.analytics.admin.v1alpha.IListDataStreamsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListDataStreamsRequest,
+          | protos.google.analytics.admin.v1alpha.IListDataStreamsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IDataStream
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListDataStreamsRequest,
+      | protos.google.analytics.admin.v1alpha.IListDataStreamsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IDataStream
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IDataStream[],
+      protos.google.analytics.admin.v1alpha.IListDataStreamsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListDataStreamsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listDataStreams(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListDataStreams` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDataStreams` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [DataStream]{@link google.analytics.admin.v1alpha.DataStream} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDataStreamsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listDataStreamsStream(
+    request?: protos.google.analytics.admin.v1alpha.IListDataStreamsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listDataStreams'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDataStreams.createStream(
+      this.innerApiCalls.listDataStreams as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listDataStreams`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListDataStreams` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDataStreams` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [DataStream]{@link google.analytics.admin.v1alpha.DataStream}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_data_streams.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListDataStreams_async
+   */
+  listDataStreamsAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListDataStreamsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IDataStream> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listDataStreams'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDataStreams.asyncIterate(
+      this.innerApiCalls['listDataStreams'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IDataStream>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -10858,6 +11362,44 @@ export class AnalyticsAdminServiceClient {
   }
 
   /**
+   * Return a fully-qualified dataStream resource name string.
+   *
+   * @param {string} property
+   * @param {string} data_stream
+   * @returns {string} Resource name string.
+   */
+  dataStreamPath(property: string, dataStream: string) {
+    return this.pathTemplates.dataStreamPathTemplate.render({
+      property: property,
+      data_stream: dataStream,
+    });
+  }
+
+  /**
+   * Parse the property from DataStream resource.
+   *
+   * @param {string} dataStreamName
+   *   A fully-qualified path representing DataStream resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromDataStreamName(dataStreamName: string) {
+    return this.pathTemplates.dataStreamPathTemplate.match(dataStreamName)
+      .property;
+  }
+
+  /**
+   * Parse the data_stream from DataStream resource.
+   *
+   * @param {string} dataStreamName
+   *   A fully-qualified path representing DataStream resource.
+   * @returns {string} A string representing the data_stream.
+   */
+  matchDataStreamFromDataStreamName(dataStreamName: string) {
+    return this.pathTemplates.dataStreamPathTemplate.match(dataStreamName)
+      .data_stream;
+  }
+
+  /**
    * Return a fully-qualified displayVideo360AdvertiserLink resource name string.
    *
    * @param {string} property
@@ -10911,50 +11453,6 @@ export class AnalyticsAdminServiceClient {
     return this.pathTemplates.displayVideo360AdvertiserLinkProposalPathTemplate.match(
       displayVideo360AdvertiserLinkProposalName
     ).property;
-  }
-
-  /**
-   * Return a fully-qualified enhancedMeasurementSettings resource name string.
-   *
-   * @param {string} property
-   * @param {string} web_data_stream
-   * @returns {string} Resource name string.
-   */
-  enhancedMeasurementSettingsPath(property: string, webDataStream: string) {
-    return this.pathTemplates.enhancedMeasurementSettingsPathTemplate.render({
-      property: property,
-      web_data_stream: webDataStream,
-    });
-  }
-
-  /**
-   * Parse the property from EnhancedMeasurementSettings resource.
-   *
-   * @param {string} enhancedMeasurementSettingsName
-   *   A fully-qualified path representing EnhancedMeasurementSettings resource.
-   * @returns {string} A string representing the property.
-   */
-  matchPropertyFromEnhancedMeasurementSettingsName(
-    enhancedMeasurementSettingsName: string
-  ) {
-    return this.pathTemplates.enhancedMeasurementSettingsPathTemplate.match(
-      enhancedMeasurementSettingsName
-    ).property;
-  }
-
-  /**
-   * Parse the web_data_stream from EnhancedMeasurementSettings resource.
-   *
-   * @param {string} enhancedMeasurementSettingsName
-   *   A fully-qualified path representing EnhancedMeasurementSettings resource.
-   * @returns {string} A string representing the web_data_stream.
-   */
-  matchWebDataStreamFromEnhancedMeasurementSettingsName(
-    enhancedMeasurementSettingsName: string
-  ) {
-    return this.pathTemplates.enhancedMeasurementSettingsPathTemplate.match(
-      enhancedMeasurementSettingsName
-    ).web_data_stream;
   }
 
   /**
