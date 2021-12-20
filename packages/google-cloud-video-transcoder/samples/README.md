@@ -17,6 +17,7 @@
   * [Create Job From Template](#create-job-from-template)
   * [Create Job Template](#create-job-template)
   * [Create Job With Animated Overlay](#create-job-with-animated-overlay)
+  * [Create Job With Concatenated Inputs](#create-job-with-concatenated-inputs)
   * [Create Job With Periodic Images Spritesheet](#create-job-with-periodic-images-spritesheet)
   * [Create Job With Set Number Images Spritesheet](#create-job-with-set-number-images-spritesheet)
   * [Create Job With Static Overlay](#create-job-with-static-overlay)
@@ -122,6 +123,23 @@ __Usage:__
 
 
 `node samples/createJobWithAnimatedOverlay.js`
+
+
+-----
+
+
+
+
+### Create Job With Concatenated Inputs
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/createJobWithConcatenatedInputs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithConcatenatedInputs.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createJobWithConcatenatedInputs.js`
 
 
 -----
