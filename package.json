@@ -36,7 +36,7 @@
     "chalk": "^5.0.0",
     "figures": "^4.0.0",
     "gaxios": "^4.0.0",
-    "parse-link-header": "^1.0.1"
+    "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
     "semistandard": "^16.0.0"
