@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+### [4.1.6](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.1.5...v4.1.6) (2021-12-20)
+
+
+### Bug Fixes
+
+* log to console using structured logging ([#780](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/780)) ([6b96e00](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/6b96e007418bd6074c2bf9de64df0742e6a6d4ae))
+
 ### [4.1.5](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.1.4...v4.1.5) (2021-10-06)
 
 
