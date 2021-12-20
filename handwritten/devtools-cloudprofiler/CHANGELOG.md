@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+### [4.1.7](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.1.6...v4.1.7) (2021-12-20)
+
+
+### Bug Fixes
+
+* remove certification expiration workaround ([#781](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/781)) ([44af460](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/44af4604f0553ef917e48abf51fa3f52950ed6b7))
+
 ### [4.1.6](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.1.5...v4.1.6) (2021-12-20)
 
 
