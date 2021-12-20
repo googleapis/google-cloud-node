@@ -5022,6 +5022,18 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** AudioEncoding enum. */
+                enum AudioEncoding {
+                    AUDIO_ENCODING_UNSPECIFIED = 0,
+                    AUDIO_ENCODING_LINEAR_16 = 1,
+                    AUDIO_ENCODING_FLAC = 2,
+                    AUDIO_ENCODING_MULAW = 3,
+                    AUDIO_ENCODING_AMR = 4,
+                    AUDIO_ENCODING_AMR_WB = 5,
+                    AUDIO_ENCODING_OGG_OPUS = 6,
+                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
+                }
+
                 /** Properties of a SpeechContext. */
                 interface ISpeechContext {
 
@@ -5116,18 +5128,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** AudioEncoding enum. */
-                enum AudioEncoding {
-                    AUDIO_ENCODING_UNSPECIFIED = 0,
-                    AUDIO_ENCODING_LINEAR_16 = 1,
-                    AUDIO_ENCODING_FLAC = 2,
-                    AUDIO_ENCODING_MULAW = 3,
-                    AUDIO_ENCODING_AMR = 4,
-                    AUDIO_ENCODING_AMR_WB = 5,
-                    AUDIO_ENCODING_OGG_OPUS = 6,
-                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                 }
 
                 /** Properties of a SpeechWordInfo. */
@@ -5808,6 +5808,96 @@ export namespace google {
                     OUTPUT_AUDIO_ENCODING_MP3_64_KBPS = 4,
                     OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3,
                     OUTPUT_AUDIO_ENCODING_MULAW = 5
+                }
+
+                /** Properties of a GcsDestination. */
+                interface IGcsDestination {
+
+                    /** GcsDestination uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents a GcsDestination. */
+                class GcsDestination implements IGcsDestination {
+
+                    /**
+                     * Constructs a new GcsDestination.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IGcsDestination);
+
+                    /** GcsDestination uri. */
+                    public uri: string;
+
+                    /**
+                     * Creates a new GcsDestination instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsDestination instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IGcsDestination): google.cloud.dialogflow.v2.GcsDestination;
+
+                    /**
+                     * Encodes the specified GcsDestination message. Does not implicitly {@link google.cloud.dialogflow.v2.GcsDestination.verify|verify} messages.
+                     * @param message GcsDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsDestination message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.GcsDestination.verify|verify} messages.
+                     * @param message GcsDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsDestination message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.GcsDestination;
+
+                    /**
+                     * Decodes a GcsDestination message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.GcsDestination;
+
+                    /**
+                     * Verifies a GcsDestination message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsDestination message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsDestination
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.GcsDestination;
+
+                    /**
+                     * Creates a plain object from a GcsDestination message. Also converts values to other types if specified.
+                     * @param message GcsDestination
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.GcsDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsDestination to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Represents a Sessions */
@@ -19601,6 +19691,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public reloadDocument(request: google.cloud.dialogflow.v2.IReloadDocumentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ExportDocument.
+                     * @param request ExportDocumentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportDocument(request: google.cloud.dialogflow.v2.IExportDocumentRequest, callback: google.cloud.dialogflow.v2.Documents.ExportDocumentCallback): void;
+
+                    /**
+                     * Calls ExportDocument.
+                     * @param request ExportDocumentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportDocument(request: google.cloud.dialogflow.v2.IExportDocumentRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace Documents {
@@ -19646,6 +19750,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ReloadDocumentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.Documents#exportDocument}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportDocumentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a Document. */
@@ -19997,6 +20108,9 @@ export namespace google {
 
                     /** ListDocumentsRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListDocumentsRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListDocumentsRequest. */
@@ -20016,6 +20130,9 @@ export namespace google {
 
                     /** ListDocumentsRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListDocumentsRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListDocumentsRequest instance using the specified properties.
@@ -20474,6 +20591,12 @@ export namespace google {
 
                     /** ReloadDocumentRequest contentUri */
                     contentUri?: (string|null);
+
+                    /** ReloadDocumentRequest importGcsCustomMetadata */
+                    importGcsCustomMetadata?: (boolean|null);
+
+                    /** ReloadDocumentRequest smartMessagingPartialUpdate */
+                    smartMessagingPartialUpdate?: (boolean|null);
                 }
 
                 /** Represents a ReloadDocumentRequest. */
@@ -20490,6 +20613,12 @@ export namespace google {
 
                     /** ReloadDocumentRequest contentUri. */
                     public contentUri?: (string|null);
+
+                    /** ReloadDocumentRequest importGcsCustomMetadata. */
+                    public importGcsCustomMetadata: boolean;
+
+                    /** ReloadDocumentRequest smartMessagingPartialUpdate. */
+                    public smartMessagingPartialUpdate: boolean;
 
                     /** ReloadDocumentRequest source. */
                     public source?: "contentUri";
@@ -20560,6 +20689,117 @@ export namespace google {
 
                     /**
                      * Converts this ReloadDocumentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ExportDocumentRequest. */
+                interface IExportDocumentRequest {
+
+                    /** ExportDocumentRequest name */
+                    name?: (string|null);
+
+                    /** ExportDocumentRequest gcsDestination */
+                    gcsDestination?: (google.cloud.dialogflow.v2.IGcsDestination|null);
+
+                    /** ExportDocumentRequest exportFullContent */
+                    exportFullContent?: (boolean|null);
+
+                    /** ExportDocumentRequest smartMessagingPartialUpdate */
+                    smartMessagingPartialUpdate?: (boolean|null);
+                }
+
+                /** Represents an ExportDocumentRequest. */
+                class ExportDocumentRequest implements IExportDocumentRequest {
+
+                    /**
+                     * Constructs a new ExportDocumentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IExportDocumentRequest);
+
+                    /** ExportDocumentRequest name. */
+                    public name: string;
+
+                    /** ExportDocumentRequest gcsDestination. */
+                    public gcsDestination?: (google.cloud.dialogflow.v2.IGcsDestination|null);
+
+                    /** ExportDocumentRequest exportFullContent. */
+                    public exportFullContent: boolean;
+
+                    /** ExportDocumentRequest smartMessagingPartialUpdate. */
+                    public smartMessagingPartialUpdate: boolean;
+
+                    /** ExportDocumentRequest destination. */
+                    public destination?: "gcsDestination";
+
+                    /**
+                     * Creates a new ExportDocumentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportDocumentRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IExportDocumentRequest): google.cloud.dialogflow.v2.ExportDocumentRequest;
+
+                    /**
+                     * Encodes the specified ExportDocumentRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.ExportDocumentRequest.verify|verify} messages.
+                     * @param message ExportDocumentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IExportDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportDocumentRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ExportDocumentRequest.verify|verify} messages.
+                     * @param message ExportDocumentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IExportDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportDocumentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportDocumentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ExportDocumentRequest;
+
+                    /**
+                     * Decodes an ExportDocumentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportDocumentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ExportDocumentRequest;
+
+                    /**
+                     * Verifies an ExportDocumentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportDocumentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportDocumentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ExportDocumentRequest;
+
+                    /**
+                     * Creates a plain object from an ExportDocumentRequest message. Also converts values to other types if specified.
+                     * @param message ExportDocumentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ExportDocumentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportDocumentRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -22881,6 +23121,9 @@ export namespace google {
 
                     /** ListKnowledgeBasesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListKnowledgeBasesRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListKnowledgeBasesRequest. */
@@ -22900,6 +23143,9 @@ export namespace google {
 
                     /** ListKnowledgeBasesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListKnowledgeBasesRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListKnowledgeBasesRequest instance using the specified properties.
@@ -51562,6 +51808,9 @@ export namespace google {
 
                     /** KnowledgeOperationMetadata state */
                     state?: (google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata.State|keyof typeof google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata.State|null);
+
+                    /** KnowledgeOperationMetadata knowledgeBase */
+                    knowledgeBase?: (string|null);
                 }
 
                 /** Represents a KnowledgeOperationMetadata. */
@@ -51575,6 +51824,9 @@ export namespace google {
 
                     /** KnowledgeOperationMetadata state. */
                     public state: (google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata.State|keyof typeof google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata.State);
+
+                    /** KnowledgeOperationMetadata knowledgeBase. */
+                    public knowledgeBase: string;
 
                     /**
                      * Creates a new KnowledgeOperationMetadata instance using the specified properties.

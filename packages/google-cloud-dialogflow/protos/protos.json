@@ -1605,6 +1605,18 @@
                         }
                       }
                     },
+                    "AudioEncoding": {
+                      "values": {
+                        "AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "AUDIO_ENCODING_LINEAR_16": 1,
+                        "AUDIO_ENCODING_FLAC": 2,
+                        "AUDIO_ENCODING_MULAW": 3,
+                        "AUDIO_ENCODING_AMR": 4,
+                        "AUDIO_ENCODING_AMR_WB": 5,
+                        "AUDIO_ENCODING_OGG_OPUS": 6,
+                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                      }
+                    },
                     "SpeechContext": {
                       "fields": {
                         "phrases": {
@@ -1616,18 +1628,6 @@
                           "type": "float",
                           "id": 2
                         }
-                      }
-                    },
-                    "AudioEncoding": {
-                      "values": {
-                        "AUDIO_ENCODING_UNSPECIFIED": 0,
-                        "AUDIO_ENCODING_LINEAR_16": 1,
-                        "AUDIO_ENCODING_FLAC": 2,
-                        "AUDIO_ENCODING_MULAW": 3,
-                        "AUDIO_ENCODING_AMR": 4,
-                        "AUDIO_ENCODING_AMR_WB": 5,
-                        "AUDIO_ENCODING_OGG_OPUS": 6,
-                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
                       }
                     },
                     "SpeechWordInfo": {
@@ -1787,6 +1787,14 @@
                         "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
                         "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
                         "OUTPUT_AUDIO_ENCODING_MULAW": 5
+                      }
+                    },
+                    "GcsDestination": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        }
                       }
                     },
                     "Sessions": {
@@ -6242,6 +6250,36 @@
                               }
                             }
                           ]
+                        },
+                        "ExportDocument": {
+                          "requestType": "ExportDocumentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/knowledgeBases/*/documents/*}:export",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{name=projects/*/locations/*/knowledgeBases/*/documents/*}:export",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.longrunning.operation_info).response_type": "Document",
+                            "(google.longrunning.operation_info).metadata_type": "KnowledgeOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/knowledgeBases/*/documents/*}:export",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{name=projects/*/locations/*/knowledgeBases/*/documents/*}:export",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Document",
+                                "metadata_type": "KnowledgeOperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -6371,6 +6409,10 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -6459,6 +6501,51 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "importGcsCustomMetadata": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "smartMessagingPartialUpdate": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExportDocumentRequest": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Document"
+                          }
+                        },
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 2
+                        },
+                        "exportFullContent": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "smartMessagingPartialUpdate": {
+                          "type": "bool",
+                          "id": 5
                         }
                       }
                     },
@@ -7299,6 +7386,10 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -8892,10 +8983,7 @@
                       "fields": {
                         "speechModelVariant": {
                           "type": "SpeechModelVariant",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 1
                         }
                       }
                     },
@@ -15538,6 +15626,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "knowledgeBase": {
+                          "type": "string",
+                          "id": 3
                         }
                       },
                       "nested": {

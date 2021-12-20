@@ -337,6 +337,12 @@ export class DocumentsClient {
     const reloadDocumentMetadata = protoFilesRoot.lookup(
       '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata'
     ) as gax.protobuf.Type;
+    const exportDocumentResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2.Document'
+    ) as gax.protobuf.Type;
+    const exportDocumentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDocument: new this._gaxModule.LongrunningDescriptor(
@@ -358,6 +364,11 @@ export class DocumentsClient {
         this.operationsClient,
         reloadDocumentResponse.decode.bind(reloadDocumentResponse),
         reloadDocumentMetadata.decode.bind(reloadDocumentMetadata)
+      ),
+      exportDocument: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportDocumentResponse.decode.bind(exportDocumentResponse),
+        exportDocumentMetadata.decode.bind(exportDocumentMetadata)
       ),
     };
 
@@ -417,6 +428,7 @@ export class DocumentsClient {
       'deleteDocument',
       'updateDocument',
       'reloadDocument',
+      'exportDocument',
     ];
     for (const methodName of documentsStubMethods) {
       const callPromise = this.documentsStub.then(
@@ -1064,6 +1076,12 @@ export class DocumentsClient {
    *
    *   For documents stored in Google Cloud Storage, these URIs must have
    *   the form `gs://<bucket-name>/<object-name>`.
+   * @param {boolean} [request.importGcsCustomMetadata]
+   *   Optional. Whether to import custom metadata from Google Cloud Storage.
+   *   Only valid when the document source is Google Cloud Storage URI.
+   * @param {boolean} [request.smartMessagingPartialUpdate]
+   *   Optional. When enabled, the reload request is to apply partial update to the smart
+   *   messaging allowlist.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1195,6 +1213,161 @@ export class DocumentsClient {
     >;
   }
   /**
+   * Exports a smart messaging candidate document into the specified
+   * destination.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: {@link google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+   * - `response`: {@link google.cloud.dialogflow.v2.Document|Document}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the document to export.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
+   * @param {google.cloud.dialogflow.v2.GcsDestination} request.gcsDestination
+   *   Cloud Storage file path to export the document.
+   * @param {boolean} request.exportFullContent
+   *   When enabled, export the full content of the document including empirical
+   *   probability.
+   * @param {boolean} request.smartMessagingPartialUpdate
+   *   When enabled, export the smart messaging allowlist document for partial
+   *   update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/documents.export_document.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_ExportDocument_async
+   */
+  exportDocument(
+    request?: protos.google.cloud.dialogflow.v2.IExportDocumentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IDocument,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  exportDocument(
+    request: protos.google.cloud.dialogflow.v2.IExportDocumentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IDocument,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportDocument(
+    request: protos.google.cloud.dialogflow.v2.IExportDocumentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IDocument,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportDocument(
+    request?: protos.google.cloud.dialogflow.v2.IExportDocumentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IDocument,
+            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IDocument,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IDocument,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.exportDocument(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `exportDocument()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/documents.export_document.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_ExportDocument_async
+   */
+  async checkExportDocumentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.v2.Document,
+      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.exportDocument,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.v2.Document,
+      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
+    >;
+  }
+  /**
    * Returns the list of all documents of the knowledge base.
    *
    * @param {Object} request
@@ -1208,6 +1381,28 @@ export class DocumentsClient {
    *   default 10 and at most 100.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request.
+   * @param {string} request.filter
+   *   The filter expression used to filter documents returned by the list method.
+   *   The expression has the following syntax:
+   *
+   *     <field> <operator> <value> [AND <field> <operator> <value>] ...
+   *
+   *   The following fields and operators are supported:
+   *
+   *   * knowledge_types with has(:) operator
+   *   * display_name with has(:) operator
+   *   * state with equals(=) operator
+   *
+   *   Examples:
+   *
+   *   * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
+   *   * "display_name:customer" matches documents whose display name contains
+   *     "customer".
+   *   * "state=ACTIVE" matches documents with ACTIVE state.
+   *   * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
+   *
+   *   For more information about filtering, see
+   *   [API Filtering](https://aip.dev/160).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1309,6 +1504,28 @@ export class DocumentsClient {
    *   default 10 and at most 100.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request.
+   * @param {string} request.filter
+   *   The filter expression used to filter documents returned by the list method.
+   *   The expression has the following syntax:
+   *
+   *     <field> <operator> <value> [AND <field> <operator> <value>] ...
+   *
+   *   The following fields and operators are supported:
+   *
+   *   * knowledge_types with has(:) operator
+   *   * display_name with has(:) operator
+   *   * state with equals(=) operator
+   *
+   *   Examples:
+   *
+   *   * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
+   *   * "display_name:customer" matches documents whose display name contains
+   *     "customer".
+   *   * "state=ACTIVE" matches documents with ACTIVE state.
+   *   * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
+   *
+   *   For more information about filtering, see
+   *   [API Filtering](https://aip.dev/160).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1358,6 +1575,28 @@ export class DocumentsClient {
    *   default 10 and at most 100.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request.
+   * @param {string} request.filter
+   *   The filter expression used to filter documents returned by the list method.
+   *   The expression has the following syntax:
+   *
+   *     <field> <operator> <value> [AND <field> <operator> <value>] ...
+   *
+   *   The following fields and operators are supported:
+   *
+   *   * knowledge_types with has(:) operator
+   *   * display_name with has(:) operator
+   *   * state with equals(=) operator
+   *
+   *   Examples:
+   *
+   *   * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
+   *   * "display_name:customer" matches documents whose display name contains
+   *     "customer".
+   *   * "state=ACTIVE" matches documents with ACTIVE state.
+   *   * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
+   *
+   *   For more information about filtering, see
+   *   [API Filtering](https://aip.dev/160).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

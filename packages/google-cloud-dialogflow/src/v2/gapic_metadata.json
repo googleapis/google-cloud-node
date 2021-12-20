@@ -399,6 +399,11 @@
                 "reloadDocument"
               ]
             },
+            "ExportDocument": {
+              "methods": [
+                "exportDocument"
+              ]
+            },
             "ListDocuments": {
               "methods": [
                 "listDocuments",
@@ -434,6 +439,11 @@
             "ReloadDocument": {
               "methods": [
                 "reloadDocument"
+              ]
+            },
+            "ExportDocument": {
+              "methods": [
+                "exportDocument"
               ]
             },
             "ListDocuments": {

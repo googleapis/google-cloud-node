@@ -33,6 +33,16 @@ function main(name) {
    *  the form `gs://<bucket-name>/<object-name>`.
    */
   // const contentUri = 'abc123'
+  /**
+   *  Optional. Whether to import custom metadata from Google Cloud Storage.
+   *  Only valid when the document source is Google Cloud Storage URI.
+   */
+  // const importGcsCustomMetadata = true
+  /**
+   *  Optional. When enabled, the reload request is to apply partial update to the smart
+   *  messaging allowlist.
+   */
+  // const smartMessagingPartialUpdate = true
 
   // Imports the Dialogflow library
   const {DocumentsClient} = require('@google-cloud/dialogflow').v2;
