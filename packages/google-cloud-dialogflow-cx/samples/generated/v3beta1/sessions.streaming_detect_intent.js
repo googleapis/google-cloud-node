@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(queryInput) {
@@ -71,17 +72,11 @@ function main(queryInput) {
 
     // Run request
     const stream = await cxClient.streamingDetectIntent();
-    stream.on('data', response => {
-      console.log(response);
-    });
-    stream.on('error', err => {
-      throw err;
-    });
-    stream.on('end', () => {
-      /* API call completed */
-    });
+    stream.on('data', (response) => { console.log(response) });
+    stream.on('error', (err) => { throw(err) });
+    stream.on('end', () => { /* API call completed */ });
     stream.write(request);
-    stream.end();
+    stream.end(); 
   }
 
   callStreamingDetectIntent();

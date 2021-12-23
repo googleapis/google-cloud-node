@@ -6467,6 +6467,10 @@
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Page"
                               }
                             },
+                            "displayName": {
+                              "type": "string",
+                              "id": 4
+                            },
                             "formInfo": {
                               "type": "FormInfo",
                               "id": 3

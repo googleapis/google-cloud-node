@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -35,8 +36,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Cx library
-  const {SecuritySettingsServiceClient} =
-    require('@google-cloud/dialogflow-cx').v3;
+  const {SecuritySettingsServiceClient} = require('@google-cloud/dialogflow-cx').v3;
 
   // Instantiates a client
   const cxClient = new SecuritySettingsServiceClient();
@@ -50,7 +50,7 @@ function main(parent) {
     // Run request
     const iterable = await cxClient.listSecuritySettingsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

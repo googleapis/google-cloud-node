@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(transitionRouteGroup) {
@@ -41,8 +42,7 @@ function main(transitionRouteGroup) {
   // const languageCode = 'abc123'
 
   // Imports the Cx library
-  const {TransitionRouteGroupsClient} =
-    require('@google-cloud/dialogflow-cx').v3;
+  const {TransitionRouteGroupsClient} = require('@google-cloud/dialogflow-cx').v3;
 
   // Instantiates a client
   const cxClient = new TransitionRouteGroupsClient();

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -41,7 +42,7 @@ function main(parent) {
    *  The expression is case insensitive. Only 'AND' is supported for logical
    *  operators. The supported syntax is listed below in detail:
    *    <field> <operator> <value> AND <field> <operator> <value>  ...
-   *    AND latest
+   *    AND latest 
    *  The supported fields and operators are:
    *  field                 operator
    *  `environment`         `=`, `IN`  (Use value `draft` for draft environment)
@@ -73,7 +74,7 @@ function main(parent) {
     // Run request
     const iterable = await cxClient.listTestCaseResultsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
