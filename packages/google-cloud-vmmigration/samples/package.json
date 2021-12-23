@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-vmmigration-samples",
+  "private": true,
+  "license": "Apache-2.0",
+  "files": [
+    "*.js"
+  ],
+  "author": "Google LLC",
+  "repository": "googleapis/nodejs-secret-manager",
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "test": "c8 mocha --recursive test/ --timeout=800000"
+  },
+  "dependencies": {
+    "@google-cloud/vmmigration": "^0.1.0"
+  },
+  "devDependencies": {
+    "c8": "^7.0.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.0.0",
+    "uuid": "^8.0.0"
+  }
+}

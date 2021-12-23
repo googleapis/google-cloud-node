@@ -1,0 +1,485 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.vmmigration.v1",
+  "libraryPackage": "@google-cloud/vmmigration",
+  "services": {
+    "VmMigration": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VmMigrationClient",
+          "rpcs": {
+            "GetSource": {
+              "methods": [
+                "getSource"
+              ]
+            },
+            "FetchInventory": {
+              "methods": [
+                "fetchInventory"
+              ]
+            },
+            "GetUtilizationReport": {
+              "methods": [
+                "getUtilizationReport"
+              ]
+            },
+            "GetDatacenterConnector": {
+              "methods": [
+                "getDatacenterConnector"
+              ]
+            },
+            "GetMigratingVm": {
+              "methods": [
+                "getMigratingVm"
+              ]
+            },
+            "GetCloneJob": {
+              "methods": [
+                "getCloneJob"
+              ]
+            },
+            "GetCutoverJob": {
+              "methods": [
+                "getCutoverJob"
+              ]
+            },
+            "GetGroup": {
+              "methods": [
+                "getGroup"
+              ]
+            },
+            "GetTargetProject": {
+              "methods": [
+                "getTargetProject"
+              ]
+            },
+            "CreateSource": {
+              "methods": [
+                "createSource"
+              ]
+            },
+            "UpdateSource": {
+              "methods": [
+                "updateSource"
+              ]
+            },
+            "DeleteSource": {
+              "methods": [
+                "deleteSource"
+              ]
+            },
+            "CreateUtilizationReport": {
+              "methods": [
+                "createUtilizationReport"
+              ]
+            },
+            "DeleteUtilizationReport": {
+              "methods": [
+                "deleteUtilizationReport"
+              ]
+            },
+            "CreateDatacenterConnector": {
+              "methods": [
+                "createDatacenterConnector"
+              ]
+            },
+            "DeleteDatacenterConnector": {
+              "methods": [
+                "deleteDatacenterConnector"
+              ]
+            },
+            "CreateMigratingVm": {
+              "methods": [
+                "createMigratingVm"
+              ]
+            },
+            "UpdateMigratingVm": {
+              "methods": [
+                "updateMigratingVm"
+              ]
+            },
+            "DeleteMigratingVm": {
+              "methods": [
+                "deleteMigratingVm"
+              ]
+            },
+            "StartMigration": {
+              "methods": [
+                "startMigration"
+              ]
+            },
+            "ResumeMigration": {
+              "methods": [
+                "resumeMigration"
+              ]
+            },
+            "PauseMigration": {
+              "methods": [
+                "pauseMigration"
+              ]
+            },
+            "FinalizeMigration": {
+              "methods": [
+                "finalizeMigration"
+              ]
+            },
+            "CreateCloneJob": {
+              "methods": [
+                "createCloneJob"
+              ]
+            },
+            "CancelCloneJob": {
+              "methods": [
+                "cancelCloneJob"
+              ]
+            },
+            "CreateCutoverJob": {
+              "methods": [
+                "createCutoverJob"
+              ]
+            },
+            "CancelCutoverJob": {
+              "methods": [
+                "cancelCutoverJob"
+              ]
+            },
+            "CreateGroup": {
+              "methods": [
+                "createGroup"
+              ]
+            },
+            "UpdateGroup": {
+              "methods": [
+                "updateGroup"
+              ]
+            },
+            "DeleteGroup": {
+              "methods": [
+                "deleteGroup"
+              ]
+            },
+            "AddGroupMigration": {
+              "methods": [
+                "addGroupMigration"
+              ]
+            },
+            "RemoveGroupMigration": {
+              "methods": [
+                "removeGroupMigration"
+              ]
+            },
+            "CreateTargetProject": {
+              "methods": [
+                "createTargetProject"
+              ]
+            },
+            "UpdateTargetProject": {
+              "methods": [
+                "updateTargetProject"
+              ]
+            },
+            "DeleteTargetProject": {
+              "methods": [
+                "deleteTargetProject"
+              ]
+            },
+            "ListSources": {
+              "methods": [
+                "listSources",
+                "listSourcesStream",
+                "listSourcesAsync"
+              ]
+            },
+            "ListUtilizationReports": {
+              "methods": [
+                "listUtilizationReports",
+                "listUtilizationReportsStream",
+                "listUtilizationReportsAsync"
+              ]
+            },
+            "ListDatacenterConnectors": {
+              "methods": [
+                "listDatacenterConnectors",
+                "listDatacenterConnectorsStream",
+                "listDatacenterConnectorsAsync"
+              ]
+            },
+            "ListMigratingVms": {
+              "methods": [
+                "listMigratingVms",
+                "listMigratingVmsStream",
+                "listMigratingVmsAsync"
+              ]
+            },
+            "ListCloneJobs": {
+              "methods": [
+                "listCloneJobs",
+                "listCloneJobsStream",
+                "listCloneJobsAsync"
+              ]
+            },
+            "ListCutoverJobs": {
+              "methods": [
+                "listCutoverJobs",
+                "listCutoverJobsStream",
+                "listCutoverJobsAsync"
+              ]
+            },
+            "ListGroups": {
+              "methods": [
+                "listGroups",
+                "listGroupsStream",
+                "listGroupsAsync"
+              ]
+            },
+            "ListTargetProjects": {
+              "methods": [
+                "listTargetProjects",
+                "listTargetProjectsStream",
+                "listTargetProjectsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VmMigrationClient",
+          "rpcs": {
+            "GetSource": {
+              "methods": [
+                "getSource"
+              ]
+            },
+            "FetchInventory": {
+              "methods": [
+                "fetchInventory"
+              ]
+            },
+            "GetUtilizationReport": {
+              "methods": [
+                "getUtilizationReport"
+              ]
+            },
+            "GetDatacenterConnector": {
+              "methods": [
+                "getDatacenterConnector"
+              ]
+            },
+            "GetMigratingVm": {
+              "methods": [
+                "getMigratingVm"
+              ]
+            },
+            "GetCloneJob": {
+              "methods": [
+                "getCloneJob"
+              ]
+            },
+            "GetCutoverJob": {
+              "methods": [
+                "getCutoverJob"
+              ]
+            },
+            "GetGroup": {
+              "methods": [
+                "getGroup"
+              ]
+            },
+            "GetTargetProject": {
+              "methods": [
+                "getTargetProject"
+              ]
+            },
+            "CreateSource": {
+              "methods": [
+                "createSource"
+              ]
+            },
+            "UpdateSource": {
+              "methods": [
+                "updateSource"
+              ]
+            },
+            "DeleteSource": {
+              "methods": [
+                "deleteSource"
+              ]
+            },
+            "CreateUtilizationReport": {
+              "methods": [
+                "createUtilizationReport"
+              ]
+            },
+            "DeleteUtilizationReport": {
+              "methods": [
+                "deleteUtilizationReport"
+              ]
+            },
+            "CreateDatacenterConnector": {
+              "methods": [
+                "createDatacenterConnector"
+              ]
+            },
+            "DeleteDatacenterConnector": {
+              "methods": [
+                "deleteDatacenterConnector"
+              ]
+            },
+            "CreateMigratingVm": {
+              "methods": [
+                "createMigratingVm"
+              ]
+            },
+            "UpdateMigratingVm": {
+              "methods": [
+                "updateMigratingVm"
+              ]
+            },
+            "DeleteMigratingVm": {
+              "methods": [
+                "deleteMigratingVm"
+              ]
+            },
+            "StartMigration": {
+              "methods": [
+                "startMigration"
+              ]
+            },
+            "ResumeMigration": {
+              "methods": [
+                "resumeMigration"
+              ]
+            },
+            "PauseMigration": {
+              "methods": [
+                "pauseMigration"
+              ]
+            },
+            "FinalizeMigration": {
+              "methods": [
+                "finalizeMigration"
+              ]
+            },
+            "CreateCloneJob": {
+              "methods": [
+                "createCloneJob"
+              ]
+            },
+            "CancelCloneJob": {
+              "methods": [
+                "cancelCloneJob"
+              ]
+            },
+            "CreateCutoverJob": {
+              "methods": [
+                "createCutoverJob"
+              ]
+            },
+            "CancelCutoverJob": {
+              "methods": [
+                "cancelCutoverJob"
+              ]
+            },
+            "CreateGroup": {
+              "methods": [
+                "createGroup"
+              ]
+            },
+            "UpdateGroup": {
+              "methods": [
+                "updateGroup"
+              ]
+            },
+            "DeleteGroup": {
+              "methods": [
+                "deleteGroup"
+              ]
+            },
+            "AddGroupMigration": {
+              "methods": [
+                "addGroupMigration"
+              ]
+            },
+            "RemoveGroupMigration": {
+              "methods": [
+                "removeGroupMigration"
+              ]
+            },
+            "CreateTargetProject": {
+              "methods": [
+                "createTargetProject"
+              ]
+            },
+            "UpdateTargetProject": {
+              "methods": [
+                "updateTargetProject"
+              ]
+            },
+            "DeleteTargetProject": {
+              "methods": [
+                "deleteTargetProject"
+              ]
+            },
+            "ListSources": {
+              "methods": [
+                "listSources",
+                "listSourcesStream",
+                "listSourcesAsync"
+              ]
+            },
+            "ListUtilizationReports": {
+              "methods": [
+                "listUtilizationReports",
+                "listUtilizationReportsStream",
+                "listUtilizationReportsAsync"
+              ]
+            },
+            "ListDatacenterConnectors": {
+              "methods": [
+                "listDatacenterConnectors",
+                "listDatacenterConnectorsStream",
+                "listDatacenterConnectorsAsync"
+              ]
+            },
+            "ListMigratingVms": {
+              "methods": [
+                "listMigratingVms",
+                "listMigratingVmsStream",
+                "listMigratingVmsAsync"
+              ]
+            },
+            "ListCloneJobs": {
+              "methods": [
+                "listCloneJobs",
+                "listCloneJobsStream",
+                "listCloneJobsAsync"
+              ]
+            },
+            "ListCutoverJobs": {
+              "methods": [
+                "listCutoverJobs",
+                "listCutoverJobsStream",
+                "listCutoverJobsAsync"
+              ]
+            },
+            "ListGroups": {
+              "methods": [
+                "listGroups",
+                "listGroupsStream",
+                "listGroupsAsync"
+              ]
+            },
+            "ListTargetProjects": {
+              "methods": [
+                "listTargetProjects",
+                "listTargetProjectsStream",
+                "listTargetProjectsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
