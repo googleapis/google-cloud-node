@@ -2,8 +2,10 @@
   "repo": "googleapis/nodejs-promisify",
   "distribution_name": "@google-cloud/promisify",
   "language": "nodejs",
-  "release_level": "ga",
+  "release_level": "stable",
   "client_documentation": "https://googleapis.dev/nodejs/promisify/latest",
   "name_pretty": "Google Cloud Common Promisify",
-  "name": "promisify"
+  "name": "promisify",
+  "api_shortname": "promisify",
+  "library_type": "OTHER"
 }
