@@ -11,5 +11,7 @@
   "codeowner_team": "@googleapis/area120-tables",
   "name_pretty": "Area120 Tables API",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/area120-tables/latest",
-  "release_level": "alpha"
+  "release_level": "preview",
+  "api_shortname": "area120tables",
+  "library_type": "GAPIC_AUTO"
 }
