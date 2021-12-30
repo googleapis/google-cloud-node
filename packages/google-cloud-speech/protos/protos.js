@@ -11661,6 +11661,7 @@
                          * @interface ISpeechRecognitionResult
                          * @property {Array.<google.cloud.speech.v1p1beta1.ISpeechRecognitionAlternative>|null} [alternatives] SpeechRecognitionResult alternatives
                          * @property {number|null} [channelTag] SpeechRecognitionResult channelTag
+                         * @property {google.protobuf.IDuration|null} [resultEndTime] SpeechRecognitionResult resultEndTime
                          * @property {string|null} [languageCode] SpeechRecognitionResult languageCode
                          */
     
@@ -11695,6 +11696,14 @@
                          * @instance
                          */
                         SpeechRecognitionResult.prototype.channelTag = 0;
+    
+                        /**
+                         * SpeechRecognitionResult resultEndTime.
+                         * @member {google.protobuf.IDuration|null|undefined} resultEndTime
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechRecognitionResult
+                         * @instance
+                         */
+                        SpeechRecognitionResult.prototype.resultEndTime = null;
     
                         /**
                          * SpeechRecognitionResult languageCode.
@@ -11733,6 +11742,8 @@
                                     $root.google.cloud.speech.v1p1beta1.SpeechRecognitionAlternative.encode(message.alternatives[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.channelTag != null && Object.hasOwnProperty.call(message, "channelTag"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.channelTag);
+                            if (message.resultEndTime != null && Object.hasOwnProperty.call(message, "resultEndTime"))
+                                $root.google.protobuf.Duration.encode(message.resultEndTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.languageCode);
                             return writer;
@@ -11776,6 +11787,9 @@
                                     break;
                                 case 2:
                                     message.channelTag = reader.int32();
+                                    break;
+                                case 4:
+                                    message.resultEndTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                     break;
                                 case 5:
                                     message.languageCode = reader.string();
@@ -11827,6 +11841,11 @@
                             if (message.channelTag != null && message.hasOwnProperty("channelTag"))
                                 if (!$util.isInteger(message.channelTag))
                                     return "channelTag: integer expected";
+                            if (message.resultEndTime != null && message.hasOwnProperty("resultEndTime")) {
+                                var error = $root.google.protobuf.Duration.verify(message.resultEndTime);
+                                if (error)
+                                    return "resultEndTime." + error;
+                            }
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 if (!$util.isString(message.languageCode))
                                     return "languageCode: string expected";
@@ -11857,6 +11876,11 @@
                             }
                             if (object.channelTag != null)
                                 message.channelTag = object.channelTag | 0;
+                            if (object.resultEndTime != null) {
+                                if (typeof object.resultEndTime !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.SpeechRecognitionResult.resultEndTime: object expected");
+                                message.resultEndTime = $root.google.protobuf.Duration.fromObject(object.resultEndTime);
+                            }
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
                             return message;
@@ -11879,6 +11903,7 @@
                                 object.alternatives = [];
                             if (options.defaults) {
                                 object.channelTag = 0;
+                                object.resultEndTime = null;
                                 object.languageCode = "";
                             }
                             if (message.alternatives && message.alternatives.length) {
@@ -11888,6 +11913,8 @@
                             }
                             if (message.channelTag != null && message.hasOwnProperty("channelTag"))
                                 object.channelTag = message.channelTag;
+                            if (message.resultEndTime != null && message.hasOwnProperty("resultEndTime"))
+                                object.resultEndTime = $root.google.protobuf.Duration.toObject(message.resultEndTime, options);
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
                             return object;

@@ -4530,6 +4530,9 @@ export namespace google {
                     /** SpeechRecognitionResult channelTag */
                     channelTag?: (number|null);
 
+                    /** SpeechRecognitionResult resultEndTime */
+                    resultEndTime?: (google.protobuf.IDuration|null);
+
                     /** SpeechRecognitionResult languageCode */
                     languageCode?: (string|null);
                 }
@@ -4548,6 +4551,9 @@ export namespace google {
 
                     /** SpeechRecognitionResult channelTag. */
                     public channelTag: number;
+
+                    /** SpeechRecognitionResult resultEndTime. */
+                    public resultEndTime?: (google.protobuf.IDuration|null);
 
                     /** SpeechRecognitionResult languageCode. */
                     public languageCode: string;

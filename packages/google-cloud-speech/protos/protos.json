@@ -1250,6 +1250,10 @@
                           "type": "int32",
                           "id": 2
                         },
+                        "resultEndTime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
                         "languageCode": {
                           "type": "string",
                           "id": 5,
