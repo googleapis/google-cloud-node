@@ -3,12 +3,14 @@
   "product_documentation": "https://cloud.google.com/monitoring/docs",
   "name": "monitoring",
   "requires_billing": true,
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "api_id": "monitoring.googleapis.com",
   "distribution_name": "@google-cloud/monitoring",
   "repo": "googleapis/nodejs-monitoring",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559785",
   "name_pretty": "Stackdriver Monitoring",
-  "default_version": "v3"
+  "default_version": "v3",
+  "api_shortname": "monitoring",
+  "library_type": "GAPIC_AUTO"
 }
