@@ -4,9 +4,8 @@
 
 # [Cloud Shell: Node.js Client](https://github.com/googleapis/nodejs-cloud-shell)
 
-
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/shell.svg)](https://www.npmjs.org/package/@google-cloud/shell)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-cloud-shell/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-cloud-shell)
 
 
 
