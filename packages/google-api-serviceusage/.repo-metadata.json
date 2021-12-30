@@ -4,12 +4,13 @@
   "product_documentation": "https://cloud.google.com/service-usage/",
   "client_documentation": "https://cloud.google.com/service-usage/docs/overview",
   "issue_tracker": "https://www.github.com/googleapis/nodejs-service-usage/issues",
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-service-usage",
   "distribution_name": "@google-cloud/service-usage",
   "api_id": "serviceusage.googleapis.com",
   "requires_billing": true,
-  "default_version": "v1"
+  "default_version": "v1",
+  "api_shortname": "service-usage",
+  "library_type": "GAPIC_AUTO"
 }
-
