@@ -1,9 +1,10 @@
 {
   "name": "paginator",
   "name_pretty": "Google Cloud Common Paginator",
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-paginator",
   "distribution_name": "@google-cloud/paginator",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/paginator/latest"
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/paginator/latest",
+  "library_type": "OTHER"
 }
