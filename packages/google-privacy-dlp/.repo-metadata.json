@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dlp/latest",
   "api_id": "dlp.googleapis.com",
   "distribution_name": "@google-cloud/dlp",
-  "release_level": "ga",
+  "release_level": "stable",
   "default_version": "v2",
   "language": "nodejs",
   "name_pretty": "Cloud Data Loss Prevention",
@@ -10,5 +10,7 @@
   "product_documentation": "https://cloud.google.com/dlp/docs/",
   "requires_billing": true,
   "name": "dlp",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/5548083"
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5548083",
+  "api_shortname": "dlp",
+  "library_type": "GAPIC_COMBO"
 }
