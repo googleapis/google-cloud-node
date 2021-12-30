@@ -4,11 +4,13 @@
   "product_documentation": "https://cloud.google.com/tpu/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/tpu/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-cloud-tpu/issues",
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-cloud-tpu",
   "distribution_name": "@google-cloud/tpu",
   "api_id": "tpu.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "tpu",
+  "library_type": "GAPIC_AUTO"
 }
