@@ -1678,6 +1678,21 @@
     "support_documentation": "https://cloud.google.com/translate/media/docs/"
   },
   {
+    "name": "vmmigration",
+    "name_pretty": "Migrate for Compute Engine",
+    "product_documentation": "https://cloud.google.com/migrate/compute-engine/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vmmigration/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-vmmigration/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-vmmigration",
+    "distribution_name": "@google-cloud/vmmigration",
+    "api_id": "vmmigration.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/migrate/compute-engine/docs/getting-support"
+  },
+  {
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/network-connectivity/latest",
     "api_id": "networkconnectivity.googleapis.com",
     "distribution_name": "@google-cloud/network-connectivity",
