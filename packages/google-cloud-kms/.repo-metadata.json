@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/kms/latest",
   "api_id": "kms.googleapis.com",
   "distribution_name": "@google-cloud/kms",
-  "release_level": "ga",
+  "release_level": "stable",
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Google Cloud Key Management Service",
@@ -11,5 +11,7 @@
   "requires_billing": true,
   "name": "kms",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5264932",
-  "codeowner_team": "@googleapis/api-kms"
+  "codeowner_team": "@googleapis/api-kms",
+  "api_shortname": "kms",
+  "library_type": "GAPIC_AUTO"
 }
