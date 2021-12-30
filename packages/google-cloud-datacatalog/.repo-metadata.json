@@ -1,6 +1,6 @@
 {
   "default_version": "v1",
-  "release_level": "ga",
+  "release_level": "stable",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datacatalog/latest",
   "name": "datacatalog",
   "product_documentation": "https://cloud.google.com/data-catalog/",
@@ -10,5 +10,7 @@
   "repo": "googleapis/nodejs-datacatalog",
   "name_pretty": "Data Catalog",
   "issue_tracker": "",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "datacatalog",
+  "library_type": "GAPIC_AUTO"
 }
