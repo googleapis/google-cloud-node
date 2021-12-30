@@ -6,7 +6,6 @@
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/appengine-admin.svg)](https://www.npmjs.org/package/@google-cloud/appengine-admin)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-appengine-admin/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-appengine-admin)
 
 
 
