@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/billing-budgets/latest",
   "api_id": "billingbudgets.googleapis.com",
   "distribution_name": "@google-cloud/billing-budgets",
-  "release_level": "ga",
+  "release_level": "stable",
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Billing Budgets",
@@ -10,5 +10,7 @@
   "product_documentation": "https://cloud.google.com/billing/docs/how-to/budget-api-overview ",
   "requires_billing": true,
   "name": "billingbudgets",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559770"
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559770",
+  "api_shortname": "billingbudgets",
+  "library_type": "GAPIC_AUTO"
 }
