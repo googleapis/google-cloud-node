@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/binary-authorization/latest",
   "api_id": "binaryauthorization.googleapis.com",
   "distribution_name": "@google-cloud/binary-authorization",
-  "release_level": "beta",
+  "release_level": "preview",
   "default_version": "v1beta1",
   "language": "nodejs",
   "name_pretty": "Binary Authorization",
@@ -11,5 +11,7 @@
   "requires_billing": true,
   "name": "binaryauthorization",
   "issue_tracker": "https://github.com/googleapis/nodejs-binary-authorization/issues",
-  "codeowner_team": "@googleapis/cicd"
+  "codeowner_team": "@googleapis/cicd",
+  "api_shortname": "binaryauthorization",
+  "library_type": "GAPIC_AUTO"
 }
