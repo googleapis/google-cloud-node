@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/compute",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/compute/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559755",
-  "release_level": "alpha",
+  "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/nodejs-compute",
   "distribution_name": "@google-cloud/compute",
@@ -12,5 +12,6 @@
   "requires_billing": true,
   "library_type": "GAPIC_AUTO",
   "codeowner_team": "@googleapis/api-compute",
-  "default_version": "v1"
+  "default_version": "v1",
+  "api_shortname": "compute"
 }
