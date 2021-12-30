@@ -4,9 +4,8 @@
 
 # [Retail API: Node.js Client](https://github.com/googleapis/nodejs-retail)
 
-
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/retail.svg)](https://www.npmjs.org/package/@google-cloud/retail)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-retail/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-retail)
 
 
 
