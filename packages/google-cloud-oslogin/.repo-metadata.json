@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/os-login/latest",
   "api_id": "oslogin.googleapis.com",
   "distribution_name": "@google-cloud/os-login",
-  "release_level": "ga",
+  "release_level": "stable",
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Google Cloud OS Login",
@@ -10,5 +10,7 @@
   "product_documentation": "https://cloud.google.com/compute/docs/oslogin/",
   "requires_billing": true,
   "name": "oslogin",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559755"
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559755",
+  "api_shortname": "oslogin",
+  "library_type": "GAPIC_AUTO"
 }
