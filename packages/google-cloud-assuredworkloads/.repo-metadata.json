@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/assured-workloads/latest",
   "api_id": "assuredworkloads.googleapis.com",
   "distribution_name": "@google-cloud/assured-workloads",
-  "release_level": "beta",
+  "release_level": "preview",
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Assured Workloads for Government",
@@ -10,5 +10,7 @@
   "product_documentation": "https://cloud.google.com/assured-workloads/docs",
   "requires_billing": true,
   "name": "assuredworkloads",
-  "issue_tracker": ""
+  "issue_tracker": "",
+  "api_shortname": "assuredworkloads",
+  "library_type": "GAPIC_AUTO"
 }
