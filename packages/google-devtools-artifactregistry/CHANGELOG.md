@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.2](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.2.1...v1.2.2) (2021-12-30)
+
+
+### Bug Fixes
+
+* **artifactregistry:** fix resource pattern ID segment name ([#100](https://www.github.com/googleapis/nodejs-artifact-registry/issues/100)) ([27d74c2](https://www.github.com/googleapis/nodejs-artifact-registry/commit/27d74c2d59bf0f9a8985f89b5440ef2fc8e45008))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.2.0...v1.2.1) (2021-10-14)
 
 
