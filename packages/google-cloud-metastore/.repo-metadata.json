@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dataproc-metastore/latest",
   "api_id": "metastore.googleapis.com",
   "distribution_name": "@google-cloud/dataproc-metastore",
-  "release_level": "BETA",
+  "release_level": "preview",
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Dataproc Metastore",
@@ -10,5 +10,7 @@
   "product_documentation": "https://cloud.google.com/dataproc-metastore/",
   "requires_billing": true,
   "name": "metastore",
-  "issue_tracker": "https://github.com/googleapis/nodejs-dataproc-metastore/issues"
+  "issue_tracker": "https://github.com/googleapis/nodejs-dataproc-metastore/issues",
+  "api_shortname": "metastore",
+  "library_type": "GAPIC_AUTO"
 }
