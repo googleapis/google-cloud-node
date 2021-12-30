@@ -4,11 +4,13 @@
   "product_documentation": "https://cloud.google.com/vpc/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vpc-access/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-vpc-access/issues",
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-vpc-access",
   "distribution_name": "@google-cloud/vpc-access",
   "api_id": "vpcaccess.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "vpcaccess",
+  "library_type": "GAPIC_AUTO"
 }
