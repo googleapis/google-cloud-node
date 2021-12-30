@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -24,11 +25,10 @@ function main() {
    *  BCP-47 (https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
    *  If not specified, the API will return all supported voices.
    *  If specified, the ListVoices call will only return voices that can be used
-   *  to synthesize this language_code. E.g. when specifying `"en-NZ"`, you will
-   *  get supported `"en-NZ"` voices; when specifying `"no"`, you will get
-   *  supported `"no-\*"` (Norwegian) and `"nb-\*"` (Norwegian Bokmal) voices;
-   *  specifying `"zh"` will also get supported `"cmn-\*"` voices; specifying
-   *  `"zh-hk"` will also get supported `"yue-hk"` voices.
+   *  to synthesize this language_code. For example, if you specify `"en-NZ"`,
+   *  all `"en-NZ"` voices will be returned. If you specify `"no"`, both
+   *  `"no-\*"` (Norwegian) and `"nb-\*"` (Norwegian Bokmal) voices will be
+   *  returned.
    */
   // const languageCode = 'abc123'
 
@@ -40,7 +40,8 @@ function main() {
 
   async function callListVoices() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const response = await texttospeechClient.listVoices(request);
