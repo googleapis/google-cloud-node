@@ -4,9 +4,8 @@
 
 # [Google Compute Engine: Node.js Client](https://github.com/googleapis/nodejs-compute)
 
-
+[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/compute.svg)](https://www.npmjs.org/package/@google-cloud/compute)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-compute/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-compute)
 
 
 
