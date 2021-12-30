@@ -4,11 +4,13 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/service-management/latest",
   "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
   "name_pretty": "Service Management API",
-  "release_level": "GA",
+  "release_level": "preview",
   "default_version": "v1",
   "name": "service-management",
   "api_id": "servicemanagement.googleapis.com",
   "requires_billing": true,
   "language": "nodejs",
-  "repo": "googleapis/nodejs-service-management"
+  "repo": "googleapis/nodejs-service-management",
+  "api_shortname": "service-management",
+  "library_type": "GAPIC_AUTO"
 }
