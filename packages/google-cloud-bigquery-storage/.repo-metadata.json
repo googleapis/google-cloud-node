@@ -1,6 +1,6 @@
 {
   "distribution_name": "@google-cloud/bigquery-storage",
-  "release_level": "ga",
+  "release_level": "stable",
   "product_documentation": "https://cloud.google.com/bigquery/docs/reference/storage",
   "repo": "googleapis/nodejs-bigquery-storage",
   "default_version": "v1",
@@ -11,5 +11,7 @@
   "name": "bigquerystorage",
   "name_pretty": "Google BigQuery Storage",
   "api_id": "bigquerystorage.googleapis.com",
-  "codeowner_team": "@googleapis/api-bigquery"
+  "codeowner_team": "@googleapis/api-bigquery",
+  "api_shortname": "bigquerystorage",
+  "library_type": "GAPIC_AUTO"
 }
