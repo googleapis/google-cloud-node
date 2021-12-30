@@ -4,9 +4,8 @@
 
 # [Google Cloud Common Paginator: Node.js Client](https://github.com/googleapis/nodejs-paginator)
 
-
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/paginator.svg)](https://www.npmjs.org/package/@google-cloud/paginator)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-paginator/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-paginator)
 
 
 
