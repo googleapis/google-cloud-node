@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(project) {
@@ -57,9 +58,7 @@ function main(project) {
     };
 
     // Run request
-    const response = await computeClient.listPreconfiguredExpressionSets(
-      request
-    );
+    const response = await computeClient.listPreconfiguredExpressionSets(request);
     console.log(response);
   }
 

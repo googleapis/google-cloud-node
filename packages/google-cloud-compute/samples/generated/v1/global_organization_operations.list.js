@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -45,20 +46,20 @@ function main() {
   // const returnPartialSuccess = true
 
   // Imports the Compute library
-  const {GlobalOrganizationOperationsClient} =
-    require('@google-cloud/compute').v1;
+  const {GlobalOrganizationOperationsClient} = require('@google-cloud/compute').v1;
 
   // Instantiates a client
   const computeClient = new GlobalOrganizationOperationsClient();
 
   async function callList() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const iterable = await computeClient.listAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(nodeGroup, project, zone) {
@@ -69,7 +70,7 @@ function main(nodeGroup, project, zone) {
     // Run request
     const iterable = await computeClient.listNodesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

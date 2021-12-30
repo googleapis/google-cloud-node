@@ -12,14 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main(
-  project,
-  region,
-  subnetwork,
-  subnetworksExpandIpCidrRangeRequestResource
-) {
+function main(project, region, subnetwork, subnetworksExpandIpCidrRangeRequestResource) {
   // [START compute_v1_generated_Subnetworks_ExpandIpCidrRange_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.

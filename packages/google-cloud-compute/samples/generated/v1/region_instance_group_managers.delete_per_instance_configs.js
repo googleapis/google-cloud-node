@@ -12,14 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main(
-  instanceGroupManager,
-  project,
-  region,
-  regionInstanceGroupManagerDeleteInstanceConfigReqResource
-) {
+function main(instanceGroupManager, project, region, regionInstanceGroupManagerDeleteInstanceConfigReqResource) {
   // [START compute_v1_generated_RegionInstanceGroupManagers_DeletePerInstanceConfigs_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -42,8 +38,7 @@ function main(
   // const regionInstanceGroupManagerDeleteInstanceConfigReqResource = {}
 
   // Imports the Compute library
-  const {RegionInstanceGroupManagersClient} =
-    require('@google-cloud/compute').v1;
+  const {RegionInstanceGroupManagersClient} = require('@google-cloud/compute').v1;
 
   // Instantiates a client
   const computeClient = new RegionInstanceGroupManagersClient();

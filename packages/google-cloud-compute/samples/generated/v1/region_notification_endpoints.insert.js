@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(notificationEndpointResource, project, region) {
@@ -37,8 +38,7 @@ function main(notificationEndpointResource, project, region) {
   // const requestId = 'abc123'
 
   // Imports the Compute library
-  const {RegionNotificationEndpointsClient} =
-    require('@google-cloud/compute').v1;
+  const {RegionNotificationEndpointsClient} = require('@google-cloud/compute').v1;
 
   // Instantiates a client
   const computeClient = new RegionNotificationEndpointsClient();

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(instanceGroupManager, project, region) {
@@ -53,8 +54,7 @@ function main(instanceGroupManager, project, region) {
   // const returnPartialSuccess = true
 
   // Imports the Compute library
-  const {RegionInstanceGroupManagersClient} =
-    require('@google-cloud/compute').v1;
+  const {RegionInstanceGroupManagersClient} = require('@google-cloud/compute').v1;
 
   // Instantiates a client
   const computeClient = new RegionInstanceGroupManagersClient();
@@ -70,7 +70,7 @@ function main(instanceGroupManager, project, region) {
     // Run request
     const iterable = await computeClient.listManagedInstancesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

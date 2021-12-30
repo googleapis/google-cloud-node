@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(project) {
@@ -63,7 +64,7 @@ function main(project) {
     // Run request
     const iterable = await computeClient.aggregatedListAsync(request);
     for await (const [key, value] of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

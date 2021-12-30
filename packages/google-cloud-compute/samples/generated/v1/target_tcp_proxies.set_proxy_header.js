@@ -12,13 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main(
-  project,
-  targetTcpProxiesSetProxyHeaderRequestResource,
-  targetTcpProxy
-) {
+function main(project, targetTcpProxiesSetProxyHeaderRequestResource, targetTcpProxy) {
   // [START compute_v1_generated_TargetTcpProxies_SetProxyHeader_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.

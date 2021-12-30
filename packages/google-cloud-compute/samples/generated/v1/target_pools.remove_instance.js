@@ -12,14 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main(
-  project,
-  region,
-  targetPool,
-  targetPoolsRemoveInstanceRequestResource
-) {
+function main(project, region, targetPool, targetPoolsRemoveInstanceRequestResource) {
   // [START compute_v1_generated_TargetPools_RemoveInstance_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.

@@ -12,14 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main(
-  instance,
-  project,
-  shieldedInstanceIntegrityPolicyResource,
-  zone
-) {
+function main(instance, project, shieldedInstanceIntegrityPolicyResource, zone) {
   // [START compute_v1_generated_Instances_SetShieldedInstanceIntegrityPolicy_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -61,9 +57,7 @@ function main(
     };
 
     // Run request
-    const response = await computeClient.setShieldedInstanceIntegrityPolicy(
-      request
-    );
+    const response = await computeClient.setShieldedInstanceIntegrityPolicy(request);
     console.log(response);
   }
 

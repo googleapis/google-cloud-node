@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(project, region, router) {
@@ -69,7 +70,7 @@ function main(project, region, router) {
     // Run request
     const iterable = await computeClient.getNatMappingInfoAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1small from './v1small';
 
 const AcceleratorTypesClient = v1.AcceleratorTypesClient;
 type AcceleratorTypesClient = v1.AcceleratorTypesClient;
@@ -184,6 +185,7 @@ type ZonesClient = v1.ZonesClient;
 
 export {
   v1,
+  v1small,
   AcceleratorTypesClient,
   AddressesClient,
   AutoscalersClient,
@@ -267,6 +269,7 @@ export {
 };
 export default {
   v1,
+  v1small,
   AcceleratorTypesClient,
   AddressesClient,
   AutoscalersClient,

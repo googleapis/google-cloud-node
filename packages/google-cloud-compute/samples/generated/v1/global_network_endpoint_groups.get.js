@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(networkEndpointGroup, project) {
@@ -29,8 +30,7 @@ function main(networkEndpointGroup, project) {
   // const project = 'my-project'
 
   // Imports the Compute library
-  const {GlobalNetworkEndpointGroupsClient} =
-    require('@google-cloud/compute').v1;
+  const {GlobalNetworkEndpointGroupsClient} = require('@google-cloud/compute').v1;
 
   // Instantiates a client
   const computeClient = new GlobalNetworkEndpointGroupsClient();

@@ -12,14 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main(
-  disk,
-  project,
-  region,
-  regionDisksAddResourcePoliciesRequestResource
-) {
+function main(disk, project, region, regionDisksAddResourcePoliciesRequestResource) {
   // [START compute_v1_generated_RegionDisks_AddResourcePolicies_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.

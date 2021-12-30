@@ -12,14 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main(
-  project,
-  region,
-  regionTargetHttpsProxiesSetSslCertificatesRequestResource,
-  targetHttpsProxy
-) {
+function main(project, region, regionTargetHttpsProxiesSetSslCertificatesRequestResource, targetHttpsProxy) {
   // [START compute_v1_generated_RegionTargetHttpsProxies_SetSslCertificates_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.

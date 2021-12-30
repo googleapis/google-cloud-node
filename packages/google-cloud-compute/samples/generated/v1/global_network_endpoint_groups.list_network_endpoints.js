@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(networkEndpointGroup, project) {
@@ -49,8 +50,7 @@ function main(networkEndpointGroup, project) {
   // const returnPartialSuccess = true
 
   // Imports the Compute library
-  const {GlobalNetworkEndpointGroupsClient} =
-    require('@google-cloud/compute').v1;
+  const {GlobalNetworkEndpointGroupsClient} = require('@google-cloud/compute').v1;
 
   // Instantiates a client
   const computeClient = new GlobalNetworkEndpointGroupsClient();
@@ -65,7 +65,7 @@ function main(networkEndpointGroup, project) {
     // Run request
     const iterable = await computeClient.listNetworkEndpointsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

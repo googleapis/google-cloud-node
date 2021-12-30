@@ -12,14 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main(
-  instanceGroupManager,
-  instanceGroupManagersApplyUpdatesRequestResource,
-  project,
-  zone
-) {
+function main(instanceGroupManager, instanceGroupManagersApplyUpdatesRequestResource, project, zone) {
   // [START compute_v1_generated_InstanceGroupManagers_ApplyUpdatesToInstances_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.

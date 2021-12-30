@@ -12,14 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main(
-  instanceGroupManager,
-  instanceGroupManagerResource,
-  project,
-  region
-) {
+function main(instanceGroupManager, instanceGroupManagerResource, project, region) {
   // [START compute_v1_generated_RegionInstanceGroupManagers_Patch_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -46,8 +42,7 @@ function main(
   // const requestId = 'abc123'
 
   // Imports the Compute library
-  const {RegionInstanceGroupManagersClient} =
-    require('@google-cloud/compute').v1;
+  const {RegionInstanceGroupManagersClient} = require('@google-cloud/compute').v1;
 
   // Instantiates a client
   const computeClient = new RegionInstanceGroupManagersClient();

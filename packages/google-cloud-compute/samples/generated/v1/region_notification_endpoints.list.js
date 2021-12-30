@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(project, region) {
@@ -49,8 +50,7 @@ function main(project, region) {
   // const returnPartialSuccess = true
 
   // Imports the Compute library
-  const {RegionNotificationEndpointsClient} =
-    require('@google-cloud/compute').v1;
+  const {RegionNotificationEndpointsClient} = require('@google-cloud/compute').v1;
 
   // Instantiates a client
   const computeClient = new RegionNotificationEndpointsClient();
@@ -65,7 +65,7 @@ function main(project, region) {
     // Run request
     const iterable = await computeClient.listAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

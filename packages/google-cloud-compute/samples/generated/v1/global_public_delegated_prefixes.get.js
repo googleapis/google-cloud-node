@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(project, publicDelegatedPrefix) {
@@ -29,8 +30,7 @@ function main(project, publicDelegatedPrefix) {
   // const publicDelegatedPrefix = 'abc123'
 
   // Imports the Compute library
-  const {GlobalPublicDelegatedPrefixesClient} =
-    require('@google-cloud/compute').v1;
+  const {GlobalPublicDelegatedPrefixesClient} = require('@google-cloud/compute').v1;
 
   // Instantiates a client
   const computeClient = new GlobalPublicDelegatedPrefixesClient();

@@ -12,13 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main(
-  globalNetworkEndpointGroupsDetachEndpointsRequestResource,
-  networkEndpointGroup,
-  project
-) {
+function main(globalNetworkEndpointGroupsDetachEndpointsRequestResource, networkEndpointGroup, project) {
   // [START compute_v1_generated_GlobalNetworkEndpointGroups_DetachNetworkEndpoints_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -41,8 +38,7 @@ function main(
   // const requestId = 'abc123'
 
   // Imports the Compute library
-  const {GlobalNetworkEndpointGroupsClient} =
-    require('@google-cloud/compute').v1;
+  const {GlobalNetworkEndpointGroupsClient} = require('@google-cloud/compute').v1;
 
   // Instantiates a client
   const computeClient = new GlobalNetworkEndpointGroupsClient();

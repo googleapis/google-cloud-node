@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(project) {
@@ -45,8 +46,7 @@ function main(project) {
   // const returnPartialSuccess = true
 
   // Imports the Compute library
-  const {GlobalPublicDelegatedPrefixesClient} =
-    require('@google-cloud/compute').v1;
+  const {GlobalPublicDelegatedPrefixesClient} = require('@google-cloud/compute').v1;
 
   // Instantiates a client
   const computeClient = new GlobalPublicDelegatedPrefixesClient();
@@ -60,7 +60,7 @@ function main(project) {
     // Run request
     const iterable = await computeClient.listAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
