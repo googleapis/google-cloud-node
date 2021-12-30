@@ -6,7 +6,6 @@
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/media-translation.svg)](https://www.npmjs.org/package/@google-cloud/media-translation)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-media-translation/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-media-translation)
 
 
 
