@@ -3,12 +3,14 @@
   "product_documentation": "https://cloud.google.com/appengine/docs/admin-api/",
   "name": "appengine-admin",
   "requires_billing": true,
-  "release_level": "GA",
+  "release_level": "preview",
   "language": "nodejs",
   "api_id": "appengine.googleapis.com",
   "distribution_name": "@google-cloud/appengine-admin",
   "repo": "googleapis/nodejs-appengine-admin",
   "issue_tracker": "https://github.com/googleapis/nodejs-appengine-admin/issues",
   "name_pretty": "App Engine Admin API",
-  "default_version": "v1"
+  "default_version": "v1",
+  "api_shortname": "appengine-admin",
+  "library_type": "GAPIC_AUTO"
 }
