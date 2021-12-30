@@ -4,11 +4,13 @@
   "product_documentation": "https://cloud.google.com/private-catalog/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/private-catalog/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-private-catalog/issues",
-  "release_level": "BETA",
+  "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/nodejs-private-catalog",
   "distribution_name": "@google-cloud/private-catalog",
   "api_id": "privatecatalog.googleapis.com",
   "default_version": "v1beta1",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "cloudprivatecatalog",
+  "library_type": "GAPIC_AUTO"
 }
