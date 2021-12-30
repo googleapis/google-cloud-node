@@ -4,12 +4,13 @@
   "product_documentation": "https://cloud.google.com/data-fusion/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/data-fusion/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5552618",
-  "release_level": "beta",
+  "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/nodejs-data-fusion",
   "distribution_name": "@google-cloud/data-fusion",
   "api_id": "datafusion.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "datafusion",
+  "library_type": "GAPIC_AUTO"
 }
-
