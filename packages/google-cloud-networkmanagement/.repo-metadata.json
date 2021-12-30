@@ -4,11 +4,13 @@
   "product_documentation": "https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/network-management/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-network-management/issues",
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-network-management",
   "distribution_name": "@google-cloud/network-management",
   "api_id": "networkmanagement.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "networkmanagement",
+  "library_type": "GAPIC_AUTO"
 }
