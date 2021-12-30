@@ -4,9 +4,8 @@
 
 # [Phishing Protection: Node.js Client](https://github.com/googleapis/nodejs-phishing-protection)
 
-
+[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/phishing-protection.svg)](https://www.npmjs.org/package/@google-cloud/phishing-protection)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-phishing-protection/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-phishing-protection)
 
 
 
