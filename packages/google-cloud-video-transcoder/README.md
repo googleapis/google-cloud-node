@@ -4,9 +4,8 @@
 
 # [Transcoder API: Node.js Client](https://github.com/googleapis/nodejs-video-transcoder)
 
-
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/video-transcoder.svg)](https://www.npmjs.org/package/@google-cloud/video-transcoder)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-video-transcoder/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-video-transcoder)
 
 
 
