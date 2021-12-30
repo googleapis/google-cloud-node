@@ -4,9 +4,8 @@
 
 # [Contact Center AI Insights API: Node.js Client](https://github.com/googleapis/nodejs-contact-center-insights)
 
-
+[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/contact-center-insights.svg)](https://www.npmjs.org/package/@google-cloud/contact-center-insights)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-contact-center-insights/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-contact-center-insights)
 
 
 
