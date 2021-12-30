@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/domains/latest",
   "api_id": "domains.googleapis.com",
   "distribution_name": "@google-cloud/domains",
-  "release_level": "BETA",
+  "release_level": "preview",
   "default_version": "v1beta1",
   "language": "nodejs",
   "name_pretty": "Cloud Domains",
@@ -10,5 +10,7 @@
   "product_documentation": "https://cloud.google.com/domains/",
   "requires_billing": true,
   "name": "domains",
-  "issue_tracker": "https://github.com/googleapis/nodejs-domains/issues"
+  "issue_tracker": "https://github.com/googleapis/nodejs-domains/issues",
+  "api_shortname": "domains",
+  "library_type": "GAPIC_AUTO"
 }
