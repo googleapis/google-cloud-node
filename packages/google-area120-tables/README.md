@@ -4,9 +4,8 @@
 
 # [Area120 Tables API: Node.js Client](https://github.com/googleapis/nodejs-area120-tables)
 
-
+[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google/area120-tables.svg)](https://www.npmjs.org/package/@google/area120-tables)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-area120-tables/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-area120-tables)
 
 
 
