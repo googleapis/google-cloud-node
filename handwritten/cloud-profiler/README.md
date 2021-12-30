@@ -4,7 +4,7 @@
 
 # [Cloud Profiler: Node.js Client](https://github.com/googleapis/cloud-profiler-nodejs)
 
-[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/profiler.svg)](https://www.npmjs.org/package/@google-cloud/profiler)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/cloud-profiler-nodejs/main.svg?style=flat)](https://codecov.io/gh/googleapis/cloud-profiler-nodejs)
 
@@ -374,12 +374,11 @@ _Legacy Node.js versions are supported as a best effort:_
 This library follows [Semantic Versioning](http://semver.org/).
 
 
-This library is considered to be **General Availability (GA)**. This means it
-is stable; the code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **GA** libraries
-are addressed with the highest priority.
 
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority.
 
 
 
