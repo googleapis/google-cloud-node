@@ -4,9 +4,8 @@
 
 # [Google Cloud Deploy: Node.js Client](https://github.com/googleapis/nodejs-deploy)
 
-
+[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/deploy.svg)](https://www.npmjs.org/package/@google-cloud/deploy)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-deploy/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-deploy)
 
 
 
