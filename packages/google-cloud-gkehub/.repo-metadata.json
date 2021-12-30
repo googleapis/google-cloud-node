@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gke-hub/latest",
   "api_id": "gkehub.googleapis.com",
   "distribution_name": "@google-cloud/gke-hub",
-  "release_level": "ga",
+  "release_level": "stable",
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "GKE Hub",
@@ -10,5 +10,7 @@
   "product_documentation": "https://cloud.google.com/anthos/gke",
   "requires_billing": true,
   "name": "gke-hub",
-  "issue_tracker": "https://github.com/googleapis/nodejs-gke-hub/issues"
+  "issue_tracker": "https://github.com/googleapis/nodejs-gke-hub/issues",
+  "api_shortname": "gkehub",
+  "library_type": "GAPIC_AUTO"
 }
