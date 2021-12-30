@@ -2,7 +2,7 @@
   "client_documentation": "https://googleapis.dev/nodejs/analytics-data/latest/index.html",
   "api_id": "analyticsdata.googleapis.com",
   "distribution_name": "@google-analytics/data",
-  "release_level": "beta",
+  "release_level": "preview",
   "default_version": "v1beta",
   "language": "nodejs",
   "name_pretty": "Google Analytics Data",
@@ -10,5 +10,7 @@
   "product_documentation": "https://developers.google.com/analytics/trusted-testing/analytics-data",
   "requires_billing": false,
   "name": "analytics-data",
-  "issue_tracker": "https://issuetracker.google.com/issues/new?component=326380x"
+  "issue_tracker": "https://issuetracker.google.com/issues/new?component=326380x",
+  "api_shortname": "analytics-data",
+  "library_type": "GAPIC_AUTO"
 }
