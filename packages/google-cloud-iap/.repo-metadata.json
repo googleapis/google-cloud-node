@@ -4,11 +4,13 @@
   "product_documentation": "https://cloud.google.com/iap/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/iap/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-iap/issues",
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-iap",
   "distribution_name": "@google-cloud/iap",
   "api_id": "iap.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "iap",
+  "library_type": "GAPIC_AUTO"
 }
