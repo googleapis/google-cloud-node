@@ -7,9 +7,11 @@
   "name": "aiplatform",
   "default_version": "v1",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/aiplatform/latest",
-  "release_level": "ga",
+  "release_level": "stable",
   "api_id": "aiplatform.googleapis.com",
   "repo": "googleapis/nodejs-ai-platform",
   "codeowner_team": "@googleapis/ml-apis",
-  "distribution_name": "@google-cloud/aiplatform"
+  "distribution_name": "@google-cloud/aiplatform",
+  "api_shortname": "aiplatform",
+  "library_type": "GAPIC_COMBO"
 }
