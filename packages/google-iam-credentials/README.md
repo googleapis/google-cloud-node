@@ -4,7 +4,7 @@
 
 # [IAM Service Account Credentials API: Node.js Client](https://github.com/googleapis/nodejs-iam-credentials)
 
-[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/iam-credentials.svg)](https://www.npmjs.org/package/@google-cloud/iam-credentials)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-iam-credentials/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-iam-credentials)
 
@@ -126,6 +126,10 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+
+This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
 
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
