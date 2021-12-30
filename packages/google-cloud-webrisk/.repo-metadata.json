@@ -2,13 +2,15 @@
   "name_pretty": "Web Risk API",
   "language": "nodejs",
   "name": "web-risk",
-  "release_level": "ga",
+  "release_level": "stable",
   "client_documentation": "https://googleapis.dev/nodejs/web-risk/latest",
   "api_id": "webrisk.googleapis.com",
   "distribution_name": "@google-cloud/web-risk",
   "product_documentation": "https://cloud.google.com/web-risk/docs/",
   "requires_billing": true,
   "default_version": "v1",
-  "issue_tracker": "",
-  "repo": "googleapis/nodejs-web-risk"
+  "issue_tracker": "https://github.com/googleapis/nodejs-web-risk/issues",
+  "repo": "googleapis/nodejs-web-risk",
+  "api_shortname": "webrisk",
+  "library_type": "GAPIC_AUTO"
 }
