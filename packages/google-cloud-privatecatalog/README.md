@@ -4,9 +4,8 @@
 
 # [Private Catalog: Node.js Client](https://github.com/googleapis/nodejs-private-catalog)
 
-
+[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/private-catalog.svg)](https://www.npmjs.org/package/@google-cloud/private-catalog)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-private-catalog/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-private-catalog)
 
 
 
