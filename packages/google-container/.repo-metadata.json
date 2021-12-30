@@ -11,5 +11,7 @@
   "codeowner_team": "@googleapis/anthos-dpe",
   "name_pretty": "Kubernetes Engine Cluster Manager API",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/container/latest",
-  "release_level": "ga"
+  "release_level": "stable",
+  "api_shortname": "container",
+  "library_type": "GAPIC_AUTO"
 }
