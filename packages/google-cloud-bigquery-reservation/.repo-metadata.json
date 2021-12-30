@@ -11,5 +11,7 @@
   "codeowner_team": "@googleapis/api-bigquery",
   "name_pretty": "Google BigQuery Reservation",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-reservation/latest",
-  "release_level": "ga"
+  "release_level": "stable",
+  "api_shortname": "bigqueryreservation",
+  "library_type": "GAPIC_AUTO"
 }
