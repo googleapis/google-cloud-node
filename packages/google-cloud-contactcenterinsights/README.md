@@ -4,7 +4,7 @@
 
 # [Contact Center AI Insights API: Node.js Client](https://github.com/googleapis/nodejs-contact-center-insights)
 
-[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/contact-center-insights.svg)](https://www.npmjs.org/package/@google-cloud/contact-center-insights)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-contact-center-insights/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-contact-center-insights)
 
@@ -135,6 +135,10 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+
+This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
 
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]

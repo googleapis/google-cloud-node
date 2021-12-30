@@ -4,12 +4,14 @@
   "product_documentation": "https://cloud.google.com/solutions/contact-center",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/contact-center-insights/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-contact-center-insights/issues",
-  "release_level": "BETA",
+  "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/nodejs-contact-center-insights",
   "distribution_name": "@google-cloud/contact-center-insights",
   "api_id": "contactcenterinsights.googleapis.com",
   "default_version": "v1",
   "requires_billing": true,
-  "codeowner_team": "@googleapis/api-contact-center-insights"
+  "codeowner_team": "@googleapis/api-contact-center-insights",
+  "api_shortname": "contactcenterinsights",
+  "library_type": "GAPIC_AUTO"
 }
