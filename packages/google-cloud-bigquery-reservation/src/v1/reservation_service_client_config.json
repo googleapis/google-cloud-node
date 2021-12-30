@@ -26,17 +26,17 @@
           "retry_params_name": "default"
         },
         "ListReservations": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetReservation": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "DeleteReservation": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
@@ -51,17 +51,17 @@
           "retry_params_name": "default"
         },
         "ListCapacityCommitments": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetCapacityCommitment": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "DeleteCapacityCommitment": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
@@ -86,17 +86,17 @@
           "retry_params_name": "default"
         },
         "ListAssignments": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "DeleteAssignment": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "SearchAssignments": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
@@ -110,7 +110,7 @@
           "retry_params_name": "default"
         },
         "GetBiReservation": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },

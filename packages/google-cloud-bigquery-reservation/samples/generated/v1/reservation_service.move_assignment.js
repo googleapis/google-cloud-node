@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -32,8 +33,7 @@ function main(name) {
   // const destinationId = 'abc123'
 
   // Imports the Reservation library
-  const {ReservationServiceClient} =
-    require('@google-cloud/bigquery-reservation').v1;
+  const {ReservationServiceClient} = require('@google-cloud/bigquery-reservation').v1;
 
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();

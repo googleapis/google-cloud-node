@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -34,8 +35,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Reservation library
-  const {ReservationServiceClient} =
-    require('@google-cloud/bigquery-reservation').v1;
+  const {ReservationServiceClient} = require('@google-cloud/bigquery-reservation').v1;
 
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
@@ -49,7 +49,7 @@ function main(parent) {
     // Run request
     const iterable = await reservationClient.listReservationsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
