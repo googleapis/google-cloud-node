@@ -6,10 +6,12 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5226584",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudbuild/latest",
   "language": "nodejs",
-  "release_level": "ga",
+  "release_level": "stable",
   "product_documentation": "https://cloud.google.com/cloud-build/docs/",
   "default_version": "v1",
   "name_pretty": "Cloud Build",
   "distribution_name": "@google-cloud/cloudbuild",
-  "api_id": "cloudbuild.googleapis.com"
+  "api_id": "cloudbuild.googleapis.com",
+  "api_shortname": "cloudbuild",
+  "library_type": "GAPIC_AUTO"
 }
