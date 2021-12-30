@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/retail/latest",
   "api_id": "retail.googleapis.com",
   "distribution_name": "@google-cloud/retail",
-  "release_level": "ga",
+  "release_level": "stable",
   "default_version": "v2beta",
   "language": "nodejs",
   "name_pretty": "Retail API",
@@ -10,5 +10,7 @@
   "product_documentation": "https://cloud.google.com/recommendations/",
   "requires_billing": true,
   "name": "retail",
-  "issue_tracker": "https://github.com/googleapis/nodejs-retail/issues"
+  "issue_tracker": "https://github.com/googleapis/nodejs-retail/issues",
+  "api_shortname": "retail",
+  "library_type": "GAPIC_AUTO"
 }
