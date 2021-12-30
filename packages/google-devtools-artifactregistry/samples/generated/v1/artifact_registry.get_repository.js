@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -25,8 +26,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Artifactregistry library
-  const {ArtifactRegistryClient} =
-    require('@google-cloud/artifact-registry').v1;
+  const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
 
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
