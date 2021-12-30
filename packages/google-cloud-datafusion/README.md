@@ -4,9 +4,8 @@
 
 # [Cloud Data Fusion: Node.js Client](https://github.com/googleapis/nodejs-data-fusion)
 
-
+[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/data-fusion.svg)](https://www.npmjs.org/package/@google-cloud/data-fusion)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-data-fusion/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-data-fusion)
 
 
 
