@@ -4,12 +4,13 @@
   "product_documentation": "https://cloud.google.com/migrate/compute-engine/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vmmigration/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-vmmigration/issues",
-  "release_level": "beta",
+  "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/nodejs-vmmigration",
   "distribution_name": "@google-cloud/vmmigration",
   "api_id": "vmmigration.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "vmmigration",
+  "library_type": "GAPIC_AUTO"
 }
-
