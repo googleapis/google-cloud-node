@@ -6,9 +6,11 @@
   "default_version": "v1",
   "api_description": "provides OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances.",
   "name_pretty": "OS Config API",
-  "release_level": "ga",
+  "release_level": "stable",
   "distribution_name": "@google-cloud/os-config",
   "name": "osconfig",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/os-config/latest",
-  "api_id": "osconfig.googleapis.com"
+  "api_id": "osconfig.googleapis.com",
+  "api_shortname": "osconfig",
+  "library_type": "GAPIC_AUTO"
 }
