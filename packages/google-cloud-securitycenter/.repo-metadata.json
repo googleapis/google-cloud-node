@@ -2,7 +2,7 @@
   "language": "nodejs",
   "api_id": "securitycenter.googleapis.com",
   "repo": "googleapis/nodejs-security-center",
-  "release_level": "ga",
+  "release_level": "stable",
   "distribution_name": "@google-cloud/security-center",
   "default_version": "v1",
   "name": "security-center",
@@ -10,5 +10,7 @@
   "requires_billing": true,
   "name_pretty": "Google Cloud Security Command Center",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559748",
-  "product_documentation": "https://cloud.google.com/security-command-center"
+  "product_documentation": "https://cloud.google.com/security-command-center",
+  "api_shortname": "securitycenter",
+  "library_type": "GAPIC_AUTO"
 }
