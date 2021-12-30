@@ -3447,6 +3447,9 @@ export namespace google {
 
                         /** WriteStream tableSchema */
                         tableSchema?: (google.cloud.bigquery.storage.v1.ITableSchema|null);
+
+                        /** WriteStream writeMode */
+                        writeMode?: (google.cloud.bigquery.storage.v1.WriteStream.WriteMode|keyof typeof google.cloud.bigquery.storage.v1.WriteStream.WriteMode|null);
                     }
 
                     /** Represents a WriteStream. */
@@ -3472,6 +3475,9 @@ export namespace google {
 
                         /** WriteStream tableSchema. */
                         public tableSchema?: (google.cloud.bigquery.storage.v1.ITableSchema|null);
+
+                        /** WriteStream writeMode. */
+                        public writeMode: (google.cloud.bigquery.storage.v1.WriteStream.WriteMode|keyof typeof google.cloud.bigquery.storage.v1.WriteStream.WriteMode);
 
                         /**
                          * Creates a new WriteStream instance using the specified properties.
@@ -3552,6 +3558,12 @@ export namespace google {
                             COMMITTED = 1,
                             PENDING = 2,
                             BUFFERED = 3
+                        }
+
+                        /** WriteMode enum. */
+                        enum WriteMode {
+                            WRITE_MODE_UNSPECIFIED = 0,
+                            INSERT = 1
                         }
                     }
 

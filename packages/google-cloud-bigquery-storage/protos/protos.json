@@ -835,6 +835,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "writeMode": {
+                              "type": "WriteMode",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
                             }
                           },
                           "nested": {
@@ -844,6 +851,12 @@
                                 "COMMITTED": 1,
                                 "PENDING": 2,
                                 "BUFFERED": 3
+                              }
+                            },
+                            "WriteMode": {
+                              "values": {
+                                "WRITE_MODE_UNSPECIFIED": 0,
+                                "INSERT": 1
                               }
                             }
                           }

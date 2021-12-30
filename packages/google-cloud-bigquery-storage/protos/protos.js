@@ -7913,6 +7913,7 @@
                              * @property {google.protobuf.ITimestamp|null} [createTime] WriteStream createTime
                              * @property {google.protobuf.ITimestamp|null} [commitTime] WriteStream commitTime
                              * @property {google.cloud.bigquery.storage.v1.ITableSchema|null} [tableSchema] WriteStream tableSchema
+                             * @property {google.cloud.bigquery.storage.v1.WriteStream.WriteMode|null} [writeMode] WriteStream writeMode
                              */
     
                             /**
@@ -7971,6 +7972,14 @@
                             WriteStream.prototype.tableSchema = null;
     
                             /**
+                             * WriteStream writeMode.
+                             * @member {google.cloud.bigquery.storage.v1.WriteStream.WriteMode} writeMode
+                             * @memberof google.cloud.bigquery.storage.v1.WriteStream
+                             * @instance
+                             */
+                            WriteStream.prototype.writeMode = 0;
+    
+                            /**
                              * Creates a new WriteStream instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.storage.v1.WriteStream
@@ -8004,6 +8013,8 @@
                                     $root.google.protobuf.Timestamp.encode(message.commitTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 if (message.tableSchema != null && Object.hasOwnProperty.call(message, "tableSchema"))
                                     $root.google.cloud.bigquery.storage.v1.TableSchema.encode(message.tableSchema, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.writeMode != null && Object.hasOwnProperty.call(message, "writeMode"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.writeMode);
                                 return writer;
                             };
     
@@ -8052,6 +8063,9 @@
                                         break;
                                     case 5:
                                         message.tableSchema = $root.google.cloud.bigquery.storage.v1.TableSchema.decode(reader, reader.uint32());
+                                        break;
+                                    case 7:
+                                        message.writeMode = reader.int32();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -8116,6 +8130,14 @@
                                     if (error)
                                         return "tableSchema." + error;
                                 }
+                                if (message.writeMode != null && message.hasOwnProperty("writeMode"))
+                                    switch (message.writeMode) {
+                                    default:
+                                        return "writeMode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -8166,6 +8188,16 @@
                                         throw TypeError(".google.cloud.bigquery.storage.v1.WriteStream.tableSchema: object expected");
                                     message.tableSchema = $root.google.cloud.bigquery.storage.v1.TableSchema.fromObject(object.tableSchema);
                                 }
+                                switch (object.writeMode) {
+                                case "WRITE_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.writeMode = 0;
+                                    break;
+                                case "INSERT":
+                                case 1:
+                                    message.writeMode = 1;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -8188,6 +8220,7 @@
                                     object.createTime = null;
                                     object.commitTime = null;
                                     object.tableSchema = null;
+                                    object.writeMode = options.enums === String ? "WRITE_MODE_UNSPECIFIED" : 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -8199,6 +8232,8 @@
                                     object.commitTime = $root.google.protobuf.Timestamp.toObject(message.commitTime, options);
                                 if (message.tableSchema != null && message.hasOwnProperty("tableSchema"))
                                     object.tableSchema = $root.google.cloud.bigquery.storage.v1.TableSchema.toObject(message.tableSchema, options);
+                                if (message.writeMode != null && message.hasOwnProperty("writeMode"))
+                                    object.writeMode = options.enums === String ? $root.google.cloud.bigquery.storage.v1.WriteStream.WriteMode[message.writeMode] : message.writeMode;
                                 return object;
                             };
     
@@ -8228,6 +8263,20 @@
                                 values[valuesById[1] = "COMMITTED"] = 1;
                                 values[valuesById[2] = "PENDING"] = 2;
                                 values[valuesById[3] = "BUFFERED"] = 3;
+                                return values;
+                            })();
+    
+                            /**
+                             * WriteMode enum.
+                             * @name google.cloud.bigquery.storage.v1.WriteStream.WriteMode
+                             * @enum {number}
+                             * @property {number} WRITE_MODE_UNSPECIFIED=0 WRITE_MODE_UNSPECIFIED value
+                             * @property {number} INSERT=1 INSERT value
+                             */
+                            WriteStream.WriteMode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "WRITE_MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "INSERT"] = 1;
                                 return values;
                             })();
     
