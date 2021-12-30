@@ -4,9 +4,8 @@
 
 # [Datastream: Node.js Client](https://github.com/googleapis/nodejs-datastream)
 
-
+[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/datastream.svg)](https://www.npmjs.org/package/@google-cloud/datastream)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-datastream/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-datastream)
 
 
 
