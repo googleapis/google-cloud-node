@@ -7,8 +7,10 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559785",
   "name_pretty": "Monitoring Dashboards",
   "default_version": "v1",
-  "release_level": "ga",
+  "release_level": "stable",
   "repo": "googleapis/nodejs-monitoring-dashboards",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/monitoring-dashboards/latest",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "monitoring",
+  "library_type": "GAPIC_AUTO"
 }
