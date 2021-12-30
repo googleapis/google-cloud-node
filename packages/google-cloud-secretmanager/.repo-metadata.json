@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/secret-manager/latest",
   "api_id": "secretmanager.googleapis.com",
   "distribution_name": "@google-cloud/secret-manager",
-  "release_level": "ga",
+  "release_level": "stable",
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Secret Manager",
@@ -11,5 +11,7 @@
   "requires_billing": true,
   "name": "secretmanager",
   "issue_tracker": "https://issuetracker.google.com/issues/new?component=784854",
-  "codeowner_team": "@googleapis/api-secrets"
+  "codeowner_team": "@googleapis/api-secrets",
+  "api_shortname": "secretmanager",
+  "library_type": "GAPIC_AUTO"
 }
