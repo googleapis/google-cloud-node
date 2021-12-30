@@ -4,11 +4,13 @@
   "product_documentation": "https://cloud.google.com/dataflow/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dataflow/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-dataflow/issues",
-  "release_level": "BETA",
+  "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/nodejs-dataflow",
   "distribution_name": "@google-cloud/dataflow",
   "api_id": "dataflow.googleapis.com",
   "default_version": "v1beta3",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "dataflow",
+  "library_type": "GAPIC_AUTO"
 }
