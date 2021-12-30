@@ -4,9 +4,8 @@
 
 # [Cloud Data Loss Prevention: Node.js Client](https://github.com/googleapis/nodejs-dlp)
 
-
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/dlp.svg)](https://www.npmjs.org/package/@google-cloud/dlp)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-dlp/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-dlp)
 
 
 
