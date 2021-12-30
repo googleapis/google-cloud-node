@@ -4,10 +4,12 @@
   "product_documentation": "https://cloud.google.com/datastore/docs",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datastore/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559768",
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-datastore",
   "distribution_name": "@google-cloud/datastore",
   "api_id": "datastore.googleapis.com",
-  "codeowner_team": "@googleapis/firestore-dpe"
+  "codeowner_team": "@googleapis/firestore-dpe",
+  "api_shortname": "datastore",
+  "library_type": "GAPIC_COMBO"
 }
