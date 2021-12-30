@@ -5,10 +5,12 @@
   "repo": "googleapis/nodejs-org-policy",
   "default_version": "v2",
   "name_pretty": "Organization Policy",
-  "release_level": "GA",
+  "release_level": "stable",
   "distribution_name": "@google-cloud/org-policy",
   "name": "org-policy",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/org-policy/latest",
   "api_id": "orgpolicy.googleapis.com",
-  "issue_tracker": "https://github.com/googleapis/nodejs-org-policy/issues"
+  "issue_tracker": "https://github.com/googleapis/nodejs-org-policy/issues",
+  "api_shortname": "orgpolicy",
+  "library_type": "GAPIC_AUTO"
 }
