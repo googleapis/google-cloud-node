@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.7.0...v2.8.0) (2021-12-30)
+
+
+### Features
+
+* add write_mode support for BigQuery Storage Write API v1 ([#228](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/228)) ([18f3123](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/18f3123275716d49460f77cbbc1a4547412087d2))
+
 ## [2.7.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.6.2...v2.7.0) (2021-09-27)
 
 
