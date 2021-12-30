@@ -4,9 +4,8 @@
 
 # [Certificate Authority Service: Node.js Client](https://github.com/googleapis/nodejs-security-private-ca)
 
-
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/security-private-ca.svg)](https://www.npmjs.org/package/@google-cloud/security-private-ca)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-security-private-ca/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-security-private-ca)
 
 
 
