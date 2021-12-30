@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.3.0...v1.4.0) (2021-12-30)
+
+
+### Features
+
+* increase the logical timeout (retry deadline) to 5 minutes ([#120](https://www.github.com/googleapis/nodejs-bigquery-reservation/issues/120)) ([5510500](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/5510500551df96a89c9481d7fe30b0cc95de5918))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.2.0...v1.3.0) (2021-09-01)
 
 
