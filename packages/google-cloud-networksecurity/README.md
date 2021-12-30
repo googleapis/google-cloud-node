@@ -4,9 +4,8 @@
 
 # [Network Security API: Node.js Client](https://github.com/googleapis/nodejs-network-security)
 
-
+[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/network-security.svg)](https://www.npmjs.org/package/@google-cloud/network-security)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-network-security/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-network-security)
 
 
 
