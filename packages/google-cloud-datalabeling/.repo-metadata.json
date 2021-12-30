@@ -1,6 +1,6 @@
 {
   "default_version": "v1beta1",
-  "release_level": "beta",
+  "release_level": "preview",
   "requires_billing": true,
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datalabeling/latest",
   "codeowner_team": "@googleapis/ml-apis",
@@ -11,5 +11,7 @@
   "distribution_name": "@google-cloud/datalabeling",
   "name_pretty": "Google Cloud Data Labeling",
   "api_id": "datalabeling.googleapis.com",
-  "repo": "googleapis/nodejs-datalabeling"
+  "repo": "googleapis/nodejs-datalabeling",
+  "api_shortname": "datalabeling",
+  "library_type": "GAPIC_AUTO"
 }
