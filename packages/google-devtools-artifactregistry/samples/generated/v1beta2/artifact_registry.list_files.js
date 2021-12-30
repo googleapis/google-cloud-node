@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -45,20 +46,20 @@ function main() {
   // const pageToken = 'abc123'
 
   // Imports the Artifactregistry library
-  const {ArtifactRegistryClient} =
-    require('@google-cloud/artifact-registry').v1beta2;
+  const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1beta2;
 
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
   async function callListFiles() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const iterable = await artifactregistryClient.listFilesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

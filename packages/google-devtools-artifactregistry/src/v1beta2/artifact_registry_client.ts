@@ -179,7 +179,7 @@ export class ArtifactRegistryClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       filePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/repositories/{repo}/files/{file}'
+        'projects/{project}/locations/{location}/repositories/{repository}/files/{file}'
       ),
       repositoryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}'
@@ -3191,15 +3191,20 @@ export class ArtifactRegistryClient {
    *
    * @param {string} project
    * @param {string} location
-   * @param {string} repo
+   * @param {string} repository
    * @param {string} file
    * @returns {string} Resource name string.
    */
-  filePath(project: string, location: string, repo: string, file: string) {
+  filePath(
+    project: string,
+    location: string,
+    repository: string,
+    file: string
+  ) {
     return this.pathTemplates.filePathTemplate.render({
       project: project,
       location: location,
-      repo: repo,
+      repository: repository,
       file: file,
     });
   }
@@ -3227,14 +3232,14 @@ export class ArtifactRegistryClient {
   }
 
   /**
-   * Parse the repo from File resource.
+   * Parse the repository from File resource.
    *
    * @param {string} fileName
    *   A fully-qualified path representing File resource.
-   * @returns {string} A string representing the repo.
+   * @returns {string} A string representing the repository.
    */
-  matchRepoFromFileName(fileName: string) {
-    return this.pathTemplates.filePathTemplate.match(fileName).repo;
+  matchRepositoryFromFileName(fileName: string) {
+    return this.pathTemplates.filePathTemplate.match(fileName).repository;
   }
 
   /**

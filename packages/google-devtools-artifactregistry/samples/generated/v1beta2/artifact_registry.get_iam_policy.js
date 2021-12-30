@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(resource) {
@@ -31,8 +32,7 @@ function main(resource) {
   // const options = {}
 
   // Imports the Artifactregistry library
-  const {ArtifactRegistryClient} =
-    require('@google-cloud/artifact-registry').v1beta2;
+  const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1beta2;
 
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();

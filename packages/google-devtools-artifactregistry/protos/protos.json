@@ -285,7 +285,7 @@
                     "File": {
                       "options": {
                         "(google.api.resource).type": "artifactregistry.googleapis.com/File",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repo}/files/{file}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/files/{file}"
                       },
                       "fields": {
                         "name": {
