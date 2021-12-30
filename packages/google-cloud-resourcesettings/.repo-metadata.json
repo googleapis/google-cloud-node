@@ -4,11 +4,13 @@
   "product_documentation": "https://cloud.google.com/resource-manager/docs/reference/resource-settings/rest",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/resource-settings/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-resource-settings/issues",
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-resource-settings",
   "distribution_name": "@google-cloud/resource-settings",
   "api_id": "resourcesettings.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "resourcesettings",
+  "library_type": "GAPIC_AUTO"
 }
