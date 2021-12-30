@@ -4,9 +4,8 @@
 
 # [Google Cloud Key Management Service: Node.js Client](https://github.com/googleapis/nodejs-kms)
 
-
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/kms.svg)](https://www.npmjs.org/package/@google-cloud/kms)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-kms/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-kms)
 
 
 
