@@ -6,7 +6,6 @@
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/notebooks.svg)](https://www.npmjs.org/package/@google-cloud/notebooks)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-notebooks/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-notebooks)
 
 
 
