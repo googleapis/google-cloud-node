@@ -5,11 +5,13 @@
   "api_id": "cloudfunctions.googleapis.com",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/functions/latest",
   "repo": "googleapis/nodejs-functions",
-  "release_level": "ga",
+  "release_level": "stable",
   "requires_billing": false,
   "name_pretty": "Google Cloud Functions",
   "name": "nodejs-functions",
   "codeowner_team": "@googleapis/serverless-team",
   "default_version": "v1",
-  "language": "nodejs"
+  "language": "nodejs",
+  "api_shortname": "cloudfunctions",
+  "library_type": "GAPIC_AUTO"
 }
