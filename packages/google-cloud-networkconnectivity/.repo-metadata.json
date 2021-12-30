@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/network-connectivity/latest",
   "api_id": "networkconnectivity.googleapis.com",
   "distribution_name": "@google-cloud/network-connectivity",
-  "release_level": "alpha",
+  "release_level": "preview",
   "default_version": "v1alpha1",
   "language": "nodejs",
   "name_pretty": "Network Connectivity Center",
@@ -10,5 +10,7 @@
   "product_documentation": "https://cloud.google.com/network-connectivity/docs",
   "requires_billing": true,
   "name": "network-connectivity",
-  "issue_tracker": "https://github.com/googleapis/nodejs-network-connectivity/issues"
+  "issue_tracker": "https://github.com/googleapis/nodejs-network-connectivity/issues",
+  "api_shortname": "networkconnectivity",
+  "library_type": "GAPIC_AUTO"
 }
