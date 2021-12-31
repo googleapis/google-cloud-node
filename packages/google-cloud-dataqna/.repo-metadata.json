@@ -5,10 +5,12 @@
   "repo": "googleapis/nodejs-data-qna",
   "default_version": "v1alpha",
   "name_pretty": "Data QnA",
-  "release_level": "alpha",
+  "release_level": "preview",
   "distribution_name": "@google-cloud/data-qna",
   "name": "dataqna",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/data-qna/latest",
   "api_id": "dataqna.googleapis.com",
-  "issue_tracker": ""
+  "issue_tracker": "https://github.com/googleapis/nodejs-data-qna/issues",
+  "api_shortname": "dataqna",
+  "library_type": "GAPIC_AUTO"
 }

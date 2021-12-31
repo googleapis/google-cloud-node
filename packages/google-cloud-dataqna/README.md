@@ -4,7 +4,7 @@
 
 # [Data QnA: Node.js Client](https://github.com/googleapis/nodejs-data-qna)
 
-[![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/data-qna.svg)](https://www.npmjs.org/package/@google-cloud/data-qna)
 
 
@@ -89,11 +89,11 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
-This library is considered to be in **alpha**. This means it is still a
+
+
+This library is considered to be in **preview**. This means it is still a
 work-in-progress and under active development. Any release is subject to
 backwards-incompatible changes at any time.
-
-
 
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
