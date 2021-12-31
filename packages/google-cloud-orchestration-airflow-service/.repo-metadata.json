@@ -6,10 +6,12 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/orchestration-airflow/latest",
   "api_id": "composer.googleapis.com",
   "distribution_name": "@google-cloud/orchestration-airflow",
-  "release_level": "ga",
+  "release_level": "stable",
   "default_version": "v1",
   "language": "nodejs",
   "repo": "googleapis/nodejs-orchestration-airflow",
   "requires_billing": true,
-  "issue_tracker": "https://issuetracker.google.com/issues/new?component=460446"
+  "issue_tracker": "https://issuetracker.google.com/issues/new?component=460446",
+  "api_shortname": "composer",
+  "library_type": "GAPIC_AUTO"
 }
