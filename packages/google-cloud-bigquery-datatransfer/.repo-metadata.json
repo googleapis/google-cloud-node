@@ -1,6 +1,6 @@
 {
   "default_version": "v1",
-  "release_level": "ga",
+  "release_level": "stable",
   "requires_billing": true,
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-data-transfer/latest",
   "codeowner_team": "@googleapis/api-bigquery",
@@ -11,5 +11,7 @@
   "distribution_name": "@google-cloud/bigquery-data-transfer",
   "name_pretty": "Google BigQuery Data Transfer Service",
   "api_id": "bigquerydatatransfer.googleapis.com",
-  "repo": "googleapis/nodejs-bigquery-data-transfer"
+  "repo": "googleapis/nodejs-bigquery-data-transfer",
+  "api_shortname": "bigquerydatatransfer",
+  "library_type": "GAPIC_AUTO"
 }
