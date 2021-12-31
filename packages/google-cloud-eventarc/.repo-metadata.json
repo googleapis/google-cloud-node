@@ -4,11 +4,13 @@
   "product_documentation": "https://cloud.google.com/eventarc/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/eventarc/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-eventarc/issues",
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-eventarc",
   "distribution_name": "@google-cloud/eventarc",
   "api_id": "eventarc.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "eventarc",
+  "library_type": "GAPIC_AUTO"
 }
