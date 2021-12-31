@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dataproc/latest",
   "api_id": "dataproc.googleapis.com",
   "distribution_name": "@google-cloud/dataproc",
-  "release_level": "ga",
+  "release_level": "stable",
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Google Cloud Dataproc",
@@ -11,5 +11,7 @@
   "requires_billing": true,
   "name": "dataproc",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559745",
-  "codeowner_team": "@googleapis/api-dataproc"
+  "codeowner_team": "@googleapis/api-dataproc",
+  "api_shortname": "dataproc",
+  "library_type": "GAPIC_AUTO"
 }
