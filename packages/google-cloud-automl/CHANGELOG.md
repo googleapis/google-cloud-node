@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [2.5.2](https://www.github.com/googleapis/nodejs-automl/compare/v2.5.1...v2.5.2) (2021-12-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency csv to v6 ([#565](https://www.github.com/googleapis/nodejs-automl/issues/565)) ([7f1d947](https://www.github.com/googleapis/nodejs-automl/commit/7f1d9477cfa2d9697206dffabdfb92dfb80bc1d1))
+
 ### [2.5.1](https://www.github.com/googleapis/nodejs-automl/compare/v2.5.0...v2.5.1) (2021-11-08)
 
 
