@@ -3,12 +3,14 @@
   "api_id": "cloudiot.googleapis.com",
   "codeowner_team": "@googleapis/api-iot",
   "distribution_name": "@google-cloud/iot",
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "name_pretty": "Google Cloud Internet of Things (IoT) Core",
   "repo": "googleapis/nodejs-iot",
   "product_documentation": "https://cloud.google.com/iot",
   "requires_billing": true,
   "name": "iot",
-  "default_version": "v1"
+  "default_version": "v1",
+  "api_shortname": "cloudiot",
+  "library_type": "GAPIC_AUTO"
 }
