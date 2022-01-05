@@ -4,11 +4,13 @@
   "product_documentation": "https://cloud.google.com/storage",
   "client_documentation": "https://googleapis.dev/nodejs/storage/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559782",
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-storage",
   "distribution_name": "@google-cloud/storage",
   "api_id": "storage-api.googleapis.com",
   "requires_billing": true,
-  "codeowner_team": "@googleapis/cloud-storage-dpe"
+  "codeowner_team": "@googleapis/cloud-storage-dpe",
+  "api_shortname": "storage",
+  "library_type": "GAPIC_MANUAL"
 }
