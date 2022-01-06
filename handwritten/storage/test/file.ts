@@ -32,7 +32,7 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import * as proxyquire from 'proxyquire';
-import * as resumableUpload from 'gcs-resumable-upload';
+import * as resumableUpload from '../src/gcs-resumable-upload';
 import * as sinon from 'sinon';
 import * as tmp from 'tmp';
 import * as zlib from 'zlib';
@@ -210,7 +210,7 @@ describe('File', () => {
       },
       '@google-cloud/promisify': fakePromisify,
       fs: fakeFs,
-      'gcs-resumable-upload': fakeResumableUpload,
+      '../src/gcs-resumable-upload': fakeResumableUpload,
       'hash-stream-validation': fakeHashStreamValidation,
       os: fakeOs,
       './signer': fakeSigner,

@@ -35,7 +35,7 @@ import * as mime from 'mime';
 import * as os from 'os';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pumpify = require('pumpify');
-import * as resumableUpload from 'gcs-resumable-upload';
+import * as resumableUpload from './gcs-resumable-upload';
 import {Duplex, Writable, Readable, PassThrough} from 'stream';
 import * as streamEvents from 'stream-events';
 import * as xdgBasedir from 'xdg-basedir';
