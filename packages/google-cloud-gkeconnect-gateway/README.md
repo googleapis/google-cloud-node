@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [API Gateway: Node.js Client](https://github.com/googleapis/nodejs-gke-connect-gateway)
+# [GKE Connect Gateway: Node.js Client](https://github.com/googleapis/nodejs-gke-connect-gateway)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/gke-connect-gateway.svg)](https://www.npmjs.org/package/@google-cloud/gke-connect-gateway)
@@ -16,8 +16,8 @@ apigateway client for Node.js
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/nodejs-gke-connect-gateway/blob/main/CHANGELOG.md).
 
-* [API Gateway Node.js Client API Reference][client-docs]
-* [API Gateway Documentation][product-docs]
+* [GKE Connect Gateway Node.js Client API Reference][client-docs]
+* [GKE Connect Gateway Documentation][product-docs]
 * [github.com/googleapis/nodejs-gke-connect-gateway](https://github.com/googleapis/nodejs-gke-connect-gateway)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -43,7 +43,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the API Gateway API][enable_api].
+1.  [Enable the GKE Connect Gateway API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -78,7 +78,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-gke-connect
 
 
 
-The [API Gateway Node.js Client API Reference][client-docs] documentation
+The [GKE Connect Gateway Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Supported Node.js Versions
@@ -138,9 +138,9 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-gke-connect-gateway/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/gke-connect-gateway/latest
-[product-docs]: https://cloud.google.com/api-gateway/
+[product-docs]: https://cloud.google.com/anthos/multicluster-management/gateway
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=gateway.googleapis.com
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=connectgateway.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started

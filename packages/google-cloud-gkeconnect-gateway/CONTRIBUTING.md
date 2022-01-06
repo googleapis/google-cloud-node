@@ -41,7 +41,7 @@ accept your pull requests.
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing]. 
-1.  [Enable the API Gateway API][enable_api]. 
+1.  [Enable the GKE Connect Gateway API][enable_api]. 
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -72,5 +72,5 @@ accept your pull requests.
 [setup]: https://cloud.google.com/nodejs/docs/setup
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=gateway.googleapis.com
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=connectgateway.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started
