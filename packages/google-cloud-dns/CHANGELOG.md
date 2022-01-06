@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+### [2.2.4](https://www.github.com/googleapis/nodejs-dns/compare/v2.2.3...v2.2.4) (2022-01-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency dns-zonefile to v0.2.10 ([#503](https://www.github.com/googleapis/nodejs-dns/issues/503)) ([dc59d1c](https://www.github.com/googleapis/nodejs-dns/commit/dc59d1c8c733348e8500a751a71ccb0a9b13656d))
+
 ### [2.2.3](https://www.github.com/googleapis/nodejs-dns/compare/v2.2.2...v2.2.3) (2021-09-22)
 
 
