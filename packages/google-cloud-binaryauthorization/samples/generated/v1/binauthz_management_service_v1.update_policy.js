@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(policy) {
@@ -27,8 +28,7 @@ function main(policy) {
   // const policy = {}
 
   // Imports the Binaryauthorization library
-  const {BinauthzManagementServiceV1Client} =
-    require('@google-cloud/binary-authorization').v1;
+  const {BinauthzManagementServiceV1Client} = require('@google-cloud/binary-authorization').v1;
 
   // Instantiates a client
   const binaryauthorizationClient = new BinauthzManagementServiceV1Client();

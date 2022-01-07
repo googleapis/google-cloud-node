@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, attestorId, attestor) {
@@ -35,12 +36,10 @@ function main(parent, attestorId, attestor) {
   // const attestor = {}
 
   // Imports the Binaryauthorization library
-  const {BinauthzManagementServiceV1Beta1Client} =
-    require('@google-cloud/binary-authorization').v1beta1;
+  const {BinauthzManagementServiceV1Beta1Client} = require('@google-cloud/binary-authorization').v1beta1;
 
   // Instantiates a client
-  const binaryauthorizationClient =
-    new BinauthzManagementServiceV1Beta1Client();
+  const binaryauthorizationClient = new BinauthzManagementServiceV1Beta1Client();
 
   async function callCreateAttestor() {
     // Construct request

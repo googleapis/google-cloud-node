@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(attestor, attestation, occurrenceNote, occurrenceResourceUri) {
@@ -44,8 +45,7 @@ function main(attestor, attestation, occurrenceNote, occurrenceResourceUri) {
   // const occurrenceResourceUri = 'abc123'
 
   // Imports the Binaryauthorization library
-  const {ValidationHelperV1Client} =
-    require('@google-cloud/binary-authorization').v1;
+  const {ValidationHelperV1Client} = require('@google-cloud/binary-authorization').v1;
 
   // Instantiates a client
   const binaryauthorizationClient = new ValidationHelperV1Client();
@@ -60,8 +60,7 @@ function main(attestor, attestation, occurrenceNote, occurrenceResourceUri) {
     };
 
     // Run request
-    const response =
-      await binaryauthorizationClient.validateAttestationOccurrence(request);
+    const response = await binaryauthorizationClient.validateAttestationOccurrence(request);
     console.log(response);
   }
 

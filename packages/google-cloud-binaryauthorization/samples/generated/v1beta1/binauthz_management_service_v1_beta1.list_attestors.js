@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -37,12 +38,10 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Binaryauthorization library
-  const {BinauthzManagementServiceV1Beta1Client} =
-    require('@google-cloud/binary-authorization').v1beta1;
+  const {BinauthzManagementServiceV1Beta1Client} = require('@google-cloud/binary-authorization').v1beta1;
 
   // Instantiates a client
-  const binaryauthorizationClient =
-    new BinauthzManagementServiceV1Beta1Client();
+  const binaryauthorizationClient = new BinauthzManagementServiceV1Beta1Client();
 
   async function callListAttestors() {
     // Construct request
@@ -51,11 +50,9 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await binaryauthorizationClient.listAttestorsAsync(
-      request
-    );
+    const iterable = await binaryauthorizationClient.listAttestorsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
