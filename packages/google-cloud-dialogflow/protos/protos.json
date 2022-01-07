@@ -8794,18 +8794,6 @@
                         }
                       }
                     },
-                    "AudioEncoding": {
-                      "values": {
-                        "AUDIO_ENCODING_UNSPECIFIED": 0,
-                        "AUDIO_ENCODING_LINEAR_16": 1,
-                        "AUDIO_ENCODING_FLAC": 2,
-                        "AUDIO_ENCODING_MULAW": 3,
-                        "AUDIO_ENCODING_AMR": 4,
-                        "AUDIO_ENCODING_AMR_WB": 5,
-                        "AUDIO_ENCODING_OGG_OPUS": 6,
-                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
-                      }
-                    },
                     "SpeechContext": {
                       "fields": {
                         "phrases": {
@@ -8817,6 +8805,18 @@
                           "type": "float",
                           "id": 2
                         }
+                      }
+                    },
+                    "AudioEncoding": {
+                      "values": {
+                        "AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "AUDIO_ENCODING_LINEAR_16": 1,
+                        "AUDIO_ENCODING_FLAC": 2,
+                        "AUDIO_ENCODING_MULAW": 3,
+                        "AUDIO_ENCODING_AMR": 4,
+                        "AUDIO_ENCODING_AMR_WB": 5,
+                        "AUDIO_ENCODING_OGG_OPUS": 6,
+                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
                       }
                     },
                     "SpeechWordInfo": {
@@ -10259,7 +10259,10 @@
                         },
                         "answerRecord": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/AnswerRecord"
+                          }
                         }
                       }
                     },
@@ -10431,7 +10434,10 @@
                         },
                         "latestMessage": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Message"
+                          }
                         },
                         "contextSize": {
                           "type": "int32",
@@ -14771,6 +14777,10 @@
                             "conversationModelConfig": {
                               "type": "ConversationModelConfig",
                               "id": 7
+                            },
+                            "conversationProcessConfig": {
+                              "type": "ConversationProcessConfig",
+                              "id": 8
                             }
                           }
                         },
@@ -14888,6 +14898,14 @@
                               "options": {
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/ConversationModel"
                               }
+                            }
+                          }
+                        },
+                        "ConversationProcessConfig": {
+                          "fields": {
+                            "recentSentencesCount": {
+                              "type": "int32",
+                              "id": 2
                             }
                           }
                         },

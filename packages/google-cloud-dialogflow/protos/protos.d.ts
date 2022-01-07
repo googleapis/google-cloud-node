@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27698,18 +27698,6 @@ export namespace google {
                     }
                 }
 
-                /** AudioEncoding enum. */
-                enum AudioEncoding {
-                    AUDIO_ENCODING_UNSPECIFIED = 0,
-                    AUDIO_ENCODING_LINEAR_16 = 1,
-                    AUDIO_ENCODING_FLAC = 2,
-                    AUDIO_ENCODING_MULAW = 3,
-                    AUDIO_ENCODING_AMR = 4,
-                    AUDIO_ENCODING_AMR_WB = 5,
-                    AUDIO_ENCODING_OGG_OPUS = 6,
-                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
-                }
-
                 /** Properties of a SpeechContext. */
                 interface ISpeechContext {
 
@@ -27804,6 +27792,18 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** AudioEncoding enum. */
+                enum AudioEncoding {
+                    AUDIO_ENCODING_UNSPECIFIED = 0,
+                    AUDIO_ENCODING_LINEAR_16 = 1,
+                    AUDIO_ENCODING_FLAC = 2,
+                    AUDIO_ENCODING_MULAW = 3,
+                    AUDIO_ENCODING_AMR = 4,
+                    AUDIO_ENCODING_AMR_WB = 5,
+                    AUDIO_ENCODING_OGG_OPUS = 6,
+                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                 }
 
                 /** Properties of a SpeechWordInfo. */
@@ -48548,6 +48548,9 @@ export namespace google {
 
                         /** SuggestionFeatureConfig conversationModelConfig */
                         conversationModelConfig?: (google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationModelConfig|null);
+
+                        /** SuggestionFeatureConfig conversationProcessConfig */
+                        conversationProcessConfig?: (google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationProcessConfig|null);
                     }
 
                     /** Represents a SuggestionFeatureConfig. */
@@ -48573,6 +48576,9 @@ export namespace google {
 
                         /** SuggestionFeatureConfig conversationModelConfig. */
                         public conversationModelConfig?: (google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationModelConfig|null);
+
+                        /** SuggestionFeatureConfig conversationProcessConfig. */
+                        public conversationProcessConfig?: (google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationProcessConfig|null);
 
                         /**
                          * Creates a new SuggestionFeatureConfig instance using the specified properties.
@@ -49324,6 +49330,96 @@ export namespace google {
 
                         /**
                          * Converts this ConversationModelConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ConversationProcessConfig. */
+                    interface IConversationProcessConfig {
+
+                        /** ConversationProcessConfig recentSentencesCount */
+                        recentSentencesCount?: (number|null);
+                    }
+
+                    /** Represents a ConversationProcessConfig. */
+                    class ConversationProcessConfig implements IConversationProcessConfig {
+
+                        /**
+                         * Constructs a new ConversationProcessConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationProcessConfig);
+
+                        /** ConversationProcessConfig recentSentencesCount. */
+                        public recentSentencesCount: number;
+
+                        /**
+                         * Creates a new ConversationProcessConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConversationProcessConfig instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationProcessConfig): google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationProcessConfig;
+
+                        /**
+                         * Encodes the specified ConversationProcessConfig message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationProcessConfig.verify|verify} messages.
+                         * @param message ConversationProcessConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationProcessConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConversationProcessConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationProcessConfig.verify|verify} messages.
+                         * @param message ConversationProcessConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.IConversationProcessConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConversationProcessConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConversationProcessConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationProcessConfig;
+
+                        /**
+                         * Decodes a ConversationProcessConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConversationProcessConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationProcessConfig;
+
+                        /**
+                         * Verifies a ConversationProcessConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConversationProcessConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConversationProcessConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationProcessConfig;
+
+                        /**
+                         * Creates a plain object from a ConversationProcessConfig message. Also converts values to other types if specified.
+                         * @param message ConversationProcessConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationProcessConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConversationProcessConfig to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
