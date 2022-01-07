@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.datastore.admin.v1",
-  "libraryPackage": "admin",
+  "libraryPackage": "@google-cloud/datastore-admin",
   "services": {
     "DatastoreAdmin": {
       "clients": {

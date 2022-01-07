@@ -11,7 +11,7 @@
                     "csharp_namespace": "Google.Cloud.Datastore.Admin.V1",
                     "go_package": "google.golang.org/genproto/googleapis/datastore/admin/v1;admin",
                     "java_multiple_files": true,
-                    "java_outer_classname": "IndexProto",
+                    "java_outer_classname": "MigrationProto",
                     "java_package": "com.google.datastore.admin.v1",
                     "php_namespace": "Google\\Cloud\\Datastore\\Admin\\V1",
                     "ruby_package": "Google::Cloud::Datastore::Admin::V1"
@@ -292,15 +292,6 @@
                         }
                       }
                     },
-                    "OperationType": {
-                      "values": {
-                        "OPERATION_TYPE_UNSPECIFIED": 0,
-                        "EXPORT_ENTITIES": 1,
-                        "IMPORT_ENTITIES": 2,
-                        "CREATE_INDEX": 3,
-                        "DELETE_INDEX": 4
-                      }
-                    },
                     "ImportEntitiesMetadata": {
                       "fields": {
                         "common": {
@@ -424,6 +415,27 @@
                         }
                       }
                     },
+                    "DatastoreFirestoreMigrationMetadata": {
+                      "fields": {
+                        "migrationState": {
+                          "type": "MigrationState",
+                          "id": 1
+                        },
+                        "migrationStep": {
+                          "type": "MigrationStep",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OperationType": {
+                      "values": {
+                        "OPERATION_TYPE_UNSPECIFIED": 0,
+                        "EXPORT_ENTITIES": 1,
+                        "IMPORT_ENTITIES": 2,
+                        "CREATE_INDEX": 3,
+                        "DELETE_INDEX": 4
+                      }
+                    },
                     "Index": {
                       "fields": {
                         "projectId": {
@@ -512,6 +524,83 @@
                             "ERROR": 4
                           }
                         }
+                      }
+                    },
+                    "MigrationStateEvent": {
+                      "fields": {
+                        "state": {
+                          "type": "MigrationState",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "MigrationProgressEvent": {
+                      "oneofs": {
+                        "stepDetails": {
+                          "oneof": [
+                            "prepareStepDetails",
+                            "redirectWritesStepDetails"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "step": {
+                          "type": "MigrationStep",
+                          "id": 1
+                        },
+                        "prepareStepDetails": {
+                          "type": "PrepareStepDetails",
+                          "id": 2
+                        },
+                        "redirectWritesStepDetails": {
+                          "type": "RedirectWritesStepDetails",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "PrepareStepDetails": {
+                          "fields": {
+                            "concurrencyMode": {
+                              "type": "ConcurrencyMode",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "RedirectWritesStepDetails": {
+                          "fields": {
+                            "concurrencyMode": {
+                              "type": "ConcurrencyMode",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ConcurrencyMode": {
+                          "values": {
+                            "CONCURRENCY_MODE_UNSPECIFIED": 0,
+                            "PESSIMISTIC": 1,
+                            "OPTIMISTIC": 2
+                          }
+                        }
+                      }
+                    },
+                    "MigrationState": {
+                      "values": {
+                        "MIGRATION_STATE_UNSPECIFIED": 0,
+                        "RUNNING": 1,
+                        "PAUSED": 2,
+                        "COMPLETE": 3
+                      }
+                    },
+                    "MigrationStep": {
+                      "values": {
+                        "MIGRATION_STEP_UNSPECIFIED": 0,
+                        "PREPARE": 6,
+                        "START": 1,
+                        "APPLY_WRITES_SYNCHRONOUSLY": 7,
+                        "COPY_AND_VERIFY": 2,
+                        "REDIRECT_EVENTUALLY_CONSISTENT_READS": 3,
+                        "REDIRECT_STRONGLY_CONSISTENT_READS": 4,
+                        "REDIRECT_WRITES": 5
                       }
                     }
                   }

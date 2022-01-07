@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -821,15 +821,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** OperationType enum. */
-                enum OperationType {
-                    OPERATION_TYPE_UNSPECIFIED = 0,
-                    EXPORT_ENTITIES = 1,
-                    IMPORT_ENTITIES = 2,
-                    CREATE_INDEX = 3,
-                    DELETE_INDEX = 4
-                }
-
                 /** Properties of an ImportEntitiesMetadata. */
                 interface IImportEntitiesMetadata {
 
@@ -1634,6 +1625,111 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a DatastoreFirestoreMigrationMetadata. */
+                interface IDatastoreFirestoreMigrationMetadata {
+
+                    /** DatastoreFirestoreMigrationMetadata migrationState */
+                    migrationState?: (google.datastore.admin.v1.MigrationState|keyof typeof google.datastore.admin.v1.MigrationState|null);
+
+                    /** DatastoreFirestoreMigrationMetadata migrationStep */
+                    migrationStep?: (google.datastore.admin.v1.MigrationStep|keyof typeof google.datastore.admin.v1.MigrationStep|null);
+                }
+
+                /** Represents a DatastoreFirestoreMigrationMetadata. */
+                class DatastoreFirestoreMigrationMetadata implements IDatastoreFirestoreMigrationMetadata {
+
+                    /**
+                     * Constructs a new DatastoreFirestoreMigrationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IDatastoreFirestoreMigrationMetadata);
+
+                    /** DatastoreFirestoreMigrationMetadata migrationState. */
+                    public migrationState: (google.datastore.admin.v1.MigrationState|keyof typeof google.datastore.admin.v1.MigrationState);
+
+                    /** DatastoreFirestoreMigrationMetadata migrationStep. */
+                    public migrationStep: (google.datastore.admin.v1.MigrationStep|keyof typeof google.datastore.admin.v1.MigrationStep);
+
+                    /**
+                     * Creates a new DatastoreFirestoreMigrationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatastoreFirestoreMigrationMetadata instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IDatastoreFirestoreMigrationMetadata): google.datastore.admin.v1.DatastoreFirestoreMigrationMetadata;
+
+                    /**
+                     * Encodes the specified DatastoreFirestoreMigrationMetadata message. Does not implicitly {@link google.datastore.admin.v1.DatastoreFirestoreMigrationMetadata.verify|verify} messages.
+                     * @param message DatastoreFirestoreMigrationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IDatastoreFirestoreMigrationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatastoreFirestoreMigrationMetadata message, length delimited. Does not implicitly {@link google.datastore.admin.v1.DatastoreFirestoreMigrationMetadata.verify|verify} messages.
+                     * @param message DatastoreFirestoreMigrationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IDatastoreFirestoreMigrationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatastoreFirestoreMigrationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatastoreFirestoreMigrationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.DatastoreFirestoreMigrationMetadata;
+
+                    /**
+                     * Decodes a DatastoreFirestoreMigrationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatastoreFirestoreMigrationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.DatastoreFirestoreMigrationMetadata;
+
+                    /**
+                     * Verifies a DatastoreFirestoreMigrationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatastoreFirestoreMigrationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatastoreFirestoreMigrationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.DatastoreFirestoreMigrationMetadata;
+
+                    /**
+                     * Creates a plain object from a DatastoreFirestoreMigrationMetadata message. Also converts values to other types if specified.
+                     * @param message DatastoreFirestoreMigrationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.DatastoreFirestoreMigrationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatastoreFirestoreMigrationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** OperationType enum. */
+                enum OperationType {
+                    OPERATION_TYPE_UNSPECIFIED = 0,
+                    EXPORT_ENTITIES = 1,
+                    IMPORT_ENTITIES = 2,
+                    CREATE_INDEX = 3,
+                    DELETE_INDEX = 4
+                }
+
                 /** Properties of an Index. */
                 interface IIndex {
 
@@ -1874,6 +1970,411 @@ export namespace google {
                         DELETING = 3,
                         ERROR = 4
                     }
+                }
+
+                /** Properties of a MigrationStateEvent. */
+                interface IMigrationStateEvent {
+
+                    /** MigrationStateEvent state */
+                    state?: (google.datastore.admin.v1.MigrationState|keyof typeof google.datastore.admin.v1.MigrationState|null);
+                }
+
+                /** Represents a MigrationStateEvent. */
+                class MigrationStateEvent implements IMigrationStateEvent {
+
+                    /**
+                     * Constructs a new MigrationStateEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IMigrationStateEvent);
+
+                    /** MigrationStateEvent state. */
+                    public state: (google.datastore.admin.v1.MigrationState|keyof typeof google.datastore.admin.v1.MigrationState);
+
+                    /**
+                     * Creates a new MigrationStateEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MigrationStateEvent instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IMigrationStateEvent): google.datastore.admin.v1.MigrationStateEvent;
+
+                    /**
+                     * Encodes the specified MigrationStateEvent message. Does not implicitly {@link google.datastore.admin.v1.MigrationStateEvent.verify|verify} messages.
+                     * @param message MigrationStateEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IMigrationStateEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MigrationStateEvent message, length delimited. Does not implicitly {@link google.datastore.admin.v1.MigrationStateEvent.verify|verify} messages.
+                     * @param message MigrationStateEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IMigrationStateEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MigrationStateEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MigrationStateEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.MigrationStateEvent;
+
+                    /**
+                     * Decodes a MigrationStateEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MigrationStateEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.MigrationStateEvent;
+
+                    /**
+                     * Verifies a MigrationStateEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MigrationStateEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MigrationStateEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.MigrationStateEvent;
+
+                    /**
+                     * Creates a plain object from a MigrationStateEvent message. Also converts values to other types if specified.
+                     * @param message MigrationStateEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.MigrationStateEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MigrationStateEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MigrationProgressEvent. */
+                interface IMigrationProgressEvent {
+
+                    /** MigrationProgressEvent step */
+                    step?: (google.datastore.admin.v1.MigrationStep|keyof typeof google.datastore.admin.v1.MigrationStep|null);
+
+                    /** MigrationProgressEvent prepareStepDetails */
+                    prepareStepDetails?: (google.datastore.admin.v1.MigrationProgressEvent.IPrepareStepDetails|null);
+
+                    /** MigrationProgressEvent redirectWritesStepDetails */
+                    redirectWritesStepDetails?: (google.datastore.admin.v1.MigrationProgressEvent.IRedirectWritesStepDetails|null);
+                }
+
+                /** Represents a MigrationProgressEvent. */
+                class MigrationProgressEvent implements IMigrationProgressEvent {
+
+                    /**
+                     * Constructs a new MigrationProgressEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IMigrationProgressEvent);
+
+                    /** MigrationProgressEvent step. */
+                    public step: (google.datastore.admin.v1.MigrationStep|keyof typeof google.datastore.admin.v1.MigrationStep);
+
+                    /** MigrationProgressEvent prepareStepDetails. */
+                    public prepareStepDetails?: (google.datastore.admin.v1.MigrationProgressEvent.IPrepareStepDetails|null);
+
+                    /** MigrationProgressEvent redirectWritesStepDetails. */
+                    public redirectWritesStepDetails?: (google.datastore.admin.v1.MigrationProgressEvent.IRedirectWritesStepDetails|null);
+
+                    /** MigrationProgressEvent stepDetails. */
+                    public stepDetails?: ("prepareStepDetails"|"redirectWritesStepDetails");
+
+                    /**
+                     * Creates a new MigrationProgressEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MigrationProgressEvent instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IMigrationProgressEvent): google.datastore.admin.v1.MigrationProgressEvent;
+
+                    /**
+                     * Encodes the specified MigrationProgressEvent message. Does not implicitly {@link google.datastore.admin.v1.MigrationProgressEvent.verify|verify} messages.
+                     * @param message MigrationProgressEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IMigrationProgressEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MigrationProgressEvent message, length delimited. Does not implicitly {@link google.datastore.admin.v1.MigrationProgressEvent.verify|verify} messages.
+                     * @param message MigrationProgressEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IMigrationProgressEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MigrationProgressEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MigrationProgressEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.MigrationProgressEvent;
+
+                    /**
+                     * Decodes a MigrationProgressEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MigrationProgressEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.MigrationProgressEvent;
+
+                    /**
+                     * Verifies a MigrationProgressEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MigrationProgressEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MigrationProgressEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.MigrationProgressEvent;
+
+                    /**
+                     * Creates a plain object from a MigrationProgressEvent message. Also converts values to other types if specified.
+                     * @param message MigrationProgressEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.MigrationProgressEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MigrationProgressEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace MigrationProgressEvent {
+
+                    /** Properties of a PrepareStepDetails. */
+                    interface IPrepareStepDetails {
+
+                        /** PrepareStepDetails concurrencyMode */
+                        concurrencyMode?: (google.datastore.admin.v1.MigrationProgressEvent.ConcurrencyMode|keyof typeof google.datastore.admin.v1.MigrationProgressEvent.ConcurrencyMode|null);
+                    }
+
+                    /** Represents a PrepareStepDetails. */
+                    class PrepareStepDetails implements IPrepareStepDetails {
+
+                        /**
+                         * Constructs a new PrepareStepDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.datastore.admin.v1.MigrationProgressEvent.IPrepareStepDetails);
+
+                        /** PrepareStepDetails concurrencyMode. */
+                        public concurrencyMode: (google.datastore.admin.v1.MigrationProgressEvent.ConcurrencyMode|keyof typeof google.datastore.admin.v1.MigrationProgressEvent.ConcurrencyMode);
+
+                        /**
+                         * Creates a new PrepareStepDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PrepareStepDetails instance
+                         */
+                        public static create(properties?: google.datastore.admin.v1.MigrationProgressEvent.IPrepareStepDetails): google.datastore.admin.v1.MigrationProgressEvent.PrepareStepDetails;
+
+                        /**
+                         * Encodes the specified PrepareStepDetails message. Does not implicitly {@link google.datastore.admin.v1.MigrationProgressEvent.PrepareStepDetails.verify|verify} messages.
+                         * @param message PrepareStepDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.datastore.admin.v1.MigrationProgressEvent.IPrepareStepDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PrepareStepDetails message, length delimited. Does not implicitly {@link google.datastore.admin.v1.MigrationProgressEvent.PrepareStepDetails.verify|verify} messages.
+                         * @param message PrepareStepDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.datastore.admin.v1.MigrationProgressEvent.IPrepareStepDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PrepareStepDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PrepareStepDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.MigrationProgressEvent.PrepareStepDetails;
+
+                        /**
+                         * Decodes a PrepareStepDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PrepareStepDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.MigrationProgressEvent.PrepareStepDetails;
+
+                        /**
+                         * Verifies a PrepareStepDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PrepareStepDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PrepareStepDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.MigrationProgressEvent.PrepareStepDetails;
+
+                        /**
+                         * Creates a plain object from a PrepareStepDetails message. Also converts values to other types if specified.
+                         * @param message PrepareStepDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.datastore.admin.v1.MigrationProgressEvent.PrepareStepDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PrepareStepDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a RedirectWritesStepDetails. */
+                    interface IRedirectWritesStepDetails {
+
+                        /** RedirectWritesStepDetails concurrencyMode */
+                        concurrencyMode?: (google.datastore.admin.v1.MigrationProgressEvent.ConcurrencyMode|keyof typeof google.datastore.admin.v1.MigrationProgressEvent.ConcurrencyMode|null);
+                    }
+
+                    /** Represents a RedirectWritesStepDetails. */
+                    class RedirectWritesStepDetails implements IRedirectWritesStepDetails {
+
+                        /**
+                         * Constructs a new RedirectWritesStepDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.datastore.admin.v1.MigrationProgressEvent.IRedirectWritesStepDetails);
+
+                        /** RedirectWritesStepDetails concurrencyMode. */
+                        public concurrencyMode: (google.datastore.admin.v1.MigrationProgressEvent.ConcurrencyMode|keyof typeof google.datastore.admin.v1.MigrationProgressEvent.ConcurrencyMode);
+
+                        /**
+                         * Creates a new RedirectWritesStepDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RedirectWritesStepDetails instance
+                         */
+                        public static create(properties?: google.datastore.admin.v1.MigrationProgressEvent.IRedirectWritesStepDetails): google.datastore.admin.v1.MigrationProgressEvent.RedirectWritesStepDetails;
+
+                        /**
+                         * Encodes the specified RedirectWritesStepDetails message. Does not implicitly {@link google.datastore.admin.v1.MigrationProgressEvent.RedirectWritesStepDetails.verify|verify} messages.
+                         * @param message RedirectWritesStepDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.datastore.admin.v1.MigrationProgressEvent.IRedirectWritesStepDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RedirectWritesStepDetails message, length delimited. Does not implicitly {@link google.datastore.admin.v1.MigrationProgressEvent.RedirectWritesStepDetails.verify|verify} messages.
+                         * @param message RedirectWritesStepDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.datastore.admin.v1.MigrationProgressEvent.IRedirectWritesStepDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RedirectWritesStepDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RedirectWritesStepDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.MigrationProgressEvent.RedirectWritesStepDetails;
+
+                        /**
+                         * Decodes a RedirectWritesStepDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RedirectWritesStepDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.MigrationProgressEvent.RedirectWritesStepDetails;
+
+                        /**
+                         * Verifies a RedirectWritesStepDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RedirectWritesStepDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RedirectWritesStepDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.MigrationProgressEvent.RedirectWritesStepDetails;
+
+                        /**
+                         * Creates a plain object from a RedirectWritesStepDetails message. Also converts values to other types if specified.
+                         * @param message RedirectWritesStepDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.datastore.admin.v1.MigrationProgressEvent.RedirectWritesStepDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RedirectWritesStepDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** ConcurrencyMode enum. */
+                    enum ConcurrencyMode {
+                        CONCURRENCY_MODE_UNSPECIFIED = 0,
+                        PESSIMISTIC = 1,
+                        OPTIMISTIC = 2
+                    }
+                }
+
+                /** MigrationState enum. */
+                enum MigrationState {
+                    MIGRATION_STATE_UNSPECIFIED = 0,
+                    RUNNING = 1,
+                    PAUSED = 2,
+                    COMPLETE = 3
+                }
+
+                /** MigrationStep enum. */
+                enum MigrationStep {
+                    MIGRATION_STEP_UNSPECIFIED = 0,
+                    PREPARE = 6,
+                    START = 1,
+                    APPLY_WRITES_SYNCHRONOUSLY = 7,
+                    COPY_AND_VERIFY = 2,
+                    REDIRECT_EVENTUALLY_CONSISTENT_READS = 3,
+                    REDIRECT_STRONGLY_CONSISTENT_READS = 4,
+                    REDIRECT_WRITES = 5
                 }
             }
         }
