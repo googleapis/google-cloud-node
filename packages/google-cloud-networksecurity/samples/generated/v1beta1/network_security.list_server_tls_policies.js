@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -37,8 +38,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Networksecurity library
-  const {NetworkSecurityClient} =
-    require('@google-cloud/network-security').v1beta1;
+  const {NetworkSecurityClient} = require('@google-cloud/network-security').v1beta1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
@@ -50,11 +50,9 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networksecurityClient.listServerTlsPoliciesAsync(
-      request
-    );
+    const iterable = await networksecurityClient.listServerTlsPoliciesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

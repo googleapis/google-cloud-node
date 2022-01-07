@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, serverTlsPolicyId, serverTlsPolicy) {
@@ -36,8 +37,7 @@ function main(parent, serverTlsPolicyId, serverTlsPolicy) {
   // const serverTlsPolicy = {}
 
   // Imports the Networksecurity library
-  const {NetworkSecurityClient} =
-    require('@google-cloud/network-security').v1beta1;
+  const {NetworkSecurityClient} = require('@google-cloud/network-security').v1beta1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
@@ -51,9 +51,7 @@ function main(parent, serverTlsPolicyId, serverTlsPolicy) {
     };
 
     // Run request
-    const [operation] = await networksecurityClient.createServerTlsPolicy(
-      request
-    );
+    const [operation] = await networksecurityClient.createServerTlsPolicy(request);
     const [response] = await operation.promise();
     console.log(response);
   }

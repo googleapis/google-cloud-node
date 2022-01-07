@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, authorizationPolicyId, authorizationPolicy) {
@@ -37,8 +38,7 @@ function main(parent, authorizationPolicyId, authorizationPolicy) {
   // const authorizationPolicy = {}
 
   // Imports the Networksecurity library
-  const {NetworkSecurityClient} =
-    require('@google-cloud/network-security').v1beta1;
+  const {NetworkSecurityClient} = require('@google-cloud/network-security').v1beta1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
@@ -52,9 +52,7 @@ function main(parent, authorizationPolicyId, authorizationPolicy) {
     };
 
     // Run request
-    const [operation] = await networksecurityClient.createAuthorizationPolicy(
-      request
-    );
+    const [operation] = await networksecurityClient.createAuthorizationPolicy(request);
     const [response] = await operation.promise();
     console.log(response);
   }

@@ -8,10 +8,11 @@
               "nested": {
                 "v1beta1": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.NetworkSecurity.V1Beta1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/networksecurity/v1beta1;networksecurity",
                     "java_multiple_files": true,
+                    "java_outer_classname": "ServerTlsPolicyProto",
                     "java_package": "com.google.cloud.networksecurity.v1beta1",
-                    "csharp_namespace": "Google.Cloud.NetworkSecurity.V1Beta1",
                     "php_namespace": "Google\\Cloud\\NetworkSecurity\\V1beta1",
                     "ruby_package": "Google::Cloud::NetworkSecurity::V1beta1"
                   },
@@ -621,7 +622,7 @@
                             "(google.api.http).body": "authorization_policy",
                             "(google.api.method_signature)": "parent,authorization_policy,authorization_policy_id",
                             "(google.longrunning.operation_info).response_type": "AuthorizationPolicy",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -636,7 +637,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "AuthorizationPolicy",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                               }
                             }
                           ]
@@ -649,7 +650,7 @@
                             "(google.api.http).body": "authorization_policy",
                             "(google.api.method_signature)": "authorization_policy,update_mask",
                             "(google.longrunning.operation_info).response_type": "AuthorizationPolicy",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -664,7 +665,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "AuthorizationPolicy",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                               }
                             }
                           ]
@@ -676,7 +677,7 @@
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/authorizationPolicies/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -690,7 +691,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                               }
                             }
                           ]
@@ -739,7 +740,7 @@
                             "(google.api.http).body": "server_tls_policy",
                             "(google.api.method_signature)": "parent,server_tls_policy,server_tls_policy_id",
                             "(google.longrunning.operation_info).response_type": "ServerTlsPolicy",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -754,7 +755,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "ServerTlsPolicy",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                               }
                             }
                           ]
@@ -767,7 +768,7 @@
                             "(google.api.http).body": "server_tls_policy",
                             "(google.api.method_signature)": "server_tls_policy,update_mask",
                             "(google.longrunning.operation_info).response_type": "ServerTlsPolicy",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -782,7 +783,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "ServerTlsPolicy",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                               }
                             }
                           ]
@@ -794,7 +795,7 @@
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/serverTlsPolicies/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -808,7 +809,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                               }
                             }
                           ]
@@ -857,7 +858,7 @@
                             "(google.api.http).body": "client_tls_policy",
                             "(google.api.method_signature)": "parent,client_tls_policy,client_tls_policy_id",
                             "(google.longrunning.operation_info).response_type": "ClientTlsPolicy",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -872,7 +873,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "ClientTlsPolicy",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                               }
                             }
                           ]
@@ -885,7 +886,7 @@
                             "(google.api.http).body": "client_tls_policy",
                             "(google.api.method_signature)": "client_tls_policy,update_mask",
                             "(google.longrunning.operation_info).response_type": "ClientTlsPolicy",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -900,7 +901,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "ClientTlsPolicy",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                               }
                             }
                           ]
@@ -912,7 +913,7 @@
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/clientTlsPolicies/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -926,7 +927,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.networksecurity.v1beta1.OperationMetadata"
                               }
                             }
                           ]
@@ -948,10 +949,7 @@
                         },
                         "description": {
                           "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 2
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -970,31 +968,19 @@
                         "labels": {
                           "keyType": "string",
                           "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 5
                         },
                         "allowOpen": {
                           "type": "bool",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 6
                         },
                         "serverCertificate": {
                           "type": "CertificateProvider",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 7
                         },
                         "mtlsPolicy": {
                           "type": "MTLSPolicy",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -1003,10 +989,7 @@
                             "clientValidationCa": {
                               "rule": "repeated",
                               "type": "ValidationCA",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 1
                             }
                           }
                         }
