@@ -1,1 +1,12 @@
-{"recurse":true,"skip":["https://codecov.io/gh/googleapis/","www.googleapis.com","img.shields.io"],"silent":true,"concurrency":5}
+{
+  "recurse": true,
+  "skip": [
+    "https://codecov.io/gh/googleapis/",
+    "www.googleapis.com",
+    "img.shields.io",
+    "https://github.com/googleapis/nodejs-ids/blob/master/CHANGELOG.md",
+    "https://github.com/googleapis/nodejs-ids/blob/addSamples/CHANGELOG.md"
+  ],
+  "silent": true,
+  "concurrency": 5
+}

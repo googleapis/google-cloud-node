@@ -6,7 +6,6 @@
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/ids.svg)](https://www.npmjs.org/package/@google-cloud/ids)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-ids/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-ids)
 
 
 
@@ -15,7 +14,7 @@ ids client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-ids/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-ids/blob/main/CHANGELOG.md).
 
 * [Cloud IDS Node.js Client API Reference][client-docs]
 * [Cloud IDS Documentation][product-docs]
@@ -88,10 +87,12 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+
 This library is considered to be in **beta**. This means it is expected to be
 mostly stable while we work toward a general availability release; however,
 complete stability is not guaranteed. We will address issues and requests
 against beta libraries with a high priority.
+
 
 
 
@@ -102,7 +103,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-ids/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-ids/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -114,7 +115,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-ids/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-ids/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/intrusion-detection-system
 [product-docs]: https://cloud.google.com/intrusion-detection-system/
