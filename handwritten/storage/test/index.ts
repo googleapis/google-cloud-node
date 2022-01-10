@@ -871,6 +871,20 @@ describe('Storage', () => {
       });
     });
 
+    it('should allow setting rpo', done => {
+      const location = 'NAM4';
+      const rpo = 'ASYNC_TURBO';
+      storage.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.strictEqual(reqOpts.json.location, location);
+        assert.strictEqual(reqOpts.json.rpo, rpo);
+        callback();
+      };
+      storage.createBucket(BUCKET_NAME, {location, rpo}, done);
+    });
+
     it('should throw when `storageClass` is set to different value than provided storageClass name', () => {
       assert.throws(() => {
         storage.createBucket(
