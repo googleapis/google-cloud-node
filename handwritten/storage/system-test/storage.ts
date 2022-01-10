@@ -948,6 +948,41 @@ describe('storage', () => {
     });
   });
 
+  describe('turbo replication', () => {
+    let bucket: Bucket;
+
+    const RPO_ASYNC_TURBO = 'ASYNC_TURBO';
+    const RPO_DEFAULT = 'DEFAULT';
+
+    const createBucket = () => {
+      bucket = storage.bucket(generateName());
+      return bucket.create({location: 'NAM4'});
+    };
+
+    const setTurboReplication = (
+      bucket: Bucket,
+      turboReplicationConfiguration: string
+    ) => {
+      return bucket.setMetadata({
+        rpo: turboReplicationConfiguration,
+      });
+    };
+
+    beforeEach(createBucket);
+
+    it("sets bucket's RPO to ASYNC_TURBO", async () => {
+      await setTurboReplication(bucket, RPO_ASYNC_TURBO);
+      const [bucketMetadata] = await bucket.getMetadata();
+      return assert.strictEqual(bucketMetadata.rpo, RPO_ASYNC_TURBO);
+    });
+
+    it("sets a bucket's RPO to DEFAULT", async () => {
+      await setTurboReplication(bucket, RPO_DEFAULT);
+      const [bucketMetadata] = await bucket.getMetadata();
+      return assert.strictEqual(bucketMetadata.rpo, RPO_DEFAULT);
+    });
+  });
+
   describe('uniform bucket-level access', () => {
     let bucket: Bucket;
 

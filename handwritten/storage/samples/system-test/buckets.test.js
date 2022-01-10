@@ -24,15 +24,20 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const storage = new Storage();
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
+const bucketNameDualRegion = `nodejs-storage-samples-${uuid.v4()}`;
 const bucketNameWithClassAndLocation = `nodejs-storage-samples-${uuid.v4()}`;
 const defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA;
 const bucket = storage.bucket(bucketName);
 const bucketWithClassAndLocation = storage.bucket(
   bucketNameWithClassAndLocation
 );
+const dualRegionBucket = storage.bucket(bucketNameDualRegion);
 
 const PUBLIC_ACCESS_PREVENTION_INHERITED = 'inherited';
 const PUBLIC_ACCESS_PREVENTION_ENFORCED = 'enforced';
+
+const RPO_ASYNC_TURBO = 'ASYNC_TURBO';
+const RPO_DEFAULT = 'DEFAULT';
 
 after(async () => {
   await bucket.delete().catch(console.error);
@@ -198,6 +203,57 @@ it('should set public access prevention to inherited', async () => {
     metadata[0].iamConfiguration.publicAccessPrevention,
     PUBLIC_ACCESS_PREVENTION_INHERITED
   );
+});
+
+it('should create a dual-region bucket with turbo replication enabled', async () => {
+  const output = execSync(
+    `node createBucketWithTurboReplication.js ${bucketNameDualRegion}`
+  );
+  assert.match(
+    output,
+    new RegExp(
+      `${bucketNameDualRegion} created with turbo replication ASYNC_TURBO class in NAM4.`
+    )
+  );
+  const [exists] = await dualRegionBucket.exists();
+  assert.strictEqual(exists, true);
+});
+
+it("should get a bucket's RPO metadata", async () => {
+  await storage.bucket(bucketNameDualRegion).setMetadata({
+    rpo: RPO_ASYNC_TURBO,
+  });
+
+  const output = execSync(`node getRPO.js ${bucketNameDualRegion}`);
+  assert.match(
+    output,
+    new RegExp(`RPO is ASYNC_TURBO for ${bucketNameDualRegion}.`)
+  );
+
+  const metadata = await dualRegionBucket.getMetadata();
+  assert.strictEqual(metadata[0].rpo, RPO_ASYNC_TURBO);
+});
+
+it("should set a bucket's RPO to ASYNC_TURBO", async () => {
+  const output = execSync(`node setRPOAsyncTurbo.js ${bucketNameDualRegion}`);
+  assert.match(
+    output,
+    new RegExp(`Turbo replication enabled for ${bucketNameDualRegion}.`)
+  );
+
+  const metadata = await dualRegionBucket.getMetadata();
+  assert.strictEqual(metadata[0].rpo, RPO_ASYNC_TURBO);
+});
+
+it("should set a bucket's RPO to DEFAULT", async () => {
+  const output = execSync(`node setRPODefault.js ${bucketNameDualRegion}`);
+  assert.match(
+    output,
+    new RegExp(`Turbo replication disabled for ${bucketNameDualRegion}.`)
+  );
+
+  const metadata = await dualRegionBucket.getMetadata();
+  assert.strictEqual(metadata[0].rpo, RPO_DEFAULT);
 });
 
 it("should add a bucket's website configuration", async () => {

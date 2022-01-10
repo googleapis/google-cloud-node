@@ -65,6 +65,7 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
     console.log(`StorageClass: ${metadata.storageClass}`);
     console.log(`TimeCreated: ${new Date(metadata.timeCreated)}`);
     console.log(`Last Metadata Update: ${new Date(metadata.updated)}`);
+    console.log(`TurboReplication: ${metadata.rpo}`);
     console.log(
       `temporaryHold: ${metadata.temporaryHold ? 'enabled' : 'disabled'}`
     );

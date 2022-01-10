@@ -34,6 +34,7 @@ objects to users via direct download.
   * [Copy File](#copy-file)
   * [Copy Old Version Of File.](#copy-old-version-of-file.)
   * [Create Bucket With Storage Class and Location.](#create-bucket-with-storage-class-and-location.)
+  * [Create Bucket With Turbo Replication](#create-bucket-with-turbo-replication)
   * [Create New Bucket](#create-new-bucket)
   * [Create Notification](#create-notification)
   * [Delete Bucket](#delete-bucket)
@@ -68,6 +69,7 @@ objects to users via direct download.
   * [Get Metadata](#get-metadata)
   * [Get Metadata Notifications](#get-metadata-notifications)
   * [Get Public Access Prevention](#get-public-access-prevention)
+  * [Get RPO](#get-rpo)
   * [Get Requester Pays Status](#get-requester-pays-status)
   * [Get Retention Policy](#get-retention-policy)
   * [Storage Get Service Account.](#storage-get-service-account.)
@@ -109,6 +111,8 @@ objects to users via direct download.
   * [Set Event Based Hold](#set-event-based-hold)
   * [Set Public Access Prevention Enforced](#set-public-access-prevention-enforced)
   * [Set Public Access Prevention Inherited](#set-public-access-prevention-inherited)
+  * [Set RPO Async Turbo](#set-rpo-async-turbo)
+  * [Set RPO Default](#set-rpo-default)
   * [Set Retention Policy](#set-retention-policy)
   * [Set Temporary Hold](#set-temporary-hold)
   * [Stream File Download](#stream-file-download)
@@ -420,6 +424,23 @@ __Usage:__
 
 
 `node createBucketWithStorageClassAndLocation.js <BUCKET_NAME> <CLASS_NAME> <LOCATION>`
+
+
+-----
+
+
+
+
+### Create Bucket With Turbo Replication
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/createBucketWithTurboReplication.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/createBucketWithTurboReplication.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createBucketWithTurboReplication.js`
 
 
 -----
@@ -1010,6 +1031,23 @@ __Usage:__
 
 
 `node samples/getPublicAccessPrevention.js`
+
+
+-----
+
+
+
+
+### Get RPO
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/getRPO.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/getRPO.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/getRPO.js`
 
 
 -----
@@ -1731,6 +1769,40 @@ __Usage:__
 
 
 `node samples/setPublicAccessPreventionInherited.js`
+
+
+-----
+
+
+
+
+### Set RPO Async Turbo
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/setRPOAsyncTurbo.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/setRPOAsyncTurbo.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/setRPOAsyncTurbo.js`
+
+
+-----
+
+
+
+
+### Set RPO Default
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/setRPODefault.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/setRPODefault.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/setRPODefault.js`
 
 
 -----
