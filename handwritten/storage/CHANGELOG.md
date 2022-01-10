@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.17.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.16.1...v5.17.0) (2022-01-10)
+
+
+### Features
+
+* add support for rpo (turbo replication) metadata field when cre… ([#1648](https://www.github.com/googleapis/nodejs-storage/issues/1648)) ([291e6ef](https://www.github.com/googleapis/nodejs-storage/commit/291e6ef48efcfca55b4a7dca8868a57c0eeec89b))
+
+
+### Bug Fixes
+
+* remove compodoc dev dependency ([#1745](https://www.github.com/googleapis/nodejs-storage/issues/1745)) ([809bf11](https://www.github.com/googleapis/nodejs-storage/commit/809bf11b8a2a2203db82aec38b6a6023a805bd62))
+
 ### [5.16.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.16.0...v5.16.1) (2021-11-29)
 
 
