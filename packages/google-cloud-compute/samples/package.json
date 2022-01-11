@@ -3,7 +3,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "repository": "googleapis/nodejs-compute",
   "private": true,
