@@ -65,7 +65,7 @@
     "c8": "^7.0.0",
     "codecov": "^3.0.2",
     "google-auth-library": "^6.0.0",
-    "gts": "^2.0.0",
+    "gts": "^3.0.0",
     "http2spy": "^2.0.0",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
