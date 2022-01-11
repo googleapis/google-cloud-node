@@ -4,6 +4,39 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/nodejs-compute/compare/v3.0.0...v3.1.0) (2022-01-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop support for Node.js 10 (#668)
+* 3.1.0
+* IPProtocol enum has been renamed to IPProtocolEnum
+* v3.1.0
+
+### Features
+
+* add eslintignore for sameple generated code ([#1302](https://github.com/googleapis/nodejs-compute/issues/1302)) ([#652](https://github.com/googleapis/nodejs-compute/issues/652)) ([b170c29](https://github.com/googleapis/nodejs-compute/commit/b170c29f99656d17eafa2ea3bfe99a79dd390a2a))
+* add minimum wrapper for compute LRO method ([#618](https://github.com/googleapis/nodejs-compute/issues/618)) ([2fa4f93](https://github.com/googleapis/nodejs-compute/commit/2fa4f93d6d0c1a67e6f1223d2a3715529b2519a5))
+
+
+### Bug Fixes
+
+* add parameter in compute bazel rules ([#692](https://github.com/googleapis/nodejs-compute/issues/692)) ([#654](https://github.com/googleapis/nodejs-compute/issues/654)) ([115d1da](https://github.com/googleapis/nodejs-compute/commit/115d1dac877566069af7320a67a77edd4400c4f2))
+* **deps:** update google-gax with http grpc status code mapping ([#655](https://github.com/googleapis/nodejs-compute/issues/655)) ([ffa79f9](https://github.com/googleapis/nodejs-compute/commit/ffa79f91b24a1a3b593bcc81d4f12c06d9f48f34))
+* **docs:** increase memory for reference doc generation ([#615](https://github.com/googleapis/nodejs-compute/issues/615)) ([5e63ce4](https://github.com/googleapis/nodejs-compute/commit/5e63ce4734686007f98f449f25807134274d0f0a))
+* drop support for Node.js 10 ([#668](https://github.com/googleapis/nodejs-compute/issues/668)) ([a4a5c9c](https://github.com/googleapis/nodejs-compute/commit/a4a5c9c24ee3d1a78edc293819faaa8b3fbe0acb))
+
+
+### Build System
+
+* automate generation and updates with OwlBot ([#651](https://github.com/googleapis/nodejs-compute/issues/651)) ([2b925fa](https://github.com/googleapis/nodejs-compute/commit/2b925fa9a6b76b773d3a8e0b40b21f8b503fe3e5))
+
+
+### Code Refactoring
+
+* IPProtocol enum has been renamed to IPProtocolEnum ([2b925fa](https://github.com/googleapis/nodejs-compute/commit/2b925fa9a6b76b773d3a8e0b40b21f8b503fe3e5))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.6.0...v3.0.0) (2021-08-17)
 
 
