@@ -305,7 +305,7 @@ describe('Compute', () => {
       }
       expect(error).to.be.an('Error');
       expect(error.message).to.contain('was not found');
-      expect(error.code).to.equal(404);
+      expect(error.code).to.equal(5);
     });
 
     it('instances update desc to an empty string', async function () {

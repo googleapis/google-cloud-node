@@ -120,7 +120,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "google-gax": "^2.25.2"
+    "google-gax": "^2.29.1"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",

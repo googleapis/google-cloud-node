@@ -15,5 +15,6 @@
 import synthtool.languages.node as node
 
 node.owlbot_main(templates_excludes=[
-  '.mocharc.js'
+  '.mocharc.js',
+  '.github/workflows/ci.yaml',
 ])
