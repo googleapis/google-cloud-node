@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(requests) {
@@ -31,8 +32,7 @@ function main(requests) {
   // const parent = 'abc123'
 
   // Imports the Documentai library
-  const {DocumentUnderstandingServiceClient} =
-    require('@google-cloud/documentai').v1beta2;
+  const {DocumentUnderstandingServiceClient} = require('@google-cloud/documentai').v1beta2;
 
   // Instantiates a client
   const documentaiClient = new DocumentUnderstandingServiceClient();

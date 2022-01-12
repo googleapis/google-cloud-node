@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, processor) {
@@ -25,14 +26,13 @@ function main(parent, processor) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. The processor to be created, requires processor_type  and display_name
+   *  Required. The processor to be created, requires processor_type  and display_name 
    *  to be set. Also, the processor is under CMEK if CMEK fields are set.
    */
   // const processor = {}
 
   // Imports the Documentai library
-  const {DocumentProcessorServiceClient} =
-    require('@google-cloud/documentai').v1beta3;
+  const {DocumentProcessorServiceClient} = require('@google-cloud/documentai').v1beta3;
 
   // Instantiates a client
   const documentaiClient = new DocumentProcessorServiceClient();

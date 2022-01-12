@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(humanReviewConfig) {
@@ -38,8 +39,7 @@ function main(humanReviewConfig) {
   // const priority = {}
 
   // Imports the Documentai library
-  const {DocumentProcessorServiceClient} =
-    require('@google-cloud/documentai').v1;
+  const {DocumentProcessorServiceClient} = require('@google-cloud/documentai').v1;
 
   // Instantiates a client
   const documentaiClient = new DocumentProcessorServiceClient();
