@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name, annotatedDataset, outputConfig) {
@@ -47,8 +48,7 @@ function main(name, annotatedDataset, outputConfig) {
   // const userEmailAddress = 'abc123'
 
   // Imports the Datalabeling library
-  const {DataLabelingServiceClient} =
-    require('@google-cloud/datalabeling').v1beta1;
+  const {DataLabelingServiceClient} = require('@google-cloud/datalabeling').v1beta1;
 
   // Instantiates a client
   const datalabelingClient = new DataLabelingServiceClient();

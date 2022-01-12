@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, annotationSpecSet) {
@@ -32,8 +33,7 @@ function main(parent, annotationSpecSet) {
   // const annotationSpecSet = {}
 
   // Imports the Datalabeling library
-  const {DataLabelingServiceClient} =
-    require('@google-cloud/datalabeling').v1beta1;
+  const {DataLabelingServiceClient} = require('@google-cloud/datalabeling').v1beta1;
 
   // Instantiates a client
   const datalabelingClient = new DataLabelingServiceClient();

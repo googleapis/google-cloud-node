@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -43,8 +44,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Datalabeling library
-  const {DataLabelingServiceClient} =
-    require('@google-cloud/datalabeling').v1beta1;
+  const {DataLabelingServiceClient} = require('@google-cloud/datalabeling').v1beta1;
 
   // Instantiates a client
   const datalabelingClient = new DataLabelingServiceClient();
@@ -56,11 +56,9 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datalabelingClient.listAnnotationSpecSetsAsync(
-      request
-    );
+    const iterable = await datalabelingClient.listAnnotationSpecSetsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
