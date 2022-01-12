@@ -7,8 +7,10 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5169231",
   "name_pretty": "Cloud Redis",
   "default_version": "v1",
-  "release_level": "ga",
+  "release_level": "stable",
   "repo": "googleapis/nodejs-redis",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/redis/latest",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "redis",
+  "library_type": "GAPIC_AUTO"
 }
