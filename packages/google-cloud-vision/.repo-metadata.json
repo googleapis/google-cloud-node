@@ -5,11 +5,13 @@
   "api_id": "vision.googleapis.com",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vision/latest",
   "repo": "googleapis/nodejs-vision",
-  "release_level": "ga",
+  "release_level": "stable",
   "requires_billing": true,
   "name_pretty": "Google Cloud Vision API",
   "name": "vision",
   "codeowner_team": "@googleapis/ml-apis",
   "default_version": "v1p4beta1",
-  "language": "nodejs"
+  "language": "nodejs",
+  "api_shortname": "vision",
+  "library_type": "GAPIC_COMBO"
 }
