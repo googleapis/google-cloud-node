@@ -1,6 +1,6 @@
 {
   "distribution_name": "@google-cloud/translate",
-  "release_level": "ga",
+  "release_level": "stable",
   "product_documentation": "https://cloud.google.com/translate/docs/",
   "repo": "googleapis/nodejs-translate",
   "default_version": "v3",
@@ -11,5 +11,7 @@
   "name": "translate",
   "name_pretty": "Cloud Translation",
   "api_id": "translate.googleapis.com",
-  "codeowner_team": "@googleapis/ml-apis"
+  "codeowner_team": "@googleapis/ml-apis",
+  "api_shortname": "translate",
+  "library_type": "GAPIC_AUTO"
 }
