@@ -4,11 +4,13 @@
   "product_documentation": "https://cloud.google.com/storage-transfer/",
   "client_documentation": "https://googleapis.dev/nodejs/storagetransfer/latest/index.html",
   "issue_tracker": "https://github.com/googleapis/nodejs-storage-transfer/issues",
-  "release_level": "ga",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/nodejs-storage-transfer",
   "distribution_name": "@google-cloud/storage-transfer",
   "api_id": "storagetransfer.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "api_shortname": "storagetransfer",
+  "library_type": "GAPIC_AUTO"
 }
