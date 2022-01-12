@@ -1,6 +1,6 @@
 {
   "default_version": "v1",
-  "release_level": "ga",
+  "release_level": "stable",
   "requires_billing": true,
   "client_documentation": "https://googleapis.dev/nodejs/text-to-speech/latest",
   "codeowner_team": "@googleapis/ml-apis",
@@ -11,5 +11,7 @@
   "distribution_name": "@google-cloud/text-to-speech",
   "name_pretty": "Google Cloud Text-to-Speech",
   "api_id": "texttospeech.googleapis.com",
-  "repo": "googleapis/nodejs-text-to-speech"
+  "repo": "googleapis/nodejs-text-to-speech",
+  "api_shortname": "texttospeech",
+  "library_type": "GAPIC_AUTO"
 }
