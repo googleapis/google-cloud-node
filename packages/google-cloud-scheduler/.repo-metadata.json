@@ -1,6 +1,6 @@
 {
   "default_version": "v1",
-  "release_level": "ga",
+  "release_level": "stable",
   "requires_billing": false,
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/scheduler/latest",
   "codeowner_team": "@googleapis/serverless-team",
@@ -11,5 +11,7 @@
   "distribution_name": "@google-cloud/scheduler",
   "name_pretty": "Google Cloud Scheduler",
   "api_id": "cloudscheduler.googleapis.com",
-  "repo": "googleapis/nodejs-scheduler"
+  "repo": "googleapis/nodejs-scheduler",
+  "api_shortname": "cloudscheduler",
+  "library_type": "GAPIC_AUTO"
 }
