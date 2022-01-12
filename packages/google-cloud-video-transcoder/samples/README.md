@@ -18,8 +18,10 @@
   * [Create Job Template](#create-job-template)
   * [Create Job With Animated Overlay](#create-job-with-animated-overlay)
   * [Create Job With Concatenated Inputs](#create-job-with-concatenated-inputs)
+  * [Create Job With Embedded Captions](#create-job-with-embedded-captions)
   * [Create Job With Periodic Images Spritesheet](#create-job-with-periodic-images-spritesheet)
   * [Create Job With Set Number Images Spritesheet](#create-job-with-set-number-images-spritesheet)
+  * [Create Job With Standalone Captions](#create-job-with-standalone-captions)
   * [Create Job With Static Overlay](#create-job-with-static-overlay)
   * [Delete Job](#delete-job)
   * [Delete Job Template](#delete-job-template)
@@ -147,6 +149,23 @@ __Usage:__
 
 
 
+### Create Job With Embedded Captions
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/createJobWithEmbeddedCaptions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithEmbeddedCaptions.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createJobWithEmbeddedCaptions.js`
+
+
+-----
+
+
+
+
 ### Create Job With Periodic Images Spritesheet
 
 View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/createJobWithPeriodicImagesSpritesheet.js).
@@ -174,6 +193,23 @@ __Usage:__
 
 
 `node samples/createJobWithSetNumberImagesSpritesheet.js`
+
+
+-----
+
+
+
+
+### Create Job With Standalone Captions
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/createJobWithStandaloneCaptions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithStandaloneCaptions.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createJobWithStandaloneCaptions.js`
 
 
 -----

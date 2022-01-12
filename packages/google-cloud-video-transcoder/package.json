@@ -39,7 +39,7 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "@google-cloud/video-transcoder": "^1.8.0",
+    "@google-cloud/video-transcoder": "^1.8.1",
     "google-gax": "^2.24.1"
   },
   "devDependencies": {
