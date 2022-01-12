@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name, trust) {
@@ -30,8 +31,7 @@ function main(name, trust) {
   // const trust = {}
 
   // Imports the Managedidentities library
-  const {ManagedIdentitiesServiceClient} =
-    require('@google-cloud/managed-identities').v1;
+  const {ManagedIdentitiesServiceClient} = require('@google-cloud/managed-identities').v1;
 
   // Instantiates a client
   const managedidentitiesClient = new ManagedIdentitiesServiceClient();

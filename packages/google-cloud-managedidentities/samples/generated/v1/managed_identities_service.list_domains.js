@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -29,7 +30,7 @@ function main(parent) {
    *  If not specified, a default value of 1000 will be used.
    *  Regardless of the page_size value, the response may include a partial list.
    *  Callers should rely on a response's
-   *  next_page_token google.cloud.managedidentities.v1.ListDomainsResponse.next_page_token
+   *  next_page_token google.cloud.managedidentities.v1.ListDomainsResponse.next_page_token 
    *  to determine if there are additional results to list.
    */
   // const pageSize = 1234
@@ -52,8 +53,7 @@ function main(parent) {
   // const orderBy = 'abc123'
 
   // Imports the Managedidentities library
-  const {ManagedIdentitiesServiceClient} =
-    require('@google-cloud/managed-identities').v1;
+  const {ManagedIdentitiesServiceClient} = require('@google-cloud/managed-identities').v1;
 
   // Instantiates a client
   const managedidentitiesClient = new ManagedIdentitiesServiceClient();
@@ -67,7 +67,7 @@ function main(parent) {
     // Run request
     const iterable = await managedidentitiesClient.listDomainsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

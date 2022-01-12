@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(updateMask, domain) {
@@ -35,8 +36,7 @@ function main(updateMask, domain) {
   // const domain = {}
 
   // Imports the Managedidentities library
-  const {ManagedIdentitiesServiceClient} =
-    require('@google-cloud/managed-identities').v1;
+  const {ManagedIdentitiesServiceClient} = require('@google-cloud/managed-identities').v1;
 
   // Instantiates a client
   const managedidentitiesClient = new ManagedIdentitiesServiceClient();

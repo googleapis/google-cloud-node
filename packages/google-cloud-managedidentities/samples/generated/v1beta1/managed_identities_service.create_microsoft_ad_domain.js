@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, domainName, domain) {
@@ -43,8 +44,7 @@ function main(parent, domainName, domain) {
   // const domain = {}
 
   // Imports the Managedidentities library
-  const {ManagedIdentitiesServiceClient} =
-    require('@google-cloud/managed-identities').v1beta1;
+  const {ManagedIdentitiesServiceClient} = require('@google-cloud/managed-identities').v1beta1;
 
   // Instantiates a client
   const managedidentitiesClient = new ManagedIdentitiesServiceClient();
@@ -58,9 +58,7 @@ function main(parent, domainName, domain) {
     };
 
     // Run request
-    const [operation] = await managedidentitiesClient.createMicrosoftAdDomain(
-      request
-    );
+    const [operation] = await managedidentitiesClient.createMicrosoftAdDomain(request);
     const [response] = await operation.promise();
     console.log(response);
   }
