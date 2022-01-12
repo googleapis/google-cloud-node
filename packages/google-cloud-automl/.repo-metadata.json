@@ -1,6 +1,6 @@
 {
   "distribution_name": "@google-cloud/automl",
-  "release_level": "ga",
+  "release_level": "stable",
   "product_documentation": "https://cloud.google.com/automl/docs/",
   "repo": "googleapis/nodejs-automl",
   "default_version": "v1",
@@ -11,5 +11,7 @@
   "name": "automl",
   "name_pretty": "Cloud AutoML",
   "api_id": "automl.googleapis.com",
-  "codeowner_team": "@googleapis/ml-apis"
+  "codeowner_team": "@googleapis/ml-apis",
+  "api_shortname": "automl",
+  "library_type": "GAPIC_COMBO"
 }
