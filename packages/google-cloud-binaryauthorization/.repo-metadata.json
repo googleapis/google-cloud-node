@@ -11,7 +11,7 @@
   "requires_billing": true,
   "name": "binaryauthorization",
   "issue_tracker": "https://github.com/googleapis/nodejs-binary-authorization/issues",
-  "codeowner_team": "@googleapis/cicd",
+  "codeowner_team": "@googleapis/aap-dpes",
   "api_shortname": "binaryauthorization",
   "library_type": "GAPIC_AUTO"
 }
