@@ -11,5 +11,7 @@
   "codeowner_team": "@googleapis/ml-apis",
   "name_pretty": "Google Cloud Video Intelligence",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/video-intelligence/latest",
-  "release_level": "ga"
+  "release_level": "stable",
+  "api_shortname": "videointelligence",
+  "library_type": "GAPIC_AUTO"
 }
