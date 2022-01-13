@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.14.1](https://github.com/googleapis/nodejs-ai-platform/compare/v1.14.0...v1.14.1) (2022-01-13)
+
+
+### Bug Fixes
+
+* remove duplicate sample ([#243](https://github.com/googleapis/nodejs-ai-platform/issues/243)) ([827edd9](https://github.com/googleapis/nodejs-ai-platform/commit/827edd96ecd9e04b7de8dbda3e4a535b9853628b))
+
 ## [1.14.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.13.0...v1.14.0) (2021-12-11)
 
 
