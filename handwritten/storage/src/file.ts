@@ -190,6 +190,7 @@ export type PredefinedAcl =
   | 'publicRead';
 
 export interface CreateResumableUploadOptions {
+  chunkSize?: number;
   configPath?: string;
   metadata?: Metadata;
   origin?: string;
@@ -1556,6 +1557,9 @@ class File extends ServiceObject<File> {
    *     `options.predefinedAcl = 'publicRead'`)
    * @property {string} [userProject] The ID of the project which will be
    *     billed for the request.
+   * @property {string} [chunkSize] Create a separate request per chunk. Should
+   *     be a multiple of 256 KiB (2^18).
+   *     {@link https://cloud.google.com/storage/docs/performing-resumable-uploads#chunked-upload| We recommend using at least 8 MiB for the chunk size.}
    */
   /**
    * Create a unique resumable upload session URI. This is the first step when
@@ -3980,6 +3984,7 @@ class File extends ServiceObject<File> {
       userProject: options.userProject || this.userProject,
       retryOptions: retryOptions,
       params: options?.preconditionOpts || this.instancePreconditionOpts,
+      chunkSize: options?.chunkSize,
     });
 
     uploadStream

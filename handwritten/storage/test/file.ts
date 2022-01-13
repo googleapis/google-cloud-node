@@ -4762,6 +4762,7 @@ describe('File', () => {
           predefinedAcl: 'allUsers',
           uri: 'http://resumable-uri',
           userProject: 'user-project-id',
+          chunkSize: 262144, // 256 KiB
         };
 
         file.generation = 3;
@@ -4815,6 +4816,7 @@ describe('File', () => {
             assert.strictEqual(opts.userProject, options.userProject);
             assert.strictEqual(opts.retryOptions, storage.retryOptions);
             assert.strictEqual(opts.params, storage.preconditionOpts);
+            assert.strictEqual(opts.chunkSize, options.chunkSize);
 
             setImmediate(done);
             return new PassThrough();
