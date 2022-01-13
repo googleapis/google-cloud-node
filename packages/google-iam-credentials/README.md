@@ -4,9 +4,8 @@
 
 # [IAM Service Account Credentials API: Node.js Client](https://github.com/googleapis/nodejs-iam-credentials)
 
-
+[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/iam-credentials.svg)](https://www.npmjs.org/package/@google-cloud/iam-credentials)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-iam-credentials/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-iam-credentials)
 
 
 
