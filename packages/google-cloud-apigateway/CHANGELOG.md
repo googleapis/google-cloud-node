@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.1](https://github.com/googleapis/nodejs-api-gateway/compare/v1.2.0...v1.2.1) (2022-01-12)
+
+
+### Bug Fixes
+
+* **apigateway:** add ancillary service bindings to service_yaml ([#84](https://github.com/googleapis/nodejs-api-gateway/issues/84)) ([801a824](https://github.com/googleapis/nodejs-api-gateway/commit/801a82482addc0acb8485c484b050cd34e39d270))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.1.6...v1.2.0) (2021-08-23)
 
 
