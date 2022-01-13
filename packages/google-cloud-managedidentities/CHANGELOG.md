@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.3](https://github.com/googleapis/nodejs-managed-identities/compare/v1.1.2...v1.1.3) (2022-01-12)
+
+
+### Bug Fixes
+
+* **managedidentities:** add ancillary service bindings to service_yaml ([#105](https://github.com/googleapis/nodejs-managed-identities/issues/105)) ([77c1911](https://github.com/googleapis/nodejs-managed-identities/commit/77c1911b9c52443cc4cd1647451130d7314aaf49))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.1.1...v1.1.2) (2021-12-06)
 
 
