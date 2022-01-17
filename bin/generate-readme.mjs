@@ -29,7 +29,12 @@ if (token) {
   console.warn('Please provide GITHUB_TOKEN env var for increased quota.');
 }
 const baseUrl = 'https://api.github.com';
-const github = new Gaxios({ headers });
+const github = new Gaxios({
+  headers,
+  retryConfig: {
+    retries: 3
+  }
+});
 
 function checkpoint (message, success = true) {
   const prefix = success ? chalk.green(figures.tick) : chalk.red(figures.cross);
@@ -147,7 +152,7 @@ async function processMetadata (repoMetadata) {
       metadata.support_documentation = supportDocsUrl;
     }
 
-    if (metadata.release_level === 'ga') {
+    if (metadata.release_level === 'stable' || metadata.release_level === 'ga') {
       gaLibraries.push(metadata);
     } else {
       previewLibraries.push(metadata);
@@ -173,11 +178,13 @@ async function generateReadme (libraries) {
   for (const lib of libraries) {
     let stability = '';
     switch (lib.release_level) {
+      case 'stable':
       case 'ga':
-        stability = '[![GA][ga-stability]][launch-stages]';
+        stability = '[![Stable][stable-stability]][launch-stages]';
         break;
-      case 'beta':
       case 'alpha':
+      case 'beta':
+      case 'preview':
         stability = '[![Preview][preview-stability]][launch-stages]';
         break;
     }
