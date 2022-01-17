@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.1](https://github.com/googleapis/nodejs-document-ai/compare/v3.2.0...v3.2.1) (2022-01-13)
+
+
+### Bug Fixes
+
+* **documentai:** add ancillary service bindings to service_yaml ([#296](https://github.com/googleapis/nodejs-document-ai/issues/296)) ([14d1b31](https://github.com/googleapis/nodejs-document-ai/commit/14d1b3195a3288f436a1445372cc3d66438bc544))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v3.1.0...v3.2.0) (2021-12-14)
 
 

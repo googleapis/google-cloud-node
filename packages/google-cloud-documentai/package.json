@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/documentai",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Document AI client for Node.js",
   "repository": "googleapis/nodejs-document-ai",
   "license": "Apache-2.0",
