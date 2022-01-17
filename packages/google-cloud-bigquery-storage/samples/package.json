@@ -14,12 +14,15 @@
   },
   "dependencies": {
     "@google-cloud/bigquery-storage": "^2.8.0",
+    "google-protobuf": "^3.19.1",
     "avsc": "^5.4.18",
     "snappy": "^7.0.0"
   },
   "devDependencies": {
+    "@google-cloud/bigquery": "^5.9.3",
     "c8": "^7.0.0",
     "chai": "^4.2.0",
-    "mocha": "^8.0.0"
+    "mocha": "^8.0.0",
+    "uuid": "^8.0.0"
   }
 }
