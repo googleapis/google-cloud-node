@@ -147,7 +147,7 @@ async function processMetadata (repoMetadata) {
       metadata.support_documentation = supportDocsUrl;
     }
 
-    if (metadata.release_level === 'ga') {
+    if (metadata.release_level === 'stable') {
       gaLibraries.push(metadata);
     } else {
       previewLibraries.push(metadata);
@@ -173,11 +173,10 @@ async function generateReadme (libraries) {
   for (const lib of libraries) {
     let stability = '';
     switch (lib.release_level) {
-      case 'ga':
-        stability = '[![GA][ga-stability]][launch-stages]';
+      case 'stable':
+        stability = '[![Stable][stable-stability]][launch-stages]';
         break;
-      case 'beta':
-      case 'alpha':
+      case 'preview':
         stability = '[![Preview][preview-stability]][launch-stages]';
         break;
     }
