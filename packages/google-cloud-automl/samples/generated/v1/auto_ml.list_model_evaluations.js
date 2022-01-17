@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, filter) {
@@ -64,7 +65,7 @@ function main(parent, filter) {
     // Run request
     const iterable = await automlClient.listModelEvaluationsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

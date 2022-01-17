@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -26,8 +27,7 @@ function main(parent) {
   /**
    *  An expression for filtering the results of the request.
    *    * `dataset_metadata` - for existence of the case (e.g.
-   *              `image_classification_dataset_metadata:*`). Some examples of
-   *              using the filter are:
+   *              `image_classification_dataset_metadata:*`). Some examples of using the filter are:
    *    * `translation_dataset_metadata:*` --> The dataset has
    *                                           `translation_dataset_metadata`.
    */
@@ -60,7 +60,7 @@ function main(parent) {
     // Run request
     const iterable = await automlClient.listDatasetsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

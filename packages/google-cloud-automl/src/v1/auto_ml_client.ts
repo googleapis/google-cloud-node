@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ const version = require('../../../package.json').version;
  *  Currently the only supported `location_id` is "us-central1".
  *
  *  On any input that is documented to expect a string parameter in
- *  snake_case or kebab-case, either of those cases is accepted.
+ *  snake_case or dash-case, either of those cases is accepted.
  * @class
  * @memberof v1
  */
@@ -1864,7 +1864,6 @@ export class AutoMlClient {
    * Deploys a model. If a model is already deployed, deploying it with the
    * same parameters has no effect. Deploying with different parametrs
    * (as e.g. changing
-   *
    * {@link google.cloud.automl.v1p1beta.ImageObjectDetectionModelDeploymentMetadata.node_number|node_number})
    *  will reset the deployment state without pausing the model's availability.
    *
@@ -2311,8 +2310,7 @@ export class AutoMlClient {
    *   An expression for filtering the results of the request.
    *
    *     * `dataset_metadata` - for existence of the case (e.g.
-   *               `image_classification_dataset_metadata:*`). Some examples of
-   *               using the filter are:
+   *               `image_classification_dataset_metadata:*`). Some examples of using the filter are:
    *
    *     * `translation_dataset_metadata:*` --> The dataset has
    *                                            `translation_dataset_metadata`.
@@ -2416,8 +2414,7 @@ export class AutoMlClient {
    *   An expression for filtering the results of the request.
    *
    *     * `dataset_metadata` - for existence of the case (e.g.
-   *               `image_classification_dataset_metadata:*`). Some examples of
-   *               using the filter are:
+   *               `image_classification_dataset_metadata:*`). Some examples of using the filter are:
    *
    *     * `translation_dataset_metadata:*` --> The dataset has
    *                                            `translation_dataset_metadata`.
@@ -2475,8 +2472,7 @@ export class AutoMlClient {
    *   An expression for filtering the results of the request.
    *
    *     * `dataset_metadata` - for existence of the case (e.g.
-   *               `image_classification_dataset_metadata:*`). Some examples of
-   *               using the filter are:
+   *               `image_classification_dataset_metadata:*`). Some examples of using the filter are:
    *
    *     * `translation_dataset_metadata:*` --> The dataset has
    *                                            `translation_dataset_metadata`.

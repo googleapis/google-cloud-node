@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name, payload) {
@@ -48,9 +49,9 @@ function main(name, payload) {
    *  AutoML Tables
    *  `feature_importance`
    *  : (boolean) Whether
-   *  feature_importance google.cloud.automl.v1.TablesModelColumnInfo.feature_importance
+   *  feature_importance google.cloud.automl.v1.TablesModelColumnInfo.feature_importance 
    *    is populated in the returned list of
-   *    TablesAnnotation google.cloud.automl.v1.TablesAnnotation
+   *    TablesAnnotation google.cloud.automl.v1.TablesAnnotation 
    *    objects. The default is false.
    */
   // const params = 1234

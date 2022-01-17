@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ const version = require('../../../package.json').version;
  *  AutoML Prediction API.
  *
  *  On any input that is documented to expect a string parameter in
- *  snake_case or kebab-case, either of those cases is accepted.
+ *  snake_case or dash-case, either of those cases is accepted.
  * @class
  * @memberof v1
  */
@@ -409,7 +409,6 @@ export class PredictionServiceClient {
    *
    *   `feature_importance`
    *   : (boolean) Whether
-   *
    *   {@link google.cloud.automl.v1.TablesModelColumnInfo.feature_importance|feature_importance}
    *     is populated in the returned list of
    *     {@link google.cloud.automl.v1.TablesAnnotation|TablesAnnotation}
