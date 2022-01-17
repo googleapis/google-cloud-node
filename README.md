@@ -9,25 +9,10 @@ applications that interact with individual Google Cloud services:
 
 | Repo | Release Level | Version |
 |------|----------|-----------------|
-| [AutoML](https://github.com/googleapis/nodejs-automl) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/automl)](https://npm.im/@google-cloud/automl) |
-| [Bigtable](https://github.com/googleapis/nodejs-bigtable) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/bigtable)](https://npm.im/@google-cloud/bigtable) |
 | [Datastore Session](https://github.com/googleapis/nodejs-datastore-session) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/connect-datastore)](https://npm.im/@google-cloud/connect-datastore) |
-| [Dialogflow API](https://github.com/googleapis/nodejs-dialogflow) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/dialogflow)](https://npm.im/@google-cloud/dialogflow) |
-| [Logging](https://github.com/googleapis/nodejs-logging) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/logging)](https://npm.im/@google-cloud/logging) |
-| [Logging for Bunyan](https://github.com/googleapis/nodejs-logging-bunyan) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/logging-bunyan)](https://npm.im/@google-cloud/logging-bunyan) |
 | [Logging for Winston](https://github.com/googleapis/nodejs-logging-winston) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/logging-winston)](https://npm.im/@google-cloud/logging-winston) |
 | [Memorystore for Memcached](https://github.com/googleapis/nodejs-memcache) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/memcache)](https://npm.im/@google-cloud/memcache) |
 | [Pub/Sub](https://github.com/googleapis/nodejs-pubsub) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/pubsub)](https://npm.im/@google-cloud/pubsub) |
-| [Recommender](https://github.com/googleapis/nodejs-recommender) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/recommender)](https://npm.im/@google-cloud/recommender) |
-| [Redis](https://github.com/googleapis/nodejs-redis) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/redis)](https://npm.im/@google-cloud/redis) |
-| [Scheduler](https://github.com/googleapis/nodejs-scheduler) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/scheduler)](https://npm.im/@google-cloud/scheduler) |
-| [Storage Transfer Service](https://github.com/googleapis/nodejs-storage-transfer) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/storage-transfer)](https://npm.im/@google-cloud/storage-transfer) |
-| [Tasks](https://github.com/googleapis/nodejs-tasks) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/tasks)](https://npm.im/@google-cloud/tasks) |
-| [Text-to-Speech](https://github.com/googleapis/nodejs-text-to-speech) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/text-to-speech)](https://npm.im/@google-cloud/text-to-speech) |
-| [Translation](https://github.com/googleapis/nodejs-translate) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/translate)](https://npm.im/@google-cloud/translate) |
-| [Video Intelligence](https://github.com/googleapis/nodejs-video-intelligence) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/video-intelligence)](https://npm.im/@google-cloud/video-intelligence) |
-| [Vision API](https://github.com/googleapis/nodejs-vision) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/vision)](https://npm.im/@google-cloud/vision) |
-| [Workflows](https://github.com/googleapis/nodejs-workflows) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/workflows)](https://npm.im/@google-cloud/workflows) |
 | [Access Approval](https://github.com/googleapis/nodejs-access-approval) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/access-approval)](https://npm.im/@google-cloud/access-approval) |
 | [Access Context Manager](https://github.com/googleapis/nodejs-access-context-manager) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/access-context-manager)](https://npm.im/@google-cloud/access-context-manager) |
 | [AI Platform Notebooks](https://github.com/googleapis/nodejs-notebooks) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/notebooks)](https://npm.im/@google-cloud/notebooks) |
@@ -38,6 +23,8 @@ applications that interact with individual Google Cloud services:
 | [Artifact Registry](https://github.com/googleapis/nodejs-artifact-registry) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/artifact-registry)](https://npm.im/@google-cloud/artifact-registry) |
 | [Asset Inventory](https://github.com/googleapis/nodejs-asset) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/asset)](https://npm.im/@google-cloud/asset) |
 | [Assured Workloads for Government](https://github.com/googleapis/nodejs-assured-workloads) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/assured-workloads)](https://npm.im/@google-cloud/assured-workloads) |
+| [AutoML](https://github.com/googleapis/nodejs-automl) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/automl)](https://npm.im/@google-cloud/automl) |
+| [Bigtable](https://github.com/googleapis/nodejs-bigtable) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/bigtable)](https://npm.im/@google-cloud/bigtable) |
 | [Billing](https://github.com/googleapis/nodejs-billing) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/billing)](https://npm.im/@google-cloud/billing) |
 | [Billing Budgets](https://github.com/googleapis/nodejs-billing-budgets) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/billing-budgets)](https://npm.im/@google-cloud/billing-budgets) |
 | [Binary Authorization](https://github.com/googleapis/nodejs-binary-authorization) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/binary-authorization)](https://npm.im/@google-cloud/binary-authorization) |
@@ -58,6 +45,7 @@ applications that interact with individual Google Cloud services:
 | [Datastore](https://github.com/googleapis/nodejs-datastore) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/datastore)](https://npm.im/@google-cloud/datastore) |
 | [Datastream](https://github.com/googleapis/nodejs-datastream) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/datastream)](https://npm.im/@google-cloud/datastream) |
 | [Deploy](https://github.com/googleapis/nodejs-deploy) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/deploy)](https://npm.im/@google-cloud/deploy) |
+| [Dialogflow API](https://github.com/googleapis/nodejs-dialogflow) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/dialogflow)](https://npm.im/@google-cloud/dialogflow) |
 | [Dialogflow CX API](https://github.com/googleapis/nodejs-dialogflow-cx) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/dialogflow-cx)](https://npm.im/@google-cloud/dialogflow-cx) |
 | [DNS](https://github.com/googleapis/nodejs-dns) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/dns)](https://npm.im/@google-cloud/dns) |
 | [Document AI](https://github.com/googleapis/nodejs-document-ai) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/documentai)](https://npm.im/@google-cloud/documentai) |
@@ -89,6 +77,8 @@ applications that interact with individual Google Cloud services:
 | [Key Management Service](https://github.com/googleapis/nodejs-kms) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/kms)](https://npm.im/@google-cloud/kms) |
 | [Kubernetes Engine Cluster Manager API](https://github.com/googleapis/nodejs-cloud-container) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/container)](https://npm.im/@google-cloud/container) |
 | [Life Sciences](https://github.com/googleapis/nodejs-life-sciences) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/life-sciences)](https://npm.im/@google-cloud/life-sciences) |
+| [Logging](https://github.com/googleapis/nodejs-logging) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/logging)](https://npm.im/@google-cloud/logging) |
+| [Logging for Bunyan](https://github.com/googleapis/nodejs-logging-bunyan) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/logging-bunyan)](https://npm.im/@google-cloud/logging-bunyan) |
 | [Managed Service for Microsoft Active Directory](https://github.com/googleapis/nodejs-managed-identities) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/managed-identities)](https://npm.im/@google-cloud/managed-identities) |
 | [Media Translation](https://github.com/googleapis/nodejs-media-translation) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/media-translation)](https://npm.im/@google-cloud/media-translation) |
 | [Migrate for Compute Engine](https://github.com/googleapis/nodejs-vmmigration) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/vmmigration)](https://npm.im/@google-cloud/vmmigration) |
@@ -104,9 +94,12 @@ applications that interact with individual Google Cloud services:
 | [Private Catalog](https://github.com/googleapis/nodejs-private-catalog) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/private-catalog)](https://npm.im/@google-cloud/private-catalog) |
 | [Profiler](https://github.com/googleapis/cloud-profiler-nodejs) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/profiler)](https://npm.im/@google-cloud/profiler) |
 | [reCAPTCHA Enterprise](https://github.com/googleapis/nodejs-recaptcha-enterprise) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/recaptcha-enterprise)](https://npm.im/@google-cloud/recaptcha-enterprise) |
+| [Recommender](https://github.com/googleapis/nodejs-recommender) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/recommender)](https://npm.im/@google-cloud/recommender) |
+| [Redis](https://github.com/googleapis/nodejs-redis) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/redis)](https://npm.im/@google-cloud/redis) |
 | [Resource Manager API](https://github.com/googleapis/nodejs-resource-manager) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/resource-manager)](https://npm.im/@google-cloud/resource-manager) |
 | [Resource Settings API](https://github.com/googleapis/nodejs-resource-settings) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/resource-settings)](https://npm.im/@google-cloud/resource-settings) |
 | [Retail API](https://github.com/googleapis/nodejs-retail) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/retail)](https://npm.im/@google-cloud/retail) |
+| [Scheduler](https://github.com/googleapis/nodejs-scheduler) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/scheduler)](https://npm.im/@google-cloud/scheduler) |
 | [Secret Manager](https://github.com/googleapis/nodejs-secret-manager) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/secret-manager)](https://npm.im/@google-cloud/secret-manager) |
 | [Security Command Center](https://github.com/googleapis/nodejs-security-center) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/security-center)](https://npm.im/@google-cloud/security-center) |
 | [Service Control API](https://github.com/googleapis/nodejs-service-control) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/service-control)](https://npm.im/@google-cloud/service-control) |
@@ -119,14 +112,21 @@ applications that interact with individual Google Cloud services:
 | [Stackdriver Debugger](https://github.com/googleapis/cloud-debug-nodejs) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/debug-agent)](https://npm.im/@google-cloud/debug-agent) |
 | [Stackdriver Monitoring](https://github.com/googleapis/nodejs-monitoring) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/monitoring)](https://npm.im/@google-cloud/monitoring) |
 | [Storage](https://github.com/googleapis/nodejs-storage) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/storage)](https://npm.im/@google-cloud/storage) |
+| [Storage Transfer Service](https://github.com/googleapis/nodejs-storage-transfer) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/storage-transfer)](https://npm.im/@google-cloud/storage-transfer) |
 | [Talent Solution](https://github.com/googleapis/nodejs-talent) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/talent)](https://npm.im/@google-cloud/talent) |
+| [Tasks](https://github.com/googleapis/nodejs-tasks) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/tasks)](https://npm.im/@google-cloud/tasks) |
+| [Text-to-Speech](https://github.com/googleapis/nodejs-text-to-speech) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/text-to-speech)](https://npm.im/@google-cloud/text-to-speech) |
 | [TPU](https://github.com/googleapis/nodejs-cloud-tpu) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/tpu)](https://npm.im/@google-cloud/tpu) |
 | [Trace](https://github.com/googleapis/cloud-trace-nodejs) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/trace-agent)](https://npm.im/@google-cloud/trace-agent) |
 | [Transcoder API](https://github.com/googleapis/nodejs-video-transcoder) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/video-transcoder)](https://npm.im/@google-cloud/video-transcoder) |
+| [Translation](https://github.com/googleapis/nodejs-translate) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/translate)](https://npm.im/@google-cloud/translate) |
 | [Vertex AI](https://github.com/googleapis/nodejs-ai-platform) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/aiplatform)](https://npm.im/@google-cloud/aiplatform) |
+| [Video Intelligence](https://github.com/googleapis/nodejs-video-intelligence) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/video-intelligence)](https://npm.im/@google-cloud/video-intelligence) |
 | [Virtual Private Cloud](https://github.com/googleapis/nodejs-vpc-access) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/vpc-access)](https://npm.im/@google-cloud/vpc-access) |
+| [Vision API](https://github.com/googleapis/nodejs-vision) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/vision)](https://npm.im/@google-cloud/vision) |
 | [Web Risk API](https://github.com/googleapis/nodejs-web-risk) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/web-risk)](https://npm.im/@google-cloud/web-risk) |
 | [Web Security Scanner](https://github.com/googleapis/nodejs-web-security-scanner) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/web-security-scanner)](https://npm.im/@google-cloud/web-security-scanner) |
+| [Workflows](https://github.com/googleapis/nodejs-workflows) |  | [![npm](https://img.shields.io/npm/v/@google-cloud/workflows)](https://npm.im/@google-cloud/workflows) |
 
 
 If the service is not listed above, [google-api-nodejs-client](https://github.com/googleapis/google-api-nodejs-client) interfaces
