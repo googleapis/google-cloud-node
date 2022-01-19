@@ -12,6 +12,6 @@
   "name_pretty": "Cloud Tasks",
   "api_id": "tasks.googleapis.com",
   "codeowner_team": "@googleapis/serverless-team",
-  "api_shortname": "tasks",
+  "api_shortname": "cloudtasks",
   "library_type": "GAPIC_AUTO"
 }
