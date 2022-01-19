@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.15.0](https://github.com/googleapis/nodejs-dialogflow-cx/compare/v2.14.0...v2.15.0) (2022-01-19)
+
+
+### Features
+
+* added `TelephonyTransferCall` in response message ([#207](https://github.com/googleapis/nodejs-dialogflow-cx/issues/207)) ([8859e3f](https://github.com/googleapis/nodejs-dialogflow-cx/commit/8859e3ff90a7d46be6a7d09bb8de2ad5db421a8f))
+* added API for changelogs docs: clarified semantic of the streaming APIs ([#197](https://github.com/googleapis/nodejs-dialogflow-cx/issues/197)) ([4f88255](https://github.com/googleapis/nodejs-dialogflow-cx/commit/4f882555cdd0243e775589e49f700defe1fa6902))
+* added API for changelogs docs: clarified semantic of the streaming APIs ([#198](https://github.com/googleapis/nodejs-dialogflow-cx/issues/198)) ([9882149](https://github.com/googleapis/nodejs-dialogflow-cx/commit/988214975c0b7e16fd6ca99a57697ffb0a1ff490))
+* added deployment API feat: exposed DTMF input info in the query result docs: added notes on long running operation ([#191](https://github.com/googleapis/nodejs-dialogflow-cx/issues/191)) ([5460ad4](https://github.com/googleapis/nodejs-dialogflow-cx/commit/5460ad46ffb774f590c8ff24816aa7f116dab112))
+* added support for `TelephonyTransferCall` ([#206](https://github.com/googleapis/nodejs-dialogflow-cx/issues/206)) ([17089de](https://github.com/googleapis/nodejs-dialogflow-cx/commit/17089defcd29ff87ecf4e6fcd9616233e4e26f7e))
+* added support for comparing between versions docs: clarified security settings API reference ([#201](https://github.com/googleapis/nodejs-dialogflow-cx/issues/201)) ([f4ca7e2](https://github.com/googleapis/nodejs-dialogflow-cx/commit/f4ca7e2cb06a149ab50278f692ba7a4ed1e62cc4))
+* added support for DeployFlow api under Environments ([5460ad4](https://github.com/googleapis/nodejs-dialogflow-cx/commit/5460ad46ffb774f590c8ff24816aa7f116dab112))
+* added support for Deployments with ListDeployments and GetDeployment apis ([5460ad4](https://github.com/googleapis/nodejs-dialogflow-cx/commit/5460ad46ffb774f590c8ff24816aa7f116dab112))
+* added support for TestCasesConfig under Environment ([5460ad4](https://github.com/googleapis/nodejs-dialogflow-cx/commit/5460ad46ffb774f590c8ff24816aa7f116dab112))
+* added the display name of the current page in webhook requests ([#211](https://github.com/googleapis/nodejs-dialogflow-cx/issues/211)) ([ae9b5ee](https://github.com/googleapis/nodejs-dialogflow-cx/commit/ae9b5ee6e6f79e81401d934702b0950b29f79ca3))
+* added the display name of the current page in webhook requests ([#212](https://github.com/googleapis/nodejs-dialogflow-cx/issues/212)) ([349bc41](https://github.com/googleapis/nodejs-dialogflow-cx/commit/349bc4108b10263cd2f0354a3ad9e33697fa72a6))
+* allow setting custom CA for generic webhooks ([#203](https://github.com/googleapis/nodejs-dialogflow-cx/issues/203)) ([f5d8155](https://github.com/googleapis/nodejs-dialogflow-cx/commit/f5d8155d7070f4d1b60ba32bc2f168c4169d9546))
+* expose dtmf input info in the query result ([5460ad4](https://github.com/googleapis/nodejs-dialogflow-cx/commit/5460ad46ffb774f590c8ff24816aa7f116dab112))
+
+
+### Bug Fixes
+
+* marked resource name of security setting as not-required ([5460ad4](https://github.com/googleapis/nodejs-dialogflow-cx/commit/5460ad46ffb774f590c8ff24816aa7f116dab112))
+
 ## [2.14.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.13.0...v2.14.0) (2021-09-21)
 
 
