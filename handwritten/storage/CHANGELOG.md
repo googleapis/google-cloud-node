@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.18.0](https://github.com/googleapis/nodejs-storage/compare/v5.17.0...v5.18.0) (2022-01-18)
+
+
+### Features
+
+* Expose `chunkSize` param for `CreateResumableUploadOptions` ([#1754](https://github.com/googleapis/nodejs-storage/issues/1754)) ([3acfd5b](https://github.com/googleapis/nodejs-storage/commit/3acfd5b2412d046c471d8d707023e034dc1a167a))
+
 ## [5.17.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.16.1...v5.17.0) (2022-01-10)
 
 
