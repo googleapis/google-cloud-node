@@ -11,7 +11,7 @@
   "requires_billing": false,
   "name": "grafeas",
   "issue_tracker": "https://github.com/grafeas/grafeas/issues",
-  "codeowner_team": "@googleapis/cicd",
+  "codeowner_team": "@googleapis/aap-dpes",
   "api_shortname": "grafeas",
   "library_type": "GAPIC_AUTO"
 }
