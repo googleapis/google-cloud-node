@@ -185,7 +185,11 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-bigquery-st
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Append_rows_pending | [source code](https://github.com/googleapis/nodejs-bigquery-storage/blob/main/samples/append_rows_pending.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-bigquery-storage&page=editor&open_in_editor=samples/append_rows_pending.js,samples/README.md) |
+| Append_rows_proto2 | [source code](https://github.com/googleapis/nodejs-bigquery-storage/blob/main/samples/append_rows_proto2.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-bigquery-storage&page=editor&open_in_editor=samples/append_rows_proto2.js,samples/README.md) |
+| Customer_record_pb | [source code](https://github.com/googleapis/nodejs-bigquery-storage/blob/main/samples/customer_record_pb.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-bigquery-storage&page=editor&open_in_editor=samples/customer_record_pb.js,samples/README.md) |
 | BigQuery Storage Quickstart | [source code](https://github.com/googleapis/nodejs-bigquery-storage/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-bigquery-storage&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Sample_data_pb2 | [source code](https://github.com/googleapis/nodejs-bigquery-storage/blob/main/samples/sample_data_pb2.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-bigquery-storage&page=editor&open_in_editor=samples/sample_data_pb2.js,samples/README.md) |
 
 
 

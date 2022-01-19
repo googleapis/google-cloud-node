@@ -12,7 +12,11 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Append_rows_pending](#append_rows_pending)
+  * [Append_rows_proto2](#append_rows_proto2)
+  * [Customer_record_pb](#customer_record_pb)
   * [BigQuery Storage Quickstart](#bigquery-storage-quickstart)
+  * [Sample_data_pb2](#sample_data_pb2)
 
 ## Before you begin
 
@@ -29,6 +33,57 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
+### Append_rows_pending
+
+View the [source code](https://github.com/googleapis/nodejs-bigquery-storage/blob/main/samples/append_rows_pending.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-bigquery-storage&page=editor&open_in_editor=samples/append_rows_pending.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/append_rows_pending.js`
+
+
+-----
+
+
+
+
+### Append_rows_proto2
+
+View the [source code](https://github.com/googleapis/nodejs-bigquery-storage/blob/main/samples/append_rows_proto2.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-bigquery-storage&page=editor&open_in_editor=samples/append_rows_proto2.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/append_rows_proto2.js`
+
+
+-----
+
+
+
+
+### Customer_record_pb
+
+View the [source code](https://github.com/googleapis/nodejs-bigquery-storage/blob/main/samples/customer_record_pb.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-bigquery-storage&page=editor&open_in_editor=samples/customer_record_pb.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/customer_record_pb.js`
+
+
+-----
+
+
+
+
 ### BigQuery Storage Quickstart
 
 Read data from a table via read stream.
@@ -41,6 +96,23 @@ __Usage:__
 
 
 `node quickstart.js`
+
+
+-----
+
+
+
+
+### Sample_data_pb2
+
+View the [source code](https://github.com/googleapis/nodejs-bigquery-storage/blob/main/samples/sample_data_pb2.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-bigquery-storage&page=editor&open_in_editor=samples/sample_data_pb2.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/sample_data_pb2.js`
 
 
 
