@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(stream) {
@@ -25,8 +26,7 @@ function main(stream) {
   // const stream = {}
 
   // Imports the Storage library
-  const {BigQueryStorageClient} =
-    require('@google-cloud/bigquery-storage').v1beta1;
+  const {BigQueryStorageClient} = require('@google-cloud/bigquery-storage').v1beta1;
 
   // Instantiates a client
   const storageClient = new BigQueryStorageClient();
