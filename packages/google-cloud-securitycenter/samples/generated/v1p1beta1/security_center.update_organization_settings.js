@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(organizationSettings) {
@@ -30,8 +31,7 @@ function main(organizationSettings) {
   // const updateMask = {}
 
   // Imports the Securitycenter library
-  const {SecurityCenterClient} =
-    require('@google-cloud/security-center').v1p1beta1;
+  const {SecurityCenterClient} = require('@google-cloud/security-center').v1p1beta1;
 
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
@@ -43,9 +43,7 @@ function main(organizationSettings) {
     };
 
     // Run request
-    const response = await securitycenterClient.updateOrganizationSettings(
-      request
-    );
+    const response = await securitycenterClient.updateOrganizationSettings(request);
     console.log(response);
   }
 

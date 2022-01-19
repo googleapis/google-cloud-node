@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, configId, notificationConfig) {
@@ -37,8 +38,7 @@ function main(parent, configId, notificationConfig) {
   // const notificationConfig = {}
 
   // Imports the Securitycenter library
-  const {SecurityCenterClient} =
-    require('@google-cloud/security-center').v1p1beta1;
+  const {SecurityCenterClient} = require('@google-cloud/security-center').v1p1beta1;
 
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
@@ -52,9 +52,7 @@ function main(parent, configId, notificationConfig) {
     };
 
     // Run request
-    const response = await securitycenterClient.createNotificationConfig(
-      request
-    );
+    const response = await securitycenterClient.createNotificationConfig(request);
     console.log(response);
   }
 

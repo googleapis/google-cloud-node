@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, configId, notificationConfig) {
@@ -52,9 +53,7 @@ function main(parent, configId, notificationConfig) {
     };
 
     // Run request
-    const response = await securitycenterClient.createNotificationConfig(
-      request
-    );
+    const response = await securitycenterClient.createNotificationConfig(request);
     console.log(response);
   }
 

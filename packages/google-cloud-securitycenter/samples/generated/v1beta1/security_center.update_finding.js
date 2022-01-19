@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(finding) {
@@ -34,8 +35,7 @@ function main(finding) {
   // const updateMask = {}
 
   // Imports the Securitycenter library
-  const {SecurityCenterClient} =
-    require('@google-cloud/security-center').v1beta1;
+  const {SecurityCenterClient} = require('@google-cloud/security-center').v1beta1;
 
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();

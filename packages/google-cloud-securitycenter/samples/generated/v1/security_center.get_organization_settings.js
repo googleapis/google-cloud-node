@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -38,9 +39,7 @@ function main(name) {
     };
 
     // Run request
-    const response = await securitycenterClient.getOrganizationSettings(
-      request
-    );
+    const response = await securitycenterClient.getOrganizationSettings(request);
     console.log(response);
   }
 
