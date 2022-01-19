@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, requestMetadata) {
@@ -75,13 +76,13 @@ function main(parent, requestMetadata) {
    *    "FULL_TIME", "PART_TIME".
    *  * company_size: histogram by CompanySize google.cloud.talent.v4.CompanySize, for example, "SMALL",
    *  "MEDIUM", "BIG".
-   *  * publish_time_in_day: histogram by the Job.posting_publish_time google.cloud.talent.v4.Job.posting_publish_time
+   *  * publish_time_in_day: histogram by the Job.posting_publish_time google.cloud.talent.v4.Job.posting_publish_time 
    *    in days.
    *    Must specify list of numeric buckets in spec.
-   *  * publish_time_in_month: histogram by the Job.posting_publish_time google.cloud.talent.v4.Job.posting_publish_time
+   *  * publish_time_in_month: histogram by the Job.posting_publish_time google.cloud.talent.v4.Job.posting_publish_time 
    *    in months.
    *    Must specify list of numeric buckets in spec.
-   *  * publish_time_in_year: histogram by the Job.posting_publish_time google.cloud.talent.v4.Job.posting_publish_time
+   *  * publish_time_in_year: histogram by the Job.posting_publish_time google.cloud.talent.v4.Job.posting_publish_time 
    *    in years.
    *    Must specify list of numeric buckets in spec.
    *  * degree_types: histogram by the Job.degree_types google.cloud.talent.v4.Job.degree_types, for example,
@@ -167,9 +168,9 @@ function main(parent, requestMetadata) {
    *  * `"relevance desc"`: By relevance descending, as determined by the API
    *    algorithms. Relevance thresholding of query results is only available
    *    with this ordering.
-   *  * `"posting_publish_time desc"`: By Job.posting_publish_time google.cloud.talent.v4.Job.posting_publish_time
+   *  * `"posting_publish_time desc"`: By Job.posting_publish_time google.cloud.talent.v4.Job.posting_publish_time 
    *    descending.
-   *  * `"posting_update_time desc"`: By Job.posting_update_time google.cloud.talent.v4.Job.posting_update_time
+   *  * `"posting_update_time desc"`: By Job.posting_update_time google.cloud.talent.v4.Job.posting_update_time 
    *    descending.
    *  * `"title"`: By Job.title google.cloud.talent.v4.Job.title  ascending.
    *  * `"title desc"`: By Job.title google.cloud.talent.v4.Job.title  descending.

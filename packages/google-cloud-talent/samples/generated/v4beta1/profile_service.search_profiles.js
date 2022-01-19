@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, requestMetadata) {
@@ -78,11 +79,11 @@ function main(parent, requestMetadata) {
    *    (recently created profiles first).
    *  * "first_name": Sort by PersonName.PersonStructuredName.given_name google.cloud.talent.v4beta1.PersonName.PersonStructuredName.given_name  in
    *    ascending order.
-   *  * "first_name desc": Sort by PersonName.PersonStructuredName.given_name google.cloud.talent.v4beta1.PersonName.PersonStructuredName.given_name
+   *  * "first_name desc": Sort by PersonName.PersonStructuredName.given_name google.cloud.talent.v4beta1.PersonName.PersonStructuredName.given_name 
    *    in descending order.
    *  * "last_name": Sort by PersonName.PersonStructuredName.family_name google.cloud.talent.v4beta1.PersonName.PersonStructuredName.family_name  in
    *    ascending order.
-   *  * "last_name desc": Sort by PersonName.PersonStructuredName.family_name google.cloud.talent.v4beta1.PersonName.PersonStructuredName.family_name
+   *  * "last_name desc": Sort by PersonName.PersonStructuredName.family_name google.cloud.talent.v4beta1.PersonName.PersonStructuredName.family_name 
    *    in ascending order.
    */
   // const orderBy = 'abc123'
@@ -169,7 +170,7 @@ function main(parent, requestMetadata) {
    *  access this result set.
    *  If this field is set, the service will ignore the resource and
    *  profile_query google.cloud.talent.v4beta1.SearchProfilesRequest.profile_query  values, and simply retrieve a page of results from the
-   *  corresponding result set.  In this case, one and only one of page_token google.cloud.talent.v4beta1.SearchProfilesRequest.page_token
+   *  corresponding result set.  In this case, one and only one of page_token google.cloud.talent.v4beta1.SearchProfilesRequest.page_token 
    *  or offset google.cloud.talent.v4beta1.SearchProfilesRequest.offset  must be set.
    *  A typical use case is to invoke SearchProfilesRequest google.cloud.talent.v4beta1.SearchProfilesRequest  without this
    *  field, then use the resulting result_set_id google.cloud.talent.v4beta1.SearchProfilesRequest.result_set_id  in

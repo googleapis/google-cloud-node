@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, jobs) {
@@ -38,7 +39,7 @@ function main(parent, jobs) {
    *  A field mask to restrict the fields that are updated. Only
    *  top level fields of Job google.cloud.talent.v4beta1.Job  are supported.
    *  If update_mask google.cloud.talent.v4beta1.BatchUpdateJobsRequest.update_mask  is provided, The Job google.cloud.talent.v4beta1.Job  inside
-   *  JobResult google.cloud.talent.v4beta1.JobOperationResult.JobResult
+   *  JobResult google.cloud.talent.v4beta1.JobOperationResult.JobResult 
    *  will only contains fields that is updated, plus the Id of the Job.
    *  Otherwise,  Job google.cloud.talent.v4beta1.Job  will include all fields, which can yield a very
    *  large response.
