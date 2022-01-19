@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -39,7 +40,7 @@ function main(parent) {
   // const pageToken = 'abc123'
   /**
    *  Optional. Controls whether folders in the
-   *  DELETE_REQUESTED google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED
+   *  DELETE_REQUESTED google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED 
    *  state should be returned. Defaults to false.
    */
   // const showDeleted = true
@@ -59,7 +60,7 @@ function main(parent) {
     // Run request
     const iterable = await resourcemanagerClient.listFoldersAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

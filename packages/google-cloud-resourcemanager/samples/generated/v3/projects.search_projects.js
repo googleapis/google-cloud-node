@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -57,8 +58,8 @@ function main() {
    */
   // const query = 'abc123'
   /**
-   *  Optional. A pagination token returned from a previous call to ListProjects
-   *  google.cloud.resourcemanager.v3.Projects.ListProjects
+   *  Optional. A pagination token returned from a previous call to ListProjects 
+   *  google.cloud.resourcemanager.v3.Projects.ListProjects 
    *  that indicates from where listing should continue.
    */
   // const pageToken = 'abc123'
@@ -77,12 +78,13 @@ function main() {
 
   async function callSearchProjects() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const iterable = await resourcemanagerClient.searchProjectsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
