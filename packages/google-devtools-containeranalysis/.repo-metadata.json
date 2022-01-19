@@ -11,7 +11,7 @@
   "distribution_name": "@google-cloud/containeranalysis",
   "name_pretty": "Google Container Analysis",
   "product_documentation": "https://cloud.google.com/container-registry/docs/container-analysis",
-  "codeowner_team": "@googleapis/cicd",
+  "codeowner_team": "@googleapis/aap-dpes",
   "api_shortname": "containeranalysis",
   "library_type": "GAPIC_AUTO"
 }
