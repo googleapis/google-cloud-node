@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -41,8 +42,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Iap library
-  const {IdentityAwareProxyOAuthServiceClient} =
-    require('@google-cloud/iap').v1;
+  const {IdentityAwareProxyOAuthServiceClient} = require('@google-cloud/iap').v1;
 
   // Instantiates a client
   const iapClient = new IdentityAwareProxyOAuthServiceClient();
@@ -54,11 +54,9 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await iapClient.listIdentityAwareProxyClientsAsync(
-      request
-    );
+    const iterable = await iapClient.listIdentityAwareProxyClientsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

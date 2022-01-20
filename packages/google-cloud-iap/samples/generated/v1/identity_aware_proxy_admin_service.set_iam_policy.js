@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(resource, policy) {
@@ -33,8 +34,7 @@ function main(resource, policy) {
   // const policy = {}
 
   // Imports the Iap library
-  const {IdentityAwareProxyAdminServiceClient} =
-    require('@google-cloud/iap').v1;
+  const {IdentityAwareProxyAdminServiceClient} = require('@google-cloud/iap').v1;
 
   // Instantiates a client
   const iapClient = new IdentityAwareProxyAdminServiceClient();
