@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(scanConfig, updateMask) {
@@ -33,8 +34,7 @@ function main(scanConfig, updateMask) {
   // const updateMask = {}
 
   // Imports the Websecurityscanner library
-  const {WebSecurityScannerClient} =
-    require('@google-cloud/web-security-scanner').v1beta;
+  const {WebSecurityScannerClient} = require('@google-cloud/web-security-scanner').v1beta;
 
   // Instantiates a client
   const websecurityscannerClient = new WebSecurityScannerClient();

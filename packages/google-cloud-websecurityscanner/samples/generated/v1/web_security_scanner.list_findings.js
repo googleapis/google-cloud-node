@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -46,20 +47,20 @@ function main() {
   // const pageSize = 1234
 
   // Imports the Websecurityscanner library
-  const {WebSecurityScannerClient} =
-    require('@google-cloud/web-security-scanner').v1;
+  const {WebSecurityScannerClient} = require('@google-cloud/web-security-scanner').v1;
 
   // Instantiates a client
   const websecurityscannerClient = new WebSecurityScannerClient();
 
   async function callListFindings() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const iterable = await websecurityscannerClient.listFindingsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

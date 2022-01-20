@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -26,15 +27,15 @@ function main() {
   // const name = 'abc123'
 
   // Imports the Websecurityscanner library
-  const {WebSecurityScannerClient} =
-    require('@google-cloud/web-security-scanner').v1;
+  const {WebSecurityScannerClient} = require('@google-cloud/web-security-scanner').v1;
 
   // Instantiates a client
   const websecurityscannerClient = new WebSecurityScannerClient();
 
   async function callStartScanRun() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const response = await websecurityscannerClient.startScanRun(request);
