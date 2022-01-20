@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(threatTypes) {
@@ -30,8 +31,7 @@ function main(threatTypes) {
   // const threatTypes = 1234
 
   // Imports the Webrisk library
-  const {WebRiskServiceV1Beta1Client} =
-    require('@google-cloud/web-risk').v1beta1;
+  const {WebRiskServiceV1Beta1Client} = require('@google-cloud/web-risk').v1beta1;
 
   // Instantiates a client
   const webriskClient = new WebRiskServiceV1Beta1Client();
