@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(product) {
@@ -26,7 +27,7 @@ function main(product) {
    *  exists, a PERMISSION_DENIED error is returned.
    *  If the Product google.cloud.retail.v2.Product  to update does not exist
    *  and
-   *  allow_missing google.cloud.retail.v2.UpdateProductRequest.allow_missing
+   *  allow_missing google.cloud.retail.v2.UpdateProductRequest.allow_missing 
    *  is not set, a NOT_FOUND error is returned.
    */
   // const product = {}

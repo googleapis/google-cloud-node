@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, inputConfig) {
@@ -33,7 +34,7 @@ function main(parent, inputConfig) {
    *  the pattern: `[a-zA-Z0-9_]+`. This is returned as [Operation.name][] in
    *  ImportMetadata google.cloud.retail.v2beta.ImportMetadata.
    *  Only supported when
-   *  ImportProductsRequest.reconciliation_mode google.cloud.retail.v2beta.ImportProductsRequest.reconciliation_mode
+   *  ImportProductsRequest.reconciliation_mode google.cloud.retail.v2beta.ImportProductsRequest.reconciliation_mode 
    *  is set to `FULL`.
    */
   // const requestId = 'abc123'
@@ -63,7 +64,7 @@ function main(parent, inputConfig) {
    *  Operation google.longrunning.Operation.
    *  Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
    *  Only supported when
-   *  ImportProductsRequest.reconciliation_mode google.cloud.retail.v2beta.ImportProductsRequest.reconciliation_mode
+   *  ImportProductsRequest.reconciliation_mode google.cloud.retail.v2beta.ImportProductsRequest.reconciliation_mode 
    *  is set to `FULL`.
    */
   // const notificationPubsubTopic = 'abc123'

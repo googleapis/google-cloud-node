@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(placement, visitorId) {
@@ -61,10 +62,10 @@ function main(placement, visitorId) {
    *  A page token
    *  SearchResponse.next_page_token google.cloud.retail.v2beta.SearchResponse.next_page_token,
    *  received from a previous
-   *  SearchService.Search google.cloud.retail.v2beta.SearchService.Search
+   *  SearchService.Search google.cloud.retail.v2beta.SearchService.Search 
    *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  SearchService.Search google.cloud.retail.v2beta.SearchService.Search
+   *  SearchService.Search google.cloud.retail.v2beta.SearchService.Search 
    *  must match the call that provided the page token. Otherwise, an
    *  INVALID_ARGUMENT error is returned.
    */
@@ -90,10 +91,10 @@ function main(placement, visitorId) {
    *  The filter applied to every search request when quality improvement such as
    *  query expansion is needed. For example, if a query does not have enough
    *  results, an expanded query with
-   *  SearchRequest.canonical_filter google.cloud.retail.v2beta.SearchRequest.canonical_filter
+   *  SearchRequest.canonical_filter google.cloud.retail.v2beta.SearchRequest.canonical_filter 
    *  will be returned as a supplement of the original query. This field is
    *  strongly recommended to achieve high search quality.
-   *  See SearchRequest.filter google.cloud.retail.v2beta.SearchRequest.filter
+   *  See SearchRequest.filter google.cloud.retail.v2beta.SearchRequest.filter 
    *  for more details about filter syntax.
    */
   // const canonicalFilter = 'abc123'
@@ -137,13 +138,13 @@ function main(placement, visitorId) {
   // const queryExpansionSpec = {}
   /**
    *  The keys to fetch and rollup the matching
-   *  variant google.cloud.retail.v2beta.Product.Type.VARIANT
+   *  variant google.cloud.retail.v2beta.Product.Type.VARIANT 
    *  Product google.cloud.retail.v2beta.Product s attributes. The attributes
    *  from all the matching
-   *  variant google.cloud.retail.v2beta.Product.Type.VARIANT
+   *  variant google.cloud.retail.v2beta.Product.Type.VARIANT 
    *  Product google.cloud.retail.v2beta.Product s are merged and
    *  de-duplicated. Notice that rollup
-   *  variant google.cloud.retail.v2beta.Product.Type.VARIANT
+   *  variant google.cloud.retail.v2beta.Product.Type.VARIANT 
    *  Product google.cloud.retail.v2beta.Product s attributes will lead to
    *  extra query latency. Maximum number of keys is 10.
    *  For FulfillmentInfo google.cloud.retail.v2beta.FulfillmentInfo, a
@@ -162,40 +163,40 @@ function main(placement, visitorId) {
    *  * attributes.key, where key is any key in the
    *    Product.attributes google.cloud.retail.v2beta.Product.attributes  map.
    *  * pickupInStore.id, where id is any
-   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids
-   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type
+   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids 
+   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type 
    *    "pickup-in-store".
    *  * shipToStore.id, where id is any
-   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids
-   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type
+   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids 
+   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type 
    *    "ship-to-store".
    *  * sameDayDelivery.id, where id is any
-   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids
-   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type
+   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids 
+   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type 
    *    "same-day-delivery".
    *  * nextDayDelivery.id, where id is any
-   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids
-   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type
+   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids 
+   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type 
    *    "next-day-delivery".
    *  * customFulfillment1.id, where id is any
-   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids
-   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type
+   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids 
+   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type 
    *    "custom-type-1".
    *  * customFulfillment2.id, where id is any
-   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids
-   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type
+   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids 
+   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type 
    *    "custom-type-2".
    *  * customFulfillment3.id, where id is any
-   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids
-   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type
+   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids 
+   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type 
    *    "custom-type-3".
    *  * customFulfillment4.id, where id is any
-   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids
-   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type
+   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids 
+   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type 
    *    "custom-type-4".
    *  * customFulfillment5.id, where id is any
-   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids
-   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type
+   *  FulfillmentInfo.place_ids google.cloud.retail.v2beta.FulfillmentInfo.place_ids 
+   *  for FulfillmentInfo.type google.cloud.retail.v2beta.FulfillmentInfo.type 
    *    "custom-type-5".
    *  If this field is set to an invalid value other than these, an
    *  INVALID_ARGUMENT error is returned.
@@ -236,7 +237,7 @@ function main(placement, visitorId) {
     // Run request
     const iterable = await retailClient.searchAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

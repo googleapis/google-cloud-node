@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(inventory) {
@@ -22,10 +23,10 @@ function main(inventory) {
   /**
    *  Required. The inventory information to update. The allowable fields to
    *  update are:
-   *  * Product.price_info google.cloud.retail.v2.Product.price_info
-   *  * Product.availability google.cloud.retail.v2.Product.availability
-   *  * Product.available_quantity google.cloud.retail.v2.Product.available_quantity
-   *  * Product.fulfillment_info google.cloud.retail.v2.Product.fulfillment_info
+   *  * Product.price_info google.cloud.retail.v2.Product.price_info 
+   *  * Product.availability google.cloud.retail.v2.Product.availability 
+   *  * Product.available_quantity google.cloud.retail.v2.Product.available_quantity 
+   *  * Product.fulfillment_info google.cloud.retail.v2.Product.fulfillment_info 
    *  The updated inventory fields must be specified in
    *  SetInventoryRequest.set_mask google.cloud.retail.v2.SetInventoryRequest.set_mask.
    *  If SetInventoryRequest.inventory.name   is empty or invalid, an
@@ -43,10 +44,10 @@ function main(inventory) {
    *  provided or default value for
    *  SetInventoryRequest.set_time google.cloud.retail.v2.SetInventoryRequest.set_time.
    *  The last update time is recorded for the following inventory fields:
-   *  * Product.price_info google.cloud.retail.v2.Product.price_info
-   *  * Product.availability google.cloud.retail.v2.Product.availability
-   *  * Product.available_quantity google.cloud.retail.v2.Product.available_quantity
-   *  * Product.fulfillment_info google.cloud.retail.v2.Product.fulfillment_info
+   *  * Product.price_info google.cloud.retail.v2.Product.price_info 
+   *  * Product.availability google.cloud.retail.v2.Product.availability 
+   *  * Product.available_quantity google.cloud.retail.v2.Product.available_quantity 
+   *  * Product.fulfillment_info google.cloud.retail.v2.Product.fulfillment_info 
    *  If a full overwrite of inventory information while ignoring timestamps is
    *  needed, UpdateProduct   should be invoked instead.
    */

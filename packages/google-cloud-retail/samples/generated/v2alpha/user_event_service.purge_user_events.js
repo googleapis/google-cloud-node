@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, filter) {
@@ -30,7 +31,7 @@ function main(parent, filter) {
    *  length limit of 5,000 characters. Empty string filter is not allowed. The
    *  eligible fields for filtering are:
    *  * `eventType`: Double quoted
-   *  UserEvent.event_type google.cloud.retail.v2alpha.UserEvent.event_type
+   *  UserEvent.event_type google.cloud.retail.v2alpha.UserEvent.event_type 
    *  string.
    *  * `eventTime`: in ISO 8601 "zulu" format.
    *  * `visitorId`: Double quoted string. Specifying this will delete all

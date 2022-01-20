@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -32,7 +33,7 @@ function main() {
   // const branchId = 'abc123'
   /**
    *  Some note on this request, this can be retrieved by
-   *  CatalogService.GetDefaultBranch google.cloud.retail.v2beta.CatalogService.GetDefaultBranch
+   *  CatalogService.GetDefaultBranch google.cloud.retail.v2beta.CatalogService.GetDefaultBranch 
    *  before next valid default branch set occurs.
    *  This field must be a UTF-8 encoded string with a length limit of 1,000
    *  characters. Otherwise, an INVALID_ARGUMENT error is returned.
@@ -47,7 +48,8 @@ function main() {
 
   async function callSetDefaultBranch() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const response = await retailClient.setDefaultBranch(request);

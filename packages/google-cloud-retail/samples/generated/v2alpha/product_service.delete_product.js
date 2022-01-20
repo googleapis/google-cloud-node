@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -30,9 +31,9 @@ function main(name) {
    *  exist, a NOT_FOUND error is returned.
    *  The Product google.cloud.retail.v2alpha.Product  to delete can neither be
    *  a
-   *  Product.Type.COLLECTION google.cloud.retail.v2alpha.Product.Type.COLLECTION
+   *  Product.Type.COLLECTION google.cloud.retail.v2alpha.Product.Type.COLLECTION 
    *  Product google.cloud.retail.v2alpha.Product  member nor a
-   *  Product.Type.PRIMARY google.cloud.retail.v2alpha.Product.Type.PRIMARY
+   *  Product.Type.PRIMARY google.cloud.retail.v2alpha.Product.Type.PRIMARY 
    *  Product google.cloud.retail.v2alpha.Product  with more than one
    *  variants google.cloud.retail.v2alpha.Product.Type.VARIANT. Otherwise, an
    *  INVALID_ARGUMENT error is returned.

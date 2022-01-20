@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -40,10 +41,10 @@ function main(parent) {
    *  A page token
    *  ListProductsResponse.next_page_token google.cloud.retail.v2.ListProductsResponse.next_page_token,
    *  received from a previous
-   *  ProductService.ListProducts google.cloud.retail.v2.ProductService.ListProducts
+   *  ProductService.ListProducts google.cloud.retail.v2.ProductService.ListProducts 
    *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  ProductService.ListProducts google.cloud.retail.v2.ProductService.ListProducts
+   *  ProductService.ListProducts google.cloud.retail.v2.ProductService.ListProducts 
    *  must match the call that provided the page token. Otherwise, an
    *  INVALID_ARGUMENT error is returned.
    */
@@ -52,13 +53,13 @@ function main(parent) {
    *  A filter to apply on the list results. Supported features:
    *  * List all the products under the parent branch if
    *  filter google.cloud.retail.v2.ListProductsRequest.filter  is unset.
-   *  * List Product.Type.VARIANT google.cloud.retail.v2.Product.Type.VARIANT
+   *  * List Product.Type.VARIANT google.cloud.retail.v2.Product.Type.VARIANT 
    *  Product google.cloud.retail.v2.Product s sharing the same
-   *    Product.Type.PRIMARY google.cloud.retail.v2.Product.Type.PRIMARY
+   *    Product.Type.PRIMARY google.cloud.retail.v2.Product.Type.PRIMARY 
    *    Product google.cloud.retail.v2.Product. For example:
    *      `primary_product_id = "some_product_id"`
    *  * List Product google.cloud.retail.v2.Product s bundled in a
-   *  Product.Type.COLLECTION google.cloud.retail.v2.Product.Type.COLLECTION
+   *  Product.Type.COLLECTION google.cloud.retail.v2.Product.Type.COLLECTION 
    *  Product google.cloud.retail.v2.Product.
    *    For example:
    *      `collection_product_id = "some_product_id"`
@@ -69,9 +70,9 @@ function main(parent) {
    *      `type = "COLLECTION"`
    *  If the field is unrecognizable, an INVALID_ARGUMENT error is returned.
    *  If the specified
-   *  Product.Type.PRIMARY google.cloud.retail.v2.Product.Type.PRIMARY
+   *  Product.Type.PRIMARY google.cloud.retail.v2.Product.Type.PRIMARY 
    *  Product google.cloud.retail.v2.Product  or
-   *  Product.Type.COLLECTION google.cloud.retail.v2.Product.Type.COLLECTION
+   *  Product.Type.COLLECTION google.cloud.retail.v2.Product.Type.COLLECTION 
    *  Product google.cloud.retail.v2.Product  does not exist, a NOT_FOUND error
    *  is returned.
    */
@@ -79,13 +80,13 @@ function main(parent) {
   /**
    *  The fields of Product google.cloud.retail.v2.Product  to return in the
    *  responses. If not set or empty, the following fields are returned:
-   *  * Product.name google.cloud.retail.v2.Product.name
-   *  * Product.id google.cloud.retail.v2.Product.id
-   *  * Product.title google.cloud.retail.v2.Product.title
-   *  * Product.uri google.cloud.retail.v2.Product.uri
-   *  * Product.images google.cloud.retail.v2.Product.images
-   *  * Product.price_info google.cloud.retail.v2.Product.price_info
-   *  * Product.brands google.cloud.retail.v2.Product.brands
+   *  * Product.name google.cloud.retail.v2.Product.name 
+   *  * Product.id google.cloud.retail.v2.Product.id 
+   *  * Product.title google.cloud.retail.v2.Product.title 
+   *  * Product.uri google.cloud.retail.v2.Product.uri 
+   *  * Product.images google.cloud.retail.v2.Product.images 
+   *  * Product.price_info google.cloud.retail.v2.Product.price_info 
+   *  * Product.brands google.cloud.retail.v2.Product.brands 
    *  If "*" is provided, all fields are returned.
    *  Product.name google.cloud.retail.v2.Product.name  is always returned no
    *  matter what mask is set.
@@ -109,7 +110,7 @@ function main(parent) {
     // Run request
     const iterable = await retailClient.listProductsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

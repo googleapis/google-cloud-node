@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -41,10 +42,10 @@ function main(parent) {
    *  A page token
    *  ListProductsResponse.next_page_token google.cloud.retail.v2alpha.ListProductsResponse.next_page_token,
    *  received from a previous
-   *  ProductService.ListProducts google.cloud.retail.v2alpha.ProductService.ListProducts
+   *  ProductService.ListProducts google.cloud.retail.v2alpha.ProductService.ListProducts 
    *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  ProductService.ListProducts google.cloud.retail.v2alpha.ProductService.ListProducts
+   *  ProductService.ListProducts google.cloud.retail.v2alpha.ProductService.ListProducts 
    *  must match the call that provided the page token. Otherwise, an
    *  INVALID_ARGUMENT error is returned.
    */
@@ -54,13 +55,13 @@ function main(parent) {
    *  * List all the products under the parent branch if
    *  filter google.cloud.retail.v2alpha.ListProductsRequest.filter  is unset.
    *  * List
-   *  Product.Type.VARIANT google.cloud.retail.v2alpha.Product.Type.VARIANT
+   *  Product.Type.VARIANT google.cloud.retail.v2alpha.Product.Type.VARIANT 
    *  Product google.cloud.retail.v2alpha.Product s sharing the same
-   *    Product.Type.PRIMARY google.cloud.retail.v2alpha.Product.Type.PRIMARY
+   *    Product.Type.PRIMARY google.cloud.retail.v2alpha.Product.Type.PRIMARY 
    *    Product google.cloud.retail.v2alpha.Product. For example:
    *      `primary_product_id = "some_product_id"`
    *  * List Product google.cloud.retail.v2alpha.Product s bundled in a
-   *  Product.Type.COLLECTION google.cloud.retail.v2alpha.Product.Type.COLLECTION
+   *  Product.Type.COLLECTION google.cloud.retail.v2alpha.Product.Type.COLLECTION 
    *  Product google.cloud.retail.v2alpha.Product.
    *    For example:
    *      `collection_product_id = "some_product_id"`
@@ -71,9 +72,9 @@ function main(parent) {
    *      `type = "COLLECTION"`
    *  If the field is unrecognizable, an INVALID_ARGUMENT error is returned.
    *  If the specified
-   *  Product.Type.PRIMARY google.cloud.retail.v2alpha.Product.Type.PRIMARY
+   *  Product.Type.PRIMARY google.cloud.retail.v2alpha.Product.Type.PRIMARY 
    *  Product google.cloud.retail.v2alpha.Product  or
-   *  Product.Type.COLLECTION google.cloud.retail.v2alpha.Product.Type.COLLECTION
+   *  Product.Type.COLLECTION google.cloud.retail.v2alpha.Product.Type.COLLECTION 
    *  Product google.cloud.retail.v2alpha.Product  does not exist, a NOT_FOUND
    *  error is returned.
    */
@@ -81,13 +82,13 @@ function main(parent) {
   /**
    *  The fields of Product google.cloud.retail.v2alpha.Product  to return in
    *  the responses. If not set or empty, the following fields are returned:
-   *  * Product.name google.cloud.retail.v2alpha.Product.name
-   *  * Product.id google.cloud.retail.v2alpha.Product.id
-   *  * Product.title google.cloud.retail.v2alpha.Product.title
-   *  * Product.uri google.cloud.retail.v2alpha.Product.uri
-   *  * Product.images google.cloud.retail.v2alpha.Product.images
-   *  * Product.price_info google.cloud.retail.v2alpha.Product.price_info
-   *  * Product.brands google.cloud.retail.v2alpha.Product.brands
+   *  * Product.name google.cloud.retail.v2alpha.Product.name 
+   *  * Product.id google.cloud.retail.v2alpha.Product.id 
+   *  * Product.title google.cloud.retail.v2alpha.Product.title 
+   *  * Product.uri google.cloud.retail.v2alpha.Product.uri 
+   *  * Product.images google.cloud.retail.v2alpha.Product.images 
+   *  * Product.price_info google.cloud.retail.v2alpha.Product.price_info 
+   *  * Product.brands google.cloud.retail.v2alpha.Product.brands 
    *  If "*" is provided, all fields are returned.
    *  Product.name google.cloud.retail.v2alpha.Product.name  is always returned
    *  no matter what mask is set.
@@ -99,7 +100,7 @@ function main(parent) {
    *  If true and
    *  page_token google.cloud.retail.v2alpha.ListProductsRequest.page_token  is
    *  empty,
-   *  ListProductsResponse.total_size google.cloud.retail.v2alpha.ListProductsResponse.total_size
+   *  ListProductsResponse.total_size google.cloud.retail.v2alpha.ListProductsResponse.total_size 
    *  is set to the total count of matched items irrespective of pagination.
    *  Notice that setting this field to true affects the performance.
    */
@@ -120,7 +121,7 @@ function main(parent) {
     // Run request
     const iterable = await retailClient.listProductsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

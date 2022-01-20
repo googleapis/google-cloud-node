@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -38,10 +39,10 @@ function main(parent) {
    *  A page token
    *  ListCatalogsResponse.next_page_token google.cloud.retail.v2alpha.ListCatalogsResponse.next_page_token,
    *  received from a previous
-   *  CatalogService.ListCatalogs google.cloud.retail.v2alpha.CatalogService.ListCatalogs
+   *  CatalogService.ListCatalogs google.cloud.retail.v2alpha.CatalogService.ListCatalogs 
    *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  CatalogService.ListCatalogs google.cloud.retail.v2alpha.CatalogService.ListCatalogs
+   *  CatalogService.ListCatalogs google.cloud.retail.v2alpha.CatalogService.ListCatalogs 
    *  must match the call that provided the page token. Otherwise, an
    *  INVALID_ARGUMENT error is returned.
    */
@@ -62,7 +63,7 @@ function main(parent) {
     // Run request
     const iterable = await retailClient.listCatalogsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
