@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -53,8 +54,7 @@ function main(parent) {
   // const orderBy = 'abc123'
 
   // Imports the Privateca library
-  const {CertificateAuthorityServiceClient} =
-    require('@google-cloud/security-private-ca').v1;
+  const {CertificateAuthorityServiceClient} = require('@google-cloud/security-private-ca').v1;
 
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
@@ -68,7 +68,7 @@ function main(parent) {
     // Run request
     const iterable = await privatecaClient.listCertificatesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

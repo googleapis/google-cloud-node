@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -28,7 +29,7 @@ function main(parent) {
   /**
    *  Optional. Limit on the number of
    *  CertificateRevocationLists google.cloud.security.privateca.v1beta1.CertificateRevocationList  to include in the
-   *  response. Further CertificateRevocationLists google.cloud.security.privateca.v1beta1.CertificateRevocationList
+   *  response. Further CertificateRevocationLists google.cloud.security.privateca.v1beta1.CertificateRevocationList 
    *  can subsequently be obtained by including the
    *  ListCertificateRevocationListsResponse.next_page_token google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsResponse.next_page_token  in a subsequent
    *  request. If unspecified, the server will pick an appropriate default.
@@ -49,8 +50,7 @@ function main(parent) {
   // const orderBy = 'abc123'
 
   // Imports the Privateca library
-  const {CertificateAuthorityServiceClient} =
-    require('@google-cloud/security-private-ca').v1beta1;
+  const {CertificateAuthorityServiceClient} = require('@google-cloud/security-private-ca').v1beta1;
 
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
@@ -62,11 +62,9 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await privatecaClient.listCertificateRevocationListsAsync(
-      request
-    );
+    const iterable = await privatecaClient.listCertificateRevocationListsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

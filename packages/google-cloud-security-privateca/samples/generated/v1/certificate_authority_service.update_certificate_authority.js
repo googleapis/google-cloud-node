@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(certificateAuthority, updateMask) {
@@ -43,8 +44,7 @@ function main(certificateAuthority, updateMask) {
   // const requestId = 'abc123'
 
   // Imports the Privateca library
-  const {CertificateAuthorityServiceClient} =
-    require('@google-cloud/security-private-ca').v1;
+  const {CertificateAuthorityServiceClient} = require('@google-cloud/security-private-ca').v1;
 
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
@@ -57,9 +57,7 @@ function main(certificateAuthority, updateMask) {
     };
 
     // Run request
-    const [operation] = await privatecaClient.updateCertificateAuthority(
-      request
-    );
+    const [operation] = await privatecaClient.updateCertificateAuthority(request);
     const [response] = await operation.promise();
     console.log(response);
   }

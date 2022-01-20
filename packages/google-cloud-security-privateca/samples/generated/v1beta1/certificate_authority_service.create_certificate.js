@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, certificate) {
@@ -20,7 +21,7 @@ function main(parent, certificate) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the location and CertificateAuthority google.cloud.security.privateca.v1beta1.CertificateAuthority
+   *  Required. The resource name of the location and CertificateAuthority google.cloud.security.privateca.v1beta1.CertificateAuthority 
    *  associated with the Certificate google.cloud.security.privateca.v1beta1.Certificate, in the format
    *  `projects/* /locations/* /certificateAuthorities/*`.
    */
@@ -52,8 +53,7 @@ function main(parent, certificate) {
   // const requestId = 'abc123'
 
   // Imports the Privateca library
-  const {CertificateAuthorityServiceClient} =
-    require('@google-cloud/security-private-ca').v1beta1;
+  const {CertificateAuthorityServiceClient} = require('@google-cloud/security-private-ca').v1beta1;
 
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
