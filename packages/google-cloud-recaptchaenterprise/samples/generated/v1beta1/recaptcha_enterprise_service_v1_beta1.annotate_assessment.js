@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name, annotation) {
@@ -30,12 +31,10 @@ function main(name, annotation) {
   // const annotation = {}
 
   // Imports the Recaptchaenterprise library
-  const {RecaptchaEnterpriseServiceV1Beta1Client} =
-    require('@google-cloud/recaptcha-enterprise').v1beta1;
+  const {RecaptchaEnterpriseServiceV1Beta1Client} = require('@google-cloud/recaptcha-enterprise').v1beta1;
 
   // Instantiates a client
-  const recaptchaenterpriseClient =
-    new RecaptchaEnterpriseServiceV1Beta1Client();
+  const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceV1Beta1Client();
 
   async function callAnnotateAssessment() {
     // Construct request
@@ -45,9 +44,7 @@ function main(name, annotation) {
     };
 
     // Run request
-    const response = await recaptchaenterpriseClient.annotateAssessment(
-      request
-    );
+    const response = await recaptchaenterpriseClient.annotateAssessment(request);
     console.log(response);
   }
 

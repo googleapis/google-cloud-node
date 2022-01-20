@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, key) {
@@ -30,12 +31,10 @@ function main(parent, key) {
   // const key = {}
 
   // Imports the Recaptchaenterprise library
-  const {RecaptchaEnterpriseServiceV1Beta1Client} =
-    require('@google-cloud/recaptcha-enterprise').v1beta1;
+  const {RecaptchaEnterpriseServiceV1Beta1Client} = require('@google-cloud/recaptcha-enterprise').v1beta1;
 
   // Instantiates a client
-  const recaptchaenterpriseClient =
-    new RecaptchaEnterpriseServiceV1Beta1Client();
+  const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceV1Beta1Client();
 
   async function callCreateKey() {
     // Construct request

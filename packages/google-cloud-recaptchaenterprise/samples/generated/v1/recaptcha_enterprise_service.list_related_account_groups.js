@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -41,8 +42,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Recaptchaenterprise library
-  const {RecaptchaEnterpriseServiceClient} =
-    require('@google-cloud/recaptcha-enterprise').v1;
+  const {RecaptchaEnterpriseServiceClient} = require('@google-cloud/recaptcha-enterprise').v1;
 
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
@@ -54,10 +54,9 @@ function main(parent) {
     };
 
     // Run request
-    const iterable =
-      await recaptchaenterpriseClient.listRelatedAccountGroupsAsync(request);
+    const iterable = await recaptchaenterpriseClient.listRelatedAccountGroupsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, assessment) {
@@ -30,8 +31,7 @@ function main(parent, assessment) {
   // const assessment = {}
 
   // Imports the Recaptchaenterprise library
-  const {RecaptchaEnterpriseServiceClient} =
-    require('@google-cloud/recaptcha-enterprise').v1;
+  const {RecaptchaEnterpriseServiceClient} = require('@google-cloud/recaptcha-enterprise').v1;
 
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
