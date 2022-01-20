@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -48,8 +49,7 @@ function main(name) {
   // const imagePullSecretContent = 'Buffer.from('string')'
 
   // Imports the Gkehub library
-  const {GkeHubMembershipServiceClient} =
-    require('@google-cloud/gke-hub').v1beta1;
+  const {GkeHubMembershipServiceClient} = require('@google-cloud/gke-hub').v1beta1;
 
   // Instantiates a client
   const gkehubClient = new GkeHubMembershipServiceClient();
