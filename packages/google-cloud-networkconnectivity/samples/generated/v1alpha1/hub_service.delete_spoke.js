@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -39,8 +40,7 @@ function main(name) {
   // const requestId = 'abc123'
 
   // Imports the Networkconnectivity library
-  const {HubServiceClient} =
-    require('@google-cloud/network-connectivity').v1alpha1;
+  const {HubServiceClient} = require('@google-cloud/network-connectivity').v1alpha1;
 
   // Instantiates a client
   const networkconnectivityClient = new HubServiceClient();
