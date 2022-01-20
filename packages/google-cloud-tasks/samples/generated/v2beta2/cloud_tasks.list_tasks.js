@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -51,7 +52,7 @@ function main(parent) {
    *  To request the first page results, page_token must be empty. To
    *  request the next page of results, page_token must be the value of
    *  next_page_token google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token  returned
-   *  from the previous call to ListTasks google.cloud.tasks.v2beta2.CloudTasks.ListTasks
+   *  from the previous call to ListTasks google.cloud.tasks.v2beta2.CloudTasks.ListTasks 
    *  method.
    *  The page token is valid for only 2 hours.
    */
@@ -72,7 +73,7 @@ function main(parent) {
     // Run request
     const iterable = await tasksClient.listTasksAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

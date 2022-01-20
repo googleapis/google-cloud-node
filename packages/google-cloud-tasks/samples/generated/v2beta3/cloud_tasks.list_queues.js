@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -25,7 +26,7 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  `filter` can be used to specify a subset of queues. Any Queue google.cloud.tasks.v2beta3.Queue
+   *  `filter` can be used to specify a subset of queues. Any Queue google.cloud.tasks.v2beta3.Queue 
    *  field can be used as a filter and several operators as supported.
    *  For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
    *  described in
@@ -50,7 +51,7 @@ function main(parent) {
    *  To request the first page results, page_token must be empty. To
    *  request the next page of results, page_token must be the value of
    *  next_page_token google.cloud.tasks.v2beta3.ListQueuesResponse.next_page_token  returned
-   *  from the previous call to ListQueues google.cloud.tasks.v2beta3.CloudTasks.ListQueues
+   *  from the previous call to ListQueues google.cloud.tasks.v2beta3.CloudTasks.ListQueues 
    *  method. It is an error to switch the value of the
    *  filter google.cloud.tasks.v2beta3.ListQueuesRequest.filter  while iterating through pages.
    */
@@ -78,7 +79,7 @@ function main(parent) {
     // Run request
     const iterable = await tasksClient.listQueuesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
