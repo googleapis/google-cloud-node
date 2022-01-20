@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -35,7 +36,7 @@ function main() {
    *  of the report.
    *  There is no limit on the number of operations in the same ReportRequest,
    *  however the ReportRequest size should be no larger than 1MB. See
-   *  ReportResponse.report_errors google.api.servicecontrol.v1.ReportResponse.report_errors
+   *  ReportResponse.report_errors google.api.servicecontrol.v1.ReportResponse.report_errors 
    *  for partial failure behavior.
    */
   // const operations = 1234
@@ -55,7 +56,8 @@ function main() {
 
   async function callReport() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const response = await servicecontrolClient.report(request);
