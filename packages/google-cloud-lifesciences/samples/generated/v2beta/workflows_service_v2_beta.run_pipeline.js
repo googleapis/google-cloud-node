@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(pipeline) {
@@ -44,8 +45,7 @@ function main(pipeline) {
   // const pubSubTopic = 'abc123'
 
   // Imports the Lifesciences library
-  const {WorkflowsServiceV2BetaClient} =
-    require('@google-cloud/life-sciences').v2beta;
+  const {WorkflowsServiceV2BetaClient} = require('@google-cloud/life-sciences').v2beta;
 
   // Instantiates a client
   const lifesciencesClient = new WorkflowsServiceV2BetaClient();
