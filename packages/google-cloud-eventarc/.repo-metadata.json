@@ -12,5 +12,6 @@
   "default_version": "v1",
   "requires_billing": true,
   "api_shortname": "eventarc",
-  "library_type": "GAPIC_AUTO"
+  "library_type": "GAPIC_AUTO",
+  "codeowner_team": "@googleapis/aap-dpes"
 }
