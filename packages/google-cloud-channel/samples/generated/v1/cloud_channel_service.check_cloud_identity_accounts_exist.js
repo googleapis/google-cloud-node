@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, domain) {
@@ -43,9 +44,7 @@ function main(parent, domain) {
     };
 
     // Run request
-    const response = await channelClient.checkCloudIdentityAccountsExist(
-      request
-    );
+    const response = await channelClient.checkCloudIdentityAccountsExist(request);
     console.log(response);
   }
 

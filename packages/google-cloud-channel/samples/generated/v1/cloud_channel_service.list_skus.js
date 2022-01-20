@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, account) {
@@ -64,7 +65,7 @@ function main(parent, account) {
     // Run request
     const iterable = await channelClient.listSkusAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
