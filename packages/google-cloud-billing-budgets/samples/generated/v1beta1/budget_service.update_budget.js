@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(budget) {
@@ -35,8 +36,7 @@ function main(budget) {
   // const updateMask = {}
 
   // Imports the Budgets library
-  const {BudgetServiceClient} =
-    require('@google-cloud/billing-budgets').v1beta1;
+  const {BudgetServiceClient} = require('@google-cloud/billing-budgets').v1beta1;
 
   // Instantiates a client
   const budgetsClient = new BudgetServiceClient();
