@@ -632,7 +632,7 @@
     "distribution_name": "@google-cloud/containeranalysis",
     "name_pretty": "Google Container Analysis",
     "product_documentation": "https://cloud.google.com/container-registry/docs/container-analysis",
-    "codeowner_team": "@googleapis/cicd",
+    "codeowner_team": "@googleapis/aap-dpes",
     "api_shortname": "containeranalysis",
     "library_type": "GAPIC_AUTO",
     "support_documentation": "https://cloud.google.com/container-registry/docs/getting-support"
@@ -650,7 +650,7 @@
     "requires_billing": false,
     "name": "grafeas",
     "issue_tracker": "https://github.com/grafeas/grafeas/issues",
-    "codeowner_team": "@googleapis/cicd",
+    "codeowner_team": "@googleapis/aap-dpes",
     "api_shortname": "grafeas",
     "library_type": "GAPIC_AUTO",
     "support_documentation": "https://cloud.google.com/container-registry/docs/getting-support"
@@ -780,12 +780,14 @@
     "product_documentation": "https://cloud.google.com/logging",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/logging-winston/latest",
     "issue_tracker": "https://issuetracker.google.com/savedsearches/559764",
-    "release_level": "ga",
+    "release_level": "stable",
     "language": "nodejs",
     "repo": "googleapis/nodejs-logging-winston",
     "distribution_name": "@google-cloud/logging-winston",
     "api_id": "logging.googleapis.com",
     "codeowner_team": "@googleapis/api-logging",
+    "api_shortname": "logging-winston",
+    "library_type": "OTHER",
     "support_documentation": "https://cloud.google.com/logging"
   },
   {
@@ -1261,7 +1263,7 @@
     "name_pretty": "Tasks",
     "api_id": "tasks.googleapis.com",
     "codeowner_team": "@googleapis/serverless-team",
-    "api_shortname": "tasks",
+    "api_shortname": "cloudtasks",
     "library_type": "GAPIC_AUTO",
     "support_documentation": "https://cloud.google.com/tasks/docs/getting-support"
   },
