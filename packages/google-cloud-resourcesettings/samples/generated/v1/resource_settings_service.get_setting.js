@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -30,8 +31,7 @@ function main(name) {
   // const view = {}
 
   // Imports the Resourcesettings library
-  const {ResourceSettingsServiceClient} =
-    require('@google-cloud/resource-settings').v1;
+  const {ResourceSettingsServiceClient} = require('@google-cloud/resource-settings').v1;
 
   // Instantiates a client
   const resourcesettingsClient = new ResourceSettingsServiceClient();
