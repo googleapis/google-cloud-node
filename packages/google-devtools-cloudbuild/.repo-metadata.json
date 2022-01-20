@@ -1,6 +1,6 @@
 {
   "repo": "googleapis/nodejs-cloudbuild",
-  "codeowner_team": "@googleapis/cicd",
+  "codeowner_team": "@googleapis/aap-dpes",
   "requires_billing": true,
   "name": "cloudbuild",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5226584",
