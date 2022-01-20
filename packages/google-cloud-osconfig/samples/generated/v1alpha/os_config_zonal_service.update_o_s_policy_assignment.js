@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(osPolicyAssignment) {
@@ -29,8 +30,7 @@ function main(osPolicyAssignment) {
   // const updateMask = {}
 
   // Imports the Osconfig library
-  const {OsConfigZonalServiceClient} =
-    require('@google-cloud/os-config').v1alpha;
+  const {OsConfigZonalServiceClient} = require('@google-cloud/os-config').v1alpha;
 
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();

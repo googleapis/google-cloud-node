@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -49,8 +50,7 @@ function main(parent) {
   // const filter = 'abc123'
 
   // Imports the Osconfig library
-  const {OsConfigZonalServiceClient} =
-    require('@google-cloud/os-config').v1alpha;
+  const {OsConfigZonalServiceClient} = require('@google-cloud/os-config').v1alpha;
 
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();
@@ -64,7 +64,7 @@ function main(parent) {
     // Run request
     const iterable = await osconfigClient.listInventoriesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
