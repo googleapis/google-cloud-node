@@ -3,7 +3,7 @@
   "release_level": "preview",
   "requires_billing": true,
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/artifact-registry/latest",
-  "codeowner_team": "@googleapis/cicd",
+  "codeowner_team": "@googleapis/aap-dpes",
   "language": "nodejs",
   "issue_tracker": "https://github.com/googleapis/nodejs-artifact-registry/issues",
   "product_documentation": "https://cloud.google.com/artifact-registry/",
