@@ -3,7 +3,7 @@
   "release_level": "stable",
   "requires_billing": false,
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/scheduler/latest",
-  "codeowner_team": "@googleapis/serverless-team",
+  "codeowner_team": "@googleapis/aap-dpes",
   "language": "nodejs",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5411429",
   "product_documentation": "https://cloud.google.com/scheduler",
