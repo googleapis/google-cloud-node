@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, utilizationReport, utilizationReportId) {
@@ -65,9 +66,7 @@ function main(parent, utilizationReport, utilizationReportId) {
     };
 
     // Run request
-    const [operation] = await vmmigrationClient.createUtilizationReport(
-      request
-    );
+    const [operation] = await vmmigrationClient.createUtilizationReport(request);
     const [response] = await operation.promise();
     console.log(response);
   }

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, pageToken) {
@@ -61,11 +62,9 @@ function main(parent, pageToken) {
     };
 
     // Run request
-    const iterable = await vmmigrationClient.listDatacenterConnectorsAsync(
-      request
-    );
+    const iterable = await vmmigrationClient.listDatacenterConnectorsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
