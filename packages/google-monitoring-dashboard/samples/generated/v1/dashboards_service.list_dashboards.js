@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -37,8 +38,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Dashboard library
-  const {DashboardsServiceClient} =
-    require('@google-cloud/monitoring-dashboards').v1;
+  const {DashboardsServiceClient} = require('@google-cloud/monitoring-dashboards').v1;
 
   // Instantiates a client
   const dashboardClient = new DashboardsServiceClient();
@@ -52,7 +52,7 @@ function main(parent) {
     // Run request
     const iterable = await dashboardClient.listDashboardsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

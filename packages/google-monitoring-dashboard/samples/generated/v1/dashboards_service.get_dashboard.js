@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -28,8 +29,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Dashboard library
-  const {DashboardsServiceClient} =
-    require('@google-cloud/monitoring-dashboards').v1;
+  const {DashboardsServiceClient} = require('@google-cloud/monitoring-dashboards').v1;
 
   // Instantiates a client
   const dashboardClient = new DashboardsServiceClient();

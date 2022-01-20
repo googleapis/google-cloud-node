@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, dashboard) {
@@ -36,8 +37,7 @@ function main(parent, dashboard) {
   // const validateOnly = true
 
   // Imports the Dashboard library
-  const {DashboardsServiceClient} =
-    require('@google-cloud/monitoring-dashboards').v1;
+  const {DashboardsServiceClient} = require('@google-cloud/monitoring-dashboards').v1;
 
   // Instantiates a client
   const dashboardClient = new DashboardsServiceClient();
