@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -28,7 +29,7 @@ function main(parent) {
    *  Optional. The maximum number of items to return.  If unspecified, server
    *  will pick an appropriate default. Server may return fewer items than
    *  requested. A caller should only rely on response's
-   *  next_page_token google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token
+   *  next_page_token google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token 
    *  to determine if there are more realms left to be queried.
    */
   // const pageSize = 1234
@@ -62,7 +63,7 @@ function main(parent) {
     // Run request
     const iterable = await gamingClient.listRealmsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

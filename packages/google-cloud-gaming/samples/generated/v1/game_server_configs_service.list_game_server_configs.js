@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -47,8 +48,7 @@ function main(parent) {
   // const orderBy = 'abc123'
 
   // Imports the Gaming library
-  const {GameServerConfigsServiceClient} =
-    require('@google-cloud/game-servers').v1;
+  const {GameServerConfigsServiceClient} = require('@google-cloud/game-servers').v1;
 
   // Instantiates a client
   const gamingClient = new GameServerConfigsServiceClient();
@@ -62,7 +62,7 @@ function main(parent) {
     // Run request
     const iterable = await gamingClient.listGameServerConfigsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

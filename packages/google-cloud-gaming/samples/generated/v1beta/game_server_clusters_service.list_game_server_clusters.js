@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -28,7 +29,7 @@ function main(parent) {
    *  Optional. The maximum number of items to return.  If unspecified, the
    *  server will pick an appropriate default. The server may return fewer items
    *  than requested. A caller should only rely on response's
-   *  next_page_token google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token
+   *  next_page_token google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token 
    *  to determine if there are more GameServerClusters left to be queried.
    */
   // const pageSize = 1234
@@ -48,8 +49,7 @@ function main(parent) {
   // const orderBy = 'abc123'
 
   // Imports the Gaming library
-  const {GameServerClustersServiceClient} =
-    require('@google-cloud/game-servers').v1beta;
+  const {GameServerClustersServiceClient} = require('@google-cloud/game-servers').v1beta;
 
   // Instantiates a client
   const gamingClient = new GameServerClustersServiceClient();
@@ -63,7 +63,7 @@ function main(parent) {
     // Run request
     const iterable = await gamingClient.listGameServerClustersAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -35,8 +36,7 @@ function main(name) {
   // const view = {}
 
   // Imports the Gaming library
-  const {GameServerClustersServiceClient} =
-    require('@google-cloud/game-servers').v1;
+  const {GameServerClustersServiceClient} = require('@google-cloud/game-servers').v1;
 
   // Instantiates a client
   const gamingClient = new GameServerClustersServiceClient();

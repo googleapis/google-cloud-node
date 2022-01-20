@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -56,8 +57,7 @@ function main(parent) {
   // const view = {}
 
   // Imports the Gaming library
-  const {GameServerClustersServiceClient} =
-    require('@google-cloud/game-servers').v1;
+  const {GameServerClustersServiceClient} = require('@google-cloud/game-servers').v1;
 
   // Instantiates a client
   const gamingClient = new GameServerClustersServiceClient();
@@ -71,7 +71,7 @@ function main(parent) {
     // Run request
     const iterable = await gamingClient.listGameServerClustersAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

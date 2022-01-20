@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, deploymentId, gameServerDeployment) {
@@ -34,8 +35,7 @@ function main(parent, deploymentId, gameServerDeployment) {
   // const gameServerDeployment = {}
 
   // Imports the Gaming library
-  const {GameServerDeploymentsServiceClient} =
-    require('@google-cloud/game-servers').v1beta;
+  const {GameServerDeploymentsServiceClient} = require('@google-cloud/game-servers').v1beta;
 
   // Instantiates a client
   const gamingClient = new GameServerDeploymentsServiceClient();
