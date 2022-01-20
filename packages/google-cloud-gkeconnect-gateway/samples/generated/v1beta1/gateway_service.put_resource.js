@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -34,15 +35,15 @@ function main() {
   // const extensions = 1234
 
   // Imports the Gateway library
-  const {GatewayServiceClient} =
-    require('@google-cloud/gke-connect-gateway').v1beta1;
+  const {GatewayServiceClient} = require('@google-cloud/gke-connect-gateway').v1beta1;
 
   // Instantiates a client
   const gatewayClient = new GatewayServiceClient();
 
   async function callPutResource() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const response = await gatewayClient.putResource(request);
