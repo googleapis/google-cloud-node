@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -47,12 +48,11 @@ function main() {
 
   async function callDeleteConsumerOverride() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
-    const [operation] = await serviceusageClient.deleteConsumerOverride(
-      request
-    );
+    const [operation] = await serviceusageClient.deleteConsumerOverride(request);
     const [response] = await operation.promise();
     console.log(response);
   }

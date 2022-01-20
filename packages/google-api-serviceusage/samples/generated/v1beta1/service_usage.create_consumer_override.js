@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -52,12 +53,11 @@ function main() {
 
   async function callCreateConsumerOverride() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
-    const [operation] = await serviceusageClient.createConsumerOverride(
-      request
-    );
+    const [operation] = await serviceusageClient.createConsumerOverride(request);
     const [response] = await operation.promise();
     console.log(response);
   }
