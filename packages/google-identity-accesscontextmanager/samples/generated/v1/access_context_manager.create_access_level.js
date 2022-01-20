@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, accessLevel) {
@@ -26,17 +27,16 @@ function main(parent, accessLevel) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. The Access Level
+   *  Required. The Access Level 
    *  google.identity.accesscontextmanager.v1.AccessLevel  to create.
-   *  Syntactic correctness of the Access Level
+   *  Syntactic correctness of the Access Level 
    *  google.identity.accesscontextmanager.v1.AccessLevel  is a
    *  precondition for creation.
    */
   // const accessLevel = {}
 
   // Imports the Accesscontextmanager library
-  const {AccessContextManagerClient} =
-    require('@google-cloud/access-context-manager').v1;
+  const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
@@ -49,9 +49,7 @@ function main(parent, accessLevel) {
     };
 
     // Run request
-    const [operation] = await accesscontextmanagerClient.createAccessLevel(
-      request
-    );
+    const [operation] = await accesscontextmanagerClient.createAccessLevel(request);
     const [response] = await operation.promise();
     console.log(response);
   }

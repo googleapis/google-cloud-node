@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -37,8 +38,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Accesscontextmanager library
-  const {AccessContextManagerClient} =
-    require('@google-cloud/access-context-manager').v1;
+  const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
@@ -50,11 +50,9 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await accesscontextmanagerClient.listAccessPoliciesAsync(
-      request
-    );
+    const iterable = await accesscontextmanagerClient.listAccessPoliciesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

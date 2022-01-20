@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(gcpUserAccessBinding, updateMask) {
@@ -20,8 +21,8 @@ function main(gcpUserAccessBinding, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. GcpUserAccessBinding
-   *  google.identity.accesscontextmanager.v1.GcpUserAccessBinding
+   *  Required. GcpUserAccessBinding 
+   *  google.identity.accesscontextmanager.v1.GcpUserAccessBinding 
    */
   // const gcpUserAccessBinding = {}
   /**
@@ -34,8 +35,7 @@ function main(gcpUserAccessBinding, updateMask) {
   // const updateMask = {}
 
   // Imports the Accesscontextmanager library
-  const {AccessContextManagerClient} =
-    require('@google-cloud/access-context-manager').v1;
+  const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
@@ -48,8 +48,7 @@ function main(gcpUserAccessBinding, updateMask) {
     };
 
     // Run request
-    const [operation] =
-      await accesscontextmanagerClient.updateGcpUserAccessBinding(request);
+    const [operation] = await accesscontextmanagerClient.updateGcpUserAccessBinding(request);
     const [response] = await operation.promise();
     console.log(response);
   }

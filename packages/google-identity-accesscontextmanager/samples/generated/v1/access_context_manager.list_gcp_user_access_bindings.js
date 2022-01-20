@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -30,15 +31,14 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  Optional. If left blank, returns the first page. To enumerate all items, use the
-   *  next_page_token
-   *  google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsResponse.next_page_token
+   *  next_page_token 
+   *  google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsResponse.next_page_token 
    *  from your previous list operation.
    */
   // const pageToken = 'abc123'
 
   // Imports the Accesscontextmanager library
-  const {AccessContextManagerClient} =
-    require('@google-cloud/access-context-manager').v1;
+  const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
@@ -50,10 +50,9 @@ function main(parent) {
     };
 
     // Run request
-    const iterable =
-      await accesscontextmanagerClient.listGcpUserAccessBindingsAsync(request);
+    const iterable = await accesscontextmanagerClient.listGcpUserAccessBindingsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

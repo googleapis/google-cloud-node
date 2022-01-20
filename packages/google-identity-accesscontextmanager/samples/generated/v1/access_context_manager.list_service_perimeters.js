@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -20,28 +21,27 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for the access policy to list Service Perimeters
+   *  Required. Resource name for the access policy to list Service Perimeters 
    *  google.identity.accesscontextmanager.v1.ServicePerimeter  from.
    *  Format:
    *  `accessPolicies/{policy_id}`
    */
   // const parent = 'abc123'
   /**
-   *  Number of Service Perimeters
+   *  Number of Service Perimeters 
    *  google.identity.accesscontextmanager.v1.ServicePerimeter  to include
    *  in the list. Default 100.
    */
   // const pageSize = 1234
   /**
-   *  Next page token for the next batch of Service Perimeter
+   *  Next page token for the next batch of Service Perimeter 
    *  google.identity.accesscontextmanager.v1.ServicePerimeter  instances.
    *  Defaults to the first page of results.
    */
   // const pageToken = 'abc123'
 
   // Imports the Accesscontextmanager library
-  const {AccessContextManagerClient} =
-    require('@google-cloud/access-context-manager').v1;
+  const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
@@ -53,10 +53,9 @@ function main(parent) {
     };
 
     // Run request
-    const iterable =
-      await accesscontextmanagerClient.listServicePerimetersAsync(request);
+    const iterable = await accesscontextmanagerClient.listServicePerimetersAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -20,7 +21,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for the Access Level
+   *  Required. Resource name for the Access Level 
    *  google.identity.accesscontextmanager.v1.AccessLevel.
    *  Format:
    *  `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
@@ -28,8 +29,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Accesscontextmanager library
-  const {AccessContextManagerClient} =
-    require('@google-cloud/access-context-manager').v1;
+  const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
@@ -41,9 +41,7 @@ function main(name) {
     };
 
     // Run request
-    const [operation] = await accesscontextmanagerClient.deleteAccessLevel(
-      request
-    );
+    const [operation] = await accesscontextmanagerClient.deleteAccessLevel(request);
     const [response] = await operation.promise();
     console.log(response);
   }

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, gcpUserAccessBinding) {
@@ -24,14 +25,13 @@ function main(parent, gcpUserAccessBinding) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. GcpUserAccessBinding
-   *  google.identity.accesscontextmanager.v1.GcpUserAccessBinding
+   *  Required. GcpUserAccessBinding 
+   *  google.identity.accesscontextmanager.v1.GcpUserAccessBinding 
    */
   // const gcpUserAccessBinding = {}
 
   // Imports the Accesscontextmanager library
-  const {AccessContextManagerClient} =
-    require('@google-cloud/access-context-manager').v1;
+  const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
@@ -44,8 +44,7 @@ function main(parent, gcpUserAccessBinding) {
     };
 
     // Run request
-    const [operation] =
-      await accesscontextmanagerClient.createGcpUserAccessBinding(request);
+    const [operation] = await accesscontextmanagerClient.createGcpUserAccessBinding(request);
     const [response] = await operation.promise();
     console.log(response);
   }

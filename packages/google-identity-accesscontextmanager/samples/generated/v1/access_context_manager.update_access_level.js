@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(accessLevel, updateMask) {
@@ -20,9 +21,9 @@ function main(accessLevel, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The updated Access Level
+   *  Required. The updated Access Level 
    *  google.identity.accesscontextmanager.v1.AccessLevel. Syntactic
-   *  correctness of the Access Level
+   *  correctness of the Access Level 
    *  google.identity.accesscontextmanager.v1.AccessLevel  is a
    *  precondition for creation.
    */
@@ -33,8 +34,7 @@ function main(accessLevel, updateMask) {
   // const updateMask = {}
 
   // Imports the Accesscontextmanager library
-  const {AccessContextManagerClient} =
-    require('@google-cloud/access-context-manager').v1;
+  const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
@@ -47,9 +47,7 @@ function main(accessLevel, updateMask) {
     };
 
     // Run request
-    const [operation] = await accesscontextmanagerClient.updateAccessLevel(
-      request
-    );
+    const [operation] = await accesscontextmanagerClient.updateAccessLevel(request);
     const [response] = await operation.promise();
     console.log(response);
   }

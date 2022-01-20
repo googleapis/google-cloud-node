@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(policy, updateMask) {
@@ -29,8 +30,7 @@ function main(policy, updateMask) {
   // const updateMask = {}
 
   // Imports the Accesscontextmanager library
-  const {AccessContextManagerClient} =
-    require('@google-cloud/access-context-manager').v1;
+  const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
@@ -43,9 +43,7 @@ function main(policy, updateMask) {
     };
 
     // Run request
-    const [operation] = await accesscontextmanagerClient.updateAccessPolicy(
-      request
-    );
+    const [operation] = await accesscontextmanagerClient.updateAccessPolicy(request);
     const [response] = await operation.promise();
     console.log(response);
   }

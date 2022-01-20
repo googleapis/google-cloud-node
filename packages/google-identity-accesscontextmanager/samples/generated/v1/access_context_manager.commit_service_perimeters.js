@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -20,16 +21,16 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for the parent Access Policy
+   *  Required. Resource name for the parent Access Policy 
    *  google.identity.accesscontextmanager.v1.AccessPolicy  which owns all
-   *  Service Perimeters
+   *  Service Perimeters 
    *  google.identity.accesscontextmanager.v1.ServicePerimeter  in scope for
    *  the commit operation.
    *  Format: `accessPolicies/{policy_id}`
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The etag for the version of the Access Policy
+   *  Optional. The etag for the version of the Access Policy 
    *  google.identity.accesscontextmanager.v1alpha.AccessPolicy  that this
    *  commit operation is to be performed on. If, at the time of commit, the
    *  etag for the Access Policy stored in Access Context Manager is different
@@ -40,8 +41,7 @@ function main(parent) {
   // const etag = 'abc123'
 
   // Imports the Accesscontextmanager library
-  const {AccessContextManagerClient} =
-    require('@google-cloud/access-context-manager').v1;
+  const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
@@ -53,8 +53,7 @@ function main(parent) {
     };
 
     // Run request
-    const [operation] =
-      await accesscontextmanagerClient.commitServicePerimeters(request);
+    const [operation] = await accesscontextmanagerClient.commitServicePerimeters(request);
     const [response] = await operation.promise();
     console.log(response);
   }

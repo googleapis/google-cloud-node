@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, servicePerimeters) {
@@ -21,22 +22,22 @@ function main(parent, servicePerimeters) {
    */
   /**
    *  Required. Resource name for the access policy which owns these
-   *  Service Perimeters
+   *  Service Perimeters 
    *  google.identity.accesscontextmanager.v1.ServicePerimeter.
    *  Format: `accessPolicies/{policy_id}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. The desired Service Perimeters
+   *  Required. The desired Service Perimeters 
    *  google.identity.accesscontextmanager.v1.ServicePerimeter  that should
-   *  replace all existing Service Perimeters
+   *  replace all existing Service Perimeters 
    *  google.identity.accesscontextmanager.v1.ServicePerimeter  in the
-   *  Access Policy
+   *  Access Policy 
    *  google.identity.accesscontextmanager.v1.AccessPolicy.
    */
   // const servicePerimeters = 1234
   /**
-   *  Optional. The etag for the version of the Access Policy
+   *  Optional. The etag for the version of the Access Policy 
    *  google.identity.accesscontextmanager.v1.AccessPolicy  that this
    *  replace operation is to be performed on. If, at the time of replace, the
    *  etag for the Access Policy stored in Access Context Manager is different
@@ -47,8 +48,7 @@ function main(parent, servicePerimeters) {
   // const etag = 'abc123'
 
   // Imports the Accesscontextmanager library
-  const {AccessContextManagerClient} =
-    require('@google-cloud/access-context-manager').v1;
+  const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
@@ -61,8 +61,7 @@ function main(parent, servicePerimeters) {
     };
 
     // Run request
-    const [operation] =
-      await accesscontextmanagerClient.replaceServicePerimeters(request);
+    const [operation] = await accesscontextmanagerClient.replaceServicePerimeters(request);
     const [response] = await operation.promise();
     console.log(response);
   }

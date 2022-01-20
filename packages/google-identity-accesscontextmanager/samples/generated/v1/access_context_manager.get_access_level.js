@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -20,7 +21,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for the Access Level
+   *  Required. Resource name for the Access Level 
    *  google.identity.accesscontextmanager.v1.AccessLevel.
    *  Format:
    *  `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
@@ -29,9 +30,9 @@ function main(name) {
   /**
    *  Whether to return `BasicLevels` in the Cloud Common Expression
    *  Language rather than as `BasicLevels`. Defaults to AS_DEFINED, where
-   *  Access Levels  google.identity.accesscontextmanager.v1.AccessLevel
+   *  Access Levels  google.identity.accesscontextmanager.v1.AccessLevel 
    *  are returned as `BasicLevels` or `CustomLevels` based on how they were
-   *  created. If set to CEL, all Access Levels
+   *  created. If set to CEL, all Access Levels 
    *  google.identity.accesscontextmanager.v1.AccessLevel  are returned as
    *  `CustomLevels`. In the CEL case, `BasicLevels` are translated to equivalent
    *  `CustomLevels`.
@@ -39,8 +40,7 @@ function main(name) {
   // const accessLevelFormat = {}
 
   // Imports the Accesscontextmanager library
-  const {AccessContextManagerClient} =
-    require('@google-cloud/access-context-manager').v1;
+  const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
