@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(serviceName, rollout) {
@@ -43,9 +44,7 @@ function main(serviceName, rollout) {
     };
 
     // Run request
-    const [operation] = await servicemanagementClient.createServiceRollout(
-      request
-    );
+    const [operation] = await servicemanagementClient.createServiceRollout(request);
     const [response] = await operation.promise();
     console.log(response);
   }

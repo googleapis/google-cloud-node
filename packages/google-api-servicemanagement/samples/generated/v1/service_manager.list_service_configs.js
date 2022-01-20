@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(serviceName) {
@@ -47,11 +48,9 @@ function main(serviceName) {
     };
 
     // Run request
-    const iterable = await servicemanagementClient.listServiceConfigsAsync(
-      request
-    );
+    const iterable = await servicemanagementClient.listServiceConfigsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

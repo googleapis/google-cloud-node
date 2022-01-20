@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(newConfig) {
@@ -24,7 +25,7 @@ function main(newConfig) {
    *  For this version of API, the supported types are
    *  google.api.servicemanagement.v1.ConfigRef google.api.servicemanagement.v1.ConfigRef,
    *  google.api.servicemanagement.v1.ConfigSource google.api.servicemanagement.v1.ConfigSource,
-   *  and google.api.Service google.api.Service
+   *  and google.api.Service google.api.Service 
    */
   // const newConfig = {}
   /**
@@ -32,7 +33,7 @@ function main(newConfig) {
    *  For this version of API, the supported types are
    *  google.api.servicemanagement.v1.ConfigRef google.api.servicemanagement.v1.ConfigRef,
    *  google.api.servicemanagement.v1.ConfigSource google.api.servicemanagement.v1.ConfigSource,
-   *  and google.api.Service google.api.Service
+   *  and google.api.Service google.api.Service 
    */
   // const oldConfig = {}
 
@@ -49,9 +50,7 @@ function main(newConfig) {
     };
 
     // Run request
-    const response = await servicemanagementClient.generateConfigReport(
-      request
-    );
+    const response = await servicemanagementClient.generateConfigReport(request);
     console.log(response);
   }
 

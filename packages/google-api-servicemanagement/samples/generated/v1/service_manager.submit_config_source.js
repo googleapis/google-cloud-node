@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(serviceName, configSource) {
@@ -49,9 +50,7 @@ function main(serviceName, configSource) {
     };
 
     // Run request
-    const [operation] = await servicemanagementClient.submitConfigSource(
-      request
-    );
+    const [operation] = await servicemanagementClient.submitConfigSource(request);
     const [response] = await operation.promise();
     console.log(response);
   }
