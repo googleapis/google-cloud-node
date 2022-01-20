@@ -715,6 +715,13 @@
                         }
                       }
                     },
+                    "ConversationView": {
+                      "values": {
+                        "CONVERSATION_VIEW_UNSPECIFIED": 0,
+                        "FULL": 2,
+                        "BASIC": 1
+                      }
+                    },
                     "CalculateStatsRequest": {
                       "fields": {
                         "location": {
@@ -729,13 +736,6 @@
                           "type": "string",
                           "id": 2
                         }
-                      }
-                    },
-                    "ConversationView": {
-                      "values": {
-                        "CONVERSATION_VIEW_UNSPECIFIED": 0,
-                        "BASIC": 1,
-                        "FULL": 2
                       }
                     },
                     "CalculateStatsResponse": {

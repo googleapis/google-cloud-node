@@ -1223,6 +1223,22 @@
                         return ContactCenterInsights;
                     })();
     
+                    /**
+                     * ConversationView enum.
+                     * @name google.cloud.contactcenterinsights.v1.ConversationView
+                     * @enum {number}
+                     * @property {number} CONVERSATION_VIEW_UNSPECIFIED=0 CONVERSATION_VIEW_UNSPECIFIED value
+                     * @property {number} FULL=2 FULL value
+                     * @property {number} BASIC=1 BASIC value
+                     */
+                    v1.ConversationView = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CONVERSATION_VIEW_UNSPECIFIED"] = 0;
+                        values[valuesById[2] = "FULL"] = 2;
+                        values[valuesById[1] = "BASIC"] = 1;
+                        return values;
+                    })();
+    
                     v1.CalculateStatsRequest = (function() {
     
                         /**
@@ -1431,22 +1447,6 @@
                         };
     
                         return CalculateStatsRequest;
-                    })();
-    
-                    /**
-                     * ConversationView enum.
-                     * @name google.cloud.contactcenterinsights.v1.ConversationView
-                     * @enum {number}
-                     * @property {number} CONVERSATION_VIEW_UNSPECIFIED=0 CONVERSATION_VIEW_UNSPECIFIED value
-                     * @property {number} BASIC=1 BASIC value
-                     * @property {number} FULL=2 FULL value
-                     */
-                    v1.ConversationView = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "CONVERSATION_VIEW_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "BASIC"] = 1;
-                        values[valuesById[2] = "FULL"] = 2;
-                        return values;
                     })();
     
                     v1.CalculateStatsResponse = (function() {
@@ -3080,8 +3080,8 @@
                                 default:
                                     return "view: enum value expected";
                                 case 0:
-                                case 1:
                                 case 2:
+                                case 1:
                                     break;
                                 }
                             return null;
@@ -3112,13 +3112,13 @@
                             case 0:
                                 message.view = 0;
                                 break;
-                            case "BASIC":
-                            case 1:
-                                message.view = 1;
-                                break;
                             case "FULL":
                             case 2:
                                 message.view = 2;
+                                break;
+                            case "BASIC":
+                            case 1:
+                                message.view = 1;
                                 break;
                             }
                             return message;
@@ -3554,8 +3554,8 @@
                                 default:
                                     return "view: enum value expected";
                                 case 0:
-                                case 1:
                                 case 2:
+                                case 1:
                                     break;
                                 }
                             return null;
@@ -3580,13 +3580,13 @@
                             case 0:
                                 message.view = 0;
                                 break;
-                            case "BASIC":
-                            case 1:
-                                message.view = 1;
-                                break;
                             case "FULL":
                             case 2:
                                 message.view = 2;
+                                break;
+                            case "BASIC":
+                            case 1:
+                                message.view = 1;
                                 break;
                             }
                             return message;

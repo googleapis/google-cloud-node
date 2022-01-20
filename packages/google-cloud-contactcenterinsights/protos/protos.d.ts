@@ -764,6 +764,13 @@ export namespace google {
                     type DeleteViewCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
+                /** ConversationView enum. */
+                enum ConversationView {
+                    CONVERSATION_VIEW_UNSPECIFIED = 0,
+                    FULL = 2,
+                    BASIC = 1
+                }
+
                 /** Properties of a CalculateStatsRequest. */
                 interface ICalculateStatsRequest {
 
@@ -858,13 +865,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** ConversationView enum. */
-                enum ConversationView {
-                    CONVERSATION_VIEW_UNSPECIFIED = 0,
-                    BASIC = 1,
-                    FULL = 2
                 }
 
                 /** Properties of a CalculateStatsResponse. */
