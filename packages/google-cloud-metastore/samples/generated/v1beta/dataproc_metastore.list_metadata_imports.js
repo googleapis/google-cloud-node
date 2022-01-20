@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -33,11 +34,11 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  Optional. A page token, received from a previous
-   *  DataprocMetastore.ListServices google.cloud.metastore.v1beta.DataprocMetastore.ListServices
+   *  DataprocMetastore.ListServices google.cloud.metastore.v1beta.DataprocMetastore.ListServices 
    *  call. Provide this token to retrieve the subsequent page.
    *  To retrieve the first page, supply an empty page token.
    *  When paginating, other parameters provided to
-   *  DataprocMetastore.ListServices google.cloud.metastore.v1beta.DataprocMetastore.ListServices
+   *  DataprocMetastore.ListServices google.cloud.metastore.v1beta.DataprocMetastore.ListServices 
    *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
@@ -53,8 +54,7 @@ function main(parent) {
   // const orderBy = 'abc123'
 
   // Imports the Metastore library
-  const {DataprocMetastoreClient} =
-    require('@google-cloud/dataproc-metastore').v1beta;
+  const {DataprocMetastoreClient} = require('@google-cloud/dataproc-metastore').v1beta;
 
   // Instantiates a client
   const metastoreClient = new DataprocMetastoreClient();
@@ -68,7 +68,7 @@ function main(parent) {
     // Run request
     const iterable = await metastoreClient.listMetadataImportsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

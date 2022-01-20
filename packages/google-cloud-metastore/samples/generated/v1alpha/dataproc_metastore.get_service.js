@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -27,8 +28,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Metastore library
-  const {DataprocMetastoreClient} =
-    require('@google-cloud/dataproc-metastore').v1alpha;
+  const {DataprocMetastoreClient} = require('@google-cloud/dataproc-metastore').v1alpha;
 
   // Instantiates a client
   const metastoreClient = new DataprocMetastoreClient();

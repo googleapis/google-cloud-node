@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(service) {
@@ -51,8 +52,7 @@ function main(service) {
   // const databaseDumpType = {}
 
   // Imports the Metastore library
-  const {DataprocMetastoreClient} =
-    require('@google-cloud/dataproc-metastore').v1beta;
+  const {DataprocMetastoreClient} = require('@google-cloud/dataproc-metastore').v1beta;
 
   // Instantiates a client
   const metastoreClient = new DataprocMetastoreClient();

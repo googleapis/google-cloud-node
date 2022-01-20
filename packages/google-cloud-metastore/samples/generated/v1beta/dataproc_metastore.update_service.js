@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(updateMask, service) {
@@ -48,8 +49,7 @@ function main(updateMask, service) {
   // const requestId = 'abc123'
 
   // Imports the Metastore library
-  const {DataprocMetastoreClient} =
-    require('@google-cloud/dataproc-metastore').v1beta;
+  const {DataprocMetastoreClient} = require('@google-cloud/dataproc-metastore').v1beta;
 
   // Instantiates a client
   const metastoreClient = new DataprocMetastoreClient();

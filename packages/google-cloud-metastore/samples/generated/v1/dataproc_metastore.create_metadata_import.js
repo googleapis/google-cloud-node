@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, metadataImportId, metadataImport) {
@@ -54,8 +55,7 @@ function main(parent, metadataImportId, metadataImport) {
   // const requestId = 'abc123'
 
   // Imports the Metastore library
-  const {DataprocMetastoreClient} =
-    require('@google-cloud/dataproc-metastore').v1;
+  const {DataprocMetastoreClient} = require('@google-cloud/dataproc-metastore').v1;
 
   // Instantiates a client
   const metastoreClient = new DataprocMetastoreClient();
