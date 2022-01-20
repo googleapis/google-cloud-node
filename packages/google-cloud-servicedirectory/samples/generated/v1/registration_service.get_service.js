@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -25,8 +26,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Servicedirectory library
-  const {RegistrationServiceClient} =
-    require('@google-cloud/service-directory').v1;
+  const {RegistrationServiceClient} = require('@google-cloud/service-directory').v1;
 
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();

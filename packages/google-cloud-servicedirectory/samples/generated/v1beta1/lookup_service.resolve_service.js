@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -62,8 +63,7 @@ function main(name) {
   // const endpointFilter = 'abc123'
 
   // Imports the Servicedirectory library
-  const {LookupServiceClient} =
-    require('@google-cloud/service-directory').v1beta1;
+  const {LookupServiceClient} = require('@google-cloud/service-directory').v1beta1;
 
   // Instantiates a client
   const servicedirectoryClient = new LookupServiceClient();

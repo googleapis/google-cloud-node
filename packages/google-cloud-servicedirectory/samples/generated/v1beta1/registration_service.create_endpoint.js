@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, endpointId, endpoint) {
@@ -39,8 +40,7 @@ function main(parent, endpointId, endpoint) {
   // const endpoint = {}
 
   // Imports the Servicedirectory library
-  const {RegistrationServiceClient} =
-    require('@google-cloud/service-directory').v1beta1;
+  const {RegistrationServiceClient} = require('@google-cloud/service-directory').v1beta1;
 
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();

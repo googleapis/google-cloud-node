@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(service, updateMask) {
@@ -29,8 +30,7 @@ function main(service, updateMask) {
   // const updateMask = {}
 
   // Imports the Servicedirectory library
-  const {RegistrationServiceClient} =
-    require('@google-cloud/service-directory').v1beta1;
+  const {RegistrationServiceClient} = require('@google-cloud/service-directory').v1beta1;
 
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();

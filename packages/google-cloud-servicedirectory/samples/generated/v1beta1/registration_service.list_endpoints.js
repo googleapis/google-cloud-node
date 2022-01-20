@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -76,8 +77,7 @@ function main(parent) {
   // const orderBy = 'abc123'
 
   // Imports the Servicedirectory library
-  const {RegistrationServiceClient} =
-    require('@google-cloud/service-directory').v1beta1;
+  const {RegistrationServiceClient} = require('@google-cloud/service-directory').v1beta1;
 
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
@@ -91,7 +91,7 @@ function main(parent) {
     // Run request
     const iterable = await servicedirectoryClient.listEndpointsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
