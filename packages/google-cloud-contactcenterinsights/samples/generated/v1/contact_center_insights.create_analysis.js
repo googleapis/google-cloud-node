@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, analysis) {
@@ -29,8 +30,7 @@ function main(parent, analysis) {
   // const analysis = {}
 
   // Imports the Contactcenterinsights library
-  const {ContactCenterInsightsClient} =
-    require('@google-cloud/contact-center-insights').v1;
+  const {ContactCenterInsightsClient} = require('@google-cloud/contact-center-insights').v1;
 
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
@@ -43,9 +43,7 @@ function main(parent, analysis) {
     };
 
     // Run request
-    const [operation] = await contactcenterinsightsClient.createAnalysis(
-      request
-    );
+    const [operation] = await contactcenterinsightsClient.createAnalysis(request);
     const [response] = await operation.promise();
     console.log(response);
   }

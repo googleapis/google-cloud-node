@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(issue) {
@@ -29,8 +30,7 @@ function main(issue) {
   // const updateMask = {}
 
   // Imports the Contactcenterinsights library
-  const {ContactCenterInsightsClient} =
-    require('@google-cloud/contact-center-insights').v1;
+  const {ContactCenterInsightsClient} = require('@google-cloud/contact-center-insights').v1;
 
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();

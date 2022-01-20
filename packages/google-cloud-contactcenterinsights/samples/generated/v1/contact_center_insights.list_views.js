@@ -16,33 +16,27 @@
 'use strict';
 
 function main(parent) {
-  // [START contactcenterinsights_v1_generated_ContactCenterInsights_ExportInsightsData_async]
+  // [START contactcenterinsights_v1_generated_ContactCenterInsights_ListViews_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Specified if sink is a BigQuery table.
-   */
-  // const bigQueryDestination = {}
-  /**
-   *  Required. The parent resource to export data from.
+   *  Required. The parent resource of the views.
    */
   // const parent = 'abc123'
   /**
-   *  A filter to reduce results to a specific subset. Useful for exporting
-   *  conversations with specific properties.
+   *  The maximum number of views to return in the response. If this
+   *  value is zero, the service will select a default size. A call may return
+   *  fewer objects than requested. A non-empty `next_page_token` in the response
+   *  indicates that more data is available.
    */
-  // const filter = 'abc123'
+  // const pageSize = 1234
   /**
-   *  A fully qualified KMS key name for BigQuery tables protected by CMEK.
-   *  Format:
-   *  projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}/cryptoKeyVersions/{version}
+   *  The value returned by the last `ListViewsResponse`; indicates
+   *  that this is a continuation of a prior `ListViews` call and
+   *  the system should return the next page of data.
    */
-  // const kmsKey = 'abc123'
-  /**
-   *  Options for what to do if the destination table already exists.
-   */
-  // const writeDisposition = {}
+  // const pageToken = 'abc123'
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} = require('@google-cloud/contact-center-insights').v1;
@@ -50,20 +44,21 @@ function main(parent) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function callExportInsightsData() {
+  async function callListViews() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const [operation] = await contactcenterinsightsClient.exportInsightsData(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await contactcenterinsightsClient.listViewsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callExportInsightsData();
-  // [END contactcenterinsights_v1_generated_ContactCenterInsights_ExportInsightsData_async]
+  callListViews();
+  // [END contactcenterinsights_v1_generated_ContactCenterInsights_ListViews_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -110,6 +110,26 @@
                 "updateSettings"
               ]
             },
+            "CreateView": {
+              "methods": [
+                "createView"
+              ]
+            },
+            "GetView": {
+              "methods": [
+                "getView"
+              ]
+            },
+            "UpdateView": {
+              "methods": [
+                "updateView"
+              ]
+            },
+            "DeleteView": {
+              "methods": [
+                "deleteView"
+              ]
+            },
             "CreateAnalysis": {
               "methods": [
                 "createAnalysis"
@@ -159,6 +179,13 @@
                 "listPhraseMatchers",
                 "listPhraseMatchersStream",
                 "listPhraseMatchersAsync"
+              ]
+            },
+            "ListViews": {
+              "methods": [
+                "listViews",
+                "listViewsStream",
+                "listViewsAsync"
               ]
             }
           }
@@ -266,6 +293,26 @@
                 "updateSettings"
               ]
             },
+            "CreateView": {
+              "methods": [
+                "createView"
+              ]
+            },
+            "GetView": {
+              "methods": [
+                "getView"
+              ]
+            },
+            "UpdateView": {
+              "methods": [
+                "updateView"
+              ]
+            },
+            "DeleteView": {
+              "methods": [
+                "deleteView"
+              ]
+            },
             "CreateAnalysis": {
               "methods": [
                 "createAnalysis"
@@ -315,6 +362,13 @@
                 "listPhraseMatchers",
                 "listPhraseMatchersStream",
                 "listPhraseMatchersAsync"
+              ]
+            },
+            "ListViews": {
+              "methods": [
+                "listViews",
+                "listViewsStream",
+                "listViewsAsync"
               ]
             }
           }

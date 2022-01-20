@@ -15,34 +15,19 @@
 
 'use strict';
 
-function main(parent) {
-  // [START contactcenterinsights_v1_generated_ContactCenterInsights_ExportInsightsData_async]
+function main(view) {
+  // [START contactcenterinsights_v1_generated_ContactCenterInsights_UpdateView_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Specified if sink is a BigQuery table.
+   *  Required. The new view.
    */
-  // const bigQueryDestination = {}
+  // const view = {}
   /**
-   *  Required. The parent resource to export data from.
+   *  The list of fields to be updated.
    */
-  // const parent = 'abc123'
-  /**
-   *  A filter to reduce results to a specific subset. Useful for exporting
-   *  conversations with specific properties.
-   */
-  // const filter = 'abc123'
-  /**
-   *  A fully qualified KMS key name for BigQuery tables protected by CMEK.
-   *  Format:
-   *  projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}/cryptoKeyVersions/{version}
-   */
-  // const kmsKey = 'abc123'
-  /**
-   *  Options for what to do if the destination table already exists.
-   */
-  // const writeDisposition = {}
+  // const updateMask = {}
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} = require('@google-cloud/contact-center-insights').v1;
@@ -50,20 +35,19 @@ function main(parent) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function callExportInsightsData() {
+  async function callUpdateView() {
     // Construct request
     const request = {
-      parent,
+      view,
     };
 
     // Run request
-    const [operation] = await contactcenterinsightsClient.exportInsightsData(request);
-    const [response] = await operation.promise();
+    const response = await contactcenterinsightsClient.updateView(request);
     console.log(response);
   }
 
-  callExportInsightsData();
-  // [END contactcenterinsights_v1_generated_ContactCenterInsights_ExportInsightsData_async]
+  callUpdateView();
+  // [END contactcenterinsights_v1_generated_ContactCenterInsights_UpdateView_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -188,6 +188,9 @@ export class ContactCenterInsightsClient {
       settingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/settings'
       ),
+      viewPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/views/{view}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -208,6 +211,11 @@ export class ContactCenterInsightsClient {
         'pageToken',
         'nextPageToken',
         'phraseMatchers'
+      ),
+      listViews: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'views'
       ),
     };
 
@@ -373,6 +381,11 @@ export class ContactCenterInsightsClient {
       'calculateStats',
       'getSettings',
       'updateSettings',
+      'createView',
+      'getView',
+      'listViews',
+      'updateView',
+      'deleteView',
     ];
     for (const methodName of contactCenterInsightsStubMethods) {
       const callPromise = this.contactCenterInsightsStub.then(
@@ -2429,6 +2442,395 @@ export class ContactCenterInsightsClient {
     this.initialize();
     return this.innerApiCalls.updateSettings(request, options, callback);
   }
+  /**
+   * Creates a view.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the view. Required. The location to create
+   *   a view for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>` or
+   *   `projects/<Project Number>/locations/<Location ID>`
+   * @param {google.cloud.contactcenterinsights.v1.View} request.view
+   *   Required. The view resource to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [View]{@link google.cloud.contactcenterinsights.v1.View}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.create_view.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreateView_async
+   */
+  createView(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createView(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createView(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createView(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IView,
+          | protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      | protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createView(request, options, callback);
+  }
+  /**
+   * Gets a view.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the view to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [View]{@link google.cloud.contactcenterinsights.v1.View}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.get_view.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetView_async
+   */
+  getView(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetViewRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      protos.google.cloud.contactcenterinsights.v1.IGetViewRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getView(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetViewRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      | protos.google.cloud.contactcenterinsights.v1.IGetViewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getView(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetViewRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      | protos.google.cloud.contactcenterinsights.v1.IGetViewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getView(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetViewRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IView,
+          | protos.google.cloud.contactcenterinsights.v1.IGetViewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      | protos.google.cloud.contactcenterinsights.v1.IGetViewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      protos.google.cloud.contactcenterinsights.v1.IGetViewRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getView(request, options, callback);
+  }
+  /**
+   * Updates a view.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.View} request.view
+   *   Required. The new view.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [View]{@link google.cloud.contactcenterinsights.v1.View}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.update_view.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UpdateView_async
+   */
+  updateView(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateView(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateView(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateView(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IView,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IView,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'view.name': request.view!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateView(request, options, callback);
+  }
+  /**
+   * Deletes a view.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the view to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.delete_view.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeleteView_async
+   */
+  deleteView(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteView(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteView(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteView(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteView(request, options, callback);
+  }
 
   /**
    * Creates an analysis. The long running operation is done when the analysis
@@ -3915,6 +4317,210 @@ export class ContactCenterInsightsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher>;
   }
+  /**
+   * Lists views.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the views.
+   * @param {number} request.pageSize
+   *   The maximum number of views to return in the response. If this
+   *   value is zero, the service will select a default size. A call may return
+   *   fewer objects than requested. A non-empty `next_page_token` in the response
+   *   indicates that more data is available.
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListViewsResponse`; indicates
+   *   that this is a continuation of a prior `ListViews` call and
+   *   the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [View]{@link google.cloud.contactcenterinsights.v1.View}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listViewsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listViews(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListViewsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IView[],
+      protos.google.cloud.contactcenterinsights.v1.IListViewsRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListViewsResponse
+    ]
+  >;
+  listViews(
+    request: protos.google.cloud.contactcenterinsights.v1.IListViewsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListViewsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListViewsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IView
+    >
+  ): void;
+  listViews(
+    request: protos.google.cloud.contactcenterinsights.v1.IListViewsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListViewsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListViewsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IView
+    >
+  ): void;
+  listViews(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListViewsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.contactcenterinsights.v1.IListViewsRequest,
+          | protos.google.cloud.contactcenterinsights.v1.IListViewsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contactcenterinsights.v1.IView
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.contactcenterinsights.v1.IListViewsRequest,
+      | protos.google.cloud.contactcenterinsights.v1.IListViewsResponse
+      | null
+      | undefined,
+      protos.google.cloud.contactcenterinsights.v1.IView
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IView[],
+      protos.google.cloud.contactcenterinsights.v1.IListViewsRequest | null,
+      protos.google.cloud.contactcenterinsights.v1.IListViewsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listViews(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the views.
+   * @param {number} request.pageSize
+   *   The maximum number of views to return in the response. If this
+   *   value is zero, the service will select a default size. A call may return
+   *   fewer objects than requested. A non-empty `next_page_token` in the response
+   *   indicates that more data is available.
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListViewsResponse`; indicates
+   *   that this is a continuation of a prior `ListViews` call and
+   *   the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [View]{@link google.cloud.contactcenterinsights.v1.View} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listViewsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listViewsStream(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListViewsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listViews'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listViews.createStream(
+      this.innerApiCalls.listViews as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listViews`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the views.
+   * @param {number} request.pageSize
+   *   The maximum number of views to return in the response. If this
+   *   value is zero, the service will select a default size. A call may return
+   *   fewer objects than requested. A non-empty `next_page_token` in the response
+   *   indicates that more data is available.
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListViewsResponse`; indicates
+   *   that this is a continuation of a prior `ListViews` call and
+   *   the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [View]{@link google.cloud.contactcenterinsights.v1.View}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.list_views.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListViews_async
+   */
+  listViewsAsync(
+    request?: protos.google.cloud.contactcenterinsights.v1.IListViewsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IView> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listViews'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listViews.asyncIterate(
+      this.innerApiCalls['listViews'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.contactcenterinsights.v1.IView>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -4280,6 +4886,55 @@ export class ContactCenterInsightsClient {
    */
   matchLocationFromSettingsName(settingsName: string) {
     return this.pathTemplates.settingsPathTemplate.match(settingsName).location;
+  }
+
+  /**
+   * Return a fully-qualified view resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} view
+   * @returns {string} Resource name string.
+   */
+  viewPath(project: string, location: string, view: string) {
+    return this.pathTemplates.viewPathTemplate.render({
+      project: project,
+      location: location,
+      view: view,
+    });
+  }
+
+  /**
+   * Parse the project from View resource.
+   *
+   * @param {string} viewName
+   *   A fully-qualified path representing View resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromViewName(viewName: string) {
+    return this.pathTemplates.viewPathTemplate.match(viewName).project;
+  }
+
+  /**
+   * Parse the location from View resource.
+   *
+   * @param {string} viewName
+   *   A fully-qualified path representing View resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromViewName(viewName: string) {
+    return this.pathTemplates.viewPathTemplate.match(viewName).location;
+  }
+
+  /**
+   * Parse the view from View resource.
+   *
+   * @param {string} viewName
+   *   A fully-qualified path representing View resource.
+   * @returns {string} A string representing the view.
+   */
+  matchViewFromViewName(viewName: string) {
+    return this.pathTemplates.viewPathTemplate.match(viewName).view;
   }
 
   /**

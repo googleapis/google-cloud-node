@@ -618,6 +618,100 @@
                               "(google.api.method_signature)": "settings,update_mask"
                             }
                           ]
+                        },
+                        "CreateView": {
+                          "requestType": "CreateViewRequest",
+                          "responseType": "View",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/views",
+                            "(google.api.http).body": "view",
+                            "(google.api.method_signature)": "parent,view"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/views",
+                                "body": "view"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,view"
+                            }
+                          ]
+                        },
+                        "GetView": {
+                          "requestType": "GetViewRequest",
+                          "responseType": "View",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/views/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/views/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListViews": {
+                          "requestType": "ListViewsRequest",
+                          "responseType": "ListViewsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/views",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/views"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateView": {
+                          "requestType": "UpdateViewRequest",
+                          "responseType": "View",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{view.name=projects/*/locations/*/views/*}",
+                            "(google.api.http).body": "view",
+                            "(google.api.method_signature)": "view,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{view.name=projects/*/locations/*/views/*}",
+                                "body": "view"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "view,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteView": {
+                          "requestType": "DeleteViewRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/views/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/views/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1416,6 +1510,97 @@
                         }
                       }
                     },
+                    "CreateViewRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "view": {
+                          "type": "View",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetViewRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/View"
+                          }
+                        }
+                      }
+                    },
+                    "ListViewsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListViewsResponse": {
+                      "fields": {
+                        "views": {
+                          "rule": "repeated",
+                          "type": "View",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateViewRequest": {
+                      "fields": {
+                        "view": {
+                          "type": "View",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteViewRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/View"
+                          }
+                        }
+                      }
+                    },
                     "Conversation": {
                       "options": {
                         "(google.api.resource).type": "contactcenterinsights.googleapis.com/Conversation",
@@ -1542,6 +1727,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "obfuscatedUserId": {
+                          "type": "string",
+                          "id": 21
                         }
                       },
                       "nested": {
@@ -1792,7 +1981,10 @@
                       "fields": {
                         "issueModel": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/IssueModel"
+                          }
                         },
                         "issues": {
                           "rule": "repeated",
@@ -2630,6 +2822,43 @@
                             "END_USER": 3,
                             "ANY_AGENT": 4
                           }
+                        }
+                      }
+                    },
+                    "View": {
+                      "options": {
+                        "(google.api.resource).type": "contactcenterinsights.googleapis.com/View",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/views/{view}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     }

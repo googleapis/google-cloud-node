@@ -451,6 +451,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateSettings(request: google.cloud.contactcenterinsights.v1.IUpdateSettingsRequest): Promise<google.cloud.contactcenterinsights.v1.Settings>;
+
+                    /**
+                     * Calls CreateView.
+                     * @param request CreateViewRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and View
+                     */
+                    public createView(request: google.cloud.contactcenterinsights.v1.ICreateViewRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.CreateViewCallback): void;
+
+                    /**
+                     * Calls CreateView.
+                     * @param request CreateViewRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createView(request: google.cloud.contactcenterinsights.v1.ICreateViewRequest): Promise<google.cloud.contactcenterinsights.v1.View>;
+
+                    /**
+                     * Calls GetView.
+                     * @param request GetViewRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and View
+                     */
+                    public getView(request: google.cloud.contactcenterinsights.v1.IGetViewRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetViewCallback): void;
+
+                    /**
+                     * Calls GetView.
+                     * @param request GetViewRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getView(request: google.cloud.contactcenterinsights.v1.IGetViewRequest): Promise<google.cloud.contactcenterinsights.v1.View>;
+
+                    /**
+                     * Calls ListViews.
+                     * @param request ListViewsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListViewsResponse
+                     */
+                    public listViews(request: google.cloud.contactcenterinsights.v1.IListViewsRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListViewsCallback): void;
+
+                    /**
+                     * Calls ListViews.
+                     * @param request ListViewsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listViews(request: google.cloud.contactcenterinsights.v1.IListViewsRequest): Promise<google.cloud.contactcenterinsights.v1.ListViewsResponse>;
+
+                    /**
+                     * Calls UpdateView.
+                     * @param request UpdateViewRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and View
+                     */
+                    public updateView(request: google.cloud.contactcenterinsights.v1.IUpdateViewRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateViewCallback): void;
+
+                    /**
+                     * Calls UpdateView.
+                     * @param request UpdateViewRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateView(request: google.cloud.contactcenterinsights.v1.IUpdateViewRequest): Promise<google.cloud.contactcenterinsights.v1.View>;
+
+                    /**
+                     * Calls DeleteView.
+                     * @param request DeleteViewRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteView(request: google.cloud.contactcenterinsights.v1.IDeleteViewRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteViewCallback): void;
+
+                    /**
+                     * Calls DeleteView.
+                     * @param request DeleteViewRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteView(request: google.cloud.contactcenterinsights.v1.IDeleteViewRequest): Promise<google.protobuf.Empty>;
                 }
 
                 namespace ContactCenterInsights {
@@ -657,6 +727,41 @@ export namespace google {
                      * @param [response] Settings
                      */
                     type UpdateSettingsCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.Settings) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#createView}.
+                     * @param error Error, if any
+                     * @param [response] View
+                     */
+                    type CreateViewCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.View) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#getView}.
+                     * @param error Error, if any
+                     * @param [response] View
+                     */
+                    type GetViewCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.View) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#listViews}.
+                     * @param error Error, if any
+                     * @param [response] ListViewsResponse
+                     */
+                    type ListViewsCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.ListViewsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#updateView}.
+                     * @param error Error, if any
+                     * @param [response] View
+                     */
+                    type UpdateViewCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.View) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#deleteView}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteViewCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of a CalculateStatsRequest. */
@@ -5311,6 +5416,576 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a CreateViewRequest. */
+                interface ICreateViewRequest {
+
+                    /** CreateViewRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateViewRequest view */
+                    view?: (google.cloud.contactcenterinsights.v1.IView|null);
+                }
+
+                /** Represents a CreateViewRequest. */
+                class CreateViewRequest implements ICreateViewRequest {
+
+                    /**
+                     * Constructs a new CreateViewRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.ICreateViewRequest);
+
+                    /** CreateViewRequest parent. */
+                    public parent: string;
+
+                    /** CreateViewRequest view. */
+                    public view?: (google.cloud.contactcenterinsights.v1.IView|null);
+
+                    /**
+                     * Creates a new CreateViewRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateViewRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.ICreateViewRequest): google.cloud.contactcenterinsights.v1.CreateViewRequest;
+
+                    /**
+                     * Encodes the specified CreateViewRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateViewRequest.verify|verify} messages.
+                     * @param message CreateViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.ICreateViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateViewRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateViewRequest.verify|verify} messages.
+                     * @param message CreateViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ICreateViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateViewRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.CreateViewRequest;
+
+                    /**
+                     * Decodes a CreateViewRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.CreateViewRequest;
+
+                    /**
+                     * Verifies a CreateViewRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateViewRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateViewRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.CreateViewRequest;
+
+                    /**
+                     * Creates a plain object from a CreateViewRequest message. Also converts values to other types if specified.
+                     * @param message CreateViewRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.CreateViewRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateViewRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetViewRequest. */
+                interface IGetViewRequest {
+
+                    /** GetViewRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetViewRequest. */
+                class GetViewRequest implements IGetViewRequest {
+
+                    /**
+                     * Constructs a new GetViewRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IGetViewRequest);
+
+                    /** GetViewRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetViewRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetViewRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IGetViewRequest): google.cloud.contactcenterinsights.v1.GetViewRequest;
+
+                    /**
+                     * Encodes the specified GetViewRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetViewRequest.verify|verify} messages.
+                     * @param message GetViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IGetViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetViewRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetViewRequest.verify|verify} messages.
+                     * @param message GetViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IGetViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetViewRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.GetViewRequest;
+
+                    /**
+                     * Decodes a GetViewRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.GetViewRequest;
+
+                    /**
+                     * Verifies a GetViewRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetViewRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetViewRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.GetViewRequest;
+
+                    /**
+                     * Creates a plain object from a GetViewRequest message. Also converts values to other types if specified.
+                     * @param message GetViewRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.GetViewRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetViewRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListViewsRequest. */
+                interface IListViewsRequest {
+
+                    /** ListViewsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListViewsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListViewsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListViewsRequest. */
+                class ListViewsRequest implements IListViewsRequest {
+
+                    /**
+                     * Constructs a new ListViewsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListViewsRequest);
+
+                    /** ListViewsRequest parent. */
+                    public parent: string;
+
+                    /** ListViewsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListViewsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListViewsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListViewsRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListViewsRequest): google.cloud.contactcenterinsights.v1.ListViewsRequest;
+
+                    /**
+                     * Encodes the specified ListViewsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListViewsRequest.verify|verify} messages.
+                     * @param message ListViewsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListViewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListViewsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListViewsRequest.verify|verify} messages.
+                     * @param message ListViewsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListViewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListViewsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListViewsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListViewsRequest;
+
+                    /**
+                     * Decodes a ListViewsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListViewsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListViewsRequest;
+
+                    /**
+                     * Verifies a ListViewsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListViewsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListViewsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListViewsRequest;
+
+                    /**
+                     * Creates a plain object from a ListViewsRequest message. Also converts values to other types if specified.
+                     * @param message ListViewsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListViewsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListViewsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListViewsResponse. */
+                interface IListViewsResponse {
+
+                    /** ListViewsResponse views */
+                    views?: (google.cloud.contactcenterinsights.v1.IView[]|null);
+
+                    /** ListViewsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListViewsResponse. */
+                class ListViewsResponse implements IListViewsResponse {
+
+                    /**
+                     * Constructs a new ListViewsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListViewsResponse);
+
+                    /** ListViewsResponse views. */
+                    public views: google.cloud.contactcenterinsights.v1.IView[];
+
+                    /** ListViewsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListViewsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListViewsResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListViewsResponse): google.cloud.contactcenterinsights.v1.ListViewsResponse;
+
+                    /**
+                     * Encodes the specified ListViewsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListViewsResponse.verify|verify} messages.
+                     * @param message ListViewsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListViewsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListViewsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListViewsResponse.verify|verify} messages.
+                     * @param message ListViewsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListViewsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListViewsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListViewsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListViewsResponse;
+
+                    /**
+                     * Decodes a ListViewsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListViewsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListViewsResponse;
+
+                    /**
+                     * Verifies a ListViewsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListViewsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListViewsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListViewsResponse;
+
+                    /**
+                     * Creates a plain object from a ListViewsResponse message. Also converts values to other types if specified.
+                     * @param message ListViewsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListViewsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListViewsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateViewRequest. */
+                interface IUpdateViewRequest {
+
+                    /** UpdateViewRequest view */
+                    view?: (google.cloud.contactcenterinsights.v1.IView|null);
+
+                    /** UpdateViewRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateViewRequest. */
+                class UpdateViewRequest implements IUpdateViewRequest {
+
+                    /**
+                     * Constructs a new UpdateViewRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IUpdateViewRequest);
+
+                    /** UpdateViewRequest view. */
+                    public view?: (google.cloud.contactcenterinsights.v1.IView|null);
+
+                    /** UpdateViewRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateViewRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateViewRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IUpdateViewRequest): google.cloud.contactcenterinsights.v1.UpdateViewRequest;
+
+                    /**
+                     * Encodes the specified UpdateViewRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateViewRequest.verify|verify} messages.
+                     * @param message UpdateViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IUpdateViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateViewRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateViewRequest.verify|verify} messages.
+                     * @param message UpdateViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IUpdateViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateViewRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.UpdateViewRequest;
+
+                    /**
+                     * Decodes an UpdateViewRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.UpdateViewRequest;
+
+                    /**
+                     * Verifies an UpdateViewRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateViewRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateViewRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.UpdateViewRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateViewRequest message. Also converts values to other types if specified.
+                     * @param message UpdateViewRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.UpdateViewRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateViewRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteViewRequest. */
+                interface IDeleteViewRequest {
+
+                    /** DeleteViewRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteViewRequest. */
+                class DeleteViewRequest implements IDeleteViewRequest {
+
+                    /**
+                     * Constructs a new DeleteViewRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IDeleteViewRequest);
+
+                    /** DeleteViewRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteViewRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteViewRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IDeleteViewRequest): google.cloud.contactcenterinsights.v1.DeleteViewRequest;
+
+                    /**
+                     * Encodes the specified DeleteViewRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteViewRequest.verify|verify} messages.
+                     * @param message DeleteViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IDeleteViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteViewRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteViewRequest.verify|verify} messages.
+                     * @param message DeleteViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IDeleteViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteViewRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.DeleteViewRequest;
+
+                    /**
+                     * Decodes a DeleteViewRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.DeleteViewRequest;
+
+                    /**
+                     * Verifies a DeleteViewRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteViewRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteViewRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.DeleteViewRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteViewRequest message. Also converts values to other types if specified.
+                     * @param message DeleteViewRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.DeleteViewRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteViewRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a Conversation. */
                 interface IConversation {
 
@@ -5367,6 +6042,9 @@ export namespace google {
 
                     /** Conversation dialogflowIntents */
                     dialogflowIntents?: ({ [k: string]: google.cloud.contactcenterinsights.v1.IDialogflowIntent }|null);
+
+                    /** Conversation obfuscatedUserId */
+                    obfuscatedUserId?: (string|null);
                 }
 
                 /** Represents a Conversation. */
@@ -5431,6 +6109,9 @@ export namespace google {
 
                     /** Conversation dialogflowIntents. */
                     public dialogflowIntents: { [k: string]: google.cloud.contactcenterinsights.v1.IDialogflowIntent };
+
+                    /** Conversation obfuscatedUserId. */
+                    public obfuscatedUserId: string;
 
                     /** Conversation metadata. */
                     public metadata?: "callMetadata";
@@ -10439,6 +11120,120 @@ export namespace google {
                         END_USER = 3,
                         ANY_AGENT = 4
                     }
+                }
+
+                /** Properties of a View. */
+                interface IView {
+
+                    /** View name */
+                    name?: (string|null);
+
+                    /** View displayName */
+                    displayName?: (string|null);
+
+                    /** View createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** View updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** View value */
+                    value?: (string|null);
+                }
+
+                /** Represents a View. */
+                class View implements IView {
+
+                    /**
+                     * Constructs a new View.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IView);
+
+                    /** View name. */
+                    public name: string;
+
+                    /** View displayName. */
+                    public displayName: string;
+
+                    /** View createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** View updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** View value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new View instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns View instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IView): google.cloud.contactcenterinsights.v1.View;
+
+                    /**
+                     * Encodes the specified View message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.View.verify|verify} messages.
+                     * @param message View message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified View message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.View.verify|verify} messages.
+                     * @param message View message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a View message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns View
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.View;
+
+                    /**
+                     * Decodes a View message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns View
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.View;
+
+                    /**
+                     * Verifies a View message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a View message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns View
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.View;
+
+                    /**
+                     * Creates a plain object from a View message. Also converts values to other types if specified.
+                     * @param message View
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.View, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this View to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
             }
         }
