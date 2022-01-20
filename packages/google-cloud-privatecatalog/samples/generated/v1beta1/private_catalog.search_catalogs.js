@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(resource) {
@@ -42,8 +43,7 @@ function main(resource) {
   // const pageToken = 'abc123'
 
   // Imports the Privatecatalog library
-  const {PrivateCatalogClient} =
-    require('@google-cloud/private-catalog').v1beta1;
+  const {PrivateCatalogClient} = require('@google-cloud/private-catalog').v1beta1;
 
   // Instantiates a client
   const privatecatalogClient = new PrivateCatalogClient();
@@ -57,7 +57,7 @@ function main(resource) {
     // Run request
     const iterable = await privatecatalogClient.searchCatalogsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(resource, query) {
@@ -20,7 +21,7 @@ function main(resource, query) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the resource context. See SearchCatalogsRequest.resource google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource
+   *  Required. The name of the resource context. See SearchCatalogsRequest.resource google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource 
    *  for details.
    */
   // const resource = 'abc123'
@@ -44,8 +45,7 @@ function main(resource, query) {
   // const pageToken = 'abc123'
 
   // Imports the Privatecatalog library
-  const {PrivateCatalogClient} =
-    require('@google-cloud/private-catalog').v1beta1;
+  const {PrivateCatalogClient} = require('@google-cloud/private-catalog').v1beta1;
 
   // Instantiates a client
   const privatecatalogClient = new PrivateCatalogClient();
@@ -60,7 +60,7 @@ function main(resource, query) {
     // Run request
     const iterable = await privatecatalogClient.searchVersionsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
