@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, workload) {
@@ -37,8 +38,7 @@ function main(parent, workload) {
   // const externalId = 'abc123'
 
   // Imports the Assuredworkloads library
-  const {AssuredWorkloadsServiceClient} =
-    require('@google-cloud/assured-workloads').v1;
+  const {AssuredWorkloadsServiceClient} = require('@google-cloud/assured-workloads').v1;
 
   // Instantiates a client
   const assuredworkloadsClient = new AssuredWorkloadsServiceClient();

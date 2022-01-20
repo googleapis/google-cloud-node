@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -41,8 +42,7 @@ function main(parent) {
   // const filter = 'abc123'
 
   // Imports the Assuredworkloads library
-  const {AssuredWorkloadsServiceClient} =
-    require('@google-cloud/assured-workloads').v1beta1;
+  const {AssuredWorkloadsServiceClient} = require('@google-cloud/assured-workloads').v1beta1;
 
   // Instantiates a client
   const assuredworkloadsClient = new AssuredWorkloadsServiceClient();
@@ -56,7 +56,7 @@ function main(parent) {
     // Run request
     const iterable = await assuredworkloadsClient.listWorkloadsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
