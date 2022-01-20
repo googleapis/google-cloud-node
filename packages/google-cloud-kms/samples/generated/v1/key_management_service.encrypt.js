@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name, plaintext) {
@@ -20,7 +21,7 @@ function main(name, plaintext) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the CryptoKey google.cloud.kms.v1.CryptoKey  or CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion
+   *  Required. The resource name of the CryptoKey google.cloud.kms.v1.CryptoKey  or CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion 
    *  to use for encryption.
    *  If a CryptoKey google.cloud.kms.v1.CryptoKey  is specified, the server will use its
    *  primary version google.cloud.kms.v1.CryptoKey.primary.

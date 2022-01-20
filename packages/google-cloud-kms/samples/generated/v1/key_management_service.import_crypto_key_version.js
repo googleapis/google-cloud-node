@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, algorithm, importJob) {
@@ -36,7 +37,7 @@ function main(parent, algorithm, importJob) {
    *  ImportCryptoKeyVersionRequest.parent google.cloud.kms.v1.ImportCryptoKeyVersionRequest.parent, have been previously created via
    *  ImportCryptoKeyVersion , and be in
    *  DESTROYED google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED  or
-   *  IMPORT_FAILED google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.IMPORT_FAILED
+   *  IMPORT_FAILED google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.IMPORT_FAILED 
    *  state. The key material and algorithm must match the previous
    *  CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  exactly if the CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  has ever contained
    *  key material.
@@ -56,7 +57,7 @@ function main(parent, algorithm, importJob) {
   // const importJob = 'abc123'
   /**
    *  Wrapped key material produced with
-   *  RSA_OAEP_3072_SHA1_AES_256 google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA1_AES_256
+   *  RSA_OAEP_3072_SHA1_AES_256 google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA1_AES_256 
    *  or
    *  RSA_OAEP_4096_SHA1_AES_256 google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA1_AES_256.
    *  This field contains the concatenation of two wrapped keys:
