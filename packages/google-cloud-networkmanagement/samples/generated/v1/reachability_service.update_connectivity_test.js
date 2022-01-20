@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(updateMask, resource) {
@@ -30,8 +31,7 @@ function main(updateMask, resource) {
   // const resource = {}
 
   // Imports the Networkmanagement library
-  const {ReachabilityServiceClient} =
-    require('@google-cloud/network-management').v1;
+  const {ReachabilityServiceClient} = require('@google-cloud/network-management').v1;
 
   // Instantiates a client
   const networkmanagementClient = new ReachabilityServiceClient();
@@ -44,9 +44,7 @@ function main(updateMask, resource) {
     };
 
     // Run request
-    const [operation] = await networkmanagementClient.updateConnectivityTest(
-      request
-    );
+    const [operation] = await networkmanagementClient.updateConnectivityTest(request);
     const [response] = await operation.promise();
     console.log(response);
   }

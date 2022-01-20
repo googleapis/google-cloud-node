@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -26,8 +27,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Networkmanagement library
-  const {ReachabilityServiceClient} =
-    require('@google-cloud/network-management').v1beta1;
+  const {ReachabilityServiceClient} = require('@google-cloud/network-management').v1beta1;
 
   // Instantiates a client
   const networkmanagementClient = new ReachabilityServiceClient();
@@ -39,9 +39,7 @@ function main(name) {
     };
 
     // Run request
-    const [operation] = await networkmanagementClient.rerunConnectivityTest(
-      request
-    );
+    const [operation] = await networkmanagementClient.rerunConnectivityTest(request);
     const [response] = await operation.promise();
     console.log(response);
   }
