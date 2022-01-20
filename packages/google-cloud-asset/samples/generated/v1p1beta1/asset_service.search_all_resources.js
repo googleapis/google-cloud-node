@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(scope) {
@@ -74,7 +75,7 @@ function main(scope) {
     // Run request
     const iterable = await assetClient.searchAllResourcesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

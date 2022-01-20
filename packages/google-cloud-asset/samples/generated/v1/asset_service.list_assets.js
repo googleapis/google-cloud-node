@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -74,7 +75,7 @@ function main(parent) {
    *  * If specified:
    *  it snapshots specified relationships. It returns an error if
    *  any of the relationship_types  doesn't belong to the supported
-   *  relationship types of the asset_types  or if any of the asset_types
+   *  relationship types of the asset_types  or if any of the asset_types 
    *  doesn't belong to the source types of the relationship_types.
    *  * Otherwise:
    *  it snapshots the supported relationships for all asset_types  or returns
@@ -101,7 +102,7 @@ function main(parent) {
     // Run request
     const iterable = await assetClient.listAssetsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
