@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -44,12 +45,11 @@ function main() {
 
   async function callUpdateAccessApprovalSettings() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
-    const response = await accessapprovalClient.updateAccessApprovalSettings(
-      request
-    );
+    const response = await accessapprovalClient.updateAccessApprovalSettings(request);
     console.log(response);
   }
 
