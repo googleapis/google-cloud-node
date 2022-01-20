@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -46,8 +47,7 @@ function main(parent) {
   // const filter = 'abc123'
 
   // Imports the Secretmanager library
-  const {SecretManagerServiceClient} =
-    require('@google-cloud/secret-manager').v1;
+  const {SecretManagerServiceClient} = require('@google-cloud/secret-manager').v1;
 
   // Instantiates a client
   const secretmanagerClient = new SecretManagerServiceClient();
@@ -61,7 +61,7 @@ function main(parent) {
     // Run request
     const iterable = await secretmanagerClient.listSecretVersionsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
