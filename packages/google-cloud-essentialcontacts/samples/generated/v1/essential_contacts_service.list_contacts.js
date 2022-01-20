@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -41,8 +42,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Essentialcontacts library
-  const {EssentialContactsServiceClient} =
-    require('@google-cloud/essential-contacts').v1;
+  const {EssentialContactsServiceClient} = require('@google-cloud/essential-contacts').v1;
 
   // Instantiates a client
   const essentialcontactsClient = new EssentialContactsServiceClient();
@@ -56,7 +56,7 @@ function main(parent) {
     // Run request
     const iterable = await essentialcontactsClient.listContactsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
