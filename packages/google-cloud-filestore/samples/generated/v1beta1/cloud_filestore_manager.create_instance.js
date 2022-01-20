@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, instanceId, instance) {
@@ -33,13 +34,12 @@ function main(parent, instanceId, instance) {
    */
   // const instanceId = 'abc123'
   /**
-   *  Required. An instance resource google.cloud.filestore.v1beta1.Instance
+   *  Required. An instance resource google.cloud.filestore.v1beta1.Instance 
    */
   // const instance = {}
 
   // Imports the Filestore library
-  const {CloudFilestoreManagerClient} =
-    require('@google-cloud/filestore').v1beta1;
+  const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1beta1;
 
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();

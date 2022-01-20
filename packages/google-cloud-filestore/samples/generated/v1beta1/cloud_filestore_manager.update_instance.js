@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(updateMask, instance) {
@@ -34,8 +35,7 @@ function main(updateMask, instance) {
   // const instance = {}
 
   // Imports the Filestore library
-  const {CloudFilestoreManagerClient} =
-    require('@google-cloud/filestore').v1beta1;
+  const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1beta1;
 
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
