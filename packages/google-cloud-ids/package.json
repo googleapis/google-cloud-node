@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/ids",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "ids client for Node.js",
   "repository": "googleapis/nodejs-ids",
   "license": "Apache-2.0",
