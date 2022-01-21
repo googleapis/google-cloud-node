@@ -139,7 +139,7 @@
   },
   {
     "repo": "googleapis/nodejs-cloudbuild",
-    "codeowner_team": "@googleapis/cicd",
+    "codeowner_team": "@googleapis/aap-dpes",
     "requires_billing": true,
     "name": "cloudbuild",
     "issue_tracker": "https://issuetracker.google.com/savedsearches/5226584",
@@ -407,6 +407,7 @@
     "requires_billing": true,
     "api_shortname": "eventarc",
     "library_type": "GAPIC_AUTO",
+    "codeowner_team": "@googleapis/aap-dpes",
     "support_documentation": "https://cloud.google.com/eventarc/docs/getting-support"
   },
   {
@@ -943,7 +944,7 @@
   },
   {
     "distribution_name": "@google-cloud/pubsub",
-    "release_level": "ga",
+    "release_level": "stable",
     "product_documentation": "https://cloud.google.com/pubsub/docs/",
     "repo": "googleapis/nodejs-pubsub",
     "default_version": "v1",
@@ -955,6 +956,8 @@
     "name_pretty": "Pub/Sub",
     "api_id": "pubsub.googleapis.com",
     "codeowner_team": "@googleapis/api-pubsub",
+    "api_shortname": "pubsub",
+    "library_type": "GAPIC_COMBO",
     "support_documentation": "https://cloud.google.com/pubsub/docs/getting-support"
   },
   {
@@ -1048,7 +1051,7 @@
     "release_level": "stable",
     "requires_billing": false,
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/scheduler/latest",
-    "codeowner_team": "@googleapis/serverless-team",
+    "codeowner_team": "@googleapis/aap-dpes",
     "language": "nodejs",
     "issue_tracker": "https://issuetracker.google.com/savedsearches/5411429",
     "product_documentation": "https://cloud.google.com/scheduler",
@@ -1144,6 +1147,7 @@
     "requires_billing": true,
     "api_shortname": "cloudshell",
     "library_type": "GAPIC_AUTO",
+    "codeowner_team": "@googleapis/aap-dpes",
     "support_documentation": "https://cloud.google.com/shell/docs/getting-support"
   },
   {
@@ -1262,7 +1266,7 @@
     "name": "tasks",
     "name_pretty": "Tasks",
     "api_id": "tasks.googleapis.com",
-    "codeowner_team": "@googleapis/serverless-team",
+    "codeowner_team": "@googleapis/aap-dpes",
     "api_shortname": "cloudtasks",
     "library_type": "GAPIC_AUTO",
     "support_documentation": "https://cloud.google.com/tasks/docs/getting-support"
@@ -1457,6 +1461,7 @@
     "default_version": "v1",
     "api_shortname": "workflows",
     "library_type": "GAPIC_AUTO",
+    "codeowner_team": "@googleapis/aap-dpes",
     "support_documentation": "https://cloud.google.com/workflows/docs/getting-support"
   },
   {
@@ -1507,6 +1512,7 @@
     "default_version": "v1",
     "api_shortname": "appengine-admin",
     "library_type": "GAPIC_AUTO",
+    "codeowner_team": "@googleapis/aap-dpes",
     "support_documentation": "https://cloud.google.com/appengine/docs/admin-api/"
   },
   {
@@ -1532,7 +1538,7 @@
     "release_level": "preview",
     "requires_billing": true,
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/artifact-registry/latest",
-    "codeowner_team": "@googleapis/cicd",
+    "codeowner_team": "@googleapis/aap-dpes",
     "language": "nodejs",
     "issue_tracker": "https://github.com/googleapis/nodejs-artifact-registry/issues",
     "product_documentation": "https://cloud.google.com/artifact-registry/",
@@ -1716,6 +1722,7 @@
     "requires_billing": true,
     "api_shortname": "clouddeploy",
     "library_type": "GAPIC_AUTO",
+    "codeowner_team": "@googleapis/aap-dpes",
     "support_documentation": "https://cloud.google.com/deploy/"
   },
   {
