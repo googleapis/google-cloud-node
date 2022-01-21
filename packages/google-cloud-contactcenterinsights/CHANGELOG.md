@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/googleapis/nodejs-contact-center-insights/compare/v1.9.0...v1.10.0) (2022-01-20)
+
+
+### Features
+
+* new API for the View resource ([#89](https://github.com/googleapis/nodejs-contact-center-insights/issues/89)) ([8aa89e5](https://github.com/googleapis/nodejs-contact-center-insights/commit/8aa89e539651b0fc3ae573be3cdbe95f7c6bb8d3))
+
 ## [1.9.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.8.0...v1.9.0) (2021-12-03)
 
 
