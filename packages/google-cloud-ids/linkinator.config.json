@@ -4,8 +4,9 @@
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
     "img.shields.io",
-    "https://github.com/googleapis/nodejs-ids/blob/master/CHANGELOG.md",
-    "https://github.com/googleapis/nodejs-ids/blob/addSamples/CHANGELOG.md"
+    "https://github.com/googleapis/nodejs-ids/blob/addSamples/CHANGELOG.md",
+    "https://github.com/googleapis/nodejs-ids/blob/main/CHANGELOG.md",
+    "https://github.com/googleapis/nodejs-ids/blob/owl-bot-update-lock-2d850512335d7adca3a4b08e02f8e63192978aea88c042dacb3e382aa996ae7c/CHANGELOG.md"
   ],
   "silent": true,
   "concurrency": 5
