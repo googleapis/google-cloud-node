@@ -529,7 +529,7 @@ export class GkeHubClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The Feature resource name in the format
+   *   Required. The Feature resource name in the format
    *   `projects/* /locations/* /features/*`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -903,13 +903,13 @@ export class GkeHubClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent (project and location) where the Feature will be created.
+   *   Required. The parent (project and location) where the Feature will be created.
    *   Specified in the format `projects/* /locations/*`.
    * @param {string} request.featureId
    *   The ID of the feature to create.
    * @param {google.cloud.gkehub.v1.Feature} request.resource
    *   The Feature resource to create.
-   * @param {string} [request.requestId]
+   * @param {string} request.requestId
    *   Optional. A request ID to identify requests. Specify a unique request ID
    *   so that if you must retry your request, the server will know to ignore
    *   the request if it has already been completed. The server will guarantee
@@ -1215,7 +1215,7 @@ export class GkeHubClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The Feature resource name in the format
+   *   Required. The Feature resource name in the format
    *   `projects/* /locations/* /features/*`.
    * @param {boolean} request.force
    *   If set to true, the delete will ignore any outstanding resources for
@@ -1534,7 +1534,7 @@ export class GkeHubClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The Feature resource name in the format
+   *   Required. The Feature resource name in the format
    *   `projects/* /locations/* /features/*`.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Mask of fields to update.
@@ -1547,7 +1547,7 @@ export class GkeHubClient {
    *   value to the empty string.
    *   If you specify the update_mask to be a special path "*", fully replaces all
    *   user-modifiable fields to match `resource`.
-   * @param {string} [request.requestId]
+   * @param {string} request.requestId
    *   Optional. A request ID to identify requests. Specify a unique request ID
    *   so that if you must retry your request, the server will know to ignore
    *   the request if it has already been completed. The server will guarantee
@@ -1967,7 +1967,7 @@ export class GkeHubClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent (project and location) where the Features will be listed.
+   *   Required. The parent (project and location) where the Features will be listed.
    *   Specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   When requesting a 'page' of resources, `page_size` specifies number of
@@ -2084,7 +2084,7 @@ export class GkeHubClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent (project and location) where the Features will be listed.
+   *   Required. The parent (project and location) where the Features will be listed.
    *   Specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   When requesting a 'page' of resources, `page_size` specifies number of
@@ -2155,7 +2155,7 @@ export class GkeHubClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent (project and location) where the Features will be listed.
+   *   Required. The parent (project and location) where the Features will be listed.
    *   Specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   When requesting a 'page' of resources, `page_size` specifies number of

@@ -12182,6 +12182,9 @@ export namespace google {
 
                     /** MembershipEndpoint kubernetesMetadata */
                     kubernetesMetadata?: (google.cloud.gkehub.v1.IKubernetesMetadata|null);
+
+                    /** MembershipEndpoint kubernetesResource */
+                    kubernetesResource?: (google.cloud.gkehub.v1.IKubernetesResource|null);
                 }
 
                 /** Represents a MembershipEndpoint. */
@@ -12198,6 +12201,9 @@ export namespace google {
 
                     /** MembershipEndpoint kubernetesMetadata. */
                     public kubernetesMetadata?: (google.cloud.gkehub.v1.IKubernetesMetadata|null);
+
+                    /** MembershipEndpoint kubernetesResource. */
+                    public kubernetesResource?: (google.cloud.gkehub.v1.IKubernetesResource|null);
 
                     /**
                      * Creates a new MembershipEndpoint instance using the specified properties.
@@ -12265,6 +12271,312 @@ export namespace google {
 
                     /**
                      * Converts this MembershipEndpoint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a KubernetesResource. */
+                interface IKubernetesResource {
+
+                    /** KubernetesResource membershipCrManifest */
+                    membershipCrManifest?: (string|null);
+
+                    /** KubernetesResource membershipResources */
+                    membershipResources?: (google.cloud.gkehub.v1.IResourceManifest[]|null);
+
+                    /** KubernetesResource connectResources */
+                    connectResources?: (google.cloud.gkehub.v1.IResourceManifest[]|null);
+
+                    /** KubernetesResource resourceOptions */
+                    resourceOptions?: (google.cloud.gkehub.v1.IResourceOptions|null);
+                }
+
+                /** Represents a KubernetesResource. */
+                class KubernetesResource implements IKubernetesResource {
+
+                    /**
+                     * Constructs a new KubernetesResource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IKubernetesResource);
+
+                    /** KubernetesResource membershipCrManifest. */
+                    public membershipCrManifest: string;
+
+                    /** KubernetesResource membershipResources. */
+                    public membershipResources: google.cloud.gkehub.v1.IResourceManifest[];
+
+                    /** KubernetesResource connectResources. */
+                    public connectResources: google.cloud.gkehub.v1.IResourceManifest[];
+
+                    /** KubernetesResource resourceOptions. */
+                    public resourceOptions?: (google.cloud.gkehub.v1.IResourceOptions|null);
+
+                    /**
+                     * Creates a new KubernetesResource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns KubernetesResource instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IKubernetesResource): google.cloud.gkehub.v1.KubernetesResource;
+
+                    /**
+                     * Encodes the specified KubernetesResource message. Does not implicitly {@link google.cloud.gkehub.v1.KubernetesResource.verify|verify} messages.
+                     * @param message KubernetesResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IKubernetesResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified KubernetesResource message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.KubernetesResource.verify|verify} messages.
+                     * @param message KubernetesResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IKubernetesResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a KubernetesResource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns KubernetesResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.KubernetesResource;
+
+                    /**
+                     * Decodes a KubernetesResource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns KubernetesResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.KubernetesResource;
+
+                    /**
+                     * Verifies a KubernetesResource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a KubernetesResource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns KubernetesResource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.KubernetesResource;
+
+                    /**
+                     * Creates a plain object from a KubernetesResource message. Also converts values to other types if specified.
+                     * @param message KubernetesResource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.KubernetesResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this KubernetesResource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ResourceOptions. */
+                interface IResourceOptions {
+
+                    /** ResourceOptions connectVersion */
+                    connectVersion?: (string|null);
+
+                    /** ResourceOptions v1beta1Crd */
+                    v1beta1Crd?: (boolean|null);
+
+                    /** ResourceOptions k8sVersion */
+                    k8sVersion?: (string|null);
+                }
+
+                /** Represents a ResourceOptions. */
+                class ResourceOptions implements IResourceOptions {
+
+                    /**
+                     * Constructs a new ResourceOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IResourceOptions);
+
+                    /** ResourceOptions connectVersion. */
+                    public connectVersion: string;
+
+                    /** ResourceOptions v1beta1Crd. */
+                    public v1beta1Crd: boolean;
+
+                    /** ResourceOptions k8sVersion. */
+                    public k8sVersion: string;
+
+                    /**
+                     * Creates a new ResourceOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceOptions instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IResourceOptions): google.cloud.gkehub.v1.ResourceOptions;
+
+                    /**
+                     * Encodes the specified ResourceOptions message. Does not implicitly {@link google.cloud.gkehub.v1.ResourceOptions.verify|verify} messages.
+                     * @param message ResourceOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IResourceOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceOptions message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ResourceOptions.verify|verify} messages.
+                     * @param message ResourceOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IResourceOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ResourceOptions;
+
+                    /**
+                     * Decodes a ResourceOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ResourceOptions;
+
+                    /**
+                     * Verifies a ResourceOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ResourceOptions;
+
+                    /**
+                     * Creates a plain object from a ResourceOptions message. Also converts values to other types if specified.
+                     * @param message ResourceOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ResourceOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ResourceManifest. */
+                interface IResourceManifest {
+
+                    /** ResourceManifest manifest */
+                    manifest?: (string|null);
+
+                    /** ResourceManifest clusterScoped */
+                    clusterScoped?: (boolean|null);
+                }
+
+                /** Represents a ResourceManifest. */
+                class ResourceManifest implements IResourceManifest {
+
+                    /**
+                     * Constructs a new ResourceManifest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IResourceManifest);
+
+                    /** ResourceManifest manifest. */
+                    public manifest: string;
+
+                    /** ResourceManifest clusterScoped. */
+                    public clusterScoped: boolean;
+
+                    /**
+                     * Creates a new ResourceManifest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceManifest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IResourceManifest): google.cloud.gkehub.v1.ResourceManifest;
+
+                    /**
+                     * Encodes the specified ResourceManifest message. Does not implicitly {@link google.cloud.gkehub.v1.ResourceManifest.verify|verify} messages.
+                     * @param message ResourceManifest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IResourceManifest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceManifest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ResourceManifest.verify|verify} messages.
+                     * @param message ResourceManifest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IResourceManifest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceManifest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceManifest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ResourceManifest;
+
+                    /**
+                     * Decodes a ResourceManifest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceManifest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ResourceManifest;
+
+                    /**
+                     * Verifies a ResourceManifest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceManifest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceManifest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ResourceManifest;
+
+                    /**
+                     * Creates a plain object from a ResourceManifest message. Also converts values to other types if specified.
+                     * @param message ResourceManifest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ResourceManifest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceManifest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

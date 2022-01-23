@@ -21,7 +21,7 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The parent (project and location) where the Feature will be created.
+   *  Required. The parent (project and location) where the Feature will be created.
    *  Specified in the format `projects/* /locations/*`.
    */
   // const parent = 'abc123'

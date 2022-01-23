@@ -2764,6 +2764,84 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "kubernetesResource": {
+                          "type": "KubernetesResource",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "KubernetesResource": {
+                      "fields": {
+                        "membershipCrManifest": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "membershipResources": {
+                          "rule": "repeated",
+                          "type": "ResourceManifest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "connectResources": {
+                          "rule": "repeated",
+                          "type": "ResourceManifest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "resourceOptions": {
+                          "type": "ResourceOptions",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ResourceOptions": {
+                      "fields": {
+                        "connectVersion": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "v1beta1Crd": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "k8sVersion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ResourceManifest": {
+                      "fields": {
+                        "manifest": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "clusterScoped": {
+                          "type": "bool",
+                          "id": 2
                         }
                       }
                     },
@@ -3265,7 +3343,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Membership"
                           }
                         },
                         "updateMask": {
@@ -3297,7 +3376,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Membership"
                           }
                         },
                         "namespace": {
@@ -3381,7 +3461,10 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/Feature"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -3418,7 +3501,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Feature"
+                          }
                         }
                       }
                     },
@@ -3426,7 +3512,10 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/Feature"
+                          }
                         },
                         "featureId": {
                           "type": "string",
@@ -3438,10 +3527,7 @@
                         },
                         "requestId": {
                           "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 4
                         }
                       }
                     },
@@ -3449,7 +3535,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Feature"
+                          }
                         },
                         "force": {
                           "type": "bool",
@@ -3468,7 +3557,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Feature"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -3480,10 +3572,7 @@
                         },
                         "requestId": {
                           "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 4
                         }
                       }
                     },

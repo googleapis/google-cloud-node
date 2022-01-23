@@ -31699,6 +31699,7 @@
                          * @interface IMembershipEndpoint
                          * @property {google.cloud.gkehub.v1.IGkeCluster|null} [gkeCluster] MembershipEndpoint gkeCluster
                          * @property {google.cloud.gkehub.v1.IKubernetesMetadata|null} [kubernetesMetadata] MembershipEndpoint kubernetesMetadata
+                         * @property {google.cloud.gkehub.v1.IKubernetesResource|null} [kubernetesResource] MembershipEndpoint kubernetesResource
                          */
     
                         /**
@@ -31733,6 +31734,14 @@
                         MembershipEndpoint.prototype.kubernetesMetadata = null;
     
                         /**
+                         * MembershipEndpoint kubernetesResource.
+                         * @member {google.cloud.gkehub.v1.IKubernetesResource|null|undefined} kubernetesResource
+                         * @memberof google.cloud.gkehub.v1.MembershipEndpoint
+                         * @instance
+                         */
+                        MembershipEndpoint.prototype.kubernetesResource = null;
+    
+                        /**
                          * Creates a new MembershipEndpoint instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gkehub.v1.MembershipEndpoint
@@ -31760,6 +31769,8 @@
                                 $root.google.cloud.gkehub.v1.GkeCluster.encode(message.gkeCluster, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.kubernetesMetadata != null && Object.hasOwnProperty.call(message, "kubernetesMetadata"))
                                 $root.google.cloud.gkehub.v1.KubernetesMetadata.encode(message.kubernetesMetadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.kubernetesResource != null && Object.hasOwnProperty.call(message, "kubernetesResource"))
+                                $root.google.cloud.gkehub.v1.KubernetesResource.encode(message.kubernetesResource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -31799,6 +31810,9 @@
                                     break;
                                 case 2:
                                     message.kubernetesMetadata = $root.google.cloud.gkehub.v1.KubernetesMetadata.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.kubernetesResource = $root.google.cloud.gkehub.v1.KubernetesResource.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -31845,6 +31859,11 @@
                                 if (error)
                                     return "kubernetesMetadata." + error;
                             }
+                            if (message.kubernetesResource != null && message.hasOwnProperty("kubernetesResource")) {
+                                var error = $root.google.cloud.gkehub.v1.KubernetesResource.verify(message.kubernetesResource);
+                                if (error)
+                                    return "kubernetesResource." + error;
+                            }
                             return null;
                         };
     
@@ -31870,6 +31889,11 @@
                                     throw TypeError(".google.cloud.gkehub.v1.MembershipEndpoint.kubernetesMetadata: object expected");
                                 message.kubernetesMetadata = $root.google.cloud.gkehub.v1.KubernetesMetadata.fromObject(object.kubernetesMetadata);
                             }
+                            if (object.kubernetesResource != null) {
+                                if (typeof object.kubernetesResource !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1.MembershipEndpoint.kubernetesResource: object expected");
+                                message.kubernetesResource = $root.google.cloud.gkehub.v1.KubernetesResource.fromObject(object.kubernetesResource);
+                            }
                             return message;
                         };
     
@@ -31889,11 +31913,14 @@
                             if (options.defaults) {
                                 object.gkeCluster = null;
                                 object.kubernetesMetadata = null;
+                                object.kubernetesResource = null;
                             }
                             if (message.gkeCluster != null && message.hasOwnProperty("gkeCluster"))
                                 object.gkeCluster = $root.google.cloud.gkehub.v1.GkeCluster.toObject(message.gkeCluster, options);
                             if (message.kubernetesMetadata != null && message.hasOwnProperty("kubernetesMetadata"))
                                 object.kubernetesMetadata = $root.google.cloud.gkehub.v1.KubernetesMetadata.toObject(message.kubernetesMetadata, options);
+                            if (message.kubernetesResource != null && message.hasOwnProperty("kubernetesResource"))
+                                object.kubernetesResource = $root.google.cloud.gkehub.v1.KubernetesResource.toObject(message.kubernetesResource, options);
                             return object;
                         };
     
@@ -31909,6 +31936,751 @@
                         };
     
                         return MembershipEndpoint;
+                    })();
+    
+                    v1.KubernetesResource = (function() {
+    
+                        /**
+                         * Properties of a KubernetesResource.
+                         * @memberof google.cloud.gkehub.v1
+                         * @interface IKubernetesResource
+                         * @property {string|null} [membershipCrManifest] KubernetesResource membershipCrManifest
+                         * @property {Array.<google.cloud.gkehub.v1.IResourceManifest>|null} [membershipResources] KubernetesResource membershipResources
+                         * @property {Array.<google.cloud.gkehub.v1.IResourceManifest>|null} [connectResources] KubernetesResource connectResources
+                         * @property {google.cloud.gkehub.v1.IResourceOptions|null} [resourceOptions] KubernetesResource resourceOptions
+                         */
+    
+                        /**
+                         * Constructs a new KubernetesResource.
+                         * @memberof google.cloud.gkehub.v1
+                         * @classdesc Represents a KubernetesResource.
+                         * @implements IKubernetesResource
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1.IKubernetesResource=} [properties] Properties to set
+                         */
+                        function KubernetesResource(properties) {
+                            this.membershipResources = [];
+                            this.connectResources = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KubernetesResource membershipCrManifest.
+                         * @member {string} membershipCrManifest
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @instance
+                         */
+                        KubernetesResource.prototype.membershipCrManifest = "";
+    
+                        /**
+                         * KubernetesResource membershipResources.
+                         * @member {Array.<google.cloud.gkehub.v1.IResourceManifest>} membershipResources
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @instance
+                         */
+                        KubernetesResource.prototype.membershipResources = $util.emptyArray;
+    
+                        /**
+                         * KubernetesResource connectResources.
+                         * @member {Array.<google.cloud.gkehub.v1.IResourceManifest>} connectResources
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @instance
+                         */
+                        KubernetesResource.prototype.connectResources = $util.emptyArray;
+    
+                        /**
+                         * KubernetesResource resourceOptions.
+                         * @member {google.cloud.gkehub.v1.IResourceOptions|null|undefined} resourceOptions
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @instance
+                         */
+                        KubernetesResource.prototype.resourceOptions = null;
+    
+                        /**
+                         * Creates a new KubernetesResource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @static
+                         * @param {google.cloud.gkehub.v1.IKubernetesResource=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1.KubernetesResource} KubernetesResource instance
+                         */
+                        KubernetesResource.create = function create(properties) {
+                            return new KubernetesResource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KubernetesResource message. Does not implicitly {@link google.cloud.gkehub.v1.KubernetesResource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @static
+                         * @param {google.cloud.gkehub.v1.IKubernetesResource} message KubernetesResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KubernetesResource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.membershipCrManifest != null && Object.hasOwnProperty.call(message, "membershipCrManifest"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.membershipCrManifest);
+                            if (message.membershipResources != null && message.membershipResources.length)
+                                for (var i = 0; i < message.membershipResources.length; ++i)
+                                    $root.google.cloud.gkehub.v1.ResourceManifest.encode(message.membershipResources[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.connectResources != null && message.connectResources.length)
+                                for (var i = 0; i < message.connectResources.length; ++i)
+                                    $root.google.cloud.gkehub.v1.ResourceManifest.encode(message.connectResources[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.resourceOptions != null && Object.hasOwnProperty.call(message, "resourceOptions"))
+                                $root.google.cloud.gkehub.v1.ResourceOptions.encode(message.resourceOptions, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KubernetesResource message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.KubernetesResource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @static
+                         * @param {google.cloud.gkehub.v1.IKubernetesResource} message KubernetesResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KubernetesResource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KubernetesResource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1.KubernetesResource} KubernetesResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KubernetesResource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1.KubernetesResource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.membershipCrManifest = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.membershipResources && message.membershipResources.length))
+                                        message.membershipResources = [];
+                                    message.membershipResources.push($root.google.cloud.gkehub.v1.ResourceManifest.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    if (!(message.connectResources && message.connectResources.length))
+                                        message.connectResources = [];
+                                    message.connectResources.push($root.google.cloud.gkehub.v1.ResourceManifest.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    message.resourceOptions = $root.google.cloud.gkehub.v1.ResourceOptions.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KubernetesResource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1.KubernetesResource} KubernetesResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KubernetesResource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KubernetesResource message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KubernetesResource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.membershipCrManifest != null && message.hasOwnProperty("membershipCrManifest"))
+                                if (!$util.isString(message.membershipCrManifest))
+                                    return "membershipCrManifest: string expected";
+                            if (message.membershipResources != null && message.hasOwnProperty("membershipResources")) {
+                                if (!Array.isArray(message.membershipResources))
+                                    return "membershipResources: array expected";
+                                for (var i = 0; i < message.membershipResources.length; ++i) {
+                                    var error = $root.google.cloud.gkehub.v1.ResourceManifest.verify(message.membershipResources[i]);
+                                    if (error)
+                                        return "membershipResources." + error;
+                                }
+                            }
+                            if (message.connectResources != null && message.hasOwnProperty("connectResources")) {
+                                if (!Array.isArray(message.connectResources))
+                                    return "connectResources: array expected";
+                                for (var i = 0; i < message.connectResources.length; ++i) {
+                                    var error = $root.google.cloud.gkehub.v1.ResourceManifest.verify(message.connectResources[i]);
+                                    if (error)
+                                        return "connectResources." + error;
+                                }
+                            }
+                            if (message.resourceOptions != null && message.hasOwnProperty("resourceOptions")) {
+                                var error = $root.google.cloud.gkehub.v1.ResourceOptions.verify(message.resourceOptions);
+                                if (error)
+                                    return "resourceOptions." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KubernetesResource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1.KubernetesResource} KubernetesResource
+                         */
+                        KubernetesResource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1.KubernetesResource)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1.KubernetesResource();
+                            if (object.membershipCrManifest != null)
+                                message.membershipCrManifest = String(object.membershipCrManifest);
+                            if (object.membershipResources) {
+                                if (!Array.isArray(object.membershipResources))
+                                    throw TypeError(".google.cloud.gkehub.v1.KubernetesResource.membershipResources: array expected");
+                                message.membershipResources = [];
+                                for (var i = 0; i < object.membershipResources.length; ++i) {
+                                    if (typeof object.membershipResources[i] !== "object")
+                                        throw TypeError(".google.cloud.gkehub.v1.KubernetesResource.membershipResources: object expected");
+                                    message.membershipResources[i] = $root.google.cloud.gkehub.v1.ResourceManifest.fromObject(object.membershipResources[i]);
+                                }
+                            }
+                            if (object.connectResources) {
+                                if (!Array.isArray(object.connectResources))
+                                    throw TypeError(".google.cloud.gkehub.v1.KubernetesResource.connectResources: array expected");
+                                message.connectResources = [];
+                                for (var i = 0; i < object.connectResources.length; ++i) {
+                                    if (typeof object.connectResources[i] !== "object")
+                                        throw TypeError(".google.cloud.gkehub.v1.KubernetesResource.connectResources: object expected");
+                                    message.connectResources[i] = $root.google.cloud.gkehub.v1.ResourceManifest.fromObject(object.connectResources[i]);
+                                }
+                            }
+                            if (object.resourceOptions != null) {
+                                if (typeof object.resourceOptions !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1.KubernetesResource.resourceOptions: object expected");
+                                message.resourceOptions = $root.google.cloud.gkehub.v1.ResourceOptions.fromObject(object.resourceOptions);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KubernetesResource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @static
+                         * @param {google.cloud.gkehub.v1.KubernetesResource} message KubernetesResource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KubernetesResource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.membershipResources = [];
+                                object.connectResources = [];
+                            }
+                            if (options.defaults) {
+                                object.membershipCrManifest = "";
+                                object.resourceOptions = null;
+                            }
+                            if (message.membershipCrManifest != null && message.hasOwnProperty("membershipCrManifest"))
+                                object.membershipCrManifest = message.membershipCrManifest;
+                            if (message.membershipResources && message.membershipResources.length) {
+                                object.membershipResources = [];
+                                for (var j = 0; j < message.membershipResources.length; ++j)
+                                    object.membershipResources[j] = $root.google.cloud.gkehub.v1.ResourceManifest.toObject(message.membershipResources[j], options);
+                            }
+                            if (message.connectResources && message.connectResources.length) {
+                                object.connectResources = [];
+                                for (var j = 0; j < message.connectResources.length; ++j)
+                                    object.connectResources[j] = $root.google.cloud.gkehub.v1.ResourceManifest.toObject(message.connectResources[j], options);
+                            }
+                            if (message.resourceOptions != null && message.hasOwnProperty("resourceOptions"))
+                                object.resourceOptions = $root.google.cloud.gkehub.v1.ResourceOptions.toObject(message.resourceOptions, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KubernetesResource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1.KubernetesResource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KubernetesResource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return KubernetesResource;
+                    })();
+    
+                    v1.ResourceOptions = (function() {
+    
+                        /**
+                         * Properties of a ResourceOptions.
+                         * @memberof google.cloud.gkehub.v1
+                         * @interface IResourceOptions
+                         * @property {string|null} [connectVersion] ResourceOptions connectVersion
+                         * @property {boolean|null} [v1beta1Crd] ResourceOptions v1beta1Crd
+                         * @property {string|null} [k8sVersion] ResourceOptions k8sVersion
+                         */
+    
+                        /**
+                         * Constructs a new ResourceOptions.
+                         * @memberof google.cloud.gkehub.v1
+                         * @classdesc Represents a ResourceOptions.
+                         * @implements IResourceOptions
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1.IResourceOptions=} [properties] Properties to set
+                         */
+                        function ResourceOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceOptions connectVersion.
+                         * @member {string} connectVersion
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @instance
+                         */
+                        ResourceOptions.prototype.connectVersion = "";
+    
+                        /**
+                         * ResourceOptions v1beta1Crd.
+                         * @member {boolean} v1beta1Crd
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @instance
+                         */
+                        ResourceOptions.prototype.v1beta1Crd = false;
+    
+                        /**
+                         * ResourceOptions k8sVersion.
+                         * @member {string} k8sVersion
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @instance
+                         */
+                        ResourceOptions.prototype.k8sVersion = "";
+    
+                        /**
+                         * Creates a new ResourceOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @static
+                         * @param {google.cloud.gkehub.v1.IResourceOptions=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1.ResourceOptions} ResourceOptions instance
+                         */
+                        ResourceOptions.create = function create(properties) {
+                            return new ResourceOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceOptions message. Does not implicitly {@link google.cloud.gkehub.v1.ResourceOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @static
+                         * @param {google.cloud.gkehub.v1.IResourceOptions} message ResourceOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.connectVersion != null && Object.hasOwnProperty.call(message, "connectVersion"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.connectVersion);
+                            if (message.v1beta1Crd != null && Object.hasOwnProperty.call(message, "v1beta1Crd"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.v1beta1Crd);
+                            if (message.k8sVersion != null && Object.hasOwnProperty.call(message, "k8sVersion"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.k8sVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceOptions message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ResourceOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @static
+                         * @param {google.cloud.gkehub.v1.IResourceOptions} message ResourceOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1.ResourceOptions} ResourceOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1.ResourceOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.connectVersion = reader.string();
+                                    break;
+                                case 2:
+                                    message.v1beta1Crd = reader.bool();
+                                    break;
+                                case 3:
+                                    message.k8sVersion = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1.ResourceOptions} ResourceOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceOptions message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.connectVersion != null && message.hasOwnProperty("connectVersion"))
+                                if (!$util.isString(message.connectVersion))
+                                    return "connectVersion: string expected";
+                            if (message.v1beta1Crd != null && message.hasOwnProperty("v1beta1Crd"))
+                                if (typeof message.v1beta1Crd !== "boolean")
+                                    return "v1beta1Crd: boolean expected";
+                            if (message.k8sVersion != null && message.hasOwnProperty("k8sVersion"))
+                                if (!$util.isString(message.k8sVersion))
+                                    return "k8sVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1.ResourceOptions} ResourceOptions
+                         */
+                        ResourceOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1.ResourceOptions)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1.ResourceOptions();
+                            if (object.connectVersion != null)
+                                message.connectVersion = String(object.connectVersion);
+                            if (object.v1beta1Crd != null)
+                                message.v1beta1Crd = Boolean(object.v1beta1Crd);
+                            if (object.k8sVersion != null)
+                                message.k8sVersion = String(object.k8sVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @static
+                         * @param {google.cloud.gkehub.v1.ResourceOptions} message ResourceOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.connectVersion = "";
+                                object.v1beta1Crd = false;
+                                object.k8sVersion = "";
+                            }
+                            if (message.connectVersion != null && message.hasOwnProperty("connectVersion"))
+                                object.connectVersion = message.connectVersion;
+                            if (message.v1beta1Crd != null && message.hasOwnProperty("v1beta1Crd"))
+                                object.v1beta1Crd = message.v1beta1Crd;
+                            if (message.k8sVersion != null && message.hasOwnProperty("k8sVersion"))
+                                object.k8sVersion = message.k8sVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1.ResourceOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ResourceOptions;
+                    })();
+    
+                    v1.ResourceManifest = (function() {
+    
+                        /**
+                         * Properties of a ResourceManifest.
+                         * @memberof google.cloud.gkehub.v1
+                         * @interface IResourceManifest
+                         * @property {string|null} [manifest] ResourceManifest manifest
+                         * @property {boolean|null} [clusterScoped] ResourceManifest clusterScoped
+                         */
+    
+                        /**
+                         * Constructs a new ResourceManifest.
+                         * @memberof google.cloud.gkehub.v1
+                         * @classdesc Represents a ResourceManifest.
+                         * @implements IResourceManifest
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1.IResourceManifest=} [properties] Properties to set
+                         */
+                        function ResourceManifest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceManifest manifest.
+                         * @member {string} manifest
+                         * @memberof google.cloud.gkehub.v1.ResourceManifest
+                         * @instance
+                         */
+                        ResourceManifest.prototype.manifest = "";
+    
+                        /**
+                         * ResourceManifest clusterScoped.
+                         * @member {boolean} clusterScoped
+                         * @memberof google.cloud.gkehub.v1.ResourceManifest
+                         * @instance
+                         */
+                        ResourceManifest.prototype.clusterScoped = false;
+    
+                        /**
+                         * Creates a new ResourceManifest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1.ResourceManifest
+                         * @static
+                         * @param {google.cloud.gkehub.v1.IResourceManifest=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1.ResourceManifest} ResourceManifest instance
+                         */
+                        ResourceManifest.create = function create(properties) {
+                            return new ResourceManifest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceManifest message. Does not implicitly {@link google.cloud.gkehub.v1.ResourceManifest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1.ResourceManifest
+                         * @static
+                         * @param {google.cloud.gkehub.v1.IResourceManifest} message ResourceManifest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceManifest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.manifest != null && Object.hasOwnProperty.call(message, "manifest"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.manifest);
+                            if (message.clusterScoped != null && Object.hasOwnProperty.call(message, "clusterScoped"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.clusterScoped);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceManifest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ResourceManifest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1.ResourceManifest
+                         * @static
+                         * @param {google.cloud.gkehub.v1.IResourceManifest} message ResourceManifest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceManifest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceManifest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1.ResourceManifest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1.ResourceManifest} ResourceManifest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceManifest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1.ResourceManifest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.manifest = reader.string();
+                                    break;
+                                case 2:
+                                    message.clusterScoped = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceManifest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1.ResourceManifest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1.ResourceManifest} ResourceManifest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceManifest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceManifest message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1.ResourceManifest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceManifest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.manifest != null && message.hasOwnProperty("manifest"))
+                                if (!$util.isString(message.manifest))
+                                    return "manifest: string expected";
+                            if (message.clusterScoped != null && message.hasOwnProperty("clusterScoped"))
+                                if (typeof message.clusterScoped !== "boolean")
+                                    return "clusterScoped: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceManifest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1.ResourceManifest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1.ResourceManifest} ResourceManifest
+                         */
+                        ResourceManifest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1.ResourceManifest)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1.ResourceManifest();
+                            if (object.manifest != null)
+                                message.manifest = String(object.manifest);
+                            if (object.clusterScoped != null)
+                                message.clusterScoped = Boolean(object.clusterScoped);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceManifest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1.ResourceManifest
+                         * @static
+                         * @param {google.cloud.gkehub.v1.ResourceManifest} message ResourceManifest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceManifest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.manifest = "";
+                                object.clusterScoped = false;
+                            }
+                            if (message.manifest != null && message.hasOwnProperty("manifest"))
+                                object.manifest = message.manifest;
+                            if (message.clusterScoped != null && message.hasOwnProperty("clusterScoped"))
+                                object.clusterScoped = message.clusterScoped;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceManifest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1.ResourceManifest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceManifest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ResourceManifest;
                     })();
     
                     v1.GkeCluster = (function() {

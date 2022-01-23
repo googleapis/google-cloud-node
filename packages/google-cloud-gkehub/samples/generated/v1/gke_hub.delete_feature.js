@@ -21,7 +21,7 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The Feature resource name in the format
+   *  Required. The Feature resource name in the format
    *  `projects/* /locations/* /features/*`.
    */
   // const name = 'abc123'
