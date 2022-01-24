@@ -30,6 +30,11 @@ export async function addLifecycleRule(bucket: Bucket) {
 }
 
 export async function combine(bucket: Bucket) {
+  bucket = new Bucket(bucket.storage, bucket.name, {
+    preconditionOpts: {
+      ifMetagenerationMatch: 1,
+    },
+  });
   const file1 = bucket.file('file1.txt');
   const file2 = bucket.file('file2.txt');
   await file1.save('file1 contents');
@@ -46,10 +51,19 @@ export async function combine(bucket: Bucket) {
   });
   const sources = [f1WithPrecondition, f2WithPrecondition];
   const allFiles = bucket.file('all-files.txt');
+  // If we are using a precondition we must make sure the file exists and the metageneration matches that provided as a query parameter
+  await allFiles.save('allfiles contents');
   await bucket.combine(sources, allFiles);
 }
 
 export async function create(bucket: Bucket) {
+  const [bucketExists] = await bucket.exists();
+  if (bucketExists) {
+    await bucket.deleteFiles();
+    await bucket.delete({
+      ignoreNotFound: true,
+    });
+  }
   await bucket.create();
 }
 
@@ -175,6 +189,14 @@ export async function bucketUploadResumable(bucket: Bucket) {
 }
 
 export async function bucketUploadMultipart(bucket: Bucket) {
+  // If we are using a precondition we must make sure the file exists and the metageneration matches that provided as a query parameter
+  bucket = new Bucket(bucket.storage, bucket.name, {
+    preconditionOpts: {
+      ifMetagenerationMatch: 1,
+    },
+  });
+  const fileToSave = bucket.file('retryStrategyTestData.json');
+  await fileToSave.save('fileToSave contents');
   await bucket.upload(
     path.join(
       __dirname,
@@ -415,6 +437,11 @@ export async function createBucket(
   _notification: Notification,
   storage: Storage
 ) {
+  const bucket = storage.bucket('test-creating-bucket');
+  const [exists] = await bucket.exists();
+  if (exists) {
+    bucket.delete();
+  }
   await storage.createBucket('test-creating-bucket');
 }
 
