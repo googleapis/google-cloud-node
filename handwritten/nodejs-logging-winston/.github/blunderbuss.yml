@@ -1,4 +1,4 @@
 assign_issues:
-  - googleapis/api-logging
+  - googleapis/api-logging-reviewers
 assign_prs:
-  - googleapis/api-logging
+  - googleapis/api-logging-reviewers
