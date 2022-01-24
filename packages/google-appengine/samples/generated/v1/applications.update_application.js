@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -40,7 +41,8 @@ function main() {
 
   async function callUpdateApplication() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const [operation] = await appengineClient.updateApplication(request);

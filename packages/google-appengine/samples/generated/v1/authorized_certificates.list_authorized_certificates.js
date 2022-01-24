@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -37,22 +38,20 @@ function main() {
   // const pageToken = 'abc123'
 
   // Imports the Appengine library
-  const {AuthorizedCertificatesClient} =
-    require('@google-cloud/appengine-admin').v1;
+  const {AuthorizedCertificatesClient} = require('@google-cloud/appengine-admin').v1;
 
   // Instantiates a client
   const appengineClient = new AuthorizedCertificatesClient();
 
   async function callListAuthorizedCertificates() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
-    const iterable = await appengineClient.listAuthorizedCertificatesAsync(
-      request
-    );
+    const iterable = await appengineClient.listAuthorizedCertificatesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

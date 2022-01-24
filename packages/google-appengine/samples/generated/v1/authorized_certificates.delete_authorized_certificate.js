@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -26,15 +27,15 @@ function main() {
   // const name = 'abc123'
 
   // Imports the Appengine library
-  const {AuthorizedCertificatesClient} =
-    require('@google-cloud/appengine-admin').v1;
+  const {AuthorizedCertificatesClient} = require('@google-cloud/appengine-admin').v1;
 
   // Instantiates a client
   const appengineClient = new AuthorizedCertificatesClient();
 
   async function callDeleteAuthorizedCertificate() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const response = await appengineClient.deleteAuthorizedCertificate(request);
