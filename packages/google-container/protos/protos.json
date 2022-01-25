@@ -3689,6 +3689,51 @@
                     }
                   }
                 },
+                "GetOpenIDConfigRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "GetOpenIDConfigResponse": {
+                  "fields": {
+                    "issuer": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "jwksUri": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "responseTypesSupported": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 3
+                    },
+                    "subjectTypesSupported": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 4
+                    },
+                    "idTokenSigningAlgValuesSupported": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 5
+                    },
+                    "claimsSupported": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    },
+                    "grantTypes": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 7
+                    }
+                  }
+                },
                 "GetJSONWebKeysRequest": {
                   "fields": {
                     "parent": {

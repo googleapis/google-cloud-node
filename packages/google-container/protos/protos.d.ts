@@ -11373,6 +11373,222 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** Properties of a GetOpenIDConfigRequest. */
+            interface IGetOpenIDConfigRequest {
+
+                /** GetOpenIDConfigRequest parent */
+                parent?: (string|null);
+            }
+
+            /** Represents a GetOpenIDConfigRequest. */
+            class GetOpenIDConfigRequest implements IGetOpenIDConfigRequest {
+
+                /**
+                 * Constructs a new GetOpenIDConfigRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IGetOpenIDConfigRequest);
+
+                /** GetOpenIDConfigRequest parent. */
+                public parent: string;
+
+                /**
+                 * Creates a new GetOpenIDConfigRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetOpenIDConfigRequest instance
+                 */
+                public static create(properties?: google.container.v1.IGetOpenIDConfigRequest): google.container.v1.GetOpenIDConfigRequest;
+
+                /**
+                 * Encodes the specified GetOpenIDConfigRequest message. Does not implicitly {@link google.container.v1.GetOpenIDConfigRequest.verify|verify} messages.
+                 * @param message GetOpenIDConfigRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IGetOpenIDConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetOpenIDConfigRequest message, length delimited. Does not implicitly {@link google.container.v1.GetOpenIDConfigRequest.verify|verify} messages.
+                 * @param message GetOpenIDConfigRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IGetOpenIDConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetOpenIDConfigRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetOpenIDConfigRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.GetOpenIDConfigRequest;
+
+                /**
+                 * Decodes a GetOpenIDConfigRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetOpenIDConfigRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.GetOpenIDConfigRequest;
+
+                /**
+                 * Verifies a GetOpenIDConfigRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetOpenIDConfigRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetOpenIDConfigRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.GetOpenIDConfigRequest;
+
+                /**
+                 * Creates a plain object from a GetOpenIDConfigRequest message. Also converts values to other types if specified.
+                 * @param message GetOpenIDConfigRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.GetOpenIDConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetOpenIDConfigRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a GetOpenIDConfigResponse. */
+            interface IGetOpenIDConfigResponse {
+
+                /** GetOpenIDConfigResponse issuer */
+                issuer?: (string|null);
+
+                /** GetOpenIDConfigResponse jwksUri */
+                jwksUri?: (string|null);
+
+                /** GetOpenIDConfigResponse responseTypesSupported */
+                responseTypesSupported?: (string[]|null);
+
+                /** GetOpenIDConfigResponse subjectTypesSupported */
+                subjectTypesSupported?: (string[]|null);
+
+                /** GetOpenIDConfigResponse idTokenSigningAlgValuesSupported */
+                idTokenSigningAlgValuesSupported?: (string[]|null);
+
+                /** GetOpenIDConfigResponse claimsSupported */
+                claimsSupported?: (string[]|null);
+
+                /** GetOpenIDConfigResponse grantTypes */
+                grantTypes?: (string[]|null);
+            }
+
+            /** Represents a GetOpenIDConfigResponse. */
+            class GetOpenIDConfigResponse implements IGetOpenIDConfigResponse {
+
+                /**
+                 * Constructs a new GetOpenIDConfigResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IGetOpenIDConfigResponse);
+
+                /** GetOpenIDConfigResponse issuer. */
+                public issuer: string;
+
+                /** GetOpenIDConfigResponse jwksUri. */
+                public jwksUri: string;
+
+                /** GetOpenIDConfigResponse responseTypesSupported. */
+                public responseTypesSupported: string[];
+
+                /** GetOpenIDConfigResponse subjectTypesSupported. */
+                public subjectTypesSupported: string[];
+
+                /** GetOpenIDConfigResponse idTokenSigningAlgValuesSupported. */
+                public idTokenSigningAlgValuesSupported: string[];
+
+                /** GetOpenIDConfigResponse claimsSupported. */
+                public claimsSupported: string[];
+
+                /** GetOpenIDConfigResponse grantTypes. */
+                public grantTypes: string[];
+
+                /**
+                 * Creates a new GetOpenIDConfigResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetOpenIDConfigResponse instance
+                 */
+                public static create(properties?: google.container.v1.IGetOpenIDConfigResponse): google.container.v1.GetOpenIDConfigResponse;
+
+                /**
+                 * Encodes the specified GetOpenIDConfigResponse message. Does not implicitly {@link google.container.v1.GetOpenIDConfigResponse.verify|verify} messages.
+                 * @param message GetOpenIDConfigResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IGetOpenIDConfigResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetOpenIDConfigResponse message, length delimited. Does not implicitly {@link google.container.v1.GetOpenIDConfigResponse.verify|verify} messages.
+                 * @param message GetOpenIDConfigResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IGetOpenIDConfigResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetOpenIDConfigResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetOpenIDConfigResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.GetOpenIDConfigResponse;
+
+                /**
+                 * Decodes a GetOpenIDConfigResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetOpenIDConfigResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.GetOpenIDConfigResponse;
+
+                /**
+                 * Verifies a GetOpenIDConfigResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetOpenIDConfigResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetOpenIDConfigResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.GetOpenIDConfigResponse;
+
+                /**
+                 * Creates a plain object from a GetOpenIDConfigResponse message. Also converts values to other types if specified.
+                 * @param message GetOpenIDConfigResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.GetOpenIDConfigResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetOpenIDConfigResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
             /** Properties of a GetJSONWebKeysRequest. */
             interface IGetJSONWebKeysRequest {
 

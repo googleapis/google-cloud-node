@@ -28904,6 +28904,595 @@
                     return ServiceExternalIPsConfig;
                 })();
     
+                v1.GetOpenIDConfigRequest = (function() {
+    
+                    /**
+                     * Properties of a GetOpenIDConfigRequest.
+                     * @memberof google.container.v1
+                     * @interface IGetOpenIDConfigRequest
+                     * @property {string|null} [parent] GetOpenIDConfigRequest parent
+                     */
+    
+                    /**
+                     * Constructs a new GetOpenIDConfigRequest.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a GetOpenIDConfigRequest.
+                     * @implements IGetOpenIDConfigRequest
+                     * @constructor
+                     * @param {google.container.v1.IGetOpenIDConfigRequest=} [properties] Properties to set
+                     */
+                    function GetOpenIDConfigRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetOpenIDConfigRequest parent.
+                     * @member {string} parent
+                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @instance
+                     */
+                    GetOpenIDConfigRequest.prototype.parent = "";
+    
+                    /**
+                     * Creates a new GetOpenIDConfigRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @static
+                     * @param {google.container.v1.IGetOpenIDConfigRequest=} [properties] Properties to set
+                     * @returns {google.container.v1.GetOpenIDConfigRequest} GetOpenIDConfigRequest instance
+                     */
+                    GetOpenIDConfigRequest.create = function create(properties) {
+                        return new GetOpenIDConfigRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetOpenIDConfigRequest message. Does not implicitly {@link google.container.v1.GetOpenIDConfigRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @static
+                     * @param {google.container.v1.IGetOpenIDConfigRequest} message GetOpenIDConfigRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetOpenIDConfigRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetOpenIDConfigRequest message, length delimited. Does not implicitly {@link google.container.v1.GetOpenIDConfigRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @static
+                     * @param {google.container.v1.IGetOpenIDConfigRequest} message GetOpenIDConfigRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetOpenIDConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetOpenIDConfigRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.GetOpenIDConfigRequest} GetOpenIDConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetOpenIDConfigRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.GetOpenIDConfigRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.parent = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetOpenIDConfigRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.GetOpenIDConfigRequest} GetOpenIDConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetOpenIDConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetOpenIDConfigRequest message.
+                     * @function verify
+                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetOpenIDConfigRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetOpenIDConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.GetOpenIDConfigRequest} GetOpenIDConfigRequest
+                     */
+                    GetOpenIDConfigRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.GetOpenIDConfigRequest)
+                            return object;
+                        var message = new $root.google.container.v1.GetOpenIDConfigRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetOpenIDConfigRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @static
+                     * @param {google.container.v1.GetOpenIDConfigRequest} message GetOpenIDConfigRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetOpenIDConfigRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.parent = "";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetOpenIDConfigRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetOpenIDConfigRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GetOpenIDConfigRequest;
+                })();
+    
+                v1.GetOpenIDConfigResponse = (function() {
+    
+                    /**
+                     * Properties of a GetOpenIDConfigResponse.
+                     * @memberof google.container.v1
+                     * @interface IGetOpenIDConfigResponse
+                     * @property {string|null} [issuer] GetOpenIDConfigResponse issuer
+                     * @property {string|null} [jwksUri] GetOpenIDConfigResponse jwksUri
+                     * @property {Array.<string>|null} [responseTypesSupported] GetOpenIDConfigResponse responseTypesSupported
+                     * @property {Array.<string>|null} [subjectTypesSupported] GetOpenIDConfigResponse subjectTypesSupported
+                     * @property {Array.<string>|null} [idTokenSigningAlgValuesSupported] GetOpenIDConfigResponse idTokenSigningAlgValuesSupported
+                     * @property {Array.<string>|null} [claimsSupported] GetOpenIDConfigResponse claimsSupported
+                     * @property {Array.<string>|null} [grantTypes] GetOpenIDConfigResponse grantTypes
+                     */
+    
+                    /**
+                     * Constructs a new GetOpenIDConfigResponse.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a GetOpenIDConfigResponse.
+                     * @implements IGetOpenIDConfigResponse
+                     * @constructor
+                     * @param {google.container.v1.IGetOpenIDConfigResponse=} [properties] Properties to set
+                     */
+                    function GetOpenIDConfigResponse(properties) {
+                        this.responseTypesSupported = [];
+                        this.subjectTypesSupported = [];
+                        this.idTokenSigningAlgValuesSupported = [];
+                        this.claimsSupported = [];
+                        this.grantTypes = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetOpenIDConfigResponse issuer.
+                     * @member {string} issuer
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @instance
+                     */
+                    GetOpenIDConfigResponse.prototype.issuer = "";
+    
+                    /**
+                     * GetOpenIDConfigResponse jwksUri.
+                     * @member {string} jwksUri
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @instance
+                     */
+                    GetOpenIDConfigResponse.prototype.jwksUri = "";
+    
+                    /**
+                     * GetOpenIDConfigResponse responseTypesSupported.
+                     * @member {Array.<string>} responseTypesSupported
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @instance
+                     */
+                    GetOpenIDConfigResponse.prototype.responseTypesSupported = $util.emptyArray;
+    
+                    /**
+                     * GetOpenIDConfigResponse subjectTypesSupported.
+                     * @member {Array.<string>} subjectTypesSupported
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @instance
+                     */
+                    GetOpenIDConfigResponse.prototype.subjectTypesSupported = $util.emptyArray;
+    
+                    /**
+                     * GetOpenIDConfigResponse idTokenSigningAlgValuesSupported.
+                     * @member {Array.<string>} idTokenSigningAlgValuesSupported
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @instance
+                     */
+                    GetOpenIDConfigResponse.prototype.idTokenSigningAlgValuesSupported = $util.emptyArray;
+    
+                    /**
+                     * GetOpenIDConfigResponse claimsSupported.
+                     * @member {Array.<string>} claimsSupported
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @instance
+                     */
+                    GetOpenIDConfigResponse.prototype.claimsSupported = $util.emptyArray;
+    
+                    /**
+                     * GetOpenIDConfigResponse grantTypes.
+                     * @member {Array.<string>} grantTypes
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @instance
+                     */
+                    GetOpenIDConfigResponse.prototype.grantTypes = $util.emptyArray;
+    
+                    /**
+                     * Creates a new GetOpenIDConfigResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @static
+                     * @param {google.container.v1.IGetOpenIDConfigResponse=} [properties] Properties to set
+                     * @returns {google.container.v1.GetOpenIDConfigResponse} GetOpenIDConfigResponse instance
+                     */
+                    GetOpenIDConfigResponse.create = function create(properties) {
+                        return new GetOpenIDConfigResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetOpenIDConfigResponse message. Does not implicitly {@link google.container.v1.GetOpenIDConfigResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @static
+                     * @param {google.container.v1.IGetOpenIDConfigResponse} message GetOpenIDConfigResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetOpenIDConfigResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.issuer != null && Object.hasOwnProperty.call(message, "issuer"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.issuer);
+                        if (message.jwksUri != null && Object.hasOwnProperty.call(message, "jwksUri"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.jwksUri);
+                        if (message.responseTypesSupported != null && message.responseTypesSupported.length)
+                            for (var i = 0; i < message.responseTypesSupported.length; ++i)
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.responseTypesSupported[i]);
+                        if (message.subjectTypesSupported != null && message.subjectTypesSupported.length)
+                            for (var i = 0; i < message.subjectTypesSupported.length; ++i)
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.subjectTypesSupported[i]);
+                        if (message.idTokenSigningAlgValuesSupported != null && message.idTokenSigningAlgValuesSupported.length)
+                            for (var i = 0; i < message.idTokenSigningAlgValuesSupported.length; ++i)
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.idTokenSigningAlgValuesSupported[i]);
+                        if (message.claimsSupported != null && message.claimsSupported.length)
+                            for (var i = 0; i < message.claimsSupported.length; ++i)
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.claimsSupported[i]);
+                        if (message.grantTypes != null && message.grantTypes.length)
+                            for (var i = 0; i < message.grantTypes.length; ++i)
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.grantTypes[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetOpenIDConfigResponse message, length delimited. Does not implicitly {@link google.container.v1.GetOpenIDConfigResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @static
+                     * @param {google.container.v1.IGetOpenIDConfigResponse} message GetOpenIDConfigResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetOpenIDConfigResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetOpenIDConfigResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.GetOpenIDConfigResponse} GetOpenIDConfigResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetOpenIDConfigResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.GetOpenIDConfigResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.issuer = reader.string();
+                                break;
+                            case 2:
+                                message.jwksUri = reader.string();
+                                break;
+                            case 3:
+                                if (!(message.responseTypesSupported && message.responseTypesSupported.length))
+                                    message.responseTypesSupported = [];
+                                message.responseTypesSupported.push(reader.string());
+                                break;
+                            case 4:
+                                if (!(message.subjectTypesSupported && message.subjectTypesSupported.length))
+                                    message.subjectTypesSupported = [];
+                                message.subjectTypesSupported.push(reader.string());
+                                break;
+                            case 5:
+                                if (!(message.idTokenSigningAlgValuesSupported && message.idTokenSigningAlgValuesSupported.length))
+                                    message.idTokenSigningAlgValuesSupported = [];
+                                message.idTokenSigningAlgValuesSupported.push(reader.string());
+                                break;
+                            case 6:
+                                if (!(message.claimsSupported && message.claimsSupported.length))
+                                    message.claimsSupported = [];
+                                message.claimsSupported.push(reader.string());
+                                break;
+                            case 7:
+                                if (!(message.grantTypes && message.grantTypes.length))
+                                    message.grantTypes = [];
+                                message.grantTypes.push(reader.string());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetOpenIDConfigResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.GetOpenIDConfigResponse} GetOpenIDConfigResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetOpenIDConfigResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetOpenIDConfigResponse message.
+                     * @function verify
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetOpenIDConfigResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.issuer != null && message.hasOwnProperty("issuer"))
+                            if (!$util.isString(message.issuer))
+                                return "issuer: string expected";
+                        if (message.jwksUri != null && message.hasOwnProperty("jwksUri"))
+                            if (!$util.isString(message.jwksUri))
+                                return "jwksUri: string expected";
+                        if (message.responseTypesSupported != null && message.hasOwnProperty("responseTypesSupported")) {
+                            if (!Array.isArray(message.responseTypesSupported))
+                                return "responseTypesSupported: array expected";
+                            for (var i = 0; i < message.responseTypesSupported.length; ++i)
+                                if (!$util.isString(message.responseTypesSupported[i]))
+                                    return "responseTypesSupported: string[] expected";
+                        }
+                        if (message.subjectTypesSupported != null && message.hasOwnProperty("subjectTypesSupported")) {
+                            if (!Array.isArray(message.subjectTypesSupported))
+                                return "subjectTypesSupported: array expected";
+                            for (var i = 0; i < message.subjectTypesSupported.length; ++i)
+                                if (!$util.isString(message.subjectTypesSupported[i]))
+                                    return "subjectTypesSupported: string[] expected";
+                        }
+                        if (message.idTokenSigningAlgValuesSupported != null && message.hasOwnProperty("idTokenSigningAlgValuesSupported")) {
+                            if (!Array.isArray(message.idTokenSigningAlgValuesSupported))
+                                return "idTokenSigningAlgValuesSupported: array expected";
+                            for (var i = 0; i < message.idTokenSigningAlgValuesSupported.length; ++i)
+                                if (!$util.isString(message.idTokenSigningAlgValuesSupported[i]))
+                                    return "idTokenSigningAlgValuesSupported: string[] expected";
+                        }
+                        if (message.claimsSupported != null && message.hasOwnProperty("claimsSupported")) {
+                            if (!Array.isArray(message.claimsSupported))
+                                return "claimsSupported: array expected";
+                            for (var i = 0; i < message.claimsSupported.length; ++i)
+                                if (!$util.isString(message.claimsSupported[i]))
+                                    return "claimsSupported: string[] expected";
+                        }
+                        if (message.grantTypes != null && message.hasOwnProperty("grantTypes")) {
+                            if (!Array.isArray(message.grantTypes))
+                                return "grantTypes: array expected";
+                            for (var i = 0; i < message.grantTypes.length; ++i)
+                                if (!$util.isString(message.grantTypes[i]))
+                                    return "grantTypes: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetOpenIDConfigResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.GetOpenIDConfigResponse} GetOpenIDConfigResponse
+                     */
+                    GetOpenIDConfigResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.GetOpenIDConfigResponse)
+                            return object;
+                        var message = new $root.google.container.v1.GetOpenIDConfigResponse();
+                        if (object.issuer != null)
+                            message.issuer = String(object.issuer);
+                        if (object.jwksUri != null)
+                            message.jwksUri = String(object.jwksUri);
+                        if (object.responseTypesSupported) {
+                            if (!Array.isArray(object.responseTypesSupported))
+                                throw TypeError(".google.container.v1.GetOpenIDConfigResponse.responseTypesSupported: array expected");
+                            message.responseTypesSupported = [];
+                            for (var i = 0; i < object.responseTypesSupported.length; ++i)
+                                message.responseTypesSupported[i] = String(object.responseTypesSupported[i]);
+                        }
+                        if (object.subjectTypesSupported) {
+                            if (!Array.isArray(object.subjectTypesSupported))
+                                throw TypeError(".google.container.v1.GetOpenIDConfigResponse.subjectTypesSupported: array expected");
+                            message.subjectTypesSupported = [];
+                            for (var i = 0; i < object.subjectTypesSupported.length; ++i)
+                                message.subjectTypesSupported[i] = String(object.subjectTypesSupported[i]);
+                        }
+                        if (object.idTokenSigningAlgValuesSupported) {
+                            if (!Array.isArray(object.idTokenSigningAlgValuesSupported))
+                                throw TypeError(".google.container.v1.GetOpenIDConfigResponse.idTokenSigningAlgValuesSupported: array expected");
+                            message.idTokenSigningAlgValuesSupported = [];
+                            for (var i = 0; i < object.idTokenSigningAlgValuesSupported.length; ++i)
+                                message.idTokenSigningAlgValuesSupported[i] = String(object.idTokenSigningAlgValuesSupported[i]);
+                        }
+                        if (object.claimsSupported) {
+                            if (!Array.isArray(object.claimsSupported))
+                                throw TypeError(".google.container.v1.GetOpenIDConfigResponse.claimsSupported: array expected");
+                            message.claimsSupported = [];
+                            for (var i = 0; i < object.claimsSupported.length; ++i)
+                                message.claimsSupported[i] = String(object.claimsSupported[i]);
+                        }
+                        if (object.grantTypes) {
+                            if (!Array.isArray(object.grantTypes))
+                                throw TypeError(".google.container.v1.GetOpenIDConfigResponse.grantTypes: array expected");
+                            message.grantTypes = [];
+                            for (var i = 0; i < object.grantTypes.length; ++i)
+                                message.grantTypes[i] = String(object.grantTypes[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetOpenIDConfigResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @static
+                     * @param {google.container.v1.GetOpenIDConfigResponse} message GetOpenIDConfigResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetOpenIDConfigResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.responseTypesSupported = [];
+                            object.subjectTypesSupported = [];
+                            object.idTokenSigningAlgValuesSupported = [];
+                            object.claimsSupported = [];
+                            object.grantTypes = [];
+                        }
+                        if (options.defaults) {
+                            object.issuer = "";
+                            object.jwksUri = "";
+                        }
+                        if (message.issuer != null && message.hasOwnProperty("issuer"))
+                            object.issuer = message.issuer;
+                        if (message.jwksUri != null && message.hasOwnProperty("jwksUri"))
+                            object.jwksUri = message.jwksUri;
+                        if (message.responseTypesSupported && message.responseTypesSupported.length) {
+                            object.responseTypesSupported = [];
+                            for (var j = 0; j < message.responseTypesSupported.length; ++j)
+                                object.responseTypesSupported[j] = message.responseTypesSupported[j];
+                        }
+                        if (message.subjectTypesSupported && message.subjectTypesSupported.length) {
+                            object.subjectTypesSupported = [];
+                            for (var j = 0; j < message.subjectTypesSupported.length; ++j)
+                                object.subjectTypesSupported[j] = message.subjectTypesSupported[j];
+                        }
+                        if (message.idTokenSigningAlgValuesSupported && message.idTokenSigningAlgValuesSupported.length) {
+                            object.idTokenSigningAlgValuesSupported = [];
+                            for (var j = 0; j < message.idTokenSigningAlgValuesSupported.length; ++j)
+                                object.idTokenSigningAlgValuesSupported[j] = message.idTokenSigningAlgValuesSupported[j];
+                        }
+                        if (message.claimsSupported && message.claimsSupported.length) {
+                            object.claimsSupported = [];
+                            for (var j = 0; j < message.claimsSupported.length; ++j)
+                                object.claimsSupported[j] = message.claimsSupported[j];
+                        }
+                        if (message.grantTypes && message.grantTypes.length) {
+                            object.grantTypes = [];
+                            for (var j = 0; j < message.grantTypes.length; ++j)
+                                object.grantTypes[j] = message.grantTypes[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetOpenIDConfigResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.GetOpenIDConfigResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetOpenIDConfigResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GetOpenIDConfigResponse;
+                })();
+    
                 v1.GetJSONWebKeysRequest = (function() {
     
                     /**
