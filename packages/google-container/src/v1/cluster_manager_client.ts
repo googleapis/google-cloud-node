@@ -784,6 +784,14 @@ export class ClusterManagerClient {
    *   The desired workload metadata config for the node pool.
    * @param {google.container.v1.NodePool.UpgradeSettings} request.upgradeSettings
    *   Upgrade settings control disruption and speed of the upgrade.
+   * @param {google.container.v1.LinuxNodeConfig} request.linuxNodeConfig
+   *   Parameters that can be configured on Linux nodes.
+   * @param {google.container.v1.NodeKubeletConfig} request.kubeletConfig
+   *   Node kubelet configs.
+   * @param {google.container.v1.GcfsConfig} request.gcfsConfig
+   *   GCFS config.
+   * @param {google.container.v1.VirtualNIC} request.gvnic
+   *   Enable or disable gvnic on the node pool.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3232,7 +3240,9 @@ export class ClusterManagerClient {
     return this.innerApiCalls.completeIPRotation(request, options, callback);
   }
   /**
-   * Sets the size for a specific node pool.
+   * Sets the size for a specific node pool. The new size will be used for all
+   * replicas, including future replicas created by modifying
+   * {@link google.container.v1.NodePool.locations|NodePool.locations}.
    *
    * @param {Object} request
    *   The request object that will be sent.

@@ -12,7 +12,9 @@
                 "java_outer_classname": "ClusterServiceProto",
                 "java_package": "com.google.container.v1",
                 "php_namespace": "Google\\Cloud\\Container\\V1",
-                "ruby_package": "Google::Cloud::Container::V1"
+                "ruby_package": "Google::Cloud::Container::V1",
+                "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
+                "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
               },
               "nested": {
                 "ClusterManager": {
@@ -844,6 +846,31 @@
                     }
                   }
                 },
+                "LinuxNodeConfig": {
+                  "fields": {
+                    "sysctls": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "NodeKubeletConfig": {
+                  "fields": {
+                    "cpuManagerPolicy": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "cpuCfsQuota": {
+                      "type": "google.protobuf.BoolValue",
+                      "id": 2
+                    },
+                    "cpuCfsQuotaPeriod": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                },
                 "NodeConfig": {
                   "fields": {
                     "machineType": {
@@ -928,9 +955,66 @@
                       "type": "ShieldedInstanceConfig",
                       "id": 20
                     },
+                    "linuxNodeConfig": {
+                      "type": "LinuxNodeConfig",
+                      "id": 21
+                    },
+                    "kubeletConfig": {
+                      "type": "NodeKubeletConfig",
+                      "id": 22
+                    },
                     "bootDiskKmsKey": {
                       "type": "string",
                       "id": 23
+                    },
+                    "gcfsConfig": {
+                      "type": "GcfsConfig",
+                      "id": 25
+                    },
+                    "advancedMachineFeatures": {
+                      "type": "AdvancedMachineFeatures",
+                      "id": 26
+                    },
+                    "gvnic": {
+                      "type": "VirtualNIC",
+                      "id": 29
+                    }
+                  }
+                },
+                "AdvancedMachineFeatures": {
+                  "oneofs": {
+                    "_threadsPerCore": {
+                      "oneof": [
+                        "threadsPerCore"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "threadsPerCore": {
+                      "type": "int64",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  }
+                },
+                "NodeNetworkConfig": {
+                  "fields": {
+                    "createPodRange": {
+                      "type": "bool",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    },
+                    "podRange": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "podIpv4CidrBlock": {
+                      "type": "string",
+                      "id": 6
                     }
                   }
                 },
@@ -959,6 +1043,14 @@
                         "UNSPECIFIED": 0,
                         "GVISOR": 1
                       }
+                    }
+                  }
+                },
+                "GcfsConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
                     }
                   }
                 },
@@ -1089,6 +1181,14 @@
                     "configConnectorConfig": {
                       "type": "ConfigConnectorConfig",
                       "id": 10
+                    },
+                    "gcePersistentDiskCsiDriverConfig": {
+                      "type": "GcePersistentDiskCsiDriverConfig",
+                      "id": 11
+                    },
+                    "gcpFilestoreCsiDriverConfig": {
+                      "type": "GcpFilestoreCsiDriverConfig",
+                      "id": 14
                     }
                   }
                 },
@@ -1206,6 +1306,22 @@
                   }
                 },
                 "ConfigConnectorConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "GcePersistentDiskCsiDriverConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "GcpFilestoreCsiDriverConfig": {
                   "fields": {
                     "enabled": {
                       "type": "bool",
@@ -1342,6 +1458,13 @@
                   }
                 },
                 "Cluster": {
+                  "oneofs": {
+                    "_nodePoolDefaults": {
+                      "oneof": [
+                        "nodePoolDefaults"
+                      ]
+                    }
+                  },
                   "fields": {
                     "name": {
                       "type": "string",
@@ -1484,6 +1607,18 @@
                       "type": "WorkloadIdentityConfig",
                       "id": 43
                     },
+                    "meshCertificates": {
+                      "type": "MeshCertificates",
+                      "id": 67
+                    },
+                    "notificationConfig": {
+                      "type": "NotificationConfig",
+                      "id": 49
+                    },
+                    "confidentialNodes": {
+                      "type": "ConfidentialNodes",
+                      "id": 50
+                    },
                     "selfLink": {
                       "type": "string",
                       "id": 100
@@ -1572,6 +1707,32 @@
                       "rule": "repeated",
                       "type": "StatusCondition",
                       "id": 118
+                    },
+                    "autopilot": {
+                      "type": "Autopilot",
+                      "id": 128
+                    },
+                    "id": {
+                      "type": "string",
+                      "id": 129,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "nodePoolDefaults": {
+                      "type": "NodePoolDefaults",
+                      "id": 131,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "loggingConfig": {
+                      "type": "LoggingConfig",
+                      "id": 132
+                    },
+                    "monitoringConfig": {
+                      "type": "MonitoringConfig",
+                      "id": 133
                     }
                   },
                   "nested": {
@@ -1585,6 +1746,22 @@
                         "ERROR": 5,
                         "DEGRADED": 6
                       }
+                    }
+                  }
+                },
+                "NodePoolDefaults": {
+                  "fields": {
+                    "nodeConfigDefaults": {
+                      "type": "NodeConfigDefaults",
+                      "id": 1
+                    }
+                  }
+                },
+                "NodeConfigDefaults": {
+                  "fields": {
+                    "gcfsConfig": {
+                      "type": "GcfsConfig",
+                      "id": 1
                     }
                   }
                 },
@@ -1618,9 +1795,17 @@
                       "type": "WorkloadIdentityConfig",
                       "id": 47
                     },
+                    "desiredMeshCertificates": {
+                      "type": "MeshCertificates",
+                      "id": 67
+                    },
                     "desiredShieldedNodes": {
                       "type": "ShieldedNodes",
                       "id": 48
+                    },
+                    "desiredDnsConfig": {
+                      "type": "DNSConfig",
+                      "id": 53
                     },
                     "desiredNodePoolAutoscaling": {
                       "type": "NodePoolAutoscaling",
@@ -1671,13 +1856,45 @@
                       "type": "ReleaseChannel",
                       "id": 31
                     },
+                    "desiredL4ilbSubsettingConfig": {
+                      "type": "ILBSubsettingConfig",
+                      "id": 39
+                    },
+                    "desiredDatapathProvider": {
+                      "type": "DatapathProvider",
+                      "id": 50
+                    },
+                    "desiredPrivateIpv6GoogleAccess": {
+                      "type": "PrivateIPv6GoogleAccess",
+                      "id": 51
+                    },
+                    "desiredNotificationConfig": {
+                      "type": "NotificationConfig",
+                      "id": 55
+                    },
                     "desiredAuthenticatorGroupsConfig": {
                       "type": "AuthenticatorGroupsConfig",
                       "id": 63
                     },
+                    "desiredLoggingConfig": {
+                      "type": "LoggingConfig",
+                      "id": 64
+                    },
+                    "desiredMonitoringConfig": {
+                      "type": "MonitoringConfig",
+                      "id": 65
+                    },
+                    "desiredServiceExternalIpsConfig": {
+                      "type": "ServiceExternalIPsConfig",
+                      "id": 60
+                    },
                     "desiredMasterVersion": {
                       "type": "string",
                       "id": 100
+                    },
+                    "desiredGcfsConfig": {
+                      "type": "GcfsConfig",
+                      "id": 109
                     }
                   }
                 },
@@ -1710,6 +1927,7 @@
                       "type": "string",
                       "id": 5,
                       "options": {
+                        "deprecated": true,
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
@@ -1743,12 +1961,22 @@
                     "clusterConditions": {
                       "rule": "repeated",
                       "type": "StatusCondition",
-                      "id": 13
+                      "id": 13,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "nodepoolConditions": {
                       "rule": "repeated",
                       "type": "StatusCondition",
-                      "id": 14
+                      "id": 14,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "error": {
+                      "type": "google.rpc.Status",
+                      "id": 15
                     }
                   },
                   "nested": {
@@ -1994,6 +2222,22 @@
                     "upgradeSettings": {
                       "type": "NodePool.UpgradeSettings",
                       "id": 15
+                    },
+                    "linuxNodeConfig": {
+                      "type": "LinuxNodeConfig",
+                      "id": 19
+                    },
+                    "kubeletConfig": {
+                      "type": "NodeKubeletConfig",
+                      "id": 20
+                    },
+                    "gcfsConfig": {
+                      "type": "GcfsConfig",
+                      "id": 22
+                    },
+                    "gvnic": {
+                      "type": "VirtualNIC",
+                      "id": 29
                     }
                   }
                 },
@@ -2662,6 +2906,10 @@
                       "type": "string",
                       "id": 13
                     },
+                    "networkConfig": {
+                      "type": "NodeNetworkConfig",
+                      "id": 14
+                    },
                     "selfLink": {
                       "type": "string",
                       "id": 100
@@ -2804,7 +3052,18 @@
                   }
                 },
                 "TimeWindow": {
+                  "oneofs": {
+                    "options": {
+                      "oneof": [
+                        "maintenanceExclusionOptions"
+                      ]
+                    }
+                  },
                   "fields": {
+                    "maintenanceExclusionOptions": {
+                      "type": "MaintenanceExclusionOptions",
+                      "id": 3
+                    },
                     "startTime": {
                       "type": "google.protobuf.Timestamp",
                       "id": 1
@@ -2812,6 +3071,23 @@
                     "endTime": {
                       "type": "google.protobuf.Timestamp",
                       "id": 2
+                    }
+                  }
+                },
+                "MaintenanceExclusionOptions": {
+                  "fields": {
+                    "scope": {
+                      "type": "Scope",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "Scope": {
+                      "values": {
+                        "NO_UPGRADES": 0,
+                        "NO_MINOR_UPGRADES": 1,
+                        "NO_MINOR_OR_NODE_UPGRADES": 2
+                      }
                     }
                   }
                 },
@@ -2981,6 +3257,10 @@
                       "type": "ResourceLimit",
                       "id": 2
                     },
+                    "autoscalingProfile": {
+                      "type": "AutoscalingProfile",
+                      "id": 3
+                    },
                     "autoprovisioningNodePoolDefaults": {
                       "type": "AutoprovisioningNodePoolDefaults",
                       "id": 4
@@ -2989,6 +3269,15 @@
                       "rule": "repeated",
                       "type": "string",
                       "id": 5
+                    }
+                  },
+                  "nested": {
+                    "AutoscalingProfile": {
+                      "values": {
+                        "PROFILE_UNSPECIFIED": 0,
+                        "OPTIMIZE_UTILIZATION": 1,
+                        "BALANCED": 2
+                      }
                     }
                   }
                 },
@@ -3224,6 +3513,10 @@
                     "acceleratorType": {
                       "type": "string",
                       "id": 2
+                    },
+                    "gpuPartitionSize": {
+                      "type": "string",
+                      "id": 3
                     }
                   }
                 },
@@ -3320,11 +3613,18 @@
                   "fields": {
                     "code": {
                       "type": "Code",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "message": {
                       "type": "string",
                       "id": 2
+                    },
+                    "canonicalCode": {
+                      "type": "google.rpc.Code",
+                      "id": 3
                     }
                   },
                   "nested": {
@@ -3335,7 +3635,8 @@
                         "GKE_SERVICE_ACCOUNT_DELETED": 2,
                         "GCE_QUOTA_EXCEEDED": 3,
                         "SET_BY_OPERATOR": 4,
-                        "CLOUD_KMS_KEY_ERROR": 7
+                        "CLOUD_KMS_KEY_ERROR": 7,
+                        "CA_EXPIRING": 9
                       }
                     }
                   }
@@ -3357,51 +3658,34 @@
                     "defaultSnatStatus": {
                       "type": "DefaultSnatStatus",
                       "id": 7
+                    },
+                    "enableL4ilbSubsetting": {
+                      "type": "bool",
+                      "id": 10
+                    },
+                    "datapathProvider": {
+                      "type": "DatapathProvider",
+                      "id": 11
+                    },
+                    "privateIpv6GoogleAccess": {
+                      "type": "PrivateIPv6GoogleAccess",
+                      "id": 12
+                    },
+                    "dnsConfig": {
+                      "type": "DNSConfig",
+                      "id": 13
+                    },
+                    "serviceExternalIpsConfig": {
+                      "type": "ServiceExternalIPsConfig",
+                      "id": 15
                     }
                   }
                 },
-                "GetOpenIDConfigRequest": {
+                "ServiceExternalIPsConfig": {
                   "fields": {
-                    "parent": {
-                      "type": "string",
+                    "enabled": {
+                      "type": "bool",
                       "id": 1
-                    }
-                  }
-                },
-                "GetOpenIDConfigResponse": {
-                  "fields": {
-                    "issuer": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "jwksUri": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "responseTypesSupported": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 3
-                    },
-                    "subjectTypesSupported": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 4
-                    },
-                    "idTokenSigningAlgValuesSupported": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 5
-                    },
-                    "claimsSupported": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 6
-                    },
-                    "grantTypes": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 7
                     }
                   }
                 },
@@ -3488,6 +3772,45 @@
                     }
                   }
                 },
+                "ILBSubsettingConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "DNSConfig": {
+                  "fields": {
+                    "clusterDns": {
+                      "type": "Provider",
+                      "id": 1
+                    },
+                    "clusterDnsScope": {
+                      "type": "DNSScope",
+                      "id": 2
+                    },
+                    "clusterDnsDomain": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "Provider": {
+                      "values": {
+                        "PROVIDER_UNSPECIFIED": 0,
+                        "PLATFORM_DEFAULT": 1,
+                        "CLOUD_DNS": 2
+                      }
+                    },
+                    "DNSScope": {
+                      "values": {
+                        "DNS_SCOPE_UNSPECIFIED": 0,
+                        "VPC_SCOPE": 2
+                      }
+                    }
+                  }
+                },
                 "MaxPodsConstraint": {
                   "fields": {
                     "maxPodsPerNode": {
@@ -3501,6 +3824,14 @@
                     "workloadPool": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "MeshCertificates": {
+                  "fields": {
+                    "enableCertificates": {
+                      "type": "google.protobuf.BoolValue",
+                      "id": 1
                     }
                   }
                 },
@@ -3667,6 +3998,244 @@
                       "id": 1
                     }
                   }
+                },
+                "VirtualNIC": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "PrivateIPv6GoogleAccess": {
+                  "values": {
+                    "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED": 0,
+                    "PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED": 1,
+                    "PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE": 2,
+                    "PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL": 3
+                  }
+                },
+                "DatapathProvider": {
+                  "values": {
+                    "DATAPATH_PROVIDER_UNSPECIFIED": 0,
+                    "LEGACY_DATAPATH": 1,
+                    "ADVANCED_DATAPATH": 2
+                  }
+                },
+                "NotificationConfig": {
+                  "fields": {
+                    "pubsub": {
+                      "type": "PubSub",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "EventType": {
+                      "values": {
+                        "EVENT_TYPE_UNSPECIFIED": 0,
+                        "UPGRADE_AVAILABLE_EVENT": 1,
+                        "UPGRADE_EVENT": 2,
+                        "SECURITY_BULLETIN_EVENT": 3
+                      }
+                    },
+                    "PubSub": {
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "topic": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "pubsub.googleapis.com/Topic"
+                          }
+                        },
+                        "filter": {
+                          "type": "Filter",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Filter": {
+                      "fields": {
+                        "eventType": {
+                          "rule": "repeated",
+                          "type": "EventType",
+                          "id": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "ConfidentialNodes": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "UpgradeResourceType": {
+                  "values": {
+                    "UPGRADE_RESOURCE_TYPE_UNSPECIFIED": 0,
+                    "MASTER": 1,
+                    "NODE_POOL": 2
+                  }
+                },
+                "UpgradeEvent": {
+                  "fields": {
+                    "resourceType": {
+                      "type": "UpgradeResourceType",
+                      "id": 1
+                    },
+                    "operation": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "operationStartTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 3
+                    },
+                    "currentVersion": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "targetVersion": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "resource": {
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                },
+                "UpgradeAvailableEvent": {
+                  "fields": {
+                    "version": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "resourceType": {
+                      "type": "UpgradeResourceType",
+                      "id": 2
+                    },
+                    "releaseChannel": {
+                      "type": "ReleaseChannel",
+                      "id": 3
+                    },
+                    "resource": {
+                      "type": "string",
+                      "id": 4
+                    }
+                  }
+                },
+                "SecurityBulletinEvent": {
+                  "fields": {
+                    "resourceTypeAffected": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "bulletinId": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "cveIds": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 3
+                    },
+                    "severity": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "bulletinUri": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "briefDescription": {
+                      "type": "string",
+                      "id": 6
+                    },
+                    "affectedSupportedMinors": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 7
+                    },
+                    "patchedVersions": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 8
+                    },
+                    "suggestedUpgradeTarget": {
+                      "type": "string",
+                      "id": 9
+                    },
+                    "manualStepsRequired": {
+                      "type": "bool",
+                      "id": 10
+                    }
+                  }
+                },
+                "Autopilot": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "LoggingConfig": {
+                  "fields": {
+                    "componentConfig": {
+                      "type": "LoggingComponentConfig",
+                      "id": 1
+                    }
+                  }
+                },
+                "LoggingComponentConfig": {
+                  "fields": {
+                    "enableComponents": {
+                      "rule": "repeated",
+                      "type": "Component",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "Component": {
+                      "values": {
+                        "COMPONENT_UNSPECIFIED": 0,
+                        "SYSTEM_COMPONENTS": 1,
+                        "WORKLOADS": 2
+                      }
+                    }
+                  }
+                },
+                "MonitoringConfig": {
+                  "fields": {
+                    "componentConfig": {
+                      "type": "MonitoringComponentConfig",
+                      "id": 1
+                    }
+                  }
+                },
+                "MonitoringComponentConfig": {
+                  "fields": {
+                    "enableComponents": {
+                      "rule": "repeated",
+                      "type": "Component",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "Component": {
+                      "values": {
+                        "COMPONENT_UNSPECIFIED": 0,
+                        "SYSTEM_COMPONENTS": 1
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -3676,7 +4245,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldBehaviorProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -3801,6 +4370,83 @@
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             }
           }
@@ -4724,6 +5370,140 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "DoubleValue": {
+              "fields": {
+                "value": {
+                  "type": "double",
+                  "id": 1
+                }
+              }
+            },
+            "FloatValue": {
+              "fields": {
+                "value": {
+                  "type": "float",
+                  "id": 1
+                }
+              }
+            },
+            "Int64Value": {
+              "fields": {
+                "value": {
+                  "type": "int64",
+                  "id": 1
+                }
+              }
+            },
+            "UInt64Value": {
+              "fields": {
+                "value": {
+                  "type": "uint64",
+                  "id": 1
+                }
+              }
+            },
+            "Int32Value": {
+              "fields": {
+                "value": {
+                  "type": "int32",
+                  "id": 1
+                }
+              }
+            },
+            "UInt32Value": {
+              "fields": {
+                "value": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "BoolValue": {
+              "fields": {
+                "value": {
+                  "type": "bool",
+                  "id": 1
+                }
+              }
+            },
+            "StringValue": {
+              "fields": {
+                "value": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "BytesValue": {
+              "fields": {
+                "value": {
+                  "type": "bytes",
+                  "id": 1
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "Code": {
+              "values": {
+                "OK": 0,
+                "CANCELLED": 1,
+                "UNKNOWN": 2,
+                "INVALID_ARGUMENT": 3,
+                "DEADLINE_EXCEEDED": 4,
+                "NOT_FOUND": 5,
+                "ALREADY_EXISTS": 6,
+                "PERMISSION_DENIED": 7,
+                "UNAUTHENTICATED": 16,
+                "RESOURCE_EXHAUSTED": 8,
+                "FAILED_PRECONDITION": 9,
+                "ABORTED": 10,
+                "OUT_OF_RANGE": 11,
+                "UNIMPLEMENTED": 12,
+                "INTERNAL": 13,
+                "UNAVAILABLE": 14,
+                "DATA_LOSS": 15
+              }
+            },
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }

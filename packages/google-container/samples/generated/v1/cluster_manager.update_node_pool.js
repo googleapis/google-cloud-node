@@ -58,6 +58,22 @@ function main(nodeVersion, imageType) {
    *  Upgrade settings control disruption and speed of the upgrade.
    */
   // const upgradeSettings = {}
+  /**
+   *  Parameters that can be configured on Linux nodes.
+   */
+  // const linuxNodeConfig = {}
+  /**
+   *  Node kubelet configs.
+   */
+  // const kubeletConfig = {}
+  /**
+   *  GCFS config.
+   */
+  // const gcfsConfig = {}
+  /**
+   *  Enable or disable gvnic on the node pool.
+   */
+  // const gvnic = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;

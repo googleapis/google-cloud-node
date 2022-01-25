@@ -1148,6 +1148,465 @@
                     return ClusterManager;
                 })();
     
+                v1.LinuxNodeConfig = (function() {
+    
+                    /**
+                     * Properties of a LinuxNodeConfig.
+                     * @memberof google.container.v1
+                     * @interface ILinuxNodeConfig
+                     * @property {Object.<string,string>|null} [sysctls] LinuxNodeConfig sysctls
+                     */
+    
+                    /**
+                     * Constructs a new LinuxNodeConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a LinuxNodeConfig.
+                     * @implements ILinuxNodeConfig
+                     * @constructor
+                     * @param {google.container.v1.ILinuxNodeConfig=} [properties] Properties to set
+                     */
+                    function LinuxNodeConfig(properties) {
+                        this.sysctls = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * LinuxNodeConfig sysctls.
+                     * @member {Object.<string,string>} sysctls
+                     * @memberof google.container.v1.LinuxNodeConfig
+                     * @instance
+                     */
+                    LinuxNodeConfig.prototype.sysctls = $util.emptyObject;
+    
+                    /**
+                     * Creates a new LinuxNodeConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.LinuxNodeConfig
+                     * @static
+                     * @param {google.container.v1.ILinuxNodeConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.LinuxNodeConfig} LinuxNodeConfig instance
+                     */
+                    LinuxNodeConfig.create = function create(properties) {
+                        return new LinuxNodeConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified LinuxNodeConfig message. Does not implicitly {@link google.container.v1.LinuxNodeConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.LinuxNodeConfig
+                     * @static
+                     * @param {google.container.v1.ILinuxNodeConfig} message LinuxNodeConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LinuxNodeConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.sysctls != null && Object.hasOwnProperty.call(message, "sysctls"))
+                            for (var keys = Object.keys(message.sysctls), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.sysctls[keys[i]]).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified LinuxNodeConfig message, length delimited. Does not implicitly {@link google.container.v1.LinuxNodeConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.LinuxNodeConfig
+                     * @static
+                     * @param {google.container.v1.ILinuxNodeConfig} message LinuxNodeConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LinuxNodeConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a LinuxNodeConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.LinuxNodeConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.LinuxNodeConfig} LinuxNodeConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LinuxNodeConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.LinuxNodeConfig(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (message.sysctls === $util.emptyObject)
+                                    message.sysctls = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.sysctls[key] = value;
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a LinuxNodeConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.LinuxNodeConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.LinuxNodeConfig} LinuxNodeConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LinuxNodeConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a LinuxNodeConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.LinuxNodeConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    LinuxNodeConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.sysctls != null && message.hasOwnProperty("sysctls")) {
+                            if (!$util.isObject(message.sysctls))
+                                return "sysctls: object expected";
+                            var key = Object.keys(message.sysctls);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.sysctls[key[i]]))
+                                    return "sysctls: string{k:string} expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a LinuxNodeConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.LinuxNodeConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.LinuxNodeConfig} LinuxNodeConfig
+                     */
+                    LinuxNodeConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.LinuxNodeConfig)
+                            return object;
+                        var message = new $root.google.container.v1.LinuxNodeConfig();
+                        if (object.sysctls) {
+                            if (typeof object.sysctls !== "object")
+                                throw TypeError(".google.container.v1.LinuxNodeConfig.sysctls: object expected");
+                            message.sysctls = {};
+                            for (var keys = Object.keys(object.sysctls), i = 0; i < keys.length; ++i)
+                                message.sysctls[keys[i]] = String(object.sysctls[keys[i]]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a LinuxNodeConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.LinuxNodeConfig
+                     * @static
+                     * @param {google.container.v1.LinuxNodeConfig} message LinuxNodeConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    LinuxNodeConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.sysctls = {};
+                        var keys2;
+                        if (message.sysctls && (keys2 = Object.keys(message.sysctls)).length) {
+                            object.sysctls = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.sysctls[keys2[j]] = message.sysctls[keys2[j]];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this LinuxNodeConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.LinuxNodeConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    LinuxNodeConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return LinuxNodeConfig;
+                })();
+    
+                v1.NodeKubeletConfig = (function() {
+    
+                    /**
+                     * Properties of a NodeKubeletConfig.
+                     * @memberof google.container.v1
+                     * @interface INodeKubeletConfig
+                     * @property {string|null} [cpuManagerPolicy] NodeKubeletConfig cpuManagerPolicy
+                     * @property {google.protobuf.IBoolValue|null} [cpuCfsQuota] NodeKubeletConfig cpuCfsQuota
+                     * @property {string|null} [cpuCfsQuotaPeriod] NodeKubeletConfig cpuCfsQuotaPeriod
+                     */
+    
+                    /**
+                     * Constructs a new NodeKubeletConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a NodeKubeletConfig.
+                     * @implements INodeKubeletConfig
+                     * @constructor
+                     * @param {google.container.v1.INodeKubeletConfig=} [properties] Properties to set
+                     */
+                    function NodeKubeletConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * NodeKubeletConfig cpuManagerPolicy.
+                     * @member {string} cpuManagerPolicy
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.cpuManagerPolicy = "";
+    
+                    /**
+                     * NodeKubeletConfig cpuCfsQuota.
+                     * @member {google.protobuf.IBoolValue|null|undefined} cpuCfsQuota
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.cpuCfsQuota = null;
+    
+                    /**
+                     * NodeKubeletConfig cpuCfsQuotaPeriod.
+                     * @member {string} cpuCfsQuotaPeriod
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.cpuCfsQuotaPeriod = "";
+    
+                    /**
+                     * Creates a new NodeKubeletConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @static
+                     * @param {google.container.v1.INodeKubeletConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.NodeKubeletConfig} NodeKubeletConfig instance
+                     */
+                    NodeKubeletConfig.create = function create(properties) {
+                        return new NodeKubeletConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified NodeKubeletConfig message. Does not implicitly {@link google.container.v1.NodeKubeletConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @static
+                     * @param {google.container.v1.INodeKubeletConfig} message NodeKubeletConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NodeKubeletConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.cpuManagerPolicy != null && Object.hasOwnProperty.call(message, "cpuManagerPolicy"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.cpuManagerPolicy);
+                        if (message.cpuCfsQuota != null && Object.hasOwnProperty.call(message, "cpuCfsQuota"))
+                            $root.google.protobuf.BoolValue.encode(message.cpuCfsQuota, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.cpuCfsQuotaPeriod != null && Object.hasOwnProperty.call(message, "cpuCfsQuotaPeriod"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.cpuCfsQuotaPeriod);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified NodeKubeletConfig message, length delimited. Does not implicitly {@link google.container.v1.NodeKubeletConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @static
+                     * @param {google.container.v1.INodeKubeletConfig} message NodeKubeletConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NodeKubeletConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a NodeKubeletConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.NodeKubeletConfig} NodeKubeletConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NodeKubeletConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.NodeKubeletConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.cpuManagerPolicy = reader.string();
+                                break;
+                            case 2:
+                                message.cpuCfsQuota = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                break;
+                            case 3:
+                                message.cpuCfsQuotaPeriod = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a NodeKubeletConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.NodeKubeletConfig} NodeKubeletConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NodeKubeletConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a NodeKubeletConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    NodeKubeletConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.cpuManagerPolicy != null && message.hasOwnProperty("cpuManagerPolicy"))
+                            if (!$util.isString(message.cpuManagerPolicy))
+                                return "cpuManagerPolicy: string expected";
+                        if (message.cpuCfsQuota != null && message.hasOwnProperty("cpuCfsQuota")) {
+                            var error = $root.google.protobuf.BoolValue.verify(message.cpuCfsQuota);
+                            if (error)
+                                return "cpuCfsQuota." + error;
+                        }
+                        if (message.cpuCfsQuotaPeriod != null && message.hasOwnProperty("cpuCfsQuotaPeriod"))
+                            if (!$util.isString(message.cpuCfsQuotaPeriod))
+                                return "cpuCfsQuotaPeriod: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a NodeKubeletConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.NodeKubeletConfig} NodeKubeletConfig
+                     */
+                    NodeKubeletConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.NodeKubeletConfig)
+                            return object;
+                        var message = new $root.google.container.v1.NodeKubeletConfig();
+                        if (object.cpuManagerPolicy != null)
+                            message.cpuManagerPolicy = String(object.cpuManagerPolicy);
+                        if (object.cpuCfsQuota != null) {
+                            if (typeof object.cpuCfsQuota !== "object")
+                                throw TypeError(".google.container.v1.NodeKubeletConfig.cpuCfsQuota: object expected");
+                            message.cpuCfsQuota = $root.google.protobuf.BoolValue.fromObject(object.cpuCfsQuota);
+                        }
+                        if (object.cpuCfsQuotaPeriod != null)
+                            message.cpuCfsQuotaPeriod = String(object.cpuCfsQuotaPeriod);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a NodeKubeletConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @static
+                     * @param {google.container.v1.NodeKubeletConfig} message NodeKubeletConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    NodeKubeletConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.cpuManagerPolicy = "";
+                            object.cpuCfsQuota = null;
+                            object.cpuCfsQuotaPeriod = "";
+                        }
+                        if (message.cpuManagerPolicy != null && message.hasOwnProperty("cpuManagerPolicy"))
+                            object.cpuManagerPolicy = message.cpuManagerPolicy;
+                        if (message.cpuCfsQuota != null && message.hasOwnProperty("cpuCfsQuota"))
+                            object.cpuCfsQuota = $root.google.protobuf.BoolValue.toObject(message.cpuCfsQuota, options);
+                        if (message.cpuCfsQuotaPeriod != null && message.hasOwnProperty("cpuCfsQuotaPeriod"))
+                            object.cpuCfsQuotaPeriod = message.cpuCfsQuotaPeriod;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this NodeKubeletConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    NodeKubeletConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return NodeKubeletConfig;
+                })();
+    
                 v1.NodeConfig = (function() {
     
                     /**
@@ -1173,7 +1632,12 @@
                      * @property {string|null} [nodeGroup] NodeConfig nodeGroup
                      * @property {google.container.v1.IReservationAffinity|null} [reservationAffinity] NodeConfig reservationAffinity
                      * @property {google.container.v1.IShieldedInstanceConfig|null} [shieldedInstanceConfig] NodeConfig shieldedInstanceConfig
+                     * @property {google.container.v1.ILinuxNodeConfig|null} [linuxNodeConfig] NodeConfig linuxNodeConfig
+                     * @property {google.container.v1.INodeKubeletConfig|null} [kubeletConfig] NodeConfig kubeletConfig
                      * @property {string|null} [bootDiskKmsKey] NodeConfig bootDiskKmsKey
+                     * @property {google.container.v1.IGcfsConfig|null} [gcfsConfig] NodeConfig gcfsConfig
+                     * @property {google.container.v1.IAdvancedMachineFeatures|null} [advancedMachineFeatures] NodeConfig advancedMachineFeatures
+                     * @property {google.container.v1.IVirtualNIC|null} [gvnic] NodeConfig gvnic
                      */
     
                     /**
@@ -1350,12 +1814,52 @@
                     NodeConfig.prototype.shieldedInstanceConfig = null;
     
                     /**
+                     * NodeConfig linuxNodeConfig.
+                     * @member {google.container.v1.ILinuxNodeConfig|null|undefined} linuxNodeConfig
+                     * @memberof google.container.v1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.linuxNodeConfig = null;
+    
+                    /**
+                     * NodeConfig kubeletConfig.
+                     * @member {google.container.v1.INodeKubeletConfig|null|undefined} kubeletConfig
+                     * @memberof google.container.v1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.kubeletConfig = null;
+    
+                    /**
                      * NodeConfig bootDiskKmsKey.
                      * @member {string} bootDiskKmsKey
                      * @memberof google.container.v1.NodeConfig
                      * @instance
                      */
                     NodeConfig.prototype.bootDiskKmsKey = "";
+    
+                    /**
+                     * NodeConfig gcfsConfig.
+                     * @member {google.container.v1.IGcfsConfig|null|undefined} gcfsConfig
+                     * @memberof google.container.v1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.gcfsConfig = null;
+    
+                    /**
+                     * NodeConfig advancedMachineFeatures.
+                     * @member {google.container.v1.IAdvancedMachineFeatures|null|undefined} advancedMachineFeatures
+                     * @memberof google.container.v1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.advancedMachineFeatures = null;
+    
+                    /**
+                     * NodeConfig gvnic.
+                     * @member {google.container.v1.IVirtualNIC|null|undefined} gvnic
+                     * @memberof google.container.v1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.gvnic = null;
     
                     /**
                      * Creates a new NodeConfig instance using the specified properties.
@@ -1425,8 +1929,18 @@
                             $root.google.container.v1.ReservationAffinity.encode(message.reservationAffinity, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                         if (message.shieldedInstanceConfig != null && Object.hasOwnProperty.call(message, "shieldedInstanceConfig"))
                             $root.google.container.v1.ShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                        if (message.linuxNodeConfig != null && Object.hasOwnProperty.call(message, "linuxNodeConfig"))
+                            $root.google.container.v1.LinuxNodeConfig.encode(message.linuxNodeConfig, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                        if (message.kubeletConfig != null && Object.hasOwnProperty.call(message, "kubeletConfig"))
+                            $root.google.container.v1.NodeKubeletConfig.encode(message.kubeletConfig, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                         if (message.bootDiskKmsKey != null && Object.hasOwnProperty.call(message, "bootDiskKmsKey"))
                             writer.uint32(/* id 23, wireType 2 =*/186).string(message.bootDiskKmsKey);
+                        if (message.gcfsConfig != null && Object.hasOwnProperty.call(message, "gcfsConfig"))
+                            $root.google.container.v1.GcfsConfig.encode(message.gcfsConfig, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                        if (message.advancedMachineFeatures != null && Object.hasOwnProperty.call(message, "advancedMachineFeatures"))
+                            $root.google.container.v1.AdvancedMachineFeatures.encode(message.advancedMachineFeatures, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                        if (message.gvnic != null && Object.hasOwnProperty.call(message, "gvnic"))
+                            $root.google.container.v1.VirtualNIC.encode(message.gvnic, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
                         return writer;
                     };
     
@@ -1564,8 +2078,23 @@
                             case 20:
                                 message.shieldedInstanceConfig = $root.google.container.v1.ShieldedInstanceConfig.decode(reader, reader.uint32());
                                 break;
+                            case 21:
+                                message.linuxNodeConfig = $root.google.container.v1.LinuxNodeConfig.decode(reader, reader.uint32());
+                                break;
+                            case 22:
+                                message.kubeletConfig = $root.google.container.v1.NodeKubeletConfig.decode(reader, reader.uint32());
+                                break;
                             case 23:
                                 message.bootDiskKmsKey = reader.string();
+                                break;
+                            case 25:
+                                message.gcfsConfig = $root.google.container.v1.GcfsConfig.decode(reader, reader.uint32());
+                                break;
+                            case 26:
+                                message.advancedMachineFeatures = $root.google.container.v1.AdvancedMachineFeatures.decode(reader, reader.uint32());
+                                break;
+                            case 29:
+                                message.gvnic = $root.google.container.v1.VirtualNIC.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -1697,9 +2226,34 @@
                             if (error)
                                 return "shieldedInstanceConfig." + error;
                         }
+                        if (message.linuxNodeConfig != null && message.hasOwnProperty("linuxNodeConfig")) {
+                            var error = $root.google.container.v1.LinuxNodeConfig.verify(message.linuxNodeConfig);
+                            if (error)
+                                return "linuxNodeConfig." + error;
+                        }
+                        if (message.kubeletConfig != null && message.hasOwnProperty("kubeletConfig")) {
+                            var error = $root.google.container.v1.NodeKubeletConfig.verify(message.kubeletConfig);
+                            if (error)
+                                return "kubeletConfig." + error;
+                        }
                         if (message.bootDiskKmsKey != null && message.hasOwnProperty("bootDiskKmsKey"))
                             if (!$util.isString(message.bootDiskKmsKey))
                                 return "bootDiskKmsKey: string expected";
+                        if (message.gcfsConfig != null && message.hasOwnProperty("gcfsConfig")) {
+                            var error = $root.google.container.v1.GcfsConfig.verify(message.gcfsConfig);
+                            if (error)
+                                return "gcfsConfig." + error;
+                        }
+                        if (message.advancedMachineFeatures != null && message.hasOwnProperty("advancedMachineFeatures")) {
+                            var error = $root.google.container.v1.AdvancedMachineFeatures.verify(message.advancedMachineFeatures);
+                            if (error)
+                                return "advancedMachineFeatures." + error;
+                        }
+                        if (message.gvnic != null && message.hasOwnProperty("gvnic")) {
+                            var error = $root.google.container.v1.VirtualNIC.verify(message.gvnic);
+                            if (error)
+                                return "gvnic." + error;
+                        }
                         return null;
                     };
     
@@ -1801,8 +2355,33 @@
                                 throw TypeError(".google.container.v1.NodeConfig.shieldedInstanceConfig: object expected");
                             message.shieldedInstanceConfig = $root.google.container.v1.ShieldedInstanceConfig.fromObject(object.shieldedInstanceConfig);
                         }
+                        if (object.linuxNodeConfig != null) {
+                            if (typeof object.linuxNodeConfig !== "object")
+                                throw TypeError(".google.container.v1.NodeConfig.linuxNodeConfig: object expected");
+                            message.linuxNodeConfig = $root.google.container.v1.LinuxNodeConfig.fromObject(object.linuxNodeConfig);
+                        }
+                        if (object.kubeletConfig != null) {
+                            if (typeof object.kubeletConfig !== "object")
+                                throw TypeError(".google.container.v1.NodeConfig.kubeletConfig: object expected");
+                            message.kubeletConfig = $root.google.container.v1.NodeKubeletConfig.fromObject(object.kubeletConfig);
+                        }
                         if (object.bootDiskKmsKey != null)
                             message.bootDiskKmsKey = String(object.bootDiskKmsKey);
+                        if (object.gcfsConfig != null) {
+                            if (typeof object.gcfsConfig !== "object")
+                                throw TypeError(".google.container.v1.NodeConfig.gcfsConfig: object expected");
+                            message.gcfsConfig = $root.google.container.v1.GcfsConfig.fromObject(object.gcfsConfig);
+                        }
+                        if (object.advancedMachineFeatures != null) {
+                            if (typeof object.advancedMachineFeatures !== "object")
+                                throw TypeError(".google.container.v1.NodeConfig.advancedMachineFeatures: object expected");
+                            message.advancedMachineFeatures = $root.google.container.v1.AdvancedMachineFeatures.fromObject(object.advancedMachineFeatures);
+                        }
+                        if (object.gvnic != null) {
+                            if (typeof object.gvnic !== "object")
+                                throw TypeError(".google.container.v1.NodeConfig.gvnic: object expected");
+                            message.gvnic = $root.google.container.v1.VirtualNIC.fromObject(object.gvnic);
+                        }
                         return message;
                     };
     
@@ -1843,7 +2422,12 @@
                             object.nodeGroup = "";
                             object.reservationAffinity = null;
                             object.shieldedInstanceConfig = null;
+                            object.linuxNodeConfig = null;
+                            object.kubeletConfig = null;
                             object.bootDiskKmsKey = "";
+                            object.gcfsConfig = null;
+                            object.advancedMachineFeatures = null;
+                            object.gvnic = null;
                         }
                         if (message.machineType != null && message.hasOwnProperty("machineType"))
                             object.machineType = message.machineType;
@@ -1902,8 +2486,18 @@
                             object.reservationAffinity = $root.google.container.v1.ReservationAffinity.toObject(message.reservationAffinity, options);
                         if (message.shieldedInstanceConfig != null && message.hasOwnProperty("shieldedInstanceConfig"))
                             object.shieldedInstanceConfig = $root.google.container.v1.ShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
+                        if (message.linuxNodeConfig != null && message.hasOwnProperty("linuxNodeConfig"))
+                            object.linuxNodeConfig = $root.google.container.v1.LinuxNodeConfig.toObject(message.linuxNodeConfig, options);
+                        if (message.kubeletConfig != null && message.hasOwnProperty("kubeletConfig"))
+                            object.kubeletConfig = $root.google.container.v1.NodeKubeletConfig.toObject(message.kubeletConfig, options);
                         if (message.bootDiskKmsKey != null && message.hasOwnProperty("bootDiskKmsKey"))
                             object.bootDiskKmsKey = message.bootDiskKmsKey;
+                        if (message.gcfsConfig != null && message.hasOwnProperty("gcfsConfig"))
+                            object.gcfsConfig = $root.google.container.v1.GcfsConfig.toObject(message.gcfsConfig, options);
+                        if (message.advancedMachineFeatures != null && message.hasOwnProperty("advancedMachineFeatures"))
+                            object.advancedMachineFeatures = $root.google.container.v1.AdvancedMachineFeatures.toObject(message.advancedMachineFeatures, options);
+                        if (message.gvnic != null && message.hasOwnProperty("gvnic"))
+                            object.gvnic = $root.google.container.v1.VirtualNIC.toObject(message.gvnic, options);
                         return object;
                     };
     
@@ -1919,6 +2513,453 @@
                     };
     
                     return NodeConfig;
+                })();
+    
+                v1.AdvancedMachineFeatures = (function() {
+    
+                    /**
+                     * Properties of an AdvancedMachineFeatures.
+                     * @memberof google.container.v1
+                     * @interface IAdvancedMachineFeatures
+                     * @property {number|Long|null} [threadsPerCore] AdvancedMachineFeatures threadsPerCore
+                     */
+    
+                    /**
+                     * Constructs a new AdvancedMachineFeatures.
+                     * @memberof google.container.v1
+                     * @classdesc Represents an AdvancedMachineFeatures.
+                     * @implements IAdvancedMachineFeatures
+                     * @constructor
+                     * @param {google.container.v1.IAdvancedMachineFeatures=} [properties] Properties to set
+                     */
+                    function AdvancedMachineFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AdvancedMachineFeatures threadsPerCore.
+                     * @member {number|Long|null|undefined} threadsPerCore
+                     * @memberof google.container.v1.AdvancedMachineFeatures
+                     * @instance
+                     */
+                    AdvancedMachineFeatures.prototype.threadsPerCore = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * AdvancedMachineFeatures _threadsPerCore.
+                     * @member {"threadsPerCore"|undefined} _threadsPerCore
+                     * @memberof google.container.v1.AdvancedMachineFeatures
+                     * @instance
+                     */
+                    Object.defineProperty(AdvancedMachineFeatures.prototype, "_threadsPerCore", {
+                        get: $util.oneOfGetter($oneOfFields = ["threadsPerCore"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new AdvancedMachineFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.AdvancedMachineFeatures
+                     * @static
+                     * @param {google.container.v1.IAdvancedMachineFeatures=} [properties] Properties to set
+                     * @returns {google.container.v1.AdvancedMachineFeatures} AdvancedMachineFeatures instance
+                     */
+                    AdvancedMachineFeatures.create = function create(properties) {
+                        return new AdvancedMachineFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AdvancedMachineFeatures message. Does not implicitly {@link google.container.v1.AdvancedMachineFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.AdvancedMachineFeatures
+                     * @static
+                     * @param {google.container.v1.IAdvancedMachineFeatures} message AdvancedMachineFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AdvancedMachineFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.threadsPerCore != null && Object.hasOwnProperty.call(message, "threadsPerCore"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int64(message.threadsPerCore);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AdvancedMachineFeatures message, length delimited. Does not implicitly {@link google.container.v1.AdvancedMachineFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.AdvancedMachineFeatures
+                     * @static
+                     * @param {google.container.v1.IAdvancedMachineFeatures} message AdvancedMachineFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AdvancedMachineFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AdvancedMachineFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.AdvancedMachineFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.AdvancedMachineFeatures} AdvancedMachineFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AdvancedMachineFeatures.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.AdvancedMachineFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.threadsPerCore = reader.int64();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AdvancedMachineFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.AdvancedMachineFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.AdvancedMachineFeatures} AdvancedMachineFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AdvancedMachineFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AdvancedMachineFeatures message.
+                     * @function verify
+                     * @memberof google.container.v1.AdvancedMachineFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AdvancedMachineFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.threadsPerCore != null && message.hasOwnProperty("threadsPerCore")) {
+                            properties._threadsPerCore = 1;
+                            if (!$util.isInteger(message.threadsPerCore) && !(message.threadsPerCore && $util.isInteger(message.threadsPerCore.low) && $util.isInteger(message.threadsPerCore.high)))
+                                return "threadsPerCore: integer|Long expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AdvancedMachineFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.AdvancedMachineFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.AdvancedMachineFeatures} AdvancedMachineFeatures
+                     */
+                    AdvancedMachineFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.AdvancedMachineFeatures)
+                            return object;
+                        var message = new $root.google.container.v1.AdvancedMachineFeatures();
+                        if (object.threadsPerCore != null)
+                            if ($util.Long)
+                                (message.threadsPerCore = $util.Long.fromValue(object.threadsPerCore)).unsigned = false;
+                            else if (typeof object.threadsPerCore === "string")
+                                message.threadsPerCore = parseInt(object.threadsPerCore, 10);
+                            else if (typeof object.threadsPerCore === "number")
+                                message.threadsPerCore = object.threadsPerCore;
+                            else if (typeof object.threadsPerCore === "object")
+                                message.threadsPerCore = new $util.LongBits(object.threadsPerCore.low >>> 0, object.threadsPerCore.high >>> 0).toNumber();
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AdvancedMachineFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.AdvancedMachineFeatures
+                     * @static
+                     * @param {google.container.v1.AdvancedMachineFeatures} message AdvancedMachineFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AdvancedMachineFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.threadsPerCore != null && message.hasOwnProperty("threadsPerCore")) {
+                            if (typeof message.threadsPerCore === "number")
+                                object.threadsPerCore = options.longs === String ? String(message.threadsPerCore) : message.threadsPerCore;
+                            else
+                                object.threadsPerCore = options.longs === String ? $util.Long.prototype.toString.call(message.threadsPerCore) : options.longs === Number ? new $util.LongBits(message.threadsPerCore.low >>> 0, message.threadsPerCore.high >>> 0).toNumber() : message.threadsPerCore;
+                            if (options.oneofs)
+                                object._threadsPerCore = "threadsPerCore";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AdvancedMachineFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.AdvancedMachineFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AdvancedMachineFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return AdvancedMachineFeatures;
+                })();
+    
+                v1.NodeNetworkConfig = (function() {
+    
+                    /**
+                     * Properties of a NodeNetworkConfig.
+                     * @memberof google.container.v1
+                     * @interface INodeNetworkConfig
+                     * @property {boolean|null} [createPodRange] NodeNetworkConfig createPodRange
+                     * @property {string|null} [podRange] NodeNetworkConfig podRange
+                     * @property {string|null} [podIpv4CidrBlock] NodeNetworkConfig podIpv4CidrBlock
+                     */
+    
+                    /**
+                     * Constructs a new NodeNetworkConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a NodeNetworkConfig.
+                     * @implements INodeNetworkConfig
+                     * @constructor
+                     * @param {google.container.v1.INodeNetworkConfig=} [properties] Properties to set
+                     */
+                    function NodeNetworkConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * NodeNetworkConfig createPodRange.
+                     * @member {boolean} createPodRange
+                     * @memberof google.container.v1.NodeNetworkConfig
+                     * @instance
+                     */
+                    NodeNetworkConfig.prototype.createPodRange = false;
+    
+                    /**
+                     * NodeNetworkConfig podRange.
+                     * @member {string} podRange
+                     * @memberof google.container.v1.NodeNetworkConfig
+                     * @instance
+                     */
+                    NodeNetworkConfig.prototype.podRange = "";
+    
+                    /**
+                     * NodeNetworkConfig podIpv4CidrBlock.
+                     * @member {string} podIpv4CidrBlock
+                     * @memberof google.container.v1.NodeNetworkConfig
+                     * @instance
+                     */
+                    NodeNetworkConfig.prototype.podIpv4CidrBlock = "";
+    
+                    /**
+                     * Creates a new NodeNetworkConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.NodeNetworkConfig
+                     * @static
+                     * @param {google.container.v1.INodeNetworkConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.NodeNetworkConfig} NodeNetworkConfig instance
+                     */
+                    NodeNetworkConfig.create = function create(properties) {
+                        return new NodeNetworkConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified NodeNetworkConfig message. Does not implicitly {@link google.container.v1.NodeNetworkConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.NodeNetworkConfig
+                     * @static
+                     * @param {google.container.v1.INodeNetworkConfig} message NodeNetworkConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NodeNetworkConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.createPodRange != null && Object.hasOwnProperty.call(message, "createPodRange"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).bool(message.createPodRange);
+                        if (message.podRange != null && Object.hasOwnProperty.call(message, "podRange"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.podRange);
+                        if (message.podIpv4CidrBlock != null && Object.hasOwnProperty.call(message, "podIpv4CidrBlock"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.podIpv4CidrBlock);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified NodeNetworkConfig message, length delimited. Does not implicitly {@link google.container.v1.NodeNetworkConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.NodeNetworkConfig
+                     * @static
+                     * @param {google.container.v1.INodeNetworkConfig} message NodeNetworkConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NodeNetworkConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a NodeNetworkConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.NodeNetworkConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.NodeNetworkConfig} NodeNetworkConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NodeNetworkConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.NodeNetworkConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 4:
+                                message.createPodRange = reader.bool();
+                                break;
+                            case 5:
+                                message.podRange = reader.string();
+                                break;
+                            case 6:
+                                message.podIpv4CidrBlock = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a NodeNetworkConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.NodeNetworkConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.NodeNetworkConfig} NodeNetworkConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NodeNetworkConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a NodeNetworkConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.NodeNetworkConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    NodeNetworkConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.createPodRange != null && message.hasOwnProperty("createPodRange"))
+                            if (typeof message.createPodRange !== "boolean")
+                                return "createPodRange: boolean expected";
+                        if (message.podRange != null && message.hasOwnProperty("podRange"))
+                            if (!$util.isString(message.podRange))
+                                return "podRange: string expected";
+                        if (message.podIpv4CidrBlock != null && message.hasOwnProperty("podIpv4CidrBlock"))
+                            if (!$util.isString(message.podIpv4CidrBlock))
+                                return "podIpv4CidrBlock: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a NodeNetworkConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.NodeNetworkConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.NodeNetworkConfig} NodeNetworkConfig
+                     */
+                    NodeNetworkConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.NodeNetworkConfig)
+                            return object;
+                        var message = new $root.google.container.v1.NodeNetworkConfig();
+                        if (object.createPodRange != null)
+                            message.createPodRange = Boolean(object.createPodRange);
+                        if (object.podRange != null)
+                            message.podRange = String(object.podRange);
+                        if (object.podIpv4CidrBlock != null)
+                            message.podIpv4CidrBlock = String(object.podIpv4CidrBlock);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a NodeNetworkConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.NodeNetworkConfig
+                     * @static
+                     * @param {google.container.v1.NodeNetworkConfig} message NodeNetworkConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    NodeNetworkConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.createPodRange = false;
+                            object.podRange = "";
+                            object.podIpv4CidrBlock = "";
+                        }
+                        if (message.createPodRange != null && message.hasOwnProperty("createPodRange"))
+                            object.createPodRange = message.createPodRange;
+                        if (message.podRange != null && message.hasOwnProperty("podRange"))
+                            object.podRange = message.podRange;
+                        if (message.podIpv4CidrBlock != null && message.hasOwnProperty("podIpv4CidrBlock"))
+                            object.podIpv4CidrBlock = message.podIpv4CidrBlock;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this NodeNetworkConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.NodeNetworkConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    NodeNetworkConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return NodeNetworkConfig;
                 })();
     
                 v1.ShieldedInstanceConfig = (function() {
@@ -2343,6 +3384,193 @@
                     })();
     
                     return SandboxConfig;
+                })();
+    
+                v1.GcfsConfig = (function() {
+    
+                    /**
+                     * Properties of a GcfsConfig.
+                     * @memberof google.container.v1
+                     * @interface IGcfsConfig
+                     * @property {boolean|null} [enabled] GcfsConfig enabled
+                     */
+    
+                    /**
+                     * Constructs a new GcfsConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a GcfsConfig.
+                     * @implements IGcfsConfig
+                     * @constructor
+                     * @param {google.container.v1.IGcfsConfig=} [properties] Properties to set
+                     */
+                    function GcfsConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GcfsConfig enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1.GcfsConfig
+                     * @instance
+                     */
+                    GcfsConfig.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new GcfsConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.GcfsConfig
+                     * @static
+                     * @param {google.container.v1.IGcfsConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.GcfsConfig} GcfsConfig instance
+                     */
+                    GcfsConfig.create = function create(properties) {
+                        return new GcfsConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GcfsConfig message. Does not implicitly {@link google.container.v1.GcfsConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.GcfsConfig
+                     * @static
+                     * @param {google.container.v1.IGcfsConfig} message GcfsConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GcfsConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GcfsConfig message, length delimited. Does not implicitly {@link google.container.v1.GcfsConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.GcfsConfig
+                     * @static
+                     * @param {google.container.v1.IGcfsConfig} message GcfsConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GcfsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GcfsConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.GcfsConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.GcfsConfig} GcfsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GcfsConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.GcfsConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.enabled = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GcfsConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.GcfsConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.GcfsConfig} GcfsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GcfsConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GcfsConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.GcfsConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GcfsConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GcfsConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.GcfsConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.GcfsConfig} GcfsConfig
+                     */
+                    GcfsConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.GcfsConfig)
+                            return object;
+                        var message = new $root.google.container.v1.GcfsConfig();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GcfsConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.GcfsConfig
+                     * @static
+                     * @param {google.container.v1.GcfsConfig} message GcfsConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GcfsConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GcfsConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.GcfsConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GcfsConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GcfsConfig;
                 })();
     
                 v1.ReservationAffinity = (function() {
@@ -3411,6 +4639,8 @@
                      * @property {google.container.v1.ICloudRunConfig|null} [cloudRunConfig] AddonsConfig cloudRunConfig
                      * @property {google.container.v1.IDnsCacheConfig|null} [dnsCacheConfig] AddonsConfig dnsCacheConfig
                      * @property {google.container.v1.IConfigConnectorConfig|null} [configConnectorConfig] AddonsConfig configConnectorConfig
+                     * @property {google.container.v1.IGcePersistentDiskCsiDriverConfig|null} [gcePersistentDiskCsiDriverConfig] AddonsConfig gcePersistentDiskCsiDriverConfig
+                     * @property {google.container.v1.IGcpFilestoreCsiDriverConfig|null} [gcpFilestoreCsiDriverConfig] AddonsConfig gcpFilestoreCsiDriverConfig
                      */
     
                     /**
@@ -3485,6 +4715,22 @@
                     AddonsConfig.prototype.configConnectorConfig = null;
     
                     /**
+                     * AddonsConfig gcePersistentDiskCsiDriverConfig.
+                     * @member {google.container.v1.IGcePersistentDiskCsiDriverConfig|null|undefined} gcePersistentDiskCsiDriverConfig
+                     * @memberof google.container.v1.AddonsConfig
+                     * @instance
+                     */
+                    AddonsConfig.prototype.gcePersistentDiskCsiDriverConfig = null;
+    
+                    /**
+                     * AddonsConfig gcpFilestoreCsiDriverConfig.
+                     * @member {google.container.v1.IGcpFilestoreCsiDriverConfig|null|undefined} gcpFilestoreCsiDriverConfig
+                     * @memberof google.container.v1.AddonsConfig
+                     * @instance
+                     */
+                    AddonsConfig.prototype.gcpFilestoreCsiDriverConfig = null;
+    
+                    /**
                      * Creates a new AddonsConfig instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.AddonsConfig
@@ -3522,6 +4768,10 @@
                             $root.google.container.v1.DnsCacheConfig.encode(message.dnsCacheConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                         if (message.configConnectorConfig != null && Object.hasOwnProperty.call(message, "configConnectorConfig"))
                             $root.google.container.v1.ConfigConnectorConfig.encode(message.configConnectorConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                        if (message.gcePersistentDiskCsiDriverConfig != null && Object.hasOwnProperty.call(message, "gcePersistentDiskCsiDriverConfig"))
+                            $root.google.container.v1.GcePersistentDiskCsiDriverConfig.encode(message.gcePersistentDiskCsiDriverConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                        if (message.gcpFilestoreCsiDriverConfig != null && Object.hasOwnProperty.call(message, "gcpFilestoreCsiDriverConfig"))
+                            $root.google.container.v1.GcpFilestoreCsiDriverConfig.encode(message.gcpFilestoreCsiDriverConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                         return writer;
                     };
     
@@ -3576,6 +4826,12 @@
                                 break;
                             case 10:
                                 message.configConnectorConfig = $root.google.container.v1.ConfigConnectorConfig.decode(reader, reader.uint32());
+                                break;
+                            case 11:
+                                message.gcePersistentDiskCsiDriverConfig = $root.google.container.v1.GcePersistentDiskCsiDriverConfig.decode(reader, reader.uint32());
+                                break;
+                            case 14:
+                                message.gcpFilestoreCsiDriverConfig = $root.google.container.v1.GcpFilestoreCsiDriverConfig.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -3647,6 +4903,16 @@
                             if (error)
                                 return "configConnectorConfig." + error;
                         }
+                        if (message.gcePersistentDiskCsiDriverConfig != null && message.hasOwnProperty("gcePersistentDiskCsiDriverConfig")) {
+                            var error = $root.google.container.v1.GcePersistentDiskCsiDriverConfig.verify(message.gcePersistentDiskCsiDriverConfig);
+                            if (error)
+                                return "gcePersistentDiskCsiDriverConfig." + error;
+                        }
+                        if (message.gcpFilestoreCsiDriverConfig != null && message.hasOwnProperty("gcpFilestoreCsiDriverConfig")) {
+                            var error = $root.google.container.v1.GcpFilestoreCsiDriverConfig.verify(message.gcpFilestoreCsiDriverConfig);
+                            if (error)
+                                return "gcpFilestoreCsiDriverConfig." + error;
+                        }
                         return null;
                     };
     
@@ -3697,6 +4963,16 @@
                                 throw TypeError(".google.container.v1.AddonsConfig.configConnectorConfig: object expected");
                             message.configConnectorConfig = $root.google.container.v1.ConfigConnectorConfig.fromObject(object.configConnectorConfig);
                         }
+                        if (object.gcePersistentDiskCsiDriverConfig != null) {
+                            if (typeof object.gcePersistentDiskCsiDriverConfig !== "object")
+                                throw TypeError(".google.container.v1.AddonsConfig.gcePersistentDiskCsiDriverConfig: object expected");
+                            message.gcePersistentDiskCsiDriverConfig = $root.google.container.v1.GcePersistentDiskCsiDriverConfig.fromObject(object.gcePersistentDiskCsiDriverConfig);
+                        }
+                        if (object.gcpFilestoreCsiDriverConfig != null) {
+                            if (typeof object.gcpFilestoreCsiDriverConfig !== "object")
+                                throw TypeError(".google.container.v1.AddonsConfig.gcpFilestoreCsiDriverConfig: object expected");
+                            message.gcpFilestoreCsiDriverConfig = $root.google.container.v1.GcpFilestoreCsiDriverConfig.fromObject(object.gcpFilestoreCsiDriverConfig);
+                        }
                         return message;
                     };
     
@@ -3721,6 +4997,8 @@
                             object.cloudRunConfig = null;
                             object.dnsCacheConfig = null;
                             object.configConnectorConfig = null;
+                            object.gcePersistentDiskCsiDriverConfig = null;
+                            object.gcpFilestoreCsiDriverConfig = null;
                         }
                         if (message.httpLoadBalancing != null && message.hasOwnProperty("httpLoadBalancing"))
                             object.httpLoadBalancing = $root.google.container.v1.HttpLoadBalancing.toObject(message.httpLoadBalancing, options);
@@ -3736,6 +5014,10 @@
                             object.dnsCacheConfig = $root.google.container.v1.DnsCacheConfig.toObject(message.dnsCacheConfig, options);
                         if (message.configConnectorConfig != null && message.hasOwnProperty("configConnectorConfig"))
                             object.configConnectorConfig = $root.google.container.v1.ConfigConnectorConfig.toObject(message.configConnectorConfig, options);
+                        if (message.gcePersistentDiskCsiDriverConfig != null && message.hasOwnProperty("gcePersistentDiskCsiDriverConfig"))
+                            object.gcePersistentDiskCsiDriverConfig = $root.google.container.v1.GcePersistentDiskCsiDriverConfig.toObject(message.gcePersistentDiskCsiDriverConfig, options);
+                        if (message.gcpFilestoreCsiDriverConfig != null && message.hasOwnProperty("gcpFilestoreCsiDriverConfig"))
+                            object.gcpFilestoreCsiDriverConfig = $root.google.container.v1.GcpFilestoreCsiDriverConfig.toObject(message.gcpFilestoreCsiDriverConfig, options);
                         return object;
                     };
     
@@ -5841,6 +7123,380 @@
                     return ConfigConnectorConfig;
                 })();
     
+                v1.GcePersistentDiskCsiDriverConfig = (function() {
+    
+                    /**
+                     * Properties of a GcePersistentDiskCsiDriverConfig.
+                     * @memberof google.container.v1
+                     * @interface IGcePersistentDiskCsiDriverConfig
+                     * @property {boolean|null} [enabled] GcePersistentDiskCsiDriverConfig enabled
+                     */
+    
+                    /**
+                     * Constructs a new GcePersistentDiskCsiDriverConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a GcePersistentDiskCsiDriverConfig.
+                     * @implements IGcePersistentDiskCsiDriverConfig
+                     * @constructor
+                     * @param {google.container.v1.IGcePersistentDiskCsiDriverConfig=} [properties] Properties to set
+                     */
+                    function GcePersistentDiskCsiDriverConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GcePersistentDiskCsiDriverConfig enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1.GcePersistentDiskCsiDriverConfig
+                     * @instance
+                     */
+                    GcePersistentDiskCsiDriverConfig.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new GcePersistentDiskCsiDriverConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.GcePersistentDiskCsiDriverConfig
+                     * @static
+                     * @param {google.container.v1.IGcePersistentDiskCsiDriverConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.GcePersistentDiskCsiDriverConfig} GcePersistentDiskCsiDriverConfig instance
+                     */
+                    GcePersistentDiskCsiDriverConfig.create = function create(properties) {
+                        return new GcePersistentDiskCsiDriverConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GcePersistentDiskCsiDriverConfig message. Does not implicitly {@link google.container.v1.GcePersistentDiskCsiDriverConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.GcePersistentDiskCsiDriverConfig
+                     * @static
+                     * @param {google.container.v1.IGcePersistentDiskCsiDriverConfig} message GcePersistentDiskCsiDriverConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GcePersistentDiskCsiDriverConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GcePersistentDiskCsiDriverConfig message, length delimited. Does not implicitly {@link google.container.v1.GcePersistentDiskCsiDriverConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.GcePersistentDiskCsiDriverConfig
+                     * @static
+                     * @param {google.container.v1.IGcePersistentDiskCsiDriverConfig} message GcePersistentDiskCsiDriverConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GcePersistentDiskCsiDriverConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GcePersistentDiskCsiDriverConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.GcePersistentDiskCsiDriverConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.GcePersistentDiskCsiDriverConfig} GcePersistentDiskCsiDriverConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GcePersistentDiskCsiDriverConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.GcePersistentDiskCsiDriverConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.enabled = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GcePersistentDiskCsiDriverConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.GcePersistentDiskCsiDriverConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.GcePersistentDiskCsiDriverConfig} GcePersistentDiskCsiDriverConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GcePersistentDiskCsiDriverConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GcePersistentDiskCsiDriverConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.GcePersistentDiskCsiDriverConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GcePersistentDiskCsiDriverConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GcePersistentDiskCsiDriverConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.GcePersistentDiskCsiDriverConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.GcePersistentDiskCsiDriverConfig} GcePersistentDiskCsiDriverConfig
+                     */
+                    GcePersistentDiskCsiDriverConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.GcePersistentDiskCsiDriverConfig)
+                            return object;
+                        var message = new $root.google.container.v1.GcePersistentDiskCsiDriverConfig();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GcePersistentDiskCsiDriverConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.GcePersistentDiskCsiDriverConfig
+                     * @static
+                     * @param {google.container.v1.GcePersistentDiskCsiDriverConfig} message GcePersistentDiskCsiDriverConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GcePersistentDiskCsiDriverConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GcePersistentDiskCsiDriverConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.GcePersistentDiskCsiDriverConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GcePersistentDiskCsiDriverConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GcePersistentDiskCsiDriverConfig;
+                })();
+    
+                v1.GcpFilestoreCsiDriverConfig = (function() {
+    
+                    /**
+                     * Properties of a GcpFilestoreCsiDriverConfig.
+                     * @memberof google.container.v1
+                     * @interface IGcpFilestoreCsiDriverConfig
+                     * @property {boolean|null} [enabled] GcpFilestoreCsiDriverConfig enabled
+                     */
+    
+                    /**
+                     * Constructs a new GcpFilestoreCsiDriverConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a GcpFilestoreCsiDriverConfig.
+                     * @implements IGcpFilestoreCsiDriverConfig
+                     * @constructor
+                     * @param {google.container.v1.IGcpFilestoreCsiDriverConfig=} [properties] Properties to set
+                     */
+                    function GcpFilestoreCsiDriverConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GcpFilestoreCsiDriverConfig enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1.GcpFilestoreCsiDriverConfig
+                     * @instance
+                     */
+                    GcpFilestoreCsiDriverConfig.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new GcpFilestoreCsiDriverConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.GcpFilestoreCsiDriverConfig
+                     * @static
+                     * @param {google.container.v1.IGcpFilestoreCsiDriverConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.GcpFilestoreCsiDriverConfig} GcpFilestoreCsiDriverConfig instance
+                     */
+                    GcpFilestoreCsiDriverConfig.create = function create(properties) {
+                        return new GcpFilestoreCsiDriverConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GcpFilestoreCsiDriverConfig message. Does not implicitly {@link google.container.v1.GcpFilestoreCsiDriverConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.GcpFilestoreCsiDriverConfig
+                     * @static
+                     * @param {google.container.v1.IGcpFilestoreCsiDriverConfig} message GcpFilestoreCsiDriverConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GcpFilestoreCsiDriverConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GcpFilestoreCsiDriverConfig message, length delimited. Does not implicitly {@link google.container.v1.GcpFilestoreCsiDriverConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.GcpFilestoreCsiDriverConfig
+                     * @static
+                     * @param {google.container.v1.IGcpFilestoreCsiDriverConfig} message GcpFilestoreCsiDriverConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GcpFilestoreCsiDriverConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GcpFilestoreCsiDriverConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.GcpFilestoreCsiDriverConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.GcpFilestoreCsiDriverConfig} GcpFilestoreCsiDriverConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GcpFilestoreCsiDriverConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.GcpFilestoreCsiDriverConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.enabled = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GcpFilestoreCsiDriverConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.GcpFilestoreCsiDriverConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.GcpFilestoreCsiDriverConfig} GcpFilestoreCsiDriverConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GcpFilestoreCsiDriverConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GcpFilestoreCsiDriverConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.GcpFilestoreCsiDriverConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GcpFilestoreCsiDriverConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GcpFilestoreCsiDriverConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.GcpFilestoreCsiDriverConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.GcpFilestoreCsiDriverConfig} GcpFilestoreCsiDriverConfig
+                     */
+                    GcpFilestoreCsiDriverConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.GcpFilestoreCsiDriverConfig)
+                            return object;
+                        var message = new $root.google.container.v1.GcpFilestoreCsiDriverConfig();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GcpFilestoreCsiDriverConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.GcpFilestoreCsiDriverConfig
+                     * @static
+                     * @param {google.container.v1.GcpFilestoreCsiDriverConfig} message GcpFilestoreCsiDriverConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GcpFilestoreCsiDriverConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GcpFilestoreCsiDriverConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.GcpFilestoreCsiDriverConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GcpFilestoreCsiDriverConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GcpFilestoreCsiDriverConfig;
+                })();
+    
                 v1.MasterAuthorizedNetworksConfig = (function() {
     
                     /**
@@ -7384,6 +9040,9 @@
                      * @property {google.container.v1.IShieldedNodes|null} [shieldedNodes] Cluster shieldedNodes
                      * @property {google.container.v1.IReleaseChannel|null} [releaseChannel] Cluster releaseChannel
                      * @property {google.container.v1.IWorkloadIdentityConfig|null} [workloadIdentityConfig] Cluster workloadIdentityConfig
+                     * @property {google.container.v1.IMeshCertificates|null} [meshCertificates] Cluster meshCertificates
+                     * @property {google.container.v1.INotificationConfig|null} [notificationConfig] Cluster notificationConfig
+                     * @property {google.container.v1.IConfidentialNodes|null} [confidentialNodes] Cluster confidentialNodes
                      * @property {string|null} [selfLink] Cluster selfLink
                      * @property {string|null} [zone] Cluster zone
                      * @property {string|null} [endpoint] Cluster endpoint
@@ -7402,6 +9061,11 @@
                      * @property {boolean|null} [enableTpu] Cluster enableTpu
                      * @property {string|null} [tpuIpv4CidrBlock] Cluster tpuIpv4CidrBlock
                      * @property {Array.<google.container.v1.IStatusCondition>|null} [conditions] Cluster conditions
+                     * @property {google.container.v1.IAutopilot|null} [autopilot] Cluster autopilot
+                     * @property {string|null} [id] Cluster id
+                     * @property {google.container.v1.INodePoolDefaults|null} [nodePoolDefaults] Cluster nodePoolDefaults
+                     * @property {google.container.v1.ILoggingConfig|null} [loggingConfig] Cluster loggingConfig
+                     * @property {google.container.v1.IMonitoringConfig|null} [monitoringConfig] Cluster monitoringConfig
                      */
     
                     /**
@@ -7689,6 +9353,30 @@
                     Cluster.prototype.workloadIdentityConfig = null;
     
                     /**
+                     * Cluster meshCertificates.
+                     * @member {google.container.v1.IMeshCertificates|null|undefined} meshCertificates
+                     * @memberof google.container.v1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.meshCertificates = null;
+    
+                    /**
+                     * Cluster notificationConfig.
+                     * @member {google.container.v1.INotificationConfig|null|undefined} notificationConfig
+                     * @memberof google.container.v1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.notificationConfig = null;
+    
+                    /**
+                     * Cluster confidentialNodes.
+                     * @member {google.container.v1.IConfidentialNodes|null|undefined} confidentialNodes
+                     * @memberof google.container.v1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.confidentialNodes = null;
+    
+                    /**
                      * Cluster selfLink.
                      * @member {string} selfLink
                      * @memberof google.container.v1.Cluster
@@ -7833,6 +9521,60 @@
                     Cluster.prototype.conditions = $util.emptyArray;
     
                     /**
+                     * Cluster autopilot.
+                     * @member {google.container.v1.IAutopilot|null|undefined} autopilot
+                     * @memberof google.container.v1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.autopilot = null;
+    
+                    /**
+                     * Cluster id.
+                     * @member {string} id
+                     * @memberof google.container.v1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.id = "";
+    
+                    /**
+                     * Cluster nodePoolDefaults.
+                     * @member {google.container.v1.INodePoolDefaults|null|undefined} nodePoolDefaults
+                     * @memberof google.container.v1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.nodePoolDefaults = null;
+    
+                    /**
+                     * Cluster loggingConfig.
+                     * @member {google.container.v1.ILoggingConfig|null|undefined} loggingConfig
+                     * @memberof google.container.v1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.loggingConfig = null;
+    
+                    /**
+                     * Cluster monitoringConfig.
+                     * @member {google.container.v1.IMonitoringConfig|null|undefined} monitoringConfig
+                     * @memberof google.container.v1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.monitoringConfig = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * Cluster _nodePoolDefaults.
+                     * @member {"nodePoolDefaults"|undefined} _nodePoolDefaults
+                     * @memberof google.container.v1.Cluster
+                     * @instance
+                     */
+                    Object.defineProperty(Cluster.prototype, "_nodePoolDefaults", {
+                        get: $util.oneOfGetter($oneOfFields = ["nodePoolDefaults"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
                      * Creates a new Cluster instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.Cluster
@@ -7925,6 +9667,12 @@
                             $root.google.container.v1.ReleaseChannel.encode(message.releaseChannel, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
                         if (message.workloadIdentityConfig != null && Object.hasOwnProperty.call(message, "workloadIdentityConfig"))
                             $root.google.container.v1.WorkloadIdentityConfig.encode(message.workloadIdentityConfig, writer.uint32(/* id 43, wireType 2 =*/346).fork()).ldelim();
+                        if (message.notificationConfig != null && Object.hasOwnProperty.call(message, "notificationConfig"))
+                            $root.google.container.v1.NotificationConfig.encode(message.notificationConfig, writer.uint32(/* id 49, wireType 2 =*/394).fork()).ldelim();
+                        if (message.confidentialNodes != null && Object.hasOwnProperty.call(message, "confidentialNodes"))
+                            $root.google.container.v1.ConfidentialNodes.encode(message.confidentialNodes, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
+                        if (message.meshCertificates != null && Object.hasOwnProperty.call(message, "meshCertificates"))
+                            $root.google.container.v1.MeshCertificates.encode(message.meshCertificates, writer.uint32(/* id 67, wireType 2 =*/538).fork()).ldelim();
                         if (message.selfLink != null && Object.hasOwnProperty.call(message, "selfLink"))
                             writer.uint32(/* id 100, wireType 2 =*/802).string(message.selfLink);
                         if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
@@ -7963,6 +9711,16 @@
                         if (message.conditions != null && message.conditions.length)
                             for (var i = 0; i < message.conditions.length; ++i)
                                 $root.google.container.v1.StatusCondition.encode(message.conditions[i], writer.uint32(/* id 118, wireType 2 =*/946).fork()).ldelim();
+                        if (message.autopilot != null && Object.hasOwnProperty.call(message, "autopilot"))
+                            $root.google.container.v1.Autopilot.encode(message.autopilot, writer.uint32(/* id 128, wireType 2 =*/1026).fork()).ldelim();
+                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                            writer.uint32(/* id 129, wireType 2 =*/1034).string(message.id);
+                        if (message.nodePoolDefaults != null && Object.hasOwnProperty.call(message, "nodePoolDefaults"))
+                            $root.google.container.v1.NodePoolDefaults.encode(message.nodePoolDefaults, writer.uint32(/* id 131, wireType 2 =*/1050).fork()).ldelim();
+                        if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
+                            $root.google.container.v1.LoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 132, wireType 2 =*/1058).fork()).ldelim();
+                        if (message.monitoringConfig != null && Object.hasOwnProperty.call(message, "monitoringConfig"))
+                            $root.google.container.v1.MonitoringConfig.encode(message.monitoringConfig, writer.uint32(/* id 133, wireType 2 =*/1066).fork()).ldelim();
                         return writer;
                     };
     
@@ -8119,6 +9877,15 @@
                             case 43:
                                 message.workloadIdentityConfig = $root.google.container.v1.WorkloadIdentityConfig.decode(reader, reader.uint32());
                                 break;
+                            case 67:
+                                message.meshCertificates = $root.google.container.v1.MeshCertificates.decode(reader, reader.uint32());
+                                break;
+                            case 49:
+                                message.notificationConfig = $root.google.container.v1.NotificationConfig.decode(reader, reader.uint32());
+                                break;
+                            case 50:
+                                message.confidentialNodes = $root.google.container.v1.ConfidentialNodes.decode(reader, reader.uint32());
+                                break;
                             case 100:
                                 message.selfLink = reader.string();
                                 break;
@@ -8177,6 +9944,21 @@
                                     message.conditions = [];
                                 message.conditions.push($root.google.container.v1.StatusCondition.decode(reader, reader.uint32()));
                                 break;
+                            case 128:
+                                message.autopilot = $root.google.container.v1.Autopilot.decode(reader, reader.uint32());
+                                break;
+                            case 129:
+                                message.id = reader.string();
+                                break;
+                            case 131:
+                                message.nodePoolDefaults = $root.google.container.v1.NodePoolDefaults.decode(reader, reader.uint32());
+                                break;
+                            case 132:
+                                message.loggingConfig = $root.google.container.v1.LoggingConfig.decode(reader, reader.uint32());
+                                break;
+                            case 133:
+                                message.monitoringConfig = $root.google.container.v1.MonitoringConfig.decode(reader, reader.uint32());
+                                break;
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -8212,6 +9994,7 @@
                     Cluster.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        var properties = {};
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -8366,6 +10149,21 @@
                             if (error)
                                 return "workloadIdentityConfig." + error;
                         }
+                        if (message.meshCertificates != null && message.hasOwnProperty("meshCertificates")) {
+                            var error = $root.google.container.v1.MeshCertificates.verify(message.meshCertificates);
+                            if (error)
+                                return "meshCertificates." + error;
+                        }
+                        if (message.notificationConfig != null && message.hasOwnProperty("notificationConfig")) {
+                            var error = $root.google.container.v1.NotificationConfig.verify(message.notificationConfig);
+                            if (error)
+                                return "notificationConfig." + error;
+                        }
+                        if (message.confidentialNodes != null && message.hasOwnProperty("confidentialNodes")) {
+                            var error = $root.google.container.v1.ConfidentialNodes.verify(message.confidentialNodes);
+                            if (error)
+                                return "confidentialNodes." + error;
+                        }
                         if (message.selfLink != null && message.hasOwnProperty("selfLink"))
                             if (!$util.isString(message.selfLink))
                                 return "selfLink: string expected";
@@ -8439,6 +10237,32 @@
                                 if (error)
                                     return "conditions." + error;
                             }
+                        }
+                        if (message.autopilot != null && message.hasOwnProperty("autopilot")) {
+                            var error = $root.google.container.v1.Autopilot.verify(message.autopilot);
+                            if (error)
+                                return "autopilot." + error;
+                        }
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            if (!$util.isString(message.id))
+                                return "id: string expected";
+                        if (message.nodePoolDefaults != null && message.hasOwnProperty("nodePoolDefaults")) {
+                            properties._nodePoolDefaults = 1;
+                            {
+                                var error = $root.google.container.v1.NodePoolDefaults.verify(message.nodePoolDefaults);
+                                if (error)
+                                    return "nodePoolDefaults." + error;
+                            }
+                        }
+                        if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig")) {
+                            var error = $root.google.container.v1.LoggingConfig.verify(message.loggingConfig);
+                            if (error)
+                                return "loggingConfig." + error;
+                        }
+                        if (message.monitoringConfig != null && message.hasOwnProperty("monitoringConfig")) {
+                            var error = $root.google.container.v1.MonitoringConfig.verify(message.monitoringConfig);
+                            if (error)
+                                return "monitoringConfig." + error;
                         }
                         return null;
                     };
@@ -8599,6 +10423,21 @@
                                 throw TypeError(".google.container.v1.Cluster.workloadIdentityConfig: object expected");
                             message.workloadIdentityConfig = $root.google.container.v1.WorkloadIdentityConfig.fromObject(object.workloadIdentityConfig);
                         }
+                        if (object.meshCertificates != null) {
+                            if (typeof object.meshCertificates !== "object")
+                                throw TypeError(".google.container.v1.Cluster.meshCertificates: object expected");
+                            message.meshCertificates = $root.google.container.v1.MeshCertificates.fromObject(object.meshCertificates);
+                        }
+                        if (object.notificationConfig != null) {
+                            if (typeof object.notificationConfig !== "object")
+                                throw TypeError(".google.container.v1.Cluster.notificationConfig: object expected");
+                            message.notificationConfig = $root.google.container.v1.NotificationConfig.fromObject(object.notificationConfig);
+                        }
+                        if (object.confidentialNodes != null) {
+                            if (typeof object.confidentialNodes !== "object")
+                                throw TypeError(".google.container.v1.Cluster.confidentialNodes: object expected");
+                            message.confidentialNodes = $root.google.container.v1.ConfidentialNodes.fromObject(object.confidentialNodes);
+                        }
                         if (object.selfLink != null)
                             message.selfLink = String(object.selfLink);
                         if (object.zone != null)
@@ -8676,6 +10515,28 @@
                                 message.conditions[i] = $root.google.container.v1.StatusCondition.fromObject(object.conditions[i]);
                             }
                         }
+                        if (object.autopilot != null) {
+                            if (typeof object.autopilot !== "object")
+                                throw TypeError(".google.container.v1.Cluster.autopilot: object expected");
+                            message.autopilot = $root.google.container.v1.Autopilot.fromObject(object.autopilot);
+                        }
+                        if (object.id != null)
+                            message.id = String(object.id);
+                        if (object.nodePoolDefaults != null) {
+                            if (typeof object.nodePoolDefaults !== "object")
+                                throw TypeError(".google.container.v1.Cluster.nodePoolDefaults: object expected");
+                            message.nodePoolDefaults = $root.google.container.v1.NodePoolDefaults.fromObject(object.nodePoolDefaults);
+                        }
+                        if (object.loggingConfig != null) {
+                            if (typeof object.loggingConfig !== "object")
+                                throw TypeError(".google.container.v1.Cluster.loggingConfig: object expected");
+                            message.loggingConfig = $root.google.container.v1.LoggingConfig.fromObject(object.loggingConfig);
+                        }
+                        if (object.monitoringConfig != null) {
+                            if (typeof object.monitoringConfig !== "object")
+                                throw TypeError(".google.container.v1.Cluster.monitoringConfig: object expected");
+                            message.monitoringConfig = $root.google.container.v1.MonitoringConfig.fromObject(object.monitoringConfig);
+                        }
                         return message;
                     };
     
@@ -8731,6 +10592,9 @@
                             object.shieldedNodes = null;
                             object.releaseChannel = null;
                             object.workloadIdentityConfig = null;
+                            object.notificationConfig = null;
+                            object.confidentialNodes = null;
+                            object.meshCertificates = null;
                             object.selfLink = "";
                             object.zone = "";
                             object.endpoint = "";
@@ -8747,6 +10611,10 @@
                             object.location = "";
                             object.enableTpu = false;
                             object.tpuIpv4CidrBlock = "";
+                            object.autopilot = null;
+                            object.id = "";
+                            object.loggingConfig = null;
+                            object.monitoringConfig = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -8824,6 +10692,12 @@
                             object.releaseChannel = $root.google.container.v1.ReleaseChannel.toObject(message.releaseChannel, options);
                         if (message.workloadIdentityConfig != null && message.hasOwnProperty("workloadIdentityConfig"))
                             object.workloadIdentityConfig = $root.google.container.v1.WorkloadIdentityConfig.toObject(message.workloadIdentityConfig, options);
+                        if (message.notificationConfig != null && message.hasOwnProperty("notificationConfig"))
+                            object.notificationConfig = $root.google.container.v1.NotificationConfig.toObject(message.notificationConfig, options);
+                        if (message.confidentialNodes != null && message.hasOwnProperty("confidentialNodes"))
+                            object.confidentialNodes = $root.google.container.v1.ConfidentialNodes.toObject(message.confidentialNodes, options);
+                        if (message.meshCertificates != null && message.hasOwnProperty("meshCertificates"))
+                            object.meshCertificates = $root.google.container.v1.MeshCertificates.toObject(message.meshCertificates, options);
                         if (message.selfLink != null && message.hasOwnProperty("selfLink"))
                             object.selfLink = message.selfLink;
                         if (message.zone != null && message.hasOwnProperty("zone"))
@@ -8866,6 +10740,19 @@
                             for (var j = 0; j < message.conditions.length; ++j)
                                 object.conditions[j] = $root.google.container.v1.StatusCondition.toObject(message.conditions[j], options);
                         }
+                        if (message.autopilot != null && message.hasOwnProperty("autopilot"))
+                            object.autopilot = $root.google.container.v1.Autopilot.toObject(message.autopilot, options);
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            object.id = message.id;
+                        if (message.nodePoolDefaults != null && message.hasOwnProperty("nodePoolDefaults")) {
+                            object.nodePoolDefaults = $root.google.container.v1.NodePoolDefaults.toObject(message.nodePoolDefaults, options);
+                            if (options.oneofs)
+                                object._nodePoolDefaults = "nodePoolDefaults";
+                        }
+                        if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
+                            object.loggingConfig = $root.google.container.v1.LoggingConfig.toObject(message.loggingConfig, options);
+                        if (message.monitoringConfig != null && message.hasOwnProperty("monitoringConfig"))
+                            object.monitoringConfig = $root.google.container.v1.MonitoringConfig.toObject(message.monitoringConfig, options);
                         return object;
                     };
     
@@ -8907,6 +10794,390 @@
                     return Cluster;
                 })();
     
+                v1.NodePoolDefaults = (function() {
+    
+                    /**
+                     * Properties of a NodePoolDefaults.
+                     * @memberof google.container.v1
+                     * @interface INodePoolDefaults
+                     * @property {google.container.v1.INodeConfigDefaults|null} [nodeConfigDefaults] NodePoolDefaults nodeConfigDefaults
+                     */
+    
+                    /**
+                     * Constructs a new NodePoolDefaults.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a NodePoolDefaults.
+                     * @implements INodePoolDefaults
+                     * @constructor
+                     * @param {google.container.v1.INodePoolDefaults=} [properties] Properties to set
+                     */
+                    function NodePoolDefaults(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * NodePoolDefaults nodeConfigDefaults.
+                     * @member {google.container.v1.INodeConfigDefaults|null|undefined} nodeConfigDefaults
+                     * @memberof google.container.v1.NodePoolDefaults
+                     * @instance
+                     */
+                    NodePoolDefaults.prototype.nodeConfigDefaults = null;
+    
+                    /**
+                     * Creates a new NodePoolDefaults instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.NodePoolDefaults
+                     * @static
+                     * @param {google.container.v1.INodePoolDefaults=} [properties] Properties to set
+                     * @returns {google.container.v1.NodePoolDefaults} NodePoolDefaults instance
+                     */
+                    NodePoolDefaults.create = function create(properties) {
+                        return new NodePoolDefaults(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified NodePoolDefaults message. Does not implicitly {@link google.container.v1.NodePoolDefaults.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.NodePoolDefaults
+                     * @static
+                     * @param {google.container.v1.INodePoolDefaults} message NodePoolDefaults message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NodePoolDefaults.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.nodeConfigDefaults != null && Object.hasOwnProperty.call(message, "nodeConfigDefaults"))
+                            $root.google.container.v1.NodeConfigDefaults.encode(message.nodeConfigDefaults, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified NodePoolDefaults message, length delimited. Does not implicitly {@link google.container.v1.NodePoolDefaults.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.NodePoolDefaults
+                     * @static
+                     * @param {google.container.v1.INodePoolDefaults} message NodePoolDefaults message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NodePoolDefaults.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a NodePoolDefaults message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.NodePoolDefaults
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.NodePoolDefaults} NodePoolDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NodePoolDefaults.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.NodePoolDefaults();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.nodeConfigDefaults = $root.google.container.v1.NodeConfigDefaults.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a NodePoolDefaults message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.NodePoolDefaults
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.NodePoolDefaults} NodePoolDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NodePoolDefaults.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a NodePoolDefaults message.
+                     * @function verify
+                     * @memberof google.container.v1.NodePoolDefaults
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    NodePoolDefaults.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.nodeConfigDefaults != null && message.hasOwnProperty("nodeConfigDefaults")) {
+                            var error = $root.google.container.v1.NodeConfigDefaults.verify(message.nodeConfigDefaults);
+                            if (error)
+                                return "nodeConfigDefaults." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a NodePoolDefaults message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.NodePoolDefaults
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.NodePoolDefaults} NodePoolDefaults
+                     */
+                    NodePoolDefaults.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.NodePoolDefaults)
+                            return object;
+                        var message = new $root.google.container.v1.NodePoolDefaults();
+                        if (object.nodeConfigDefaults != null) {
+                            if (typeof object.nodeConfigDefaults !== "object")
+                                throw TypeError(".google.container.v1.NodePoolDefaults.nodeConfigDefaults: object expected");
+                            message.nodeConfigDefaults = $root.google.container.v1.NodeConfigDefaults.fromObject(object.nodeConfigDefaults);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a NodePoolDefaults message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.NodePoolDefaults
+                     * @static
+                     * @param {google.container.v1.NodePoolDefaults} message NodePoolDefaults
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    NodePoolDefaults.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.nodeConfigDefaults = null;
+                        if (message.nodeConfigDefaults != null && message.hasOwnProperty("nodeConfigDefaults"))
+                            object.nodeConfigDefaults = $root.google.container.v1.NodeConfigDefaults.toObject(message.nodeConfigDefaults, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this NodePoolDefaults to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.NodePoolDefaults
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    NodePoolDefaults.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return NodePoolDefaults;
+                })();
+    
+                v1.NodeConfigDefaults = (function() {
+    
+                    /**
+                     * Properties of a NodeConfigDefaults.
+                     * @memberof google.container.v1
+                     * @interface INodeConfigDefaults
+                     * @property {google.container.v1.IGcfsConfig|null} [gcfsConfig] NodeConfigDefaults gcfsConfig
+                     */
+    
+                    /**
+                     * Constructs a new NodeConfigDefaults.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a NodeConfigDefaults.
+                     * @implements INodeConfigDefaults
+                     * @constructor
+                     * @param {google.container.v1.INodeConfigDefaults=} [properties] Properties to set
+                     */
+                    function NodeConfigDefaults(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * NodeConfigDefaults gcfsConfig.
+                     * @member {google.container.v1.IGcfsConfig|null|undefined} gcfsConfig
+                     * @memberof google.container.v1.NodeConfigDefaults
+                     * @instance
+                     */
+                    NodeConfigDefaults.prototype.gcfsConfig = null;
+    
+                    /**
+                     * Creates a new NodeConfigDefaults instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.NodeConfigDefaults
+                     * @static
+                     * @param {google.container.v1.INodeConfigDefaults=} [properties] Properties to set
+                     * @returns {google.container.v1.NodeConfigDefaults} NodeConfigDefaults instance
+                     */
+                    NodeConfigDefaults.create = function create(properties) {
+                        return new NodeConfigDefaults(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified NodeConfigDefaults message. Does not implicitly {@link google.container.v1.NodeConfigDefaults.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.NodeConfigDefaults
+                     * @static
+                     * @param {google.container.v1.INodeConfigDefaults} message NodeConfigDefaults message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NodeConfigDefaults.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.gcfsConfig != null && Object.hasOwnProperty.call(message, "gcfsConfig"))
+                            $root.google.container.v1.GcfsConfig.encode(message.gcfsConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified NodeConfigDefaults message, length delimited. Does not implicitly {@link google.container.v1.NodeConfigDefaults.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.NodeConfigDefaults
+                     * @static
+                     * @param {google.container.v1.INodeConfigDefaults} message NodeConfigDefaults message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NodeConfigDefaults.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a NodeConfigDefaults message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.NodeConfigDefaults
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.NodeConfigDefaults} NodeConfigDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NodeConfigDefaults.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.NodeConfigDefaults();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.gcfsConfig = $root.google.container.v1.GcfsConfig.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a NodeConfigDefaults message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.NodeConfigDefaults
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.NodeConfigDefaults} NodeConfigDefaults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NodeConfigDefaults.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a NodeConfigDefaults message.
+                     * @function verify
+                     * @memberof google.container.v1.NodeConfigDefaults
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    NodeConfigDefaults.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.gcfsConfig != null && message.hasOwnProperty("gcfsConfig")) {
+                            var error = $root.google.container.v1.GcfsConfig.verify(message.gcfsConfig);
+                            if (error)
+                                return "gcfsConfig." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a NodeConfigDefaults message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.NodeConfigDefaults
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.NodeConfigDefaults} NodeConfigDefaults
+                     */
+                    NodeConfigDefaults.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.NodeConfigDefaults)
+                            return object;
+                        var message = new $root.google.container.v1.NodeConfigDefaults();
+                        if (object.gcfsConfig != null) {
+                            if (typeof object.gcfsConfig !== "object")
+                                throw TypeError(".google.container.v1.NodeConfigDefaults.gcfsConfig: object expected");
+                            message.gcfsConfig = $root.google.container.v1.GcfsConfig.fromObject(object.gcfsConfig);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a NodeConfigDefaults message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.NodeConfigDefaults
+                     * @static
+                     * @param {google.container.v1.NodeConfigDefaults} message NodeConfigDefaults
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    NodeConfigDefaults.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.gcfsConfig = null;
+                        if (message.gcfsConfig != null && message.hasOwnProperty("gcfsConfig"))
+                            object.gcfsConfig = $root.google.container.v1.GcfsConfig.toObject(message.gcfsConfig, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this NodeConfigDefaults to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.NodeConfigDefaults
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    NodeConfigDefaults.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return NodeConfigDefaults;
+                })();
+    
                 v1.ClusterUpdate = (function() {
     
                     /**
@@ -8920,7 +11191,9 @@
                      * @property {string|null} [desiredImageType] ClusterUpdate desiredImageType
                      * @property {google.container.v1.IDatabaseEncryption|null} [desiredDatabaseEncryption] ClusterUpdate desiredDatabaseEncryption
                      * @property {google.container.v1.IWorkloadIdentityConfig|null} [desiredWorkloadIdentityConfig] ClusterUpdate desiredWorkloadIdentityConfig
+                     * @property {google.container.v1.IMeshCertificates|null} [desiredMeshCertificates] ClusterUpdate desiredMeshCertificates
                      * @property {google.container.v1.IShieldedNodes|null} [desiredShieldedNodes] ClusterUpdate desiredShieldedNodes
+                     * @property {google.container.v1.IDNSConfig|null} [desiredDnsConfig] ClusterUpdate desiredDnsConfig
                      * @property {google.container.v1.INodePoolAutoscaling|null} [desiredNodePoolAutoscaling] ClusterUpdate desiredNodePoolAutoscaling
                      * @property {Array.<string>|null} [desiredLocations] ClusterUpdate desiredLocations
                      * @property {google.container.v1.IMasterAuthorizedNetworksConfig|null} [desiredMasterAuthorizedNetworksConfig] ClusterUpdate desiredMasterAuthorizedNetworksConfig
@@ -8933,8 +11206,16 @@
                      * @property {google.container.v1.IIntraNodeVisibilityConfig|null} [desiredIntraNodeVisibilityConfig] ClusterUpdate desiredIntraNodeVisibilityConfig
                      * @property {google.container.v1.IDefaultSnatStatus|null} [desiredDefaultSnatStatus] ClusterUpdate desiredDefaultSnatStatus
                      * @property {google.container.v1.IReleaseChannel|null} [desiredReleaseChannel] ClusterUpdate desiredReleaseChannel
+                     * @property {google.container.v1.IILBSubsettingConfig|null} [desiredL4ilbSubsettingConfig] ClusterUpdate desiredL4ilbSubsettingConfig
+                     * @property {google.container.v1.DatapathProvider|null} [desiredDatapathProvider] ClusterUpdate desiredDatapathProvider
+                     * @property {google.container.v1.PrivateIPv6GoogleAccess|null} [desiredPrivateIpv6GoogleAccess] ClusterUpdate desiredPrivateIpv6GoogleAccess
+                     * @property {google.container.v1.INotificationConfig|null} [desiredNotificationConfig] ClusterUpdate desiredNotificationConfig
                      * @property {google.container.v1.IAuthenticatorGroupsConfig|null} [desiredAuthenticatorGroupsConfig] ClusterUpdate desiredAuthenticatorGroupsConfig
+                     * @property {google.container.v1.ILoggingConfig|null} [desiredLoggingConfig] ClusterUpdate desiredLoggingConfig
+                     * @property {google.container.v1.IMonitoringConfig|null} [desiredMonitoringConfig] ClusterUpdate desiredMonitoringConfig
+                     * @property {google.container.v1.IServiceExternalIPsConfig|null} [desiredServiceExternalIpsConfig] ClusterUpdate desiredServiceExternalIpsConfig
                      * @property {string|null} [desiredMasterVersion] ClusterUpdate desiredMasterVersion
+                     * @property {google.container.v1.IGcfsConfig|null} [desiredGcfsConfig] ClusterUpdate desiredGcfsConfig
                      */
     
                     /**
@@ -9010,12 +11291,28 @@
                     ClusterUpdate.prototype.desiredWorkloadIdentityConfig = null;
     
                     /**
+                     * ClusterUpdate desiredMeshCertificates.
+                     * @member {google.container.v1.IMeshCertificates|null|undefined} desiredMeshCertificates
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredMeshCertificates = null;
+    
+                    /**
                      * ClusterUpdate desiredShieldedNodes.
                      * @member {google.container.v1.IShieldedNodes|null|undefined} desiredShieldedNodes
                      * @memberof google.container.v1.ClusterUpdate
                      * @instance
                      */
                     ClusterUpdate.prototype.desiredShieldedNodes = null;
+    
+                    /**
+                     * ClusterUpdate desiredDnsConfig.
+                     * @member {google.container.v1.IDNSConfig|null|undefined} desiredDnsConfig
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredDnsConfig = null;
     
                     /**
                      * ClusterUpdate desiredNodePoolAutoscaling.
@@ -9114,6 +11411,38 @@
                     ClusterUpdate.prototype.desiredReleaseChannel = null;
     
                     /**
+                     * ClusterUpdate desiredL4ilbSubsettingConfig.
+                     * @member {google.container.v1.IILBSubsettingConfig|null|undefined} desiredL4ilbSubsettingConfig
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredL4ilbSubsettingConfig = null;
+    
+                    /**
+                     * ClusterUpdate desiredDatapathProvider.
+                     * @member {google.container.v1.DatapathProvider} desiredDatapathProvider
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredDatapathProvider = 0;
+    
+                    /**
+                     * ClusterUpdate desiredPrivateIpv6GoogleAccess.
+                     * @member {google.container.v1.PrivateIPv6GoogleAccess} desiredPrivateIpv6GoogleAccess
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredPrivateIpv6GoogleAccess = 0;
+    
+                    /**
+                     * ClusterUpdate desiredNotificationConfig.
+                     * @member {google.container.v1.INotificationConfig|null|undefined} desiredNotificationConfig
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredNotificationConfig = null;
+    
+                    /**
                      * ClusterUpdate desiredAuthenticatorGroupsConfig.
                      * @member {google.container.v1.IAuthenticatorGroupsConfig|null|undefined} desiredAuthenticatorGroupsConfig
                      * @memberof google.container.v1.ClusterUpdate
@@ -9122,12 +11451,44 @@
                     ClusterUpdate.prototype.desiredAuthenticatorGroupsConfig = null;
     
                     /**
+                     * ClusterUpdate desiredLoggingConfig.
+                     * @member {google.container.v1.ILoggingConfig|null|undefined} desiredLoggingConfig
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredLoggingConfig = null;
+    
+                    /**
+                     * ClusterUpdate desiredMonitoringConfig.
+                     * @member {google.container.v1.IMonitoringConfig|null|undefined} desiredMonitoringConfig
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredMonitoringConfig = null;
+    
+                    /**
+                     * ClusterUpdate desiredServiceExternalIpsConfig.
+                     * @member {google.container.v1.IServiceExternalIPsConfig|null|undefined} desiredServiceExternalIpsConfig
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredServiceExternalIpsConfig = null;
+    
+                    /**
                      * ClusterUpdate desiredMasterVersion.
                      * @member {string} desiredMasterVersion
                      * @memberof google.container.v1.ClusterUpdate
                      * @instance
                      */
                     ClusterUpdate.prototype.desiredMasterVersion = "";
+    
+                    /**
+                     * ClusterUpdate desiredGcfsConfig.
+                     * @member {google.container.v1.IGcfsConfig|null|undefined} desiredGcfsConfig
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredGcfsConfig = null;
     
                     /**
                      * Creates a new ClusterUpdate instance using the specified properties.
@@ -9188,16 +11549,36 @@
                             $root.google.container.v1.DefaultSnatStatus.encode(message.desiredDefaultSnatStatus, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                         if (message.desiredReleaseChannel != null && Object.hasOwnProperty.call(message, "desiredReleaseChannel"))
                             $root.google.container.v1.ReleaseChannel.encode(message.desiredReleaseChannel, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                        if (message.desiredL4ilbSubsettingConfig != null && Object.hasOwnProperty.call(message, "desiredL4ilbSubsettingConfig"))
+                            $root.google.container.v1.ILBSubsettingConfig.encode(message.desiredL4ilbSubsettingConfig, writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
                         if (message.desiredDatabaseEncryption != null && Object.hasOwnProperty.call(message, "desiredDatabaseEncryption"))
                             $root.google.container.v1.DatabaseEncryption.encode(message.desiredDatabaseEncryption, writer.uint32(/* id 46, wireType 2 =*/370).fork()).ldelim();
                         if (message.desiredWorkloadIdentityConfig != null && Object.hasOwnProperty.call(message, "desiredWorkloadIdentityConfig"))
                             $root.google.container.v1.WorkloadIdentityConfig.encode(message.desiredWorkloadIdentityConfig, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                         if (message.desiredShieldedNodes != null && Object.hasOwnProperty.call(message, "desiredShieldedNodes"))
                             $root.google.container.v1.ShieldedNodes.encode(message.desiredShieldedNodes, writer.uint32(/* id 48, wireType 2 =*/386).fork()).ldelim();
+                        if (message.desiredDatapathProvider != null && Object.hasOwnProperty.call(message, "desiredDatapathProvider"))
+                            writer.uint32(/* id 50, wireType 0 =*/400).int32(message.desiredDatapathProvider);
+                        if (message.desiredPrivateIpv6GoogleAccess != null && Object.hasOwnProperty.call(message, "desiredPrivateIpv6GoogleAccess"))
+                            writer.uint32(/* id 51, wireType 0 =*/408).int32(message.desiredPrivateIpv6GoogleAccess);
+                        if (message.desiredDnsConfig != null && Object.hasOwnProperty.call(message, "desiredDnsConfig"))
+                            $root.google.container.v1.DNSConfig.encode(message.desiredDnsConfig, writer.uint32(/* id 53, wireType 2 =*/426).fork()).ldelim();
+                        if (message.desiredNotificationConfig != null && Object.hasOwnProperty.call(message, "desiredNotificationConfig"))
+                            $root.google.container.v1.NotificationConfig.encode(message.desiredNotificationConfig, writer.uint32(/* id 55, wireType 2 =*/442).fork()).ldelim();
+                        if (message.desiredServiceExternalIpsConfig != null && Object.hasOwnProperty.call(message, "desiredServiceExternalIpsConfig"))
+                            $root.google.container.v1.ServiceExternalIPsConfig.encode(message.desiredServiceExternalIpsConfig, writer.uint32(/* id 60, wireType 2 =*/482).fork()).ldelim();
                         if (message.desiredAuthenticatorGroupsConfig != null && Object.hasOwnProperty.call(message, "desiredAuthenticatorGroupsConfig"))
                             $root.google.container.v1.AuthenticatorGroupsConfig.encode(message.desiredAuthenticatorGroupsConfig, writer.uint32(/* id 63, wireType 2 =*/506).fork()).ldelim();
+                        if (message.desiredLoggingConfig != null && Object.hasOwnProperty.call(message, "desiredLoggingConfig"))
+                            $root.google.container.v1.LoggingConfig.encode(message.desiredLoggingConfig, writer.uint32(/* id 64, wireType 2 =*/514).fork()).ldelim();
+                        if (message.desiredMonitoringConfig != null && Object.hasOwnProperty.call(message, "desiredMonitoringConfig"))
+                            $root.google.container.v1.MonitoringConfig.encode(message.desiredMonitoringConfig, writer.uint32(/* id 65, wireType 2 =*/522).fork()).ldelim();
+                        if (message.desiredMeshCertificates != null && Object.hasOwnProperty.call(message, "desiredMeshCertificates"))
+                            $root.google.container.v1.MeshCertificates.encode(message.desiredMeshCertificates, writer.uint32(/* id 67, wireType 2 =*/538).fork()).ldelim();
                         if (message.desiredMasterVersion != null && Object.hasOwnProperty.call(message, "desiredMasterVersion"))
                             writer.uint32(/* id 100, wireType 2 =*/802).string(message.desiredMasterVersion);
+                        if (message.desiredGcfsConfig != null && Object.hasOwnProperty.call(message, "desiredGcfsConfig"))
+                            $root.google.container.v1.GcfsConfig.encode(message.desiredGcfsConfig, writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                         return writer;
                     };
     
@@ -9253,8 +11634,14 @@
                             case 47:
                                 message.desiredWorkloadIdentityConfig = $root.google.container.v1.WorkloadIdentityConfig.decode(reader, reader.uint32());
                                 break;
+                            case 67:
+                                message.desiredMeshCertificates = $root.google.container.v1.MeshCertificates.decode(reader, reader.uint32());
+                                break;
                             case 48:
                                 message.desiredShieldedNodes = $root.google.container.v1.ShieldedNodes.decode(reader, reader.uint32());
+                                break;
+                            case 53:
+                                message.desiredDnsConfig = $root.google.container.v1.DNSConfig.decode(reader, reader.uint32());
                                 break;
                             case 9:
                                 message.desiredNodePoolAutoscaling = $root.google.container.v1.NodePoolAutoscaling.decode(reader, reader.uint32());
@@ -9294,11 +11681,35 @@
                             case 31:
                                 message.desiredReleaseChannel = $root.google.container.v1.ReleaseChannel.decode(reader, reader.uint32());
                                 break;
+                            case 39:
+                                message.desiredL4ilbSubsettingConfig = $root.google.container.v1.ILBSubsettingConfig.decode(reader, reader.uint32());
+                                break;
+                            case 50:
+                                message.desiredDatapathProvider = reader.int32();
+                                break;
+                            case 51:
+                                message.desiredPrivateIpv6GoogleAccess = reader.int32();
+                                break;
+                            case 55:
+                                message.desiredNotificationConfig = $root.google.container.v1.NotificationConfig.decode(reader, reader.uint32());
+                                break;
                             case 63:
                                 message.desiredAuthenticatorGroupsConfig = $root.google.container.v1.AuthenticatorGroupsConfig.decode(reader, reader.uint32());
                                 break;
+                            case 64:
+                                message.desiredLoggingConfig = $root.google.container.v1.LoggingConfig.decode(reader, reader.uint32());
+                                break;
+                            case 65:
+                                message.desiredMonitoringConfig = $root.google.container.v1.MonitoringConfig.decode(reader, reader.uint32());
+                                break;
+                            case 60:
+                                message.desiredServiceExternalIpsConfig = $root.google.container.v1.ServiceExternalIPsConfig.decode(reader, reader.uint32());
+                                break;
                             case 100:
                                 message.desiredMasterVersion = reader.string();
+                                break;
+                            case 109:
+                                message.desiredGcfsConfig = $root.google.container.v1.GcfsConfig.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -9362,10 +11773,20 @@
                             if (error)
                                 return "desiredWorkloadIdentityConfig." + error;
                         }
+                        if (message.desiredMeshCertificates != null && message.hasOwnProperty("desiredMeshCertificates")) {
+                            var error = $root.google.container.v1.MeshCertificates.verify(message.desiredMeshCertificates);
+                            if (error)
+                                return "desiredMeshCertificates." + error;
+                        }
                         if (message.desiredShieldedNodes != null && message.hasOwnProperty("desiredShieldedNodes")) {
                             var error = $root.google.container.v1.ShieldedNodes.verify(message.desiredShieldedNodes);
                             if (error)
                                 return "desiredShieldedNodes." + error;
+                        }
+                        if (message.desiredDnsConfig != null && message.hasOwnProperty("desiredDnsConfig")) {
+                            var error = $root.google.container.v1.DNSConfig.verify(message.desiredDnsConfig);
+                            if (error)
+                                return "desiredDnsConfig." + error;
                         }
                         if (message.desiredNodePoolAutoscaling != null && message.hasOwnProperty("desiredNodePoolAutoscaling")) {
                             var error = $root.google.container.v1.NodePoolAutoscaling.verify(message.desiredNodePoolAutoscaling);
@@ -9427,14 +11848,63 @@
                             if (error)
                                 return "desiredReleaseChannel." + error;
                         }
+                        if (message.desiredL4ilbSubsettingConfig != null && message.hasOwnProperty("desiredL4ilbSubsettingConfig")) {
+                            var error = $root.google.container.v1.ILBSubsettingConfig.verify(message.desiredL4ilbSubsettingConfig);
+                            if (error)
+                                return "desiredL4ilbSubsettingConfig." + error;
+                        }
+                        if (message.desiredDatapathProvider != null && message.hasOwnProperty("desiredDatapathProvider"))
+                            switch (message.desiredDatapathProvider) {
+                            default:
+                                return "desiredDatapathProvider: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.desiredPrivateIpv6GoogleAccess != null && message.hasOwnProperty("desiredPrivateIpv6GoogleAccess"))
+                            switch (message.desiredPrivateIpv6GoogleAccess) {
+                            default:
+                                return "desiredPrivateIpv6GoogleAccess: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        if (message.desiredNotificationConfig != null && message.hasOwnProperty("desiredNotificationConfig")) {
+                            var error = $root.google.container.v1.NotificationConfig.verify(message.desiredNotificationConfig);
+                            if (error)
+                                return "desiredNotificationConfig." + error;
+                        }
                         if (message.desiredAuthenticatorGroupsConfig != null && message.hasOwnProperty("desiredAuthenticatorGroupsConfig")) {
                             var error = $root.google.container.v1.AuthenticatorGroupsConfig.verify(message.desiredAuthenticatorGroupsConfig);
                             if (error)
                                 return "desiredAuthenticatorGroupsConfig." + error;
                         }
+                        if (message.desiredLoggingConfig != null && message.hasOwnProperty("desiredLoggingConfig")) {
+                            var error = $root.google.container.v1.LoggingConfig.verify(message.desiredLoggingConfig);
+                            if (error)
+                                return "desiredLoggingConfig." + error;
+                        }
+                        if (message.desiredMonitoringConfig != null && message.hasOwnProperty("desiredMonitoringConfig")) {
+                            var error = $root.google.container.v1.MonitoringConfig.verify(message.desiredMonitoringConfig);
+                            if (error)
+                                return "desiredMonitoringConfig." + error;
+                        }
+                        if (message.desiredServiceExternalIpsConfig != null && message.hasOwnProperty("desiredServiceExternalIpsConfig")) {
+                            var error = $root.google.container.v1.ServiceExternalIPsConfig.verify(message.desiredServiceExternalIpsConfig);
+                            if (error)
+                                return "desiredServiceExternalIpsConfig." + error;
+                        }
                         if (message.desiredMasterVersion != null && message.hasOwnProperty("desiredMasterVersion"))
                             if (!$util.isString(message.desiredMasterVersion))
                                 return "desiredMasterVersion: string expected";
+                        if (message.desiredGcfsConfig != null && message.hasOwnProperty("desiredGcfsConfig")) {
+                            var error = $root.google.container.v1.GcfsConfig.verify(message.desiredGcfsConfig);
+                            if (error)
+                                return "desiredGcfsConfig." + error;
+                        }
                         return null;
                     };
     
@@ -9473,10 +11943,20 @@
                                 throw TypeError(".google.container.v1.ClusterUpdate.desiredWorkloadIdentityConfig: object expected");
                             message.desiredWorkloadIdentityConfig = $root.google.container.v1.WorkloadIdentityConfig.fromObject(object.desiredWorkloadIdentityConfig);
                         }
+                        if (object.desiredMeshCertificates != null) {
+                            if (typeof object.desiredMeshCertificates !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredMeshCertificates: object expected");
+                            message.desiredMeshCertificates = $root.google.container.v1.MeshCertificates.fromObject(object.desiredMeshCertificates);
+                        }
                         if (object.desiredShieldedNodes != null) {
                             if (typeof object.desiredShieldedNodes !== "object")
                                 throw TypeError(".google.container.v1.ClusterUpdate.desiredShieldedNodes: object expected");
                             message.desiredShieldedNodes = $root.google.container.v1.ShieldedNodes.fromObject(object.desiredShieldedNodes);
+                        }
+                        if (object.desiredDnsConfig != null) {
+                            if (typeof object.desiredDnsConfig !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredDnsConfig: object expected");
+                            message.desiredDnsConfig = $root.google.container.v1.DNSConfig.fromObject(object.desiredDnsConfig);
                         }
                         if (object.desiredNodePoolAutoscaling != null) {
                             if (typeof object.desiredNodePoolAutoscaling !== "object")
@@ -9537,13 +12017,75 @@
                                 throw TypeError(".google.container.v1.ClusterUpdate.desiredReleaseChannel: object expected");
                             message.desiredReleaseChannel = $root.google.container.v1.ReleaseChannel.fromObject(object.desiredReleaseChannel);
                         }
+                        if (object.desiredL4ilbSubsettingConfig != null) {
+                            if (typeof object.desiredL4ilbSubsettingConfig !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredL4ilbSubsettingConfig: object expected");
+                            message.desiredL4ilbSubsettingConfig = $root.google.container.v1.ILBSubsettingConfig.fromObject(object.desiredL4ilbSubsettingConfig);
+                        }
+                        switch (object.desiredDatapathProvider) {
+                        case "DATAPATH_PROVIDER_UNSPECIFIED":
+                        case 0:
+                            message.desiredDatapathProvider = 0;
+                            break;
+                        case "LEGACY_DATAPATH":
+                        case 1:
+                            message.desiredDatapathProvider = 1;
+                            break;
+                        case "ADVANCED_DATAPATH":
+                        case 2:
+                            message.desiredDatapathProvider = 2;
+                            break;
+                        }
+                        switch (object.desiredPrivateIpv6GoogleAccess) {
+                        case "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED":
+                        case 0:
+                            message.desiredPrivateIpv6GoogleAccess = 0;
+                            break;
+                        case "PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED":
+                        case 1:
+                            message.desiredPrivateIpv6GoogleAccess = 1;
+                            break;
+                        case "PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE":
+                        case 2:
+                            message.desiredPrivateIpv6GoogleAccess = 2;
+                            break;
+                        case "PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL":
+                        case 3:
+                            message.desiredPrivateIpv6GoogleAccess = 3;
+                            break;
+                        }
+                        if (object.desiredNotificationConfig != null) {
+                            if (typeof object.desiredNotificationConfig !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredNotificationConfig: object expected");
+                            message.desiredNotificationConfig = $root.google.container.v1.NotificationConfig.fromObject(object.desiredNotificationConfig);
+                        }
                         if (object.desiredAuthenticatorGroupsConfig != null) {
                             if (typeof object.desiredAuthenticatorGroupsConfig !== "object")
                                 throw TypeError(".google.container.v1.ClusterUpdate.desiredAuthenticatorGroupsConfig: object expected");
                             message.desiredAuthenticatorGroupsConfig = $root.google.container.v1.AuthenticatorGroupsConfig.fromObject(object.desiredAuthenticatorGroupsConfig);
                         }
+                        if (object.desiredLoggingConfig != null) {
+                            if (typeof object.desiredLoggingConfig !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredLoggingConfig: object expected");
+                            message.desiredLoggingConfig = $root.google.container.v1.LoggingConfig.fromObject(object.desiredLoggingConfig);
+                        }
+                        if (object.desiredMonitoringConfig != null) {
+                            if (typeof object.desiredMonitoringConfig !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredMonitoringConfig: object expected");
+                            message.desiredMonitoringConfig = $root.google.container.v1.MonitoringConfig.fromObject(object.desiredMonitoringConfig);
+                        }
+                        if (object.desiredServiceExternalIpsConfig != null) {
+                            if (typeof object.desiredServiceExternalIpsConfig !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredServiceExternalIpsConfig: object expected");
+                            message.desiredServiceExternalIpsConfig = $root.google.container.v1.ServiceExternalIPsConfig.fromObject(object.desiredServiceExternalIpsConfig);
+                        }
                         if (object.desiredMasterVersion != null)
                             message.desiredMasterVersion = String(object.desiredMasterVersion);
+                        if (object.desiredGcfsConfig != null) {
+                            if (typeof object.desiredGcfsConfig !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredGcfsConfig: object expected");
+                            message.desiredGcfsConfig = $root.google.container.v1.GcfsConfig.fromObject(object.desiredGcfsConfig);
+                        }
                         return message;
                     };
     
@@ -9579,11 +12121,21 @@
                             object.desiredIntraNodeVisibilityConfig = null;
                             object.desiredDefaultSnatStatus = null;
                             object.desiredReleaseChannel = null;
+                            object.desiredL4ilbSubsettingConfig = null;
                             object.desiredDatabaseEncryption = null;
                             object.desiredWorkloadIdentityConfig = null;
                             object.desiredShieldedNodes = null;
+                            object.desiredDatapathProvider = options.enums === String ? "DATAPATH_PROVIDER_UNSPECIFIED" : 0;
+                            object.desiredPrivateIpv6GoogleAccess = options.enums === String ? "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED" : 0;
+                            object.desiredDnsConfig = null;
+                            object.desiredNotificationConfig = null;
+                            object.desiredServiceExternalIpsConfig = null;
                             object.desiredAuthenticatorGroupsConfig = null;
+                            object.desiredLoggingConfig = null;
+                            object.desiredMonitoringConfig = null;
+                            object.desiredMeshCertificates = null;
                             object.desiredMasterVersion = "";
+                            object.desiredGcfsConfig = null;
                         }
                         if (message.desiredNodeVersion != null && message.hasOwnProperty("desiredNodeVersion"))
                             object.desiredNodeVersion = message.desiredNodeVersion;
@@ -9622,16 +12174,36 @@
                             object.desiredDefaultSnatStatus = $root.google.container.v1.DefaultSnatStatus.toObject(message.desiredDefaultSnatStatus, options);
                         if (message.desiredReleaseChannel != null && message.hasOwnProperty("desiredReleaseChannel"))
                             object.desiredReleaseChannel = $root.google.container.v1.ReleaseChannel.toObject(message.desiredReleaseChannel, options);
+                        if (message.desiredL4ilbSubsettingConfig != null && message.hasOwnProperty("desiredL4ilbSubsettingConfig"))
+                            object.desiredL4ilbSubsettingConfig = $root.google.container.v1.ILBSubsettingConfig.toObject(message.desiredL4ilbSubsettingConfig, options);
                         if (message.desiredDatabaseEncryption != null && message.hasOwnProperty("desiredDatabaseEncryption"))
                             object.desiredDatabaseEncryption = $root.google.container.v1.DatabaseEncryption.toObject(message.desiredDatabaseEncryption, options);
                         if (message.desiredWorkloadIdentityConfig != null && message.hasOwnProperty("desiredWorkloadIdentityConfig"))
                             object.desiredWorkloadIdentityConfig = $root.google.container.v1.WorkloadIdentityConfig.toObject(message.desiredWorkloadIdentityConfig, options);
                         if (message.desiredShieldedNodes != null && message.hasOwnProperty("desiredShieldedNodes"))
                             object.desiredShieldedNodes = $root.google.container.v1.ShieldedNodes.toObject(message.desiredShieldedNodes, options);
+                        if (message.desiredDatapathProvider != null && message.hasOwnProperty("desiredDatapathProvider"))
+                            object.desiredDatapathProvider = options.enums === String ? $root.google.container.v1.DatapathProvider[message.desiredDatapathProvider] : message.desiredDatapathProvider;
+                        if (message.desiredPrivateIpv6GoogleAccess != null && message.hasOwnProperty("desiredPrivateIpv6GoogleAccess"))
+                            object.desiredPrivateIpv6GoogleAccess = options.enums === String ? $root.google.container.v1.PrivateIPv6GoogleAccess[message.desiredPrivateIpv6GoogleAccess] : message.desiredPrivateIpv6GoogleAccess;
+                        if (message.desiredDnsConfig != null && message.hasOwnProperty("desiredDnsConfig"))
+                            object.desiredDnsConfig = $root.google.container.v1.DNSConfig.toObject(message.desiredDnsConfig, options);
+                        if (message.desiredNotificationConfig != null && message.hasOwnProperty("desiredNotificationConfig"))
+                            object.desiredNotificationConfig = $root.google.container.v1.NotificationConfig.toObject(message.desiredNotificationConfig, options);
+                        if (message.desiredServiceExternalIpsConfig != null && message.hasOwnProperty("desiredServiceExternalIpsConfig"))
+                            object.desiredServiceExternalIpsConfig = $root.google.container.v1.ServiceExternalIPsConfig.toObject(message.desiredServiceExternalIpsConfig, options);
                         if (message.desiredAuthenticatorGroupsConfig != null && message.hasOwnProperty("desiredAuthenticatorGroupsConfig"))
                             object.desiredAuthenticatorGroupsConfig = $root.google.container.v1.AuthenticatorGroupsConfig.toObject(message.desiredAuthenticatorGroupsConfig, options);
+                        if (message.desiredLoggingConfig != null && message.hasOwnProperty("desiredLoggingConfig"))
+                            object.desiredLoggingConfig = $root.google.container.v1.LoggingConfig.toObject(message.desiredLoggingConfig, options);
+                        if (message.desiredMonitoringConfig != null && message.hasOwnProperty("desiredMonitoringConfig"))
+                            object.desiredMonitoringConfig = $root.google.container.v1.MonitoringConfig.toObject(message.desiredMonitoringConfig, options);
+                        if (message.desiredMeshCertificates != null && message.hasOwnProperty("desiredMeshCertificates"))
+                            object.desiredMeshCertificates = $root.google.container.v1.MeshCertificates.toObject(message.desiredMeshCertificates, options);
                         if (message.desiredMasterVersion != null && message.hasOwnProperty("desiredMasterVersion"))
                             object.desiredMasterVersion = message.desiredMasterVersion;
+                        if (message.desiredGcfsConfig != null && message.hasOwnProperty("desiredGcfsConfig"))
+                            object.desiredGcfsConfig = $root.google.container.v1.GcfsConfig.toObject(message.desiredGcfsConfig, options);
                         return object;
                     };
     
@@ -9669,6 +12241,7 @@
                      * @property {google.container.v1.IOperationProgress|null} [progress] Operation progress
                      * @property {Array.<google.container.v1.IStatusCondition>|null} [clusterConditions] Operation clusterConditions
                      * @property {Array.<google.container.v1.IStatusCondition>|null} [nodepoolConditions] Operation nodepoolConditions
+                     * @property {google.rpc.IStatus|null} [error] Operation error
                      */
     
                     /**
@@ -9801,6 +12374,14 @@
                     Operation.prototype.nodepoolConditions = $util.emptyArray;
     
                     /**
+                     * Operation error.
+                     * @member {google.rpc.IStatus|null|undefined} error
+                     * @memberof google.container.v1.Operation
+                     * @instance
+                     */
+                    Operation.prototype.error = null;
+    
+                    /**
                      * Creates a new Operation instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.Operation
@@ -9854,6 +12435,8 @@
                         if (message.nodepoolConditions != null && message.nodepoolConditions.length)
                             for (var i = 0; i < message.nodepoolConditions.length; ++i)
                                 $root.google.container.v1.StatusCondition.encode(message.nodepoolConditions[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                        if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                            $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                         return writer;
                     };
     
@@ -9933,6 +12516,9 @@
                                 if (!(message.nodepoolConditions && message.nodepoolConditions.length))
                                     message.nodepoolConditions = [];
                                 message.nodepoolConditions.push($root.google.container.v1.StatusCondition.decode(reader, reader.uint32()));
+                                break;
+                            case 15:
+                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -10052,6 +12638,11 @@
                                 if (error)
                                     return "nodepoolConditions." + error;
                             }
+                        }
+                        if (message.error != null && message.hasOwnProperty("error")) {
+                            var error = $root.google.rpc.Status.verify(message.error);
+                            if (error)
+                                return "error." + error;
                         }
                         return null;
                     };
@@ -10203,6 +12794,11 @@
                                 message.nodepoolConditions[i] = $root.google.container.v1.StatusCondition.fromObject(object.nodepoolConditions[i]);
                             }
                         }
+                        if (object.error != null) {
+                            if (typeof object.error !== "object")
+                                throw TypeError(".google.container.v1.Operation.error: object expected");
+                            message.error = $root.google.rpc.Status.fromObject(object.error);
+                        }
                         return message;
                     };
     
@@ -10236,6 +12832,7 @@
                             object.startTime = "";
                             object.endTime = "";
                             object.progress = null;
+                            object.error = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -10271,6 +12868,8 @@
                             for (var j = 0; j < message.nodepoolConditions.length; ++j)
                                 object.nodepoolConditions[j] = $root.google.container.v1.StatusCondition.toObject(message.nodepoolConditions[j], options);
                         }
+                        if (message.error != null && message.hasOwnProperty("error"))
+                            object.error = $root.google.rpc.Status.toObject(message.error, options);
                         return object;
                     };
     
@@ -11782,6 +14381,10 @@
                      * @property {Array.<string>|null} [locations] UpdateNodePoolRequest locations
                      * @property {google.container.v1.IWorkloadMetadataConfig|null} [workloadMetadataConfig] UpdateNodePoolRequest workloadMetadataConfig
                      * @property {google.container.v1.NodePool.IUpgradeSettings|null} [upgradeSettings] UpdateNodePoolRequest upgradeSettings
+                     * @property {google.container.v1.ILinuxNodeConfig|null} [linuxNodeConfig] UpdateNodePoolRequest linuxNodeConfig
+                     * @property {google.container.v1.INodeKubeletConfig|null} [kubeletConfig] UpdateNodePoolRequest kubeletConfig
+                     * @property {google.container.v1.IGcfsConfig|null} [gcfsConfig] UpdateNodePoolRequest gcfsConfig
+                     * @property {google.container.v1.IVirtualNIC|null} [gvnic] UpdateNodePoolRequest gvnic
                      */
     
                     /**
@@ -11881,6 +14484,38 @@
                     UpdateNodePoolRequest.prototype.upgradeSettings = null;
     
                     /**
+                     * UpdateNodePoolRequest linuxNodeConfig.
+                     * @member {google.container.v1.ILinuxNodeConfig|null|undefined} linuxNodeConfig
+                     * @memberof google.container.v1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    UpdateNodePoolRequest.prototype.linuxNodeConfig = null;
+    
+                    /**
+                     * UpdateNodePoolRequest kubeletConfig.
+                     * @member {google.container.v1.INodeKubeletConfig|null|undefined} kubeletConfig
+                     * @memberof google.container.v1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    UpdateNodePoolRequest.prototype.kubeletConfig = null;
+    
+                    /**
+                     * UpdateNodePoolRequest gcfsConfig.
+                     * @member {google.container.v1.IGcfsConfig|null|undefined} gcfsConfig
+                     * @memberof google.container.v1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    UpdateNodePoolRequest.prototype.gcfsConfig = null;
+    
+                    /**
+                     * UpdateNodePoolRequest gvnic.
+                     * @member {google.container.v1.IVirtualNIC|null|undefined} gvnic
+                     * @memberof google.container.v1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    UpdateNodePoolRequest.prototype.gvnic = null;
+    
+                    /**
                      * Creates a new UpdateNodePoolRequest instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.UpdateNodePoolRequest
@@ -11925,6 +14560,14 @@
                             $root.google.container.v1.WorkloadMetadataConfig.encode(message.workloadMetadataConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                         if (message.upgradeSettings != null && Object.hasOwnProperty.call(message, "upgradeSettings"))
                             $root.google.container.v1.NodePool.UpgradeSettings.encode(message.upgradeSettings, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                        if (message.linuxNodeConfig != null && Object.hasOwnProperty.call(message, "linuxNodeConfig"))
+                            $root.google.container.v1.LinuxNodeConfig.encode(message.linuxNodeConfig, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                        if (message.kubeletConfig != null && Object.hasOwnProperty.call(message, "kubeletConfig"))
+                            $root.google.container.v1.NodeKubeletConfig.encode(message.kubeletConfig, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                        if (message.gcfsConfig != null && Object.hasOwnProperty.call(message, "gcfsConfig"))
+                            $root.google.container.v1.GcfsConfig.encode(message.gcfsConfig, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                        if (message.gvnic != null && Object.hasOwnProperty.call(message, "gvnic"))
+                            $root.google.container.v1.VirtualNIC.encode(message.gvnic, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
                         return writer;
                     };
     
@@ -11990,6 +14633,18 @@
                                 break;
                             case 15:
                                 message.upgradeSettings = $root.google.container.v1.NodePool.UpgradeSettings.decode(reader, reader.uint32());
+                                break;
+                            case 19:
+                                message.linuxNodeConfig = $root.google.container.v1.LinuxNodeConfig.decode(reader, reader.uint32());
+                                break;
+                            case 20:
+                                message.kubeletConfig = $root.google.container.v1.NodeKubeletConfig.decode(reader, reader.uint32());
+                                break;
+                            case 22:
+                                message.gcfsConfig = $root.google.container.v1.GcfsConfig.decode(reader, reader.uint32());
+                                break;
+                            case 29:
+                                message.gvnic = $root.google.container.v1.VirtualNIC.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -12064,6 +14719,26 @@
                             if (error)
                                 return "upgradeSettings." + error;
                         }
+                        if (message.linuxNodeConfig != null && message.hasOwnProperty("linuxNodeConfig")) {
+                            var error = $root.google.container.v1.LinuxNodeConfig.verify(message.linuxNodeConfig);
+                            if (error)
+                                return "linuxNodeConfig." + error;
+                        }
+                        if (message.kubeletConfig != null && message.hasOwnProperty("kubeletConfig")) {
+                            var error = $root.google.container.v1.NodeKubeletConfig.verify(message.kubeletConfig);
+                            if (error)
+                                return "kubeletConfig." + error;
+                        }
+                        if (message.gcfsConfig != null && message.hasOwnProperty("gcfsConfig")) {
+                            var error = $root.google.container.v1.GcfsConfig.verify(message.gcfsConfig);
+                            if (error)
+                                return "gcfsConfig." + error;
+                        }
+                        if (message.gvnic != null && message.hasOwnProperty("gvnic")) {
+                            var error = $root.google.container.v1.VirtualNIC.verify(message.gvnic);
+                            if (error)
+                                return "gvnic." + error;
+                        }
                         return null;
                     };
     
@@ -12110,6 +14785,26 @@
                                 throw TypeError(".google.container.v1.UpdateNodePoolRequest.upgradeSettings: object expected");
                             message.upgradeSettings = $root.google.container.v1.NodePool.UpgradeSettings.fromObject(object.upgradeSettings);
                         }
+                        if (object.linuxNodeConfig != null) {
+                            if (typeof object.linuxNodeConfig !== "object")
+                                throw TypeError(".google.container.v1.UpdateNodePoolRequest.linuxNodeConfig: object expected");
+                            message.linuxNodeConfig = $root.google.container.v1.LinuxNodeConfig.fromObject(object.linuxNodeConfig);
+                        }
+                        if (object.kubeletConfig != null) {
+                            if (typeof object.kubeletConfig !== "object")
+                                throw TypeError(".google.container.v1.UpdateNodePoolRequest.kubeletConfig: object expected");
+                            message.kubeletConfig = $root.google.container.v1.NodeKubeletConfig.fromObject(object.kubeletConfig);
+                        }
+                        if (object.gcfsConfig != null) {
+                            if (typeof object.gcfsConfig !== "object")
+                                throw TypeError(".google.container.v1.UpdateNodePoolRequest.gcfsConfig: object expected");
+                            message.gcfsConfig = $root.google.container.v1.GcfsConfig.fromObject(object.gcfsConfig);
+                        }
+                        if (object.gvnic != null) {
+                            if (typeof object.gvnic !== "object")
+                                throw TypeError(".google.container.v1.UpdateNodePoolRequest.gvnic: object expected");
+                            message.gvnic = $root.google.container.v1.VirtualNIC.fromObject(object.gvnic);
+                        }
                         return message;
                     };
     
@@ -12138,6 +14833,10 @@
                             object.name = "";
                             object.workloadMetadataConfig = null;
                             object.upgradeSettings = null;
+                            object.linuxNodeConfig = null;
+                            object.kubeletConfig = null;
+                            object.gcfsConfig = null;
+                            object.gvnic = null;
                         }
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
@@ -12162,6 +14861,14 @@
                             object.workloadMetadataConfig = $root.google.container.v1.WorkloadMetadataConfig.toObject(message.workloadMetadataConfig, options);
                         if (message.upgradeSettings != null && message.hasOwnProperty("upgradeSettings"))
                             object.upgradeSettings = $root.google.container.v1.NodePool.UpgradeSettings.toObject(message.upgradeSettings, options);
+                        if (message.linuxNodeConfig != null && message.hasOwnProperty("linuxNodeConfig"))
+                            object.linuxNodeConfig = $root.google.container.v1.LinuxNodeConfig.toObject(message.linuxNodeConfig, options);
+                        if (message.kubeletConfig != null && message.hasOwnProperty("kubeletConfig"))
+                            object.kubeletConfig = $root.google.container.v1.NodeKubeletConfig.toObject(message.kubeletConfig, options);
+                        if (message.gcfsConfig != null && message.hasOwnProperty("gcfsConfig"))
+                            object.gcfsConfig = $root.google.container.v1.GcfsConfig.toObject(message.gcfsConfig, options);
+                        if (message.gvnic != null && message.hasOwnProperty("gvnic"))
+                            object.gvnic = $root.google.container.v1.VirtualNIC.toObject(message.gvnic, options);
                         return object;
                     };
     
@@ -17918,6 +20625,7 @@
                      * @property {google.container.v1.INodeConfig|null} [config] NodePool config
                      * @property {number|null} [initialNodeCount] NodePool initialNodeCount
                      * @property {Array.<string>|null} [locations] NodePool locations
+                     * @property {google.container.v1.INodeNetworkConfig|null} [networkConfig] NodePool networkConfig
                      * @property {string|null} [selfLink] NodePool selfLink
                      * @property {string|null} [version] NodePool version
                      * @property {Array.<string>|null} [instanceGroupUrls] NodePool instanceGroupUrls
@@ -17980,6 +20688,14 @@
                      * @instance
                      */
                     NodePool.prototype.locations = $util.emptyArray;
+    
+                    /**
+                     * NodePool networkConfig.
+                     * @member {google.container.v1.INodeNetworkConfig|null|undefined} networkConfig
+                     * @memberof google.container.v1.NodePool
+                     * @instance
+                     */
+                    NodePool.prototype.networkConfig = null;
     
                     /**
                      * NodePool selfLink.
@@ -18110,6 +20826,8 @@
                         if (message.locations != null && message.locations.length)
                             for (var i = 0; i < message.locations.length; ++i)
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.locations[i]);
+                        if (message.networkConfig != null && Object.hasOwnProperty.call(message, "networkConfig"))
+                            $root.google.container.v1.NodeNetworkConfig.encode(message.networkConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                         if (message.selfLink != null && Object.hasOwnProperty.call(message, "selfLink"))
                             writer.uint32(/* id 100, wireType 2 =*/802).string(message.selfLink);
                         if (message.version != null && Object.hasOwnProperty.call(message, "version"))
@@ -18173,6 +20891,9 @@
                                 if (!(message.locations && message.locations.length))
                                     message.locations = [];
                                 message.locations.push(reader.string());
+                                break;
+                            case 14:
+                                message.networkConfig = $root.google.container.v1.NodeNetworkConfig.decode(reader, reader.uint32());
                                 break;
                             case 100:
                                 message.selfLink = reader.string();
@@ -18263,6 +20984,11 @@
                             for (var i = 0; i < message.locations.length; ++i)
                                 if (!$util.isString(message.locations[i]))
                                     return "locations: string[] expected";
+                        }
+                        if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
+                            var error = $root.google.container.v1.NodeNetworkConfig.verify(message.networkConfig);
+                            if (error)
+                                return "networkConfig." + error;
                         }
                         if (message.selfLink != null && message.hasOwnProperty("selfLink"))
                             if (!$util.isString(message.selfLink))
@@ -18355,6 +21081,11 @@
                             message.locations = [];
                             for (var i = 0; i < object.locations.length; ++i)
                                 message.locations[i] = String(object.locations[i]);
+                        }
+                        if (object.networkConfig != null) {
+                            if (typeof object.networkConfig !== "object")
+                                throw TypeError(".google.container.v1.NodePool.networkConfig: object expected");
+                            message.networkConfig = $root.google.container.v1.NodeNetworkConfig.fromObject(object.networkConfig);
                         }
                         if (object.selfLink != null)
                             message.selfLink = String(object.selfLink);
@@ -18460,6 +21191,7 @@
                             object.management = null;
                             object.maxPodsConstraint = null;
                             object.podIpv4CidrSize = 0;
+                            object.networkConfig = null;
                             object.selfLink = "";
                             object.version = "";
                             object.status = options.enums === String ? "STATUS_UNSPECIFIED" : 0;
@@ -18485,6 +21217,8 @@
                             for (var j = 0; j < message.locations.length; ++j)
                                 object.locations[j] = message.locations[j];
                         }
+                        if (message.networkConfig != null && message.hasOwnProperty("networkConfig"))
+                            object.networkConfig = $root.google.container.v1.NodeNetworkConfig.toObject(message.networkConfig, options);
                         if (message.selfLink != null && message.hasOwnProperty("selfLink"))
                             object.selfLink = message.selfLink;
                         if (message.version != null && message.hasOwnProperty("version"))
@@ -19734,6 +22468,7 @@
                      * Properties of a TimeWindow.
                      * @memberof google.container.v1
                      * @interface ITimeWindow
+                     * @property {google.container.v1.IMaintenanceExclusionOptions|null} [maintenanceExclusionOptions] TimeWindow maintenanceExclusionOptions
                      * @property {google.protobuf.ITimestamp|null} [startTime] TimeWindow startTime
                      * @property {google.protobuf.ITimestamp|null} [endTime] TimeWindow endTime
                      */
@@ -19754,6 +22489,14 @@
                     }
     
                     /**
+                     * TimeWindow maintenanceExclusionOptions.
+                     * @member {google.container.v1.IMaintenanceExclusionOptions|null|undefined} maintenanceExclusionOptions
+                     * @memberof google.container.v1.TimeWindow
+                     * @instance
+                     */
+                    TimeWindow.prototype.maintenanceExclusionOptions = null;
+    
+                    /**
                      * TimeWindow startTime.
                      * @member {google.protobuf.ITimestamp|null|undefined} startTime
                      * @memberof google.container.v1.TimeWindow
@@ -19768,6 +22511,20 @@
                      * @instance
                      */
                     TimeWindow.prototype.endTime = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * TimeWindow options.
+                     * @member {"maintenanceExclusionOptions"|undefined} options
+                     * @memberof google.container.v1.TimeWindow
+                     * @instance
+                     */
+                    Object.defineProperty(TimeWindow.prototype, "options", {
+                        get: $util.oneOfGetter($oneOfFields = ["maintenanceExclusionOptions"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
     
                     /**
                      * Creates a new TimeWindow instance using the specified properties.
@@ -19797,6 +22554,8 @@
                             $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                         if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
                             $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.maintenanceExclusionOptions != null && Object.hasOwnProperty.call(message, "maintenanceExclusionOptions"))
+                            $root.google.container.v1.MaintenanceExclusionOptions.encode(message.maintenanceExclusionOptions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         return writer;
                     };
     
@@ -19831,6 +22590,9 @@
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
+                            case 3:
+                                message.maintenanceExclusionOptions = $root.google.container.v1.MaintenanceExclusionOptions.decode(reader, reader.uint32());
+                                break;
                             case 1:
                                 message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                 break;
@@ -19872,6 +22634,15 @@
                     TimeWindow.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        var properties = {};
+                        if (message.maintenanceExclusionOptions != null && message.hasOwnProperty("maintenanceExclusionOptions")) {
+                            properties.options = 1;
+                            {
+                                var error = $root.google.container.v1.MaintenanceExclusionOptions.verify(message.maintenanceExclusionOptions);
+                                if (error)
+                                    return "maintenanceExclusionOptions." + error;
+                            }
+                        }
                         if (message.startTime != null && message.hasOwnProperty("startTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.startTime);
                             if (error)
@@ -19897,6 +22668,11 @@
                         if (object instanceof $root.google.container.v1.TimeWindow)
                             return object;
                         var message = new $root.google.container.v1.TimeWindow();
+                        if (object.maintenanceExclusionOptions != null) {
+                            if (typeof object.maintenanceExclusionOptions !== "object")
+                                throw TypeError(".google.container.v1.TimeWindow.maintenanceExclusionOptions: object expected");
+                            message.maintenanceExclusionOptions = $root.google.container.v1.MaintenanceExclusionOptions.fromObject(object.maintenanceExclusionOptions);
+                        }
                         if (object.startTime != null) {
                             if (typeof object.startTime !== "object")
                                 throw TypeError(".google.container.v1.TimeWindow.startTime: object expected");
@@ -19931,6 +22707,11 @@
                             object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                         if (message.endTime != null && message.hasOwnProperty("endTime"))
                             object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                        if (message.maintenanceExclusionOptions != null && message.hasOwnProperty("maintenanceExclusionOptions")) {
+                            object.maintenanceExclusionOptions = $root.google.container.v1.MaintenanceExclusionOptions.toObject(message.maintenanceExclusionOptions, options);
+                            if (options.oneofs)
+                                object.options = "maintenanceExclusionOptions";
+                        }
                         return object;
                     };
     
@@ -19946,6 +22727,227 @@
                     };
     
                     return TimeWindow;
+                })();
+    
+                v1.MaintenanceExclusionOptions = (function() {
+    
+                    /**
+                     * Properties of a MaintenanceExclusionOptions.
+                     * @memberof google.container.v1
+                     * @interface IMaintenanceExclusionOptions
+                     * @property {google.container.v1.MaintenanceExclusionOptions.Scope|null} [scope] MaintenanceExclusionOptions scope
+                     */
+    
+                    /**
+                     * Constructs a new MaintenanceExclusionOptions.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a MaintenanceExclusionOptions.
+                     * @implements IMaintenanceExclusionOptions
+                     * @constructor
+                     * @param {google.container.v1.IMaintenanceExclusionOptions=} [properties] Properties to set
+                     */
+                    function MaintenanceExclusionOptions(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MaintenanceExclusionOptions scope.
+                     * @member {google.container.v1.MaintenanceExclusionOptions.Scope} scope
+                     * @memberof google.container.v1.MaintenanceExclusionOptions
+                     * @instance
+                     */
+                    MaintenanceExclusionOptions.prototype.scope = 0;
+    
+                    /**
+                     * Creates a new MaintenanceExclusionOptions instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.MaintenanceExclusionOptions
+                     * @static
+                     * @param {google.container.v1.IMaintenanceExclusionOptions=} [properties] Properties to set
+                     * @returns {google.container.v1.MaintenanceExclusionOptions} MaintenanceExclusionOptions instance
+                     */
+                    MaintenanceExclusionOptions.create = function create(properties) {
+                        return new MaintenanceExclusionOptions(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MaintenanceExclusionOptions message. Does not implicitly {@link google.container.v1.MaintenanceExclusionOptions.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.MaintenanceExclusionOptions
+                     * @static
+                     * @param {google.container.v1.IMaintenanceExclusionOptions} message MaintenanceExclusionOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MaintenanceExclusionOptions.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.scope);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MaintenanceExclusionOptions message, length delimited. Does not implicitly {@link google.container.v1.MaintenanceExclusionOptions.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.MaintenanceExclusionOptions
+                     * @static
+                     * @param {google.container.v1.IMaintenanceExclusionOptions} message MaintenanceExclusionOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MaintenanceExclusionOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MaintenanceExclusionOptions message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.MaintenanceExclusionOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.MaintenanceExclusionOptions} MaintenanceExclusionOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MaintenanceExclusionOptions.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.MaintenanceExclusionOptions();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.scope = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MaintenanceExclusionOptions message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.MaintenanceExclusionOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.MaintenanceExclusionOptions} MaintenanceExclusionOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MaintenanceExclusionOptions.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MaintenanceExclusionOptions message.
+                     * @function verify
+                     * @memberof google.container.v1.MaintenanceExclusionOptions
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MaintenanceExclusionOptions.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.scope != null && message.hasOwnProperty("scope"))
+                            switch (message.scope) {
+                            default:
+                                return "scope: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MaintenanceExclusionOptions message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.MaintenanceExclusionOptions
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.MaintenanceExclusionOptions} MaintenanceExclusionOptions
+                     */
+                    MaintenanceExclusionOptions.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.MaintenanceExclusionOptions)
+                            return object;
+                        var message = new $root.google.container.v1.MaintenanceExclusionOptions();
+                        switch (object.scope) {
+                        case "NO_UPGRADES":
+                        case 0:
+                            message.scope = 0;
+                            break;
+                        case "NO_MINOR_UPGRADES":
+                        case 1:
+                            message.scope = 1;
+                            break;
+                        case "NO_MINOR_OR_NODE_UPGRADES":
+                        case 2:
+                            message.scope = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MaintenanceExclusionOptions message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.MaintenanceExclusionOptions
+                     * @static
+                     * @param {google.container.v1.MaintenanceExclusionOptions} message MaintenanceExclusionOptions
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MaintenanceExclusionOptions.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.scope = options.enums === String ? "NO_UPGRADES" : 0;
+                        if (message.scope != null && message.hasOwnProperty("scope"))
+                            object.scope = options.enums === String ? $root.google.container.v1.MaintenanceExclusionOptions.Scope[message.scope] : message.scope;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MaintenanceExclusionOptions to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.MaintenanceExclusionOptions
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MaintenanceExclusionOptions.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Scope enum.
+                     * @name google.container.v1.MaintenanceExclusionOptions.Scope
+                     * @enum {number}
+                     * @property {number} NO_UPGRADES=0 NO_UPGRADES value
+                     * @property {number} NO_MINOR_UPGRADES=1 NO_MINOR_UPGRADES value
+                     * @property {number} NO_MINOR_OR_NODE_UPGRADES=2 NO_MINOR_OR_NODE_UPGRADES value
+                     */
+                    MaintenanceExclusionOptions.Scope = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NO_UPGRADES"] = 0;
+                        values[valuesById[1] = "NO_MINOR_UPGRADES"] = 1;
+                        values[valuesById[2] = "NO_MINOR_OR_NODE_UPGRADES"] = 2;
+                        return values;
+                    })();
+    
+                    return MaintenanceExclusionOptions;
                 })();
     
                 v1.RecurringTimeWindow = (function() {
@@ -21466,6 +24468,7 @@
                      * @interface IClusterAutoscaling
                      * @property {boolean|null} [enableNodeAutoprovisioning] ClusterAutoscaling enableNodeAutoprovisioning
                      * @property {Array.<google.container.v1.IResourceLimit>|null} [resourceLimits] ClusterAutoscaling resourceLimits
+                     * @property {google.container.v1.ClusterAutoscaling.AutoscalingProfile|null} [autoscalingProfile] ClusterAutoscaling autoscalingProfile
                      * @property {google.container.v1.IAutoprovisioningNodePoolDefaults|null} [autoprovisioningNodePoolDefaults] ClusterAutoscaling autoprovisioningNodePoolDefaults
                      * @property {Array.<string>|null} [autoprovisioningLocations] ClusterAutoscaling autoprovisioningLocations
                      */
@@ -21502,6 +24505,14 @@
                      * @instance
                      */
                     ClusterAutoscaling.prototype.resourceLimits = $util.emptyArray;
+    
+                    /**
+                     * ClusterAutoscaling autoscalingProfile.
+                     * @member {google.container.v1.ClusterAutoscaling.AutoscalingProfile} autoscalingProfile
+                     * @memberof google.container.v1.ClusterAutoscaling
+                     * @instance
+                     */
+                    ClusterAutoscaling.prototype.autoscalingProfile = 0;
     
                     /**
                      * ClusterAutoscaling autoprovisioningNodePoolDefaults.
@@ -21548,6 +24559,8 @@
                         if (message.resourceLimits != null && message.resourceLimits.length)
                             for (var i = 0; i < message.resourceLimits.length; ++i)
                                 $root.google.container.v1.ResourceLimit.encode(message.resourceLimits[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.autoscalingProfile != null && Object.hasOwnProperty.call(message, "autoscalingProfile"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.autoscalingProfile);
                         if (message.autoprovisioningNodePoolDefaults != null && Object.hasOwnProperty.call(message, "autoprovisioningNodePoolDefaults"))
                             $root.google.container.v1.AutoprovisioningNodePoolDefaults.encode(message.autoprovisioningNodePoolDefaults, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                         if (message.autoprovisioningLocations != null && message.autoprovisioningLocations.length)
@@ -21594,6 +24607,9 @@
                                 if (!(message.resourceLimits && message.resourceLimits.length))
                                     message.resourceLimits = [];
                                 message.resourceLimits.push($root.google.container.v1.ResourceLimit.decode(reader, reader.uint32()));
+                                break;
+                            case 3:
+                                message.autoscalingProfile = reader.int32();
                                 break;
                             case 4:
                                 message.autoprovisioningNodePoolDefaults = $root.google.container.v1.AutoprovisioningNodePoolDefaults.decode(reader, reader.uint32());
@@ -21650,6 +24666,15 @@
                                     return "resourceLimits." + error;
                             }
                         }
+                        if (message.autoscalingProfile != null && message.hasOwnProperty("autoscalingProfile"))
+                            switch (message.autoscalingProfile) {
+                            default:
+                                return "autoscalingProfile: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         if (message.autoprovisioningNodePoolDefaults != null && message.hasOwnProperty("autoprovisioningNodePoolDefaults")) {
                             var error = $root.google.container.v1.AutoprovisioningNodePoolDefaults.verify(message.autoprovisioningNodePoolDefaults);
                             if (error)
@@ -21689,6 +24714,20 @@
                                 message.resourceLimits[i] = $root.google.container.v1.ResourceLimit.fromObject(object.resourceLimits[i]);
                             }
                         }
+                        switch (object.autoscalingProfile) {
+                        case "PROFILE_UNSPECIFIED":
+                        case 0:
+                            message.autoscalingProfile = 0;
+                            break;
+                        case "OPTIMIZE_UTILIZATION":
+                        case 1:
+                            message.autoscalingProfile = 1;
+                            break;
+                        case "BALANCED":
+                        case 2:
+                            message.autoscalingProfile = 2;
+                            break;
+                        }
                         if (object.autoprovisioningNodePoolDefaults != null) {
                             if (typeof object.autoprovisioningNodePoolDefaults !== "object")
                                 throw TypeError(".google.container.v1.ClusterAutoscaling.autoprovisioningNodePoolDefaults: object expected");
@@ -21723,6 +24762,7 @@
                         }
                         if (options.defaults) {
                             object.enableNodeAutoprovisioning = false;
+                            object.autoscalingProfile = options.enums === String ? "PROFILE_UNSPECIFIED" : 0;
                             object.autoprovisioningNodePoolDefaults = null;
                         }
                         if (message.enableNodeAutoprovisioning != null && message.hasOwnProperty("enableNodeAutoprovisioning"))
@@ -21732,6 +24772,8 @@
                             for (var j = 0; j < message.resourceLimits.length; ++j)
                                 object.resourceLimits[j] = $root.google.container.v1.ResourceLimit.toObject(message.resourceLimits[j], options);
                         }
+                        if (message.autoscalingProfile != null && message.hasOwnProperty("autoscalingProfile"))
+                            object.autoscalingProfile = options.enums === String ? $root.google.container.v1.ClusterAutoscaling.AutoscalingProfile[message.autoscalingProfile] : message.autoscalingProfile;
                         if (message.autoprovisioningNodePoolDefaults != null && message.hasOwnProperty("autoprovisioningNodePoolDefaults"))
                             object.autoprovisioningNodePoolDefaults = $root.google.container.v1.AutoprovisioningNodePoolDefaults.toObject(message.autoprovisioningNodePoolDefaults, options);
                         if (message.autoprovisioningLocations && message.autoprovisioningLocations.length) {
@@ -21752,6 +24794,22 @@
                     ClusterAutoscaling.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
+    
+                    /**
+                     * AutoscalingProfile enum.
+                     * @name google.container.v1.ClusterAutoscaling.AutoscalingProfile
+                     * @enum {number}
+                     * @property {number} PROFILE_UNSPECIFIED=0 PROFILE_UNSPECIFIED value
+                     * @property {number} OPTIMIZE_UTILIZATION=1 OPTIMIZE_UTILIZATION value
+                     * @property {number} BALANCED=2 BALANCED value
+                     */
+                    ClusterAutoscaling.AutoscalingProfile = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "PROFILE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "OPTIMIZE_UTILIZATION"] = 1;
+                        values[valuesById[2] = "BALANCED"] = 2;
+                        return values;
+                    })();
     
                     return ClusterAutoscaling;
                 })();
@@ -23836,6 +26894,7 @@
                      * @interface IAcceleratorConfig
                      * @property {number|Long|null} [acceleratorCount] AcceleratorConfig acceleratorCount
                      * @property {string|null} [acceleratorType] AcceleratorConfig acceleratorType
+                     * @property {string|null} [gpuPartitionSize] AcceleratorConfig gpuPartitionSize
                      */
     
                     /**
@@ -23870,6 +26929,14 @@
                     AcceleratorConfig.prototype.acceleratorType = "";
     
                     /**
+                     * AcceleratorConfig gpuPartitionSize.
+                     * @member {string} gpuPartitionSize
+                     * @memberof google.container.v1.AcceleratorConfig
+                     * @instance
+                     */
+                    AcceleratorConfig.prototype.gpuPartitionSize = "";
+    
+                    /**
                      * Creates a new AcceleratorConfig instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.AcceleratorConfig
@@ -23897,6 +26964,8 @@
                             writer.uint32(/* id 1, wireType 0 =*/8).int64(message.acceleratorCount);
                         if (message.acceleratorType != null && Object.hasOwnProperty.call(message, "acceleratorType"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.acceleratorType);
+                        if (message.gpuPartitionSize != null && Object.hasOwnProperty.call(message, "gpuPartitionSize"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.gpuPartitionSize);
                         return writer;
                     };
     
@@ -23936,6 +27005,9 @@
                                 break;
                             case 2:
                                 message.acceleratorType = reader.string();
+                                break;
+                            case 3:
+                                message.gpuPartitionSize = reader.string();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -23978,6 +27050,9 @@
                         if (message.acceleratorType != null && message.hasOwnProperty("acceleratorType"))
                             if (!$util.isString(message.acceleratorType))
                                 return "acceleratorType: string expected";
+                        if (message.gpuPartitionSize != null && message.hasOwnProperty("gpuPartitionSize"))
+                            if (!$util.isString(message.gpuPartitionSize))
+                                return "gpuPartitionSize: string expected";
                         return null;
                     };
     
@@ -24004,6 +27079,8 @@
                                 message.acceleratorCount = new $util.LongBits(object.acceleratorCount.low >>> 0, object.acceleratorCount.high >>> 0).toNumber();
                         if (object.acceleratorType != null)
                             message.acceleratorType = String(object.acceleratorType);
+                        if (object.gpuPartitionSize != null)
+                            message.gpuPartitionSize = String(object.gpuPartitionSize);
                         return message;
                     };
     
@@ -24027,6 +27104,7 @@
                             } else
                                 object.acceleratorCount = options.longs === String ? "0" : 0;
                             object.acceleratorType = "";
+                            object.gpuPartitionSize = "";
                         }
                         if (message.acceleratorCount != null && message.hasOwnProperty("acceleratorCount"))
                             if (typeof message.acceleratorCount === "number")
@@ -24035,6 +27113,8 @@
                                 object.acceleratorCount = options.longs === String ? $util.Long.prototype.toString.call(message.acceleratorCount) : options.longs === Number ? new $util.LongBits(message.acceleratorCount.low >>> 0, message.acceleratorCount.high >>> 0).toNumber() : message.acceleratorCount;
                         if (message.acceleratorType != null && message.hasOwnProperty("acceleratorType"))
                             object.acceleratorType = message.acceleratorType;
+                        if (message.gpuPartitionSize != null && message.hasOwnProperty("gpuPartitionSize"))
+                            object.gpuPartitionSize = message.gpuPartitionSize;
                         return object;
                     };
     
@@ -24843,6 +27923,7 @@
                      * @interface IStatusCondition
                      * @property {google.container.v1.StatusCondition.Code|null} [code] StatusCondition code
                      * @property {string|null} [message] StatusCondition message
+                     * @property {google.rpc.Code|null} [canonicalCode] StatusCondition canonicalCode
                      */
     
                     /**
@@ -24877,6 +27958,14 @@
                     StatusCondition.prototype.message = "";
     
                     /**
+                     * StatusCondition canonicalCode.
+                     * @member {google.rpc.Code} canonicalCode
+                     * @memberof google.container.v1.StatusCondition
+                     * @instance
+                     */
+                    StatusCondition.prototype.canonicalCode = 0;
+    
+                    /**
                      * Creates a new StatusCondition instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.StatusCondition
@@ -24904,6 +27993,8 @@
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
                         if (message.message != null && Object.hasOwnProperty.call(message, "message"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                        if (message.canonicalCode != null && Object.hasOwnProperty.call(message, "canonicalCode"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.canonicalCode);
                         return writer;
                     };
     
@@ -24943,6 +28034,9 @@
                                 break;
                             case 2:
                                 message.message = reader.string();
+                                break;
+                            case 3:
+                                message.canonicalCode = reader.int32();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -24989,11 +28083,35 @@
                             case 3:
                             case 4:
                             case 7:
+                            case 9:
                                 break;
                             }
                         if (message.message != null && message.hasOwnProperty("message"))
                             if (!$util.isString(message.message))
                                 return "message: string expected";
+                        if (message.canonicalCode != null && message.hasOwnProperty("canonicalCode"))
+                            switch (message.canonicalCode) {
+                            default:
+                                return "canonicalCode: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                            case 7:
+                            case 16:
+                            case 8:
+                            case 9:
+                            case 10:
+                            case 11:
+                            case 12:
+                            case 13:
+                            case 14:
+                            case 15:
+                                break;
+                            }
                         return null;
                     };
     
@@ -25034,9 +28152,83 @@
                         case 7:
                             message.code = 7;
                             break;
+                        case "CA_EXPIRING":
+                        case 9:
+                            message.code = 9;
+                            break;
                         }
                         if (object.message != null)
                             message.message = String(object.message);
+                        switch (object.canonicalCode) {
+                        case "OK":
+                        case 0:
+                            message.canonicalCode = 0;
+                            break;
+                        case "CANCELLED":
+                        case 1:
+                            message.canonicalCode = 1;
+                            break;
+                        case "UNKNOWN":
+                        case 2:
+                            message.canonicalCode = 2;
+                            break;
+                        case "INVALID_ARGUMENT":
+                        case 3:
+                            message.canonicalCode = 3;
+                            break;
+                        case "DEADLINE_EXCEEDED":
+                        case 4:
+                            message.canonicalCode = 4;
+                            break;
+                        case "NOT_FOUND":
+                        case 5:
+                            message.canonicalCode = 5;
+                            break;
+                        case "ALREADY_EXISTS":
+                        case 6:
+                            message.canonicalCode = 6;
+                            break;
+                        case "PERMISSION_DENIED":
+                        case 7:
+                            message.canonicalCode = 7;
+                            break;
+                        case "UNAUTHENTICATED":
+                        case 16:
+                            message.canonicalCode = 16;
+                            break;
+                        case "RESOURCE_EXHAUSTED":
+                        case 8:
+                            message.canonicalCode = 8;
+                            break;
+                        case "FAILED_PRECONDITION":
+                        case 9:
+                            message.canonicalCode = 9;
+                            break;
+                        case "ABORTED":
+                        case 10:
+                            message.canonicalCode = 10;
+                            break;
+                        case "OUT_OF_RANGE":
+                        case 11:
+                            message.canonicalCode = 11;
+                            break;
+                        case "UNIMPLEMENTED":
+                        case 12:
+                            message.canonicalCode = 12;
+                            break;
+                        case "INTERNAL":
+                        case 13:
+                            message.canonicalCode = 13;
+                            break;
+                        case "UNAVAILABLE":
+                        case 14:
+                            message.canonicalCode = 14;
+                            break;
+                        case "DATA_LOSS":
+                        case 15:
+                            message.canonicalCode = 15;
+                            break;
+                        }
                         return message;
                     };
     
@@ -25056,11 +28248,14 @@
                         if (options.defaults) {
                             object.code = options.enums === String ? "UNKNOWN" : 0;
                             object.message = "";
+                            object.canonicalCode = options.enums === String ? "OK" : 0;
                         }
                         if (message.code != null && message.hasOwnProperty("code"))
                             object.code = options.enums === String ? $root.google.container.v1.StatusCondition.Code[message.code] : message.code;
                         if (message.message != null && message.hasOwnProperty("message"))
                             object.message = message.message;
+                        if (message.canonicalCode != null && message.hasOwnProperty("canonicalCode"))
+                            object.canonicalCode = options.enums === String ? $root.google.rpc.Code[message.canonicalCode] : message.canonicalCode;
                         return object;
                     };
     
@@ -25085,6 +28280,7 @@
                      * @property {number} GCE_QUOTA_EXCEEDED=3 GCE_QUOTA_EXCEEDED value
                      * @property {number} SET_BY_OPERATOR=4 SET_BY_OPERATOR value
                      * @property {number} CLOUD_KMS_KEY_ERROR=7 CLOUD_KMS_KEY_ERROR value
+                     * @property {number} CA_EXPIRING=9 CA_EXPIRING value
                      */
                     StatusCondition.Code = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -25094,6 +28290,7 @@
                         values[valuesById[3] = "GCE_QUOTA_EXCEEDED"] = 3;
                         values[valuesById[4] = "SET_BY_OPERATOR"] = 4;
                         values[valuesById[7] = "CLOUD_KMS_KEY_ERROR"] = 7;
+                        values[valuesById[9] = "CA_EXPIRING"] = 9;
                         return values;
                     })();
     
@@ -25110,6 +28307,11 @@
                      * @property {string|null} [subnetwork] NetworkConfig subnetwork
                      * @property {boolean|null} [enableIntraNodeVisibility] NetworkConfig enableIntraNodeVisibility
                      * @property {google.container.v1.IDefaultSnatStatus|null} [defaultSnatStatus] NetworkConfig defaultSnatStatus
+                     * @property {boolean|null} [enableL4ilbSubsetting] NetworkConfig enableL4ilbSubsetting
+                     * @property {google.container.v1.DatapathProvider|null} [datapathProvider] NetworkConfig datapathProvider
+                     * @property {google.container.v1.PrivateIPv6GoogleAccess|null} [privateIpv6GoogleAccess] NetworkConfig privateIpv6GoogleAccess
+                     * @property {google.container.v1.IDNSConfig|null} [dnsConfig] NetworkConfig dnsConfig
+                     * @property {google.container.v1.IServiceExternalIPsConfig|null} [serviceExternalIpsConfig] NetworkConfig serviceExternalIpsConfig
                      */
     
                     /**
@@ -25160,6 +28362,46 @@
                     NetworkConfig.prototype.defaultSnatStatus = null;
     
                     /**
+                     * NetworkConfig enableL4ilbSubsetting.
+                     * @member {boolean} enableL4ilbSubsetting
+                     * @memberof google.container.v1.NetworkConfig
+                     * @instance
+                     */
+                    NetworkConfig.prototype.enableL4ilbSubsetting = false;
+    
+                    /**
+                     * NetworkConfig datapathProvider.
+                     * @member {google.container.v1.DatapathProvider} datapathProvider
+                     * @memberof google.container.v1.NetworkConfig
+                     * @instance
+                     */
+                    NetworkConfig.prototype.datapathProvider = 0;
+    
+                    /**
+                     * NetworkConfig privateIpv6GoogleAccess.
+                     * @member {google.container.v1.PrivateIPv6GoogleAccess} privateIpv6GoogleAccess
+                     * @memberof google.container.v1.NetworkConfig
+                     * @instance
+                     */
+                    NetworkConfig.prototype.privateIpv6GoogleAccess = 0;
+    
+                    /**
+                     * NetworkConfig dnsConfig.
+                     * @member {google.container.v1.IDNSConfig|null|undefined} dnsConfig
+                     * @memberof google.container.v1.NetworkConfig
+                     * @instance
+                     */
+                    NetworkConfig.prototype.dnsConfig = null;
+    
+                    /**
+                     * NetworkConfig serviceExternalIpsConfig.
+                     * @member {google.container.v1.IServiceExternalIPsConfig|null|undefined} serviceExternalIpsConfig
+                     * @memberof google.container.v1.NetworkConfig
+                     * @instance
+                     */
+                    NetworkConfig.prototype.serviceExternalIpsConfig = null;
+    
+                    /**
                      * Creates a new NetworkConfig instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.NetworkConfig
@@ -25191,6 +28433,16 @@
                             writer.uint32(/* id 5, wireType 0 =*/40).bool(message.enableIntraNodeVisibility);
                         if (message.defaultSnatStatus != null && Object.hasOwnProperty.call(message, "defaultSnatStatus"))
                             $root.google.container.v1.DefaultSnatStatus.encode(message.defaultSnatStatus, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.enableL4ilbSubsetting != null && Object.hasOwnProperty.call(message, "enableL4ilbSubsetting"))
+                            writer.uint32(/* id 10, wireType 0 =*/80).bool(message.enableL4ilbSubsetting);
+                        if (message.datapathProvider != null && Object.hasOwnProperty.call(message, "datapathProvider"))
+                            writer.uint32(/* id 11, wireType 0 =*/88).int32(message.datapathProvider);
+                        if (message.privateIpv6GoogleAccess != null && Object.hasOwnProperty.call(message, "privateIpv6GoogleAccess"))
+                            writer.uint32(/* id 12, wireType 0 =*/96).int32(message.privateIpv6GoogleAccess);
+                        if (message.dnsConfig != null && Object.hasOwnProperty.call(message, "dnsConfig"))
+                            $root.google.container.v1.DNSConfig.encode(message.dnsConfig, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                        if (message.serviceExternalIpsConfig != null && Object.hasOwnProperty.call(message, "serviceExternalIpsConfig"))
+                            $root.google.container.v1.ServiceExternalIPsConfig.encode(message.serviceExternalIpsConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                         return writer;
                     };
     
@@ -25236,6 +28488,21 @@
                                 break;
                             case 7:
                                 message.defaultSnatStatus = $root.google.container.v1.DefaultSnatStatus.decode(reader, reader.uint32());
+                                break;
+                            case 10:
+                                message.enableL4ilbSubsetting = reader.bool();
+                                break;
+                            case 11:
+                                message.datapathProvider = reader.int32();
+                                break;
+                            case 12:
+                                message.privateIpv6GoogleAccess = reader.int32();
+                                break;
+                            case 13:
+                                message.dnsConfig = $root.google.container.v1.DNSConfig.decode(reader, reader.uint32());
+                                break;
+                            case 15:
+                                message.serviceExternalIpsConfig = $root.google.container.v1.ServiceExternalIPsConfig.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -25286,6 +28553,38 @@
                             if (error)
                                 return "defaultSnatStatus." + error;
                         }
+                        if (message.enableL4ilbSubsetting != null && message.hasOwnProperty("enableL4ilbSubsetting"))
+                            if (typeof message.enableL4ilbSubsetting !== "boolean")
+                                return "enableL4ilbSubsetting: boolean expected";
+                        if (message.datapathProvider != null && message.hasOwnProperty("datapathProvider"))
+                            switch (message.datapathProvider) {
+                            default:
+                                return "datapathProvider: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.privateIpv6GoogleAccess != null && message.hasOwnProperty("privateIpv6GoogleAccess"))
+                            switch (message.privateIpv6GoogleAccess) {
+                            default:
+                                return "privateIpv6GoogleAccess: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        if (message.dnsConfig != null && message.hasOwnProperty("dnsConfig")) {
+                            var error = $root.google.container.v1.DNSConfig.verify(message.dnsConfig);
+                            if (error)
+                                return "dnsConfig." + error;
+                        }
+                        if (message.serviceExternalIpsConfig != null && message.hasOwnProperty("serviceExternalIpsConfig")) {
+                            var error = $root.google.container.v1.ServiceExternalIPsConfig.verify(message.serviceExternalIpsConfig);
+                            if (error)
+                                return "serviceExternalIpsConfig." + error;
+                        }
                         return null;
                     };
     
@@ -25312,6 +28611,50 @@
                                 throw TypeError(".google.container.v1.NetworkConfig.defaultSnatStatus: object expected");
                             message.defaultSnatStatus = $root.google.container.v1.DefaultSnatStatus.fromObject(object.defaultSnatStatus);
                         }
+                        if (object.enableL4ilbSubsetting != null)
+                            message.enableL4ilbSubsetting = Boolean(object.enableL4ilbSubsetting);
+                        switch (object.datapathProvider) {
+                        case "DATAPATH_PROVIDER_UNSPECIFIED":
+                        case 0:
+                            message.datapathProvider = 0;
+                            break;
+                        case "LEGACY_DATAPATH":
+                        case 1:
+                            message.datapathProvider = 1;
+                            break;
+                        case "ADVANCED_DATAPATH":
+                        case 2:
+                            message.datapathProvider = 2;
+                            break;
+                        }
+                        switch (object.privateIpv6GoogleAccess) {
+                        case "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED":
+                        case 0:
+                            message.privateIpv6GoogleAccess = 0;
+                            break;
+                        case "PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED":
+                        case 1:
+                            message.privateIpv6GoogleAccess = 1;
+                            break;
+                        case "PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE":
+                        case 2:
+                            message.privateIpv6GoogleAccess = 2;
+                            break;
+                        case "PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL":
+                        case 3:
+                            message.privateIpv6GoogleAccess = 3;
+                            break;
+                        }
+                        if (object.dnsConfig != null) {
+                            if (typeof object.dnsConfig !== "object")
+                                throw TypeError(".google.container.v1.NetworkConfig.dnsConfig: object expected");
+                            message.dnsConfig = $root.google.container.v1.DNSConfig.fromObject(object.dnsConfig);
+                        }
+                        if (object.serviceExternalIpsConfig != null) {
+                            if (typeof object.serviceExternalIpsConfig !== "object")
+                                throw TypeError(".google.container.v1.NetworkConfig.serviceExternalIpsConfig: object expected");
+                            message.serviceExternalIpsConfig = $root.google.container.v1.ServiceExternalIPsConfig.fromObject(object.serviceExternalIpsConfig);
+                        }
                         return message;
                     };
     
@@ -25333,6 +28676,11 @@
                             object.subnetwork = "";
                             object.enableIntraNodeVisibility = false;
                             object.defaultSnatStatus = null;
+                            object.enableL4ilbSubsetting = false;
+                            object.datapathProvider = options.enums === String ? "DATAPATH_PROVIDER_UNSPECIFIED" : 0;
+                            object.privateIpv6GoogleAccess = options.enums === String ? "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED" : 0;
+                            object.dnsConfig = null;
+                            object.serviceExternalIpsConfig = null;
                         }
                         if (message.network != null && message.hasOwnProperty("network"))
                             object.network = message.network;
@@ -25342,6 +28690,16 @@
                             object.enableIntraNodeVisibility = message.enableIntraNodeVisibility;
                         if (message.defaultSnatStatus != null && message.hasOwnProperty("defaultSnatStatus"))
                             object.defaultSnatStatus = $root.google.container.v1.DefaultSnatStatus.toObject(message.defaultSnatStatus, options);
+                        if (message.enableL4ilbSubsetting != null && message.hasOwnProperty("enableL4ilbSubsetting"))
+                            object.enableL4ilbSubsetting = message.enableL4ilbSubsetting;
+                        if (message.datapathProvider != null && message.hasOwnProperty("datapathProvider"))
+                            object.datapathProvider = options.enums === String ? $root.google.container.v1.DatapathProvider[message.datapathProvider] : message.datapathProvider;
+                        if (message.privateIpv6GoogleAccess != null && message.hasOwnProperty("privateIpv6GoogleAccess"))
+                            object.privateIpv6GoogleAccess = options.enums === String ? $root.google.container.v1.PrivateIPv6GoogleAccess[message.privateIpv6GoogleAccess] : message.privateIpv6GoogleAccess;
+                        if (message.dnsConfig != null && message.hasOwnProperty("dnsConfig"))
+                            object.dnsConfig = $root.google.container.v1.DNSConfig.toObject(message.dnsConfig, options);
+                        if (message.serviceExternalIpsConfig != null && message.hasOwnProperty("serviceExternalIpsConfig"))
+                            object.serviceExternalIpsConfig = $root.google.container.v1.ServiceExternalIPsConfig.toObject(message.serviceExternalIpsConfig, options);
                         return object;
                     };
     
@@ -25359,24 +28717,24 @@
                     return NetworkConfig;
                 })();
     
-                v1.GetOpenIDConfigRequest = (function() {
+                v1.ServiceExternalIPsConfig = (function() {
     
                     /**
-                     * Properties of a GetOpenIDConfigRequest.
+                     * Properties of a ServiceExternalIPsConfig.
                      * @memberof google.container.v1
-                     * @interface IGetOpenIDConfigRequest
-                     * @property {string|null} [parent] GetOpenIDConfigRequest parent
+                     * @interface IServiceExternalIPsConfig
+                     * @property {boolean|null} [enabled] ServiceExternalIPsConfig enabled
                      */
     
                     /**
-                     * Constructs a new GetOpenIDConfigRequest.
+                     * Constructs a new ServiceExternalIPsConfig.
                      * @memberof google.container.v1
-                     * @classdesc Represents a GetOpenIDConfigRequest.
-                     * @implements IGetOpenIDConfigRequest
+                     * @classdesc Represents a ServiceExternalIPsConfig.
+                     * @implements IServiceExternalIPsConfig
                      * @constructor
-                     * @param {google.container.v1.IGetOpenIDConfigRequest=} [properties] Properties to set
+                     * @param {google.container.v1.IServiceExternalIPsConfig=} [properties] Properties to set
                      */
-                    function GetOpenIDConfigRequest(properties) {
+                    function ServiceExternalIPsConfig(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -25384,75 +28742,75 @@
                     }
     
                     /**
-                     * GetOpenIDConfigRequest parent.
-                     * @member {string} parent
-                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * ServiceExternalIPsConfig enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1.ServiceExternalIPsConfig
                      * @instance
                      */
-                    GetOpenIDConfigRequest.prototype.parent = "";
+                    ServiceExternalIPsConfig.prototype.enabled = false;
     
                     /**
-                     * Creates a new GetOpenIDConfigRequest instance using the specified properties.
+                     * Creates a new ServiceExternalIPsConfig instance using the specified properties.
                      * @function create
-                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @memberof google.container.v1.ServiceExternalIPsConfig
                      * @static
-                     * @param {google.container.v1.IGetOpenIDConfigRequest=} [properties] Properties to set
-                     * @returns {google.container.v1.GetOpenIDConfigRequest} GetOpenIDConfigRequest instance
+                     * @param {google.container.v1.IServiceExternalIPsConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.ServiceExternalIPsConfig} ServiceExternalIPsConfig instance
                      */
-                    GetOpenIDConfigRequest.create = function create(properties) {
-                        return new GetOpenIDConfigRequest(properties);
+                    ServiceExternalIPsConfig.create = function create(properties) {
+                        return new ServiceExternalIPsConfig(properties);
                     };
     
                     /**
-                     * Encodes the specified GetOpenIDConfigRequest message. Does not implicitly {@link google.container.v1.GetOpenIDConfigRequest.verify|verify} messages.
+                     * Encodes the specified ServiceExternalIPsConfig message. Does not implicitly {@link google.container.v1.ServiceExternalIPsConfig.verify|verify} messages.
                      * @function encode
-                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @memberof google.container.v1.ServiceExternalIPsConfig
                      * @static
-                     * @param {google.container.v1.IGetOpenIDConfigRequest} message GetOpenIDConfigRequest message or plain object to encode
+                     * @param {google.container.v1.IServiceExternalIPsConfig} message ServiceExternalIPsConfig message or plain object to encode
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    GetOpenIDConfigRequest.encode = function encode(message, writer) {
+                    ServiceExternalIPsConfig.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
                         return writer;
                     };
     
                     /**
-                     * Encodes the specified GetOpenIDConfigRequest message, length delimited. Does not implicitly {@link google.container.v1.GetOpenIDConfigRequest.verify|verify} messages.
+                     * Encodes the specified ServiceExternalIPsConfig message, length delimited. Does not implicitly {@link google.container.v1.ServiceExternalIPsConfig.verify|verify} messages.
                      * @function encodeDelimited
-                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @memberof google.container.v1.ServiceExternalIPsConfig
                      * @static
-                     * @param {google.container.v1.IGetOpenIDConfigRequest} message GetOpenIDConfigRequest message or plain object to encode
+                     * @param {google.container.v1.IServiceExternalIPsConfig} message ServiceExternalIPsConfig message or plain object to encode
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    GetOpenIDConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    ServiceExternalIPsConfig.encodeDelimited = function encodeDelimited(message, writer) {
                         return this.encode(message, writer).ldelim();
                     };
     
                     /**
-                     * Decodes a GetOpenIDConfigRequest message from the specified reader or buffer.
+                     * Decodes a ServiceExternalIPsConfig message from the specified reader or buffer.
                      * @function decode
-                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @memberof google.container.v1.ServiceExternalIPsConfig
                      * @static
                      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                      * @param {number} [length] Message length if known beforehand
-                     * @returns {google.container.v1.GetOpenIDConfigRequest} GetOpenIDConfigRequest
+                     * @returns {google.container.v1.ServiceExternalIPsConfig} ServiceExternalIPsConfig
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetOpenIDConfigRequest.decode = function decode(reader, length) {
+                    ServiceExternalIPsConfig.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.GetOpenIDConfigRequest();
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.ServiceExternalIPsConfig();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1:
-                                message.parent = reader.string();
+                                message.enabled = reader.bool();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -25463,489 +28821,87 @@
                     };
     
                     /**
-                     * Decodes a GetOpenIDConfigRequest message from the specified reader or buffer, length delimited.
+                     * Decodes a ServiceExternalIPsConfig message from the specified reader or buffer, length delimited.
                      * @function decodeDelimited
-                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @memberof google.container.v1.ServiceExternalIPsConfig
                      * @static
                      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.container.v1.GetOpenIDConfigRequest} GetOpenIDConfigRequest
+                     * @returns {google.container.v1.ServiceExternalIPsConfig} ServiceExternalIPsConfig
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetOpenIDConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                    ServiceExternalIPsConfig.decodeDelimited = function decodeDelimited(reader) {
                         if (!(reader instanceof $Reader))
                             reader = new $Reader(reader);
                         return this.decode(reader, reader.uint32());
                     };
     
                     /**
-                     * Verifies a GetOpenIDConfigRequest message.
+                     * Verifies a ServiceExternalIPsConfig message.
                      * @function verify
-                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @memberof google.container.v1.ServiceExternalIPsConfig
                      * @static
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    GetOpenIDConfigRequest.verify = function verify(message) {
+                    ServiceExternalIPsConfig.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
-                        if (message.parent != null && message.hasOwnProperty("parent"))
-                            if (!$util.isString(message.parent))
-                                return "parent: string expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
                         return null;
                     };
     
                     /**
-                     * Creates a GetOpenIDConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates a ServiceExternalIPsConfig message from a plain object. Also converts values to their respective internal types.
                      * @function fromObject
-                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @memberof google.container.v1.ServiceExternalIPsConfig
                      * @static
                      * @param {Object.<string,*>} object Plain object
-                     * @returns {google.container.v1.GetOpenIDConfigRequest} GetOpenIDConfigRequest
+                     * @returns {google.container.v1.ServiceExternalIPsConfig} ServiceExternalIPsConfig
                      */
-                    GetOpenIDConfigRequest.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.container.v1.GetOpenIDConfigRequest)
+                    ServiceExternalIPsConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.ServiceExternalIPsConfig)
                             return object;
-                        var message = new $root.google.container.v1.GetOpenIDConfigRequest();
-                        if (object.parent != null)
-                            message.parent = String(object.parent);
+                        var message = new $root.google.container.v1.ServiceExternalIPsConfig();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
                         return message;
                     };
     
                     /**
-                     * Creates a plain object from a GetOpenIDConfigRequest message. Also converts values to other types if specified.
+                     * Creates a plain object from a ServiceExternalIPsConfig message. Also converts values to other types if specified.
                      * @function toObject
-                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @memberof google.container.v1.ServiceExternalIPsConfig
                      * @static
-                     * @param {google.container.v1.GetOpenIDConfigRequest} message GetOpenIDConfigRequest
+                     * @param {google.container.v1.ServiceExternalIPsConfig} message ServiceExternalIPsConfig
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    GetOpenIDConfigRequest.toObject = function toObject(message, options) {
+                    ServiceExternalIPsConfig.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
                         var object = {};
                         if (options.defaults)
-                            object.parent = "";
-                        if (message.parent != null && message.hasOwnProperty("parent"))
-                            object.parent = message.parent;
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
                         return object;
                     };
     
                     /**
-                     * Converts this GetOpenIDConfigRequest to JSON.
+                     * Converts this ServiceExternalIPsConfig to JSON.
                      * @function toJSON
-                     * @memberof google.container.v1.GetOpenIDConfigRequest
+                     * @memberof google.container.v1.ServiceExternalIPsConfig
                      * @instance
                      * @returns {Object.<string,*>} JSON object
                      */
-                    GetOpenIDConfigRequest.prototype.toJSON = function toJSON() {
+                    ServiceExternalIPsConfig.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
-                    return GetOpenIDConfigRequest;
-                })();
-    
-                v1.GetOpenIDConfigResponse = (function() {
-    
-                    /**
-                     * Properties of a GetOpenIDConfigResponse.
-                     * @memberof google.container.v1
-                     * @interface IGetOpenIDConfigResponse
-                     * @property {string|null} [issuer] GetOpenIDConfigResponse issuer
-                     * @property {string|null} [jwksUri] GetOpenIDConfigResponse jwksUri
-                     * @property {Array.<string>|null} [responseTypesSupported] GetOpenIDConfigResponse responseTypesSupported
-                     * @property {Array.<string>|null} [subjectTypesSupported] GetOpenIDConfigResponse subjectTypesSupported
-                     * @property {Array.<string>|null} [idTokenSigningAlgValuesSupported] GetOpenIDConfigResponse idTokenSigningAlgValuesSupported
-                     * @property {Array.<string>|null} [claimsSupported] GetOpenIDConfigResponse claimsSupported
-                     * @property {Array.<string>|null} [grantTypes] GetOpenIDConfigResponse grantTypes
-                     */
-    
-                    /**
-                     * Constructs a new GetOpenIDConfigResponse.
-                     * @memberof google.container.v1
-                     * @classdesc Represents a GetOpenIDConfigResponse.
-                     * @implements IGetOpenIDConfigResponse
-                     * @constructor
-                     * @param {google.container.v1.IGetOpenIDConfigResponse=} [properties] Properties to set
-                     */
-                    function GetOpenIDConfigResponse(properties) {
-                        this.responseTypesSupported = [];
-                        this.subjectTypesSupported = [];
-                        this.idTokenSigningAlgValuesSupported = [];
-                        this.claimsSupported = [];
-                        this.grantTypes = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * GetOpenIDConfigResponse issuer.
-                     * @member {string} issuer
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @instance
-                     */
-                    GetOpenIDConfigResponse.prototype.issuer = "";
-    
-                    /**
-                     * GetOpenIDConfigResponse jwksUri.
-                     * @member {string} jwksUri
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @instance
-                     */
-                    GetOpenIDConfigResponse.prototype.jwksUri = "";
-    
-                    /**
-                     * GetOpenIDConfigResponse responseTypesSupported.
-                     * @member {Array.<string>} responseTypesSupported
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @instance
-                     */
-                    GetOpenIDConfigResponse.prototype.responseTypesSupported = $util.emptyArray;
-    
-                    /**
-                     * GetOpenIDConfigResponse subjectTypesSupported.
-                     * @member {Array.<string>} subjectTypesSupported
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @instance
-                     */
-                    GetOpenIDConfigResponse.prototype.subjectTypesSupported = $util.emptyArray;
-    
-                    /**
-                     * GetOpenIDConfigResponse idTokenSigningAlgValuesSupported.
-                     * @member {Array.<string>} idTokenSigningAlgValuesSupported
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @instance
-                     */
-                    GetOpenIDConfigResponse.prototype.idTokenSigningAlgValuesSupported = $util.emptyArray;
-    
-                    /**
-                     * GetOpenIDConfigResponse claimsSupported.
-                     * @member {Array.<string>} claimsSupported
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @instance
-                     */
-                    GetOpenIDConfigResponse.prototype.claimsSupported = $util.emptyArray;
-    
-                    /**
-                     * GetOpenIDConfigResponse grantTypes.
-                     * @member {Array.<string>} grantTypes
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @instance
-                     */
-                    GetOpenIDConfigResponse.prototype.grantTypes = $util.emptyArray;
-    
-                    /**
-                     * Creates a new GetOpenIDConfigResponse instance using the specified properties.
-                     * @function create
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @static
-                     * @param {google.container.v1.IGetOpenIDConfigResponse=} [properties] Properties to set
-                     * @returns {google.container.v1.GetOpenIDConfigResponse} GetOpenIDConfigResponse instance
-                     */
-                    GetOpenIDConfigResponse.create = function create(properties) {
-                        return new GetOpenIDConfigResponse(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified GetOpenIDConfigResponse message. Does not implicitly {@link google.container.v1.GetOpenIDConfigResponse.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @static
-                     * @param {google.container.v1.IGetOpenIDConfigResponse} message GetOpenIDConfigResponse message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GetOpenIDConfigResponse.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.issuer != null && Object.hasOwnProperty.call(message, "issuer"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.issuer);
-                        if (message.jwksUri != null && Object.hasOwnProperty.call(message, "jwksUri"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.jwksUri);
-                        if (message.responseTypesSupported != null && message.responseTypesSupported.length)
-                            for (var i = 0; i < message.responseTypesSupported.length; ++i)
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.responseTypesSupported[i]);
-                        if (message.subjectTypesSupported != null && message.subjectTypesSupported.length)
-                            for (var i = 0; i < message.subjectTypesSupported.length; ++i)
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.subjectTypesSupported[i]);
-                        if (message.idTokenSigningAlgValuesSupported != null && message.idTokenSigningAlgValuesSupported.length)
-                            for (var i = 0; i < message.idTokenSigningAlgValuesSupported.length; ++i)
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.idTokenSigningAlgValuesSupported[i]);
-                        if (message.claimsSupported != null && message.claimsSupported.length)
-                            for (var i = 0; i < message.claimsSupported.length; ++i)
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.claimsSupported[i]);
-                        if (message.grantTypes != null && message.grantTypes.length)
-                            for (var i = 0; i < message.grantTypes.length; ++i)
-                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.grantTypes[i]);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified GetOpenIDConfigResponse message, length delimited. Does not implicitly {@link google.container.v1.GetOpenIDConfigResponse.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @static
-                     * @param {google.container.v1.IGetOpenIDConfigResponse} message GetOpenIDConfigResponse message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GetOpenIDConfigResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a GetOpenIDConfigResponse message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.container.v1.GetOpenIDConfigResponse} GetOpenIDConfigResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GetOpenIDConfigResponse.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.GetOpenIDConfigResponse();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.issuer = reader.string();
-                                break;
-                            case 2:
-                                message.jwksUri = reader.string();
-                                break;
-                            case 3:
-                                if (!(message.responseTypesSupported && message.responseTypesSupported.length))
-                                    message.responseTypesSupported = [];
-                                message.responseTypesSupported.push(reader.string());
-                                break;
-                            case 4:
-                                if (!(message.subjectTypesSupported && message.subjectTypesSupported.length))
-                                    message.subjectTypesSupported = [];
-                                message.subjectTypesSupported.push(reader.string());
-                                break;
-                            case 5:
-                                if (!(message.idTokenSigningAlgValuesSupported && message.idTokenSigningAlgValuesSupported.length))
-                                    message.idTokenSigningAlgValuesSupported = [];
-                                message.idTokenSigningAlgValuesSupported.push(reader.string());
-                                break;
-                            case 6:
-                                if (!(message.claimsSupported && message.claimsSupported.length))
-                                    message.claimsSupported = [];
-                                message.claimsSupported.push(reader.string());
-                                break;
-                            case 7:
-                                if (!(message.grantTypes && message.grantTypes.length))
-                                    message.grantTypes = [];
-                                message.grantTypes.push(reader.string());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a GetOpenIDConfigResponse message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.container.v1.GetOpenIDConfigResponse} GetOpenIDConfigResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GetOpenIDConfigResponse.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a GetOpenIDConfigResponse message.
-                     * @function verify
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    GetOpenIDConfigResponse.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.issuer != null && message.hasOwnProperty("issuer"))
-                            if (!$util.isString(message.issuer))
-                                return "issuer: string expected";
-                        if (message.jwksUri != null && message.hasOwnProperty("jwksUri"))
-                            if (!$util.isString(message.jwksUri))
-                                return "jwksUri: string expected";
-                        if (message.responseTypesSupported != null && message.hasOwnProperty("responseTypesSupported")) {
-                            if (!Array.isArray(message.responseTypesSupported))
-                                return "responseTypesSupported: array expected";
-                            for (var i = 0; i < message.responseTypesSupported.length; ++i)
-                                if (!$util.isString(message.responseTypesSupported[i]))
-                                    return "responseTypesSupported: string[] expected";
-                        }
-                        if (message.subjectTypesSupported != null && message.hasOwnProperty("subjectTypesSupported")) {
-                            if (!Array.isArray(message.subjectTypesSupported))
-                                return "subjectTypesSupported: array expected";
-                            for (var i = 0; i < message.subjectTypesSupported.length; ++i)
-                                if (!$util.isString(message.subjectTypesSupported[i]))
-                                    return "subjectTypesSupported: string[] expected";
-                        }
-                        if (message.idTokenSigningAlgValuesSupported != null && message.hasOwnProperty("idTokenSigningAlgValuesSupported")) {
-                            if (!Array.isArray(message.idTokenSigningAlgValuesSupported))
-                                return "idTokenSigningAlgValuesSupported: array expected";
-                            for (var i = 0; i < message.idTokenSigningAlgValuesSupported.length; ++i)
-                                if (!$util.isString(message.idTokenSigningAlgValuesSupported[i]))
-                                    return "idTokenSigningAlgValuesSupported: string[] expected";
-                        }
-                        if (message.claimsSupported != null && message.hasOwnProperty("claimsSupported")) {
-                            if (!Array.isArray(message.claimsSupported))
-                                return "claimsSupported: array expected";
-                            for (var i = 0; i < message.claimsSupported.length; ++i)
-                                if (!$util.isString(message.claimsSupported[i]))
-                                    return "claimsSupported: string[] expected";
-                        }
-                        if (message.grantTypes != null && message.hasOwnProperty("grantTypes")) {
-                            if (!Array.isArray(message.grantTypes))
-                                return "grantTypes: array expected";
-                            for (var i = 0; i < message.grantTypes.length; ++i)
-                                if (!$util.isString(message.grantTypes[i]))
-                                    return "grantTypes: string[] expected";
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a GetOpenIDConfigResponse message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.container.v1.GetOpenIDConfigResponse} GetOpenIDConfigResponse
-                     */
-                    GetOpenIDConfigResponse.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.container.v1.GetOpenIDConfigResponse)
-                            return object;
-                        var message = new $root.google.container.v1.GetOpenIDConfigResponse();
-                        if (object.issuer != null)
-                            message.issuer = String(object.issuer);
-                        if (object.jwksUri != null)
-                            message.jwksUri = String(object.jwksUri);
-                        if (object.responseTypesSupported) {
-                            if (!Array.isArray(object.responseTypesSupported))
-                                throw TypeError(".google.container.v1.GetOpenIDConfigResponse.responseTypesSupported: array expected");
-                            message.responseTypesSupported = [];
-                            for (var i = 0; i < object.responseTypesSupported.length; ++i)
-                                message.responseTypesSupported[i] = String(object.responseTypesSupported[i]);
-                        }
-                        if (object.subjectTypesSupported) {
-                            if (!Array.isArray(object.subjectTypesSupported))
-                                throw TypeError(".google.container.v1.GetOpenIDConfigResponse.subjectTypesSupported: array expected");
-                            message.subjectTypesSupported = [];
-                            for (var i = 0; i < object.subjectTypesSupported.length; ++i)
-                                message.subjectTypesSupported[i] = String(object.subjectTypesSupported[i]);
-                        }
-                        if (object.idTokenSigningAlgValuesSupported) {
-                            if (!Array.isArray(object.idTokenSigningAlgValuesSupported))
-                                throw TypeError(".google.container.v1.GetOpenIDConfigResponse.idTokenSigningAlgValuesSupported: array expected");
-                            message.idTokenSigningAlgValuesSupported = [];
-                            for (var i = 0; i < object.idTokenSigningAlgValuesSupported.length; ++i)
-                                message.idTokenSigningAlgValuesSupported[i] = String(object.idTokenSigningAlgValuesSupported[i]);
-                        }
-                        if (object.claimsSupported) {
-                            if (!Array.isArray(object.claimsSupported))
-                                throw TypeError(".google.container.v1.GetOpenIDConfigResponse.claimsSupported: array expected");
-                            message.claimsSupported = [];
-                            for (var i = 0; i < object.claimsSupported.length; ++i)
-                                message.claimsSupported[i] = String(object.claimsSupported[i]);
-                        }
-                        if (object.grantTypes) {
-                            if (!Array.isArray(object.grantTypes))
-                                throw TypeError(".google.container.v1.GetOpenIDConfigResponse.grantTypes: array expected");
-                            message.grantTypes = [];
-                            for (var i = 0; i < object.grantTypes.length; ++i)
-                                message.grantTypes[i] = String(object.grantTypes[i]);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a GetOpenIDConfigResponse message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @static
-                     * @param {google.container.v1.GetOpenIDConfigResponse} message GetOpenIDConfigResponse
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    GetOpenIDConfigResponse.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults) {
-                            object.responseTypesSupported = [];
-                            object.subjectTypesSupported = [];
-                            object.idTokenSigningAlgValuesSupported = [];
-                            object.claimsSupported = [];
-                            object.grantTypes = [];
-                        }
-                        if (options.defaults) {
-                            object.issuer = "";
-                            object.jwksUri = "";
-                        }
-                        if (message.issuer != null && message.hasOwnProperty("issuer"))
-                            object.issuer = message.issuer;
-                        if (message.jwksUri != null && message.hasOwnProperty("jwksUri"))
-                            object.jwksUri = message.jwksUri;
-                        if (message.responseTypesSupported && message.responseTypesSupported.length) {
-                            object.responseTypesSupported = [];
-                            for (var j = 0; j < message.responseTypesSupported.length; ++j)
-                                object.responseTypesSupported[j] = message.responseTypesSupported[j];
-                        }
-                        if (message.subjectTypesSupported && message.subjectTypesSupported.length) {
-                            object.subjectTypesSupported = [];
-                            for (var j = 0; j < message.subjectTypesSupported.length; ++j)
-                                object.subjectTypesSupported[j] = message.subjectTypesSupported[j];
-                        }
-                        if (message.idTokenSigningAlgValuesSupported && message.idTokenSigningAlgValuesSupported.length) {
-                            object.idTokenSigningAlgValuesSupported = [];
-                            for (var j = 0; j < message.idTokenSigningAlgValuesSupported.length; ++j)
-                                object.idTokenSigningAlgValuesSupported[j] = message.idTokenSigningAlgValuesSupported[j];
-                        }
-                        if (message.claimsSupported && message.claimsSupported.length) {
-                            object.claimsSupported = [];
-                            for (var j = 0; j < message.claimsSupported.length; ++j)
-                                object.claimsSupported[j] = message.claimsSupported[j];
-                        }
-                        if (message.grantTypes && message.grantTypes.length) {
-                            object.grantTypes = [];
-                            for (var j = 0; j < message.grantTypes.length; ++j)
-                                object.grantTypes[j] = message.grantTypes[j];
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this GetOpenIDConfigResponse to JSON.
-                     * @function toJSON
-                     * @memberof google.container.v1.GetOpenIDConfigResponse
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    GetOpenIDConfigResponse.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return GetOpenIDConfigResponse;
+                    return ServiceExternalIPsConfig;
                 })();
     
                 v1.GetJSONWebKeysRequest = (function() {
@@ -27122,6 +30078,486 @@
                     return IntraNodeVisibilityConfig;
                 })();
     
+                v1.ILBSubsettingConfig = (function() {
+    
+                    /**
+                     * Properties of a ILBSubsettingConfig.
+                     * @memberof google.container.v1
+                     * @interface IILBSubsettingConfig
+                     * @property {boolean|null} [enabled] ILBSubsettingConfig enabled
+                     */
+    
+                    /**
+                     * Constructs a new ILBSubsettingConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a ILBSubsettingConfig.
+                     * @implements IILBSubsettingConfig
+                     * @constructor
+                     * @param {google.container.v1.IILBSubsettingConfig=} [properties] Properties to set
+                     */
+                    function ILBSubsettingConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ILBSubsettingConfig enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1.ILBSubsettingConfig
+                     * @instance
+                     */
+                    ILBSubsettingConfig.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new ILBSubsettingConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.ILBSubsettingConfig
+                     * @static
+                     * @param {google.container.v1.IILBSubsettingConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.ILBSubsettingConfig} ILBSubsettingConfig instance
+                     */
+                    ILBSubsettingConfig.create = function create(properties) {
+                        return new ILBSubsettingConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ILBSubsettingConfig message. Does not implicitly {@link google.container.v1.ILBSubsettingConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.ILBSubsettingConfig
+                     * @static
+                     * @param {google.container.v1.IILBSubsettingConfig} message ILBSubsettingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ILBSubsettingConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ILBSubsettingConfig message, length delimited. Does not implicitly {@link google.container.v1.ILBSubsettingConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.ILBSubsettingConfig
+                     * @static
+                     * @param {google.container.v1.IILBSubsettingConfig} message ILBSubsettingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ILBSubsettingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ILBSubsettingConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.ILBSubsettingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.ILBSubsettingConfig} ILBSubsettingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ILBSubsettingConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.ILBSubsettingConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.enabled = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ILBSubsettingConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.ILBSubsettingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.ILBSubsettingConfig} ILBSubsettingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ILBSubsettingConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ILBSubsettingConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.ILBSubsettingConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ILBSubsettingConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ILBSubsettingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.ILBSubsettingConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.ILBSubsettingConfig} ILBSubsettingConfig
+                     */
+                    ILBSubsettingConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.ILBSubsettingConfig)
+                            return object;
+                        var message = new $root.google.container.v1.ILBSubsettingConfig();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ILBSubsettingConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.ILBSubsettingConfig
+                     * @static
+                     * @param {google.container.v1.ILBSubsettingConfig} message ILBSubsettingConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ILBSubsettingConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ILBSubsettingConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.ILBSubsettingConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ILBSubsettingConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ILBSubsettingConfig;
+                })();
+    
+                v1.DNSConfig = (function() {
+    
+                    /**
+                     * Properties of a DNSConfig.
+                     * @memberof google.container.v1
+                     * @interface IDNSConfig
+                     * @property {google.container.v1.DNSConfig.Provider|null} [clusterDns] DNSConfig clusterDns
+                     * @property {google.container.v1.DNSConfig.DNSScope|null} [clusterDnsScope] DNSConfig clusterDnsScope
+                     * @property {string|null} [clusterDnsDomain] DNSConfig clusterDnsDomain
+                     */
+    
+                    /**
+                     * Constructs a new DNSConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a DNSConfig.
+                     * @implements IDNSConfig
+                     * @constructor
+                     * @param {google.container.v1.IDNSConfig=} [properties] Properties to set
+                     */
+                    function DNSConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DNSConfig clusterDns.
+                     * @member {google.container.v1.DNSConfig.Provider} clusterDns
+                     * @memberof google.container.v1.DNSConfig
+                     * @instance
+                     */
+                    DNSConfig.prototype.clusterDns = 0;
+    
+                    /**
+                     * DNSConfig clusterDnsScope.
+                     * @member {google.container.v1.DNSConfig.DNSScope} clusterDnsScope
+                     * @memberof google.container.v1.DNSConfig
+                     * @instance
+                     */
+                    DNSConfig.prototype.clusterDnsScope = 0;
+    
+                    /**
+                     * DNSConfig clusterDnsDomain.
+                     * @member {string} clusterDnsDomain
+                     * @memberof google.container.v1.DNSConfig
+                     * @instance
+                     */
+                    DNSConfig.prototype.clusterDnsDomain = "";
+    
+                    /**
+                     * Creates a new DNSConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.DNSConfig
+                     * @static
+                     * @param {google.container.v1.IDNSConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.DNSConfig} DNSConfig instance
+                     */
+                    DNSConfig.create = function create(properties) {
+                        return new DNSConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DNSConfig message. Does not implicitly {@link google.container.v1.DNSConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.DNSConfig
+                     * @static
+                     * @param {google.container.v1.IDNSConfig} message DNSConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DNSConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.clusterDns != null && Object.hasOwnProperty.call(message, "clusterDns"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.clusterDns);
+                        if (message.clusterDnsScope != null && Object.hasOwnProperty.call(message, "clusterDnsScope"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.clusterDnsScope);
+                        if (message.clusterDnsDomain != null && Object.hasOwnProperty.call(message, "clusterDnsDomain"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.clusterDnsDomain);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DNSConfig message, length delimited. Does not implicitly {@link google.container.v1.DNSConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.DNSConfig
+                     * @static
+                     * @param {google.container.v1.IDNSConfig} message DNSConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DNSConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DNSConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.DNSConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.DNSConfig} DNSConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DNSConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.DNSConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.clusterDns = reader.int32();
+                                break;
+                            case 2:
+                                message.clusterDnsScope = reader.int32();
+                                break;
+                            case 3:
+                                message.clusterDnsDomain = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DNSConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.DNSConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.DNSConfig} DNSConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DNSConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DNSConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.DNSConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DNSConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.clusterDns != null && message.hasOwnProperty("clusterDns"))
+                            switch (message.clusterDns) {
+                            default:
+                                return "clusterDns: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.clusterDnsScope != null && message.hasOwnProperty("clusterDnsScope"))
+                            switch (message.clusterDnsScope) {
+                            default:
+                                return "clusterDnsScope: enum value expected";
+                            case 0:
+                            case 2:
+                                break;
+                            }
+                        if (message.clusterDnsDomain != null && message.hasOwnProperty("clusterDnsDomain"))
+                            if (!$util.isString(message.clusterDnsDomain))
+                                return "clusterDnsDomain: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DNSConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.DNSConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.DNSConfig} DNSConfig
+                     */
+                    DNSConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.DNSConfig)
+                            return object;
+                        var message = new $root.google.container.v1.DNSConfig();
+                        switch (object.clusterDns) {
+                        case "PROVIDER_UNSPECIFIED":
+                        case 0:
+                            message.clusterDns = 0;
+                            break;
+                        case "PLATFORM_DEFAULT":
+                        case 1:
+                            message.clusterDns = 1;
+                            break;
+                        case "CLOUD_DNS":
+                        case 2:
+                            message.clusterDns = 2;
+                            break;
+                        }
+                        switch (object.clusterDnsScope) {
+                        case "DNS_SCOPE_UNSPECIFIED":
+                        case 0:
+                            message.clusterDnsScope = 0;
+                            break;
+                        case "VPC_SCOPE":
+                        case 2:
+                            message.clusterDnsScope = 2;
+                            break;
+                        }
+                        if (object.clusterDnsDomain != null)
+                            message.clusterDnsDomain = String(object.clusterDnsDomain);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DNSConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.DNSConfig
+                     * @static
+                     * @param {google.container.v1.DNSConfig} message DNSConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DNSConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.clusterDns = options.enums === String ? "PROVIDER_UNSPECIFIED" : 0;
+                            object.clusterDnsScope = options.enums === String ? "DNS_SCOPE_UNSPECIFIED" : 0;
+                            object.clusterDnsDomain = "";
+                        }
+                        if (message.clusterDns != null && message.hasOwnProperty("clusterDns"))
+                            object.clusterDns = options.enums === String ? $root.google.container.v1.DNSConfig.Provider[message.clusterDns] : message.clusterDns;
+                        if (message.clusterDnsScope != null && message.hasOwnProperty("clusterDnsScope"))
+                            object.clusterDnsScope = options.enums === String ? $root.google.container.v1.DNSConfig.DNSScope[message.clusterDnsScope] : message.clusterDnsScope;
+                        if (message.clusterDnsDomain != null && message.hasOwnProperty("clusterDnsDomain"))
+                            object.clusterDnsDomain = message.clusterDnsDomain;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DNSConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.DNSConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DNSConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Provider enum.
+                     * @name google.container.v1.DNSConfig.Provider
+                     * @enum {number}
+                     * @property {number} PROVIDER_UNSPECIFIED=0 PROVIDER_UNSPECIFIED value
+                     * @property {number} PLATFORM_DEFAULT=1 PLATFORM_DEFAULT value
+                     * @property {number} CLOUD_DNS=2 CLOUD_DNS value
+                     */
+                    DNSConfig.Provider = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "PROVIDER_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "PLATFORM_DEFAULT"] = 1;
+                        values[valuesById[2] = "CLOUD_DNS"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * DNSScope enum.
+                     * @name google.container.v1.DNSConfig.DNSScope
+                     * @enum {number}
+                     * @property {number} DNS_SCOPE_UNSPECIFIED=0 DNS_SCOPE_UNSPECIFIED value
+                     * @property {number} VPC_SCOPE=2 VPC_SCOPE value
+                     */
+                    DNSConfig.DNSScope = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DNS_SCOPE_UNSPECIFIED"] = 0;
+                        values[valuesById[2] = "VPC_SCOPE"] = 2;
+                        return values;
+                    })();
+    
+                    return DNSConfig;
+                })();
+    
                 v1.MaxPodsConstraint = (function() {
     
                     /**
@@ -27508,6 +30944,198 @@
                     };
     
                     return WorkloadIdentityConfig;
+                })();
+    
+                v1.MeshCertificates = (function() {
+    
+                    /**
+                     * Properties of a MeshCertificates.
+                     * @memberof google.container.v1
+                     * @interface IMeshCertificates
+                     * @property {google.protobuf.IBoolValue|null} [enableCertificates] MeshCertificates enableCertificates
+                     */
+    
+                    /**
+                     * Constructs a new MeshCertificates.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a MeshCertificates.
+                     * @implements IMeshCertificates
+                     * @constructor
+                     * @param {google.container.v1.IMeshCertificates=} [properties] Properties to set
+                     */
+                    function MeshCertificates(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MeshCertificates enableCertificates.
+                     * @member {google.protobuf.IBoolValue|null|undefined} enableCertificates
+                     * @memberof google.container.v1.MeshCertificates
+                     * @instance
+                     */
+                    MeshCertificates.prototype.enableCertificates = null;
+    
+                    /**
+                     * Creates a new MeshCertificates instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.MeshCertificates
+                     * @static
+                     * @param {google.container.v1.IMeshCertificates=} [properties] Properties to set
+                     * @returns {google.container.v1.MeshCertificates} MeshCertificates instance
+                     */
+                    MeshCertificates.create = function create(properties) {
+                        return new MeshCertificates(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MeshCertificates message. Does not implicitly {@link google.container.v1.MeshCertificates.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.MeshCertificates
+                     * @static
+                     * @param {google.container.v1.IMeshCertificates} message MeshCertificates message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MeshCertificates.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enableCertificates != null && Object.hasOwnProperty.call(message, "enableCertificates"))
+                            $root.google.protobuf.BoolValue.encode(message.enableCertificates, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MeshCertificates message, length delimited. Does not implicitly {@link google.container.v1.MeshCertificates.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.MeshCertificates
+                     * @static
+                     * @param {google.container.v1.IMeshCertificates} message MeshCertificates message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MeshCertificates.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MeshCertificates message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.MeshCertificates
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.MeshCertificates} MeshCertificates
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MeshCertificates.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.MeshCertificates();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.enableCertificates = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MeshCertificates message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.MeshCertificates
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.MeshCertificates} MeshCertificates
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MeshCertificates.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MeshCertificates message.
+                     * @function verify
+                     * @memberof google.container.v1.MeshCertificates
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MeshCertificates.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enableCertificates != null && message.hasOwnProperty("enableCertificates")) {
+                            var error = $root.google.protobuf.BoolValue.verify(message.enableCertificates);
+                            if (error)
+                                return "enableCertificates." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MeshCertificates message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.MeshCertificates
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.MeshCertificates} MeshCertificates
+                     */
+                    MeshCertificates.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.MeshCertificates)
+                            return object;
+                        var message = new $root.google.container.v1.MeshCertificates();
+                        if (object.enableCertificates != null) {
+                            if (typeof object.enableCertificates !== "object")
+                                throw TypeError(".google.container.v1.MeshCertificates.enableCertificates: object expected");
+                            message.enableCertificates = $root.google.protobuf.BoolValue.fromObject(object.enableCertificates);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MeshCertificates message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.MeshCertificates
+                     * @static
+                     * @param {google.container.v1.MeshCertificates} message MeshCertificates
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MeshCertificates.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enableCertificates = null;
+                        if (message.enableCertificates != null && message.hasOwnProperty("enableCertificates"))
+                            object.enableCertificates = $root.google.protobuf.BoolValue.toObject(message.enableCertificates, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MeshCertificates to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.MeshCertificates
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MeshCertificates.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return MeshCertificates;
                 })();
     
                 v1.DatabaseEncryption = (function() {
@@ -29994,6 +33622,3205 @@
                     return ShieldedNodes;
                 })();
     
+                v1.VirtualNIC = (function() {
+    
+                    /**
+                     * Properties of a VirtualNIC.
+                     * @memberof google.container.v1
+                     * @interface IVirtualNIC
+                     * @property {boolean|null} [enabled] VirtualNIC enabled
+                     */
+    
+                    /**
+                     * Constructs a new VirtualNIC.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a VirtualNIC.
+                     * @implements IVirtualNIC
+                     * @constructor
+                     * @param {google.container.v1.IVirtualNIC=} [properties] Properties to set
+                     */
+                    function VirtualNIC(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * VirtualNIC enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1.VirtualNIC
+                     * @instance
+                     */
+                    VirtualNIC.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new VirtualNIC instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.VirtualNIC
+                     * @static
+                     * @param {google.container.v1.IVirtualNIC=} [properties] Properties to set
+                     * @returns {google.container.v1.VirtualNIC} VirtualNIC instance
+                     */
+                    VirtualNIC.create = function create(properties) {
+                        return new VirtualNIC(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VirtualNIC message. Does not implicitly {@link google.container.v1.VirtualNIC.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.VirtualNIC
+                     * @static
+                     * @param {google.container.v1.IVirtualNIC} message VirtualNIC message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VirtualNIC.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VirtualNIC message, length delimited. Does not implicitly {@link google.container.v1.VirtualNIC.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.VirtualNIC
+                     * @static
+                     * @param {google.container.v1.IVirtualNIC} message VirtualNIC message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VirtualNIC.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VirtualNIC message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.VirtualNIC
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.VirtualNIC} VirtualNIC
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VirtualNIC.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.VirtualNIC();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.enabled = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VirtualNIC message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.VirtualNIC
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.VirtualNIC} VirtualNIC
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VirtualNIC.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VirtualNIC message.
+                     * @function verify
+                     * @memberof google.container.v1.VirtualNIC
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VirtualNIC.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VirtualNIC message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.VirtualNIC
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.VirtualNIC} VirtualNIC
+                     */
+                    VirtualNIC.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.VirtualNIC)
+                            return object;
+                        var message = new $root.google.container.v1.VirtualNIC();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a VirtualNIC message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.VirtualNIC
+                     * @static
+                     * @param {google.container.v1.VirtualNIC} message VirtualNIC
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VirtualNIC.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this VirtualNIC to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.VirtualNIC
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VirtualNIC.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return VirtualNIC;
+                })();
+    
+                /**
+                 * PrivateIPv6GoogleAccess enum.
+                 * @name google.container.v1.PrivateIPv6GoogleAccess
+                 * @enum {number}
+                 * @property {number} PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED=0 PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED value
+                 * @property {number} PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED=1 PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED value
+                 * @property {number} PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE=2 PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE value
+                 * @property {number} PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL=3 PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL value
+                 */
+                v1.PrivateIPv6GoogleAccess = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED"] = 1;
+                    values[valuesById[2] = "PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE"] = 2;
+                    values[valuesById[3] = "PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL"] = 3;
+                    return values;
+                })();
+    
+                /**
+                 * DatapathProvider enum.
+                 * @name google.container.v1.DatapathProvider
+                 * @enum {number}
+                 * @property {number} DATAPATH_PROVIDER_UNSPECIFIED=0 DATAPATH_PROVIDER_UNSPECIFIED value
+                 * @property {number} LEGACY_DATAPATH=1 LEGACY_DATAPATH value
+                 * @property {number} ADVANCED_DATAPATH=2 ADVANCED_DATAPATH value
+                 */
+                v1.DatapathProvider = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "DATAPATH_PROVIDER_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "LEGACY_DATAPATH"] = 1;
+                    values[valuesById[2] = "ADVANCED_DATAPATH"] = 2;
+                    return values;
+                })();
+    
+                v1.NotificationConfig = (function() {
+    
+                    /**
+                     * Properties of a NotificationConfig.
+                     * @memberof google.container.v1
+                     * @interface INotificationConfig
+                     * @property {google.container.v1.NotificationConfig.IPubSub|null} [pubsub] NotificationConfig pubsub
+                     */
+    
+                    /**
+                     * Constructs a new NotificationConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a NotificationConfig.
+                     * @implements INotificationConfig
+                     * @constructor
+                     * @param {google.container.v1.INotificationConfig=} [properties] Properties to set
+                     */
+                    function NotificationConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * NotificationConfig pubsub.
+                     * @member {google.container.v1.NotificationConfig.IPubSub|null|undefined} pubsub
+                     * @memberof google.container.v1.NotificationConfig
+                     * @instance
+                     */
+                    NotificationConfig.prototype.pubsub = null;
+    
+                    /**
+                     * Creates a new NotificationConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.NotificationConfig
+                     * @static
+                     * @param {google.container.v1.INotificationConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.NotificationConfig} NotificationConfig instance
+                     */
+                    NotificationConfig.create = function create(properties) {
+                        return new NotificationConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified NotificationConfig message. Does not implicitly {@link google.container.v1.NotificationConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.NotificationConfig
+                     * @static
+                     * @param {google.container.v1.INotificationConfig} message NotificationConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NotificationConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.pubsub != null && Object.hasOwnProperty.call(message, "pubsub"))
+                            $root.google.container.v1.NotificationConfig.PubSub.encode(message.pubsub, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified NotificationConfig message, length delimited. Does not implicitly {@link google.container.v1.NotificationConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.NotificationConfig
+                     * @static
+                     * @param {google.container.v1.INotificationConfig} message NotificationConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NotificationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a NotificationConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.NotificationConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.NotificationConfig} NotificationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NotificationConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.NotificationConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.pubsub = $root.google.container.v1.NotificationConfig.PubSub.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a NotificationConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.NotificationConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.NotificationConfig} NotificationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NotificationConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a NotificationConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.NotificationConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    NotificationConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.pubsub != null && message.hasOwnProperty("pubsub")) {
+                            var error = $root.google.container.v1.NotificationConfig.PubSub.verify(message.pubsub);
+                            if (error)
+                                return "pubsub." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a NotificationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.NotificationConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.NotificationConfig} NotificationConfig
+                     */
+                    NotificationConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.NotificationConfig)
+                            return object;
+                        var message = new $root.google.container.v1.NotificationConfig();
+                        if (object.pubsub != null) {
+                            if (typeof object.pubsub !== "object")
+                                throw TypeError(".google.container.v1.NotificationConfig.pubsub: object expected");
+                            message.pubsub = $root.google.container.v1.NotificationConfig.PubSub.fromObject(object.pubsub);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a NotificationConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.NotificationConfig
+                     * @static
+                     * @param {google.container.v1.NotificationConfig} message NotificationConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    NotificationConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.pubsub = null;
+                        if (message.pubsub != null && message.hasOwnProperty("pubsub"))
+                            object.pubsub = $root.google.container.v1.NotificationConfig.PubSub.toObject(message.pubsub, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this NotificationConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.NotificationConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    NotificationConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * EventType enum.
+                     * @name google.container.v1.NotificationConfig.EventType
+                     * @enum {number}
+                     * @property {number} EVENT_TYPE_UNSPECIFIED=0 EVENT_TYPE_UNSPECIFIED value
+                     * @property {number} UPGRADE_AVAILABLE_EVENT=1 UPGRADE_AVAILABLE_EVENT value
+                     * @property {number} UPGRADE_EVENT=2 UPGRADE_EVENT value
+                     * @property {number} SECURITY_BULLETIN_EVENT=3 SECURITY_BULLETIN_EVENT value
+                     */
+                    NotificationConfig.EventType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "EVENT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "UPGRADE_AVAILABLE_EVENT"] = 1;
+                        values[valuesById[2] = "UPGRADE_EVENT"] = 2;
+                        values[valuesById[3] = "SECURITY_BULLETIN_EVENT"] = 3;
+                        return values;
+                    })();
+    
+                    NotificationConfig.PubSub = (function() {
+    
+                        /**
+                         * Properties of a PubSub.
+                         * @memberof google.container.v1.NotificationConfig
+                         * @interface IPubSub
+                         * @property {boolean|null} [enabled] PubSub enabled
+                         * @property {string|null} [topic] PubSub topic
+                         * @property {google.container.v1.NotificationConfig.IFilter|null} [filter] PubSub filter
+                         */
+    
+                        /**
+                         * Constructs a new PubSub.
+                         * @memberof google.container.v1.NotificationConfig
+                         * @classdesc Represents a PubSub.
+                         * @implements IPubSub
+                         * @constructor
+                         * @param {google.container.v1.NotificationConfig.IPubSub=} [properties] Properties to set
+                         */
+                        function PubSub(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PubSub enabled.
+                         * @member {boolean} enabled
+                         * @memberof google.container.v1.NotificationConfig.PubSub
+                         * @instance
+                         */
+                        PubSub.prototype.enabled = false;
+    
+                        /**
+                         * PubSub topic.
+                         * @member {string} topic
+                         * @memberof google.container.v1.NotificationConfig.PubSub
+                         * @instance
+                         */
+                        PubSub.prototype.topic = "";
+    
+                        /**
+                         * PubSub filter.
+                         * @member {google.container.v1.NotificationConfig.IFilter|null|undefined} filter
+                         * @memberof google.container.v1.NotificationConfig.PubSub
+                         * @instance
+                         */
+                        PubSub.prototype.filter = null;
+    
+                        /**
+                         * Creates a new PubSub instance using the specified properties.
+                         * @function create
+                         * @memberof google.container.v1.NotificationConfig.PubSub
+                         * @static
+                         * @param {google.container.v1.NotificationConfig.IPubSub=} [properties] Properties to set
+                         * @returns {google.container.v1.NotificationConfig.PubSub} PubSub instance
+                         */
+                        PubSub.create = function create(properties) {
+                            return new PubSub(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PubSub message. Does not implicitly {@link google.container.v1.NotificationConfig.PubSub.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.container.v1.NotificationConfig.PubSub
+                         * @static
+                         * @param {google.container.v1.NotificationConfig.IPubSub} message PubSub message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PubSub.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                            if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.topic);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                $root.google.container.v1.NotificationConfig.Filter.encode(message.filter, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PubSub message, length delimited. Does not implicitly {@link google.container.v1.NotificationConfig.PubSub.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.container.v1.NotificationConfig.PubSub
+                         * @static
+                         * @param {google.container.v1.NotificationConfig.IPubSub} message PubSub message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PubSub.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PubSub message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.container.v1.NotificationConfig.PubSub
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.container.v1.NotificationConfig.PubSub} PubSub
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PubSub.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.NotificationConfig.PubSub();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.enabled = reader.bool();
+                                    break;
+                                case 2:
+                                    message.topic = reader.string();
+                                    break;
+                                case 3:
+                                    message.filter = $root.google.container.v1.NotificationConfig.Filter.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PubSub message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.container.v1.NotificationConfig.PubSub
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.container.v1.NotificationConfig.PubSub} PubSub
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PubSub.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PubSub message.
+                         * @function verify
+                         * @memberof google.container.v1.NotificationConfig.PubSub
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PubSub.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                if (typeof message.enabled !== "boolean")
+                                    return "enabled: boolean expected";
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                if (!$util.isString(message.topic))
+                                    return "topic: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter")) {
+                                var error = $root.google.container.v1.NotificationConfig.Filter.verify(message.filter);
+                                if (error)
+                                    return "filter." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PubSub message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.container.v1.NotificationConfig.PubSub
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.container.v1.NotificationConfig.PubSub} PubSub
+                         */
+                        PubSub.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.container.v1.NotificationConfig.PubSub)
+                                return object;
+                            var message = new $root.google.container.v1.NotificationConfig.PubSub();
+                            if (object.enabled != null)
+                                message.enabled = Boolean(object.enabled);
+                            if (object.topic != null)
+                                message.topic = String(object.topic);
+                            if (object.filter != null) {
+                                if (typeof object.filter !== "object")
+                                    throw TypeError(".google.container.v1.NotificationConfig.PubSub.filter: object expected");
+                                message.filter = $root.google.container.v1.NotificationConfig.Filter.fromObject(object.filter);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PubSub message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.container.v1.NotificationConfig.PubSub
+                         * @static
+                         * @param {google.container.v1.NotificationConfig.PubSub} message PubSub
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PubSub.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.enabled = false;
+                                object.topic = "";
+                                object.filter = null;
+                            }
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                object.enabled = message.enabled;
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                object.topic = message.topic;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = $root.google.container.v1.NotificationConfig.Filter.toObject(message.filter, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PubSub to JSON.
+                         * @function toJSON
+                         * @memberof google.container.v1.NotificationConfig.PubSub
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PubSub.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PubSub;
+                    })();
+    
+                    NotificationConfig.Filter = (function() {
+    
+                        /**
+                         * Properties of a Filter.
+                         * @memberof google.container.v1.NotificationConfig
+                         * @interface IFilter
+                         * @property {Array.<google.container.v1.NotificationConfig.EventType>|null} [eventType] Filter eventType
+                         */
+    
+                        /**
+                         * Constructs a new Filter.
+                         * @memberof google.container.v1.NotificationConfig
+                         * @classdesc Represents a Filter.
+                         * @implements IFilter
+                         * @constructor
+                         * @param {google.container.v1.NotificationConfig.IFilter=} [properties] Properties to set
+                         */
+                        function Filter(properties) {
+                            this.eventType = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Filter eventType.
+                         * @member {Array.<google.container.v1.NotificationConfig.EventType>} eventType
+                         * @memberof google.container.v1.NotificationConfig.Filter
+                         * @instance
+                         */
+                        Filter.prototype.eventType = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Filter instance using the specified properties.
+                         * @function create
+                         * @memberof google.container.v1.NotificationConfig.Filter
+                         * @static
+                         * @param {google.container.v1.NotificationConfig.IFilter=} [properties] Properties to set
+                         * @returns {google.container.v1.NotificationConfig.Filter} Filter instance
+                         */
+                        Filter.create = function create(properties) {
+                            return new Filter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Filter message. Does not implicitly {@link google.container.v1.NotificationConfig.Filter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.container.v1.NotificationConfig.Filter
+                         * @static
+                         * @param {google.container.v1.NotificationConfig.IFilter} message Filter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Filter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.eventType != null && message.eventType.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.eventType.length; ++i)
+                                    writer.int32(message.eventType[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.container.v1.NotificationConfig.Filter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.container.v1.NotificationConfig.Filter
+                         * @static
+                         * @param {google.container.v1.NotificationConfig.IFilter} message Filter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Filter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Filter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.container.v1.NotificationConfig.Filter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.container.v1.NotificationConfig.Filter} Filter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Filter.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.NotificationConfig.Filter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.eventType && message.eventType.length))
+                                        message.eventType = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.eventType.push(reader.int32());
+                                    } else
+                                        message.eventType.push(reader.int32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Filter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.container.v1.NotificationConfig.Filter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.container.v1.NotificationConfig.Filter} Filter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Filter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Filter message.
+                         * @function verify
+                         * @memberof google.container.v1.NotificationConfig.Filter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Filter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.eventType != null && message.hasOwnProperty("eventType")) {
+                                if (!Array.isArray(message.eventType))
+                                    return "eventType: array expected";
+                                for (var i = 0; i < message.eventType.length; ++i)
+                                    switch (message.eventType[i]) {
+                                    default:
+                                        return "eventType: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Filter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.container.v1.NotificationConfig.Filter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.container.v1.NotificationConfig.Filter} Filter
+                         */
+                        Filter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.container.v1.NotificationConfig.Filter)
+                                return object;
+                            var message = new $root.google.container.v1.NotificationConfig.Filter();
+                            if (object.eventType) {
+                                if (!Array.isArray(object.eventType))
+                                    throw TypeError(".google.container.v1.NotificationConfig.Filter.eventType: array expected");
+                                message.eventType = [];
+                                for (var i = 0; i < object.eventType.length; ++i)
+                                    switch (object.eventType[i]) {
+                                    default:
+                                    case "EVENT_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.eventType[i] = 0;
+                                        break;
+                                    case "UPGRADE_AVAILABLE_EVENT":
+                                    case 1:
+                                        message.eventType[i] = 1;
+                                        break;
+                                    case "UPGRADE_EVENT":
+                                    case 2:
+                                        message.eventType[i] = 2;
+                                        break;
+                                    case "SECURITY_BULLETIN_EVENT":
+                                    case 3:
+                                        message.eventType[i] = 3;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Filter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.container.v1.NotificationConfig.Filter
+                         * @static
+                         * @param {google.container.v1.NotificationConfig.Filter} message Filter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Filter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.eventType = [];
+                            if (message.eventType && message.eventType.length) {
+                                object.eventType = [];
+                                for (var j = 0; j < message.eventType.length; ++j)
+                                    object.eventType[j] = options.enums === String ? $root.google.container.v1.NotificationConfig.EventType[message.eventType[j]] : message.eventType[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Filter to JSON.
+                         * @function toJSON
+                         * @memberof google.container.v1.NotificationConfig.Filter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Filter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Filter;
+                    })();
+    
+                    return NotificationConfig;
+                })();
+    
+                v1.ConfidentialNodes = (function() {
+    
+                    /**
+                     * Properties of a ConfidentialNodes.
+                     * @memberof google.container.v1
+                     * @interface IConfidentialNodes
+                     * @property {boolean|null} [enabled] ConfidentialNodes enabled
+                     */
+    
+                    /**
+                     * Constructs a new ConfidentialNodes.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a ConfidentialNodes.
+                     * @implements IConfidentialNodes
+                     * @constructor
+                     * @param {google.container.v1.IConfidentialNodes=} [properties] Properties to set
+                     */
+                    function ConfidentialNodes(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ConfidentialNodes enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1.ConfidentialNodes
+                     * @instance
+                     */
+                    ConfidentialNodes.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new ConfidentialNodes instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.ConfidentialNodes
+                     * @static
+                     * @param {google.container.v1.IConfidentialNodes=} [properties] Properties to set
+                     * @returns {google.container.v1.ConfidentialNodes} ConfidentialNodes instance
+                     */
+                    ConfidentialNodes.create = function create(properties) {
+                        return new ConfidentialNodes(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ConfidentialNodes message. Does not implicitly {@link google.container.v1.ConfidentialNodes.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.ConfidentialNodes
+                     * @static
+                     * @param {google.container.v1.IConfidentialNodes} message ConfidentialNodes message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ConfidentialNodes.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ConfidentialNodes message, length delimited. Does not implicitly {@link google.container.v1.ConfidentialNodes.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.ConfidentialNodes
+                     * @static
+                     * @param {google.container.v1.IConfidentialNodes} message ConfidentialNodes message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ConfidentialNodes.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ConfidentialNodes message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.ConfidentialNodes
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.ConfidentialNodes} ConfidentialNodes
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ConfidentialNodes.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.ConfidentialNodes();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.enabled = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ConfidentialNodes message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.ConfidentialNodes
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.ConfidentialNodes} ConfidentialNodes
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ConfidentialNodes.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ConfidentialNodes message.
+                     * @function verify
+                     * @memberof google.container.v1.ConfidentialNodes
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ConfidentialNodes.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ConfidentialNodes message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.ConfidentialNodes
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.ConfidentialNodes} ConfidentialNodes
+                     */
+                    ConfidentialNodes.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.ConfidentialNodes)
+                            return object;
+                        var message = new $root.google.container.v1.ConfidentialNodes();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ConfidentialNodes message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.ConfidentialNodes
+                     * @static
+                     * @param {google.container.v1.ConfidentialNodes} message ConfidentialNodes
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ConfidentialNodes.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ConfidentialNodes to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.ConfidentialNodes
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ConfidentialNodes.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ConfidentialNodes;
+                })();
+    
+                /**
+                 * UpgradeResourceType enum.
+                 * @name google.container.v1.UpgradeResourceType
+                 * @enum {number}
+                 * @property {number} UPGRADE_RESOURCE_TYPE_UNSPECIFIED=0 UPGRADE_RESOURCE_TYPE_UNSPECIFIED value
+                 * @property {number} MASTER=1 MASTER value
+                 * @property {number} NODE_POOL=2 NODE_POOL value
+                 */
+                v1.UpgradeResourceType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "UPGRADE_RESOURCE_TYPE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "MASTER"] = 1;
+                    values[valuesById[2] = "NODE_POOL"] = 2;
+                    return values;
+                })();
+    
+                v1.UpgradeEvent = (function() {
+    
+                    /**
+                     * Properties of an UpgradeEvent.
+                     * @memberof google.container.v1
+                     * @interface IUpgradeEvent
+                     * @property {google.container.v1.UpgradeResourceType|null} [resourceType] UpgradeEvent resourceType
+                     * @property {string|null} [operation] UpgradeEvent operation
+                     * @property {google.protobuf.ITimestamp|null} [operationStartTime] UpgradeEvent operationStartTime
+                     * @property {string|null} [currentVersion] UpgradeEvent currentVersion
+                     * @property {string|null} [targetVersion] UpgradeEvent targetVersion
+                     * @property {string|null} [resource] UpgradeEvent resource
+                     */
+    
+                    /**
+                     * Constructs a new UpgradeEvent.
+                     * @memberof google.container.v1
+                     * @classdesc Represents an UpgradeEvent.
+                     * @implements IUpgradeEvent
+                     * @constructor
+                     * @param {google.container.v1.IUpgradeEvent=} [properties] Properties to set
+                     */
+                    function UpgradeEvent(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpgradeEvent resourceType.
+                     * @member {google.container.v1.UpgradeResourceType} resourceType
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @instance
+                     */
+                    UpgradeEvent.prototype.resourceType = 0;
+    
+                    /**
+                     * UpgradeEvent operation.
+                     * @member {string} operation
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @instance
+                     */
+                    UpgradeEvent.prototype.operation = "";
+    
+                    /**
+                     * UpgradeEvent operationStartTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} operationStartTime
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @instance
+                     */
+                    UpgradeEvent.prototype.operationStartTime = null;
+    
+                    /**
+                     * UpgradeEvent currentVersion.
+                     * @member {string} currentVersion
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @instance
+                     */
+                    UpgradeEvent.prototype.currentVersion = "";
+    
+                    /**
+                     * UpgradeEvent targetVersion.
+                     * @member {string} targetVersion
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @instance
+                     */
+                    UpgradeEvent.prototype.targetVersion = "";
+    
+                    /**
+                     * UpgradeEvent resource.
+                     * @member {string} resource
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @instance
+                     */
+                    UpgradeEvent.prototype.resource = "";
+    
+                    /**
+                     * Creates a new UpgradeEvent instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @static
+                     * @param {google.container.v1.IUpgradeEvent=} [properties] Properties to set
+                     * @returns {google.container.v1.UpgradeEvent} UpgradeEvent instance
+                     */
+                    UpgradeEvent.create = function create(properties) {
+                        return new UpgradeEvent(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpgradeEvent message. Does not implicitly {@link google.container.v1.UpgradeEvent.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @static
+                     * @param {google.container.v1.IUpgradeEvent} message UpgradeEvent message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpgradeEvent.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.resourceType);
+                        if (message.operation != null && Object.hasOwnProperty.call(message, "operation"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.operation);
+                        if (message.operationStartTime != null && Object.hasOwnProperty.call(message, "operationStartTime"))
+                            $root.google.protobuf.Timestamp.encode(message.operationStartTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.currentVersion != null && Object.hasOwnProperty.call(message, "currentVersion"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.currentVersion);
+                        if (message.targetVersion != null && Object.hasOwnProperty.call(message, "targetVersion"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.targetVersion);
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.resource);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpgradeEvent message, length delimited. Does not implicitly {@link google.container.v1.UpgradeEvent.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @static
+                     * @param {google.container.v1.IUpgradeEvent} message UpgradeEvent message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpgradeEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpgradeEvent message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.UpgradeEvent} UpgradeEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpgradeEvent.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.UpgradeEvent();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.resourceType = reader.int32();
+                                break;
+                            case 2:
+                                message.operation = reader.string();
+                                break;
+                            case 3:
+                                message.operationStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            case 4:
+                                message.currentVersion = reader.string();
+                                break;
+                            case 5:
+                                message.targetVersion = reader.string();
+                                break;
+                            case 6:
+                                message.resource = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpgradeEvent message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.UpgradeEvent} UpgradeEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpgradeEvent.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpgradeEvent message.
+                     * @function verify
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpgradeEvent.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                            switch (message.resourceType) {
+                            default:
+                                return "resourceType: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.operation != null && message.hasOwnProperty("operation"))
+                            if (!$util.isString(message.operation))
+                                return "operation: string expected";
+                        if (message.operationStartTime != null && message.hasOwnProperty("operationStartTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.operationStartTime);
+                            if (error)
+                                return "operationStartTime." + error;
+                        }
+                        if (message.currentVersion != null && message.hasOwnProperty("currentVersion"))
+                            if (!$util.isString(message.currentVersion))
+                                return "currentVersion: string expected";
+                        if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
+                            if (!$util.isString(message.targetVersion))
+                                return "targetVersion: string expected";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            if (!$util.isString(message.resource))
+                                return "resource: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpgradeEvent message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.UpgradeEvent} UpgradeEvent
+                     */
+                    UpgradeEvent.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.UpgradeEvent)
+                            return object;
+                        var message = new $root.google.container.v1.UpgradeEvent();
+                        switch (object.resourceType) {
+                        case "UPGRADE_RESOURCE_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.resourceType = 0;
+                            break;
+                        case "MASTER":
+                        case 1:
+                            message.resourceType = 1;
+                            break;
+                        case "NODE_POOL":
+                        case 2:
+                            message.resourceType = 2;
+                            break;
+                        }
+                        if (object.operation != null)
+                            message.operation = String(object.operation);
+                        if (object.operationStartTime != null) {
+                            if (typeof object.operationStartTime !== "object")
+                                throw TypeError(".google.container.v1.UpgradeEvent.operationStartTime: object expected");
+                            message.operationStartTime = $root.google.protobuf.Timestamp.fromObject(object.operationStartTime);
+                        }
+                        if (object.currentVersion != null)
+                            message.currentVersion = String(object.currentVersion);
+                        if (object.targetVersion != null)
+                            message.targetVersion = String(object.targetVersion);
+                        if (object.resource != null)
+                            message.resource = String(object.resource);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpgradeEvent message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @static
+                     * @param {google.container.v1.UpgradeEvent} message UpgradeEvent
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpgradeEvent.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.resourceType = options.enums === String ? "UPGRADE_RESOURCE_TYPE_UNSPECIFIED" : 0;
+                            object.operation = "";
+                            object.operationStartTime = null;
+                            object.currentVersion = "";
+                            object.targetVersion = "";
+                            object.resource = "";
+                        }
+                        if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                            object.resourceType = options.enums === String ? $root.google.container.v1.UpgradeResourceType[message.resourceType] : message.resourceType;
+                        if (message.operation != null && message.hasOwnProperty("operation"))
+                            object.operation = message.operation;
+                        if (message.operationStartTime != null && message.hasOwnProperty("operationStartTime"))
+                            object.operationStartTime = $root.google.protobuf.Timestamp.toObject(message.operationStartTime, options);
+                        if (message.currentVersion != null && message.hasOwnProperty("currentVersion"))
+                            object.currentVersion = message.currentVersion;
+                        if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
+                            object.targetVersion = message.targetVersion;
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = message.resource;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpgradeEvent to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.UpgradeEvent
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpgradeEvent.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return UpgradeEvent;
+                })();
+    
+                v1.UpgradeAvailableEvent = (function() {
+    
+                    /**
+                     * Properties of an UpgradeAvailableEvent.
+                     * @memberof google.container.v1
+                     * @interface IUpgradeAvailableEvent
+                     * @property {string|null} [version] UpgradeAvailableEvent version
+                     * @property {google.container.v1.UpgradeResourceType|null} [resourceType] UpgradeAvailableEvent resourceType
+                     * @property {google.container.v1.IReleaseChannel|null} [releaseChannel] UpgradeAvailableEvent releaseChannel
+                     * @property {string|null} [resource] UpgradeAvailableEvent resource
+                     */
+    
+                    /**
+                     * Constructs a new UpgradeAvailableEvent.
+                     * @memberof google.container.v1
+                     * @classdesc Represents an UpgradeAvailableEvent.
+                     * @implements IUpgradeAvailableEvent
+                     * @constructor
+                     * @param {google.container.v1.IUpgradeAvailableEvent=} [properties] Properties to set
+                     */
+                    function UpgradeAvailableEvent(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpgradeAvailableEvent version.
+                     * @member {string} version
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @instance
+                     */
+                    UpgradeAvailableEvent.prototype.version = "";
+    
+                    /**
+                     * UpgradeAvailableEvent resourceType.
+                     * @member {google.container.v1.UpgradeResourceType} resourceType
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @instance
+                     */
+                    UpgradeAvailableEvent.prototype.resourceType = 0;
+    
+                    /**
+                     * UpgradeAvailableEvent releaseChannel.
+                     * @member {google.container.v1.IReleaseChannel|null|undefined} releaseChannel
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @instance
+                     */
+                    UpgradeAvailableEvent.prototype.releaseChannel = null;
+    
+                    /**
+                     * UpgradeAvailableEvent resource.
+                     * @member {string} resource
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @instance
+                     */
+                    UpgradeAvailableEvent.prototype.resource = "";
+    
+                    /**
+                     * Creates a new UpgradeAvailableEvent instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @static
+                     * @param {google.container.v1.IUpgradeAvailableEvent=} [properties] Properties to set
+                     * @returns {google.container.v1.UpgradeAvailableEvent} UpgradeAvailableEvent instance
+                     */
+                    UpgradeAvailableEvent.create = function create(properties) {
+                        return new UpgradeAvailableEvent(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpgradeAvailableEvent message. Does not implicitly {@link google.container.v1.UpgradeAvailableEvent.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @static
+                     * @param {google.container.v1.IUpgradeAvailableEvent} message UpgradeAvailableEvent message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpgradeAvailableEvent.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.version);
+                        if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.resourceType);
+                        if (message.releaseChannel != null && Object.hasOwnProperty.call(message, "releaseChannel"))
+                            $root.google.container.v1.ReleaseChannel.encode(message.releaseChannel, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.resource);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpgradeAvailableEvent message, length delimited. Does not implicitly {@link google.container.v1.UpgradeAvailableEvent.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @static
+                     * @param {google.container.v1.IUpgradeAvailableEvent} message UpgradeAvailableEvent message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpgradeAvailableEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpgradeAvailableEvent message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.UpgradeAvailableEvent} UpgradeAvailableEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpgradeAvailableEvent.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.UpgradeAvailableEvent();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.version = reader.string();
+                                break;
+                            case 2:
+                                message.resourceType = reader.int32();
+                                break;
+                            case 3:
+                                message.releaseChannel = $root.google.container.v1.ReleaseChannel.decode(reader, reader.uint32());
+                                break;
+                            case 4:
+                                message.resource = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpgradeAvailableEvent message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.UpgradeAvailableEvent} UpgradeAvailableEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpgradeAvailableEvent.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpgradeAvailableEvent message.
+                     * @function verify
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpgradeAvailableEvent.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.version != null && message.hasOwnProperty("version"))
+                            if (!$util.isString(message.version))
+                                return "version: string expected";
+                        if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                            switch (message.resourceType) {
+                            default:
+                                return "resourceType: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.releaseChannel != null && message.hasOwnProperty("releaseChannel")) {
+                            var error = $root.google.container.v1.ReleaseChannel.verify(message.releaseChannel);
+                            if (error)
+                                return "releaseChannel." + error;
+                        }
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            if (!$util.isString(message.resource))
+                                return "resource: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpgradeAvailableEvent message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.UpgradeAvailableEvent} UpgradeAvailableEvent
+                     */
+                    UpgradeAvailableEvent.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.UpgradeAvailableEvent)
+                            return object;
+                        var message = new $root.google.container.v1.UpgradeAvailableEvent();
+                        if (object.version != null)
+                            message.version = String(object.version);
+                        switch (object.resourceType) {
+                        case "UPGRADE_RESOURCE_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.resourceType = 0;
+                            break;
+                        case "MASTER":
+                        case 1:
+                            message.resourceType = 1;
+                            break;
+                        case "NODE_POOL":
+                        case 2:
+                            message.resourceType = 2;
+                            break;
+                        }
+                        if (object.releaseChannel != null) {
+                            if (typeof object.releaseChannel !== "object")
+                                throw TypeError(".google.container.v1.UpgradeAvailableEvent.releaseChannel: object expected");
+                            message.releaseChannel = $root.google.container.v1.ReleaseChannel.fromObject(object.releaseChannel);
+                        }
+                        if (object.resource != null)
+                            message.resource = String(object.resource);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpgradeAvailableEvent message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @static
+                     * @param {google.container.v1.UpgradeAvailableEvent} message UpgradeAvailableEvent
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpgradeAvailableEvent.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.version = "";
+                            object.resourceType = options.enums === String ? "UPGRADE_RESOURCE_TYPE_UNSPECIFIED" : 0;
+                            object.releaseChannel = null;
+                            object.resource = "";
+                        }
+                        if (message.version != null && message.hasOwnProperty("version"))
+                            object.version = message.version;
+                        if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                            object.resourceType = options.enums === String ? $root.google.container.v1.UpgradeResourceType[message.resourceType] : message.resourceType;
+                        if (message.releaseChannel != null && message.hasOwnProperty("releaseChannel"))
+                            object.releaseChannel = $root.google.container.v1.ReleaseChannel.toObject(message.releaseChannel, options);
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = message.resource;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpgradeAvailableEvent to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.UpgradeAvailableEvent
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpgradeAvailableEvent.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return UpgradeAvailableEvent;
+                })();
+    
+                v1.SecurityBulletinEvent = (function() {
+    
+                    /**
+                     * Properties of a SecurityBulletinEvent.
+                     * @memberof google.container.v1
+                     * @interface ISecurityBulletinEvent
+                     * @property {string|null} [resourceTypeAffected] SecurityBulletinEvent resourceTypeAffected
+                     * @property {string|null} [bulletinId] SecurityBulletinEvent bulletinId
+                     * @property {Array.<string>|null} [cveIds] SecurityBulletinEvent cveIds
+                     * @property {string|null} [severity] SecurityBulletinEvent severity
+                     * @property {string|null} [bulletinUri] SecurityBulletinEvent bulletinUri
+                     * @property {string|null} [briefDescription] SecurityBulletinEvent briefDescription
+                     * @property {Array.<string>|null} [affectedSupportedMinors] SecurityBulletinEvent affectedSupportedMinors
+                     * @property {Array.<string>|null} [patchedVersions] SecurityBulletinEvent patchedVersions
+                     * @property {string|null} [suggestedUpgradeTarget] SecurityBulletinEvent suggestedUpgradeTarget
+                     * @property {boolean|null} [manualStepsRequired] SecurityBulletinEvent manualStepsRequired
+                     */
+    
+                    /**
+                     * Constructs a new SecurityBulletinEvent.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a SecurityBulletinEvent.
+                     * @implements ISecurityBulletinEvent
+                     * @constructor
+                     * @param {google.container.v1.ISecurityBulletinEvent=} [properties] Properties to set
+                     */
+                    function SecurityBulletinEvent(properties) {
+                        this.cveIds = [];
+                        this.affectedSupportedMinors = [];
+                        this.patchedVersions = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SecurityBulletinEvent resourceTypeAffected.
+                     * @member {string} resourceTypeAffected
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @instance
+                     */
+                    SecurityBulletinEvent.prototype.resourceTypeAffected = "";
+    
+                    /**
+                     * SecurityBulletinEvent bulletinId.
+                     * @member {string} bulletinId
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @instance
+                     */
+                    SecurityBulletinEvent.prototype.bulletinId = "";
+    
+                    /**
+                     * SecurityBulletinEvent cveIds.
+                     * @member {Array.<string>} cveIds
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @instance
+                     */
+                    SecurityBulletinEvent.prototype.cveIds = $util.emptyArray;
+    
+                    /**
+                     * SecurityBulletinEvent severity.
+                     * @member {string} severity
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @instance
+                     */
+                    SecurityBulletinEvent.prototype.severity = "";
+    
+                    /**
+                     * SecurityBulletinEvent bulletinUri.
+                     * @member {string} bulletinUri
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @instance
+                     */
+                    SecurityBulletinEvent.prototype.bulletinUri = "";
+    
+                    /**
+                     * SecurityBulletinEvent briefDescription.
+                     * @member {string} briefDescription
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @instance
+                     */
+                    SecurityBulletinEvent.prototype.briefDescription = "";
+    
+                    /**
+                     * SecurityBulletinEvent affectedSupportedMinors.
+                     * @member {Array.<string>} affectedSupportedMinors
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @instance
+                     */
+                    SecurityBulletinEvent.prototype.affectedSupportedMinors = $util.emptyArray;
+    
+                    /**
+                     * SecurityBulletinEvent patchedVersions.
+                     * @member {Array.<string>} patchedVersions
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @instance
+                     */
+                    SecurityBulletinEvent.prototype.patchedVersions = $util.emptyArray;
+    
+                    /**
+                     * SecurityBulletinEvent suggestedUpgradeTarget.
+                     * @member {string} suggestedUpgradeTarget
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @instance
+                     */
+                    SecurityBulletinEvent.prototype.suggestedUpgradeTarget = "";
+    
+                    /**
+                     * SecurityBulletinEvent manualStepsRequired.
+                     * @member {boolean} manualStepsRequired
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @instance
+                     */
+                    SecurityBulletinEvent.prototype.manualStepsRequired = false;
+    
+                    /**
+                     * Creates a new SecurityBulletinEvent instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @static
+                     * @param {google.container.v1.ISecurityBulletinEvent=} [properties] Properties to set
+                     * @returns {google.container.v1.SecurityBulletinEvent} SecurityBulletinEvent instance
+                     */
+                    SecurityBulletinEvent.create = function create(properties) {
+                        return new SecurityBulletinEvent(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SecurityBulletinEvent message. Does not implicitly {@link google.container.v1.SecurityBulletinEvent.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @static
+                     * @param {google.container.v1.ISecurityBulletinEvent} message SecurityBulletinEvent message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SecurityBulletinEvent.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resourceTypeAffected != null && Object.hasOwnProperty.call(message, "resourceTypeAffected"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceTypeAffected);
+                        if (message.bulletinId != null && Object.hasOwnProperty.call(message, "bulletinId"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.bulletinId);
+                        if (message.cveIds != null && message.cveIds.length)
+                            for (var i = 0; i < message.cveIds.length; ++i)
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.cveIds[i]);
+                        if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.severity);
+                        if (message.bulletinUri != null && Object.hasOwnProperty.call(message, "bulletinUri"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.bulletinUri);
+                        if (message.briefDescription != null && Object.hasOwnProperty.call(message, "briefDescription"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.briefDescription);
+                        if (message.affectedSupportedMinors != null && message.affectedSupportedMinors.length)
+                            for (var i = 0; i < message.affectedSupportedMinors.length; ++i)
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.affectedSupportedMinors[i]);
+                        if (message.patchedVersions != null && message.patchedVersions.length)
+                            for (var i = 0; i < message.patchedVersions.length; ++i)
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.patchedVersions[i]);
+                        if (message.suggestedUpgradeTarget != null && Object.hasOwnProperty.call(message, "suggestedUpgradeTarget"))
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.suggestedUpgradeTarget);
+                        if (message.manualStepsRequired != null && Object.hasOwnProperty.call(message, "manualStepsRequired"))
+                            writer.uint32(/* id 10, wireType 0 =*/80).bool(message.manualStepsRequired);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SecurityBulletinEvent message, length delimited. Does not implicitly {@link google.container.v1.SecurityBulletinEvent.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @static
+                     * @param {google.container.v1.ISecurityBulletinEvent} message SecurityBulletinEvent message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SecurityBulletinEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SecurityBulletinEvent message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.SecurityBulletinEvent} SecurityBulletinEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SecurityBulletinEvent.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.SecurityBulletinEvent();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.resourceTypeAffected = reader.string();
+                                break;
+                            case 2:
+                                message.bulletinId = reader.string();
+                                break;
+                            case 3:
+                                if (!(message.cveIds && message.cveIds.length))
+                                    message.cveIds = [];
+                                message.cveIds.push(reader.string());
+                                break;
+                            case 4:
+                                message.severity = reader.string();
+                                break;
+                            case 5:
+                                message.bulletinUri = reader.string();
+                                break;
+                            case 6:
+                                message.briefDescription = reader.string();
+                                break;
+                            case 7:
+                                if (!(message.affectedSupportedMinors && message.affectedSupportedMinors.length))
+                                    message.affectedSupportedMinors = [];
+                                message.affectedSupportedMinors.push(reader.string());
+                                break;
+                            case 8:
+                                if (!(message.patchedVersions && message.patchedVersions.length))
+                                    message.patchedVersions = [];
+                                message.patchedVersions.push(reader.string());
+                                break;
+                            case 9:
+                                message.suggestedUpgradeTarget = reader.string();
+                                break;
+                            case 10:
+                                message.manualStepsRequired = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SecurityBulletinEvent message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.SecurityBulletinEvent} SecurityBulletinEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SecurityBulletinEvent.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SecurityBulletinEvent message.
+                     * @function verify
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SecurityBulletinEvent.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.resourceTypeAffected != null && message.hasOwnProperty("resourceTypeAffected"))
+                            if (!$util.isString(message.resourceTypeAffected))
+                                return "resourceTypeAffected: string expected";
+                        if (message.bulletinId != null && message.hasOwnProperty("bulletinId"))
+                            if (!$util.isString(message.bulletinId))
+                                return "bulletinId: string expected";
+                        if (message.cveIds != null && message.hasOwnProperty("cveIds")) {
+                            if (!Array.isArray(message.cveIds))
+                                return "cveIds: array expected";
+                            for (var i = 0; i < message.cveIds.length; ++i)
+                                if (!$util.isString(message.cveIds[i]))
+                                    return "cveIds: string[] expected";
+                        }
+                        if (message.severity != null && message.hasOwnProperty("severity"))
+                            if (!$util.isString(message.severity))
+                                return "severity: string expected";
+                        if (message.bulletinUri != null && message.hasOwnProperty("bulletinUri"))
+                            if (!$util.isString(message.bulletinUri))
+                                return "bulletinUri: string expected";
+                        if (message.briefDescription != null && message.hasOwnProperty("briefDescription"))
+                            if (!$util.isString(message.briefDescription))
+                                return "briefDescription: string expected";
+                        if (message.affectedSupportedMinors != null && message.hasOwnProperty("affectedSupportedMinors")) {
+                            if (!Array.isArray(message.affectedSupportedMinors))
+                                return "affectedSupportedMinors: array expected";
+                            for (var i = 0; i < message.affectedSupportedMinors.length; ++i)
+                                if (!$util.isString(message.affectedSupportedMinors[i]))
+                                    return "affectedSupportedMinors: string[] expected";
+                        }
+                        if (message.patchedVersions != null && message.hasOwnProperty("patchedVersions")) {
+                            if (!Array.isArray(message.patchedVersions))
+                                return "patchedVersions: array expected";
+                            for (var i = 0; i < message.patchedVersions.length; ++i)
+                                if (!$util.isString(message.patchedVersions[i]))
+                                    return "patchedVersions: string[] expected";
+                        }
+                        if (message.suggestedUpgradeTarget != null && message.hasOwnProperty("suggestedUpgradeTarget"))
+                            if (!$util.isString(message.suggestedUpgradeTarget))
+                                return "suggestedUpgradeTarget: string expected";
+                        if (message.manualStepsRequired != null && message.hasOwnProperty("manualStepsRequired"))
+                            if (typeof message.manualStepsRequired !== "boolean")
+                                return "manualStepsRequired: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SecurityBulletinEvent message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.SecurityBulletinEvent} SecurityBulletinEvent
+                     */
+                    SecurityBulletinEvent.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.SecurityBulletinEvent)
+                            return object;
+                        var message = new $root.google.container.v1.SecurityBulletinEvent();
+                        if (object.resourceTypeAffected != null)
+                            message.resourceTypeAffected = String(object.resourceTypeAffected);
+                        if (object.bulletinId != null)
+                            message.bulletinId = String(object.bulletinId);
+                        if (object.cveIds) {
+                            if (!Array.isArray(object.cveIds))
+                                throw TypeError(".google.container.v1.SecurityBulletinEvent.cveIds: array expected");
+                            message.cveIds = [];
+                            for (var i = 0; i < object.cveIds.length; ++i)
+                                message.cveIds[i] = String(object.cveIds[i]);
+                        }
+                        if (object.severity != null)
+                            message.severity = String(object.severity);
+                        if (object.bulletinUri != null)
+                            message.bulletinUri = String(object.bulletinUri);
+                        if (object.briefDescription != null)
+                            message.briefDescription = String(object.briefDescription);
+                        if (object.affectedSupportedMinors) {
+                            if (!Array.isArray(object.affectedSupportedMinors))
+                                throw TypeError(".google.container.v1.SecurityBulletinEvent.affectedSupportedMinors: array expected");
+                            message.affectedSupportedMinors = [];
+                            for (var i = 0; i < object.affectedSupportedMinors.length; ++i)
+                                message.affectedSupportedMinors[i] = String(object.affectedSupportedMinors[i]);
+                        }
+                        if (object.patchedVersions) {
+                            if (!Array.isArray(object.patchedVersions))
+                                throw TypeError(".google.container.v1.SecurityBulletinEvent.patchedVersions: array expected");
+                            message.patchedVersions = [];
+                            for (var i = 0; i < object.patchedVersions.length; ++i)
+                                message.patchedVersions[i] = String(object.patchedVersions[i]);
+                        }
+                        if (object.suggestedUpgradeTarget != null)
+                            message.suggestedUpgradeTarget = String(object.suggestedUpgradeTarget);
+                        if (object.manualStepsRequired != null)
+                            message.manualStepsRequired = Boolean(object.manualStepsRequired);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SecurityBulletinEvent message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @static
+                     * @param {google.container.v1.SecurityBulletinEvent} message SecurityBulletinEvent
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SecurityBulletinEvent.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.cveIds = [];
+                            object.affectedSupportedMinors = [];
+                            object.patchedVersions = [];
+                        }
+                        if (options.defaults) {
+                            object.resourceTypeAffected = "";
+                            object.bulletinId = "";
+                            object.severity = "";
+                            object.bulletinUri = "";
+                            object.briefDescription = "";
+                            object.suggestedUpgradeTarget = "";
+                            object.manualStepsRequired = false;
+                        }
+                        if (message.resourceTypeAffected != null && message.hasOwnProperty("resourceTypeAffected"))
+                            object.resourceTypeAffected = message.resourceTypeAffected;
+                        if (message.bulletinId != null && message.hasOwnProperty("bulletinId"))
+                            object.bulletinId = message.bulletinId;
+                        if (message.cveIds && message.cveIds.length) {
+                            object.cveIds = [];
+                            for (var j = 0; j < message.cveIds.length; ++j)
+                                object.cveIds[j] = message.cveIds[j];
+                        }
+                        if (message.severity != null && message.hasOwnProperty("severity"))
+                            object.severity = message.severity;
+                        if (message.bulletinUri != null && message.hasOwnProperty("bulletinUri"))
+                            object.bulletinUri = message.bulletinUri;
+                        if (message.briefDescription != null && message.hasOwnProperty("briefDescription"))
+                            object.briefDescription = message.briefDescription;
+                        if (message.affectedSupportedMinors && message.affectedSupportedMinors.length) {
+                            object.affectedSupportedMinors = [];
+                            for (var j = 0; j < message.affectedSupportedMinors.length; ++j)
+                                object.affectedSupportedMinors[j] = message.affectedSupportedMinors[j];
+                        }
+                        if (message.patchedVersions && message.patchedVersions.length) {
+                            object.patchedVersions = [];
+                            for (var j = 0; j < message.patchedVersions.length; ++j)
+                                object.patchedVersions[j] = message.patchedVersions[j];
+                        }
+                        if (message.suggestedUpgradeTarget != null && message.hasOwnProperty("suggestedUpgradeTarget"))
+                            object.suggestedUpgradeTarget = message.suggestedUpgradeTarget;
+                        if (message.manualStepsRequired != null && message.hasOwnProperty("manualStepsRequired"))
+                            object.manualStepsRequired = message.manualStepsRequired;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SecurityBulletinEvent to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.SecurityBulletinEvent
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SecurityBulletinEvent.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return SecurityBulletinEvent;
+                })();
+    
+                v1.Autopilot = (function() {
+    
+                    /**
+                     * Properties of an Autopilot.
+                     * @memberof google.container.v1
+                     * @interface IAutopilot
+                     * @property {boolean|null} [enabled] Autopilot enabled
+                     */
+    
+                    /**
+                     * Constructs a new Autopilot.
+                     * @memberof google.container.v1
+                     * @classdesc Represents an Autopilot.
+                     * @implements IAutopilot
+                     * @constructor
+                     * @param {google.container.v1.IAutopilot=} [properties] Properties to set
+                     */
+                    function Autopilot(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Autopilot enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1.Autopilot
+                     * @instance
+                     */
+                    Autopilot.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new Autopilot instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.Autopilot
+                     * @static
+                     * @param {google.container.v1.IAutopilot=} [properties] Properties to set
+                     * @returns {google.container.v1.Autopilot} Autopilot instance
+                     */
+                    Autopilot.create = function create(properties) {
+                        return new Autopilot(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Autopilot message. Does not implicitly {@link google.container.v1.Autopilot.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.Autopilot
+                     * @static
+                     * @param {google.container.v1.IAutopilot} message Autopilot message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Autopilot.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Autopilot message, length delimited. Does not implicitly {@link google.container.v1.Autopilot.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.Autopilot
+                     * @static
+                     * @param {google.container.v1.IAutopilot} message Autopilot message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Autopilot.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Autopilot message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.Autopilot
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.Autopilot} Autopilot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Autopilot.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.Autopilot();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.enabled = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Autopilot message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.Autopilot
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.Autopilot} Autopilot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Autopilot.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Autopilot message.
+                     * @function verify
+                     * @memberof google.container.v1.Autopilot
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Autopilot.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Autopilot message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.Autopilot
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.Autopilot} Autopilot
+                     */
+                    Autopilot.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.Autopilot)
+                            return object;
+                        var message = new $root.google.container.v1.Autopilot();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Autopilot message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.Autopilot
+                     * @static
+                     * @param {google.container.v1.Autopilot} message Autopilot
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Autopilot.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Autopilot to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.Autopilot
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Autopilot.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Autopilot;
+                })();
+    
+                v1.LoggingConfig = (function() {
+    
+                    /**
+                     * Properties of a LoggingConfig.
+                     * @memberof google.container.v1
+                     * @interface ILoggingConfig
+                     * @property {google.container.v1.ILoggingComponentConfig|null} [componentConfig] LoggingConfig componentConfig
+                     */
+    
+                    /**
+                     * Constructs a new LoggingConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a LoggingConfig.
+                     * @implements ILoggingConfig
+                     * @constructor
+                     * @param {google.container.v1.ILoggingConfig=} [properties] Properties to set
+                     */
+                    function LoggingConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * LoggingConfig componentConfig.
+                     * @member {google.container.v1.ILoggingComponentConfig|null|undefined} componentConfig
+                     * @memberof google.container.v1.LoggingConfig
+                     * @instance
+                     */
+                    LoggingConfig.prototype.componentConfig = null;
+    
+                    /**
+                     * Creates a new LoggingConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.LoggingConfig
+                     * @static
+                     * @param {google.container.v1.ILoggingConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.LoggingConfig} LoggingConfig instance
+                     */
+                    LoggingConfig.create = function create(properties) {
+                        return new LoggingConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified LoggingConfig message. Does not implicitly {@link google.container.v1.LoggingConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.LoggingConfig
+                     * @static
+                     * @param {google.container.v1.ILoggingConfig} message LoggingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LoggingConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.componentConfig != null && Object.hasOwnProperty.call(message, "componentConfig"))
+                            $root.google.container.v1.LoggingComponentConfig.encode(message.componentConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified LoggingConfig message, length delimited. Does not implicitly {@link google.container.v1.LoggingConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.LoggingConfig
+                     * @static
+                     * @param {google.container.v1.ILoggingConfig} message LoggingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LoggingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a LoggingConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.LoggingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.LoggingConfig} LoggingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LoggingConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.LoggingConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.componentConfig = $root.google.container.v1.LoggingComponentConfig.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a LoggingConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.LoggingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.LoggingConfig} LoggingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LoggingConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a LoggingConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.LoggingConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    LoggingConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.componentConfig != null && message.hasOwnProperty("componentConfig")) {
+                            var error = $root.google.container.v1.LoggingComponentConfig.verify(message.componentConfig);
+                            if (error)
+                                return "componentConfig." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a LoggingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.LoggingConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.LoggingConfig} LoggingConfig
+                     */
+                    LoggingConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.LoggingConfig)
+                            return object;
+                        var message = new $root.google.container.v1.LoggingConfig();
+                        if (object.componentConfig != null) {
+                            if (typeof object.componentConfig !== "object")
+                                throw TypeError(".google.container.v1.LoggingConfig.componentConfig: object expected");
+                            message.componentConfig = $root.google.container.v1.LoggingComponentConfig.fromObject(object.componentConfig);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a LoggingConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.LoggingConfig
+                     * @static
+                     * @param {google.container.v1.LoggingConfig} message LoggingConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    LoggingConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.componentConfig = null;
+                        if (message.componentConfig != null && message.hasOwnProperty("componentConfig"))
+                            object.componentConfig = $root.google.container.v1.LoggingComponentConfig.toObject(message.componentConfig, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this LoggingConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.LoggingConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    LoggingConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return LoggingConfig;
+                })();
+    
+                v1.LoggingComponentConfig = (function() {
+    
+                    /**
+                     * Properties of a LoggingComponentConfig.
+                     * @memberof google.container.v1
+                     * @interface ILoggingComponentConfig
+                     * @property {Array.<google.container.v1.LoggingComponentConfig.Component>|null} [enableComponents] LoggingComponentConfig enableComponents
+                     */
+    
+                    /**
+                     * Constructs a new LoggingComponentConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a LoggingComponentConfig.
+                     * @implements ILoggingComponentConfig
+                     * @constructor
+                     * @param {google.container.v1.ILoggingComponentConfig=} [properties] Properties to set
+                     */
+                    function LoggingComponentConfig(properties) {
+                        this.enableComponents = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * LoggingComponentConfig enableComponents.
+                     * @member {Array.<google.container.v1.LoggingComponentConfig.Component>} enableComponents
+                     * @memberof google.container.v1.LoggingComponentConfig
+                     * @instance
+                     */
+                    LoggingComponentConfig.prototype.enableComponents = $util.emptyArray;
+    
+                    /**
+                     * Creates a new LoggingComponentConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.LoggingComponentConfig
+                     * @static
+                     * @param {google.container.v1.ILoggingComponentConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.LoggingComponentConfig} LoggingComponentConfig instance
+                     */
+                    LoggingComponentConfig.create = function create(properties) {
+                        return new LoggingComponentConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified LoggingComponentConfig message. Does not implicitly {@link google.container.v1.LoggingComponentConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.LoggingComponentConfig
+                     * @static
+                     * @param {google.container.v1.ILoggingComponentConfig} message LoggingComponentConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LoggingComponentConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enableComponents != null && message.enableComponents.length) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                            for (var i = 0; i < message.enableComponents.length; ++i)
+                                writer.int32(message.enableComponents[i]);
+                            writer.ldelim();
+                        }
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified LoggingComponentConfig message, length delimited. Does not implicitly {@link google.container.v1.LoggingComponentConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.LoggingComponentConfig
+                     * @static
+                     * @param {google.container.v1.ILoggingComponentConfig} message LoggingComponentConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LoggingComponentConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a LoggingComponentConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.LoggingComponentConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.LoggingComponentConfig} LoggingComponentConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LoggingComponentConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.LoggingComponentConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.enableComponents && message.enableComponents.length))
+                                    message.enableComponents = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.enableComponents.push(reader.int32());
+                                } else
+                                    message.enableComponents.push(reader.int32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a LoggingComponentConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.LoggingComponentConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.LoggingComponentConfig} LoggingComponentConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LoggingComponentConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a LoggingComponentConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.LoggingComponentConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    LoggingComponentConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enableComponents != null && message.hasOwnProperty("enableComponents")) {
+                            if (!Array.isArray(message.enableComponents))
+                                return "enableComponents: array expected";
+                            for (var i = 0; i < message.enableComponents.length; ++i)
+                                switch (message.enableComponents[i]) {
+                                default:
+                                    return "enableComponents: enum value[] expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a LoggingComponentConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.LoggingComponentConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.LoggingComponentConfig} LoggingComponentConfig
+                     */
+                    LoggingComponentConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.LoggingComponentConfig)
+                            return object;
+                        var message = new $root.google.container.v1.LoggingComponentConfig();
+                        if (object.enableComponents) {
+                            if (!Array.isArray(object.enableComponents))
+                                throw TypeError(".google.container.v1.LoggingComponentConfig.enableComponents: array expected");
+                            message.enableComponents = [];
+                            for (var i = 0; i < object.enableComponents.length; ++i)
+                                switch (object.enableComponents[i]) {
+                                default:
+                                case "COMPONENT_UNSPECIFIED":
+                                case 0:
+                                    message.enableComponents[i] = 0;
+                                    break;
+                                case "SYSTEM_COMPONENTS":
+                                case 1:
+                                    message.enableComponents[i] = 1;
+                                    break;
+                                case "WORKLOADS":
+                                case 2:
+                                    message.enableComponents[i] = 2;
+                                    break;
+                                }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a LoggingComponentConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.LoggingComponentConfig
+                     * @static
+                     * @param {google.container.v1.LoggingComponentConfig} message LoggingComponentConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    LoggingComponentConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.enableComponents = [];
+                        if (message.enableComponents && message.enableComponents.length) {
+                            object.enableComponents = [];
+                            for (var j = 0; j < message.enableComponents.length; ++j)
+                                object.enableComponents[j] = options.enums === String ? $root.google.container.v1.LoggingComponentConfig.Component[message.enableComponents[j]] : message.enableComponents[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this LoggingComponentConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.LoggingComponentConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    LoggingComponentConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Component enum.
+                     * @name google.container.v1.LoggingComponentConfig.Component
+                     * @enum {number}
+                     * @property {number} COMPONENT_UNSPECIFIED=0 COMPONENT_UNSPECIFIED value
+                     * @property {number} SYSTEM_COMPONENTS=1 SYSTEM_COMPONENTS value
+                     * @property {number} WORKLOADS=2 WORKLOADS value
+                     */
+                    LoggingComponentConfig.Component = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "COMPONENT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SYSTEM_COMPONENTS"] = 1;
+                        values[valuesById[2] = "WORKLOADS"] = 2;
+                        return values;
+                    })();
+    
+                    return LoggingComponentConfig;
+                })();
+    
+                v1.MonitoringConfig = (function() {
+    
+                    /**
+                     * Properties of a MonitoringConfig.
+                     * @memberof google.container.v1
+                     * @interface IMonitoringConfig
+                     * @property {google.container.v1.IMonitoringComponentConfig|null} [componentConfig] MonitoringConfig componentConfig
+                     */
+    
+                    /**
+                     * Constructs a new MonitoringConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a MonitoringConfig.
+                     * @implements IMonitoringConfig
+                     * @constructor
+                     * @param {google.container.v1.IMonitoringConfig=} [properties] Properties to set
+                     */
+                    function MonitoringConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MonitoringConfig componentConfig.
+                     * @member {google.container.v1.IMonitoringComponentConfig|null|undefined} componentConfig
+                     * @memberof google.container.v1.MonitoringConfig
+                     * @instance
+                     */
+                    MonitoringConfig.prototype.componentConfig = null;
+    
+                    /**
+                     * Creates a new MonitoringConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.MonitoringConfig
+                     * @static
+                     * @param {google.container.v1.IMonitoringConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.MonitoringConfig} MonitoringConfig instance
+                     */
+                    MonitoringConfig.create = function create(properties) {
+                        return new MonitoringConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MonitoringConfig message. Does not implicitly {@link google.container.v1.MonitoringConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.MonitoringConfig
+                     * @static
+                     * @param {google.container.v1.IMonitoringConfig} message MonitoringConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MonitoringConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.componentConfig != null && Object.hasOwnProperty.call(message, "componentConfig"))
+                            $root.google.container.v1.MonitoringComponentConfig.encode(message.componentConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MonitoringConfig message, length delimited. Does not implicitly {@link google.container.v1.MonitoringConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.MonitoringConfig
+                     * @static
+                     * @param {google.container.v1.IMonitoringConfig} message MonitoringConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MonitoringConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MonitoringConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.MonitoringConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.MonitoringConfig} MonitoringConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MonitoringConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.MonitoringConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.componentConfig = $root.google.container.v1.MonitoringComponentConfig.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MonitoringConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.MonitoringConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.MonitoringConfig} MonitoringConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MonitoringConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MonitoringConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.MonitoringConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MonitoringConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.componentConfig != null && message.hasOwnProperty("componentConfig")) {
+                            var error = $root.google.container.v1.MonitoringComponentConfig.verify(message.componentConfig);
+                            if (error)
+                                return "componentConfig." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MonitoringConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.MonitoringConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.MonitoringConfig} MonitoringConfig
+                     */
+                    MonitoringConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.MonitoringConfig)
+                            return object;
+                        var message = new $root.google.container.v1.MonitoringConfig();
+                        if (object.componentConfig != null) {
+                            if (typeof object.componentConfig !== "object")
+                                throw TypeError(".google.container.v1.MonitoringConfig.componentConfig: object expected");
+                            message.componentConfig = $root.google.container.v1.MonitoringComponentConfig.fromObject(object.componentConfig);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MonitoringConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.MonitoringConfig
+                     * @static
+                     * @param {google.container.v1.MonitoringConfig} message MonitoringConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MonitoringConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.componentConfig = null;
+                        if (message.componentConfig != null && message.hasOwnProperty("componentConfig"))
+                            object.componentConfig = $root.google.container.v1.MonitoringComponentConfig.toObject(message.componentConfig, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MonitoringConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.MonitoringConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MonitoringConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return MonitoringConfig;
+                })();
+    
+                v1.MonitoringComponentConfig = (function() {
+    
+                    /**
+                     * Properties of a MonitoringComponentConfig.
+                     * @memberof google.container.v1
+                     * @interface IMonitoringComponentConfig
+                     * @property {Array.<google.container.v1.MonitoringComponentConfig.Component>|null} [enableComponents] MonitoringComponentConfig enableComponents
+                     */
+    
+                    /**
+                     * Constructs a new MonitoringComponentConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a MonitoringComponentConfig.
+                     * @implements IMonitoringComponentConfig
+                     * @constructor
+                     * @param {google.container.v1.IMonitoringComponentConfig=} [properties] Properties to set
+                     */
+                    function MonitoringComponentConfig(properties) {
+                        this.enableComponents = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MonitoringComponentConfig enableComponents.
+                     * @member {Array.<google.container.v1.MonitoringComponentConfig.Component>} enableComponents
+                     * @memberof google.container.v1.MonitoringComponentConfig
+                     * @instance
+                     */
+                    MonitoringComponentConfig.prototype.enableComponents = $util.emptyArray;
+    
+                    /**
+                     * Creates a new MonitoringComponentConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.MonitoringComponentConfig
+                     * @static
+                     * @param {google.container.v1.IMonitoringComponentConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.MonitoringComponentConfig} MonitoringComponentConfig instance
+                     */
+                    MonitoringComponentConfig.create = function create(properties) {
+                        return new MonitoringComponentConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MonitoringComponentConfig message. Does not implicitly {@link google.container.v1.MonitoringComponentConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.MonitoringComponentConfig
+                     * @static
+                     * @param {google.container.v1.IMonitoringComponentConfig} message MonitoringComponentConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MonitoringComponentConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enableComponents != null && message.enableComponents.length) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                            for (var i = 0; i < message.enableComponents.length; ++i)
+                                writer.int32(message.enableComponents[i]);
+                            writer.ldelim();
+                        }
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MonitoringComponentConfig message, length delimited. Does not implicitly {@link google.container.v1.MonitoringComponentConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.MonitoringComponentConfig
+                     * @static
+                     * @param {google.container.v1.IMonitoringComponentConfig} message MonitoringComponentConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MonitoringComponentConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MonitoringComponentConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.MonitoringComponentConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.MonitoringComponentConfig} MonitoringComponentConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MonitoringComponentConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.MonitoringComponentConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.enableComponents && message.enableComponents.length))
+                                    message.enableComponents = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.enableComponents.push(reader.int32());
+                                } else
+                                    message.enableComponents.push(reader.int32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MonitoringComponentConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.MonitoringComponentConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.MonitoringComponentConfig} MonitoringComponentConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MonitoringComponentConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MonitoringComponentConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.MonitoringComponentConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MonitoringComponentConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enableComponents != null && message.hasOwnProperty("enableComponents")) {
+                            if (!Array.isArray(message.enableComponents))
+                                return "enableComponents: array expected";
+                            for (var i = 0; i < message.enableComponents.length; ++i)
+                                switch (message.enableComponents[i]) {
+                                default:
+                                    return "enableComponents: enum value[] expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MonitoringComponentConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.MonitoringComponentConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.MonitoringComponentConfig} MonitoringComponentConfig
+                     */
+                    MonitoringComponentConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.MonitoringComponentConfig)
+                            return object;
+                        var message = new $root.google.container.v1.MonitoringComponentConfig();
+                        if (object.enableComponents) {
+                            if (!Array.isArray(object.enableComponents))
+                                throw TypeError(".google.container.v1.MonitoringComponentConfig.enableComponents: array expected");
+                            message.enableComponents = [];
+                            for (var i = 0; i < object.enableComponents.length; ++i)
+                                switch (object.enableComponents[i]) {
+                                default:
+                                case "COMPONENT_UNSPECIFIED":
+                                case 0:
+                                    message.enableComponents[i] = 0;
+                                    break;
+                                case "SYSTEM_COMPONENTS":
+                                case 1:
+                                    message.enableComponents[i] = 1;
+                                    break;
+                                }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MonitoringComponentConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.MonitoringComponentConfig
+                     * @static
+                     * @param {google.container.v1.MonitoringComponentConfig} message MonitoringComponentConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MonitoringComponentConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.enableComponents = [];
+                        if (message.enableComponents && message.enableComponents.length) {
+                            object.enableComponents = [];
+                            for (var j = 0; j < message.enableComponents.length; ++j)
+                                object.enableComponents[j] = options.enums === String ? $root.google.container.v1.MonitoringComponentConfig.Component[message.enableComponents[j]] : message.enableComponents[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MonitoringComponentConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.MonitoringComponentConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MonitoringComponentConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Component enum.
+                     * @name google.container.v1.MonitoringComponentConfig.Component
+                     * @enum {number}
+                     * @property {number} COMPONENT_UNSPECIFIED=0 COMPONENT_UNSPECIFIED value
+                     * @property {number} SYSTEM_COMPONENTS=1 SYSTEM_COMPONENTS value
+                     */
+                    MonitoringComponentConfig.Component = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "COMPONENT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SYSTEM_COMPONENTS"] = 1;
+                        return values;
+                    })();
+    
+                    return MonitoringComponentConfig;
+                })();
+    
                 return v1;
             })();
     
@@ -30937,6 +37764,641 @@
                 values[valuesById[6] = "UNORDERED_LIST"] = 6;
                 values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
                 return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        case 10:
+                            if (!(message.style && message.style.length))
+                                message.style = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.style.push(reader.int32());
+                            } else
+                                message.style.push(reader.int32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
             })();
     
             return api;
@@ -35132,6 +42594,7 @@
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
+                 * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
     
                 /**
@@ -35144,6 +42607,7 @@
                  */
                 function FileOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -35319,6 +42783,14 @@
                 FileOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FileOptions .google.api.resourceDefinition.
+                 * @member {Array.<google.api.IResourceDescriptor>} .google.api.resourceDefinition
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype[".google.api.resourceDefinition"] = $util.emptyArray;
+    
+                /**
                  * Creates a new FileOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileOptions
@@ -35385,6 +42857,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
+                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -35483,6 +42958,11 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                message[".google.api.resourceDefinition"] = [];
+                            message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -35594,6 +43074,15 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
+                        if (!Array.isArray(message[".google.api.resourceDefinition"]))
+                            return ".google.api.resourceDefinition: array expected";
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            if (error)
+                                return ".google.api.resourceDefinition." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -35671,6 +43160,16 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resourceDefinition"]) {
+                        if (!Array.isArray(object[".google.api.resourceDefinition"]))
+                            throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
+                        message[".google.api.resourceDefinition"] = [];
+                        for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
+                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
+                                throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -35687,8 +43186,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.resourceDefinition"] = [];
+                    }
                     if (options.defaults) {
                         object.javaPackage = "";
                         object.javaOuterClassname = "";
@@ -35756,6 +43257,11 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
+                        object[".google.api.resourceDefinition"] = [];
+                        for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
+                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
+                    }
                     return object;
                 };
     
@@ -35800,6 +43306,7 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
+                 * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
     
                 /**
@@ -35859,6 +43366,14 @@
                 MessageOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * MessageOptions .google.api.resource.
+                 * @member {google.api.IResourceDescriptor|null|undefined} .google.api.resource
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype[".google.api.resource"] = null;
+    
+                /**
                  * Creates a new MessageOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MessageOptions
@@ -35893,6 +43408,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resource"] != null && Object.hasOwnProperty.call(message, ".google.api.resource"))
+                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -35943,6 +43460,9 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -36000,6 +43520,11 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        if (error)
+                            return ".google.api.resource." + error;
+                    }
                     return null;
                 };
     
@@ -36033,6 +43558,11 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resource"] != null) {
+                        if (typeof object[".google.api.resource"] !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                    }
                     return message;
                 };
     
@@ -36056,6 +43586,7 @@
                         object.noStandardDescriptorAccessor = false;
                         object.deprecated = false;
                         object.mapEntry = false;
+                        object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
@@ -36070,6 +43601,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
                     return object;
                 };
     
@@ -36101,6 +43634,7 @@
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -36185,6 +43719,14 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -36229,6 +43771,8 @@
                             writer.int32(message[".google.api.fieldBehavior"][i]);
                         writer.ldelim();
                     }
+                    if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
+                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
                 };
     
@@ -36295,6 +43839,9 @@
                                     message[".google.api.fieldBehavior"].push(reader.int32());
                             } else
                                 message[".google.api.fieldBehavior"].push(reader.int32());
+                            break;
+                        case 1055:
+                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -36387,6 +43934,11 @@
                             case 7:
                                 break;
                             }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -36490,6 +44042,11 @@
                                 break;
                             }
                     }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                    }
                     return message;
                 };
     
@@ -36517,6 +44074,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
+                        object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -36540,6 +44098,8 @@
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
                             object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
                     return object;
                 };
     
@@ -39922,7 +47482,2256 @@
                 return Timestamp;
             })();
     
+            protobuf.DoubleValue = (function() {
+    
+                /**
+                 * Properties of a DoubleValue.
+                 * @memberof google.protobuf
+                 * @interface IDoubleValue
+                 * @property {number|null} [value] DoubleValue value
+                 */
+    
+                /**
+                 * Constructs a new DoubleValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a DoubleValue.
+                 * @implements IDoubleValue
+                 * @constructor
+                 * @param {google.protobuf.IDoubleValue=} [properties] Properties to set
+                 */
+                function DoubleValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DoubleValue value.
+                 * @member {number} value
+                 * @memberof google.protobuf.DoubleValue
+                 * @instance
+                 */
+                DoubleValue.prototype.value = 0;
+    
+                /**
+                 * Creates a new DoubleValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {google.protobuf.IDoubleValue=} [properties] Properties to set
+                 * @returns {google.protobuf.DoubleValue} DoubleValue instance
+                 */
+                DoubleValue.create = function create(properties) {
+                    return new DoubleValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified DoubleValue message. Does not implicitly {@link google.protobuf.DoubleValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {google.protobuf.IDoubleValue} message DoubleValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DoubleValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 1 =*/9).double(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DoubleValue message, length delimited. Does not implicitly {@link google.protobuf.DoubleValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {google.protobuf.IDoubleValue} message DoubleValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DoubleValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DoubleValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.DoubleValue} DoubleValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DoubleValue.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DoubleValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.value = reader.double();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DoubleValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.DoubleValue} DoubleValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DoubleValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DoubleValue message.
+                 * @function verify
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DoubleValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value !== "number")
+                            return "value: number expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a DoubleValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.DoubleValue} DoubleValue
+                 */
+                DoubleValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.DoubleValue)
+                        return object;
+                    var message = new $root.google.protobuf.DoubleValue();
+                    if (object.value != null)
+                        message.value = Number(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DoubleValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {google.protobuf.DoubleValue} message DoubleValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DoubleValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.json && !isFinite(message.value) ? String(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this DoubleValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.DoubleValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DoubleValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return DoubleValue;
+            })();
+    
+            protobuf.FloatValue = (function() {
+    
+                /**
+                 * Properties of a FloatValue.
+                 * @memberof google.protobuf
+                 * @interface IFloatValue
+                 * @property {number|null} [value] FloatValue value
+                 */
+    
+                /**
+                 * Constructs a new FloatValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FloatValue.
+                 * @implements IFloatValue
+                 * @constructor
+                 * @param {google.protobuf.IFloatValue=} [properties] Properties to set
+                 */
+                function FloatValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FloatValue value.
+                 * @member {number} value
+                 * @memberof google.protobuf.FloatValue
+                 * @instance
+                 */
+                FloatValue.prototype.value = 0;
+    
+                /**
+                 * Creates a new FloatValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {google.protobuf.IFloatValue=} [properties] Properties to set
+                 * @returns {google.protobuf.FloatValue} FloatValue instance
+                 */
+                FloatValue.create = function create(properties) {
+                    return new FloatValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified FloatValue message. Does not implicitly {@link google.protobuf.FloatValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {google.protobuf.IFloatValue} message FloatValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FloatValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 5 =*/13).float(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FloatValue message, length delimited. Does not implicitly {@link google.protobuf.FloatValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {google.protobuf.IFloatValue} message FloatValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FloatValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FloatValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FloatValue} FloatValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FloatValue.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FloatValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.value = reader.float();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FloatValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FloatValue} FloatValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FloatValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FloatValue message.
+                 * @function verify
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FloatValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value !== "number")
+                            return "value: number expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a FloatValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FloatValue} FloatValue
+                 */
+                FloatValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FloatValue)
+                        return object;
+                    var message = new $root.google.protobuf.FloatValue();
+                    if (object.value != null)
+                        message.value = Number(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FloatValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {google.protobuf.FloatValue} message FloatValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FloatValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.json && !isFinite(message.value) ? String(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FloatValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FloatValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FloatValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return FloatValue;
+            })();
+    
+            protobuf.Int64Value = (function() {
+    
+                /**
+                 * Properties of an Int64Value.
+                 * @memberof google.protobuf
+                 * @interface IInt64Value
+                 * @property {number|Long|null} [value] Int64Value value
+                 */
+    
+                /**
+                 * Constructs a new Int64Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Int64Value.
+                 * @implements IInt64Value
+                 * @constructor
+                 * @param {google.protobuf.IInt64Value=} [properties] Properties to set
+                 */
+                function Int64Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Int64Value value.
+                 * @member {number|Long} value
+                 * @memberof google.protobuf.Int64Value
+                 * @instance
+                 */
+                Int64Value.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Creates a new Int64Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {google.protobuf.IInt64Value=} [properties] Properties to set
+                 * @returns {google.protobuf.Int64Value} Int64Value instance
+                 */
+                Int64Value.create = function create(properties) {
+                    return new Int64Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified Int64Value message. Does not implicitly {@link google.protobuf.Int64Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {google.protobuf.IInt64Value} message Int64Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Int64Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Int64Value message, length delimited. Does not implicitly {@link google.protobuf.Int64Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {google.protobuf.IInt64Value} message Int64Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Int64Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Int64Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Int64Value} Int64Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Int64Value.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int64Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.value = reader.int64();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Int64Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Int64Value} Int64Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Int64Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Int64Value message.
+                 * @function verify
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Int64Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
+                            return "value: integer|Long expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Int64Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Int64Value} Int64Value
+                 */
+                Int64Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Int64Value)
+                        return object;
+                    var message = new $root.google.protobuf.Int64Value();
+                    if (object.value != null)
+                        if ($util.Long)
+                            (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                        else if (typeof object.value === "string")
+                            message.value = parseInt(object.value, 10);
+                        else if (typeof object.value === "number")
+                            message.value = object.value;
+                        else if (typeof object.value === "object")
+                            message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Int64Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {google.protobuf.Int64Value} message Int64Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Int64Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.value = options.longs === String ? "0" : 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value === "number")
+                            object.value = options.longs === String ? String(message.value) : message.value;
+                        else
+                            object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Int64Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Int64Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Int64Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Int64Value;
+            })();
+    
+            protobuf.UInt64Value = (function() {
+    
+                /**
+                 * Properties of a UInt64Value.
+                 * @memberof google.protobuf
+                 * @interface IUInt64Value
+                 * @property {number|Long|null} [value] UInt64Value value
+                 */
+    
+                /**
+                 * Constructs a new UInt64Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a UInt64Value.
+                 * @implements IUInt64Value
+                 * @constructor
+                 * @param {google.protobuf.IUInt64Value=} [properties] Properties to set
+                 */
+                function UInt64Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UInt64Value value.
+                 * @member {number|Long} value
+                 * @memberof google.protobuf.UInt64Value
+                 * @instance
+                 */
+                UInt64Value.prototype.value = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+                /**
+                 * Creates a new UInt64Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {google.protobuf.IUInt64Value=} [properties] Properties to set
+                 * @returns {google.protobuf.UInt64Value} UInt64Value instance
+                 */
+                UInt64Value.create = function create(properties) {
+                    return new UInt64Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified UInt64Value message. Does not implicitly {@link google.protobuf.UInt64Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {google.protobuf.IUInt64Value} message UInt64Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UInt64Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UInt64Value message, length delimited. Does not implicitly {@link google.protobuf.UInt64Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {google.protobuf.IUInt64Value} message UInt64Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UInt64Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a UInt64Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.UInt64Value} UInt64Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UInt64Value.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt64Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.value = reader.uint64();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a UInt64Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.UInt64Value} UInt64Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UInt64Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a UInt64Value message.
+                 * @function verify
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UInt64Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
+                            return "value: integer|Long expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a UInt64Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.UInt64Value} UInt64Value
+                 */
+                UInt64Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.UInt64Value)
+                        return object;
+                    var message = new $root.google.protobuf.UInt64Value();
+                    if (object.value != null)
+                        if ($util.Long)
+                            (message.value = $util.Long.fromValue(object.value)).unsigned = true;
+                        else if (typeof object.value === "string")
+                            message.value = parseInt(object.value, 10);
+                        else if (typeof object.value === "number")
+                            message.value = object.value;
+                        else if (typeof object.value === "object")
+                            message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber(true);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a UInt64Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {google.protobuf.UInt64Value} message UInt64Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UInt64Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, true);
+                            object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.value = options.longs === String ? "0" : 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value === "number")
+                            object.value = options.longs === String ? String(message.value) : message.value;
+                        else
+                            object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber(true) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this UInt64Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.UInt64Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UInt64Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return UInt64Value;
+            })();
+    
+            protobuf.Int32Value = (function() {
+    
+                /**
+                 * Properties of an Int32Value.
+                 * @memberof google.protobuf
+                 * @interface IInt32Value
+                 * @property {number|null} [value] Int32Value value
+                 */
+    
+                /**
+                 * Constructs a new Int32Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Int32Value.
+                 * @implements IInt32Value
+                 * @constructor
+                 * @param {google.protobuf.IInt32Value=} [properties] Properties to set
+                 */
+                function Int32Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Int32Value value.
+                 * @member {number} value
+                 * @memberof google.protobuf.Int32Value
+                 * @instance
+                 */
+                Int32Value.prototype.value = 0;
+    
+                /**
+                 * Creates a new Int32Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {google.protobuf.IInt32Value=} [properties] Properties to set
+                 * @returns {google.protobuf.Int32Value} Int32Value instance
+                 */
+                Int32Value.create = function create(properties) {
+                    return new Int32Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified Int32Value message. Does not implicitly {@link google.protobuf.Int32Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {google.protobuf.IInt32Value} message Int32Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Int32Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Int32Value message, length delimited. Does not implicitly {@link google.protobuf.Int32Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {google.protobuf.IInt32Value} message Int32Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Int32Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Int32Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Int32Value} Int32Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Int32Value.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int32Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.value = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Int32Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Int32Value} Int32Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Int32Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Int32Value message.
+                 * @function verify
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Int32Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isInteger(message.value))
+                            return "value: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Int32Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Int32Value} Int32Value
+                 */
+                Int32Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Int32Value)
+                        return object;
+                    var message = new $root.google.protobuf.Int32Value();
+                    if (object.value != null)
+                        message.value = object.value | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Int32Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {google.protobuf.Int32Value} message Int32Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Int32Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Int32Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Int32Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Int32Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Int32Value;
+            })();
+    
+            protobuf.UInt32Value = (function() {
+    
+                /**
+                 * Properties of a UInt32Value.
+                 * @memberof google.protobuf
+                 * @interface IUInt32Value
+                 * @property {number|null} [value] UInt32Value value
+                 */
+    
+                /**
+                 * Constructs a new UInt32Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a UInt32Value.
+                 * @implements IUInt32Value
+                 * @constructor
+                 * @param {google.protobuf.IUInt32Value=} [properties] Properties to set
+                 */
+                function UInt32Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UInt32Value value.
+                 * @member {number} value
+                 * @memberof google.protobuf.UInt32Value
+                 * @instance
+                 */
+                UInt32Value.prototype.value = 0;
+    
+                /**
+                 * Creates a new UInt32Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {google.protobuf.IUInt32Value=} [properties] Properties to set
+                 * @returns {google.protobuf.UInt32Value} UInt32Value instance
+                 */
+                UInt32Value.create = function create(properties) {
+                    return new UInt32Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified UInt32Value message. Does not implicitly {@link google.protobuf.UInt32Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {google.protobuf.IUInt32Value} message UInt32Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UInt32Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UInt32Value message, length delimited. Does not implicitly {@link google.protobuf.UInt32Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {google.protobuf.IUInt32Value} message UInt32Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UInt32Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a UInt32Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.UInt32Value} UInt32Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UInt32Value.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt32Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.value = reader.uint32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a UInt32Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.UInt32Value} UInt32Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UInt32Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a UInt32Value message.
+                 * @function verify
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UInt32Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isInteger(message.value))
+                            return "value: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a UInt32Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.UInt32Value} UInt32Value
+                 */
+                UInt32Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.UInt32Value)
+                        return object;
+                    var message = new $root.google.protobuf.UInt32Value();
+                    if (object.value != null)
+                        message.value = object.value >>> 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a UInt32Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {google.protobuf.UInt32Value} message UInt32Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UInt32Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this UInt32Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.UInt32Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UInt32Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return UInt32Value;
+            })();
+    
+            protobuf.BoolValue = (function() {
+    
+                /**
+                 * Properties of a BoolValue.
+                 * @memberof google.protobuf
+                 * @interface IBoolValue
+                 * @property {boolean|null} [value] BoolValue value
+                 */
+    
+                /**
+                 * Constructs a new BoolValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a BoolValue.
+                 * @implements IBoolValue
+                 * @constructor
+                 * @param {google.protobuf.IBoolValue=} [properties] Properties to set
+                 */
+                function BoolValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * BoolValue value.
+                 * @member {boolean} value
+                 * @memberof google.protobuf.BoolValue
+                 * @instance
+                 */
+                BoolValue.prototype.value = false;
+    
+                /**
+                 * Creates a new BoolValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {google.protobuf.IBoolValue=} [properties] Properties to set
+                 * @returns {google.protobuf.BoolValue} BoolValue instance
+                 */
+                BoolValue.create = function create(properties) {
+                    return new BoolValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified BoolValue message. Does not implicitly {@link google.protobuf.BoolValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {google.protobuf.IBoolValue} message BoolValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BoolValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified BoolValue message, length delimited. Does not implicitly {@link google.protobuf.BoolValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {google.protobuf.IBoolValue} message BoolValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BoolValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a BoolValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.BoolValue} BoolValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BoolValue.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BoolValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.value = reader.bool();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a BoolValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.BoolValue} BoolValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BoolValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a BoolValue message.
+                 * @function verify
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                BoolValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value !== "boolean")
+                            return "value: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a BoolValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.BoolValue} BoolValue
+                 */
+                BoolValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.BoolValue)
+                        return object;
+                    var message = new $root.google.protobuf.BoolValue();
+                    if (object.value != null)
+                        message.value = Boolean(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a BoolValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {google.protobuf.BoolValue} message BoolValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                BoolValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = false;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this BoolValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.BoolValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                BoolValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return BoolValue;
+            })();
+    
+            protobuf.StringValue = (function() {
+    
+                /**
+                 * Properties of a StringValue.
+                 * @memberof google.protobuf
+                 * @interface IStringValue
+                 * @property {string|null} [value] StringValue value
+                 */
+    
+                /**
+                 * Constructs a new StringValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a StringValue.
+                 * @implements IStringValue
+                 * @constructor
+                 * @param {google.protobuf.IStringValue=} [properties] Properties to set
+                 */
+                function StringValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * StringValue value.
+                 * @member {string} value
+                 * @memberof google.protobuf.StringValue
+                 * @instance
+                 */
+                StringValue.prototype.value = "";
+    
+                /**
+                 * Creates a new StringValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {google.protobuf.IStringValue=} [properties] Properties to set
+                 * @returns {google.protobuf.StringValue} StringValue instance
+                 */
+                StringValue.create = function create(properties) {
+                    return new StringValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified StringValue message. Does not implicitly {@link google.protobuf.StringValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {google.protobuf.IStringValue} message StringValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                StringValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified StringValue message, length delimited. Does not implicitly {@link google.protobuf.StringValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {google.protobuf.IStringValue} message StringValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                StringValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a StringValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.StringValue} StringValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                StringValue.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.StringValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.value = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a StringValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.StringValue} StringValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                StringValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a StringValue message.
+                 * @function verify
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                StringValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isString(message.value))
+                            return "value: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a StringValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.StringValue} StringValue
+                 */
+                StringValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.StringValue)
+                        return object;
+                    var message = new $root.google.protobuf.StringValue();
+                    if (object.value != null)
+                        message.value = String(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a StringValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {google.protobuf.StringValue} message StringValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                StringValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = "";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this StringValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.StringValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                StringValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return StringValue;
+            })();
+    
+            protobuf.BytesValue = (function() {
+    
+                /**
+                 * Properties of a BytesValue.
+                 * @memberof google.protobuf
+                 * @interface IBytesValue
+                 * @property {Uint8Array|null} [value] BytesValue value
+                 */
+    
+                /**
+                 * Constructs a new BytesValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a BytesValue.
+                 * @implements IBytesValue
+                 * @constructor
+                 * @param {google.protobuf.IBytesValue=} [properties] Properties to set
+                 */
+                function BytesValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * BytesValue value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.BytesValue
+                 * @instance
+                 */
+                BytesValue.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new BytesValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {google.protobuf.IBytesValue=} [properties] Properties to set
+                 * @returns {google.protobuf.BytesValue} BytesValue instance
+                 */
+                BytesValue.create = function create(properties) {
+                    return new BytesValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified BytesValue message. Does not implicitly {@link google.protobuf.BytesValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {google.protobuf.IBytesValue} message BytesValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BytesValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified BytesValue message, length delimited. Does not implicitly {@link google.protobuf.BytesValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {google.protobuf.IBytesValue} message BytesValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BytesValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a BytesValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.BytesValue} BytesValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BytesValue.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BytesValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.value = reader.bytes();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a BytesValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.BytesValue} BytesValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BytesValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a BytesValue message.
+                 * @function verify
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                BytesValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a BytesValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.BytesValue} BytesValue
+                 */
+                BytesValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.BytesValue)
+                        return object;
+                    var message = new $root.google.protobuf.BytesValue();
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a BytesValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {google.protobuf.BytesValue} message BytesValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                BytesValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this BytesValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.BytesValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                BytesValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return BytesValue;
+            })();
+    
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type_url = reader.string();
+                            break;
+                        case 2:
+                            message.value = reader.bytes();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Any;
+            })();
+    
             return protobuf;
+        })();
+    
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            /**
+             * Code enum.
+             * @name google.rpc.Code
+             * @enum {number}
+             * @property {number} OK=0 OK value
+             * @property {number} CANCELLED=1 CANCELLED value
+             * @property {number} UNKNOWN=2 UNKNOWN value
+             * @property {number} INVALID_ARGUMENT=3 INVALID_ARGUMENT value
+             * @property {number} DEADLINE_EXCEEDED=4 DEADLINE_EXCEEDED value
+             * @property {number} NOT_FOUND=5 NOT_FOUND value
+             * @property {number} ALREADY_EXISTS=6 ALREADY_EXISTS value
+             * @property {number} PERMISSION_DENIED=7 PERMISSION_DENIED value
+             * @property {number} UNAUTHENTICATED=16 UNAUTHENTICATED value
+             * @property {number} RESOURCE_EXHAUSTED=8 RESOURCE_EXHAUSTED value
+             * @property {number} FAILED_PRECONDITION=9 FAILED_PRECONDITION value
+             * @property {number} ABORTED=10 ABORTED value
+             * @property {number} OUT_OF_RANGE=11 OUT_OF_RANGE value
+             * @property {number} UNIMPLEMENTED=12 UNIMPLEMENTED value
+             * @property {number} INTERNAL=13 INTERNAL value
+             * @property {number} UNAVAILABLE=14 UNAVAILABLE value
+             * @property {number} DATA_LOSS=15 DATA_LOSS value
+             */
+            rpc.Code = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "OK"] = 0;
+                values[valuesById[1] = "CANCELLED"] = 1;
+                values[valuesById[2] = "UNKNOWN"] = 2;
+                values[valuesById[3] = "INVALID_ARGUMENT"] = 3;
+                values[valuesById[4] = "DEADLINE_EXCEEDED"] = 4;
+                values[valuesById[5] = "NOT_FOUND"] = 5;
+                values[valuesById[6] = "ALREADY_EXISTS"] = 6;
+                values[valuesById[7] = "PERMISSION_DENIED"] = 7;
+                values[valuesById[16] = "UNAUTHENTICATED"] = 16;
+                values[valuesById[8] = "RESOURCE_EXHAUSTED"] = 8;
+                values[valuesById[9] = "FAILED_PRECONDITION"] = 9;
+                values[valuesById[10] = "ABORTED"] = 10;
+                values[valuesById[11] = "OUT_OF_RANGE"] = 11;
+                values[valuesById[12] = "UNIMPLEMENTED"] = 12;
+                values[valuesById[13] = "INTERNAL"] = 13;
+                values[valuesById[14] = "UNAVAILABLE"] = 14;
+                values[valuesById[15] = "DATA_LOSS"] = 15;
+                return values;
+            })();
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.code = reader.int32();
+                            break;
+                        case 2:
+                            message.message = reader.string();
+                            break;
+                        case 3:
+                            if (!(message.details && message.details.length))
+                                message.details = [];
+                            message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
         })();
     
         return google;
