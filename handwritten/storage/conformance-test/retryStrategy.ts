@@ -94,12 +94,12 @@ describe('retry conformance testing', () => {
   ) {
     const testCase: RetryTestCase = retryTestCases[testCaseIndex];
     describe(`Scenario ${testCase.id}`, () => {
-      excecuteScenario(testCase);
+      executeScenario(testCase);
     });
   }
 });
 
-function excecuteScenario(testCase: RetryTestCase) {
+function executeScenario(testCase: RetryTestCase) {
   for (
     let instructionNumber = 0;
     instructionNumber < testCase.cases.length;
