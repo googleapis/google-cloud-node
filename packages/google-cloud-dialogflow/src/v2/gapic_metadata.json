@@ -384,6 +384,11 @@
                 "createDocument"
               ]
             },
+            "ImportDocuments": {
+              "methods": [
+                "importDocuments"
+              ]
+            },
             "DeleteDocument": {
               "methods": [
                 "deleteDocument"
@@ -424,6 +429,11 @@
             "CreateDocument": {
               "methods": [
                 "createDocument"
+              ]
+            },
+            "ImportDocuments": {
+              "methods": [
+                "importDocuments"
               ]
             },
             "DeleteDocument": {
@@ -882,6 +892,11 @@
                 "suggestFaqAnswers"
               ]
             },
+            "SuggestSmartReplies": {
+              "methods": [
+                "suggestSmartReplies"
+              ]
+            },
             "ListParticipants": {
               "methods": [
                 "listParticipants",
@@ -922,6 +937,11 @@
             "SuggestFaqAnswers": {
               "methods": [
                 "suggestFaqAnswers"
+              ]
+            },
+            "SuggestSmartReplies": {
+              "methods": [
+                "suggestSmartReplies"
               ]
             },
             "ListParticipants": {

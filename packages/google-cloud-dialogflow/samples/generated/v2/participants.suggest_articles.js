@@ -27,14 +27,14 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The name of the latest conversation message to compile suggestion
+   *  Optional. The name of the latest conversation message to compile suggestion
    *  for. If empty, it will be the latest message of the conversation.
    *  Format: `projects/<Project ID>/locations/<Location
    *  ID>/conversations/<Conversation ID>/messages/<Message ID>`.
    */
   // const latestMessage = 'abc123'
   /**
-   *  Max number of messages prior to and including
+   *  Optional. Max number of messages prior to and including
    *  latest_message google.cloud.dialogflow.v2.SuggestArticlesRequest.latest_message  to use as context
    *  when compiling the suggestion. By default 20 and at most 50.
    */

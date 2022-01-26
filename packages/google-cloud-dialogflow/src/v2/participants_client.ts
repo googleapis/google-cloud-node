@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -356,6 +356,7 @@ export class ParticipantsClient {
       'analyzeContent',
       'suggestArticles',
       'suggestFaqAnswers',
+      'suggestSmartReplies',
     ];
     for (const methodName of participantsStubMethods) {
       const callPromise = this.participantsStub.then(
@@ -848,14 +849,14 @@ export class ParticipantsClient {
    *   Required. The name of the participant to fetch suggestion for.
    *   Format: `projects/<Project ID>/locations/<Location
    *   ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
-   * @param {string} request.latestMessage
-   *   The name of the latest conversation message to compile suggestion
+   * @param {string} [request.latestMessage]
+   *   Optional. The name of the latest conversation message to compile suggestion
    *   for. If empty, it will be the latest message of the conversation.
    *
    *   Format: `projects/<Project ID>/locations/<Location
    *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
-   * @param {number} request.contextSize
-   *   Max number of messages prior to and including
+   * @param {number} [request.contextSize]
+   *   Optional. Max number of messages prior to and including
    *   {@link google.cloud.dialogflow.v2.SuggestArticlesRequest.latest_message|latest_message} to use as context
    *   when compiling the suggestion. By default 20 and at most 50.
    * @param {google.cloud.dialogflow.v2.AssistQueryParameters} request.assistQueryParams
@@ -954,14 +955,14 @@ export class ParticipantsClient {
    *   Required. The name of the participant to fetch suggestion for.
    *   Format: `projects/<Project ID>/locations/<Location
    *   ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
-   * @param {string} request.latestMessage
-   *   The name of the latest conversation message to compile suggestion
+   * @param {string} [request.latestMessage]
+   *   Optional. The name of the latest conversation message to compile suggestion
    *   for. If empty, it will be the latest message of the conversation.
    *
    *   Format: `projects/<Project ID>/locations/<Location
    *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
-   * @param {number} request.contextSize
-   *   Max number of messages prior to and including
+   * @param {number} [request.contextSize]
+   *   Optional. Max number of messages prior to and including
    *   [latest_message] to use as context when compiling the
    *   suggestion. By default 20 and at most 50.
    * @param {google.cloud.dialogflow.v2.AssistQueryParameters} request.assistQueryParams
@@ -1049,6 +1050,114 @@ export class ParticipantsClient {
       });
     this.initialize();
     return this.innerApiCalls.suggestFaqAnswers(request, options, callback);
+  }
+  /**
+   * Gets smart replies for a participant based on specific historical
+   * messages.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the participant to fetch suggestion for.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
+   * @param {google.cloud.dialogflow.v2.TextInput} request.currentTextInput
+   *   The current natural language text segment to compile suggestion
+   *   for. This provides a way for user to get follow up smart reply suggestion
+   *   after a smart reply selection, without sending a text message.
+   * @param {string} request.latestMessage
+   *   The name of the latest conversation message to compile suggestion
+   *   for. If empty, it will be the latest message of the conversation.
+   *
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+   * @param {number} request.contextSize
+   *   Max number of messages prior to and including
+   *   [latest_message] to use as context when compiling the
+   *   suggestion. By default 20 and at most 50.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SuggestSmartRepliesResponse]{@link google.cloud.dialogflow.v2.SuggestSmartRepliesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/participants.suggest_smart_replies.js</caption>
+   * region_tag:dialogflow_v2_generated_Participants_SuggestSmartReplies_async
+   */
+  suggestSmartReplies(
+    request?: protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesResponse,
+      protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  suggestSmartReplies(
+    request: protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesResponse,
+      | protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  suggestSmartReplies(
+    request: protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesResponse,
+      | protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  suggestSmartReplies(
+    request?: protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesResponse,
+          | protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesResponse,
+      | protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesResponse,
+      protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.suggestSmartReplies(request, options, callback);
   }
 
   /**

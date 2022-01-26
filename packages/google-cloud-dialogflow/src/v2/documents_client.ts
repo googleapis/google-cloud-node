@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -319,6 +319,12 @@ export class DocumentsClient {
     const createDocumentMetadata = protoFilesRoot.lookup(
       '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata'
     ) as gax.protobuf.Type;
+    const importDocumentsResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2.ImportDocumentsResponse'
+    ) as gax.protobuf.Type;
+    const importDocumentsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2.KnowledgeOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteDocumentResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -349,6 +355,11 @@ export class DocumentsClient {
         this.operationsClient,
         createDocumentResponse.decode.bind(createDocumentResponse),
         createDocumentMetadata.decode.bind(createDocumentMetadata)
+      ),
+      importDocuments: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importDocumentsResponse.decode.bind(importDocumentsResponse),
+        importDocumentsMetadata.decode.bind(importDocumentsMetadata)
       ),
       deleteDocument: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -425,6 +436,7 @@ export class DocumentsClient {
       'listDocuments',
       'getDocument',
       'createDocument',
+      'importDocuments',
       'deleteDocument',
       'updateDocument',
       'reloadDocument',
@@ -750,6 +762,166 @@ export class DocumentsClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dialogflow.v2.Document,
+      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
+    >;
+  }
+  /**
+   * Creates documents by importing data from external sources.
+   * Dialogflow supports up to 350 documents in each request. If you try to
+   * import more, Dialogflow will return an error.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: {@link google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+   * - `response`: {@link google.cloud.dialogflow.v2.ImportDocumentsResponse|ImportDocumentsResponse}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The knowledge base to import documents into.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>`.
+   * @param {google.cloud.dialogflow.v2.GcsSources} request.gcsSource
+   *   The Google Cloud Storage location for the documents.
+   *   The path can include a wildcard.
+   *
+   *   These URIs may have the forms
+   *   `gs://<bucket-name>/<object-name>`.
+   *   `gs://<bucket-name>/<object-path>/*.<extension>`.
+   * @param {google.cloud.dialogflow.v2.ImportDocumentTemplate} request.documentTemplate
+   *   Required. Document template used for importing all the documents.
+   * @param {boolean} request.importGcsCustomMetadata
+   *   Whether to import custom metadata from Google Cloud Storage.
+   *   Only valid when the document source is Google Cloud Storage URI.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/documents.import_documents.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_ImportDocuments_async
+   */
+  importDocuments(
+    request?: protos.google.cloud.dialogflow.v2.IImportDocumentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  importDocuments(
+    request: protos.google.cloud.dialogflow.v2.IImportDocumentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importDocuments(
+    request: protos.google.cloud.dialogflow.v2.IImportDocumentsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importDocuments(
+    request?: protos.google.cloud.dialogflow.v2.IImportDocumentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
+            protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IImportDocumentsResponse,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importDocuments(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importDocuments()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/documents.import_documents.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_ImportDocuments_async
+   */
+  async checkImportDocumentsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.v2.ImportDocumentsResponse,
+      protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.importDocuments,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.v2.ImportDocumentsResponse,
       protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
     >;
   }

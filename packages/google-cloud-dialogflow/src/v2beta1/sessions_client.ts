@@ -619,7 +619,7 @@ export class SessionsClient {
    */
   streamingDetectIntent(options?: CallOptions): gax.CancellableStream {
     this.initialize();
-    return this.innerApiCalls.streamingDetectIntent(options);
+    return this.innerApiCalls.streamingDetectIntent(null, options);
   }
 
   // --------------------

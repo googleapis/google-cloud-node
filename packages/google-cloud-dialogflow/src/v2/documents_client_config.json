@@ -38,6 +38,11 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
+        "ImportDocuments": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
         "DeleteDocument": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",

@@ -293,7 +293,7 @@ describe('v2beta1.SessionsClient', () => {
       assert(
         (client.innerApiCalls.streamingDetectIntent as SinonStub)
           .getCall(0)
-          .calledWithExactly(undefined)
+          .calledWith(null)
       );
       assert.deepStrictEqual(
         ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
@@ -336,7 +336,7 @@ describe('v2beta1.SessionsClient', () => {
       assert(
         (client.innerApiCalls.streamingDetectIntent as SinonStub)
           .getCall(0)
-          .calledWithExactly(undefined)
+          .calledWith(null)
       );
       assert.deepStrictEqual(
         ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
