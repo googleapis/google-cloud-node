@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -28,7 +29,7 @@ function main() {
    */
   // const launchParameter = {}
   /**
-   *  Required. The regional endpoint
+   *  Required. The regional endpoint 
    *  (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
    *  which to direct the request. E.g., us-central1, us-west1.
    */
@@ -40,15 +41,15 @@ function main() {
   // const validateOnly = true
 
   // Imports the Dataflow library
-  const {FlexTemplatesServiceClient} =
-    require('@google-cloud/dataflow').v1beta3;
+  const {FlexTemplatesServiceClient} = require('@google-cloud/dataflow').v1beta3;
 
   // Instantiates a client
   const dataflowClient = new FlexTemplatesServiceClient();
 
   async function callLaunchFlexTemplate() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const response = await dataflowClient.launchFlexTemplate(request);

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -28,7 +29,7 @@ function main() {
    */
   // const jobId = 'abc123'
   /**
-   *  The regional endpoint
+   *  The regional endpoint 
    *  (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
    *  contains the job specified by job_id.
    */
@@ -54,12 +55,13 @@ function main() {
 
   async function callGetJobExecutionDetails() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const iterable = await dataflowClient.getJobExecutionDetailsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

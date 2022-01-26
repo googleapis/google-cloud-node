@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -39,7 +40,7 @@ function main() {
    */
   // const pageToken = 'abc123'
   /**
-   *  The regional endpoint
+   *  The regional endpoint 
    *  (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
    *  contains this job.
    */
@@ -53,12 +54,13 @@ function main() {
 
   async function callAggregatedListJobs() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const iterable = await dataflowClient.aggregatedListJobsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

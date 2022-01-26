@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -42,7 +43,7 @@ function main() {
    */
   // const environment = {}
   /**
-   *  The regional endpoint
+   *  The regional endpoint 
    *  (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
    *  which to direct the request.
    */
@@ -56,7 +57,8 @@ function main() {
 
   async function callCreateJobFromTemplate() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const response = await dataflowClient.createJobFromTemplate(request);
