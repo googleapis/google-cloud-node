@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -37,29 +38,23 @@ function main() {
   // const inputContent = 'Buffer.from('string')'
 
   // Imports the Videointelligence library
-  const {StreamingVideoIntelligenceServiceClient} =
-    require('@google-cloud/video-intelligence').v1p3beta1;
+  const {StreamingVideoIntelligenceServiceClient} = require('@google-cloud/video-intelligence').v1p3beta1;
 
   // Instantiates a client
   const videointelligenceClient = new StreamingVideoIntelligenceServiceClient();
 
   async function callStreamingAnnotateVideo() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const stream = await videointelligenceClient.streamingAnnotateVideo();
-    stream.on('data', response => {
-      console.log(response);
-    });
-    stream.on('error', err => {
-      throw err;
-    });
-    stream.on('end', () => {
-      /* API call completed */
-    });
+    stream.on('data', (response) => { console.log(response) });
+    stream.on('error', (err) => { throw(err) });
+    stream.on('end', () => { /* API call completed */ });
     stream.write(request);
-    stream.end();
+    stream.end(); 
   }
 
   callStreamingAnnotateVideo();
