@@ -315,7 +315,7 @@ export class TetherClient {
    */
   egress(options?: CallOptions): gax.CancellableStream {
     this.initialize();
-    return this.innerApiCalls.egress(options);
+    return this.innerApiCalls.egress(null, options);
   }
 
   /**
