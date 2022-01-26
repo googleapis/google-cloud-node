@@ -5421,6 +5421,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.redis.v1beta1.CloudRedis#getInstanceAuthString}.
+                         * @memberof google.cloud.redis.v1beta1.CloudRedis
+                         * @typedef GetInstanceAuthStringCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.redis.v1beta1.InstanceAuthString} [response] InstanceAuthString
+                         */
+    
+                        /**
+                         * Calls GetInstanceAuthString.
+                         * @function getInstanceAuthString
+                         * @memberof google.cloud.redis.v1beta1.CloudRedis
+                         * @instance
+                         * @param {google.cloud.redis.v1beta1.IGetInstanceAuthStringRequest} request GetInstanceAuthStringRequest message or plain object
+                         * @param {google.cloud.redis.v1beta1.CloudRedis.GetInstanceAuthStringCallback} callback Node-style callback called with the error, if any, and InstanceAuthString
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudRedis.prototype.getInstanceAuthString = function getInstanceAuthString(request, callback) {
+                            return this.rpcCall(getInstanceAuthString, $root.google.cloud.redis.v1beta1.GetInstanceAuthStringRequest, $root.google.cloud.redis.v1beta1.InstanceAuthString, request, callback);
+                        }, "name", { value: "GetInstanceAuthString" });
+    
+                        /**
+                         * Calls GetInstanceAuthString.
+                         * @function getInstanceAuthString
+                         * @memberof google.cloud.redis.v1beta1.CloudRedis
+                         * @instance
+                         * @param {google.cloud.redis.v1beta1.IGetInstanceAuthStringRequest} request GetInstanceAuthStringRequest message or plain object
+                         * @returns {Promise<google.cloud.redis.v1beta1.InstanceAuthString>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.redis.v1beta1.CloudRedis#createInstance}.
                          * @memberof google.cloud.redis.v1beta1.CloudRedis
                          * @typedef CreateInstanceCallback
@@ -5647,6 +5680,39 @@
                          * @memberof google.cloud.redis.v1beta1.CloudRedis
                          * @instance
                          * @param {google.cloud.redis.v1beta1.IDeleteInstanceRequest} request DeleteInstanceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.redis.v1beta1.CloudRedis#rescheduleMaintenance}.
+                         * @memberof google.cloud.redis.v1beta1.CloudRedis
+                         * @typedef RescheduleMaintenanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RescheduleMaintenance.
+                         * @function rescheduleMaintenance
+                         * @memberof google.cloud.redis.v1beta1.CloudRedis
+                         * @instance
+                         * @param {google.cloud.redis.v1beta1.IRescheduleMaintenanceRequest} request RescheduleMaintenanceRequest message or plain object
+                         * @param {google.cloud.redis.v1beta1.CloudRedis.RescheduleMaintenanceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudRedis.prototype.rescheduleMaintenance = function rescheduleMaintenance(request, callback) {
+                            return this.rpcCall(rescheduleMaintenance, $root.google.cloud.redis.v1beta1.RescheduleMaintenanceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RescheduleMaintenance" });
+    
+                        /**
+                         * Calls RescheduleMaintenance.
+                         * @function rescheduleMaintenance
+                         * @memberof google.cloud.redis.v1beta1.CloudRedis
+                         * @instance
+                         * @param {google.cloud.redis.v1beta1.IRescheduleMaintenanceRequest} request RescheduleMaintenanceRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
@@ -5889,6 +5955,11 @@
                          * @property {string|null} [authorizedNetwork] Instance authorizedNetwork
                          * @property {string|null} [persistenceIamIdentity] Instance persistenceIamIdentity
                          * @property {google.cloud.redis.v1beta1.Instance.ConnectMode|null} [connectMode] Instance connectMode
+                         * @property {boolean|null} [authEnabled] Instance authEnabled
+                         * @property {Array.<google.cloud.redis.v1beta1.ITlsCertificate>|null} [serverCaCerts] Instance serverCaCerts
+                         * @property {google.cloud.redis.v1beta1.Instance.TransitEncryptionMode|null} [transitEncryptionMode] Instance transitEncryptionMode
+                         * @property {google.cloud.redis.v1beta1.IMaintenancePolicy|null} [maintenancePolicy] Instance maintenancePolicy
+                         * @property {google.cloud.redis.v1beta1.IMaintenanceSchedule|null} [maintenanceSchedule] Instance maintenanceSchedule
                          * @property {number|null} [replicaCount] Instance replicaCount
                          * @property {Array.<google.cloud.redis.v1beta1.INodeInfo>|null} [nodes] Instance nodes
                          * @property {string|null} [readEndpoint] Instance readEndpoint
@@ -5907,6 +5978,7 @@
                         function Instance(properties) {
                             this.labels = {};
                             this.redisConfigs = {};
+                            this.serverCaCerts = [];
                             this.nodes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -6067,6 +6139,46 @@
                         Instance.prototype.connectMode = 0;
     
                         /**
+                         * Instance authEnabled.
+                         * @member {boolean} authEnabled
+                         * @memberof google.cloud.redis.v1beta1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.authEnabled = false;
+    
+                        /**
+                         * Instance serverCaCerts.
+                         * @member {Array.<google.cloud.redis.v1beta1.ITlsCertificate>} serverCaCerts
+                         * @memberof google.cloud.redis.v1beta1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.serverCaCerts = $util.emptyArray;
+    
+                        /**
+                         * Instance transitEncryptionMode.
+                         * @member {google.cloud.redis.v1beta1.Instance.TransitEncryptionMode} transitEncryptionMode
+                         * @memberof google.cloud.redis.v1beta1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.transitEncryptionMode = 0;
+    
+                        /**
+                         * Instance maintenancePolicy.
+                         * @member {google.cloud.redis.v1beta1.IMaintenancePolicy|null|undefined} maintenancePolicy
+                         * @memberof google.cloud.redis.v1beta1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.maintenancePolicy = null;
+    
+                        /**
+                         * Instance maintenanceSchedule.
+                         * @member {google.cloud.redis.v1beta1.IMaintenanceSchedule|null|undefined} maintenanceSchedule
+                         * @memberof google.cloud.redis.v1beta1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.maintenanceSchedule = null;
+    
+                        /**
                          * Instance replicaCount.
                          * @member {number} replicaCount
                          * @memberof google.cloud.redis.v1beta1.Instance
@@ -6170,6 +6282,17 @@
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.persistenceIamIdentity);
                             if (message.connectMode != null && Object.hasOwnProperty.call(message, "connectMode"))
                                 writer.uint32(/* id 22, wireType 0 =*/176).int32(message.connectMode);
+                            if (message.authEnabled != null && Object.hasOwnProperty.call(message, "authEnabled"))
+                                writer.uint32(/* id 23, wireType 0 =*/184).bool(message.authEnabled);
+                            if (message.serverCaCerts != null && message.serverCaCerts.length)
+                                for (var i = 0; i < message.serverCaCerts.length; ++i)
+                                    $root.google.cloud.redis.v1beta1.TlsCertificate.encode(message.serverCaCerts[i], writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                            if (message.transitEncryptionMode != null && Object.hasOwnProperty.call(message, "transitEncryptionMode"))
+                                writer.uint32(/* id 26, wireType 0 =*/208).int32(message.transitEncryptionMode);
+                            if (message.maintenancePolicy != null && Object.hasOwnProperty.call(message, "maintenancePolicy"))
+                                $root.google.cloud.redis.v1beta1.MaintenancePolicy.encode(message.maintenancePolicy, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                            if (message.maintenanceSchedule != null && Object.hasOwnProperty.call(message, "maintenanceSchedule"))
+                                $root.google.cloud.redis.v1beta1.MaintenanceSchedule.encode(message.maintenanceSchedule, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             if (message.replicaCount != null && Object.hasOwnProperty.call(message, "replicaCount"))
                                 writer.uint32(/* id 31, wireType 0 =*/248).int32(message.replicaCount);
                             if (message.nodes != null && message.nodes.length)
@@ -6309,6 +6432,23 @@
                                     break;
                                 case 22:
                                     message.connectMode = reader.int32();
+                                    break;
+                                case 23:
+                                    message.authEnabled = reader.bool();
+                                    break;
+                                case 25:
+                                    if (!(message.serverCaCerts && message.serverCaCerts.length))
+                                        message.serverCaCerts = [];
+                                    message.serverCaCerts.push($root.google.cloud.redis.v1beta1.TlsCertificate.decode(reader, reader.uint32()));
+                                    break;
+                                case 26:
+                                    message.transitEncryptionMode = reader.int32();
+                                    break;
+                                case 27:
+                                    message.maintenancePolicy = $root.google.cloud.redis.v1beta1.MaintenancePolicy.decode(reader, reader.uint32());
+                                    break;
+                                case 28:
+                                    message.maintenanceSchedule = $root.google.cloud.redis.v1beta1.MaintenanceSchedule.decode(reader, reader.uint32());
                                     break;
                                 case 31:
                                     message.replicaCount = reader.int32();
@@ -6455,6 +6595,37 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.authEnabled != null && message.hasOwnProperty("authEnabled"))
+                                if (typeof message.authEnabled !== "boolean")
+                                    return "authEnabled: boolean expected";
+                            if (message.serverCaCerts != null && message.hasOwnProperty("serverCaCerts")) {
+                                if (!Array.isArray(message.serverCaCerts))
+                                    return "serverCaCerts: array expected";
+                                for (var i = 0; i < message.serverCaCerts.length; ++i) {
+                                    var error = $root.google.cloud.redis.v1beta1.TlsCertificate.verify(message.serverCaCerts[i]);
+                                    if (error)
+                                        return "serverCaCerts." + error;
+                                }
+                            }
+                            if (message.transitEncryptionMode != null && message.hasOwnProperty("transitEncryptionMode"))
+                                switch (message.transitEncryptionMode) {
+                                default:
+                                    return "transitEncryptionMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.maintenancePolicy != null && message.hasOwnProperty("maintenancePolicy")) {
+                                var error = $root.google.cloud.redis.v1beta1.MaintenancePolicy.verify(message.maintenancePolicy);
+                                if (error)
+                                    return "maintenancePolicy." + error;
+                            }
+                            if (message.maintenanceSchedule != null && message.hasOwnProperty("maintenanceSchedule")) {
+                                var error = $root.google.cloud.redis.v1beta1.MaintenanceSchedule.verify(message.maintenanceSchedule);
+                                if (error)
+                                    return "maintenanceSchedule." + error;
+                            }
                             if (message.replicaCount != null && message.hasOwnProperty("replicaCount"))
                                 if (!$util.isInteger(message.replicaCount))
                                     return "replicaCount: integer expected";
@@ -6608,6 +6779,42 @@
                                 message.connectMode = 2;
                                 break;
                             }
+                            if (object.authEnabled != null)
+                                message.authEnabled = Boolean(object.authEnabled);
+                            if (object.serverCaCerts) {
+                                if (!Array.isArray(object.serverCaCerts))
+                                    throw TypeError(".google.cloud.redis.v1beta1.Instance.serverCaCerts: array expected");
+                                message.serverCaCerts = [];
+                                for (var i = 0; i < object.serverCaCerts.length; ++i) {
+                                    if (typeof object.serverCaCerts[i] !== "object")
+                                        throw TypeError(".google.cloud.redis.v1beta1.Instance.serverCaCerts: object expected");
+                                    message.serverCaCerts[i] = $root.google.cloud.redis.v1beta1.TlsCertificate.fromObject(object.serverCaCerts[i]);
+                                }
+                            }
+                            switch (object.transitEncryptionMode) {
+                            case "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.transitEncryptionMode = 0;
+                                break;
+                            case "SERVER_AUTHENTICATION":
+                            case 1:
+                                message.transitEncryptionMode = 1;
+                                break;
+                            case "DISABLED":
+                            case 2:
+                                message.transitEncryptionMode = 2;
+                                break;
+                            }
+                            if (object.maintenancePolicy != null) {
+                                if (typeof object.maintenancePolicy !== "object")
+                                    throw TypeError(".google.cloud.redis.v1beta1.Instance.maintenancePolicy: object expected");
+                                message.maintenancePolicy = $root.google.cloud.redis.v1beta1.MaintenancePolicy.fromObject(object.maintenancePolicy);
+                            }
+                            if (object.maintenanceSchedule != null) {
+                                if (typeof object.maintenanceSchedule !== "object")
+                                    throw TypeError(".google.cloud.redis.v1beta1.Instance.maintenanceSchedule: object expected");
+                                message.maintenanceSchedule = $root.google.cloud.redis.v1beta1.MaintenanceSchedule.fromObject(object.maintenanceSchedule);
+                            }
                             if (object.replicaCount != null)
                                 message.replicaCount = object.replicaCount | 0;
                             if (object.nodes) {
@@ -6654,8 +6861,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
+                                object.serverCaCerts = [];
                                 object.nodes = [];
+                            }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
                                 object.redisConfigs = {};
@@ -6678,6 +6887,10 @@
                                 object.authorizedNetwork = "";
                                 object.persistenceIamIdentity = "";
                                 object.connectMode = options.enums === String ? "CONNECT_MODE_UNSPECIFIED" : 0;
+                                object.authEnabled = false;
+                                object.transitEncryptionMode = options.enums === String ? "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED" : 0;
+                                object.maintenancePolicy = null;
+                                object.maintenanceSchedule = null;
                                 object.replicaCount = 0;
                                 object.readEndpoint = "";
                                 object.readEndpointPort = 0;
@@ -6728,6 +6941,19 @@
                                 object.persistenceIamIdentity = message.persistenceIamIdentity;
                             if (message.connectMode != null && message.hasOwnProperty("connectMode"))
                                 object.connectMode = options.enums === String ? $root.google.cloud.redis.v1beta1.Instance.ConnectMode[message.connectMode] : message.connectMode;
+                            if (message.authEnabled != null && message.hasOwnProperty("authEnabled"))
+                                object.authEnabled = message.authEnabled;
+                            if (message.serverCaCerts && message.serverCaCerts.length) {
+                                object.serverCaCerts = [];
+                                for (var j = 0; j < message.serverCaCerts.length; ++j)
+                                    object.serverCaCerts[j] = $root.google.cloud.redis.v1beta1.TlsCertificate.toObject(message.serverCaCerts[j], options);
+                            }
+                            if (message.transitEncryptionMode != null && message.hasOwnProperty("transitEncryptionMode"))
+                                object.transitEncryptionMode = options.enums === String ? $root.google.cloud.redis.v1beta1.Instance.TransitEncryptionMode[message.transitEncryptionMode] : message.transitEncryptionMode;
+                            if (message.maintenancePolicy != null && message.hasOwnProperty("maintenancePolicy"))
+                                object.maintenancePolicy = $root.google.cloud.redis.v1beta1.MaintenancePolicy.toObject(message.maintenancePolicy, options);
+                            if (message.maintenanceSchedule != null && message.hasOwnProperty("maintenanceSchedule"))
+                                object.maintenanceSchedule = $root.google.cloud.redis.v1beta1.MaintenanceSchedule.toObject(message.maintenanceSchedule, options);
                             if (message.replicaCount != null && message.hasOwnProperty("replicaCount"))
                                 object.replicaCount = message.replicaCount;
                             if (message.nodes && message.nodes.length) {
@@ -6816,6 +7042,22 @@
                         })();
     
                         /**
+                         * TransitEncryptionMode enum.
+                         * @name google.cloud.redis.v1beta1.Instance.TransitEncryptionMode
+                         * @enum {number}
+                         * @property {number} TRANSIT_ENCRYPTION_MODE_UNSPECIFIED=0 TRANSIT_ENCRYPTION_MODE_UNSPECIFIED value
+                         * @property {number} SERVER_AUTHENTICATION=1 SERVER_AUTHENTICATION value
+                         * @property {number} DISABLED=2 DISABLED value
+                         */
+                        Instance.TransitEncryptionMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SERVER_AUTHENTICATION"] = 1;
+                            values[valuesById[2] = "DISABLED"] = 2;
+                            return values;
+                        })();
+    
+                        /**
                          * ReadReplicasMode enum.
                          * @name google.cloud.redis.v1beta1.Instance.ReadReplicasMode
                          * @enum {number}
@@ -6832,6 +7074,1124 @@
                         })();
     
                         return Instance;
+                    })();
+    
+                    v1beta1.RescheduleMaintenanceRequest = (function() {
+    
+                        /**
+                         * Properties of a RescheduleMaintenanceRequest.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @interface IRescheduleMaintenanceRequest
+                         * @property {string|null} [name] RescheduleMaintenanceRequest name
+                         * @property {google.cloud.redis.v1beta1.RescheduleMaintenanceRequest.RescheduleType|null} [rescheduleType] RescheduleMaintenanceRequest rescheduleType
+                         * @property {google.protobuf.ITimestamp|null} [scheduleTime] RescheduleMaintenanceRequest scheduleTime
+                         */
+    
+                        /**
+                         * Constructs a new RescheduleMaintenanceRequest.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @classdesc Represents a RescheduleMaintenanceRequest.
+                         * @implements IRescheduleMaintenanceRequest
+                         * @constructor
+                         * @param {google.cloud.redis.v1beta1.IRescheduleMaintenanceRequest=} [properties] Properties to set
+                         */
+                        function RescheduleMaintenanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RescheduleMaintenanceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.redis.v1beta1.RescheduleMaintenanceRequest
+                         * @instance
+                         */
+                        RescheduleMaintenanceRequest.prototype.name = "";
+    
+                        /**
+                         * RescheduleMaintenanceRequest rescheduleType.
+                         * @member {google.cloud.redis.v1beta1.RescheduleMaintenanceRequest.RescheduleType} rescheduleType
+                         * @memberof google.cloud.redis.v1beta1.RescheduleMaintenanceRequest
+                         * @instance
+                         */
+                        RescheduleMaintenanceRequest.prototype.rescheduleType = 0;
+    
+                        /**
+                         * RescheduleMaintenanceRequest scheduleTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} scheduleTime
+                         * @memberof google.cloud.redis.v1beta1.RescheduleMaintenanceRequest
+                         * @instance
+                         */
+                        RescheduleMaintenanceRequest.prototype.scheduleTime = null;
+    
+                        /**
+                         * Creates a new RescheduleMaintenanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.redis.v1beta1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IRescheduleMaintenanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.redis.v1beta1.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest instance
+                         */
+                        RescheduleMaintenanceRequest.create = function create(properties) {
+                            return new RescheduleMaintenanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RescheduleMaintenanceRequest message. Does not implicitly {@link google.cloud.redis.v1beta1.RescheduleMaintenanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.redis.v1beta1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IRescheduleMaintenanceRequest} message RescheduleMaintenanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RescheduleMaintenanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.rescheduleType != null && Object.hasOwnProperty.call(message, "rescheduleType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.rescheduleType);
+                            if (message.scheduleTime != null && Object.hasOwnProperty.call(message, "scheduleTime"))
+                                $root.google.protobuf.Timestamp.encode(message.scheduleTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RescheduleMaintenanceRequest message, length delimited. Does not implicitly {@link google.cloud.redis.v1beta1.RescheduleMaintenanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IRescheduleMaintenanceRequest} message RescheduleMaintenanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RescheduleMaintenanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.redis.v1beta1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.redis.v1beta1.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RescheduleMaintenanceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1beta1.RescheduleMaintenanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.rescheduleType = reader.int32();
+                                    break;
+                                case 3:
+                                    message.scheduleTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.redis.v1beta1.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RescheduleMaintenanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RescheduleMaintenanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.redis.v1beta1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RescheduleMaintenanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.rescheduleType != null && message.hasOwnProperty("rescheduleType"))
+                                switch (message.rescheduleType) {
+                                default:
+                                    return "rescheduleType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.scheduleTime);
+                                if (error)
+                                    return "scheduleTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RescheduleMaintenanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.redis.v1beta1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.redis.v1beta1.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest
+                         */
+                        RescheduleMaintenanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.redis.v1beta1.RescheduleMaintenanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.redis.v1beta1.RescheduleMaintenanceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.rescheduleType) {
+                            case "RESCHEDULE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.rescheduleType = 0;
+                                break;
+                            case "IMMEDIATE":
+                            case 1:
+                                message.rescheduleType = 1;
+                                break;
+                            case "NEXT_AVAILABLE_WINDOW":
+                            case 2:
+                                message.rescheduleType = 2;
+                                break;
+                            case "SPECIFIC_TIME":
+                            case 3:
+                                message.rescheduleType = 3;
+                                break;
+                            }
+                            if (object.scheduleTime != null) {
+                                if (typeof object.scheduleTime !== "object")
+                                    throw TypeError(".google.cloud.redis.v1beta1.RescheduleMaintenanceRequest.scheduleTime: object expected");
+                                message.scheduleTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RescheduleMaintenanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.redis.v1beta1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.RescheduleMaintenanceRequest} message RescheduleMaintenanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RescheduleMaintenanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.rescheduleType = options.enums === String ? "RESCHEDULE_TYPE_UNSPECIFIED" : 0;
+                                object.scheduleTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.rescheduleType != null && message.hasOwnProperty("rescheduleType"))
+                                object.rescheduleType = options.enums === String ? $root.google.cloud.redis.v1beta1.RescheduleMaintenanceRequest.RescheduleType[message.rescheduleType] : message.rescheduleType;
+                            if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime"))
+                                object.scheduleTime = $root.google.protobuf.Timestamp.toObject(message.scheduleTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RescheduleMaintenanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.redis.v1beta1.RescheduleMaintenanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RescheduleMaintenanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * RescheduleType enum.
+                         * @name google.cloud.redis.v1beta1.RescheduleMaintenanceRequest.RescheduleType
+                         * @enum {number}
+                         * @property {number} RESCHEDULE_TYPE_UNSPECIFIED=0 RESCHEDULE_TYPE_UNSPECIFIED value
+                         * @property {number} IMMEDIATE=1 IMMEDIATE value
+                         * @property {number} NEXT_AVAILABLE_WINDOW=2 NEXT_AVAILABLE_WINDOW value
+                         * @property {number} SPECIFIC_TIME=3 SPECIFIC_TIME value
+                         */
+                        RescheduleMaintenanceRequest.RescheduleType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RESCHEDULE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IMMEDIATE"] = 1;
+                            values[valuesById[2] = "NEXT_AVAILABLE_WINDOW"] = 2;
+                            values[valuesById[3] = "SPECIFIC_TIME"] = 3;
+                            return values;
+                        })();
+    
+                        return RescheduleMaintenanceRequest;
+                    })();
+    
+                    v1beta1.MaintenancePolicy = (function() {
+    
+                        /**
+                         * Properties of a MaintenancePolicy.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @interface IMaintenancePolicy
+                         * @property {google.protobuf.ITimestamp|null} [createTime] MaintenancePolicy createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] MaintenancePolicy updateTime
+                         * @property {string|null} [description] MaintenancePolicy description
+                         * @property {Array.<google.cloud.redis.v1beta1.IWeeklyMaintenanceWindow>|null} [weeklyMaintenanceWindow] MaintenancePolicy weeklyMaintenanceWindow
+                         */
+    
+                        /**
+                         * Constructs a new MaintenancePolicy.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @classdesc Represents a MaintenancePolicy.
+                         * @implements IMaintenancePolicy
+                         * @constructor
+                         * @param {google.cloud.redis.v1beta1.IMaintenancePolicy=} [properties] Properties to set
+                         */
+                        function MaintenancePolicy(properties) {
+                            this.weeklyMaintenanceWindow = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaintenancePolicy createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.createTime = null;
+    
+                        /**
+                         * MaintenancePolicy updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.updateTime = null;
+    
+                        /**
+                         * MaintenancePolicy description.
+                         * @member {string} description
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.description = "";
+    
+                        /**
+                         * MaintenancePolicy weeklyMaintenanceWindow.
+                         * @member {Array.<google.cloud.redis.v1beta1.IWeeklyMaintenanceWindow>} weeklyMaintenanceWindow
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.weeklyMaintenanceWindow = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MaintenancePolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IMaintenancePolicy=} [properties] Properties to set
+                         * @returns {google.cloud.redis.v1beta1.MaintenancePolicy} MaintenancePolicy instance
+                         */
+                        MaintenancePolicy.create = function create(properties) {
+                            return new MaintenancePolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenancePolicy message. Does not implicitly {@link google.cloud.redis.v1beta1.MaintenancePolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IMaintenancePolicy} message MaintenancePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenancePolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.weeklyMaintenanceWindow != null && message.weeklyMaintenanceWindow.length)
+                                for (var i = 0; i < message.weeklyMaintenanceWindow.length; ++i)
+                                    $root.google.cloud.redis.v1beta1.WeeklyMaintenanceWindow.encode(message.weeklyMaintenanceWindow[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenancePolicy message, length delimited. Does not implicitly {@link google.cloud.redis.v1beta1.MaintenancePolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IMaintenancePolicy} message MaintenancePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenancePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaintenancePolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.redis.v1beta1.MaintenancePolicy} MaintenancePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenancePolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1beta1.MaintenancePolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                case 4:
+                                    if (!(message.weeklyMaintenanceWindow && message.weeklyMaintenanceWindow.length))
+                                        message.weeklyMaintenanceWindow = [];
+                                    message.weeklyMaintenanceWindow.push($root.google.cloud.redis.v1beta1.WeeklyMaintenanceWindow.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaintenancePolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.redis.v1beta1.MaintenancePolicy} MaintenancePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenancePolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaintenancePolicy message.
+                         * @function verify
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaintenancePolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.weeklyMaintenanceWindow != null && message.hasOwnProperty("weeklyMaintenanceWindow")) {
+                                if (!Array.isArray(message.weeklyMaintenanceWindow))
+                                    return "weeklyMaintenanceWindow: array expected";
+                                for (var i = 0; i < message.weeklyMaintenanceWindow.length; ++i) {
+                                    var error = $root.google.cloud.redis.v1beta1.WeeklyMaintenanceWindow.verify(message.weeklyMaintenanceWindow[i]);
+                                    if (error)
+                                        return "weeklyMaintenanceWindow." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaintenancePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.redis.v1beta1.MaintenancePolicy} MaintenancePolicy
+                         */
+                        MaintenancePolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.redis.v1beta1.MaintenancePolicy)
+                                return object;
+                            var message = new $root.google.cloud.redis.v1beta1.MaintenancePolicy();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.redis.v1beta1.MaintenancePolicy.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.redis.v1beta1.MaintenancePolicy.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.weeklyMaintenanceWindow) {
+                                if (!Array.isArray(object.weeklyMaintenanceWindow))
+                                    throw TypeError(".google.cloud.redis.v1beta1.MaintenancePolicy.weeklyMaintenanceWindow: array expected");
+                                message.weeklyMaintenanceWindow = [];
+                                for (var i = 0; i < object.weeklyMaintenanceWindow.length; ++i) {
+                                    if (typeof object.weeklyMaintenanceWindow[i] !== "object")
+                                        throw TypeError(".google.cloud.redis.v1beta1.MaintenancePolicy.weeklyMaintenanceWindow: object expected");
+                                    message.weeklyMaintenanceWindow[i] = $root.google.cloud.redis.v1beta1.WeeklyMaintenanceWindow.fromObject(object.weeklyMaintenanceWindow[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaintenancePolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.MaintenancePolicy} message MaintenancePolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaintenancePolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.weeklyMaintenanceWindow = [];
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.weeklyMaintenanceWindow && message.weeklyMaintenanceWindow.length) {
+                                object.weeklyMaintenanceWindow = [];
+                                for (var j = 0; j < message.weeklyMaintenanceWindow.length; ++j)
+                                    object.weeklyMaintenanceWindow[j] = $root.google.cloud.redis.v1beta1.WeeklyMaintenanceWindow.toObject(message.weeklyMaintenanceWindow[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaintenancePolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.redis.v1beta1.MaintenancePolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaintenancePolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MaintenancePolicy;
+                    })();
+    
+                    v1beta1.WeeklyMaintenanceWindow = (function() {
+    
+                        /**
+                         * Properties of a WeeklyMaintenanceWindow.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @interface IWeeklyMaintenanceWindow
+                         * @property {google.type.DayOfWeek|null} [day] WeeklyMaintenanceWindow day
+                         * @property {google.type.ITimeOfDay|null} [startTime] WeeklyMaintenanceWindow startTime
+                         * @property {google.protobuf.IDuration|null} [duration] WeeklyMaintenanceWindow duration
+                         */
+    
+                        /**
+                         * Constructs a new WeeklyMaintenanceWindow.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @classdesc Represents a WeeklyMaintenanceWindow.
+                         * @implements IWeeklyMaintenanceWindow
+                         * @constructor
+                         * @param {google.cloud.redis.v1beta1.IWeeklyMaintenanceWindow=} [properties] Properties to set
+                         */
+                        function WeeklyMaintenanceWindow(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WeeklyMaintenanceWindow day.
+                         * @member {google.type.DayOfWeek} day
+                         * @memberof google.cloud.redis.v1beta1.WeeklyMaintenanceWindow
+                         * @instance
+                         */
+                        WeeklyMaintenanceWindow.prototype.day = 0;
+    
+                        /**
+                         * WeeklyMaintenanceWindow startTime.
+                         * @member {google.type.ITimeOfDay|null|undefined} startTime
+                         * @memberof google.cloud.redis.v1beta1.WeeklyMaintenanceWindow
+                         * @instance
+                         */
+                        WeeklyMaintenanceWindow.prototype.startTime = null;
+    
+                        /**
+                         * WeeklyMaintenanceWindow duration.
+                         * @member {google.protobuf.IDuration|null|undefined} duration
+                         * @memberof google.cloud.redis.v1beta1.WeeklyMaintenanceWindow
+                         * @instance
+                         */
+                        WeeklyMaintenanceWindow.prototype.duration = null;
+    
+                        /**
+                         * Creates a new WeeklyMaintenanceWindow instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.redis.v1beta1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IWeeklyMaintenanceWindow=} [properties] Properties to set
+                         * @returns {google.cloud.redis.v1beta1.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow instance
+                         */
+                        WeeklyMaintenanceWindow.create = function create(properties) {
+                            return new WeeklyMaintenanceWindow(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WeeklyMaintenanceWindow message. Does not implicitly {@link google.cloud.redis.v1beta1.WeeklyMaintenanceWindow.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.redis.v1beta1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IWeeklyMaintenanceWindow} message WeeklyMaintenanceWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WeeklyMaintenanceWindow.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.day);
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.type.TimeOfDay.encode(message.startTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+                                $root.google.protobuf.Duration.encode(message.duration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WeeklyMaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.redis.v1beta1.WeeklyMaintenanceWindow.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IWeeklyMaintenanceWindow} message WeeklyMaintenanceWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WeeklyMaintenanceWindow.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.redis.v1beta1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.redis.v1beta1.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WeeklyMaintenanceWindow.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1beta1.WeeklyMaintenanceWindow();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.day = reader.int32();
+                                    break;
+                                case 2:
+                                    message.startTime = $root.google.type.TimeOfDay.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.redis.v1beta1.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WeeklyMaintenanceWindow.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WeeklyMaintenanceWindow message.
+                         * @function verify
+                         * @memberof google.cloud.redis.v1beta1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WeeklyMaintenanceWindow.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.day != null && message.hasOwnProperty("day"))
+                                switch (message.day) {
+                                default:
+                                    return "day: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.type.TimeOfDay.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.duration != null && message.hasOwnProperty("duration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.duration);
+                                if (error)
+                                    return "duration." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WeeklyMaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.redis.v1beta1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.redis.v1beta1.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow
+                         */
+                        WeeklyMaintenanceWindow.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.redis.v1beta1.WeeklyMaintenanceWindow)
+                                return object;
+                            var message = new $root.google.cloud.redis.v1beta1.WeeklyMaintenanceWindow();
+                            switch (object.day) {
+                            case "DAY_OF_WEEK_UNSPECIFIED":
+                            case 0:
+                                message.day = 0;
+                                break;
+                            case "MONDAY":
+                            case 1:
+                                message.day = 1;
+                                break;
+                            case "TUESDAY":
+                            case 2:
+                                message.day = 2;
+                                break;
+                            case "WEDNESDAY":
+                            case 3:
+                                message.day = 3;
+                                break;
+                            case "THURSDAY":
+                            case 4:
+                                message.day = 4;
+                                break;
+                            case "FRIDAY":
+                            case 5:
+                                message.day = 5;
+                                break;
+                            case "SATURDAY":
+                            case 6:
+                                message.day = 6;
+                                break;
+                            case "SUNDAY":
+                            case 7:
+                                message.day = 7;
+                                break;
+                            }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.redis.v1beta1.WeeklyMaintenanceWindow.startTime: object expected");
+                                message.startTime = $root.google.type.TimeOfDay.fromObject(object.startTime);
+                            }
+                            if (object.duration != null) {
+                                if (typeof object.duration !== "object")
+                                    throw TypeError(".google.cloud.redis.v1beta1.WeeklyMaintenanceWindow.duration: object expected");
+                                message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WeeklyMaintenanceWindow message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.redis.v1beta1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.WeeklyMaintenanceWindow} message WeeklyMaintenanceWindow
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WeeklyMaintenanceWindow.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.day = options.enums === String ? "DAY_OF_WEEK_UNSPECIFIED" : 0;
+                                object.startTime = null;
+                                object.duration = null;
+                            }
+                            if (message.day != null && message.hasOwnProperty("day"))
+                                object.day = options.enums === String ? $root.google.type.DayOfWeek[message.day] : message.day;
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.type.TimeOfDay.toObject(message.startTime, options);
+                            if (message.duration != null && message.hasOwnProperty("duration"))
+                                object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WeeklyMaintenanceWindow to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.redis.v1beta1.WeeklyMaintenanceWindow
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WeeklyMaintenanceWindow.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return WeeklyMaintenanceWindow;
+                    })();
+    
+                    v1beta1.MaintenanceSchedule = (function() {
+    
+                        /**
+                         * Properties of a MaintenanceSchedule.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @interface IMaintenanceSchedule
+                         * @property {google.protobuf.ITimestamp|null} [startTime] MaintenanceSchedule startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] MaintenanceSchedule endTime
+                         * @property {boolean|null} [canReschedule] MaintenanceSchedule canReschedule
+                         * @property {google.protobuf.ITimestamp|null} [scheduleDeadlineTime] MaintenanceSchedule scheduleDeadlineTime
+                         */
+    
+                        /**
+                         * Constructs a new MaintenanceSchedule.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @classdesc Represents a MaintenanceSchedule.
+                         * @implements IMaintenanceSchedule
+                         * @constructor
+                         * @param {google.cloud.redis.v1beta1.IMaintenanceSchedule=} [properties] Properties to set
+                         */
+                        function MaintenanceSchedule(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaintenanceSchedule startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @instance
+                         */
+                        MaintenanceSchedule.prototype.startTime = null;
+    
+                        /**
+                         * MaintenanceSchedule endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @instance
+                         */
+                        MaintenanceSchedule.prototype.endTime = null;
+    
+                        /**
+                         * MaintenanceSchedule canReschedule.
+                         * @member {boolean} canReschedule
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @instance
+                         */
+                        MaintenanceSchedule.prototype.canReschedule = false;
+    
+                        /**
+                         * MaintenanceSchedule scheduleDeadlineTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} scheduleDeadlineTime
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @instance
+                         */
+                        MaintenanceSchedule.prototype.scheduleDeadlineTime = null;
+    
+                        /**
+                         * Creates a new MaintenanceSchedule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IMaintenanceSchedule=} [properties] Properties to set
+                         * @returns {google.cloud.redis.v1beta1.MaintenanceSchedule} MaintenanceSchedule instance
+                         */
+                        MaintenanceSchedule.create = function create(properties) {
+                            return new MaintenanceSchedule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenanceSchedule message. Does not implicitly {@link google.cloud.redis.v1beta1.MaintenanceSchedule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IMaintenanceSchedule} message MaintenanceSchedule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenanceSchedule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.canReschedule != null && Object.hasOwnProperty.call(message, "canReschedule"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.canReschedule);
+                            if (message.scheduleDeadlineTime != null && Object.hasOwnProperty.call(message, "scheduleDeadlineTime"))
+                                $root.google.protobuf.Timestamp.encode(message.scheduleDeadlineTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenanceSchedule message, length delimited. Does not implicitly {@link google.cloud.redis.v1beta1.MaintenanceSchedule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IMaintenanceSchedule} message MaintenanceSchedule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenanceSchedule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaintenanceSchedule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.redis.v1beta1.MaintenanceSchedule} MaintenanceSchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenanceSchedule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1beta1.MaintenanceSchedule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.canReschedule = reader.bool();
+                                    break;
+                                case 5:
+                                    message.scheduleDeadlineTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaintenanceSchedule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.redis.v1beta1.MaintenanceSchedule} MaintenanceSchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenanceSchedule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaintenanceSchedule message.
+                         * @function verify
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaintenanceSchedule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.canReschedule != null && message.hasOwnProperty("canReschedule"))
+                                if (typeof message.canReschedule !== "boolean")
+                                    return "canReschedule: boolean expected";
+                            if (message.scheduleDeadlineTime != null && message.hasOwnProperty("scheduleDeadlineTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.scheduleDeadlineTime);
+                                if (error)
+                                    return "scheduleDeadlineTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaintenanceSchedule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.redis.v1beta1.MaintenanceSchedule} MaintenanceSchedule
+                         */
+                        MaintenanceSchedule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.redis.v1beta1.MaintenanceSchedule)
+                                return object;
+                            var message = new $root.google.cloud.redis.v1beta1.MaintenanceSchedule();
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.redis.v1beta1.MaintenanceSchedule.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.redis.v1beta1.MaintenanceSchedule.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.canReschedule != null)
+                                message.canReschedule = Boolean(object.canReschedule);
+                            if (object.scheduleDeadlineTime != null) {
+                                if (typeof object.scheduleDeadlineTime !== "object")
+                                    throw TypeError(".google.cloud.redis.v1beta1.MaintenanceSchedule.scheduleDeadlineTime: object expected");
+                                message.scheduleDeadlineTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleDeadlineTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaintenanceSchedule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.MaintenanceSchedule} message MaintenanceSchedule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaintenanceSchedule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.endTime = null;
+                                object.canReschedule = false;
+                                object.scheduleDeadlineTime = null;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.canReschedule != null && message.hasOwnProperty("canReschedule"))
+                                object.canReschedule = message.canReschedule;
+                            if (message.scheduleDeadlineTime != null && message.hasOwnProperty("scheduleDeadlineTime"))
+                                object.scheduleDeadlineTime = $root.google.protobuf.Timestamp.toObject(message.scheduleDeadlineTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaintenanceSchedule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.redis.v1beta1.MaintenanceSchedule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaintenanceSchedule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MaintenanceSchedule;
                     })();
     
                     v1beta1.ListInstancesRequest = (function() {
@@ -7521,6 +8881,380 @@
                         };
     
                         return GetInstanceRequest;
+                    })();
+    
+                    v1beta1.GetInstanceAuthStringRequest = (function() {
+    
+                        /**
+                         * Properties of a GetInstanceAuthStringRequest.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @interface IGetInstanceAuthStringRequest
+                         * @property {string|null} [name] GetInstanceAuthStringRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetInstanceAuthStringRequest.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @classdesc Represents a GetInstanceAuthStringRequest.
+                         * @implements IGetInstanceAuthStringRequest
+                         * @constructor
+                         * @param {google.cloud.redis.v1beta1.IGetInstanceAuthStringRequest=} [properties] Properties to set
+                         */
+                        function GetInstanceAuthStringRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetInstanceAuthStringRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.redis.v1beta1.GetInstanceAuthStringRequest
+                         * @instance
+                         */
+                        GetInstanceAuthStringRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetInstanceAuthStringRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.redis.v1beta1.GetInstanceAuthStringRequest
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IGetInstanceAuthStringRequest=} [properties] Properties to set
+                         * @returns {google.cloud.redis.v1beta1.GetInstanceAuthStringRequest} GetInstanceAuthStringRequest instance
+                         */
+                        GetInstanceAuthStringRequest.create = function create(properties) {
+                            return new GetInstanceAuthStringRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetInstanceAuthStringRequest message. Does not implicitly {@link google.cloud.redis.v1beta1.GetInstanceAuthStringRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.redis.v1beta1.GetInstanceAuthStringRequest
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IGetInstanceAuthStringRequest} message GetInstanceAuthStringRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetInstanceAuthStringRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetInstanceAuthStringRequest message, length delimited. Does not implicitly {@link google.cloud.redis.v1beta1.GetInstanceAuthStringRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.GetInstanceAuthStringRequest
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IGetInstanceAuthStringRequest} message GetInstanceAuthStringRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetInstanceAuthStringRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetInstanceAuthStringRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.redis.v1beta1.GetInstanceAuthStringRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.redis.v1beta1.GetInstanceAuthStringRequest} GetInstanceAuthStringRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetInstanceAuthStringRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1beta1.GetInstanceAuthStringRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetInstanceAuthStringRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.GetInstanceAuthStringRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.redis.v1beta1.GetInstanceAuthStringRequest} GetInstanceAuthStringRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetInstanceAuthStringRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetInstanceAuthStringRequest message.
+                         * @function verify
+                         * @memberof google.cloud.redis.v1beta1.GetInstanceAuthStringRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetInstanceAuthStringRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetInstanceAuthStringRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.redis.v1beta1.GetInstanceAuthStringRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.redis.v1beta1.GetInstanceAuthStringRequest} GetInstanceAuthStringRequest
+                         */
+                        GetInstanceAuthStringRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.redis.v1beta1.GetInstanceAuthStringRequest)
+                                return object;
+                            var message = new $root.google.cloud.redis.v1beta1.GetInstanceAuthStringRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetInstanceAuthStringRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.redis.v1beta1.GetInstanceAuthStringRequest
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.GetInstanceAuthStringRequest} message GetInstanceAuthStringRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetInstanceAuthStringRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetInstanceAuthStringRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.redis.v1beta1.GetInstanceAuthStringRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetInstanceAuthStringRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetInstanceAuthStringRequest;
+                    })();
+    
+                    v1beta1.InstanceAuthString = (function() {
+    
+                        /**
+                         * Properties of an InstanceAuthString.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @interface IInstanceAuthString
+                         * @property {string|null} [authString] InstanceAuthString authString
+                         */
+    
+                        /**
+                         * Constructs a new InstanceAuthString.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @classdesc Represents an InstanceAuthString.
+                         * @implements IInstanceAuthString
+                         * @constructor
+                         * @param {google.cloud.redis.v1beta1.IInstanceAuthString=} [properties] Properties to set
+                         */
+                        function InstanceAuthString(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InstanceAuthString authString.
+                         * @member {string} authString
+                         * @memberof google.cloud.redis.v1beta1.InstanceAuthString
+                         * @instance
+                         */
+                        InstanceAuthString.prototype.authString = "";
+    
+                        /**
+                         * Creates a new InstanceAuthString instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.redis.v1beta1.InstanceAuthString
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IInstanceAuthString=} [properties] Properties to set
+                         * @returns {google.cloud.redis.v1beta1.InstanceAuthString} InstanceAuthString instance
+                         */
+                        InstanceAuthString.create = function create(properties) {
+                            return new InstanceAuthString(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InstanceAuthString message. Does not implicitly {@link google.cloud.redis.v1beta1.InstanceAuthString.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.redis.v1beta1.InstanceAuthString
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IInstanceAuthString} message InstanceAuthString message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InstanceAuthString.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.authString != null && Object.hasOwnProperty.call(message, "authString"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.authString);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InstanceAuthString message, length delimited. Does not implicitly {@link google.cloud.redis.v1beta1.InstanceAuthString.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.InstanceAuthString
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IInstanceAuthString} message InstanceAuthString message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InstanceAuthString.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InstanceAuthString message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.redis.v1beta1.InstanceAuthString
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.redis.v1beta1.InstanceAuthString} InstanceAuthString
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InstanceAuthString.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1beta1.InstanceAuthString();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.authString = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InstanceAuthString message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.InstanceAuthString
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.redis.v1beta1.InstanceAuthString} InstanceAuthString
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InstanceAuthString.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InstanceAuthString message.
+                         * @function verify
+                         * @memberof google.cloud.redis.v1beta1.InstanceAuthString
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InstanceAuthString.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.authString != null && message.hasOwnProperty("authString"))
+                                if (!$util.isString(message.authString))
+                                    return "authString: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InstanceAuthString message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.redis.v1beta1.InstanceAuthString
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.redis.v1beta1.InstanceAuthString} InstanceAuthString
+                         */
+                        InstanceAuthString.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.redis.v1beta1.InstanceAuthString)
+                                return object;
+                            var message = new $root.google.cloud.redis.v1beta1.InstanceAuthString();
+                            if (object.authString != null)
+                                message.authString = String(object.authString);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InstanceAuthString message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.redis.v1beta1.InstanceAuthString
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.InstanceAuthString} message InstanceAuthString
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InstanceAuthString.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.authString = "";
+                            if (message.authString != null && message.hasOwnProperty("authString"))
+                                object.authString = message.authString;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InstanceAuthString to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.redis.v1beta1.InstanceAuthString
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InstanceAuthString.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return InstanceAuthString;
                     })();
     
                     v1beta1.CreateInstanceRequest = (function() {
@@ -10234,6 +11968,292 @@
                         };
     
                         return ZoneMetadata;
+                    })();
+    
+                    v1beta1.TlsCertificate = (function() {
+    
+                        /**
+                         * Properties of a TlsCertificate.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @interface ITlsCertificate
+                         * @property {string|null} [serialNumber] TlsCertificate serialNumber
+                         * @property {string|null} [cert] TlsCertificate cert
+                         * @property {google.protobuf.ITimestamp|null} [createTime] TlsCertificate createTime
+                         * @property {google.protobuf.ITimestamp|null} [expireTime] TlsCertificate expireTime
+                         * @property {string|null} [sha1Fingerprint] TlsCertificate sha1Fingerprint
+                         */
+    
+                        /**
+                         * Constructs a new TlsCertificate.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @classdesc Represents a TlsCertificate.
+                         * @implements ITlsCertificate
+                         * @constructor
+                         * @param {google.cloud.redis.v1beta1.ITlsCertificate=} [properties] Properties to set
+                         */
+                        function TlsCertificate(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TlsCertificate serialNumber.
+                         * @member {string} serialNumber
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @instance
+                         */
+                        TlsCertificate.prototype.serialNumber = "";
+    
+                        /**
+                         * TlsCertificate cert.
+                         * @member {string} cert
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @instance
+                         */
+                        TlsCertificate.prototype.cert = "";
+    
+                        /**
+                         * TlsCertificate createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @instance
+                         */
+                        TlsCertificate.prototype.createTime = null;
+    
+                        /**
+                         * TlsCertificate expireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @instance
+                         */
+                        TlsCertificate.prototype.expireTime = null;
+    
+                        /**
+                         * TlsCertificate sha1Fingerprint.
+                         * @member {string} sha1Fingerprint
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @instance
+                         */
+                        TlsCertificate.prototype.sha1Fingerprint = "";
+    
+                        /**
+                         * Creates a new TlsCertificate instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.ITlsCertificate=} [properties] Properties to set
+                         * @returns {google.cloud.redis.v1beta1.TlsCertificate} TlsCertificate instance
+                         */
+                        TlsCertificate.create = function create(properties) {
+                            return new TlsCertificate(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TlsCertificate message. Does not implicitly {@link google.cloud.redis.v1beta1.TlsCertificate.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.ITlsCertificate} message TlsCertificate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TlsCertificate.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serialNumber != null && Object.hasOwnProperty.call(message, "serialNumber"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serialNumber);
+                            if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.cert);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.sha1Fingerprint != null && Object.hasOwnProperty.call(message, "sha1Fingerprint"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.sha1Fingerprint);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TlsCertificate message, length delimited. Does not implicitly {@link google.cloud.redis.v1beta1.TlsCertificate.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.ITlsCertificate} message TlsCertificate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TlsCertificate.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TlsCertificate message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.redis.v1beta1.TlsCertificate} TlsCertificate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TlsCertificate.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1beta1.TlsCertificate();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.serialNumber = reader.string();
+                                    break;
+                                case 2:
+                                    message.cert = reader.string();
+                                    break;
+                                case 3:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.sha1Fingerprint = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TlsCertificate message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.redis.v1beta1.TlsCertificate} TlsCertificate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TlsCertificate.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TlsCertificate message.
+                         * @function verify
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TlsCertificate.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serialNumber != null && message.hasOwnProperty("serialNumber"))
+                                if (!$util.isString(message.serialNumber))
+                                    return "serialNumber: string expected";
+                            if (message.cert != null && message.hasOwnProperty("cert"))
+                                if (!$util.isString(message.cert))
+                                    return "cert: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                if (error)
+                                    return "expireTime." + error;
+                            }
+                            if (message.sha1Fingerprint != null && message.hasOwnProperty("sha1Fingerprint"))
+                                if (!$util.isString(message.sha1Fingerprint))
+                                    return "sha1Fingerprint: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TlsCertificate message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.redis.v1beta1.TlsCertificate} TlsCertificate
+                         */
+                        TlsCertificate.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.redis.v1beta1.TlsCertificate)
+                                return object;
+                            var message = new $root.google.cloud.redis.v1beta1.TlsCertificate();
+                            if (object.serialNumber != null)
+                                message.serialNumber = String(object.serialNumber);
+                            if (object.cert != null)
+                                message.cert = String(object.cert);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.redis.v1beta1.TlsCertificate.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.expireTime != null) {
+                                if (typeof object.expireTime !== "object")
+                                    throw TypeError(".google.cloud.redis.v1beta1.TlsCertificate.expireTime: object expected");
+                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            }
+                            if (object.sha1Fingerprint != null)
+                                message.sha1Fingerprint = String(object.sha1Fingerprint);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TlsCertificate message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.TlsCertificate} message TlsCertificate
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TlsCertificate.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.serialNumber = "";
+                                object.cert = "";
+                                object.createTime = null;
+                                object.expireTime = null;
+                                object.sha1Fingerprint = "";
+                            }
+                            if (message.serialNumber != null && message.hasOwnProperty("serialNumber"))
+                                object.serialNumber = message.serialNumber;
+                            if (message.cert != null && message.hasOwnProperty("cert"))
+                                object.cert = message.cert;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                            if (message.sha1Fingerprint != null && message.hasOwnProperty("sha1Fingerprint"))
+                                object.sha1Fingerprint = message.sha1Fingerprint;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TlsCertificate to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.redis.v1beta1.TlsCertificate
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TlsCertificate.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TlsCertificate;
                     })();
     
                     return v1beta1;
@@ -23841,6 +25861,298 @@
             })();
     
             return rpc;
+        })();
+    
+        google.type = (function() {
+    
+            /**
+             * Namespace type.
+             * @memberof google
+             * @namespace
+             */
+            var type = {};
+    
+            /**
+             * DayOfWeek enum.
+             * @name google.type.DayOfWeek
+             * @enum {number}
+             * @property {number} DAY_OF_WEEK_UNSPECIFIED=0 DAY_OF_WEEK_UNSPECIFIED value
+             * @property {number} MONDAY=1 MONDAY value
+             * @property {number} TUESDAY=2 TUESDAY value
+             * @property {number} WEDNESDAY=3 WEDNESDAY value
+             * @property {number} THURSDAY=4 THURSDAY value
+             * @property {number} FRIDAY=5 FRIDAY value
+             * @property {number} SATURDAY=6 SATURDAY value
+             * @property {number} SUNDAY=7 SUNDAY value
+             */
+            type.DayOfWeek = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "DAY_OF_WEEK_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "MONDAY"] = 1;
+                values[valuesById[2] = "TUESDAY"] = 2;
+                values[valuesById[3] = "WEDNESDAY"] = 3;
+                values[valuesById[4] = "THURSDAY"] = 4;
+                values[valuesById[5] = "FRIDAY"] = 5;
+                values[valuesById[6] = "SATURDAY"] = 6;
+                values[valuesById[7] = "SUNDAY"] = 7;
+                return values;
+            })();
+    
+            type.TimeOfDay = (function() {
+    
+                /**
+                 * Properties of a TimeOfDay.
+                 * @memberof google.type
+                 * @interface ITimeOfDay
+                 * @property {number|null} [hours] TimeOfDay hours
+                 * @property {number|null} [minutes] TimeOfDay minutes
+                 * @property {number|null} [seconds] TimeOfDay seconds
+                 * @property {number|null} [nanos] TimeOfDay nanos
+                 */
+    
+                /**
+                 * Constructs a new TimeOfDay.
+                 * @memberof google.type
+                 * @classdesc Represents a TimeOfDay.
+                 * @implements ITimeOfDay
+                 * @constructor
+                 * @param {google.type.ITimeOfDay=} [properties] Properties to set
+                 */
+                function TimeOfDay(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TimeOfDay hours.
+                 * @member {number} hours
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.hours = 0;
+    
+                /**
+                 * TimeOfDay minutes.
+                 * @member {number} minutes
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.minutes = 0;
+    
+                /**
+                 * TimeOfDay seconds.
+                 * @member {number} seconds
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.seconds = 0;
+    
+                /**
+                 * TimeOfDay nanos.
+                 * @member {number} nanos
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new TimeOfDay instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay=} [properties] Properties to set
+                 * @returns {google.type.TimeOfDay} TimeOfDay instance
+                 */
+                TimeOfDay.create = function create(properties) {
+                    return new TimeOfDay(properties);
+                };
+    
+                /**
+                 * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay} message TimeOfDay message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeOfDay.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.hours);
+                    if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minutes);
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay} message TimeOfDay message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeOfDay.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TimeOfDay message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeOfDay.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeOfDay();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.hours = reader.int32();
+                            break;
+                        case 2:
+                            message.minutes = reader.int32();
+                            break;
+                        case 3:
+                            message.seconds = reader.int32();
+                            break;
+                        case 4:
+                            message.nanos = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeOfDay.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TimeOfDay message.
+                 * @function verify
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TimeOfDay.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        if (!$util.isInteger(message.hours))
+                            return "hours: integer expected";
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        if (!$util.isInteger(message.minutes))
+                            return "minutes: integer expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds))
+                            return "seconds: integer expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 */
+                TimeOfDay.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.TimeOfDay)
+                        return object;
+                    var message = new $root.google.type.TimeOfDay();
+                    if (object.hours != null)
+                        message.hours = object.hours | 0;
+                    if (object.minutes != null)
+                        message.minutes = object.minutes | 0;
+                    if (object.seconds != null)
+                        message.seconds = object.seconds | 0;
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.TimeOfDay} message TimeOfDay
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TimeOfDay.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.hours = 0;
+                        object.minutes = 0;
+                        object.seconds = 0;
+                        object.nanos = 0;
+                    }
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        object.hours = message.hours;
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        object.minutes = message.minutes;
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        object.seconds = message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TimeOfDay to JSON.
+                 * @function toJSON
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TimeOfDay.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return TimeOfDay;
+            })();
+    
+            return type;
         })();
     
         return google;

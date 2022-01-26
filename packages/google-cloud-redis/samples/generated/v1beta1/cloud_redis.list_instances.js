@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -30,14 +31,13 @@ function main(parent) {
    *  If not specified, a default value of 1000 will be used by the service.
    *  Regardless of the page_size value, the response may include a partial list
    *  and a caller should only rely on response's
-   *  `next_page_token` google.cloud.redis.v1beta1.ListInstancesResponse.next_page_token
+   *  `next_page_token` google.cloud.redis.v1beta1.ListInstancesResponse.next_page_token 
    *  to determine if there are more instances left to be queried.
    */
   // const pageSize = 1234
   /**
    *  The `next_page_token` value returned from a previous
-   *  ListInstances google.cloud.redis.v1beta1.CloudRedis.ListInstances
-   *  request, if any.
+   *  ListInstances google.cloud.redis.v1beta1.CloudRedis.ListInstances  request, if any.
    */
   // const pageToken = 'abc123'
 
@@ -56,7 +56,7 @@ function main(parent) {
     // Run request
     const iterable = await redisClient.listInstancesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

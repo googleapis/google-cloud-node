@@ -15,8 +15,8 @@
 
 'use strict';
 
-function main(name, inputConfig) {
-  // [START redis_v1beta1_generated_CloudRedis_ImportInstance_async]
+function main(name) {
+  // [START redis_v1beta1_generated_CloudRedis_GetInstanceAuthString_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -26,10 +26,6 @@ function main(name, inputConfig) {
    *  where `location_id` refers to a GCP region.
    */
   // const name = 'abc123'
-  /**
-   *  Required. Specify data to be imported.
-   */
-  // const inputConfig = {}
 
   // Imports the Redis library
   const {CloudRedisClient} = require('@google-cloud/redis').v1beta1;
@@ -37,21 +33,19 @@ function main(name, inputConfig) {
   // Instantiates a client
   const redisClient = new CloudRedisClient();
 
-  async function callImportInstance() {
+  async function callGetInstanceAuthString() {
     // Construct request
     const request = {
       name,
-      inputConfig,
     };
 
     // Run request
-    const [operation] = await redisClient.importInstance(request);
-    const [response] = await operation.promise();
+    const response = await redisClient.getInstanceAuthString(request);
     console.log(response);
   }
 
-  callImportInstance();
-  // [END redis_v1beta1_generated_CloudRedis_ImportInstance_async]
+  callGetInstanceAuthString();
+  // [END redis_v1beta1_generated_CloudRedis_GetInstanceAuthString_async]
 }
 
 process.on('unhandledRejection', err => {

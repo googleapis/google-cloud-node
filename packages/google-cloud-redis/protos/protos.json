@@ -819,6 +819,24 @@
                             }
                           ]
                         },
+                        "GetInstanceAuthString": {
+                          "requestType": "GetInstanceAuthStringRequest",
+                          "responseType": "InstanceAuthString",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/instances/*}/authString",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/instances/*}/authString"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "CreateInstance": {
                           "requestType": "CreateInstanceRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1012,6 +1030,34 @@
                               }
                             }
                           ]
+                        },
+                        "RescheduleMaintenance": {
+                          "requestType": "RescheduleMaintenanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/instances/*}:rescheduleMaintenance",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name, reschedule_type, schedule_time",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1beta1.Instance",
+                            "(google.longrunning.operation_info).metadata_type": "google.protobuf.Any"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/instances/*}:rescheduleMaintenance",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name, reschedule_type, schedule_time"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.redis.v1beta1.Instance",
+                                "metadata_type": "google.protobuf.Any"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1168,6 +1214,42 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "authEnabled": {
+                          "type": "bool",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serverCaCerts": {
+                          "rule": "repeated",
+                          "type": "TlsCertificate",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "transitEncryptionMode": {
+                          "type": "TransitEncryptionMode",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maintenancePolicy": {
+                          "type": "MaintenancePolicy",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maintenanceSchedule": {
+                          "type": "MaintenanceSchedule",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "replicaCount": {
                           "type": "int32",
                           "id": 31,
@@ -1233,11 +1315,144 @@
                             "PRIVATE_SERVICE_ACCESS": 2
                           }
                         },
+                        "TransitEncryptionMode": {
+                          "values": {
+                            "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED": 0,
+                            "SERVER_AUTHENTICATION": 1,
+                            "DISABLED": 2
+                          }
+                        },
                         "ReadReplicasMode": {
                           "values": {
                             "READ_REPLICAS_MODE_UNSPECIFIED": 0,
                             "READ_REPLICAS_DISABLED": 1,
                             "READ_REPLICAS_ENABLED": 2
+                          }
+                        }
+                      }
+                    },
+                    "RescheduleMaintenanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "redis.googleapis.com/Instance"
+                          }
+                        },
+                        "rescheduleType": {
+                          "type": "RescheduleType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "scheduleTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RescheduleType": {
+                          "values": {
+                            "RESCHEDULE_TYPE_UNSPECIFIED": 0,
+                            "IMMEDIATE": 1,
+                            "NEXT_AVAILABLE_WINDOW": 2,
+                            "SPECIFIC_TIME": 3
+                          }
+                        }
+                      }
+                    },
+                    "MaintenancePolicy": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "weeklyMaintenanceWindow": {
+                          "rule": "repeated",
+                          "type": "WeeklyMaintenanceWindow",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "WeeklyMaintenanceWindow": {
+                      "fields": {
+                        "day": {
+                          "type": "google.type.DayOfWeek",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.type.TimeOfDay",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "MaintenanceSchedule": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "canReschedule": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "scheduleDeadlineTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -1289,6 +1504,26 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "redis.googleapis.com/Instance"
                           }
+                        }
+                      }
+                    },
+                    "GetInstanceAuthStringRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "redis.googleapis.com/Instance"
+                          }
+                        }
+                      }
+                    },
+                    "InstanceAuthString": {
+                      "fields": {
+                        "authString": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -1497,6 +1732,36 @@
                     },
                     "ZoneMetadata": {
                       "fields": {}
+                    },
+                    "TlsCertificate": {
+                      "fields": {
+                        "serialNumber": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "cert": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sha1Fingerprint": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
                     }
                   }
                 }
@@ -2911,6 +3176,50 @@
                   "rule": "repeated",
                   "type": "google.protobuf.Any",
                   "id": 3
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/type/timeofday;timeofday",
+            "java_multiple_files": true,
+            "java_outer_classname": "TimeOfDayProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "DayOfWeek": {
+              "values": {
+                "DAY_OF_WEEK_UNSPECIFIED": 0,
+                "MONDAY": 1,
+                "TUESDAY": 2,
+                "WEDNESDAY": 3,
+                "THURSDAY": 4,
+                "FRIDAY": 5,
+                "SATURDAY": 6,
+                "SUNDAY": 7
+              }
+            },
+            "TimeOfDay": {
+              "fields": {
+                "hours": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "minutes": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "seconds": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 4
                 }
               }
             }

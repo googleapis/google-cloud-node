@@ -15,8 +15,8 @@
 
 'use strict';
 
-function main(name, inputConfig) {
-  // [START redis_v1beta1_generated_CloudRedis_ImportInstance_async]
+function main(name, rescheduleType) {
+  // [START redis_v1beta1_generated_CloudRedis_RescheduleMaintenance_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -27,9 +27,15 @@ function main(name, inputConfig) {
    */
   // const name = 'abc123'
   /**
-   *  Required. Specify data to be imported.
+   *  Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as well.
    */
-  // const inputConfig = {}
+  // const rescheduleType = {}
+  /**
+   *  Optional. Timestamp when the maintenance shall be rescheduled to if
+   *  reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for
+   *  example `2012-11-15T16:19:00.094Z`.
+   */
+  // const scheduleTime = {}
 
   // Imports the Redis library
   const {CloudRedisClient} = require('@google-cloud/redis').v1beta1;
@@ -37,21 +43,21 @@ function main(name, inputConfig) {
   // Instantiates a client
   const redisClient = new CloudRedisClient();
 
-  async function callImportInstance() {
+  async function callRescheduleMaintenance() {
     // Construct request
     const request = {
       name,
-      inputConfig,
+      rescheduleType,
     };
 
     // Run request
-    const [operation] = await redisClient.importInstance(request);
+    const [operation] = await redisClient.rescheduleMaintenance(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callImportInstance();
-  // [END redis_v1beta1_generated_CloudRedis_ImportInstance_async]
+  callRescheduleMaintenance();
+  // [END redis_v1beta1_generated_CloudRedis_RescheduleMaintenance_async]
 }
 
 process.on('unhandledRejection', err => {
