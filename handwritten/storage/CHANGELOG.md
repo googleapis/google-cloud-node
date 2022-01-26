@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.18.1](https://github.com/googleapis/nodejs-storage/compare/v5.18.0...v5.18.1) (2022-01-26)
+
+
+### Bug Fixes
+
+* **gcs-resumable-upload:** Stop Duplicate Response Handlers on Retries ([#1764](https://github.com/googleapis/nodejs-storage/issues/1764)) ([fe44871](https://github.com/googleapis/nodejs-storage/commit/fe4487187aa405e7d7f8e0bec485bbddb76ea050))
+
 ## [5.18.0](https://github.com/googleapis/nodejs-storage/compare/v5.17.0...v5.18.0) (2022-01-18)
 
 
