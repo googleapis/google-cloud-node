@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,10 +41,7 @@ import * as gapicConfig from './data_transfer_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The Google BigQuery Data Transfer Service API enables BigQuery users to
- *  configure the transfer of their data from other Google Products into
- *  BigQuery. This service contains methods that are end user exposed. It backs
- *  up the frontend.
+ *  This API allows users to manage their data transfers into BigQuery.
  * @class
  * @memberof v1
  */
@@ -283,6 +280,7 @@ export class DataTransferServiceClient {
       'listTransferRuns',
       'listTransferLogs',
       'checkValidCreds',
+      'enrollDataSources',
     ];
     for (const methodName of dataTransferServiceStubMethods) {
       const callPromise = this.dataTransferServiceStub.then(
@@ -366,8 +364,7 @@ export class DataTransferServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Retrieves a supported data source and returns its settings,
-   * which can be used for UI rendering.
+   * Retrieves a supported data source and returns its settings.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -727,8 +724,8 @@ export class DataTransferServiceClient {
     return this.innerApiCalls.updateTransferConfig(request, options, callback);
   }
   /**
-   * Deletes a data transfer configuration,
-   * including any associated transfer runs and logs.
+   * Deletes a data transfer configuration, including any associated transfer
+   * runs and logs.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1352,10 +1349,6 @@ export class DataTransferServiceClient {
   /**
    * Returns true if valid credentials exist for the given data source and
    * requesting user.
-   * Some data sources doesn't support service account, so we need to talk to
-   * them on behalf of the end user. This API just checks whether we have OAuth
-   * token for the particular user, which is a pre-requisite before user can
-   * create a transfer config.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1453,10 +1446,115 @@ export class DataTransferServiceClient {
     this.initialize();
     return this.innerApiCalls.checkValidCreds(request, options, callback);
   }
+  /**
+   * Enroll data sources in a user project. This allows users to create transfer
+   * configurations for these data sources. They will also appear in the
+   * ListDataSources RPC and as such, will appear in the BigQuery UI
+   * 'https://bigquery.cloud.google.com' (and the documents can be found at
+   * https://cloud.google.com/bigquery/bigquery-web-ui and
+   * https://cloud.google.com/bigquery/docs/working-with-transfers).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the project resource in the form:
+   *   `projects/{project_id}`
+   * @param {string[]} request.dataSourceIds
+   *   Data sources that are enrolled. It is required to provide at least one
+   *   data source id.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_transfer_service.enroll_data_sources.js</caption>
+   * region_tag:bigquerydatatransfer_v1_generated_DataTransferService_EnrollDataSources_async
+   */
+  enrollDataSources(
+    request?: protos.google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  enrollDataSources(
+    request: protos.google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  enrollDataSources(
+    request: protos.google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  enrollDataSources(
+    request?: protos.google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.enrollDataSources(request, options, callback);
+  }
 
   /**
-   * Lists supported data sources and returns their settings,
-   * which can be used for UI rendering.
+   * Lists supported data sources and returns their settings.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1877,7 +1975,7 @@ export class DataTransferServiceClient {
     ) as AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig>;
   }
   /**
-   * Returns information about running and completed jobs.
+   * Returns information about running and completed transfer runs.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2099,7 +2197,7 @@ export class DataTransferServiceClient {
     ) as AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.ITransferRun>;
   }
   /**
-   * Returns user facing log messages for the data transfer run.
+   * Returns log messages for the transfer run.
    *
    * @param {Object} request
    *   The request object that will be sent.

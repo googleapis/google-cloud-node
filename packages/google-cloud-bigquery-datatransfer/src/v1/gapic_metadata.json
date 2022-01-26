@@ -60,6 +60,11 @@
                 "checkValidCreds"
               ]
             },
+            "EnrollDataSources": {
+              "methods": [
+                "enrollDataSources"
+              ]
+            },
             "ListDataSources": {
               "methods": [
                 "listDataSources",
@@ -141,6 +146,11 @@
             "CheckValidCreds": {
               "methods": [
                 "checkValidCreds"
+              ]
+            },
+            "EnrollDataSources": {
+              "methods": [
+                "enrollDataSources"
               ]
             },
             "ListDataSources": {

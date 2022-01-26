@@ -569,6 +569,39 @@
                              * @variation 2
                              */
     
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datatransfer.v1.DataTransferService#enrollDataSources}.
+                             * @memberof google.cloud.bigquery.datatransfer.v1.DataTransferService
+                             * @typedef EnrollDataSourcesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls EnrollDataSources.
+                             * @function enrollDataSources
+                             * @memberof google.cloud.bigquery.datatransfer.v1.DataTransferService
+                             * @instance
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest} request EnrollDataSourcesRequest message or plain object
+                             * @param {google.cloud.bigquery.datatransfer.v1.DataTransferService.EnrollDataSourcesCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataTransferService.prototype.enrollDataSources = function enrollDataSources(request, callback) {
+                                return this.rpcCall(enrollDataSources, $root.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "EnrollDataSources" });
+    
+                            /**
+                             * Calls EnrollDataSources.
+                             * @function enrollDataSources
+                             * @memberof google.cloud.bigquery.datatransfer.v1.DataTransferService
+                             * @instance
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest} request EnrollDataSourcesRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
                             return DataTransferService;
                         })();
     
@@ -7016,6 +7049,232 @@
                             return StartManualTransferRunsResponse;
                         })();
     
+                        v1.EnrollDataSourcesRequest = (function() {
+    
+                            /**
+                             * Properties of an EnrollDataSourcesRequest.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @interface IEnrollDataSourcesRequest
+                             * @property {string|null} [name] EnrollDataSourcesRequest name
+                             * @property {Array.<string>|null} [dataSourceIds] EnrollDataSourcesRequest dataSourceIds
+                             */
+    
+                            /**
+                             * Constructs a new EnrollDataSourcesRequest.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @classdesc Represents an EnrollDataSourcesRequest.
+                             * @implements IEnrollDataSourcesRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest=} [properties] Properties to set
+                             */
+                            function EnrollDataSourcesRequest(properties) {
+                                this.dataSourceIds = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EnrollDataSourcesRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest
+                             * @instance
+                             */
+                            EnrollDataSourcesRequest.prototype.name = "";
+    
+                            /**
+                             * EnrollDataSourcesRequest dataSourceIds.
+                             * @member {Array.<string>} dataSourceIds
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest
+                             * @instance
+                             */
+                            EnrollDataSourcesRequest.prototype.dataSourceIds = $util.emptyArray;
+    
+                            /**
+                             * Creates a new EnrollDataSourcesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest} EnrollDataSourcesRequest instance
+                             */
+                            EnrollDataSourcesRequest.create = function create(properties) {
+                                return new EnrollDataSourcesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EnrollDataSourcesRequest message. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest} message EnrollDataSourcesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EnrollDataSourcesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.dataSourceIds != null && message.dataSourceIds.length)
+                                    for (var i = 0; i < message.dataSourceIds.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataSourceIds[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EnrollDataSourcesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest} message EnrollDataSourcesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EnrollDataSourcesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EnrollDataSourcesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest} EnrollDataSourcesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EnrollDataSourcesRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.name = reader.string();
+                                        break;
+                                    case 2:
+                                        if (!(message.dataSourceIds && message.dataSourceIds.length))
+                                            message.dataSourceIds = [];
+                                        message.dataSourceIds.push(reader.string());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EnrollDataSourcesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest} EnrollDataSourcesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EnrollDataSourcesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EnrollDataSourcesRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EnrollDataSourcesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.dataSourceIds != null && message.hasOwnProperty("dataSourceIds")) {
+                                    if (!Array.isArray(message.dataSourceIds))
+                                        return "dataSourceIds: array expected";
+                                    for (var i = 0; i < message.dataSourceIds.length; ++i)
+                                        if (!$util.isString(message.dataSourceIds[i]))
+                                            return "dataSourceIds: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EnrollDataSourcesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest} EnrollDataSourcesRequest
+                             */
+                            EnrollDataSourcesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.dataSourceIds) {
+                                    if (!Array.isArray(object.dataSourceIds))
+                                        throw TypeError(".google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest.dataSourceIds: array expected");
+                                    message.dataSourceIds = [];
+                                    for (var i = 0; i < object.dataSourceIds.length; ++i)
+                                        message.dataSourceIds[i] = String(object.dataSourceIds[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EnrollDataSourcesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest} message EnrollDataSourcesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EnrollDataSourcesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.dataSourceIds = [];
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.dataSourceIds && message.dataSourceIds.length) {
+                                    object.dataSourceIds = [];
+                                    for (var j = 0; j < message.dataSourceIds.length; ++j)
+                                        object.dataSourceIds[j] = message.dataSourceIds[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EnrollDataSourcesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EnrollDataSourcesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return EnrollDataSourcesRequest;
+                        })();
+    
                         /**
                          * TransferType enum.
                          * @name google.cloud.bigquery.datatransfer.v1.TransferType
@@ -7483,6 +7742,211 @@
                             return ScheduleOptions;
                         })();
     
+                        v1.UserInfo = (function() {
+    
+                            /**
+                             * Properties of a UserInfo.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @interface IUserInfo
+                             * @property {string|null} [email] UserInfo email
+                             */
+    
+                            /**
+                             * Constructs a new UserInfo.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @classdesc Represents a UserInfo.
+                             * @implements IUserInfo
+                             * @constructor
+                             * @param {google.cloud.bigquery.datatransfer.v1.IUserInfo=} [properties] Properties to set
+                             */
+                            function UserInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UserInfo email.
+                             * @member {string|null|undefined} email
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UserInfo
+                             * @instance
+                             */
+                            UserInfo.prototype.email = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * UserInfo _email.
+                             * @member {"email"|undefined} _email
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UserInfo
+                             * @instance
+                             */
+                            Object.defineProperty(UserInfo.prototype, "_email", {
+                                get: $util.oneOfGetter($oneOfFields = ["email"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new UserInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UserInfo
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IUserInfo=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datatransfer.v1.UserInfo} UserInfo instance
+                             */
+                            UserInfo.create = function create(properties) {
+                                return new UserInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UserInfo message. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.UserInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UserInfo
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IUserInfo} message UserInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.email != null && Object.hasOwnProperty.call(message, "email"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.email);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UserInfo message, length delimited. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.UserInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UserInfo
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IUserInfo} message UserInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a UserInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UserInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datatransfer.v1.UserInfo} UserInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserInfo.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datatransfer.v1.UserInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.email = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a UserInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UserInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datatransfer.v1.UserInfo} UserInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a UserInfo message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UserInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UserInfo.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.email != null && message.hasOwnProperty("email")) {
+                                    properties._email = 1;
+                                    if (!$util.isString(message.email))
+                                        return "email: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a UserInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UserInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datatransfer.v1.UserInfo} UserInfo
+                             */
+                            UserInfo.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datatransfer.v1.UserInfo)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datatransfer.v1.UserInfo();
+                                if (object.email != null)
+                                    message.email = String(object.email);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a UserInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UserInfo
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.UserInfo} message UserInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UserInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.email != null && message.hasOwnProperty("email")) {
+                                    object.email = message.email;
+                                    if (options.oneofs)
+                                        object._email = "email";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UserInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UserInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UserInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return UserInfo;
+                        })();
+    
                         v1.TransferConfig = (function() {
     
                             /**
@@ -7505,6 +7969,7 @@
                              * @property {string|null} [datasetRegion] TransferConfig datasetRegion
                              * @property {string|null} [notificationPubsubTopic] TransferConfig notificationPubsubTopic
                              * @property {google.cloud.bigquery.datatransfer.v1.IEmailPreferences|null} [emailPreferences] TransferConfig emailPreferences
+                             * @property {google.cloud.bigquery.datatransfer.v1.IUserInfo|null} [ownerInfo] TransferConfig ownerInfo
                              */
     
                             /**
@@ -7650,6 +8115,14 @@
                              */
                             TransferConfig.prototype.emailPreferences = null;
     
+                            /**
+                             * TransferConfig ownerInfo.
+                             * @member {google.cloud.bigquery.datatransfer.v1.IUserInfo|null|undefined} ownerInfo
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TransferConfig
+                             * @instance
+                             */
+                            TransferConfig.prototype.ownerInfo = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -7661,6 +8134,17 @@
                              */
                             Object.defineProperty(TransferConfig.prototype, "destination", {
                                 get: $util.oneOfGetter($oneOfFields = ["destinationDatasetId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * TransferConfig _ownerInfo.
+                             * @member {"ownerInfo"|undefined} _ownerInfo
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TransferConfig
+                             * @instance
+                             */
+                            Object.defineProperty(TransferConfig.prototype, "_ownerInfo", {
+                                get: $util.oneOfGetter($oneOfFields = ["ownerInfo"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -7720,6 +8204,8 @@
                                     $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.encode(message.emailPreferences, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                                 if (message.scheduleOptions != null && Object.hasOwnProperty.call(message, "scheduleOptions"))
                                     $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptions.encode(message.scheduleOptions, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                                if (message.ownerInfo != null && Object.hasOwnProperty.call(message, "ownerInfo"))
+                                    $root.google.cloud.bigquery.datatransfer.v1.UserInfo.encode(message.ownerInfo, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                                 return writer;
                             };
     
@@ -7801,6 +8287,9 @@
                                         break;
                                     case 18:
                                         message.emailPreferences = $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.decode(reader, reader.uint32());
+                                        break;
+                                    case 27:
+                                        message.ownerInfo = $root.google.cloud.bigquery.datatransfer.v1.UserInfo.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -7907,6 +8396,14 @@
                                     if (error)
                                         return "emailPreferences." + error;
                                 }
+                                if (message.ownerInfo != null && message.hasOwnProperty("ownerInfo")) {
+                                    properties._ownerInfo = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.datatransfer.v1.UserInfo.verify(message.ownerInfo);
+                                        if (error)
+                                            return "ownerInfo." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -8000,6 +8497,11 @@
                                         throw TypeError(".google.cloud.bigquery.datatransfer.v1.TransferConfig.emailPreferences: object expected");
                                     message.emailPreferences = $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.fromObject(object.emailPreferences);
                                 }
+                                if (object.ownerInfo != null) {
+                                    if (typeof object.ownerInfo !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datatransfer.v1.TransferConfig.ownerInfo: object expected");
+                                    message.ownerInfo = $root.google.cloud.bigquery.datatransfer.v1.UserInfo.fromObject(object.ownerInfo);
+                                }
                                 return message;
                             };
     
@@ -8075,6 +8577,11 @@
                                     object.emailPreferences = $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.toObject(message.emailPreferences, options);
                                 if (message.scheduleOptions != null && message.hasOwnProperty("scheduleOptions"))
                                     object.scheduleOptions = $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptions.toObject(message.scheduleOptions, options);
+                                if (message.ownerInfo != null && message.hasOwnProperty("ownerInfo")) {
+                                    object.ownerInfo = $root.google.cloud.bigquery.datatransfer.v1.UserInfo.toObject(message.ownerInfo, options);
+                                    if (options.oneofs)
+                                        object._ownerInfo = "ownerInfo";
+                                }
                                 return object;
                             };
     

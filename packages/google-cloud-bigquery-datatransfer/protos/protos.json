@@ -353,6 +353,28 @@
                                   "(google.api.method_signature)": "name"
                                 }
                               ]
+                            },
+                            "EnrollDataSources": {
+                              "requestType": "EnrollDataSourcesRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).post": "/v1/{name=projects/*/locations/*}:enrollDataSources",
+                                "(google.api.http).body": "*",
+                                "(google.api.http).additional_bindings.post": "/v1/{name=projects/*}:enrollDataSources",
+                                "(google.api.http).additional_bindings.body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{name=projects/*/locations/*}:enrollDataSources",
+                                    "body": "*",
+                                    "additional_bindings": {
+                                      "post": "/v1/{name=projects/*}:enrollDataSources",
+                                      "body": "*"
+                                    }
+                                  }
+                                }
+                              ]
                             }
                           }
                         },
@@ -953,6 +975,19 @@
                             }
                           }
                         },
+                        "EnrollDataSourcesRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "dataSourceIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
                         "TransferType": {
                           "options": {
                             "deprecated": true
@@ -997,6 +1032,24 @@
                             }
                           }
                         },
+                        "UserInfo": {
+                          "oneofs": {
+                            "_email": {
+                              "oneof": [
+                                "email"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "email": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
                         "TransferConfig": {
                           "options": {
                             "(google.api.resource).type": "bigquerydatatransfer.googleapis.com/TransferConfig",
@@ -1006,6 +1059,11 @@
                             "destination": {
                               "oneof": [
                                 "destinationDatasetId"
+                              ]
+                            },
+                            "_ownerInfo": {
+                              "oneof": [
+                                "ownerInfo"
                               ]
                             }
                           },
@@ -1085,6 +1143,14 @@
                             "emailPreferences": {
                               "type": "EmailPreferences",
                               "id": 18
+                            },
+                            "ownerInfo": {
+                              "type": "UserInfo",
+                              "id": 27,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
                             }
                           }
                         },
