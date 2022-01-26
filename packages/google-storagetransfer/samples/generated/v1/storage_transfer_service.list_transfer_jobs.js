@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(filter) {
@@ -43,8 +44,7 @@ function main(filter) {
   // const pageToken = 'abc123'
 
   // Imports the Storagetransfer library
-  const {StorageTransferServiceClient} =
-    require('@google-cloud/storage-transfer').v1;
+  const {StorageTransferServiceClient} = require('@google-cloud/storage-transfer').v1;
 
   // Instantiates a client
   const storagetransferClient = new StorageTransferServiceClient();
@@ -58,7 +58,7 @@ function main(filter) {
     // Run request
     const iterable = await storagetransferClient.listTransferJobsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(projectId) {
@@ -26,8 +27,7 @@ function main(projectId) {
   // const projectId = 'abc123'
 
   // Imports the Storagetransfer library
-  const {StorageTransferServiceClient} =
-    require('@google-cloud/storage-transfer').v1;
+  const {StorageTransferServiceClient} = require('@google-cloud/storage-transfer').v1;
 
   // Instantiates a client
   const storagetransferClient = new StorageTransferServiceClient();
@@ -39,9 +39,7 @@ function main(projectId) {
     };
 
     // Run request
-    const response = await storagetransferClient.getGoogleServiceAccount(
-      request
-    );
+    const response = await storagetransferClient.getGoogleServiceAccount(request);
     console.log(response);
   }
 
