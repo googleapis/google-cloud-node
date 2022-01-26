@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -21,8 +22,8 @@ function main(parent) {
    */
   /**
    *  Required. The name of the Data Catalog resource to list the tags of.
-   *  The resource can be an Entry google.cloud.datacatalog.v1.Entry
-   *  or an EntryGroup google.cloud.datacatalog.v1.EntryGroup
+   *  The resource can be an Entry google.cloud.datacatalog.v1.Entry 
+   *  or an EntryGroup google.cloud.datacatalog.v1.EntryGroup 
    *  (without `/entries/{entries}` at the end).
    */
   // const parent = 'abc123'
@@ -51,7 +52,7 @@ function main(parent) {
     // Run request
     const iterable = await datacatalogClient.listTagsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

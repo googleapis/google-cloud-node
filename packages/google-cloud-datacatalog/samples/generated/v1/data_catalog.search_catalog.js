@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(scope) {
@@ -49,9 +50,9 @@ function main(scope) {
   /**
    *  Optional. Pagination token that, if specified, returns the next page of search
    *  results. If empty, returns the first page.
-   *  This token is returned in the SearchCatalogResponse.next_page_token google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token
+   *  This token is returned in the SearchCatalogResponse.next_page_token google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token 
    *  field of the response to a previous
-   *  SearchCatalogRequest google.cloud.datacatalog.v1.DataCatalog.SearchCatalog
+   *  SearchCatalogRequest google.cloud.datacatalog.v1.DataCatalog.SearchCatalog 
    *  call.
    */
   // const pageToken = 'abc123'
@@ -79,7 +80,7 @@ function main(scope) {
     // Run request
     const iterable = await datacatalogClient.searchCatalogAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

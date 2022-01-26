@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name, newEnumValueDisplayName) {
@@ -42,9 +43,7 @@ function main(name, newEnumValueDisplayName) {
     };
 
     // Run request
-    const response = await datacatalogClient.renameTagTemplateFieldEnumValue(
-      request
-    );
+    const response = await datacatalogClient.renameTagTemplateFieldEnumValue(request);
     console.log(response);
   }
 

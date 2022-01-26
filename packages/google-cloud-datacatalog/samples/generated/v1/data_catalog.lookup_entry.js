@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -21,7 +22,7 @@ function main() {
    */
   /**
    *  The full name of the Google Cloud Platform resource the Data Catalog
-   *  entry represents. For more information, see Full Resource Name
+   *  entry represents. For more information, see Full Resource Name 
    *  (https://cloud.google.com/apis/design/resource_names#full_resource_name).
    *  Full names are case-sensitive. For example:
    *   * `//bigquery.googleapis.com/projects/{PROJECT_ID}/datasets/{DATASET_ID}/tables/{TABLE_ID}`
@@ -37,7 +38,7 @@ function main() {
    *  * `bigquery.dataset.{PROJECT_ID}.{DATASET_ID}`
    *  * `datacatalog.entry.{PROJECT_ID}.{LOCATION_ID}.{ENTRY_GROUP_ID}.{ENTRY_ID}`
    *  Identifiers (`*_ID`) should comply with the
-   *  Lexical structure in Standard SQL
+   *  Lexical structure in Standard SQL 
    *  (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
    */
   // const sqlResource = 'abc123'
@@ -61,7 +62,8 @@ function main() {
 
   async function callLookupEntry() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const response = await datacatalogClient.lookupEntry(request);

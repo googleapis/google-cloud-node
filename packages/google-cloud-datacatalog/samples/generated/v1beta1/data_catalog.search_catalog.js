@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(scope, query) {
@@ -47,7 +48,7 @@ function main(scope, query) {
    *  Optional. Pagination token returned in an earlier
    *  SearchCatalogResponse.next_page_token google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token, which
    *  indicates that this is a continuation of a prior
-   *  SearchCatalogRequest google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog
+   *  SearchCatalogRequest google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog 
    *  call, and that the system should return the next page of data. If empty,
    *  the first page is returned.
    */
@@ -78,7 +79,7 @@ function main(scope, query) {
     // Run request
     const iterable = await datacatalogClient.searchCatalogAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

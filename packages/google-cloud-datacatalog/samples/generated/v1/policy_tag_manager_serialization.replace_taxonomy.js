@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name, serializedTaxonomy) {
@@ -29,8 +30,7 @@ function main(name, serializedTaxonomy) {
   // const serializedTaxonomy = {}
 
   // Imports the Datacatalog library
-  const {PolicyTagManagerSerializationClient} =
-    require('@google-cloud/datacatalog').v1;
+  const {PolicyTagManagerSerializationClient} = require('@google-cloud/datacatalog').v1;
 
   // Instantiates a client
   const datacatalogClient = new PolicyTagManagerSerializationClient();

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -27,7 +28,7 @@ function main() {
   /**
    *  Specifies fields to update. If not set, defaults to all fields you can
    *  update.
-   *  For more information, see FieldMask
+   *  For more information, see FieldMask 
    *  (https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask).
    */
   // const updateMask = {}
@@ -40,7 +41,8 @@ function main() {
 
   async function callUpdateTaxonomy() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const response = await datacatalogClient.updateTaxonomy(request);
