@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -47,8 +48,7 @@ function main(parent) {
   // const suggestionTypes = 1234
 
   // Imports the Dataqna library
-  const {AutoSuggestionServiceClient} =
-    require('@google-cloud/data-qna').v1alpha;
+  const {AutoSuggestionServiceClient} = require('@google-cloud/data-qna').v1alpha;
 
   // Instantiates a client
   const dataqnaClient = new AutoSuggestionServiceClient();
