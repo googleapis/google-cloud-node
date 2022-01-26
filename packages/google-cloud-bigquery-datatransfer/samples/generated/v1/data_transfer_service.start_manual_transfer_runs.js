@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -36,15 +37,15 @@ function main() {
   // const requestedRunTime = {}
 
   // Imports the Datatransfer library
-  const {DataTransferServiceClient} =
-    require('@google-cloud/bigquery-data-transfer').v1;
+  const {DataTransferServiceClient} = require('@google-cloud/bigquery-data-transfer').v1;
 
   // Instantiates a client
   const datatransferClient = new DataTransferServiceClient();
 
   async function callStartManualTransferRuns() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const response = await datatransferClient.startManualTransferRuns(request);

@@ -244,6 +244,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public checkValidCreds(request: google.cloud.bigquery.datatransfer.v1.ICheckValidCredsRequest): Promise<google.cloud.bigquery.datatransfer.v1.CheckValidCredsResponse>;
+
+                        /**
+                         * Calls EnrollDataSources.
+                         * @param request EnrollDataSourcesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public enrollDataSources(request: google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest, callback: google.cloud.bigquery.datatransfer.v1.DataTransferService.EnrollDataSourcesCallback): void;
+
+                        /**
+                         * Calls EnrollDataSources.
+                         * @param request EnrollDataSourcesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public enrollDataSources(request: google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest): Promise<google.protobuf.Empty>;
                     }
 
                     namespace DataTransferService {
@@ -345,6 +359,13 @@ export namespace google {
                          * @param [response] CheckValidCredsResponse
                          */
                         type CheckValidCredsCallback = (error: (Error|null), response?: google.cloud.bigquery.datatransfer.v1.CheckValidCredsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datatransfer.v1.DataTransferService#enrollDataSources}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type EnrollDataSourcesCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                     }
 
                     /** Properties of a DataSourceParameter. */
@@ -2920,6 +2941,102 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** Properties of an EnrollDataSourcesRequest. */
+                    interface IEnrollDataSourcesRequest {
+
+                        /** EnrollDataSourcesRequest name */
+                        name?: (string|null);
+
+                        /** EnrollDataSourcesRequest dataSourceIds */
+                        dataSourceIds?: (string[]|null);
+                    }
+
+                    /** Represents an EnrollDataSourcesRequest. */
+                    class EnrollDataSourcesRequest implements IEnrollDataSourcesRequest {
+
+                        /**
+                         * Constructs a new EnrollDataSourcesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest);
+
+                        /** EnrollDataSourcesRequest name. */
+                        public name: string;
+
+                        /** EnrollDataSourcesRequest dataSourceIds. */
+                        public dataSourceIds: string[];
+
+                        /**
+                         * Creates a new EnrollDataSourcesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EnrollDataSourcesRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest): google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest;
+
+                        /**
+                         * Encodes the specified EnrollDataSourcesRequest message. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest.verify|verify} messages.
+                         * @param message EnrollDataSourcesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EnrollDataSourcesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest.verify|verify} messages.
+                         * @param message EnrollDataSourcesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datatransfer.v1.IEnrollDataSourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EnrollDataSourcesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EnrollDataSourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest;
+
+                        /**
+                         * Decodes an EnrollDataSourcesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EnrollDataSourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest;
+
+                        /**
+                         * Verifies an EnrollDataSourcesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EnrollDataSourcesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EnrollDataSourcesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest;
+
+                        /**
+                         * Creates a plain object from an EnrollDataSourcesRequest message. Also converts values to other types if specified.
+                         * @param message EnrollDataSourcesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EnrollDataSourcesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
                     /** TransferType enum. */
                     enum TransferType {
                         TRANSFER_TYPE_UNSPECIFIED = 0,
@@ -3129,6 +3246,99 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** Properties of a UserInfo. */
+                    interface IUserInfo {
+
+                        /** UserInfo email */
+                        email?: (string|null);
+                    }
+
+                    /** Represents a UserInfo. */
+                    class UserInfo implements IUserInfo {
+
+                        /**
+                         * Constructs a new UserInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datatransfer.v1.IUserInfo);
+
+                        /** UserInfo email. */
+                        public email?: (string|null);
+
+                        /** UserInfo _email. */
+                        public _email?: "email";
+
+                        /**
+                         * Creates a new UserInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserInfo instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datatransfer.v1.IUserInfo): google.cloud.bigquery.datatransfer.v1.UserInfo;
+
+                        /**
+                         * Encodes the specified UserInfo message. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.UserInfo.verify|verify} messages.
+                         * @param message UserInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datatransfer.v1.IUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserInfo message, length delimited. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.UserInfo.verify|verify} messages.
+                         * @param message UserInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datatransfer.v1.IUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datatransfer.v1.UserInfo;
+
+                        /**
+                         * Decodes a UserInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datatransfer.v1.UserInfo;
+
+                        /**
+                         * Verifies a UserInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datatransfer.v1.UserInfo;
+
+                        /**
+                         * Creates a plain object from a UserInfo message. Also converts values to other types if specified.
+                         * @param message UserInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datatransfer.v1.UserInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
                     /** Properties of a TransferConfig. */
                     interface ITransferConfig {
 
@@ -3179,6 +3389,9 @@ export namespace google {
 
                         /** TransferConfig emailPreferences */
                         emailPreferences?: (google.cloud.bigquery.datatransfer.v1.IEmailPreferences|null);
+
+                        /** TransferConfig ownerInfo */
+                        ownerInfo?: (google.cloud.bigquery.datatransfer.v1.IUserInfo|null);
                     }
 
                     /** Represents a TransferConfig. */
@@ -3238,8 +3451,14 @@ export namespace google {
                         /** TransferConfig emailPreferences. */
                         public emailPreferences?: (google.cloud.bigquery.datatransfer.v1.IEmailPreferences|null);
 
+                        /** TransferConfig ownerInfo. */
+                        public ownerInfo?: (google.cloud.bigquery.datatransfer.v1.IUserInfo|null);
+
                         /** TransferConfig destination. */
                         public destination?: "destinationDatasetId";
+
+                        /** TransferConfig _ownerInfo. */
+                        public _ownerInfo?: "ownerInfo";
 
                         /**
                          * Creates a new TransferConfig instance using the specified properties.

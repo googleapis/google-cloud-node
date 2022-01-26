@@ -15,17 +15,21 @@
 
 'use strict';
 
-function main(name) {
-  // [START bigquerydatatransfer_v1_generated_DataTransferService_DeleteTransferConfig_async]
+function main() {
+  // [START bigquerydatatransfer_v1_generated_DataTransferService_EnrollDataSources_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The field will contain name of the resource requested, for example:
-   *  `projects/{project_id}/transferConfigs/{config_id}` or
-   *  `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
+   *  The name of the project resource in the form:
+   *  `projects/{project_id}`
    */
   // const name = 'abc123'
+  /**
+   *  Data sources that are enrolled. It is required to provide at least one
+   *  data source id.
+   */
+  // const dataSourceIds = 'abc123'
 
   // Imports the Datatransfer library
   const {DataTransferServiceClient} = require('@google-cloud/bigquery-data-transfer').v1;
@@ -33,19 +37,18 @@ function main(name) {
   // Instantiates a client
   const datatransferClient = new DataTransferServiceClient();
 
-  async function callDeleteTransferConfig() {
+  async function callEnrollDataSources() {
     // Construct request
     const request = {
-      name,
     };
 
     // Run request
-    const response = await datatransferClient.deleteTransferConfig(request);
+    const response = await datatransferClient.enrollDataSources(request);
     console.log(response);
   }
 
-  callDeleteTransferConfig();
-  // [END bigquerydatatransfer_v1_generated_DataTransferService_DeleteTransferConfig_async]
+  callEnrollDataSources();
+  // [END bigquerydatatransfer_v1_generated_DataTransferService_EnrollDataSources_async]
 }
 
 process.on('unhandledRejection', err => {
