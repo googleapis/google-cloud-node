@@ -12,15 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main(
-  parent,
-  sourceLanguageCode,
-  targetLanguageCodes,
-  inputConfigs,
-  outputConfig
-) {
+function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, outputConfig) {
   // [START translate_v3beta1_generated_TranslationService_BatchTranslateDocument_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.

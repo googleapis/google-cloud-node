@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -30,7 +31,7 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  Optional. A token identifying a page of results the server should return.
-   *  Typically, this is the value of ListGlossariesResponse.next_page_token
+   *  Typically, this is the value of ListGlossariesResponse.next_page_token 
    *  returned from the previous call to `ListGlossaries` method.
    *  The first page is returned if `page_token`is empty or missing.
    */
@@ -70,7 +71,7 @@ function main(parent) {
     // Run request
     const iterable = await translationClient.listGlossariesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
