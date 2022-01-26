@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -38,29 +39,23 @@ function main() {
   // const audioContent = 'Buffer.from('string')'
 
   // Imports the Mediatranslation library
-  const {SpeechTranslationServiceClient} =
-    require('@google-cloud/media-translation').v1beta1;
+  const {SpeechTranslationServiceClient} = require('@google-cloud/media-translation').v1beta1;
 
   // Instantiates a client
   const mediatranslationClient = new SpeechTranslationServiceClient();
 
   async function callStreamingTranslateSpeech() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const stream = await mediatranslationClient.streamingTranslateSpeech();
-    stream.on('data', response => {
-      console.log(response);
-    });
-    stream.on('error', err => {
-      throw err;
-    });
-    stream.on('end', () => {
-      /* API call completed */
-    });
+    stream.on('data', (response) => { console.log(response) });
+    stream.on('error', (err) => { throw(err) });
+    stream.on('end', () => { /* API call completed */ });
     stream.write(request);
-    stream.end();
+    stream.end(); 
   }
 
   callStreamingTranslateSpeech();
