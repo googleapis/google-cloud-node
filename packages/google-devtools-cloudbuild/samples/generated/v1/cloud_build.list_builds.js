@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(projectId) {
@@ -61,7 +62,7 @@ function main(projectId) {
     // Run request
     const iterable = await cloudbuildClient.listBuildsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
