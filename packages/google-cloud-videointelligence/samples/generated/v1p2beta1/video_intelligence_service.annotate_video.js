@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(features) {
@@ -63,8 +64,7 @@ function main(features) {
   // const locationId = 'abc123'
 
   // Imports the Videointelligence library
-  const {VideoIntelligenceServiceClient} =
-    require('@google-cloud/video-intelligence').v1p2beta1;
+  const {VideoIntelligenceServiceClient} = require('@google-cloud/video-intelligence').v1p2beta1;
 
   // Instantiates a client
   const videointelligenceClient = new VideoIntelligenceServiceClient();
