@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, connection) {
@@ -34,8 +35,7 @@ function main(parent, connection) {
   // const connection = {}
 
   // Imports the Connection library
-  const {ConnectionServiceClient} =
-    require('@google-cloud/bigquery-connection').v1;
+  const {ConnectionServiceClient} = require('@google-cloud/bigquery-connection').v1;
 
   // Instantiates a client
   const connectionClient = new ConnectionServiceClient();

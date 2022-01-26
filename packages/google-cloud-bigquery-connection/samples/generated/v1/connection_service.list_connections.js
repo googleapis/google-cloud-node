@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, pageSize) {
@@ -34,8 +35,7 @@ function main(parent, pageSize) {
   // const pageToken = 'abc123'
 
   // Imports the Connection library
-  const {ConnectionServiceClient} =
-    require('@google-cloud/bigquery-connection').v1;
+  const {ConnectionServiceClient} = require('@google-cloud/bigquery-connection').v1;
 
   // Instantiates a client
   const connectionClient = new ConnectionServiceClient();
@@ -50,7 +50,7 @@ function main(parent, pageSize) {
     // Run request
     const iterable = await connectionClient.listConnectionsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
