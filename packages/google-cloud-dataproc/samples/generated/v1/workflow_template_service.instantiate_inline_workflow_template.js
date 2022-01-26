@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent, template) {
@@ -59,9 +60,7 @@ function main(parent, template) {
     };
 
     // Run request
-    const [operation] = await dataprocClient.instantiateInlineWorkflowTemplate(
-      request
-    );
+    const [operation] = await dataprocClient.instantiateInlineWorkflowTemplate(request);
     const [response] = await operation.promise();
     console.log(response);
   }

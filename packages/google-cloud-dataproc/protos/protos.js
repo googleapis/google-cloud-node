@@ -6255,6 +6255,8 @@
                          * Properties of a RuntimeConfig.
                          * @memberof google.cloud.dataproc.v1
                          * @interface IRuntimeConfig
+                         * @property {string|null} [version] RuntimeConfig version
+                         * @property {string|null} [containerImage] RuntimeConfig containerImage
                          * @property {Object.<string,string>|null} [properties] RuntimeConfig properties
                          */
     
@@ -6273,6 +6275,22 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * RuntimeConfig version.
+                         * @member {string} version
+                         * @memberof google.cloud.dataproc.v1.RuntimeConfig
+                         * @instance
+                         */
+                        RuntimeConfig.prototype.version = "";
+    
+                        /**
+                         * RuntimeConfig containerImage.
+                         * @member {string} containerImage
+                         * @memberof google.cloud.dataproc.v1.RuntimeConfig
+                         * @instance
+                         */
+                        RuntimeConfig.prototype.containerImage = "";
     
                         /**
                          * RuntimeConfig properties.
@@ -6306,6 +6324,10 @@
                         RuntimeConfig.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.version);
+                            if (message.containerImage != null && Object.hasOwnProperty.call(message, "containerImage"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.containerImage);
                             if (message.properties != null && Object.hasOwnProperty.call(message, "properties"))
                                 for (var keys = Object.keys(message.properties), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.properties[keys[i]]).ldelim();
@@ -6343,6 +6365,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 1:
+                                    message.version = reader.string();
+                                    break;
+                                case 2:
+                                    message.containerImage = reader.string();
+                                    break;
                                 case 3:
                                     if (message.properties === $util.emptyObject)
                                         message.properties = {};
@@ -6400,6 +6428,12 @@
                         RuntimeConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            if (message.containerImage != null && message.hasOwnProperty("containerImage"))
+                                if (!$util.isString(message.containerImage))
+                                    return "containerImage: string expected";
                             if (message.properties != null && message.hasOwnProperty("properties")) {
                                 if (!$util.isObject(message.properties))
                                     return "properties: object expected";
@@ -6423,6 +6457,10 @@
                             if (object instanceof $root.google.cloud.dataproc.v1.RuntimeConfig)
                                 return object;
                             var message = new $root.google.cloud.dataproc.v1.RuntimeConfig();
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            if (object.containerImage != null)
+                                message.containerImage = String(object.containerImage);
                             if (object.properties) {
                                 if (typeof object.properties !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1.RuntimeConfig.properties: object expected");
@@ -6448,6 +6486,14 @@
                             var object = {};
                             if (options.objects || options.defaults)
                                 object.properties = {};
+                            if (options.defaults) {
+                                object.version = "";
+                                object.containerImage = "";
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            if (message.containerImage != null && message.hasOwnProperty("containerImage"))
+                                object.containerImage = message.containerImage;
                             var keys2;
                             if (message.properties && (keys2 = Object.keys(message.properties)).length) {
                                 object.properties = {};
@@ -7419,6 +7465,7 @@
                          * @interface IRuntimeInfo
                          * @property {Object.<string,string>|null} [endpoints] RuntimeInfo endpoints
                          * @property {string|null} [outputUri] RuntimeInfo outputUri
+                         * @property {string|null} [diagnosticOutputUri] RuntimeInfo diagnosticOutputUri
                          */
     
                         /**
@@ -7454,6 +7501,14 @@
                         RuntimeInfo.prototype.outputUri = "";
     
                         /**
+                         * RuntimeInfo diagnosticOutputUri.
+                         * @member {string} diagnosticOutputUri
+                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
+                         * @instance
+                         */
+                        RuntimeInfo.prototype.diagnosticOutputUri = "";
+    
+                        /**
                          * Creates a new RuntimeInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.RuntimeInfo
@@ -7482,6 +7537,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.endpoints[keys[i]]).ldelim();
                             if (message.outputUri != null && Object.hasOwnProperty.call(message, "outputUri"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.outputUri);
+                            if (message.diagnosticOutputUri != null && Object.hasOwnProperty.call(message, "diagnosticOutputUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.diagnosticOutputUri);
                             return writer;
                         };
     
@@ -7541,6 +7598,9 @@
                                 case 2:
                                     message.outputUri = reader.string();
                                     break;
+                                case 3:
+                                    message.diagnosticOutputUri = reader.string();
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7587,6 +7647,9 @@
                             if (message.outputUri != null && message.hasOwnProperty("outputUri"))
                                 if (!$util.isString(message.outputUri))
                                     return "outputUri: string expected";
+                            if (message.diagnosticOutputUri != null && message.hasOwnProperty("diagnosticOutputUri"))
+                                if (!$util.isString(message.diagnosticOutputUri))
+                                    return "diagnosticOutputUri: string expected";
                             return null;
                         };
     
@@ -7611,6 +7674,8 @@
                             }
                             if (object.outputUri != null)
                                 message.outputUri = String(object.outputUri);
+                            if (object.diagnosticOutputUri != null)
+                                message.diagnosticOutputUri = String(object.diagnosticOutputUri);
                             return message;
                         };
     
@@ -7629,8 +7694,10 @@
                             var object = {};
                             if (options.objects || options.defaults)
                                 object.endpoints = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.outputUri = "";
+                                object.diagnosticOutputUri = "";
+                            }
                             var keys2;
                             if (message.endpoints && (keys2 = Object.keys(message.endpoints)).length) {
                                 object.endpoints = {};
@@ -7639,6 +7706,8 @@
                             }
                             if (message.outputUri != null && message.hasOwnProperty("outputUri"))
                                 object.outputUri = message.outputUri;
+                            if (message.diagnosticOutputUri != null && message.hasOwnProperty("diagnosticOutputUri"))
+                                object.diagnosticOutputUri = message.diagnosticOutputUri;
                             return object;
                         };
     
@@ -12108,6 +12177,7 @@
                          * @property {string|null} [bootDiskType] DiskConfig bootDiskType
                          * @property {number|null} [bootDiskSizeGb] DiskConfig bootDiskSizeGb
                          * @property {number|null} [numLocalSsds] DiskConfig numLocalSsds
+                         * @property {string|null} [localSsdInterface] DiskConfig localSsdInterface
                          */
     
                         /**
@@ -12150,6 +12220,14 @@
                         DiskConfig.prototype.numLocalSsds = 0;
     
                         /**
+                         * DiskConfig localSsdInterface.
+                         * @member {string} localSsdInterface
+                         * @memberof google.cloud.dataproc.v1.DiskConfig
+                         * @instance
+                         */
+                        DiskConfig.prototype.localSsdInterface = "";
+    
+                        /**
                          * Creates a new DiskConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.DiskConfig
@@ -12179,6 +12257,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.numLocalSsds);
                             if (message.bootDiskType != null && Object.hasOwnProperty.call(message, "bootDiskType"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.bootDiskType);
+                            if (message.localSsdInterface != null && Object.hasOwnProperty.call(message, "localSsdInterface"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.localSsdInterface);
                             return writer;
                         };
     
@@ -12221,6 +12301,9 @@
                                     break;
                                 case 2:
                                     message.numLocalSsds = reader.int32();
+                                    break;
+                                case 4:
+                                    message.localSsdInterface = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -12266,6 +12349,9 @@
                             if (message.numLocalSsds != null && message.hasOwnProperty("numLocalSsds"))
                                 if (!$util.isInteger(message.numLocalSsds))
                                     return "numLocalSsds: integer expected";
+                            if (message.localSsdInterface != null && message.hasOwnProperty("localSsdInterface"))
+                                if (!$util.isString(message.localSsdInterface))
+                                    return "localSsdInterface: string expected";
                             return null;
                         };
     
@@ -12287,6 +12373,8 @@
                                 message.bootDiskSizeGb = object.bootDiskSizeGb | 0;
                             if (object.numLocalSsds != null)
                                 message.numLocalSsds = object.numLocalSsds | 0;
+                            if (object.localSsdInterface != null)
+                                message.localSsdInterface = String(object.localSsdInterface);
                             return message;
                         };
     
@@ -12307,6 +12395,7 @@
                                 object.bootDiskSizeGb = 0;
                                 object.numLocalSsds = 0;
                                 object.bootDiskType = "";
+                                object.localSsdInterface = "";
                             }
                             if (message.bootDiskSizeGb != null && message.hasOwnProperty("bootDiskSizeGb"))
                                 object.bootDiskSizeGb = message.bootDiskSizeGb;
@@ -12314,6 +12403,8 @@
                                 object.numLocalSsds = message.numLocalSsds;
                             if (message.bootDiskType != null && message.hasOwnProperty("bootDiskType"))
                                 object.bootDiskType = message.bootDiskType;
+                            if (message.localSsdInterface != null && message.hasOwnProperty("localSsdInterface"))
+                                object.localSsdInterface = message.localSsdInterface;
                             return object;
                         };
     

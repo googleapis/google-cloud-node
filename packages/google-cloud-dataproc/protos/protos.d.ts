@@ -2509,6 +2509,12 @@ export namespace google {
                 /** Properties of a RuntimeConfig. */
                 interface IRuntimeConfig {
 
+                    /** RuntimeConfig version */
+                    version?: (string|null);
+
+                    /** RuntimeConfig containerImage */
+                    containerImage?: (string|null);
+
                     /** RuntimeConfig properties */
                     properties?: ({ [k: string]: string }|null);
                 }
@@ -2521,6 +2527,12 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.dataproc.v1.IRuntimeConfig);
+
+                    /** RuntimeConfig version. */
+                    public version: string;
+
+                    /** RuntimeConfig containerImage. */
+                    public containerImage: string;
 
                     /** RuntimeConfig properties. */
                     public properties: { [k: string]: string };
@@ -3003,6 +3015,9 @@ export namespace google {
 
                     /** RuntimeInfo outputUri */
                     outputUri?: (string|null);
+
+                    /** RuntimeInfo diagnosticOutputUri */
+                    diagnosticOutputUri?: (string|null);
                 }
 
                 /** Represents a RuntimeInfo. */
@@ -3019,6 +3034,9 @@ export namespace google {
 
                     /** RuntimeInfo outputUri. */
                     public outputUri: string;
+
+                    /** RuntimeInfo diagnosticOutputUri. */
+                    public diagnosticOutputUri: string;
 
                     /**
                      * Creates a new RuntimeInfo instance using the specified properties.
@@ -4890,6 +4908,9 @@ export namespace google {
 
                     /** DiskConfig numLocalSsds */
                     numLocalSsds?: (number|null);
+
+                    /** DiskConfig localSsdInterface */
+                    localSsdInterface?: (string|null);
                 }
 
                 /** Represents a DiskConfig. */
@@ -4909,6 +4930,9 @@ export namespace google {
 
                     /** DiskConfig numLocalSsds. */
                     public numLocalSsds: number;
+
+                    /** DiskConfig localSsdInterface. */
+                    public localSsdInterface: string;
 
                     /**
                      * Creates a new DiskConfig instance using the specified properties.
