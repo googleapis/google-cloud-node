@@ -19,7 +19,7 @@ import * as mockery from 'mockery';
 import * as nock from 'nock';
 import * as path from 'path';
 import * as sinon from 'sinon';
-import {PassThrough, Readable} from 'stream';
+import {Readable} from 'stream';
 
 import {
   ApiError,
@@ -906,7 +906,7 @@ describe('gcs-resumable-upload', () => {
 
   describe('#startUploading', () => {
     beforeEach(() => {
-      up.makeRequestStream = async () => new PassThrough();
+      up.makeRequestStream = async () => null;
       up.upstreamChunkBuffer = Buffer.alloc(16);
     });
 
@@ -976,14 +976,6 @@ describe('gcs-resumable-upload', () => {
       };
 
       up.startUploading();
-    });
-
-    it("should setup a 'response' listener", async () => {
-      assert.equal(up.eventNames().includes('response'), false);
-
-      await up.startUploading();
-
-      assert.equal(up.eventNames().includes('response'), true);
     });
 
     it('should destroy the stream if the request failed', done => {
@@ -1697,13 +1689,26 @@ describe('gcs-resumable-upload', () => {
       up.makeRequestStream(REQ_OPTS);
     });
 
-    it('should return the response', async () => {
-      const response = {};
+    it('should return the response if successful', async () => {
+      const response = {some: 'response'};
       up.authClient = {
         request: async () => response,
       };
+      up.onResponse = () => true;
+
       const stream = await up.makeRequestStream(REQ_OPTS);
       assert.strictEqual(stream, response);
+    });
+
+    it('should return `null` if the response is unsuccessful', async () => {
+      const response = {some: 'response'};
+      up.authClient = {
+        request: async () => response,
+      };
+      up.onResponse = () => false;
+
+      const stream = await up.makeRequestStream(REQ_OPTS);
+      assert.strictEqual(stream, null);
     });
   });
 
@@ -2261,7 +2266,7 @@ describe('gcs-resumable-upload', () => {
           let dataReceived = 0;
           let chunkWritesInRequest = 0;
 
-          await new Promise(resolve => {
+          const res = await new Promise(resolve => {
             opts.body.on('data', (data: Buffer) => {
               dataReceived += data.byteLength;
               overallDataReceived += data.byteLength;
@@ -2271,7 +2276,7 @@ describe('gcs-resumable-upload', () => {
             opts.body.on('end', () => {
               requests.push({dataReceived, opts, chunkWritesInRequest});
 
-              up.emit('response', {
+              resolve({
                 status: 200,
                 data: {},
               });
@@ -2279,6 +2284,8 @@ describe('gcs-resumable-upload', () => {
               resolve(null);
             });
           });
+
+          return res;
         };
 
         up.on('error', done);
@@ -2400,7 +2407,7 @@ describe('gcs-resumable-upload', () => {
           let dataReceived = 0;
           let chunkWritesInRequest = 0;
 
-          await new Promise(resolve => {
+          const res = await new Promise(resolve => {
             opts.body.on('data', (data: Buffer) => {
               dataReceived += data.byteLength;
               overallDataReceived += data.byteLength;
@@ -2415,7 +2422,7 @@ describe('gcs-resumable-upload', () => {
                   ? overallDataReceived - 1
                   : 0;
 
-                up.emit('response', {
+                resolve({
                   status: RESUMABLE_INCOMPLETE_STATUS_CODE,
                   headers: {
                     range: `bytes=0-${lastByteReceived}`,
@@ -2423,15 +2430,15 @@ describe('gcs-resumable-upload', () => {
                   data: {},
                 });
               } else {
-                up.emit('response', {
+                resolve({
                   status: 200,
                   data: {},
                 });
               }
-
-              resolve(null);
             });
           });
+
+          return res;
         };
 
         up.on('error', done);

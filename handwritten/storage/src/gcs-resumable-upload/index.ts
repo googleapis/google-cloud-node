@@ -767,12 +767,6 @@ export class Upload extends Pumpify {
       },
     });
 
-    // This should be 'once' as `startUploading` can be called again for
-    // multi chunk uploads and each request would have its own response.
-    this.once('response', resp => {
-      responseReceived = true;
-      this.responseHandler(resp);
-    });
     let headers: GaxiosOptions['headers'] = {};
 
     // If using multiple chunk upload, set appropriate header
@@ -797,7 +791,11 @@ export class Upload extends Pumpify {
     };
 
     try {
-      await this.makeRequestStream(reqOpts);
+      const resp = await this.makeRequestStream(reqOpts);
+      if (resp) {
+        responseReceived = true;
+        this.responseHandler(resp);
+      }
     } catch (err) {
       const e = err as Error;
       this.destroy(e);
@@ -989,7 +987,7 @@ export class Upload extends Pumpify {
     return res;
   }
 
-  private async makeRequestStream(reqOpts: GaxiosOptions): GaxiosPromise {
+  private async makeRequestStream(reqOpts: GaxiosOptions) {
     const controller = new AbortController();
     const errorCallback = () => controller.abort();
     this.once('error', errorCallback);
@@ -1008,10 +1006,10 @@ export class Upload extends Pumpify {
       reqOpts
     );
     const res = await this.authClient.request(combinedReqOpts);
-    this.onResponse(res);
+    const successfulRequest = this.onResponse(res);
     this.removeListener('error', errorCallback);
 
-    return res;
+    return successfulRequest ? res : null;
   }
 
   private restart() {
