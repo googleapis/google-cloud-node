@@ -17,7 +17,7 @@ function main(
   contents = 'these are my file contents',
   destFileName = 'file.txt'
 ) {
-  // [START storage_upload_without_authentication_create_resumable]
+  // [START storage_upload_without_authentication]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
@@ -36,7 +36,7 @@ function main(
   // Creates a client
   const storage = new Storage();
 
-  async function uploadWithoutAuthenticationCreateResumableUploadStrategy() {
+  async function uploadWithoutAuthentication() {
     const file = storage.bucket(bucketName).file(destFileName);
 
     // Returns an authenticated endpoint to which
@@ -54,10 +54,8 @@ function main(
     console.log(`${destFileName} uploaded to ${bucketName}`);
   }
 
-  uploadWithoutAuthenticationCreateResumableUploadStrategy().catch(
-    console.error
-  );
-  // [END storage_upload_without_authentication_create_resumable]
+  uploadWithoutAuthentication().catch(console.error);
+  // [END storage_upload_without_authentication]
 }
 process.on('unhandledRejection', err => {
   console.error(err.message);

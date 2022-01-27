@@ -82,9 +82,9 @@ describe('file', () => {
     assert.strictEqual(exists, true);
   });
 
-  it('should upload a file without authentication using resumable strategy', async () => {
+  it('should upload a file without authentication', async () => {
     const output = execSync(
-      `node uploadWithoutAuthenticationResumable.js ${bucketName} ${fileContents} ${fileName}`
+      `node uploadWithoutAuthentication.js ${bucketName} ${fileContents} ${fileName}`
     );
     assert.match(output, new RegExp(`${fileName} uploaded to ${bucketName}`));
     const [exists] = await bucket.file(fileName).exists();

@@ -122,7 +122,7 @@ objects to users via direct download.
   * [Upload File](#upload-file)
   * [Upload File With Kms Key](#upload-file-with-kms-key)
   * [Upload From Memory](#upload-from-memory)
-  * [Upload Without Authentication Resumable](#upload-without-authentication-resumable)
+  * [Upload Without Authentication](#upload-without-authentication)
   * [Upload Without Authentication Signed Url](#upload-without-authentication-signed-url)
   * [View Bucket Iam Members](#view-bucket-iam-members)
 
@@ -1965,16 +1965,16 @@ __Usage:__
 
 
 
-### Upload Without Authentication Resumable
+### Upload Without Authentication
 
-View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/uploadWithoutAuthenticationResumable.js).
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/uploadWithoutAuthentication.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/uploadWithoutAuthenticationResumable.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/uploadWithoutAuthentication.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/uploadWithoutAuthenticationResumable.js`
+`node samples/uploadWithoutAuthentication.js`
 
 
 -----
