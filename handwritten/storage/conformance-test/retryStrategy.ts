@@ -70,6 +70,7 @@ const TESTBENCH_HOST =
 
 const CONF_TEST_PROJECT_ID = 'my-project-id';
 const TIMEOUT_FOR_DOCKER_OPS = 60000;
+const TIME_TO_WAIT_FOR_CONTAINER_READY = 10000;
 const TIMEOUT_FOR_INDIVIDUAL_TEST = 20000;
 const RETRY_MULTIPLIER_FOR_CONFORMANCE_TESTS = 0.01;
 
@@ -79,6 +80,10 @@ describe('retry conformance testing', () => {
     this.timeout(TIMEOUT_FOR_DOCKER_OPS);
     await getTestBenchDockerImage();
     await runTestBenchDockerImage();
+    // Introduce an artificial wait to make sure the docker container is up and ready to accept connections.
+    await new Promise(resolve =>
+      setTimeout(resolve, TIME_TO_WAIT_FOR_CONTAINER_READY)
+    );
   });
 
   after(async function () {
