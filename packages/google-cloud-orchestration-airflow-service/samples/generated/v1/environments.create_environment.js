@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main() {
@@ -30,15 +31,15 @@ function main() {
   // const environment = {}
 
   // Imports the Service library
-  const {EnvironmentsClient} =
-    require('@google-cloud/orchestration-airflow').v1;
+  const {EnvironmentsClient} = require('@google-cloud/orchestration-airflow').v1;
 
   // Instantiates a client
   const serviceClient = new EnvironmentsClient();
 
   async function callCreateEnvironment() {
     // Construct request
-    const request = {};
+    const request = {
+    };
 
     // Run request
     const [operation] = await serviceClient.createEnvironment(request);

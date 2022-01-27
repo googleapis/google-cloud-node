@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(updateMask) {
@@ -154,8 +155,7 @@ function main(updateMask) {
   // const updateMask = {}
 
   // Imports the Service library
-  const {EnvironmentsClient} =
-    require('@google-cloud/orchestration-airflow').v1beta1;
+  const {EnvironmentsClient} = require('@google-cloud/orchestration-airflow').v1beta1;
 
   // Instantiates a client
   const serviceClient = new EnvironmentsClient();
