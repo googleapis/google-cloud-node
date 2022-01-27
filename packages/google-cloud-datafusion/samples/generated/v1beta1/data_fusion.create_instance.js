@@ -12,20 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main() {
+function main(parent, instanceId) {
   // [START datafusion_v1beta1_generated_DataFusion_CreateInstance_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The instance's project and location in the format
+   *  Required. The instance's project and location in the format
    *  projects/{project}/locations/{location}.
    */
   // const parent = 'abc123'
   /**
-   *  The name of the instance to create.
+   *  Required. The name of the instance to create.
    */
   // const instanceId = 'abc123'
   /**
@@ -41,7 +42,10 @@ function main() {
 
   async function callCreateInstance() {
     // Construct request
-    const request = {};
+    const request = {
+      parent,
+      instanceId,
+    };
 
     // Run request
     const [operation] = await datafusionClient.createInstance(request);

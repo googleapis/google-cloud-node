@@ -12,15 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main() {
+function main(name) {
   // [START datafusion_v1beta1_generated_DataFusion_UpgradeInstance_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the Data Fusion instance which need to be upgraded in the form of
+   *  Required. Name of the Data Fusion instance which need to be upgraded in the form of
    *  projects/{project}/locations/{location}/instances/{instance}
    *  Instance will be upgraded with the latest stable version of the Data
    *  Fusion.
@@ -35,7 +36,9 @@ function main() {
 
   async function callUpgradeInstance() {
     // Construct request
-    const request = {};
+    const request = {
+      name,
+    };
 
     // Run request
     const [operation] = await datafusionClient.upgradeInstance(request);

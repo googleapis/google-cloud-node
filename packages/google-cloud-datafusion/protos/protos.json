@@ -13,7 +13,9 @@
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.datafusion.v1",
                     "php_namespace": "Google\\Cloud\\DataFusion\\V1",
-                    "ruby_package": "Google::Cloud::DataFusion::V1"
+                    "ruby_package": "Google::Cloud::DataFusion::V1",
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
                   },
                   "nested": {
                     "DataFusion": {
@@ -202,6 +204,19 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 3
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "TYPE_PREVIEW": 1,
+                            "TYPE_GENERAL_AVAILABILITY": 2
+                          }
                         }
                       }
                     },
@@ -239,7 +254,10 @@
                       "fields": {
                         "keyReference": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
                         }
                       }
                     },
@@ -253,7 +271,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "datafusion.googleapis.com/Instance"
                           }
                         },
                         "description": {
@@ -397,6 +416,14 @@
                         "cryptoKeyConfig": {
                           "type": "CryptoKeyConfig",
                           "id": 28
+                        },
+                        "disabledReason": {
+                          "rule": "repeated",
+                          "type": "DisabledReason",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -419,7 +446,14 @@
                             "RESTARTING": 6,
                             "UPDATING": 7,
                             "AUTO_UPDATING": 8,
-                            "AUTO_UPGRADING": 9
+                            "AUTO_UPGRADING": 9,
+                            "DISABLED": 10
+                          }
+                        },
+                        "DisabledReason": {
+                          "values": {
+                            "DISABLED_REASON_UNSPECIFIED": 0,
+                            "KMS_KEY_ISSUE": 1
                           }
                         }
                       }
@@ -428,7 +462,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -472,7 +510,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
                           }
                         },
                         "pageSize": {
@@ -506,7 +545,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datafusion.googleapis.com/Instance"
+                          }
                         }
                       }
                     },
@@ -514,11 +557,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "instanceId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "instance": {
                           "type": "Instance",
@@ -530,7 +580,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datafusion.googleapis.com/Instance"
+                          }
                         }
                       }
                     },
@@ -538,7 +592,10 @@
                       "fields": {
                         "instance": {
                           "type": "Instance",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -550,7 +607,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datafusion.googleapis.com/Instance"
+                          }
                         }
                       }
                     },
@@ -600,7 +661,9 @@
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.datafusion.v1beta1",
                     "php_namespace": "Google\\Cloud\\DataFusion\\V1beta1",
-                    "ruby_package": "Google::Cloud::DataFusion::V1beta1"
+                    "ruby_package": "Google::Cloud::DataFusion::V1beta1",
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
                   },
                   "nested": {
                     "DataFusion": {
@@ -905,6 +968,19 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 3
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "TYPE_PREVIEW": 1,
+                            "TYPE_GENERAL_AVAILABILITY": 2
+                          }
                         }
                       }
                     },
@@ -929,7 +1005,10 @@
                       "fields": {
                         "keyReference": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
                         }
                       }
                     },
@@ -943,7 +1022,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "datafusion.googleapis.com/Instance"
                           }
                         },
                         "description": {
@@ -1087,6 +1167,14 @@
                         "cryptoKeyConfig": {
                           "type": "CryptoKeyConfig",
                           "id": 27
+                        },
+                        "disabledReason": {
+                          "rule": "repeated",
+                          "type": "DisabledReason",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1109,7 +1197,14 @@
                             "RESTARTING": 6,
                             "UPDATING": 7,
                             "AUTO_UPDATING": 8,
-                            "AUTO_UPGRADING": 9
+                            "AUTO_UPGRADING": 9,
+                            "DISABLED": 10
+                          }
+                        },
+                        "DisabledReason": {
+                          "values": {
+                            "DISABLED_REASON_UNSPECIFIED": 0,
+                            "KMS_KEY_ISSUE": 1
                           }
                         }
                       }
@@ -1118,7 +1213,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -1162,7 +1261,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
                           }
                         },
                         "pageSize": {
@@ -1196,7 +1296,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datafusion.googleapis.com/Instance"
+                          }
                         }
                       }
                     },
@@ -1204,11 +1308,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "instanceId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "instance": {
                           "type": "Instance",
@@ -1220,7 +1331,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datafusion.googleapis.com/Instance"
+                          }
                         }
                       }
                     },
@@ -1228,7 +1343,10 @@
                       "fields": {
                         "instance": {
                           "type": "Instance",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -1240,7 +1358,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datafusion.googleapis.com/Instance"
+                          }
                         }
                       }
                     },
@@ -1248,7 +1370,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datafusion.googleapis.com/Instance"
+                          }
                         }
                       }
                     },
@@ -1288,7 +1414,10 @@
                       "fields": {
                         "resource": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1403,7 +1532,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datafusion.googleapis.com/Instance"
+                          }
                         },
                         "dnsPeering": {
                           "type": "DnsPeering",
@@ -1425,7 +1558,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datafusion.googleapis.com/Instance"
+                          }
                         },
                         "zone": {
                           "type": "string",

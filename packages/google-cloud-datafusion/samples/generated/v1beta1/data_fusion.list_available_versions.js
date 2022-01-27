@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -20,8 +21,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location for which to retrieve instance
-   *  information in the format projects/{project}/locations/{location}.
+   *  Required. The project and location for which to retrieve instance information
+   *  in the format projects/{project}/locations/{location}.
    */
   // const parent = 'abc123'
   /**
@@ -36,7 +37,7 @@ function main(parent) {
   /**
    *  Whether or not to return the latest patch of every available minor version.
    *  If true, only the latest patch will be returned. Ex. if allowed versions is
-   *  6.1.1, 6.1.2, 6.2.0  then response will be 6.1.2, 6.2.0
+   *  6.1.1, 6.1.2, 6.2.0  then response will be 6.1.2, 6.2.0 
    */
   // const latestPatchOnly = true
 
@@ -55,7 +56,7 @@ function main(parent) {
     // Run request
     const iterable = await datafusionClient.listAvailableVersionsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

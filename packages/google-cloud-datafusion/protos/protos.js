@@ -551,6 +551,7 @@
                          * @property {string|null} [versionNumber] Version versionNumber
                          * @property {boolean|null} [defaultVersion] Version defaultVersion
                          * @property {Array.<string>|null} [availableFeatures] Version availableFeatures
+                         * @property {google.cloud.datafusion.v1.Version.Type|null} [type] Version type
                          */
     
                         /**
@@ -594,6 +595,14 @@
                         Version.prototype.availableFeatures = $util.emptyArray;
     
                         /**
+                         * Version type.
+                         * @member {google.cloud.datafusion.v1.Version.Type} type
+                         * @memberof google.cloud.datafusion.v1.Version
+                         * @instance
+                         */
+                        Version.prototype.type = 0;
+    
+                        /**
                          * Creates a new Version instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datafusion.v1.Version
@@ -624,6 +633,8 @@
                             if (message.availableFeatures != null && message.availableFeatures.length)
                                 for (var i = 0; i < message.availableFeatures.length; ++i)
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.availableFeatures[i]);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.type);
                             return writer;
                         };
     
@@ -668,6 +679,9 @@
                                     if (!(message.availableFeatures && message.availableFeatures.length))
                                         message.availableFeatures = [];
                                     message.availableFeatures.push(reader.string());
+                                    break;
+                                case 4:
+                                    message.type = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -717,6 +731,15 @@
                                     if (!$util.isString(message.availableFeatures[i]))
                                         return "availableFeatures: string[] expected";
                             }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -743,6 +766,20 @@
                                 for (var i = 0; i < object.availableFeatures.length; ++i)
                                     message.availableFeatures[i] = String(object.availableFeatures[i]);
                             }
+                            switch (object.type) {
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_PREVIEW":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_GENERAL_AVAILABILITY":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -764,6 +801,7 @@
                             if (options.defaults) {
                                 object.versionNumber = "";
                                 object.defaultVersion = false;
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.versionNumber != null && message.hasOwnProperty("versionNumber"))
                                 object.versionNumber = message.versionNumber;
@@ -774,6 +812,8 @@
                                 for (var j = 0; j < message.availableFeatures.length; ++j)
                                     object.availableFeatures[j] = message.availableFeatures[j];
                             }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.datafusion.v1.Version.Type[message.type] : message.type;
                             return object;
                         };
     
@@ -787,6 +827,22 @@
                         Version.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.datafusion.v1.Version.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} TYPE_PREVIEW=1 TYPE_PREVIEW value
+                         * @property {number} TYPE_GENERAL_AVAILABILITY=2 TYPE_GENERAL_AVAILABILITY value
+                         */
+                        Version.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TYPE_PREVIEW"] = 1;
+                            values[valuesById[2] = "TYPE_GENERAL_AVAILABILITY"] = 2;
+                            return values;
+                        })();
     
                         return Version;
                     })();
@@ -1303,6 +1359,7 @@
                          * @property {string|null} [dataprocServiceAccount] Instance dataprocServiceAccount
                          * @property {boolean|null} [enableRbac] Instance enableRbac
                          * @property {google.cloud.datafusion.v1.ICryptoKeyConfig|null} [cryptoKeyConfig] Instance cryptoKeyConfig
+                         * @property {Array.<google.cloud.datafusion.v1.Instance.DisabledReason>|null} [disabledReason] Instance disabledReason
                          */
     
                         /**
@@ -1318,6 +1375,7 @@
                             this.options = {};
                             this.availableVersion = [];
                             this.accelerators = [];
+                            this.disabledReason = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1541,6 +1599,14 @@
                         Instance.prototype.cryptoKeyConfig = null;
     
                         /**
+                         * Instance disabledReason.
+                         * @member {Array.<google.cloud.datafusion.v1.Instance.DisabledReason>} disabledReason
+                         * @memberof google.cloud.datafusion.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.disabledReason = $util.emptyArray;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datafusion.v1.Instance
@@ -1622,6 +1688,12 @@
                                 writer.uint32(/* id 27, wireType 0 =*/216).bool(message.enableRbac);
                             if (message.cryptoKeyConfig != null && Object.hasOwnProperty.call(message, "cryptoKeyConfig"))
                                 $root.google.cloud.datafusion.v1.CryptoKeyConfig.encode(message.cryptoKeyConfig, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
+                            if (message.disabledReason != null && message.disabledReason.length) {
+                                writer.uint32(/* id 29, wireType 2 =*/234).fork();
+                                for (var i = 0; i < message.disabledReason.length; ++i)
+                                    writer.int32(message.disabledReason[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -1779,6 +1851,16 @@
                                 case 28:
                                     message.cryptoKeyConfig = $root.google.cloud.datafusion.v1.CryptoKeyConfig.decode(reader, reader.uint32());
                                     break;
+                                case 29:
+                                    if (!(message.disabledReason && message.disabledReason.length))
+                                        message.disabledReason = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.disabledReason.push(reader.int32());
+                                    } else
+                                        message.disabledReason.push(reader.int32());
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1884,6 +1966,7 @@
                                 case 7:
                                 case 8:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.stateMessage != null && message.hasOwnProperty("stateMessage"))
@@ -1944,6 +2027,18 @@
                                 var error = $root.google.cloud.datafusion.v1.CryptoKeyConfig.verify(message.cryptoKeyConfig);
                                 if (error)
                                     return "cryptoKeyConfig." + error;
+                            }
+                            if (message.disabledReason != null && message.hasOwnProperty("disabledReason")) {
+                                if (!Array.isArray(message.disabledReason))
+                                    return "disabledReason: array expected";
+                                for (var i = 0; i < message.disabledReason.length; ++i)
+                                    switch (message.disabledReason[i]) {
+                                    default:
+                                        return "disabledReason: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
                             }
                             return null;
                         };
@@ -2058,6 +2153,10 @@
                             case 9:
                                 message.state = 9;
                                 break;
+                            case "DISABLED":
+                            case 10:
+                                message.state = 10;
+                                break;
                             }
                             if (object.stateMessage != null)
                                 message.stateMessage = String(object.stateMessage);
@@ -2108,6 +2207,23 @@
                                     throw TypeError(".google.cloud.datafusion.v1.Instance.cryptoKeyConfig: object expected");
                                 message.cryptoKeyConfig = $root.google.cloud.datafusion.v1.CryptoKeyConfig.fromObject(object.cryptoKeyConfig);
                             }
+                            if (object.disabledReason) {
+                                if (!Array.isArray(object.disabledReason))
+                                    throw TypeError(".google.cloud.datafusion.v1.Instance.disabledReason: array expected");
+                                message.disabledReason = [];
+                                for (var i = 0; i < object.disabledReason.length; ++i)
+                                    switch (object.disabledReason[i]) {
+                                    default:
+                                    case "DISABLED_REASON_UNSPECIFIED":
+                                    case 0:
+                                        message.disabledReason[i] = 0;
+                                        break;
+                                    case "KMS_KEY_ISSUE":
+                                    case 1:
+                                        message.disabledReason[i] = 1;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -2127,6 +2243,7 @@
                             if (options.arrays || options.defaults) {
                                 object.availableVersion = [];
                                 object.accelerators = [];
+                                object.disabledReason = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
@@ -2224,6 +2341,11 @@
                                 object.enableRbac = message.enableRbac;
                             if (message.cryptoKeyConfig != null && message.hasOwnProperty("cryptoKeyConfig"))
                                 object.cryptoKeyConfig = $root.google.cloud.datafusion.v1.CryptoKeyConfig.toObject(message.cryptoKeyConfig, options);
+                            if (message.disabledReason && message.disabledReason.length) {
+                                object.disabledReason = [];
+                                for (var j = 0; j < message.disabledReason.length; ++j)
+                                    object.disabledReason[j] = options.enums === String ? $root.google.cloud.datafusion.v1.Instance.DisabledReason[message.disabledReason[j]] : message.disabledReason[j];
+                            }
                             return object;
                         };
     
@@ -2270,6 +2392,7 @@
                          * @property {number} UPDATING=7 UPDATING value
                          * @property {number} AUTO_UPDATING=8 AUTO_UPDATING value
                          * @property {number} AUTO_UPGRADING=9 AUTO_UPGRADING value
+                         * @property {number} DISABLED=10 DISABLED value
                          */
                         Instance.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -2283,6 +2406,21 @@
                             values[valuesById[7] = "UPDATING"] = 7;
                             values[valuesById[8] = "AUTO_UPDATING"] = 8;
                             values[valuesById[9] = "AUTO_UPGRADING"] = 9;
+                            values[valuesById[10] = "DISABLED"] = 10;
+                            return values;
+                        })();
+    
+                        /**
+                         * DisabledReason enum.
+                         * @name google.cloud.datafusion.v1.Instance.DisabledReason
+                         * @enum {number}
+                         * @property {number} DISABLED_REASON_UNSPECIFIED=0 DISABLED_REASON_UNSPECIFIED value
+                         * @property {number} KMS_KEY_ISSUE=1 KMS_KEY_ISSUE value
+                         */
+                        Instance.DisabledReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DISABLED_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "KMS_KEY_ISSUE"] = 1;
                             return values;
                         })();
     
@@ -5421,6 +5559,7 @@
                          * @property {string|null} [versionNumber] Version versionNumber
                          * @property {boolean|null} [defaultVersion] Version defaultVersion
                          * @property {Array.<string>|null} [availableFeatures] Version availableFeatures
+                         * @property {google.cloud.datafusion.v1beta1.Version.Type|null} [type] Version type
                          */
     
                         /**
@@ -5464,6 +5603,14 @@
                         Version.prototype.availableFeatures = $util.emptyArray;
     
                         /**
+                         * Version type.
+                         * @member {google.cloud.datafusion.v1beta1.Version.Type} type
+                         * @memberof google.cloud.datafusion.v1beta1.Version
+                         * @instance
+                         */
+                        Version.prototype.type = 0;
+    
+                        /**
                          * Creates a new Version instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datafusion.v1beta1.Version
@@ -5494,6 +5641,8 @@
                             if (message.availableFeatures != null && message.availableFeatures.length)
                                 for (var i = 0; i < message.availableFeatures.length; ++i)
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.availableFeatures[i]);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.type);
                             return writer;
                         };
     
@@ -5538,6 +5687,9 @@
                                     if (!(message.availableFeatures && message.availableFeatures.length))
                                         message.availableFeatures = [];
                                     message.availableFeatures.push(reader.string());
+                                    break;
+                                case 4:
+                                    message.type = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5587,6 +5739,15 @@
                                     if (!$util.isString(message.availableFeatures[i]))
                                         return "availableFeatures: string[] expected";
                             }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -5613,6 +5774,20 @@
                                 for (var i = 0; i < object.availableFeatures.length; ++i)
                                     message.availableFeatures[i] = String(object.availableFeatures[i]);
                             }
+                            switch (object.type) {
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_PREVIEW":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_GENERAL_AVAILABILITY":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -5634,6 +5809,7 @@
                             if (options.defaults) {
                                 object.versionNumber = "";
                                 object.defaultVersion = false;
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.versionNumber != null && message.hasOwnProperty("versionNumber"))
                                 object.versionNumber = message.versionNumber;
@@ -5644,6 +5820,8 @@
                                 for (var j = 0; j < message.availableFeatures.length; ++j)
                                     object.availableFeatures[j] = message.availableFeatures[j];
                             }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.datafusion.v1beta1.Version.Type[message.type] : message.type;
                             return object;
                         };
     
@@ -5657,6 +5835,22 @@
                         Version.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.datafusion.v1beta1.Version.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} TYPE_PREVIEW=1 TYPE_PREVIEW value
+                         * @property {number} TYPE_GENERAL_AVAILABILITY=2 TYPE_GENERAL_AVAILABILITY value
+                         */
+                        Version.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TYPE_PREVIEW"] = 1;
+                            values[valuesById[2] = "TYPE_GENERAL_AVAILABILITY"] = 2;
+                            return values;
+                        })();
     
                         return Version;
                     })();
@@ -6102,6 +6296,7 @@
                          * @property {string|null} [dataprocServiceAccount] Instance dataprocServiceAccount
                          * @property {boolean|null} [enableRbac] Instance enableRbac
                          * @property {google.cloud.datafusion.v1beta1.ICryptoKeyConfig|null} [cryptoKeyConfig] Instance cryptoKeyConfig
+                         * @property {Array.<google.cloud.datafusion.v1beta1.Instance.DisabledReason>|null} [disabledReason] Instance disabledReason
                          */
     
                         /**
@@ -6117,6 +6312,7 @@
                             this.options = {};
                             this.availableVersion = [];
                             this.accelerators = [];
+                            this.disabledReason = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6340,6 +6536,14 @@
                         Instance.prototype.cryptoKeyConfig = null;
     
                         /**
+                         * Instance disabledReason.
+                         * @member {Array.<google.cloud.datafusion.v1beta1.Instance.DisabledReason>} disabledReason
+                         * @memberof google.cloud.datafusion.v1beta1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.disabledReason = $util.emptyArray;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datafusion.v1beta1.Instance
@@ -6421,6 +6625,12 @@
                                 writer.uint32(/* id 26, wireType 0 =*/208).bool(message.enableRbac);
                             if (message.cryptoKeyConfig != null && Object.hasOwnProperty.call(message, "cryptoKeyConfig"))
                                 $root.google.cloud.datafusion.v1beta1.CryptoKeyConfig.encode(message.cryptoKeyConfig, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                            if (message.disabledReason != null && message.disabledReason.length) {
+                                writer.uint32(/* id 28, wireType 2 =*/226).fork();
+                                for (var i = 0; i < message.disabledReason.length; ++i)
+                                    writer.int32(message.disabledReason[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -6578,6 +6788,16 @@
                                 case 27:
                                     message.cryptoKeyConfig = $root.google.cloud.datafusion.v1beta1.CryptoKeyConfig.decode(reader, reader.uint32());
                                     break;
+                                case 28:
+                                    if (!(message.disabledReason && message.disabledReason.length))
+                                        message.disabledReason = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.disabledReason.push(reader.int32());
+                                    } else
+                                        message.disabledReason.push(reader.int32());
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6683,6 +6903,7 @@
                                 case 7:
                                 case 8:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.stateMessage != null && message.hasOwnProperty("stateMessage"))
@@ -6743,6 +6964,18 @@
                                 var error = $root.google.cloud.datafusion.v1beta1.CryptoKeyConfig.verify(message.cryptoKeyConfig);
                                 if (error)
                                     return "cryptoKeyConfig." + error;
+                            }
+                            if (message.disabledReason != null && message.hasOwnProperty("disabledReason")) {
+                                if (!Array.isArray(message.disabledReason))
+                                    return "disabledReason: array expected";
+                                for (var i = 0; i < message.disabledReason.length; ++i)
+                                    switch (message.disabledReason[i]) {
+                                    default:
+                                        return "disabledReason: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
                             }
                             return null;
                         };
@@ -6857,6 +7090,10 @@
                             case 9:
                                 message.state = 9;
                                 break;
+                            case "DISABLED":
+                            case 10:
+                                message.state = 10;
+                                break;
                             }
                             if (object.stateMessage != null)
                                 message.stateMessage = String(object.stateMessage);
@@ -6907,6 +7144,23 @@
                                     throw TypeError(".google.cloud.datafusion.v1beta1.Instance.cryptoKeyConfig: object expected");
                                 message.cryptoKeyConfig = $root.google.cloud.datafusion.v1beta1.CryptoKeyConfig.fromObject(object.cryptoKeyConfig);
                             }
+                            if (object.disabledReason) {
+                                if (!Array.isArray(object.disabledReason))
+                                    throw TypeError(".google.cloud.datafusion.v1beta1.Instance.disabledReason: array expected");
+                                message.disabledReason = [];
+                                for (var i = 0; i < object.disabledReason.length; ++i)
+                                    switch (object.disabledReason[i]) {
+                                    default:
+                                    case "DISABLED_REASON_UNSPECIFIED":
+                                    case 0:
+                                        message.disabledReason[i] = 0;
+                                        break;
+                                    case "KMS_KEY_ISSUE":
+                                    case 1:
+                                        message.disabledReason[i] = 1;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -6926,6 +7180,7 @@
                             if (options.arrays || options.defaults) {
                                 object.availableVersion = [];
                                 object.accelerators = [];
+                                object.disabledReason = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
@@ -7023,6 +7278,11 @@
                                 object.enableRbac = message.enableRbac;
                             if (message.cryptoKeyConfig != null && message.hasOwnProperty("cryptoKeyConfig"))
                                 object.cryptoKeyConfig = $root.google.cloud.datafusion.v1beta1.CryptoKeyConfig.toObject(message.cryptoKeyConfig, options);
+                            if (message.disabledReason && message.disabledReason.length) {
+                                object.disabledReason = [];
+                                for (var j = 0; j < message.disabledReason.length; ++j)
+                                    object.disabledReason[j] = options.enums === String ? $root.google.cloud.datafusion.v1beta1.Instance.DisabledReason[message.disabledReason[j]] : message.disabledReason[j];
+                            }
                             return object;
                         };
     
@@ -7069,6 +7329,7 @@
                          * @property {number} UPDATING=7 UPDATING value
                          * @property {number} AUTO_UPDATING=8 AUTO_UPDATING value
                          * @property {number} AUTO_UPGRADING=9 AUTO_UPGRADING value
+                         * @property {number} DISABLED=10 DISABLED value
                          */
                         Instance.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7082,6 +7343,21 @@
                             values[valuesById[7] = "UPDATING"] = 7;
                             values[valuesById[8] = "AUTO_UPDATING"] = 8;
                             values[valuesById[9] = "AUTO_UPGRADING"] = 9;
+                            values[valuesById[10] = "DISABLED"] = 10;
+                            return values;
+                        })();
+    
+                        /**
+                         * DisabledReason enum.
+                         * @name google.cloud.datafusion.v1beta1.Instance.DisabledReason
+                         * @enum {number}
+                         * @property {number} DISABLED_REASON_UNSPECIFIED=0 DISABLED_REASON_UNSPECIFIED value
+                         * @property {number} KMS_KEY_ISSUE=1 KMS_KEY_ISSUE value
+                         */
+                        Instance.DisabledReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DISABLED_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "KMS_KEY_ISSUE"] = 1;
                             return values;
                         })();
     

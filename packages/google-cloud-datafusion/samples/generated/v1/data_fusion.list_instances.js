@@ -12,15 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main() {
+function main(parent) {
   // [START datafusion_v1_generated_DataFusion_ListInstances_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The project and location for which to retrieve instance information
+   *  Required. The project and location for which to retrieve instance information
    *  in the format projects/{project}/locations/{location}. If the location is
    *  specified as '-' (wildcard), then all regions available to the project
    *  are queried, and the results are aggregated.
@@ -52,12 +53,14 @@ function main() {
 
   async function callListInstances() {
     // Construct request
-    const request = {};
+    const request = {
+      parent,
+    };
 
     // Run request
     const iterable = await datafusionClient.listInstancesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

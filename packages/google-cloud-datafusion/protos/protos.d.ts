@@ -304,6 +304,9 @@ export namespace google {
 
                     /** Version availableFeatures */
                     availableFeatures?: (string[]|null);
+
+                    /** Version type */
+                    type?: (google.cloud.datafusion.v1.Version.Type|keyof typeof google.cloud.datafusion.v1.Version.Type|null);
                 }
 
                 /** Represents a Version. */
@@ -323,6 +326,9 @@ export namespace google {
 
                     /** Version availableFeatures. */
                     public availableFeatures: string[];
+
+                    /** Version type. */
+                    public type: (google.cloud.datafusion.v1.Version.Type|keyof typeof google.cloud.datafusion.v1.Version.Type);
 
                     /**
                      * Creates a new Version instance using the specified properties.
@@ -393,6 +399,16 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace Version {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        TYPE_PREVIEW = 1,
+                        TYPE_GENERAL_AVAILABILITY = 2
+                    }
                 }
 
                 /** Properties of an Accelerator. */
@@ -683,6 +699,9 @@ export namespace google {
 
                     /** Instance cryptoKeyConfig */
                     cryptoKeyConfig?: (google.cloud.datafusion.v1.ICryptoKeyConfig|null);
+
+                    /** Instance disabledReason */
+                    disabledReason?: (google.cloud.datafusion.v1.Instance.DisabledReason[]|null);
                 }
 
                 /** Represents an Instance. */
@@ -774,6 +793,9 @@ export namespace google {
 
                     /** Instance cryptoKeyConfig. */
                     public cryptoKeyConfig?: (google.cloud.datafusion.v1.ICryptoKeyConfig|null);
+
+                    /** Instance disabledReason. */
+                    public disabledReason: google.cloud.datafusion.v1.Instance.DisabledReason[];
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -867,7 +889,14 @@ export namespace google {
                         RESTARTING = 6,
                         UPDATING = 7,
                         AUTO_UPDATING = 8,
-                        AUTO_UPGRADING = 9
+                        AUTO_UPGRADING = 9,
+                        DISABLED = 10
+                    }
+
+                    /** DisabledReason enum. */
+                    enum DisabledReason {
+                        DISABLED_REASON_UNSPECIFIED = 0,
+                        KMS_KEY_ISSUE = 1
                     }
                 }
 
@@ -2299,6 +2328,9 @@ export namespace google {
 
                     /** Version availableFeatures */
                     availableFeatures?: (string[]|null);
+
+                    /** Version type */
+                    type?: (google.cloud.datafusion.v1beta1.Version.Type|keyof typeof google.cloud.datafusion.v1beta1.Version.Type|null);
                 }
 
                 /** Represents a Version. */
@@ -2318,6 +2350,9 @@ export namespace google {
 
                     /** Version availableFeatures. */
                     public availableFeatures: string[];
+
+                    /** Version type. */
+                    public type: (google.cloud.datafusion.v1beta1.Version.Type|keyof typeof google.cloud.datafusion.v1beta1.Version.Type);
 
                     /**
                      * Creates a new Version instance using the specified properties.
@@ -2388,6 +2423,16 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace Version {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        TYPE_PREVIEW = 1,
+                        TYPE_GENERAL_AVAILABILITY = 2
+                    }
                 }
 
                 /** Properties of an Accelerator. */
@@ -2663,6 +2708,9 @@ export namespace google {
 
                     /** Instance cryptoKeyConfig */
                     cryptoKeyConfig?: (google.cloud.datafusion.v1beta1.ICryptoKeyConfig|null);
+
+                    /** Instance disabledReason */
+                    disabledReason?: (google.cloud.datafusion.v1beta1.Instance.DisabledReason[]|null);
                 }
 
                 /** Represents an Instance. */
@@ -2754,6 +2802,9 @@ export namespace google {
 
                     /** Instance cryptoKeyConfig. */
                     public cryptoKeyConfig?: (google.cloud.datafusion.v1beta1.ICryptoKeyConfig|null);
+
+                    /** Instance disabledReason. */
+                    public disabledReason: google.cloud.datafusion.v1beta1.Instance.DisabledReason[];
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -2847,7 +2898,14 @@ export namespace google {
                         RESTARTING = 6,
                         UPDATING = 7,
                         AUTO_UPDATING = 8,
-                        AUTO_UPGRADING = 9
+                        AUTO_UPGRADING = 9,
+                        DISABLED = 10
+                    }
+
+                    /** DisabledReason enum. */
+                    enum DisabledReason {
+                        DISABLED_REASON_UNSPECIFIED = 0,
+                        KMS_KEY_ISSUE = 1
                     }
                 }
 

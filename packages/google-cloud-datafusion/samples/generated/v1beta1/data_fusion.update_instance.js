@@ -12,15 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main() {
+function main(instance) {
   // [START datafusion_v1beta1_generated_DataFusion_UpdateInstance_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The instance resource that replaces the resource on the server. Currently,
+   *  Required. The instance resource that replaces the resource on the server. Currently,
    *  Data Fusion only allows replacing labels, options, and stack driver
    *  settings. All other fields will be ignored.
    */
@@ -43,7 +44,9 @@ function main() {
 
   async function callUpdateInstance() {
     // Construct request
-    const request = {};
+    const request = {
+      instance,
+    };
 
     // Run request
     const [operation] = await datafusionClient.updateInstance(request);

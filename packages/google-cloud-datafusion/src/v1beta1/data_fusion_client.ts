@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -168,8 +168,14 @@ export class DataFusionClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
+      ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}'
+      ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
       namespacePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/namespaces/{namespace}'
@@ -427,7 +433,7 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The instance resource name in the format
+   *   Required. The instance resource name in the format
    *   projects/{project}/locations/{location}/instances/{instance}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -519,7 +525,7 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.resource
-   *   The resource on which IAM policy to be removed is attached to.
+   *   Required. The resource on which IAM policy to be removed is attached to.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -616,7 +622,7 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The resource on which DNS peering will be created.
+   *   Required. The resource on which DNS peering will be created.
    * @param {google.cloud.datafusion.v1beta1.DnsPeering} request.dnsPeering
    *   Dns peering config.
    * @param {object} [options]
@@ -709,7 +715,7 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The resource on which DNS peering will be removed.
+   *   Required. The resource on which DNS peering will be removed.
    * @param {string} request.zone
    *   Required. The zone to be removed.
    * @param {object} [options]
@@ -809,10 +815,10 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The instance's project and location in the format
+   *   Required. The instance's project and location in the format
    *   projects/{project}/locations/{location}.
    * @param {string} request.instanceId
-   *   The name of the instance to create.
+   *   Required. The name of the instance to create.
    * @param {google.cloud.datafusion.v1beta1.Instance} request.instance
    *   An instance resource.
    * @param {object} [options]
@@ -951,7 +957,7 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The instance resource name in the format
+   *   Required. The instance resource name in the format
    *   projects/{project}/locations/{location}/instances/{instance}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1089,7 +1095,7 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.datafusion.v1beta1.Instance} request.instance
-   *   The instance resource that replaces the resource on the server. Currently,
+   *   Required. The instance resource that replaces the resource on the server. Currently,
    *   Data Fusion only allows replacing labels, options, and stack driver
    *   settings. All other fields will be ignored.
    * @param {google.protobuf.FieldMask} request.updateMask
@@ -1236,7 +1242,7 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Name of the Data Fusion instance which need to be restarted in the form of
+   *   Required. Name of the Data Fusion instance which need to be restarted in the form of
    *   projects/{project}/locations/{location}/instances/{instance}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1375,7 +1381,7 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Name of the Data Fusion instance which need to be upgraded in the form of
+   *   Required. Name of the Data Fusion instance which need to be upgraded in the form of
    *   projects/{project}/locations/{location}/instances/{instance}
    *   Instance will be upgraded with the latest stable version of the Data
    *   Fusion.
@@ -1516,8 +1522,8 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve instance
-   *   information in the format projects/{project}/locations/{location}.
+   *   Required. The project and location for which to retrieve instance information
+   *   in the format projects/{project}/locations/{location}.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    * @param {string} request.pageToken
@@ -1620,8 +1626,8 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve instance
-   *   information in the format projects/{project}/locations/{location}.
+   *   Required. The project and location for which to retrieve instance information
+   *   in the format projects/{project}/locations/{location}.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    * @param {string} request.pageToken
@@ -1672,8 +1678,8 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve instance
-   *   information in the format projects/{project}/locations/{location}.
+   *   Required. The project and location for which to retrieve instance information
+   *   in the format projects/{project}/locations/{location}.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    * @param {string} request.pageToken
@@ -1723,7 +1729,7 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project and location for which to retrieve instance information
+   *   Required. The project and location for which to retrieve instance information
    *   in the format projects/{project}/locations/{location}. If the location is
    *   specified as '-' (wildcard), then all regions available to the project
    *   are queried, and the results are aggregated.
@@ -1829,7 +1835,7 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project and location for which to retrieve instance information
+   *   Required. The project and location for which to retrieve instance information
    *   in the format projects/{project}/locations/{location}. If the location is
    *   specified as '-' (wildcard), then all regions available to the project
    *   are queried, and the results are aggregated.
@@ -1883,7 +1889,7 @@ export class DataFusionClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project and location for which to retrieve instance information
+   *   Required. The project and location for which to retrieve instance information
    *   in the format projects/{project}/locations/{location}. If the location is
    *   specified as '-' (wildcard), then all regions available to the project
    *   are queried, and the results are aggregated.
@@ -2334,6 +2340,77 @@ export class DataFusionClient {
   // --------------------
 
   /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
+  }
+
+  /**
    * Return a fully-qualified instance resource name string.
    *
    * @param {string} project
@@ -2380,6 +2457,42 @@ export class DataFusionClient {
    */
   matchInstanceFromInstanceName(instanceName: string) {
     return this.pathTemplates.instancePathTemplate.match(instanceName).instance;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**

@@ -12,15 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main(zone) {
+function main(parent, zone) {
   // [START datafusion_v1beta1_generated_DataFusion_RemoveDnsPeering_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The resource on which DNS peering will be removed.
+   *  Required. The resource on which DNS peering will be removed.
    */
   // const parent = 'abc123'
   /**
@@ -37,6 +38,7 @@ function main(zone) {
   async function callRemoveDnsPeering() {
     // Construct request
     const request = {
+      parent,
       zone,
     };
 

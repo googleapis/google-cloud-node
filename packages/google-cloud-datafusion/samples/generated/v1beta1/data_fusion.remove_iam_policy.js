@@ -12,15 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main() {
+function main(resource) {
   // [START datafusion_v1beta1_generated_DataFusion_RemoveIamPolicy_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The resource on which IAM policy to be removed is attached to.
+   *  Required. The resource on which IAM policy to be removed is attached to.
    */
   // const resource = 'abc123'
 
@@ -32,7 +33,9 @@ function main() {
 
   async function callRemoveIamPolicy() {
     // Construct request
-    const request = {};
+    const request = {
+      resource,
+    };
 
     // Run request
     const response = await datafusionClient.removeIamPolicy(request);

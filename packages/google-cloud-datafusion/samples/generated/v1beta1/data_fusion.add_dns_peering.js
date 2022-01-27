@@ -12,15 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
-function main() {
+function main(parent) {
   // [START datafusion_v1beta1_generated_DataFusion_AddDnsPeering_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The resource on which DNS peering will be created.
+   *  Required. The resource on which DNS peering will be created.
    */
   // const parent = 'abc123'
   /**
@@ -36,7 +37,9 @@ function main() {
 
   async function callAddDnsPeering() {
     // Construct request
-    const request = {};
+    const request = {
+      parent,
+    };
 
     // Run request
     const response = await datafusionClient.addDnsPeering(request);
