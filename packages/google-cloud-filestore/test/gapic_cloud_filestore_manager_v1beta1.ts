@@ -2671,6 +2671,7 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
+        instance: 'instanceValue',
         snapshot: 'snapshotValue',
       };
       const client =
@@ -2690,6 +2691,7 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
         const result = client.snapshotPath(
           'projectValue',
           'locationValue',
+          'instanceValue',
           'snapshotValue'
         );
         assert.strictEqual(result, fakePath);
@@ -2713,6 +2715,16 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       it('matchLocationFromSnapshotName', () => {
         const result = client.matchLocationFromSnapshotName(fakePath);
         assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.snapshotPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchInstanceFromSnapshotName', () => {
+        const result = client.matchInstanceFromSnapshotName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
         assert(
           (client.pathTemplates.snapshotPathTemplate.match as SinonStub)
             .getCall(-1)

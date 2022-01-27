@@ -903,9 +903,7 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudFilestoreServiceProto",
                     "java_package": "com.google.cloud.filestore.v1beta1",
-                    "php_namespace": "Google\\Cloud\\Filestore\\V1beta1",
-                    "(google.api.resource_definition).type": "file.googleapis.com/Snapshot",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/snapshots/{snapshot}"
+                    "php_namespace": "Google\\Cloud\\Filestore\\V1beta1"
                   },
                   "nested": {
                     "CloudFilestoreManager": {
@@ -1526,6 +1524,61 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "Snapshot": {
+                      "options": {
+                        "(google.api.resource).type": "file.googleapis.com/Snapshot",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/snapshots/{snapshot}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "filesystemUsedBytes": {
+                          "type": "int64",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 3,
+                            "DELETING": 4
+                          }
                         }
                       }
                     },

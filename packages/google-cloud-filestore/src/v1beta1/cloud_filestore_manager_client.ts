@@ -198,7 +198,7 @@ export class CloudFilestoreManagerClient {
         'projects/{project}/locations/{location}'
       ),
       snapshotPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/snapshots/{snapshot}'
+        'projects/{project}/locations/{location}/instances/{instance}/snapshots/{snapshot}'
       ),
     };
 
@@ -2232,13 +2232,20 @@ export class CloudFilestoreManagerClient {
    *
    * @param {string} project
    * @param {string} location
+   * @param {string} instance
    * @param {string} snapshot
    * @returns {string} Resource name string.
    */
-  snapshotPath(project: string, location: string, snapshot: string) {
+  snapshotPath(
+    project: string,
+    location: string,
+    instance: string,
+    snapshot: string
+  ) {
     return this.pathTemplates.snapshotPathTemplate.render({
       project: project,
       location: location,
+      instance: instance,
       snapshot: snapshot,
     });
   }
@@ -2263,6 +2270,17 @@ export class CloudFilestoreManagerClient {
    */
   matchLocationFromSnapshotName(snapshotName: string) {
     return this.pathTemplates.snapshotPathTemplate.match(snapshotName).location;
+  }
+
+  /**
+   * Parse the instance from Snapshot resource.
+   *
+   * @param {string} snapshotName
+   *   A fully-qualified path representing Snapshot resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromSnapshotName(snapshotName: string) {
+    return this.pathTemplates.snapshotPathTemplate.match(snapshotName).instance;
   }
 
   /**

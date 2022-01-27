@@ -3902,6 +3902,137 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a Snapshot. */
+                interface ISnapshot {
+
+                    /** Snapshot name */
+                    name?: (string|null);
+
+                    /** Snapshot description */
+                    description?: (string|null);
+
+                    /** Snapshot state */
+                    state?: (google.cloud.filestore.v1beta1.Snapshot.State|keyof typeof google.cloud.filestore.v1beta1.Snapshot.State|null);
+
+                    /** Snapshot createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Snapshot labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Snapshot filesystemUsedBytes */
+                    filesystemUsedBytes?: (number|Long|string|null);
+                }
+
+                /** Represents a Snapshot. */
+                class Snapshot implements ISnapshot {
+
+                    /**
+                     * Constructs a new Snapshot.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.ISnapshot);
+
+                    /** Snapshot name. */
+                    public name: string;
+
+                    /** Snapshot description. */
+                    public description: string;
+
+                    /** Snapshot state. */
+                    public state: (google.cloud.filestore.v1beta1.Snapshot.State|keyof typeof google.cloud.filestore.v1beta1.Snapshot.State);
+
+                    /** Snapshot createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Snapshot labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Snapshot filesystemUsedBytes. */
+                    public filesystemUsedBytes: (number|Long|string);
+
+                    /**
+                     * Creates a new Snapshot instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Snapshot instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.ISnapshot): google.cloud.filestore.v1beta1.Snapshot;
+
+                    /**
+                     * Encodes the specified Snapshot message. Does not implicitly {@link google.cloud.filestore.v1beta1.Snapshot.verify|verify} messages.
+                     * @param message Snapshot message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.ISnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Snapshot message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.Snapshot.verify|verify} messages.
+                     * @param message Snapshot message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.ISnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Snapshot message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Snapshot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.Snapshot;
+
+                    /**
+                     * Decodes a Snapshot message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Snapshot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.Snapshot;
+
+                    /**
+                     * Verifies a Snapshot message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Snapshot message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Snapshot
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.Snapshot;
+
+                    /**
+                     * Creates a plain object from a Snapshot message. Also converts values to other types if specified.
+                     * @param message Snapshot
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.Snapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Snapshot to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Snapshot {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 3,
+                        DELETING = 4
+                    }
+                }
+
                 /** Properties of a Backup. */
                 interface IBackup {
 
