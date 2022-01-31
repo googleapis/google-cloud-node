@@ -7025,6 +7025,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "dedicatedResources": {
+                          "type": "DedicatedResources",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "enableAccessLogging": {
                           "type": "bool",
                           "id": 8,
