@@ -20910,6 +20910,27 @@
                             "fixedNodeCount": {
                               "type": "int32",
                               "id": 2
+                            },
+                            "scaling": {
+                              "type": "Scaling",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "Scaling": {
+                              "fields": {
+                                "minNodeCount": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "maxNodeCount": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
                             }
                           }
                         },
@@ -23409,6 +23430,13 @@
                         "automaticResources": {
                           "type": "AutomaticResources",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dedicatedResources": {
+                          "type": "DedicatedResources",
+                          "id": 16,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
