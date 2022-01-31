@@ -74,7 +74,7 @@
     "mocha": "^8.0.0",
     "pack-n-play": "^1.0.0-2",
     "proxyquire": "^2.0.1",
-    "sinon": "^12.0.0",
+    "sinon": "^13.0.0",
     "typescript": "^3.8.3"
   }
 }
