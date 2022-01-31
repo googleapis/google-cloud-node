@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(name) {
@@ -26,8 +27,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Transcoder library
-  const {TranscoderServiceClient} =
-    require('@google-cloud/video-transcoder').v1beta1;
+  const {TranscoderServiceClient} = require('@google-cloud/video-transcoder').v1beta1;
 
   // Instantiates a client
   const transcoderClient = new TranscoderServiceClient();

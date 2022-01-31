@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
@@ -45,8 +46,7 @@ function main(parent) {
   // const orderBy = 'abc123'
 
   // Imports the Transcoder library
-  const {TranscoderServiceClient} =
-    require('@google-cloud/video-transcoder').v1;
+  const {TranscoderServiceClient} = require('@google-cloud/video-transcoder').v1;
 
   // Instantiates a client
   const transcoderClient = new TranscoderServiceClient();
@@ -60,7 +60,7 @@ function main(parent) {
     // Run request
     const iterable = await transcoderClient.listJobTemplatesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
