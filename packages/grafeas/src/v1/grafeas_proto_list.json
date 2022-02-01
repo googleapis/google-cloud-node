@@ -13,6 +13,7 @@
   "../../protos/grafeas/v1/intoto_statement.proto",
   "../../protos/grafeas/v1/package.proto",
   "../../protos/grafeas/v1/provenance.proto",
+  "../../protos/grafeas/v1/severity.proto",
   "../../protos/grafeas/v1/slsa_provenance.proto",
   "../../protos/grafeas/v1/upgrade.proto",
   "../../protos/grafeas/v1/vulnerability.proto"
