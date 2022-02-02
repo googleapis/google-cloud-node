@@ -9618,14 +9618,6 @@
                             }
                           },
                           "nested": {
-                            "InsightsExportSettings": {
-                              "fields": {
-                                "enableInsightsExport": {
-                                  "type": "bool",
-                                  "id": 1
-                                }
-                              }
-                            },
                             "RedactionStrategy": {
                               "values": {
                                 "REDACTION_STRATEGY_UNSPECIFIED": 0,
@@ -9643,7 +9635,35 @@
                                 "PURGE_DATA_TYPE_UNSPECIFIED": 0,
                                 "DIALOGFLOW_HISTORY": 1
                               }
+                            },
+                            "InsightsExportSettings": {
+                              "fields": {
+                                "enableInsightsExport": {
+                                  "type": "bool",
+                                  "id": 1
+                                }
+                              }
                             }
+                          }
+                        },
+                        "AudioEncoding": {
+                          "values": {
+                            "AUDIO_ENCODING_UNSPECIFIED": 0,
+                            "AUDIO_ENCODING_LINEAR_16": 1,
+                            "AUDIO_ENCODING_FLAC": 2,
+                            "AUDIO_ENCODING_MULAW": 3,
+                            "AUDIO_ENCODING_AMR": 4,
+                            "AUDIO_ENCODING_AMR_WB": 5,
+                            "AUDIO_ENCODING_OGG_OPUS": 6,
+                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                          }
+                        },
+                        "SpeechModelVariant": {
+                          "values": {
+                            "SPEECH_MODEL_VARIANT_UNSPECIFIED": 0,
+                            "USE_BEST_AVAILABLE": 1,
+                            "USE_STANDARD": 2,
+                            "USE_ENHANCED": 3
                           }
                         },
                         "SpeechWordInfo": {
@@ -9664,18 +9684,6 @@
                               "type": "float",
                               "id": 4
                             }
-                          }
-                        },
-                        "AudioEncoding": {
-                          "values": {
-                            "AUDIO_ENCODING_UNSPECIFIED": 0,
-                            "AUDIO_ENCODING_LINEAR_16": 1,
-                            "AUDIO_ENCODING_FLAC": 2,
-                            "AUDIO_ENCODING_MULAW": 3,
-                            "AUDIO_ENCODING_AMR": 4,
-                            "AUDIO_ENCODING_AMR_WB": 5,
-                            "AUDIO_ENCODING_OGG_OPUS": 6,
-                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
                           }
                         },
                         "InputAudioConfig": {
@@ -9714,12 +9722,12 @@
                             }
                           }
                         },
-                        "SpeechModelVariant": {
+                        "SsmlVoiceGender": {
                           "values": {
-                            "SPEECH_MODEL_VARIANT_UNSPECIFIED": 0,
-                            "USE_BEST_AVAILABLE": 1,
-                            "USE_STANDARD": 2,
-                            "USE_ENHANCED": 3
+                            "SSML_VOICE_GENDER_UNSPECIFIED": 0,
+                            "SSML_VOICE_GENDER_MALE": 1,
+                            "SSML_VOICE_GENDER_FEMALE": 2,
+                            "SSML_VOICE_GENDER_NEUTRAL": 3
                           }
                         },
                         "VoiceSelectionParams": {
@@ -9759,6 +9767,16 @@
                             }
                           }
                         },
+                        "OutputAudioEncoding": {
+                          "values": {
+                            "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
+                            "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
+                            "OUTPUT_AUDIO_ENCODING_MP3": 2,
+                            "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
+                            "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
+                            "OUTPUT_AUDIO_ENCODING_MULAW": 5
+                          }
+                        },
                         "OutputAudioConfig": {
                           "fields": {
                             "audioEncoding": {
@@ -9776,24 +9794,6 @@
                               "type": "SynthesizeSpeechConfig",
                               "id": 3
                             }
-                          }
-                        },
-                        "SsmlVoiceGender": {
-                          "values": {
-                            "SSML_VOICE_GENDER_UNSPECIFIED": 0,
-                            "SSML_VOICE_GENDER_MALE": 1,
-                            "SSML_VOICE_GENDER_FEMALE": 2,
-                            "SSML_VOICE_GENDER_NEUTRAL": 3
-                          }
-                        },
-                        "OutputAudioEncoding": {
-                          "values": {
-                            "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
-                            "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
-                            "OUTPUT_AUDIO_ENCODING_MP3": 2,
-                            "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
-                            "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
-                            "OUTPUT_AUDIO_ENCODING_MULAW": 5
                           }
                         },
                         "Changelogs": {
@@ -10004,6 +10004,14 @@
                             }
                           },
                           "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "RUNNING": 1,
+                                "SUCCEEDED": 2,
+                                "FAILED": 3
+                              }
+                            },
                             "Result": {
                               "fields": {
                                 "deploymentTestResults": {
@@ -10021,14 +10029,6 @@
                                     "(google.api.resource_reference).type": "dialogflow.googleapis.com/Experiment"
                                   }
                                 }
-                              }
-                            },
-                            "State": {
-                              "values": {
-                                "STATE_UNSPECIFIED": 0,
-                                "RUNNING": 1,
-                                "SUCCEEDED": 2,
-                                "FAILED": 3
                               }
                             }
                           }
@@ -10228,6 +10228,20 @@
                             }
                           },
                           "nested": {
+                            "Kind": {
+                              "values": {
+                                "KIND_UNSPECIFIED": 0,
+                                "KIND_MAP": 1,
+                                "KIND_LIST": 2,
+                                "KIND_REGEXP": 3
+                              }
+                            },
+                            "AutoExpansionMode": {
+                              "values": {
+                                "AUTO_EXPANSION_MODE_UNSPECIFIED": 0,
+                                "AUTO_EXPANSION_MODE_DEFAULT": 1
+                              }
+                            },
                             "Entity": {
                               "fields": {
                                 "value": {
@@ -10256,20 +10270,6 @@
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
                                 }
-                              }
-                            },
-                            "Kind": {
-                              "values": {
-                                "KIND_UNSPECIFIED": 0,
-                                "KIND_MAP": 1,
-                                "KIND_LIST": 2,
-                                "KIND_REGEXP": 3
-                              }
-                            },
-                            "AutoExpansionMode": {
-                              "values": {
-                                "AUTO_EXPANSION_MODE_UNSPECIFIED": 0,
-                                "AUTO_EXPANSION_MODE_DEFAULT": 1
                               }
                             }
                           }
@@ -14225,6 +14225,15 @@
                             }
                           },
                           "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "DRAFT": 1,
+                                "RUNNING": 2,
+                                "DONE": 3,
+                                "ROLLOUT_FAILED": 4
+                              }
+                            },
                             "Definition": {
                               "oneofs": {
                                 "variants": {
@@ -14257,6 +14266,24 @@
                                 }
                               },
                               "nested": {
+                                "MetricType": {
+                                  "values": {
+                                    "METRIC_UNSPECIFIED": 0,
+                                    "CONTAINED_SESSION_NO_CALLBACK_RATE": 1,
+                                    "LIVE_AGENT_HANDOFF_RATE": 2,
+                                    "CALLBACK_SESSION_RATE": 3,
+                                    "ABANDONED_SESSION_RATE": 4,
+                                    "SESSION_END_RATE": 5
+                                  }
+                                },
+                                "CountType": {
+                                  "values": {
+                                    "COUNT_TYPE_UNSPECIFIED": 0,
+                                    "TOTAL_NO_MATCH_COUNT": 1,
+                                    "TOTAL_TURN_COUNT": 2,
+                                    "AVERAGE_TURN_COUNT": 3
+                                  }
+                                },
                                 "ConfidenceInterval": {
                                   "fields": {
                                     "confidenceLevel": {
@@ -14328,34 +14355,7 @@
                                       "id": 3
                                     }
                                   }
-                                },
-                                "MetricType": {
-                                  "values": {
-                                    "METRIC_UNSPECIFIED": 0,
-                                    "CONTAINED_SESSION_NO_CALLBACK_RATE": 1,
-                                    "LIVE_AGENT_HANDOFF_RATE": 2,
-                                    "CALLBACK_SESSION_RATE": 3,
-                                    "ABANDONED_SESSION_RATE": 4,
-                                    "SESSION_END_RATE": 5
-                                  }
-                                },
-                                "CountType": {
-                                  "values": {
-                                    "COUNT_TYPE_UNSPECIFIED": 0,
-                                    "TOTAL_NO_MATCH_COUNT": 1,
-                                    "TOTAL_TURN_COUNT": 2,
-                                    "AVERAGE_TURN_COUNT": 3
-                                  }
                                 }
-                              }
-                            },
-                            "State": {
-                              "values": {
-                                "STATE_UNSPECIFIED": 0,
-                                "DRAFT": 1,
-                                "RUNNING": 2,
-                                "DONE": 3,
-                                "ROLLOUT_FAILED": 4
                               }
                             }
                           }

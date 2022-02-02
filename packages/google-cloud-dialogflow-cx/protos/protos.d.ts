@@ -35632,6 +35632,24 @@ export namespace google {
 
                     namespace SecuritySettings {
 
+                        /** RedactionStrategy enum. */
+                        enum RedactionStrategy {
+                            REDACTION_STRATEGY_UNSPECIFIED = 0,
+                            REDACT_WITH_SERVICE = 1
+                        }
+
+                        /** RedactionScope enum. */
+                        enum RedactionScope {
+                            REDACTION_SCOPE_UNSPECIFIED = 0,
+                            REDACT_DISK_STORAGE = 2
+                        }
+
+                        /** PurgeDataType enum. */
+                        enum PurgeDataType {
+                            PURGE_DATA_TYPE_UNSPECIFIED = 0,
+                            DIALOGFLOW_HISTORY = 1
+                        }
+
                         /** Properties of an InsightsExportSettings. */
                         interface IInsightsExportSettings {
 
@@ -35721,24 +35739,26 @@ export namespace google {
                              */
                             public toJSON(): { [k: string]: any };
                         }
+                    }
 
-                        /** RedactionStrategy enum. */
-                        enum RedactionStrategy {
-                            REDACTION_STRATEGY_UNSPECIFIED = 0,
-                            REDACT_WITH_SERVICE = 1
-                        }
+                    /** AudioEncoding enum. */
+                    enum AudioEncoding {
+                        AUDIO_ENCODING_UNSPECIFIED = 0,
+                        AUDIO_ENCODING_LINEAR_16 = 1,
+                        AUDIO_ENCODING_FLAC = 2,
+                        AUDIO_ENCODING_MULAW = 3,
+                        AUDIO_ENCODING_AMR = 4,
+                        AUDIO_ENCODING_AMR_WB = 5,
+                        AUDIO_ENCODING_OGG_OPUS = 6,
+                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
+                    }
 
-                        /** RedactionScope enum. */
-                        enum RedactionScope {
-                            REDACTION_SCOPE_UNSPECIFIED = 0,
-                            REDACT_DISK_STORAGE = 2
-                        }
-
-                        /** PurgeDataType enum. */
-                        enum PurgeDataType {
-                            PURGE_DATA_TYPE_UNSPECIFIED = 0,
-                            DIALOGFLOW_HISTORY = 1
-                        }
+                    /** SpeechModelVariant enum. */
+                    enum SpeechModelVariant {
+                        SPEECH_MODEL_VARIANT_UNSPECIFIED = 0,
+                        USE_BEST_AVAILABLE = 1,
+                        USE_STANDARD = 2,
+                        USE_ENHANCED = 3
                     }
 
                     /** Properties of a SpeechWordInfo. */
@@ -35847,18 +35867,6 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
-                    }
-
-                    /** AudioEncoding enum. */
-                    enum AudioEncoding {
-                        AUDIO_ENCODING_UNSPECIFIED = 0,
-                        AUDIO_ENCODING_LINEAR_16 = 1,
-                        AUDIO_ENCODING_FLAC = 2,
-                        AUDIO_ENCODING_MULAW = 3,
-                        AUDIO_ENCODING_AMR = 4,
-                        AUDIO_ENCODING_AMR_WB = 5,
-                        AUDIO_ENCODING_OGG_OPUS = 6,
-                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                     }
 
                     /** Properties of an InputAudioConfig. */
@@ -35987,12 +35995,12 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
-                    /** SpeechModelVariant enum. */
-                    enum SpeechModelVariant {
-                        SPEECH_MODEL_VARIANT_UNSPECIFIED = 0,
-                        USE_BEST_AVAILABLE = 1,
-                        USE_STANDARD = 2,
-                        USE_ENHANCED = 3
+                    /** SsmlVoiceGender enum. */
+                    enum SsmlVoiceGender {
+                        SSML_VOICE_GENDER_UNSPECIFIED = 0,
+                        SSML_VOICE_GENDER_MALE = 1,
+                        SSML_VOICE_GENDER_FEMALE = 2,
+                        SSML_VOICE_GENDER_NEUTRAL = 3
                     }
 
                     /** Properties of a VoiceSelectionParams. */
@@ -36205,6 +36213,16 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** OutputAudioEncoding enum. */
+                    enum OutputAudioEncoding {
+                        OUTPUT_AUDIO_ENCODING_UNSPECIFIED = 0,
+                        OUTPUT_AUDIO_ENCODING_LINEAR_16 = 1,
+                        OUTPUT_AUDIO_ENCODING_MP3 = 2,
+                        OUTPUT_AUDIO_ENCODING_MP3_64_KBPS = 4,
+                        OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3,
+                        OUTPUT_AUDIO_ENCODING_MULAW = 5
+                    }
+
                     /** Properties of an OutputAudioConfig. */
                     interface IOutputAudioConfig {
 
@@ -36305,24 +36323,6 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
-                    }
-
-                    /** SsmlVoiceGender enum. */
-                    enum SsmlVoiceGender {
-                        SSML_VOICE_GENDER_UNSPECIFIED = 0,
-                        SSML_VOICE_GENDER_MALE = 1,
-                        SSML_VOICE_GENDER_FEMALE = 2,
-                        SSML_VOICE_GENDER_NEUTRAL = 3
-                    }
-
-                    /** OutputAudioEncoding enum. */
-                    enum OutputAudioEncoding {
-                        OUTPUT_AUDIO_ENCODING_UNSPECIFIED = 0,
-                        OUTPUT_AUDIO_ENCODING_LINEAR_16 = 1,
-                        OUTPUT_AUDIO_ENCODING_MP3 = 2,
-                        OUTPUT_AUDIO_ENCODING_MP3_64_KBPS = 4,
-                        OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3,
-                        OUTPUT_AUDIO_ENCODING_MULAW = 5
                     }
 
                     /** Represents a Changelogs */
@@ -36999,6 +36999,14 @@ export namespace google {
 
                     namespace Deployment {
 
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            RUNNING = 1,
+                            SUCCEEDED = 2,
+                            FAILED = 3
+                        }
+
                         /** Properties of a Result. */
                         interface IResult {
 
@@ -37093,14 +37101,6 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
-                        }
-
-                        /** State enum. */
-                        enum State {
-                            STATE_UNSPECIFIED = 0,
-                            RUNNING = 1,
-                            SUCCEEDED = 2,
-                            FAILED = 3
                         }
                     }
 
@@ -37655,6 +37655,20 @@ export namespace google {
 
                     namespace EntityType {
 
+                        /** Kind enum. */
+                        enum Kind {
+                            KIND_UNSPECIFIED = 0,
+                            KIND_MAP = 1,
+                            KIND_LIST = 2,
+                            KIND_REGEXP = 3
+                        }
+
+                        /** AutoExpansionMode enum. */
+                        enum AutoExpansionMode {
+                            AUTO_EXPANSION_MODE_UNSPECIFIED = 0,
+                            AUTO_EXPANSION_MODE_DEFAULT = 1
+                        }
+
                         /** Properties of an Entity. */
                         interface IEntity {
 
@@ -37839,20 +37853,6 @@ export namespace google {
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
-                        }
-
-                        /** Kind enum. */
-                        enum Kind {
-                            KIND_UNSPECIFIED = 0,
-                            KIND_MAP = 1,
-                            KIND_LIST = 2,
-                            KIND_REGEXP = 3
-                        }
-
-                        /** AutoExpansionMode enum. */
-                        enum AutoExpansionMode {
-                            AUTO_EXPANSION_MODE_UNSPECIFIED = 0,
-                            AUTO_EXPANSION_MODE_DEFAULT = 1
                         }
                     }
 
@@ -52645,6 +52645,15 @@ export namespace google {
 
                     namespace Experiment {
 
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            DRAFT = 1,
+                            RUNNING = 2,
+                            DONE = 3,
+                            ROLLOUT_FAILED = 4
+                        }
+
                         /** Properties of a Definition. */
                         interface IDefinition {
 
@@ -52841,6 +52850,24 @@ export namespace google {
                         }
 
                         namespace Result {
+
+                            /** MetricType enum. */
+                            enum MetricType {
+                                METRIC_UNSPECIFIED = 0,
+                                CONTAINED_SESSION_NO_CALLBACK_RATE = 1,
+                                LIVE_AGENT_HANDOFF_RATE = 2,
+                                CALLBACK_SESSION_RATE = 3,
+                                ABANDONED_SESSION_RATE = 4,
+                                SESSION_END_RATE = 5
+                            }
+
+                            /** CountType enum. */
+                            enum CountType {
+                                COUNT_TYPE_UNSPECIFIED = 0,
+                                TOTAL_NO_MATCH_COUNT = 1,
+                                TOTAL_TURN_COUNT = 2,
+                                AVERAGE_TURN_COUNT = 3
+                            }
 
                             /** Properties of a ConfidenceInterval. */
                             interface IConfidenceInterval {
@@ -53168,33 +53195,6 @@ export namespace google {
                                  */
                                 public toJSON(): { [k: string]: any };
                             }
-
-                            /** MetricType enum. */
-                            enum MetricType {
-                                METRIC_UNSPECIFIED = 0,
-                                CONTAINED_SESSION_NO_CALLBACK_RATE = 1,
-                                LIVE_AGENT_HANDOFF_RATE = 2,
-                                CALLBACK_SESSION_RATE = 3,
-                                ABANDONED_SESSION_RATE = 4,
-                                SESSION_END_RATE = 5
-                            }
-
-                            /** CountType enum. */
-                            enum CountType {
-                                COUNT_TYPE_UNSPECIFIED = 0,
-                                TOTAL_NO_MATCH_COUNT = 1,
-                                TOTAL_TURN_COUNT = 2,
-                                AVERAGE_TURN_COUNT = 3
-                            }
-                        }
-
-                        /** State enum. */
-                        enum State {
-                            STATE_UNSPECIFIED = 0,
-                            DRAFT = 1,
-                            RUNNING = 2,
-                            DONE = 3,
-                            ROLLOUT_FAILED = 4
                         }
                     }
 
