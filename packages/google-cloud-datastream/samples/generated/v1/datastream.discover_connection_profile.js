@@ -12,38 +12,44 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
-  // [START datastream_quickstart]
+  // [START datastream_v1_generated_Datastream_DiscoverConnectionProfile_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent that owns the collection of connection profiles.
+   *  Required. The parent resource of the connection profile type. Must be in the
+   *  format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Maximum number of connection profiles to return.
-   *  If unspecified, at most 50 connection profiles will be returned.
-   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  An ad-hoc connection profile configuration.
    */
-  // const pageSize = 1234
+  // const connectionProfile = {}
   /**
-   *  Page token received from a previous `ListConnectionProfiles` call.
-   *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListConnectionProfiles`
-   *  must match the call that provided the page token.
+   *  A reference to an existing connection profile.
    */
-  // const pageToken = 'abc123'
+  // const connectionProfileName = 'abc123'
   /**
-   *  Filter request.
+   *  Whether to retrieve the full hierarchy of data objects (TRUE) or only the
+   *  current level (FALSE).
    */
-  // const filter = 'abc123'
+  // const fullHierarchy = true
   /**
-   *  Order by fields for the result.
+   *  The number of hierarchy levels below the current level to be retrieved.
    */
-  // const orderBy = 'abc123'
+  // const hierarchyDepth = 1234
+  /**
+   *  Oracle RDBMS to enrich with child data objects and metadata.
+   */
+  // const oracleRdbms = {}
+  /**
+   *  MySQL RDBMS to enrich with child data objects and metadata.
+   */
+  // const mysqlRdbms = {}
 
   // Imports the Datastream library
   const {DatastreamClient} = require('@google-cloud/datastream').v1;
@@ -51,23 +57,19 @@ function main(parent) {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function listConnectionProfiles() {
+  async function callDiscoverConnectionProfile() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await datastreamClient.listConnectionProfilesAsync(
-      request
-    );
-    for await (const response of iterable) {
-      console.log(response);
-    }
+    const response = await datastreamClient.discoverConnectionProfile(request);
+    console.log(response);
   }
 
-  listConnectionProfiles();
-  // [END datastream_quickstart]
+  callDiscoverConnectionProfile();
+  // [END datastream_v1_generated_Datastream_DiscoverConnectionProfile_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -12,27 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
-  // [START datastream_quickstart]
+  // [START datastream_v1_generated_Datastream_ListStreams_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent that owns the collection of connection profiles.
+   *  Required. The parent that owns the collection of streams.
    */
   // const parent = 'abc123'
   /**
-   *  Maximum number of connection profiles to return.
-   *  If unspecified, at most 50 connection profiles will be returned.
-   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  Maximum number of streams to return.
+   *  If unspecified, at most 50 streams will  be returned. The maximum
+   *  value is 1000; values above 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**
-   *  Page token received from a previous `ListConnectionProfiles` call.
+   *  Page token received from a previous `ListStreams` call.
    *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListConnectionProfiles`
+   *  When paginating, all other parameters provided to `ListStreams`
    *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
@@ -51,23 +52,21 @@ function main(parent) {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function listConnectionProfiles() {
+  async function callListStreams() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await datastreamClient.listConnectionProfilesAsync(
-      request
-    );
+    const iterable = await datastreamClient.listStreamsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
-  listConnectionProfiles();
-  // [END datastream_quickstart]
+  callListStreams();
+  // [END datastream_v1_generated_Datastream_ListStreams_async]
 }
 
 process.on('unhandledRejection', err => {

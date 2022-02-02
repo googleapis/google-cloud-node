@@ -9,7 +9,7 @@
   "repo": "googleapis/nodejs-datastream",
   "distribution_name": "@google-cloud/datastream",
   "api_id": "datastream.googleapis.com",
-  "default_version": "v1alpha1",
+  "default_version": "v1",
   "requires_billing": true,
   "api_shortname": "datastream",
   "library_type": "GAPIC_AUTO"

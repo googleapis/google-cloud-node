@@ -87,7 +87,7 @@ npm install @google-cloud/datastream
 // const orderBy = 'abc123'
 
 // Imports the Datastream library
-const {DatastreamClient} = require('@google-cloud/datastream').v1alpha1;
+const {DatastreamClient} = require('@google-cloud/datastream').v1;
 
 // Instantiates a client
 const datastreamClient = new DatastreamClient();

@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
 
 function main(parent) {
-  // [START datastream_quickstart]
+  // [START datastream_v1_generated_Datastream_ListConnectionProfiles_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -51,23 +52,21 @@ function main(parent) {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function listConnectionProfiles() {
+  async function callListConnectionProfiles() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await datastreamClient.listConnectionProfilesAsync(
-      request
-    );
+    const iterable = await datastreamClient.listConnectionProfilesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
-  listConnectionProfiles();
-  // [END datastream_quickstart]
+  callListConnectionProfiles();
+  // [END datastream_v1_generated_Datastream_ListConnectionProfiles_async]
 }
 
 process.on('unhandledRejection', err => {
