@@ -350,6 +350,9 @@ export class SearchServiceClient {
    *   identify a visitor on a single device. This unique identifier should not
    *   change if the visitor logs in or out of the website.
    *
+   *   This should be the same identifier as
+   *   {@link google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id}.
+   *
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
    * @param {google.cloud.retail.v2alpha.UserInfo} request.userInfo
@@ -442,14 +445,15 @@ export class SearchServiceClient {
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2alpha.Product|Product}s attributes. The attributes
-   *   from all the matching
+   *   {@link google.cloud.retail.v2alpha.Product|Product}s attributes,
+   *   {@link google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo} or
+   *   {@link google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s attributes.
+   *   The attributes from all the matching
    *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2alpha.Product|Product}s are merged and
-   *   de-duplicated. Notice that rollup
-   *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2alpha.Product|Product}s attributes will lead to
-   *   extra query latency. Maximum number of keys is 10.
+   *   {@link google.cloud.retail.v2alpha.Product|Product}s or
+   *   {@link google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s are merged
+   *   and de-duplicated. Notice that rollup attributes will lead to extra query
+   *   latency. Maximum number of keys is 30.
    *
    *   For {@link google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo}, a
    *   fulfillment type and a fulfillment ID must be provided in the format of
@@ -464,6 +468,7 @@ export class SearchServiceClient {
    *   * discount
    *   * variantId
    *   * inventory(place_id,price)
+   *   * inventory(place_id,original_price)
    *   * inventory(place_id,attributes.key), where key is any key in the
    *     {@link |Product.inventories.attributes} map.
    *   * attributes.key, where key is any key in the
@@ -635,6 +640,9 @@ export class SearchServiceClient {
    *   identify a visitor on a single device. This unique identifier should not
    *   change if the visitor logs in or out of the website.
    *
+   *   This should be the same identifier as
+   *   {@link google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id}.
+   *
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
    * @param {google.cloud.retail.v2alpha.UserInfo} request.userInfo
@@ -727,14 +735,15 @@ export class SearchServiceClient {
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2alpha.Product|Product}s attributes. The attributes
-   *   from all the matching
+   *   {@link google.cloud.retail.v2alpha.Product|Product}s attributes,
+   *   {@link google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo} or
+   *   {@link google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s attributes.
+   *   The attributes from all the matching
    *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2alpha.Product|Product}s are merged and
-   *   de-duplicated. Notice that rollup
-   *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2alpha.Product|Product}s attributes will lead to
-   *   extra query latency. Maximum number of keys is 10.
+   *   {@link google.cloud.retail.v2alpha.Product|Product}s or
+   *   {@link google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s are merged
+   *   and de-duplicated. Notice that rollup attributes will lead to extra query
+   *   latency. Maximum number of keys is 30.
    *
    *   For {@link google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo}, a
    *   fulfillment type and a fulfillment ID must be provided in the format of
@@ -749,6 +758,7 @@ export class SearchServiceClient {
    *   * discount
    *   * variantId
    *   * inventory(place_id,price)
+   *   * inventory(place_id,original_price)
    *   * inventory(place_id,attributes.key), where key is any key in the
    *     {@link |Product.inventories.attributes} map.
    *   * attributes.key, where key is any key in the
@@ -876,6 +886,9 @@ export class SearchServiceClient {
    *   identify a visitor on a single device. This unique identifier should not
    *   change if the visitor logs in or out of the website.
    *
+   *   This should be the same identifier as
+   *   {@link google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id}.
+   *
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
    * @param {google.cloud.retail.v2alpha.UserInfo} request.userInfo
@@ -968,14 +981,15 @@ export class SearchServiceClient {
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2alpha.Product|Product}s attributes. The attributes
-   *   from all the matching
+   *   {@link google.cloud.retail.v2alpha.Product|Product}s attributes,
+   *   {@link google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo} or
+   *   {@link google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s attributes.
+   *   The attributes from all the matching
    *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2alpha.Product|Product}s are merged and
-   *   de-duplicated. Notice that rollup
-   *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2alpha.Product|Product}s attributes will lead to
-   *   extra query latency. Maximum number of keys is 10.
+   *   {@link google.cloud.retail.v2alpha.Product|Product}s or
+   *   {@link google.cloud.retail.v2alpha.LocalInventory|LocalInventory}s are merged
+   *   and de-duplicated. Notice that rollup attributes will lead to extra query
+   *   latency. Maximum number of keys is 30.
    *
    *   For {@link google.cloud.retail.v2alpha.FulfillmentInfo|FulfillmentInfo}, a
    *   fulfillment type and a fulfillment ID must be provided in the format of
@@ -990,6 +1004,7 @@ export class SearchServiceClient {
    *   * discount
    *   * variantId
    *   * inventory(place_id,price)
+   *   * inventory(place_id,original_price)
    *   * inventory(place_id,attributes.key), where key is any key in the
    *     {@link |Product.inventories.attributes} map.
    *   * attributes.key, where key is any key in the

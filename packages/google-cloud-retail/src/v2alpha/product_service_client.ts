@@ -1116,8 +1116,9 @@ export class ProductServiceClient {
    *   needed, {@link |UpdateProduct} should be invoked instead.
    * @param {google.protobuf.FieldMask} request.setMask
    *   Indicates which inventory fields in the provided
-   *   {@link google.cloud.retail.v2alpha.Product|Product} to update. If not set or set
-   *   with empty paths, all inventory fields will be updated.
+   *   {@link google.cloud.retail.v2alpha.Product|Product} to update.
+   *
+   *   At least one field must be provided.
    *
    *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
    *   is returned and the entire update will be ignored.
@@ -1683,7 +1684,7 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2alpha.ProductService.GetProduct|GetProduct} or
    * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ListProducts}.
    *
-   * Store inventory information can only be modified using this method.
+   * Local inventory information can only be modified using this method.
    * {@link google.cloud.retail.v2alpha.ProductService.CreateProduct|CreateProduct}
    * and
    * {@link google.cloud.retail.v2alpha.ProductService.UpdateProduct|UpdateProduct}
@@ -1705,7 +1706,7 @@ export class ProductServiceClient {
    *   not it exists, a PERMISSION_DENIED error is returned.
    * @param {number[]} request.localInventories
    *   Required. A list of inventory information at difference places. Each place
-   *   is identified by its place ID. At most 1000 inventories are allowed per
+   *   is identified by its place ID. At most 3000 inventories are allowed per
    *   request.
    * @param {google.protobuf.FieldMask} request.addMask
    *   Indicates which inventory fields in the provided list of
@@ -1876,7 +1877,7 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2alpha.ProductService.GetProduct|GetProduct} or
    * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ListProducts}.
    *
-   * Store inventory information can only be removed using this method.
+   * Local inventory information can only be removed using this method.
    * {@link google.cloud.retail.v2alpha.ProductService.CreateProduct|CreateProduct}
    * and
    * {@link google.cloud.retail.v2alpha.ProductService.UpdateProduct|UpdateProduct}
@@ -1898,7 +1899,7 @@ export class ProductServiceClient {
    *   not it exists, a PERMISSION_DENIED error is returned.
    * @param {string[]} request.placeIds
    *   Required. A list of place IDs to have their inventory deleted.
-   *   At most 1000 place IDs are allowed per request.
+   *   At most 3000 place IDs are allowed per request.
    * @param {google.protobuf.Timestamp} request.removeTime
    *   The time when the inventory deletions are issued. Used to prevent
    *   out-of-order updates and deletions on local inventory fields. If not

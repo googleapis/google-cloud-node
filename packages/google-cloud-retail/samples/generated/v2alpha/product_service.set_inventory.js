@@ -54,8 +54,8 @@ function main(inventory) {
   // const inventory = {}
   /**
    *  Indicates which inventory fields in the provided
-   *  Product google.cloud.retail.v2alpha.Product  to update. If not set or set
-   *  with empty paths, all inventory fields will be updated.
+   *  Product google.cloud.retail.v2alpha.Product  to update.
+   *  At least one field must be provided.
    *  If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
    *  is returned and the entire update will be ignored.
    */

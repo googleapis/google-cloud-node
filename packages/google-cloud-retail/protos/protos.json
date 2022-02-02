@@ -2470,6 +2470,14 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 3
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -2512,6 +2520,213 @@
                         "merchantCenterLinkingConfig": {
                           "type": "MerchantCenterLinkingConfig",
                           "id": 6
+                        }
+                      }
+                    },
+                    "SolutionType": {
+                      "values": {
+                        "SOLUTION_TYPE_UNSPECIFIED": 0,
+                        "SOLUTION_TYPE_RECOMMENDATION": 1,
+                        "SOLUTION_TYPE_SEARCH": 2
+                      }
+                    },
+                    "Condition": {
+                      "fields": {
+                        "queryTerms": {
+                          "rule": "repeated",
+                          "type": "QueryTerm",
+                          "id": 1
+                        },
+                        "activeTimeRange": {
+                          "rule": "repeated",
+                          "type": "TimeRange",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "QueryTerm": {
+                          "fields": {
+                            "value": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "fullMatch": {
+                              "type": "bool",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "TimeRange": {
+                          "fields": {
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "endTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Rule": {
+                      "oneofs": {
+                        "action": {
+                          "oneof": [
+                            "boostAction",
+                            "redirectAction",
+                            "onewaySynonymsAction",
+                            "doNotAssociateAction",
+                            "replacementAction",
+                            "ignoreAction",
+                            "filterAction",
+                            "twowaySynonymsAction"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "boostAction": {
+                          "type": "BoostAction",
+                          "id": 2
+                        },
+                        "redirectAction": {
+                          "type": "RedirectAction",
+                          "id": 3
+                        },
+                        "onewaySynonymsAction": {
+                          "type": "OnewaySynonymsAction",
+                          "id": 6
+                        },
+                        "doNotAssociateAction": {
+                          "type": "DoNotAssociateAction",
+                          "id": 7
+                        },
+                        "replacementAction": {
+                          "type": "ReplacementAction",
+                          "id": 8
+                        },
+                        "ignoreAction": {
+                          "type": "IgnoreAction",
+                          "id": 9
+                        },
+                        "filterAction": {
+                          "type": "FilterAction",
+                          "id": 10
+                        },
+                        "twowaySynonymsAction": {
+                          "type": "TwowaySynonymsAction",
+                          "id": 11
+                        },
+                        "condition": {
+                          "type": "Condition",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "BoostAction": {
+                          "fields": {
+                            "boost": {
+                              "type": "float",
+                              "id": 1
+                            },
+                            "productsFilter": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "FilterAction": {
+                          "fields": {
+                            "filter": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "RedirectAction": {
+                          "fields": {
+                            "redirectUri": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "TwowaySynonymsAction": {
+                          "fields": {
+                            "synonyms": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "OnewaySynonymsAction": {
+                          "fields": {
+                            "queryTerms": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "synonyms": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
+                            },
+                            "onewayTerms": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DoNotAssociateAction": {
+                          "fields": {
+                            "queryTerms": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "doNotAssociateTerms": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "terms": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ReplacementAction": {
+                          "fields": {
+                            "queryTerms": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "replacementTerm": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "term": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "IgnoreAction": {
+                          "fields": {
+                            "ignoreTerms": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
@@ -4823,6 +5038,11 @@
                         "redirectUri": {
                           "type": "string",
                           "id": 10
+                        },
+                        "appliedControls": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12
                         }
                       },
                       "nested": {

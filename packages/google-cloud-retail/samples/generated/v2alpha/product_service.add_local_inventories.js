@@ -31,7 +31,7 @@ function main(product, localInventories) {
   // const product = 'abc123'
   /**
    *  Required. A list of inventory information at difference places. Each place
-   *  is identified by its place ID. At most 1000 inventories are allowed per
+   *  is identified by its place ID. At most 3000 inventories are allowed per
    *  request.
    */
   // const localInventories = 1234
