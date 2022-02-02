@@ -8,17 +8,53 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "csharp_namespace": "Google.Cloud.SecurityCenter.V1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/securitycenter/v1;securitycenter",
                     "java_multiple_files": true,
+                    "java_outer_classname": "ResourceProto",
                     "java_package": "com.google.cloud.securitycenter.v1",
+                    "csharp_namespace": "Google.Cloud.SecurityCenter.V1",
                     "php_namespace": "Google\\Cloud\\SecurityCenter\\V1",
                     "ruby_package": "Google::Cloud::SecurityCenter::V1",
-                    "java_outer_classname": "ResourceProto",
                     "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
                     "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
                   },
                   "nested": {
+                    "Access": {
+                      "fields": {
+                        "principalEmail": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "callerIp": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "callerIpGeo": {
+                          "type": "Geolocation",
+                          "id": 3
+                        },
+                        "userAgentFamily": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "serviceName": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "methodName": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "Geolocation": {
+                      "fields": {
+                        "regionCode": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "Asset": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/Asset",
@@ -262,6 +298,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "access": {
+                          "type": "Access",
+                          "id": 26
                         },
                         "muteInitiator": {
                           "type": "string",
@@ -2076,6 +2116,15 @@
                             }
                           },
                           "nested": {
+                            "StateChange": {
+                              "values": {
+                                "UNUSED": 0,
+                                "CHANGED": 1,
+                                "UNCHANGED": 2,
+                                "ADDED": 3,
+                                "REMOVED": 4
+                              }
+                            },
                             "Resource": {
                               "fields": {
                                 "name": {
@@ -2111,15 +2160,6 @@
                                   "type": "string",
                                   "id": 8
                                 }
-                              }
-                            },
-                            "StateChange": {
-                              "values": {
-                                "UNUSED": 0,
-                                "CHANGED": 1,
-                                "UNCHANGED": 2,
-                                "ADDED": 3,
-                                "REMOVED": 4
                               }
                             }
                           }
@@ -5042,91 +5082,14 @@
         },
         "api": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
             "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -5209,6 +5172,83 @@
                   "id": 1
                 },
                 "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
                   "type": "string",
                   "id": 2
                 }

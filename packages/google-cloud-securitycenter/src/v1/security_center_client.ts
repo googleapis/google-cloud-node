@@ -2575,7 +2575,8 @@ export class SecurityCenterClient {
    * @param {google.protobuf.Timestamp} request.startTime
    *   The time at which the updated SecurityMarks take effect.
    *   If not set uses current server time.  Updates will be applied to the
-   *   SecurityMarks that are active immediately preceding this time.
+   *   SecurityMarks that are active immediately preceding this time. Must be
+   *   smaller or equal to the server time.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
