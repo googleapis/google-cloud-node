@@ -1701,7 +1701,7 @@
     "repo": "googleapis/nodejs-datastream",
     "distribution_name": "@google-cloud/datastream",
     "api_id": "datastream.googleapis.com",
-    "default_version": "v1alpha1",
+    "default_version": "v1",
     "requires_billing": true,
     "api_shortname": "datastream",
     "library_type": "GAPIC_AUTO",
@@ -1723,7 +1723,7 @@
     "api_shortname": "clouddeploy",
     "library_type": "GAPIC_AUTO",
     "codeowner_team": "@googleapis/aap-dpes",
-    "support_documentation": "https://cloud.google.com/deploy/"
+    "support_documentation": "https://cloud.google.com/deploy/docs/getting-support"
   },
   {
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/domains/latest",
@@ -1824,6 +1824,21 @@
     "issue_tracker": "https://github.com/googleapis/nodejs-iam-credentials/issues",
     "api_shortname": "iamcredentials",
     "library_type": "GAPIC_AUTO"
+  },
+  {
+    "name": "ids",
+    "name_pretty": "IDS",
+    "product_documentation": "https://cloud.google.com/intrusion-detection-system/",
+    "client_documentation": "https://cloud.google.com/intrusion-detection-system",
+    "issue_tracker": "https://github.com/googleapis/nodejs-ids/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-ids",
+    "distribution_name": "@google-cloud/ids",
+    "api_id": "ids.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/intrusion-detection-system/"
   },
   {
     "name": "lifesciences",
@@ -1999,12 +2014,14 @@
     "product_documentation": "https://cloud.google.com/debugger",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/debug-agent/latest",
     "issue_tracker": "https://issuetracker.google.com/savedsearches/559771",
-    "release_level": "beta",
+    "release_level": "preview",
     "language": "nodejs",
     "repo": "googleapis/cloud-debug-nodejs",
     "distribution_name": "@google-cloud/debug-agent",
     "api_id": "clouddebugger.googleapis.com",
     "codeowner_team": "@googleapis/api-debug",
+    "api_shortname": "clouddebugger",
+    "library_type": "AGENT",
     "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
