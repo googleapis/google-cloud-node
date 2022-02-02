@@ -409,6 +409,10 @@ export class MetricsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.getJobMetrics(request, options, callback);
   }
@@ -510,6 +514,10 @@ export class MetricsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.getJobExecutionDetails(
       request,
@@ -558,6 +566,10 @@ export class MetricsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     const defaultCallSettings = this._defaults['getJobExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -611,6 +623,10 @@ export class MetricsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     const defaultCallSettings = this._defaults['getJobExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -724,6 +740,10 @@ export class MetricsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.getStageExecutionDetails(
       request,
@@ -778,6 +798,10 @@ export class MetricsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     const defaultCallSettings = this._defaults['getStageExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -837,6 +861,10 @@ export class MetricsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     const defaultCallSettings = this._defaults['getStageExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

@@ -7611,6 +7611,34 @@
                     return PipelineDescription;
                 })();
     
+                /**
+                 * KindType enum.
+                 * @name google.dataflow.v1beta3.KindType
+                 * @enum {number}
+                 * @property {number} UNKNOWN_KIND=0 UNKNOWN_KIND value
+                 * @property {number} PAR_DO_KIND=1 PAR_DO_KIND value
+                 * @property {number} GROUP_BY_KEY_KIND=2 GROUP_BY_KEY_KIND value
+                 * @property {number} FLATTEN_KIND=3 FLATTEN_KIND value
+                 * @property {number} READ_KIND=4 READ_KIND value
+                 * @property {number} WRITE_KIND=5 WRITE_KIND value
+                 * @property {number} CONSTANT_KIND=6 CONSTANT_KIND value
+                 * @property {number} SINGLETON_KIND=7 SINGLETON_KIND value
+                 * @property {number} SHUFFLE_KIND=8 SHUFFLE_KIND value
+                 */
+                v1beta3.KindType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "UNKNOWN_KIND"] = 0;
+                    values[valuesById[1] = "PAR_DO_KIND"] = 1;
+                    values[valuesById[2] = "GROUP_BY_KEY_KIND"] = 2;
+                    values[valuesById[3] = "FLATTEN_KIND"] = 3;
+                    values[valuesById[4] = "READ_KIND"] = 4;
+                    values[valuesById[5] = "WRITE_KIND"] = 5;
+                    values[valuesById[6] = "CONSTANT_KIND"] = 6;
+                    values[valuesById[7] = "SINGLETON_KIND"] = 7;
+                    values[valuesById[8] = "SHUFFLE_KIND"] = 8;
+                    return values;
+                })();
+    
                 v1beta3.TransformSummary = (function() {
     
                     /**
@@ -8010,34 +8038,6 @@
                     };
     
                     return TransformSummary;
-                })();
-    
-                /**
-                 * KindType enum.
-                 * @name google.dataflow.v1beta3.KindType
-                 * @enum {number}
-                 * @property {number} UNKNOWN_KIND=0 UNKNOWN_KIND value
-                 * @property {number} PAR_DO_KIND=1 PAR_DO_KIND value
-                 * @property {number} GROUP_BY_KEY_KIND=2 GROUP_BY_KEY_KIND value
-                 * @property {number} FLATTEN_KIND=3 FLATTEN_KIND value
-                 * @property {number} READ_KIND=4 READ_KIND value
-                 * @property {number} WRITE_KIND=5 WRITE_KIND value
-                 * @property {number} CONSTANT_KIND=6 CONSTANT_KIND value
-                 * @property {number} SINGLETON_KIND=7 SINGLETON_KIND value
-                 * @property {number} SHUFFLE_KIND=8 SHUFFLE_KIND value
-                 */
-                v1beta3.KindType = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "UNKNOWN_KIND"] = 0;
-                    values[valuesById[1] = "PAR_DO_KIND"] = 1;
-                    values[valuesById[2] = "GROUP_BY_KEY_KIND"] = 2;
-                    values[valuesById[3] = "FLATTEN_KIND"] = 3;
-                    values[valuesById[4] = "READ_KIND"] = 4;
-                    values[valuesById[5] = "WRITE_KIND"] = 5;
-                    values[valuesById[6] = "CONSTANT_KIND"] = 6;
-                    values[valuesById[7] = "SINGLETON_KIND"] = 7;
-                    values[valuesById[8] = "SHUFFLE_KIND"] = 8;
-                    return values;
                 })();
     
                 v1beta3.ExecutionStageSummary = (function() {
@@ -10008,6 +10008,42 @@
                     return Step;
                 })();
     
+                /**
+                 * JobState enum.
+                 * @name google.dataflow.v1beta3.JobState
+                 * @enum {number}
+                 * @property {number} JOB_STATE_UNKNOWN=0 JOB_STATE_UNKNOWN value
+                 * @property {number} JOB_STATE_STOPPED=1 JOB_STATE_STOPPED value
+                 * @property {number} JOB_STATE_RUNNING=2 JOB_STATE_RUNNING value
+                 * @property {number} JOB_STATE_DONE=3 JOB_STATE_DONE value
+                 * @property {number} JOB_STATE_FAILED=4 JOB_STATE_FAILED value
+                 * @property {number} JOB_STATE_CANCELLED=5 JOB_STATE_CANCELLED value
+                 * @property {number} JOB_STATE_UPDATED=6 JOB_STATE_UPDATED value
+                 * @property {number} JOB_STATE_DRAINING=7 JOB_STATE_DRAINING value
+                 * @property {number} JOB_STATE_DRAINED=8 JOB_STATE_DRAINED value
+                 * @property {number} JOB_STATE_PENDING=9 JOB_STATE_PENDING value
+                 * @property {number} JOB_STATE_CANCELLING=10 JOB_STATE_CANCELLING value
+                 * @property {number} JOB_STATE_QUEUED=11 JOB_STATE_QUEUED value
+                 * @property {number} JOB_STATE_RESOURCE_CLEANING_UP=12 JOB_STATE_RESOURCE_CLEANING_UP value
+                 */
+                v1beta3.JobState = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "JOB_STATE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "JOB_STATE_STOPPED"] = 1;
+                    values[valuesById[2] = "JOB_STATE_RUNNING"] = 2;
+                    values[valuesById[3] = "JOB_STATE_DONE"] = 3;
+                    values[valuesById[4] = "JOB_STATE_FAILED"] = 4;
+                    values[valuesById[5] = "JOB_STATE_CANCELLED"] = 5;
+                    values[valuesById[6] = "JOB_STATE_UPDATED"] = 6;
+                    values[valuesById[7] = "JOB_STATE_DRAINING"] = 7;
+                    values[valuesById[8] = "JOB_STATE_DRAINED"] = 8;
+                    values[valuesById[9] = "JOB_STATE_PENDING"] = 9;
+                    values[valuesById[10] = "JOB_STATE_CANCELLING"] = 10;
+                    values[valuesById[11] = "JOB_STATE_QUEUED"] = 11;
+                    values[valuesById[12] = "JOB_STATE_RESOURCE_CLEANING_UP"] = 12;
+                    return values;
+                })();
+    
                 v1beta3.JobExecutionInfo = (function() {
     
                     /**
@@ -10441,38 +10477,20 @@
                 })();
     
                 /**
-                 * JobState enum.
-                 * @name google.dataflow.v1beta3.JobState
+                 * JobView enum.
+                 * @name google.dataflow.v1beta3.JobView
                  * @enum {number}
-                 * @property {number} JOB_STATE_UNKNOWN=0 JOB_STATE_UNKNOWN value
-                 * @property {number} JOB_STATE_STOPPED=1 JOB_STATE_STOPPED value
-                 * @property {number} JOB_STATE_RUNNING=2 JOB_STATE_RUNNING value
-                 * @property {number} JOB_STATE_DONE=3 JOB_STATE_DONE value
-                 * @property {number} JOB_STATE_FAILED=4 JOB_STATE_FAILED value
-                 * @property {number} JOB_STATE_CANCELLED=5 JOB_STATE_CANCELLED value
-                 * @property {number} JOB_STATE_UPDATED=6 JOB_STATE_UPDATED value
-                 * @property {number} JOB_STATE_DRAINING=7 JOB_STATE_DRAINING value
-                 * @property {number} JOB_STATE_DRAINED=8 JOB_STATE_DRAINED value
-                 * @property {number} JOB_STATE_PENDING=9 JOB_STATE_PENDING value
-                 * @property {number} JOB_STATE_CANCELLING=10 JOB_STATE_CANCELLING value
-                 * @property {number} JOB_STATE_QUEUED=11 JOB_STATE_QUEUED value
-                 * @property {number} JOB_STATE_RESOURCE_CLEANING_UP=12 JOB_STATE_RESOURCE_CLEANING_UP value
+                 * @property {number} JOB_VIEW_UNKNOWN=0 JOB_VIEW_UNKNOWN value
+                 * @property {number} JOB_VIEW_SUMMARY=1 JOB_VIEW_SUMMARY value
+                 * @property {number} JOB_VIEW_ALL=2 JOB_VIEW_ALL value
+                 * @property {number} JOB_VIEW_DESCRIPTION=3 JOB_VIEW_DESCRIPTION value
                  */
-                v1beta3.JobState = (function() {
+                v1beta3.JobView = (function() {
                     var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "JOB_STATE_UNKNOWN"] = 0;
-                    values[valuesById[1] = "JOB_STATE_STOPPED"] = 1;
-                    values[valuesById[2] = "JOB_STATE_RUNNING"] = 2;
-                    values[valuesById[3] = "JOB_STATE_DONE"] = 3;
-                    values[valuesById[4] = "JOB_STATE_FAILED"] = 4;
-                    values[valuesById[5] = "JOB_STATE_CANCELLED"] = 5;
-                    values[valuesById[6] = "JOB_STATE_UPDATED"] = 6;
-                    values[valuesById[7] = "JOB_STATE_DRAINING"] = 7;
-                    values[valuesById[8] = "JOB_STATE_DRAINED"] = 8;
-                    values[valuesById[9] = "JOB_STATE_PENDING"] = 9;
-                    values[valuesById[10] = "JOB_STATE_CANCELLING"] = 10;
-                    values[valuesById[11] = "JOB_STATE_QUEUED"] = 11;
-                    values[valuesById[12] = "JOB_STATE_RESOURCE_CLEANING_UP"] = 12;
+                    values[valuesById[0] = "JOB_VIEW_UNKNOWN"] = 0;
+                    values[valuesById[1] = "JOB_VIEW_SUMMARY"] = 1;
+                    values[valuesById[2] = "JOB_VIEW_ALL"] = 2;
+                    values[valuesById[3] = "JOB_VIEW_DESCRIPTION"] = 3;
                     return values;
                 })();
     
@@ -11055,24 +11073,6 @@
                     };
     
                     return GetJobRequest;
-                })();
-    
-                /**
-                 * JobView enum.
-                 * @name google.dataflow.v1beta3.JobView
-                 * @enum {number}
-                 * @property {number} JOB_VIEW_UNKNOWN=0 JOB_VIEW_UNKNOWN value
-                 * @property {number} JOB_VIEW_SUMMARY=1 JOB_VIEW_SUMMARY value
-                 * @property {number} JOB_VIEW_ALL=2 JOB_VIEW_ALL value
-                 * @property {number} JOB_VIEW_DESCRIPTION=3 JOB_VIEW_DESCRIPTION value
-                 */
-                v1beta3.JobView = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "JOB_VIEW_UNKNOWN"] = 0;
-                    values[valuesById[1] = "JOB_VIEW_SUMMARY"] = 1;
-                    values[valuesById[2] = "JOB_VIEW_ALL"] = 2;
-                    values[valuesById[3] = "JOB_VIEW_DESCRIPTION"] = 3;
-                    return values;
                 })();
     
                 v1beta3.UpdateJobRequest = (function() {
@@ -12969,6 +12969,28 @@
                     return SnapshotsV1Beta3;
                 })();
     
+                /**
+                 * SnapshotState enum.
+                 * @name google.dataflow.v1beta3.SnapshotState
+                 * @enum {number}
+                 * @property {number} UNKNOWN_SNAPSHOT_STATE=0 UNKNOWN_SNAPSHOT_STATE value
+                 * @property {number} PENDING=1 PENDING value
+                 * @property {number} RUNNING=2 RUNNING value
+                 * @property {number} READY=3 READY value
+                 * @property {number} FAILED=4 FAILED value
+                 * @property {number} DELETED=5 DELETED value
+                 */
+                v1beta3.SnapshotState = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "UNKNOWN_SNAPSHOT_STATE"] = 0;
+                    values[valuesById[1] = "PENDING"] = 1;
+                    values[valuesById[2] = "RUNNING"] = 2;
+                    values[valuesById[3] = "READY"] = 3;
+                    values[valuesById[4] = "FAILED"] = 4;
+                    values[valuesById[5] = "DELETED"] = 5;
+                    return values;
+                })();
+    
                 v1beta3.PubsubSnapshotMetadata = (function() {
     
                     /**
@@ -13204,28 +13226,6 @@
                     };
     
                     return PubsubSnapshotMetadata;
-                })();
-    
-                /**
-                 * SnapshotState enum.
-                 * @name google.dataflow.v1beta3.SnapshotState
-                 * @enum {number}
-                 * @property {number} UNKNOWN_SNAPSHOT_STATE=0 UNKNOWN_SNAPSHOT_STATE value
-                 * @property {number} PENDING=1 PENDING value
-                 * @property {number} RUNNING=2 RUNNING value
-                 * @property {number} READY=3 READY value
-                 * @property {number} FAILED=4 FAILED value
-                 * @property {number} DELETED=5 DELETED value
-                 */
-                v1beta3.SnapshotState = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "UNKNOWN_SNAPSHOT_STATE"] = 0;
-                    values[valuesById[1] = "PENDING"] = 1;
-                    values[valuesById[2] = "RUNNING"] = 2;
-                    values[valuesById[3] = "READY"] = 3;
-                    values[valuesById[4] = "FAILED"] = 4;
-                    values[valuesById[5] = "DELETED"] = 5;
-                    return values;
                 })();
     
                 v1beta3.Snapshot = (function() {
@@ -15117,6 +15117,28 @@
                     return JobMessage;
                 })();
     
+                /**
+                 * JobMessageImportance enum.
+                 * @name google.dataflow.v1beta3.JobMessageImportance
+                 * @enum {number}
+                 * @property {number} JOB_MESSAGE_IMPORTANCE_UNKNOWN=0 JOB_MESSAGE_IMPORTANCE_UNKNOWN value
+                 * @property {number} JOB_MESSAGE_DEBUG=1 JOB_MESSAGE_DEBUG value
+                 * @property {number} JOB_MESSAGE_DETAILED=2 JOB_MESSAGE_DETAILED value
+                 * @property {number} JOB_MESSAGE_BASIC=5 JOB_MESSAGE_BASIC value
+                 * @property {number} JOB_MESSAGE_WARNING=3 JOB_MESSAGE_WARNING value
+                 * @property {number} JOB_MESSAGE_ERROR=4 JOB_MESSAGE_ERROR value
+                 */
+                v1beta3.JobMessageImportance = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "JOB_MESSAGE_IMPORTANCE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "JOB_MESSAGE_DEBUG"] = 1;
+                    values[valuesById[2] = "JOB_MESSAGE_DETAILED"] = 2;
+                    values[valuesById[5] = "JOB_MESSAGE_BASIC"] = 5;
+                    values[valuesById[3] = "JOB_MESSAGE_WARNING"] = 3;
+                    values[valuesById[4] = "JOB_MESSAGE_ERROR"] = 4;
+                    return values;
+                })();
+    
                 v1beta3.StructuredMessage = (function() {
     
                     /**
@@ -15584,28 +15606,6 @@
                     })();
     
                     return StructuredMessage;
-                })();
-    
-                /**
-                 * JobMessageImportance enum.
-                 * @name google.dataflow.v1beta3.JobMessageImportance
-                 * @enum {number}
-                 * @property {number} JOB_MESSAGE_IMPORTANCE_UNKNOWN=0 JOB_MESSAGE_IMPORTANCE_UNKNOWN value
-                 * @property {number} JOB_MESSAGE_DEBUG=1 JOB_MESSAGE_DEBUG value
-                 * @property {number} JOB_MESSAGE_DETAILED=2 JOB_MESSAGE_DETAILED value
-                 * @property {number} JOB_MESSAGE_BASIC=5 JOB_MESSAGE_BASIC value
-                 * @property {number} JOB_MESSAGE_WARNING=3 JOB_MESSAGE_WARNING value
-                 * @property {number} JOB_MESSAGE_ERROR=4 JOB_MESSAGE_ERROR value
-                 */
-                v1beta3.JobMessageImportance = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "JOB_MESSAGE_IMPORTANCE_UNKNOWN"] = 0;
-                    values[valuesById[1] = "JOB_MESSAGE_DEBUG"] = 1;
-                    values[valuesById[2] = "JOB_MESSAGE_DETAILED"] = 2;
-                    values[valuesById[5] = "JOB_MESSAGE_BASIC"] = 5;
-                    values[valuesById[3] = "JOB_MESSAGE_WARNING"] = 3;
-                    values[valuesById[4] = "JOB_MESSAGE_ERROR"] = 4;
-                    return values;
                 })();
     
                 v1beta3.AutoscalingEvent = (function() {
@@ -18724,6 +18724,28 @@
                     return ProgressTimeseries;
                 })();
     
+                /**
+                 * ExecutionState enum.
+                 * @name google.dataflow.v1beta3.ExecutionState
+                 * @enum {number}
+                 * @property {number} EXECUTION_STATE_UNKNOWN=0 EXECUTION_STATE_UNKNOWN value
+                 * @property {number} EXECUTION_STATE_NOT_STARTED=1 EXECUTION_STATE_NOT_STARTED value
+                 * @property {number} EXECUTION_STATE_RUNNING=2 EXECUTION_STATE_RUNNING value
+                 * @property {number} EXECUTION_STATE_SUCCEEDED=3 EXECUTION_STATE_SUCCEEDED value
+                 * @property {number} EXECUTION_STATE_FAILED=4 EXECUTION_STATE_FAILED value
+                 * @property {number} EXECUTION_STATE_CANCELLED=5 EXECUTION_STATE_CANCELLED value
+                 */
+                v1beta3.ExecutionState = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "EXECUTION_STATE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "EXECUTION_STATE_NOT_STARTED"] = 1;
+                    values[valuesById[2] = "EXECUTION_STATE_RUNNING"] = 2;
+                    values[valuesById[3] = "EXECUTION_STATE_SUCCEEDED"] = 3;
+                    values[valuesById[4] = "EXECUTION_STATE_FAILED"] = 4;
+                    values[valuesById[5] = "EXECUTION_STATE_CANCELLED"] = 5;
+                    return values;
+                })();
+    
                 v1beta3.StageSummary = (function() {
     
                     /**
@@ -20063,28 +20085,6 @@
                     };
     
                     return WorkItemDetails;
-                })();
-    
-                /**
-                 * ExecutionState enum.
-                 * @name google.dataflow.v1beta3.ExecutionState
-                 * @enum {number}
-                 * @property {number} EXECUTION_STATE_UNKNOWN=0 EXECUTION_STATE_UNKNOWN value
-                 * @property {number} EXECUTION_STATE_NOT_STARTED=1 EXECUTION_STATE_NOT_STARTED value
-                 * @property {number} EXECUTION_STATE_RUNNING=2 EXECUTION_STATE_RUNNING value
-                 * @property {number} EXECUTION_STATE_SUCCEEDED=3 EXECUTION_STATE_SUCCEEDED value
-                 * @property {number} EXECUTION_STATE_FAILED=4 EXECUTION_STATE_FAILED value
-                 * @property {number} EXECUTION_STATE_CANCELLED=5 EXECUTION_STATE_CANCELLED value
-                 */
-                v1beta3.ExecutionState = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "EXECUTION_STATE_UNKNOWN"] = 0;
-                    values[valuesById[1] = "EXECUTION_STATE_NOT_STARTED"] = 1;
-                    values[valuesById[2] = "EXECUTION_STATE_RUNNING"] = 2;
-                    values[valuesById[3] = "EXECUTION_STATE_SUCCEEDED"] = 3;
-                    values[valuesById[4] = "EXECUTION_STATE_FAILED"] = 4;
-                    values[valuesById[5] = "EXECUTION_STATE_CANCELLED"] = 5;
-                    return values;
                 })();
     
                 v1beta3.WorkerDetails = (function() {
@@ -25248,6 +25248,11 @@
                      * @property {google.dataflow.v1beta3.FlexResourceSchedulingGoal|null} [flexrsGoal] FlexTemplateRuntimeEnvironment flexrsGoal
                      * @property {string|null} [stagingLocation] FlexTemplateRuntimeEnvironment stagingLocation
                      * @property {string|null} [sdkContainerImage] FlexTemplateRuntimeEnvironment sdkContainerImage
+                     * @property {number|null} [diskSizeGb] FlexTemplateRuntimeEnvironment diskSizeGb
+                     * @property {google.dataflow.v1beta3.AutoscalingAlgorithm|null} [autoscalingAlgorithm] FlexTemplateRuntimeEnvironment autoscalingAlgorithm
+                     * @property {boolean|null} [dumpHeapOnOom] FlexTemplateRuntimeEnvironment dumpHeapOnOom
+                     * @property {string|null} [saveHeapDumpsToGcsPath] FlexTemplateRuntimeEnvironment saveHeapDumpsToGcsPath
+                     * @property {string|null} [launcherMachineType] FlexTemplateRuntimeEnvironment launcherMachineType
                      */
     
                     /**
@@ -25412,6 +25417,46 @@
                     FlexTemplateRuntimeEnvironment.prototype.sdkContainerImage = "";
     
                     /**
+                     * FlexTemplateRuntimeEnvironment diskSizeGb.
+                     * @member {number} diskSizeGb
+                     * @memberof google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment
+                     * @instance
+                     */
+                    FlexTemplateRuntimeEnvironment.prototype.diskSizeGb = 0;
+    
+                    /**
+                     * FlexTemplateRuntimeEnvironment autoscalingAlgorithm.
+                     * @member {google.dataflow.v1beta3.AutoscalingAlgorithm} autoscalingAlgorithm
+                     * @memberof google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment
+                     * @instance
+                     */
+                    FlexTemplateRuntimeEnvironment.prototype.autoscalingAlgorithm = 0;
+    
+                    /**
+                     * FlexTemplateRuntimeEnvironment dumpHeapOnOom.
+                     * @member {boolean} dumpHeapOnOom
+                     * @memberof google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment
+                     * @instance
+                     */
+                    FlexTemplateRuntimeEnvironment.prototype.dumpHeapOnOom = false;
+    
+                    /**
+                     * FlexTemplateRuntimeEnvironment saveHeapDumpsToGcsPath.
+                     * @member {string} saveHeapDumpsToGcsPath
+                     * @memberof google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment
+                     * @instance
+                     */
+                    FlexTemplateRuntimeEnvironment.prototype.saveHeapDumpsToGcsPath = "";
+    
+                    /**
+                     * FlexTemplateRuntimeEnvironment launcherMachineType.
+                     * @member {string} launcherMachineType
+                     * @memberof google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment
+                     * @instance
+                     */
+                    FlexTemplateRuntimeEnvironment.prototype.launcherMachineType = "";
+    
+                    /**
                      * Creates a new FlexTemplateRuntimeEnvironment instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment
@@ -25473,6 +25518,16 @@
                             writer.uint32(/* id 17, wireType 2 =*/138).string(message.stagingLocation);
                         if (message.sdkContainerImage != null && Object.hasOwnProperty.call(message, "sdkContainerImage"))
                             writer.uint32(/* id 18, wireType 2 =*/146).string(message.sdkContainerImage);
+                        if (message.diskSizeGb != null && Object.hasOwnProperty.call(message, "diskSizeGb"))
+                            writer.uint32(/* id 20, wireType 0 =*/160).int32(message.diskSizeGb);
+                        if (message.autoscalingAlgorithm != null && Object.hasOwnProperty.call(message, "autoscalingAlgorithm"))
+                            writer.uint32(/* id 21, wireType 0 =*/168).int32(message.autoscalingAlgorithm);
+                        if (message.dumpHeapOnOom != null && Object.hasOwnProperty.call(message, "dumpHeapOnOom"))
+                            writer.uint32(/* id 22, wireType 0 =*/176).bool(message.dumpHeapOnOom);
+                        if (message.saveHeapDumpsToGcsPath != null && Object.hasOwnProperty.call(message, "saveHeapDumpsToGcsPath"))
+                            writer.uint32(/* id 23, wireType 2 =*/186).string(message.saveHeapDumpsToGcsPath);
+                        if (message.launcherMachineType != null && Object.hasOwnProperty.call(message, "launcherMachineType"))
+                            writer.uint32(/* id 24, wireType 2 =*/194).string(message.launcherMachineType);
                         return writer;
                     };
     
@@ -25581,6 +25636,21 @@
                                 break;
                             case 18:
                                 message.sdkContainerImage = reader.string();
+                                break;
+                            case 20:
+                                message.diskSizeGb = reader.int32();
+                                break;
+                            case 21:
+                                message.autoscalingAlgorithm = reader.int32();
+                                break;
+                            case 22:
+                                message.dumpHeapOnOom = reader.bool();
+                                break;
+                            case 23:
+                                message.saveHeapDumpsToGcsPath = reader.string();
+                                break;
+                            case 24:
+                                message.launcherMachineType = reader.string();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -25692,6 +25762,27 @@
                         if (message.sdkContainerImage != null && message.hasOwnProperty("sdkContainerImage"))
                             if (!$util.isString(message.sdkContainerImage))
                                 return "sdkContainerImage: string expected";
+                        if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
+                            if (!$util.isInteger(message.diskSizeGb))
+                                return "diskSizeGb: integer expected";
+                        if (message.autoscalingAlgorithm != null && message.hasOwnProperty("autoscalingAlgorithm"))
+                            switch (message.autoscalingAlgorithm) {
+                            default:
+                                return "autoscalingAlgorithm: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.dumpHeapOnOom != null && message.hasOwnProperty("dumpHeapOnOom"))
+                            if (typeof message.dumpHeapOnOom !== "boolean")
+                                return "dumpHeapOnOom: boolean expected";
+                        if (message.saveHeapDumpsToGcsPath != null && message.hasOwnProperty("saveHeapDumpsToGcsPath"))
+                            if (!$util.isString(message.saveHeapDumpsToGcsPath))
+                                return "saveHeapDumpsToGcsPath: string expected";
+                        if (message.launcherMachineType != null && message.hasOwnProperty("launcherMachineType"))
+                            if (!$util.isString(message.launcherMachineType))
+                                return "launcherMachineType: string expected";
                         return null;
                     };
     
@@ -25777,6 +25868,28 @@
                             message.stagingLocation = String(object.stagingLocation);
                         if (object.sdkContainerImage != null)
                             message.sdkContainerImage = String(object.sdkContainerImage);
+                        if (object.diskSizeGb != null)
+                            message.diskSizeGb = object.diskSizeGb | 0;
+                        switch (object.autoscalingAlgorithm) {
+                        case "AUTOSCALING_ALGORITHM_UNKNOWN":
+                        case 0:
+                            message.autoscalingAlgorithm = 0;
+                            break;
+                        case "AUTOSCALING_ALGORITHM_NONE":
+                        case 1:
+                            message.autoscalingAlgorithm = 1;
+                            break;
+                        case "AUTOSCALING_ALGORITHM_BASIC":
+                        case 2:
+                            message.autoscalingAlgorithm = 2;
+                            break;
+                        }
+                        if (object.dumpHeapOnOom != null)
+                            message.dumpHeapOnOom = Boolean(object.dumpHeapOnOom);
+                        if (object.saveHeapDumpsToGcsPath != null)
+                            message.saveHeapDumpsToGcsPath = String(object.saveHeapDumpsToGcsPath);
+                        if (object.launcherMachineType != null)
+                            message.launcherMachineType = String(object.launcherMachineType);
                         return message;
                     };
     
@@ -25814,6 +25927,11 @@
                             object.flexrsGoal = options.enums === String ? "FLEXRS_UNSPECIFIED" : 0;
                             object.stagingLocation = "";
                             object.sdkContainerImage = "";
+                            object.diskSizeGb = 0;
+                            object.autoscalingAlgorithm = options.enums === String ? "AUTOSCALING_ALGORITHM_UNKNOWN" : 0;
+                            object.dumpHeapOnOom = false;
+                            object.saveHeapDumpsToGcsPath = "";
+                            object.launcherMachineType = "";
                         }
                         if (message.numWorkers != null && message.hasOwnProperty("numWorkers"))
                             object.numWorkers = message.numWorkers;
@@ -25858,6 +25976,16 @@
                             object.stagingLocation = message.stagingLocation;
                         if (message.sdkContainerImage != null && message.hasOwnProperty("sdkContainerImage"))
                             object.sdkContainerImage = message.sdkContainerImage;
+                        if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
+                            object.diskSizeGb = message.diskSizeGb;
+                        if (message.autoscalingAlgorithm != null && message.hasOwnProperty("autoscalingAlgorithm"))
+                            object.autoscalingAlgorithm = options.enums === String ? $root.google.dataflow.v1beta3.AutoscalingAlgorithm[message.autoscalingAlgorithm] : message.autoscalingAlgorithm;
+                        if (message.dumpHeapOnOom != null && message.hasOwnProperty("dumpHeapOnOom"))
+                            object.dumpHeapOnOom = message.dumpHeapOnOom;
+                        if (message.saveHeapDumpsToGcsPath != null && message.hasOwnProperty("saveHeapDumpsToGcsPath"))
+                            object.saveHeapDumpsToGcsPath = message.saveHeapDumpsToGcsPath;
+                        if (message.launcherMachineType != null && message.hasOwnProperty("launcherMachineType"))
+                            object.launcherMachineType = message.launcherMachineType;
                         return object;
                     };
     
@@ -27149,6 +27277,36 @@
                     return ParameterMetadata;
                 })();
     
+                /**
+                 * ParameterType enum.
+                 * @name google.dataflow.v1beta3.ParameterType
+                 * @enum {number}
+                 * @property {number} DEFAULT=0 DEFAULT value
+                 * @property {number} TEXT=1 TEXT value
+                 * @property {number} GCS_READ_BUCKET=2 GCS_READ_BUCKET value
+                 * @property {number} GCS_WRITE_BUCKET=3 GCS_WRITE_BUCKET value
+                 * @property {number} GCS_READ_FILE=4 GCS_READ_FILE value
+                 * @property {number} GCS_WRITE_FILE=5 GCS_WRITE_FILE value
+                 * @property {number} GCS_READ_FOLDER=6 GCS_READ_FOLDER value
+                 * @property {number} GCS_WRITE_FOLDER=7 GCS_WRITE_FOLDER value
+                 * @property {number} PUBSUB_TOPIC=8 PUBSUB_TOPIC value
+                 * @property {number} PUBSUB_SUBSCRIPTION=9 PUBSUB_SUBSCRIPTION value
+                 */
+                v1beta3.ParameterType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "DEFAULT"] = 0;
+                    values[valuesById[1] = "TEXT"] = 1;
+                    values[valuesById[2] = "GCS_READ_BUCKET"] = 2;
+                    values[valuesById[3] = "GCS_WRITE_BUCKET"] = 3;
+                    values[valuesById[4] = "GCS_READ_FILE"] = 4;
+                    values[valuesById[5] = "GCS_WRITE_FILE"] = 5;
+                    values[valuesById[6] = "GCS_READ_FOLDER"] = 6;
+                    values[valuesById[7] = "GCS_WRITE_FOLDER"] = 7;
+                    values[valuesById[8] = "PUBSUB_TOPIC"] = 8;
+                    values[valuesById[9] = "PUBSUB_SUBSCRIPTION"] = 9;
+                    return values;
+                })();
+    
                 v1beta3.TemplateMetadata = (function() {
     
                     /**
@@ -27645,36 +27803,6 @@
                     })();
     
                     return SDKInfo;
-                })();
-    
-                /**
-                 * ParameterType enum.
-                 * @name google.dataflow.v1beta3.ParameterType
-                 * @enum {number}
-                 * @property {number} DEFAULT=0 DEFAULT value
-                 * @property {number} TEXT=1 TEXT value
-                 * @property {number} GCS_READ_BUCKET=2 GCS_READ_BUCKET value
-                 * @property {number} GCS_WRITE_BUCKET=3 GCS_WRITE_BUCKET value
-                 * @property {number} GCS_READ_FILE=4 GCS_READ_FILE value
-                 * @property {number} GCS_WRITE_FILE=5 GCS_WRITE_FILE value
-                 * @property {number} GCS_READ_FOLDER=6 GCS_READ_FOLDER value
-                 * @property {number} GCS_WRITE_FOLDER=7 GCS_WRITE_FOLDER value
-                 * @property {number} PUBSUB_TOPIC=8 PUBSUB_TOPIC value
-                 * @property {number} PUBSUB_SUBSCRIPTION=9 PUBSUB_SUBSCRIPTION value
-                 */
-                v1beta3.ParameterType = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "DEFAULT"] = 0;
-                    values[valuesById[1] = "TEXT"] = 1;
-                    values[valuesById[2] = "GCS_READ_BUCKET"] = 2;
-                    values[valuesById[3] = "GCS_WRITE_BUCKET"] = 3;
-                    values[valuesById[4] = "GCS_READ_FILE"] = 4;
-                    values[valuesById[5] = "GCS_WRITE_FILE"] = 5;
-                    values[valuesById[6] = "GCS_READ_FOLDER"] = 6;
-                    values[valuesById[7] = "GCS_WRITE_FOLDER"] = 7;
-                    values[valuesById[8] = "PUBSUB_TOPIC"] = 8;
-                    values[valuesById[9] = "PUBSUB_SUBSCRIPTION"] = 9;
-                    return values;
                 })();
     
                 v1beta3.RuntimeMetadata = (function() {

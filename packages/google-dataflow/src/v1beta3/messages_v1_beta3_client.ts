@@ -423,6 +423,10 @@ export class MessagesV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.listJobMessages(request, options, callback);
   }
@@ -475,6 +479,10 @@ export class MessagesV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     const defaultCallSettings = this._defaults['listJobMessages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -536,6 +544,10 @@ export class MessagesV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     const defaultCallSettings = this._defaults['listJobMessages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

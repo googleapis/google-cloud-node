@@ -2723,6 +2723,19 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** KindType enum. */
+            enum KindType {
+                UNKNOWN_KIND = 0,
+                PAR_DO_KIND = 1,
+                GROUP_BY_KEY_KIND = 2,
+                FLATTEN_KIND = 3,
+                READ_KIND = 4,
+                WRITE_KIND = 5,
+                CONSTANT_KIND = 6,
+                SINGLETON_KIND = 7,
+                SHUFFLE_KIND = 8
+            }
+
             /** Properties of a TransformSummary. */
             interface ITransformSummary {
 
@@ -2841,19 +2854,6 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
-            }
-
-            /** KindType enum. */
-            enum KindType {
-                UNKNOWN_KIND = 0,
-                PAR_DO_KIND = 1,
-                GROUP_BY_KEY_KIND = 2,
-                FLATTEN_KIND = 3,
-                READ_KIND = 4,
-                WRITE_KIND = 5,
-                CONSTANT_KIND = 6,
-                SINGLETON_KIND = 7,
-                SHUFFLE_KIND = 8
             }
 
             /** Properties of an ExecutionStageSummary. */
@@ -3564,6 +3564,23 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** JobState enum. */
+            enum JobState {
+                JOB_STATE_UNKNOWN = 0,
+                JOB_STATE_STOPPED = 1,
+                JOB_STATE_RUNNING = 2,
+                JOB_STATE_DONE = 3,
+                JOB_STATE_FAILED = 4,
+                JOB_STATE_CANCELLED = 5,
+                JOB_STATE_UPDATED = 6,
+                JOB_STATE_DRAINING = 7,
+                JOB_STATE_DRAINED = 8,
+                JOB_STATE_PENDING = 9,
+                JOB_STATE_CANCELLING = 10,
+                JOB_STATE_QUEUED = 11,
+                JOB_STATE_RESOURCE_CLEANING_UP = 12
+            }
+
             /** Properties of a JobExecutionInfo. */
             interface IJobExecutionInfo {
 
@@ -3744,21 +3761,12 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
-            /** JobState enum. */
-            enum JobState {
-                JOB_STATE_UNKNOWN = 0,
-                JOB_STATE_STOPPED = 1,
-                JOB_STATE_RUNNING = 2,
-                JOB_STATE_DONE = 3,
-                JOB_STATE_FAILED = 4,
-                JOB_STATE_CANCELLED = 5,
-                JOB_STATE_UPDATED = 6,
-                JOB_STATE_DRAINING = 7,
-                JOB_STATE_DRAINED = 8,
-                JOB_STATE_PENDING = 9,
-                JOB_STATE_CANCELLING = 10,
-                JOB_STATE_QUEUED = 11,
-                JOB_STATE_RESOURCE_CLEANING_UP = 12
+            /** JobView enum. */
+            enum JobView {
+                JOB_VIEW_UNKNOWN = 0,
+                JOB_VIEW_SUMMARY = 1,
+                JOB_VIEW_ALL = 2,
+                JOB_VIEW_DESCRIPTION = 3
             }
 
             /** Properties of a CreateJobRequest. */
@@ -3981,14 +3989,6 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
-            }
-
-            /** JobView enum. */
-            enum JobView {
-                JOB_VIEW_UNKNOWN = 0,
-                JOB_VIEW_SUMMARY = 1,
-                JOB_VIEW_ALL = 2,
-                JOB_VIEW_DESCRIPTION = 3
             }
 
             /** Properties of an UpdateJobRequest. */
@@ -4809,6 +4809,16 @@ export namespace google {
                 type ListSnapshotsCallback = (error: (Error|null), response?: google.dataflow.v1beta3.ListSnapshotsResponse) => void;
             }
 
+            /** SnapshotState enum. */
+            enum SnapshotState {
+                UNKNOWN_SNAPSHOT_STATE = 0,
+                PENDING = 1,
+                RUNNING = 2,
+                READY = 3,
+                FAILED = 4,
+                DELETED = 5
+            }
+
             /** Properties of a PubsubSnapshotMetadata. */
             interface IPubsubSnapshotMetadata {
 
@@ -4909,16 +4919,6 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
-            }
-
-            /** SnapshotState enum. */
-            enum SnapshotState {
-                UNKNOWN_SNAPSHOT_STATE = 0,
-                PENDING = 1,
-                RUNNING = 2,
-                READY = 3,
-                FAILED = 4,
-                DELETED = 5
             }
 
             /** Properties of a Snapshot. */
@@ -5698,6 +5698,16 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** JobMessageImportance enum. */
+            enum JobMessageImportance {
+                JOB_MESSAGE_IMPORTANCE_UNKNOWN = 0,
+                JOB_MESSAGE_DEBUG = 1,
+                JOB_MESSAGE_DETAILED = 2,
+                JOB_MESSAGE_BASIC = 5,
+                JOB_MESSAGE_WARNING = 3,
+                JOB_MESSAGE_ERROR = 4
+            }
+
             /** Properties of a StructuredMessage. */
             interface IStructuredMessage {
 
@@ -5897,16 +5907,6 @@ export namespace google {
                      */
                     public toJSON(): { [k: string]: any };
                 }
-            }
-
-            /** JobMessageImportance enum. */
-            enum JobMessageImportance {
-                JOB_MESSAGE_IMPORTANCE_UNKNOWN = 0,
-                JOB_MESSAGE_DEBUG = 1,
-                JOB_MESSAGE_DETAILED = 2,
-                JOB_MESSAGE_BASIC = 5,
-                JOB_MESSAGE_WARNING = 3,
-                JOB_MESSAGE_ERROR = 4
             }
 
             /** Properties of an AutoscalingEvent. */
@@ -7127,6 +7127,16 @@ export namespace google {
                 }
             }
 
+            /** ExecutionState enum. */
+            enum ExecutionState {
+                EXECUTION_STATE_UNKNOWN = 0,
+                EXECUTION_STATE_NOT_STARTED = 1,
+                EXECUTION_STATE_RUNNING = 2,
+                EXECUTION_STATE_SUCCEEDED = 3,
+                EXECUTION_STATE_FAILED = 4,
+                EXECUTION_STATE_CANCELLED = 5
+            }
+
             /** Properties of a StageSummary. */
             interface IStageSummary {
 
@@ -7599,16 +7609,6 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
-            }
-
-            /** ExecutionState enum. */
-            enum ExecutionState {
-                EXECUTION_STATE_UNKNOWN = 0,
-                EXECUTION_STATE_NOT_STARTED = 1,
-                EXECUTION_STATE_RUNNING = 2,
-                EXECUTION_STATE_SUCCEEDED = 3,
-                EXECUTION_STATE_FAILED = 4,
-                EXECUTION_STATE_CANCELLED = 5
             }
 
             /** Properties of a WorkerDetails. */
@@ -9761,6 +9761,21 @@ export namespace google {
 
                 /** FlexTemplateRuntimeEnvironment sdkContainerImage */
                 sdkContainerImage?: (string|null);
+
+                /** FlexTemplateRuntimeEnvironment diskSizeGb */
+                diskSizeGb?: (number|null);
+
+                /** FlexTemplateRuntimeEnvironment autoscalingAlgorithm */
+                autoscalingAlgorithm?: (google.dataflow.v1beta3.AutoscalingAlgorithm|keyof typeof google.dataflow.v1beta3.AutoscalingAlgorithm|null);
+
+                /** FlexTemplateRuntimeEnvironment dumpHeapOnOom */
+                dumpHeapOnOom?: (boolean|null);
+
+                /** FlexTemplateRuntimeEnvironment saveHeapDumpsToGcsPath */
+                saveHeapDumpsToGcsPath?: (string|null);
+
+                /** FlexTemplateRuntimeEnvironment launcherMachineType */
+                launcherMachineType?: (string|null);
             }
 
             /** Represents a FlexTemplateRuntimeEnvironment. */
@@ -9825,6 +9840,21 @@ export namespace google {
 
                 /** FlexTemplateRuntimeEnvironment sdkContainerImage. */
                 public sdkContainerImage: string;
+
+                /** FlexTemplateRuntimeEnvironment diskSizeGb. */
+                public diskSizeGb: number;
+
+                /** FlexTemplateRuntimeEnvironment autoscalingAlgorithm. */
+                public autoscalingAlgorithm: (google.dataflow.v1beta3.AutoscalingAlgorithm|keyof typeof google.dataflow.v1beta3.AutoscalingAlgorithm);
+
+                /** FlexTemplateRuntimeEnvironment dumpHeapOnOom. */
+                public dumpHeapOnOom: boolean;
+
+                /** FlexTemplateRuntimeEnvironment saveHeapDumpsToGcsPath. */
+                public saveHeapDumpsToGcsPath: string;
+
+                /** FlexTemplateRuntimeEnvironment launcherMachineType. */
+                public launcherMachineType: string;
 
                 /**
                  * Creates a new FlexTemplateRuntimeEnvironment instance using the specified properties.
@@ -10311,6 +10341,20 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** ParameterType enum. */
+            enum ParameterType {
+                DEFAULT = 0,
+                TEXT = 1,
+                GCS_READ_BUCKET = 2,
+                GCS_WRITE_BUCKET = 3,
+                GCS_READ_FILE = 4,
+                GCS_WRITE_FILE = 5,
+                GCS_READ_FOLDER = 6,
+                GCS_WRITE_FOLDER = 7,
+                PUBSUB_TOPIC = 8,
+                PUBSUB_SUBSCRIPTION = 9
+            }
+
             /** Properties of a TemplateMetadata. */
             interface ITemplateMetadata {
 
@@ -10517,20 +10561,6 @@ export namespace google {
                     JAVA = 1,
                     PYTHON = 2
                 }
-            }
-
-            /** ParameterType enum. */
-            enum ParameterType {
-                DEFAULT = 0,
-                TEXT = 1,
-                GCS_READ_BUCKET = 2,
-                GCS_WRITE_BUCKET = 3,
-                GCS_READ_FILE = 4,
-                GCS_WRITE_FILE = 5,
-                GCS_READ_FOLDER = 6,
-                GCS_WRITE_FOLDER = 7,
-                PUBSUB_TOPIC = 8,
-                PUBSUB_SUBSCRIPTION = 9
             }
 
             /** Properties of a RuntimeMetadata. */

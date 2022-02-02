@@ -142,7 +142,15 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Snapshot()
       );
@@ -165,7 +173,15 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Snapshot()
       );
@@ -204,7 +220,15 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.getSnapshot = stubSimpleCall(
         undefined,
@@ -229,7 +253,15 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotResponse()
       );
@@ -252,7 +284,15 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotResponse()
       );
@@ -291,7 +331,15 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSnapshot = stubSimpleCall(
         undefined,
@@ -316,7 +364,15 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsResponse()
       );
@@ -339,7 +395,15 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsResponse()
       );
@@ -378,7 +442,15 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.listSnapshots = stubSimpleCall(
         undefined,

@@ -205,7 +205,15 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.JobMetrics()
       );
@@ -228,7 +236,15 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.JobMetrics()
       );
@@ -267,7 +283,15 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.getJobMetrics = stubSimpleCall(
         undefined,
@@ -292,7 +316,15 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.StageSummary()
@@ -324,7 +356,15 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.StageSummary()
@@ -371,7 +411,15 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.getJobExecutionDetails = stubSimpleCall(
         undefined,
@@ -397,6 +445,8 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.StageSummary()
@@ -436,6 +486,13 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.getJobExecutionDetails, request)
       );
+      assert.strictEqual(
+        (
+          client.descriptors.page.getJobExecutionDetails
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
 
     it('invokes getJobExecutionDetailsStream with error', async () => {
@@ -447,6 +504,8 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.getJobExecutionDetails.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -475,6 +534,13 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.getJobExecutionDetails, request)
       );
+      assert.strictEqual(
+        (
+          client.descriptors.page.getJobExecutionDetails
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
 
     it('uses async iteration with getJobExecutionDetails without error', async () => {
@@ -486,6 +552,8 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.StageSummary()
@@ -512,6 +580,13 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ).getCall(0).args[1],
         request
       );
+      assert.strictEqual(
+        (
+          client.descriptors.page.getJobExecutionDetails
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
 
     it('uses async iteration with getJobExecutionDetails with error', async () => {
@@ -523,6 +598,8 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.getJobExecutionDetails.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -540,6 +617,13 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ).getCall(0).args[1],
         request
       );
+      assert.strictEqual(
+        (
+          client.descriptors.page.getJobExecutionDetails
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
   });
 
@@ -553,7 +637,15 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.WorkerDetails()
@@ -585,7 +677,15 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.WorkerDetails()
@@ -632,7 +732,15 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.getStageExecutionDetails = stubSimpleCall(
         undefined,
@@ -658,6 +766,8 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.WorkerDetails()
@@ -697,6 +807,13 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.getStageExecutionDetails, request)
       );
+      assert.strictEqual(
+        (
+          client.descriptors.page.getStageExecutionDetails
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
 
     it('invokes getStageExecutionDetailsStream with error', async () => {
@@ -708,6 +825,8 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.getStageExecutionDetails.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -736,6 +855,13 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.getStageExecutionDetails, request)
       );
+      assert.strictEqual(
+        (
+          client.descriptors.page.getStageExecutionDetails
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
 
     it('uses async iteration with getStageExecutionDetails without error', async () => {
@@ -747,6 +873,8 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.WorkerDetails()
@@ -773,6 +901,13 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ).getCall(0).args[1],
         request
       );
+      assert.strictEqual(
+        (
+          client.descriptors.page.getStageExecutionDetails
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
 
     it('uses async iteration with getStageExecutionDetails with error', async () => {
@@ -784,6 +919,8 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
       client.descriptors.page.getStageExecutionDetails.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -800,6 +937,13 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.getStageExecutionDetails
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
       );
     });
   });

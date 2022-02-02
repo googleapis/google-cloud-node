@@ -142,7 +142,15 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Job()
       );
@@ -166,7 +174,15 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Job()
       );
@@ -205,7 +221,15 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.createJobFromTemplate = stubSimpleCall(
         undefined,
@@ -233,7 +257,15 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateResponse()
       );
@@ -256,7 +288,15 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateResponse()
       );
@@ -295,7 +335,15 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.launchTemplate = stubSimpleCall(
         undefined,
@@ -320,7 +368,15 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateResponse()
       );
@@ -343,7 +399,15 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateResponse()
       );
@@ -382,7 +446,15 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.getTemplate = stubSimpleCall(
         undefined,

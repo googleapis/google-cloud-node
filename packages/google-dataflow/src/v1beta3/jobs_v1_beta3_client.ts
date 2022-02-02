@@ -412,6 +412,10 @@ export class JobsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.createJob(request, options, callback);
   }
@@ -505,6 +509,10 @@ export class JobsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.getJob(request, options, callback);
   }
@@ -599,6 +607,10 @@ export class JobsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.updateJob(request, options, callback);
   }
@@ -769,6 +781,10 @@ export class JobsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.snapshotJob(request, options, callback);
   }
@@ -875,6 +891,10 @@ export class JobsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.listJobs(request, options, callback);
   }
@@ -921,6 +941,10 @@ export class JobsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -976,6 +1000,10 @@ export class JobsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1080,6 +1108,10 @@ export class JobsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.aggregatedListJobs(request, options, callback);
   }
@@ -1126,6 +1158,10 @@ export class JobsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     const defaultCallSettings = this._defaults['aggregatedListJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1181,6 +1217,10 @@ export class JobsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     const defaultCallSettings = this._defaults['aggregatedListJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

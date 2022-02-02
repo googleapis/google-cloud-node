@@ -370,6 +370,10 @@ export class SnapshotsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.getSnapshot(request, options, callback);
   }
@@ -455,6 +459,10 @@ export class SnapshotsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteSnapshot(request, options, callback);
   }
@@ -540,6 +548,10 @@ export class SnapshotsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.listSnapshots(request, options, callback);
   }

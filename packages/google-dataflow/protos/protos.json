@@ -421,23 +421,97 @@
                   "methods": {
                     "CreateJob": {
                       "requestType": "CreateJobRequest",
-                      "responseType": "Job"
+                      "responseType": "Job",
+                      "options": {
+                        "(google.api.http).post": "/v1b3/projects/{project_id}/jobs",
+                        "(google.api.http).body": "job",
+                        "(google.api.http).additional_bindings.post": "/v1b3/projects/{project_id}/locations/{location}/jobs",
+                        "(google.api.http).additional_bindings.body": "job"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1b3/projects/{project_id}/jobs",
+                            "body": "job",
+                            "additional_bindings": {
+                              "post": "/v1b3/projects/{project_id}/locations/{location}/jobs",
+                              "body": "job"
+                            }
+                          }
+                        }
+                      ]
                     },
                     "GetJob": {
                       "requestType": "GetJobRequest",
-                      "responseType": "Job"
+                      "responseType": "Job",
+                      "options": {
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/jobs/{job_id}",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1b3/projects/{project_id}/jobs/{job_id}",
+                            "additional_bindings": {
+                              "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}"
+                            }
+                          }
+                        }
+                      ]
                     },
                     "UpdateJob": {
                       "requestType": "UpdateJobRequest",
-                      "responseType": "Job"
+                      "responseType": "Job",
+                      "options": {
+                        "(google.api.http).put": "/v1b3/projects/{project_id}/jobs/{job_id}",
+                        "(google.api.http).body": "job",
+                        "(google.api.http).additional_bindings.put": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}",
+                        "(google.api.http).additional_bindings.body": "job"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "put": "/v1b3/projects/{project_id}/jobs/{job_id}",
+                            "body": "job",
+                            "additional_bindings": {
+                              "put": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}",
+                              "body": "job"
+                            }
+                          }
+                        }
+                      ]
                     },
                     "ListJobs": {
                       "requestType": "ListJobsRequest",
-                      "responseType": "ListJobsResponse"
+                      "responseType": "ListJobsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/jobs",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/jobs"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1b3/projects/{project_id}/jobs",
+                            "additional_bindings": {
+                              "get": "/v1b3/projects/{project_id}/locations/{location}/jobs"
+                            }
+                          }
+                        }
+                      ]
                     },
                     "AggregatedListJobs": {
                       "requestType": "ListJobsRequest",
-                      "responseType": "ListJobsResponse"
+                      "responseType": "ListJobsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/jobs:aggregated"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1b3/projects/{project_id}/jobs:aggregated"
+                          }
+                        }
+                      ]
                     },
                     "CheckActiveJobs": {
                       "requestType": "CheckActiveJobsRequest",
@@ -445,7 +519,25 @@
                     },
                     "SnapshotJob": {
                       "requestType": "SnapshotJobRequest",
-                      "responseType": "Snapshot"
+                      "responseType": "Snapshot",
+                      "options": {
+                        "(google.api.http).post": "/v1b3/projects/{project_id}/jobs/{job_id}:snapshot",
+                        "(google.api.http).body": "*",
+                        "(google.api.http).additional_bindings.post": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}:snapshot",
+                        "(google.api.http).additional_bindings.body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1b3/projects/{project_id}/jobs/{job_id}:snapshot",
+                            "body": "*",
+                            "additional_bindings": {
+                              "post": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}:snapshot",
+                              "body": "*"
+                            }
+                          }
+                        }
+                      ]
                     }
                   }
                 },
@@ -742,6 +834,19 @@
                     }
                   }
                 },
+                "KindType": {
+                  "values": {
+                    "UNKNOWN_KIND": 0,
+                    "PAR_DO_KIND": 1,
+                    "GROUP_BY_KEY_KIND": 2,
+                    "FLATTEN_KIND": 3,
+                    "READ_KIND": 4,
+                    "WRITE_KIND": 5,
+                    "CONSTANT_KIND": 6,
+                    "SINGLETON_KIND": 7,
+                    "SHUFFLE_KIND": 8
+                  }
+                },
                 "TransformSummary": {
                   "fields": {
                     "kind": {
@@ -771,19 +876,6 @@
                       "type": "string",
                       "id": 6
                     }
-                  }
-                },
-                "KindType": {
-                  "values": {
-                    "UNKNOWN_KIND": 0,
-                    "PAR_DO_KIND": 1,
-                    "GROUP_BY_KEY_KIND": 2,
-                    "FLATTEN_KIND": 3,
-                    "READ_KIND": 4,
-                    "WRITE_KIND": 5,
-                    "CONSTANT_KIND": 6,
-                    "SINGLETON_KIND": 7,
-                    "SHUFFLE_KIND": 8
                   }
                 },
                 "ExecutionStageSummary": {
@@ -962,6 +1054,23 @@
                     }
                   }
                 },
+                "JobState": {
+                  "values": {
+                    "JOB_STATE_UNKNOWN": 0,
+                    "JOB_STATE_STOPPED": 1,
+                    "JOB_STATE_RUNNING": 2,
+                    "JOB_STATE_DONE": 3,
+                    "JOB_STATE_FAILED": 4,
+                    "JOB_STATE_CANCELLED": 5,
+                    "JOB_STATE_UPDATED": 6,
+                    "JOB_STATE_DRAINING": 7,
+                    "JOB_STATE_DRAINED": 8,
+                    "JOB_STATE_PENDING": 9,
+                    "JOB_STATE_CANCELLING": 10,
+                    "JOB_STATE_QUEUED": 11,
+                    "JOB_STATE_RESOURCE_CLEANING_UP": 12
+                  }
+                },
                 "JobExecutionInfo": {
                   "fields": {
                     "stages": {
@@ -980,21 +1089,12 @@
                     }
                   }
                 },
-                "JobState": {
+                "JobView": {
                   "values": {
-                    "JOB_STATE_UNKNOWN": 0,
-                    "JOB_STATE_STOPPED": 1,
-                    "JOB_STATE_RUNNING": 2,
-                    "JOB_STATE_DONE": 3,
-                    "JOB_STATE_FAILED": 4,
-                    "JOB_STATE_CANCELLED": 5,
-                    "JOB_STATE_UPDATED": 6,
-                    "JOB_STATE_DRAINING": 7,
-                    "JOB_STATE_DRAINED": 8,
-                    "JOB_STATE_PENDING": 9,
-                    "JOB_STATE_CANCELLING": 10,
-                    "JOB_STATE_QUEUED": 11,
-                    "JOB_STATE_RESOURCE_CLEANING_UP": 12
+                    "JOB_VIEW_UNKNOWN": 0,
+                    "JOB_VIEW_SUMMARY": 1,
+                    "JOB_VIEW_ALL": 2,
+                    "JOB_VIEW_DESCRIPTION": 3
                   }
                 },
                 "CreateJobRequest": {
@@ -1039,14 +1139,6 @@
                       "type": "string",
                       "id": 4
                     }
-                  }
-                },
-                "JobView": {
-                  "values": {
-                    "JOB_VIEW_UNKNOWN": 0,
-                    "JOB_VIEW_SUMMARY": 1,
-                    "JOB_VIEW_ALL": 2,
-                    "JOB_VIEW_DESCRIPTION": 3
                   }
                 },
                 "UpdateJobRequest": {
@@ -1188,16 +1280,73 @@
                   "methods": {
                     "GetSnapshot": {
                       "requestType": "GetSnapshotRequest",
-                      "responseType": "Snapshot"
+                      "responseType": "Snapshot",
+                      "options": {
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/snapshots/{snapshot_id}",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/snapshots/{snapshot_id}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1b3/projects/{project_id}/snapshots/{snapshot_id}",
+                            "additional_bindings": {
+                              "get": "/v1b3/projects/{project_id}/locations/{location}/snapshots/{snapshot_id}"
+                            }
+                          }
+                        }
+                      ]
                     },
                     "DeleteSnapshot": {
                       "requestType": "DeleteSnapshotRequest",
-                      "responseType": "DeleteSnapshotResponse"
+                      "responseType": "DeleteSnapshotResponse",
+                      "options": {
+                        "(google.api.http).delete": "/v1b3/projects/{project_id}/snapshots",
+                        "(google.api.http).additional_bindings.delete": "/v1b3/projects/{project_id}/locations/{location}/snapshots/{snapshot_id}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v1b3/projects/{project_id}/snapshots",
+                            "additional_bindings": {
+                              "delete": "/v1b3/projects/{project_id}/locations/{location}/snapshots/{snapshot_id}"
+                            }
+                          }
+                        }
+                      ]
                     },
                     "ListSnapshots": {
                       "requestType": "ListSnapshotsRequest",
-                      "responseType": "ListSnapshotsResponse"
+                      "responseType": "ListSnapshotsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/snapshots",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/snapshots"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1b3/projects/{project_id}/snapshots",
+                            "additional_bindings": [
+                              {
+                                "get": "/v1b3/projects/{project_id}/locations/{location}/snapshots"
+                              },
+                              {
+                                "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/snapshots"
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     }
+                  }
+                },
+                "SnapshotState": {
+                  "values": {
+                    "UNKNOWN_SNAPSHOT_STATE": 0,
+                    "PENDING": 1,
+                    "RUNNING": 2,
+                    "READY": 3,
+                    "FAILED": 4,
+                    "DELETED": 5
                   }
                 },
                 "PubsubSnapshotMetadata": {
@@ -1214,16 +1363,6 @@
                       "type": "google.protobuf.Timestamp",
                       "id": 3
                     }
-                  }
-                },
-                "SnapshotState": {
-                  "values": {
-                    "UNKNOWN_SNAPSHOT_STATE": 0,
-                    "PENDING": 1,
-                    "RUNNING": 2,
-                    "READY": 3,
-                    "FAILED": 4,
-                    "DELETED": 5
                   }
                 },
                 "Snapshot": {
@@ -1339,7 +1478,21 @@
                   "methods": {
                     "ListJobMessages": {
                       "requestType": "ListJobMessagesRequest",
-                      "responseType": "ListJobMessagesResponse"
+                      "responseType": "ListJobMessagesResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/jobs/{job_id}/messages",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/messages"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1b3/projects/{project_id}/jobs/{job_id}/messages",
+                            "additional_bindings": {
+                              "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/messages"
+                            }
+                          }
+                        }
+                      ]
                     }
                   }
                 },
@@ -1361,6 +1514,16 @@
                       "type": "JobMessageImportance",
                       "id": 4
                     }
+                  }
+                },
+                "JobMessageImportance": {
+                  "values": {
+                    "JOB_MESSAGE_IMPORTANCE_UNKNOWN": 0,
+                    "JOB_MESSAGE_DEBUG": 1,
+                    "JOB_MESSAGE_DETAILED": 2,
+                    "JOB_MESSAGE_BASIC": 5,
+                    "JOB_MESSAGE_WARNING": 3,
+                    "JOB_MESSAGE_ERROR": 4
                   }
                 },
                 "StructuredMessage": {
@@ -1392,16 +1555,6 @@
                         }
                       }
                     }
-                  }
-                },
-                "JobMessageImportance": {
-                  "values": {
-                    "JOB_MESSAGE_IMPORTANCE_UNKNOWN": 0,
-                    "JOB_MESSAGE_DEBUG": 1,
-                    "JOB_MESSAGE_DETAILED": 2,
-                    "JOB_MESSAGE_BASIC": 5,
-                    "JOB_MESSAGE_WARNING": 3,
-                    "JOB_MESSAGE_ERROR": 4
                   }
                 },
                 "AutoscalingEvent": {
@@ -1505,15 +1658,49 @@
                   "methods": {
                     "GetJobMetrics": {
                       "requestType": "GetJobMetricsRequest",
-                      "responseType": "JobMetrics"
+                      "responseType": "JobMetrics",
+                      "options": {
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/jobs/{job_id}/metrics",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/metrics"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1b3/projects/{project_id}/jobs/{job_id}/metrics",
+                            "additional_bindings": {
+                              "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/metrics"
+                            }
+                          }
+                        }
+                      ]
                     },
                     "GetJobExecutionDetails": {
                       "requestType": "GetJobExecutionDetailsRequest",
-                      "responseType": "JobExecutionDetails"
+                      "responseType": "JobExecutionDetails",
+                      "options": {
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/executionDetails"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/executionDetails"
+                          }
+                        }
+                      ]
                     },
                     "GetStageExecutionDetails": {
                       "requestType": "GetStageExecutionDetailsRequest",
-                      "responseType": "StageExecutionDetails"
+                      "responseType": "StageExecutionDetails",
+                      "options": {
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/stages/{stage_id}/executionDetails"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/stages/{stage_id}/executionDetails"
+                          }
+                        }
+                      ]
                     }
                   }
                 },
@@ -1666,6 +1853,16 @@
                     }
                   }
                 },
+                "ExecutionState": {
+                  "values": {
+                    "EXECUTION_STATE_UNKNOWN": 0,
+                    "EXECUTION_STATE_NOT_STARTED": 1,
+                    "EXECUTION_STATE_RUNNING": 2,
+                    "EXECUTION_STATE_SUCCEEDED": 3,
+                    "EXECUTION_STATE_FAILED": 4,
+                    "EXECUTION_STATE_CANCELLED": 5
+                  }
+                },
                 "StageSummary": {
                   "fields": {
                     "stageId": {
@@ -1775,16 +1972,6 @@
                       "type": "MetricUpdate",
                       "id": 7
                     }
-                  }
-                },
-                "ExecutionState": {
-                  "values": {
-                    "EXECUTION_STATE_UNKNOWN": 0,
-                    "EXECUTION_STATE_NOT_STARTED": 1,
-                    "EXECUTION_STATE_RUNNING": 2,
-                    "EXECUTION_STATE_SUCCEEDED": 3,
-                    "EXECUTION_STATE_FAILED": 4,
-                    "EXECUTION_STATE_CANCELLED": 5
                   }
                 },
                 "WorkerDetails": {
@@ -2071,15 +2258,65 @@
                   "methods": {
                     "CreateJobFromTemplate": {
                       "requestType": "CreateJobFromTemplateRequest",
-                      "responseType": "Job"
+                      "responseType": "Job",
+                      "options": {
+                        "(google.api.http).post": "/v1b3/projects/{project_id}/templates",
+                        "(google.api.http).body": "*",
+                        "(google.api.http).additional_bindings.post": "/v1b3/projects/{project_id}/locations/{location}/templates",
+                        "(google.api.http).additional_bindings.body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1b3/projects/{project_id}/templates",
+                            "body": "*",
+                            "additional_bindings": {
+                              "post": "/v1b3/projects/{project_id}/locations/{location}/templates",
+                              "body": "*"
+                            }
+                          }
+                        }
+                      ]
                     },
                     "LaunchTemplate": {
                       "requestType": "LaunchTemplateRequest",
-                      "responseType": "LaunchTemplateResponse"
+                      "responseType": "LaunchTemplateResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1b3/projects/{project_id}/templates:launch",
+                        "(google.api.http).body": "launch_parameters",
+                        "(google.api.http).additional_bindings.post": "/v1b3/projects/{project_id}/locations/{location}/templates:launch",
+                        "(google.api.http).additional_bindings.body": "launch_parameters"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1b3/projects/{project_id}/templates:launch",
+                            "body": "launch_parameters",
+                            "additional_bindings": {
+                              "post": "/v1b3/projects/{project_id}/locations/{location}/templates:launch",
+                              "body": "launch_parameters"
+                            }
+                          }
+                        }
+                      ]
                     },
                     "GetTemplate": {
                       "requestType": "GetTemplateRequest",
-                      "responseType": "GetTemplateResponse"
+                      "responseType": "GetTemplateResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/templates:get",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/templates:get"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1b3/projects/{project_id}/templates:get",
+                            "additional_bindings": {
+                              "get": "/v1b3/projects/{project_id}/locations/{location}/templates:get"
+                            }
+                          }
+                        }
+                      ]
                     }
                   }
                 },
@@ -2091,7 +2328,19 @@
                   "methods": {
                     "LaunchFlexTemplate": {
                       "requestType": "LaunchFlexTemplateRequest",
-                      "responseType": "LaunchFlexTemplateResponse"
+                      "responseType": "LaunchFlexTemplateResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1b3/projects/{project_id}/locations/{location}/flexTemplates:launch",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1b3/projects/{project_id}/locations/{location}/flexTemplates:launch",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     }
                   }
                 },
@@ -2245,6 +2494,26 @@
                     "sdkContainerImage": {
                       "type": "string",
                       "id": 18
+                    },
+                    "diskSizeGb": {
+                      "type": "int32",
+                      "id": 20
+                    },
+                    "autoscalingAlgorithm": {
+                      "type": "AutoscalingAlgorithm",
+                      "id": 21
+                    },
+                    "dumpHeapOnOom": {
+                      "type": "bool",
+                      "id": 22
+                    },
+                    "saveHeapDumpsToGcsPath": {
+                      "type": "string",
+                      "id": 23
+                    },
+                    "launcherMachineType": {
+                      "type": "string",
+                      "id": 24
                     }
                   }
                 },
@@ -2372,6 +2641,20 @@
                     }
                   }
                 },
+                "ParameterType": {
+                  "values": {
+                    "DEFAULT": 0,
+                    "TEXT": 1,
+                    "GCS_READ_BUCKET": 2,
+                    "GCS_WRITE_BUCKET": 3,
+                    "GCS_READ_FILE": 4,
+                    "GCS_WRITE_FILE": 5,
+                    "GCS_READ_FOLDER": 6,
+                    "GCS_WRITE_FOLDER": 7,
+                    "PUBSUB_TOPIC": 8,
+                    "PUBSUB_SUBSCRIPTION": 9
+                  }
+                },
                 "TemplateMetadata": {
                   "fields": {
                     "name": {
@@ -2408,20 +2691,6 @@
                         "PYTHON": 2
                       }
                     }
-                  }
-                },
-                "ParameterType": {
-                  "values": {
-                    "DEFAULT": 0,
-                    "TEXT": 1,
-                    "GCS_READ_BUCKET": 2,
-                    "GCS_WRITE_BUCKET": 3,
-                    "GCS_READ_FILE": 4,
-                    "GCS_WRITE_FILE": 5,
-                    "GCS_READ_FOLDER": 6,
-                    "GCS_WRITE_FOLDER": 7,
-                    "PUBSUB_TOPIC": 8,
-                    "PUBSUB_SUBSCRIPTION": 9
                   }
                 },
                 "RuntimeMetadata": {
