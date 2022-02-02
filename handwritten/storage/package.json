@@ -79,7 +79,7 @@
     "@grpc/proto-loader": "^0.6.0",
     "@types/async-retry": "^1.4.3",
     "@types/compressible": "^2.0.0",
-    "@types/concat-stream": "^1.6.0",
+    "@types/concat-stream": "^2.0.0",
     "@types/configstore": "^5.0.0",
     "@types/date-and-time": "^0.13.0",
     "@types/extend": "^3.0.0",
