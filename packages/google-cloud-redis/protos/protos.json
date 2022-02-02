@@ -1285,6 +1285,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "persistenceConfig": {
+                          "type": "PersistenceConfig",
+                          "id": 37,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1327,6 +1334,56 @@
                             "READ_REPLICAS_MODE_UNSPECIFIED": 0,
                             "READ_REPLICAS_DISABLED": 1,
                             "READ_REPLICAS_ENABLED": 2
+                          }
+                        }
+                      }
+                    },
+                    "PersistenceConfig": {
+                      "fields": {
+                        "persistenceMode": {
+                          "type": "PersistenceMode",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "rdbSnapshotPeriod": {
+                          "type": "SnapshotPeriod",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "rdbNextSnapshotTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rdbSnapshotStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PersistenceMode": {
+                          "values": {
+                            "PERSISTENCE_MODE_UNSPECIFIED": 0,
+                            "DISABLED": 1,
+                            "RDB": 2
+                          }
+                        },
+                        "SnapshotPeriod": {
+                          "values": {
+                            "SNAPSHOT_PERIOD_UNSPECIFIED": 0,
+                            "ONE_HOUR": 3,
+                            "SIX_HOURS": 4,
+                            "TWELVE_HOURS": 5,
+                            "TWENTY_FOUR_HOURS": 6
                           }
                         }
                       }

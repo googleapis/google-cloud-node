@@ -2686,6 +2686,9 @@ export namespace google {
 
                     /** Instance readReplicasMode */
                     readReplicasMode?: (google.cloud.redis.v1beta1.Instance.ReadReplicasMode|keyof typeof google.cloud.redis.v1beta1.Instance.ReadReplicasMode|null);
+
+                    /** Instance persistenceConfig */
+                    persistenceConfig?: (google.cloud.redis.v1beta1.IPersistenceConfig|null);
                 }
 
                 /** Represents an Instance. */
@@ -2783,6 +2786,9 @@ export namespace google {
 
                     /** Instance readReplicasMode. */
                     public readReplicasMode: (google.cloud.redis.v1beta1.Instance.ReadReplicasMode|keyof typeof google.cloud.redis.v1beta1.Instance.ReadReplicasMode);
+
+                    /** Instance persistenceConfig. */
+                    public persistenceConfig?: (google.cloud.redis.v1beta1.IPersistenceConfig|null);
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -2896,6 +2902,133 @@ export namespace google {
                         READ_REPLICAS_MODE_UNSPECIFIED = 0,
                         READ_REPLICAS_DISABLED = 1,
                         READ_REPLICAS_ENABLED = 2
+                    }
+                }
+
+                /** Properties of a PersistenceConfig. */
+                interface IPersistenceConfig {
+
+                    /** PersistenceConfig persistenceMode */
+                    persistenceMode?: (google.cloud.redis.v1beta1.PersistenceConfig.PersistenceMode|keyof typeof google.cloud.redis.v1beta1.PersistenceConfig.PersistenceMode|null);
+
+                    /** PersistenceConfig rdbSnapshotPeriod */
+                    rdbSnapshotPeriod?: (google.cloud.redis.v1beta1.PersistenceConfig.SnapshotPeriod|keyof typeof google.cloud.redis.v1beta1.PersistenceConfig.SnapshotPeriod|null);
+
+                    /** PersistenceConfig rdbNextSnapshotTime */
+                    rdbNextSnapshotTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PersistenceConfig rdbSnapshotStartTime */
+                    rdbSnapshotStartTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a PersistenceConfig. */
+                class PersistenceConfig implements IPersistenceConfig {
+
+                    /**
+                     * Constructs a new PersistenceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.redis.v1beta1.IPersistenceConfig);
+
+                    /** PersistenceConfig persistenceMode. */
+                    public persistenceMode: (google.cloud.redis.v1beta1.PersistenceConfig.PersistenceMode|keyof typeof google.cloud.redis.v1beta1.PersistenceConfig.PersistenceMode);
+
+                    /** PersistenceConfig rdbSnapshotPeriod. */
+                    public rdbSnapshotPeriod: (google.cloud.redis.v1beta1.PersistenceConfig.SnapshotPeriod|keyof typeof google.cloud.redis.v1beta1.PersistenceConfig.SnapshotPeriod);
+
+                    /** PersistenceConfig rdbNextSnapshotTime. */
+                    public rdbNextSnapshotTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PersistenceConfig rdbSnapshotStartTime. */
+                    public rdbSnapshotStartTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new PersistenceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PersistenceConfig instance
+                     */
+                    public static create(properties?: google.cloud.redis.v1beta1.IPersistenceConfig): google.cloud.redis.v1beta1.PersistenceConfig;
+
+                    /**
+                     * Encodes the specified PersistenceConfig message. Does not implicitly {@link google.cloud.redis.v1beta1.PersistenceConfig.verify|verify} messages.
+                     * @param message PersistenceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.redis.v1beta1.IPersistenceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PersistenceConfig message, length delimited. Does not implicitly {@link google.cloud.redis.v1beta1.PersistenceConfig.verify|verify} messages.
+                     * @param message PersistenceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.redis.v1beta1.IPersistenceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PersistenceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PersistenceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.v1beta1.PersistenceConfig;
+
+                    /**
+                     * Decodes a PersistenceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PersistenceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.v1beta1.PersistenceConfig;
+
+                    /**
+                     * Verifies a PersistenceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PersistenceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PersistenceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.redis.v1beta1.PersistenceConfig;
+
+                    /**
+                     * Creates a plain object from a PersistenceConfig message. Also converts values to other types if specified.
+                     * @param message PersistenceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.redis.v1beta1.PersistenceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PersistenceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace PersistenceConfig {
+
+                    /** PersistenceMode enum. */
+                    enum PersistenceMode {
+                        PERSISTENCE_MODE_UNSPECIFIED = 0,
+                        DISABLED = 1,
+                        RDB = 2
+                    }
+
+                    /** SnapshotPeriod enum. */
+                    enum SnapshotPeriod {
+                        SNAPSHOT_PERIOD_UNSPECIFIED = 0,
+                        ONE_HOUR = 3,
+                        SIX_HOURS = 4,
+                        TWELVE_HOURS = 5,
+                        TWENTY_FOUR_HOURS = 6
                     }
                 }
 
