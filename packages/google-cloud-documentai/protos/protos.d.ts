@@ -5608,6 +5608,9 @@ export namespace google {
 
                     /** ReviewDocumentOperationMetadata commonMetadata */
                     commonMetadata?: (google.cloud.documentai.v1.ICommonOperationMetadata|null);
+
+                    /** ReviewDocumentOperationMetadata questionId */
+                    questionId?: (string|null);
                 }
 
                 /** Represents a ReviewDocumentOperationMetadata. */
@@ -5621,6 +5624,9 @@ export namespace google {
 
                     /** ReviewDocumentOperationMetadata commonMetadata. */
                     public commonMetadata?: (google.cloud.documentai.v1.ICommonOperationMetadata|null);
+
+                    /** ReviewDocumentOperationMetadata questionId. */
+                    public questionId: string;
 
                     /**
                      * Creates a new ReviewDocumentOperationMetadata instance using the specified properties.
