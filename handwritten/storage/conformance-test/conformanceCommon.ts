@@ -13,21 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {describe, it} from 'mocha';
+import * as jsonToNodeApiMapping from './test-data/retryInvocationMap.json';
+import * as libraryMethods from './libraryMethods';
+import {Bucket, File, HmacKey, Notification, Storage} from '../src/';
 import * as uuid from 'uuid';
 import * as assert from 'assert';
-import * as libraryMethods from './libraryMethods';
-import fetch from 'node-fetch';
-
-import {Bucket, File, HmacKey, Notification, Storage} from '../src/';
-import {
-  getTestBenchDockerImage,
-  runTestBenchDockerImage,
-  stopTestBenchDockerImage,
-} from './test-bench-util';
 import {DecorateRequestOptions} from '@google-cloud/common';
-import * as testFile from './test-data/retryStrategyTestData.json';
-import * as jsonToNodeApiMapping from './test-data/retryInvocationMap.json';
+import fetch from 'node-fetch';
 
 interface RetryCase {
   instructions: String[];
@@ -38,7 +30,7 @@ interface Method {
   resources: String[];
 }
 
-interface RetryTestCase {
+export interface RetryTestCase {
   id: number;
   description: String;
   cases: RetryCase[];
@@ -56,55 +48,19 @@ interface ConformanceTestResult {
 }
 
 type LibraryMethodsModuleType = typeof import('./libraryMethods');
-
-const retryTestCases: RetryTestCase[] = testFile.retryStrategyTests;
 const methodMap: Map<String, String[]> = new Map(
   Object.entries(jsonToNodeApiMapping)
 );
 
 const DURATION_SECONDS = 600; // 10 mins.
-
 const TESTS_PREFIX = `storage.retry.tests.${shortUUID()}.`;
 const TESTBENCH_HOST =
   process.env.STORAGE_EMULATOR_HOST || 'http://localhost:9000/';
-
 const CONF_TEST_PROJECT_ID = 'my-project-id';
-const TIMEOUT_FOR_DOCKER_OPS = 60000;
-const TIME_TO_WAIT_FOR_CONTAINER_READY = 10000;
 const TIMEOUT_FOR_INDIVIDUAL_TEST = 20000;
 const RETRY_MULTIPLIER_FOR_CONFORMANCE_TESTS = 0.01;
 
-describe('retry conformance testing', () => {
-  before(async function () {
-    // Increase the timeout for this before block so that the docker images have time to download and run.
-    this.timeout(TIMEOUT_FOR_DOCKER_OPS);
-    await getTestBenchDockerImage();
-    await runTestBenchDockerImage();
-    // Introduce an artificial wait to make sure the docker container is up and ready to accept connections.
-    await new Promise(resolve =>
-      setTimeout(resolve, TIME_TO_WAIT_FOR_CONTAINER_READY)
-    );
-  });
-
-  after(async function () {
-    // Increase the timeout for this block so that docker has time to stop the container.
-    this.timeout(TIMEOUT_FOR_DOCKER_OPS);
-    await stopTestBenchDockerImage();
-  });
-
-  for (
-    let testCaseIndex = 0;
-    testCaseIndex < retryTestCases.length;
-    testCaseIndex++
-  ) {
-    const testCase: RetryTestCase = retryTestCases[testCaseIndex];
-    describe(`Scenario ${testCase.id}`, () => {
-      executeScenario(testCase);
-    });
-  }
-});
-
-function executeScenario(testCase: RetryTestCase) {
+export function executeScenario(testCase: RetryTestCase) {
   for (
     let instructionNumber = 0;
     instructionNumber < testCase.cases.length;
