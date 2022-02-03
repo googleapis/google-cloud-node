@@ -51,7 +51,7 @@
                               "type": "google.protobuf.Duration",
                               "id": 4,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "IMMUTABLE"
                               }
                             },
                             "keySpec": {
@@ -150,6 +150,23 @@
                             }
                           },
                           "nested": {
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "SELF_SIGNED": 1,
+                                "SUBORDINATE": 2
+                              }
+                            },
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "ENABLED": 1,
+                                "DISABLED": 2,
+                                "STAGED": 3,
+                                "AWAITING_USER_ACTIVATION": 4,
+                                "DELETED": 5
+                              }
+                            },
                             "AccessUrls": {
                               "fields": {
                                 "caCertificateAccessUrl": {
@@ -181,23 +198,6 @@
                                   "type": "SignHashAlgorithm",
                                   "id": 2
                                 }
-                              }
-                            },
-                            "Type": {
-                              "values": {
-                                "TYPE_UNSPECIFIED": 0,
-                                "SELF_SIGNED": 1,
-                                "SUBORDINATE": 2
-                              }
-                            },
-                            "State": {
-                              "values": {
-                                "STATE_UNSPECIFIED": 0,
-                                "ENABLED": 1,
-                                "DISABLED": 2,
-                                "STAGED": 3,
-                                "AWAITING_USER_ACTIVATION": 4,
-                                "DELETED": 5
                               }
                             },
                             "SignHashAlgorithm": {
@@ -259,6 +259,13 @@
                             }
                           },
                           "nested": {
+                            "Tier": {
+                              "values": {
+                                "TIER_UNSPECIFIED": 0,
+                                "ENTERPRISE": 1,
+                                "DEVOPS": 2
+                              }
+                            },
                             "PublishingOptions": {
                               "fields": {
                                 "publishCaCert": {
@@ -403,13 +410,6 @@
                                     }
                                   }
                                 }
-                              }
-                            },
-                            "Tier": {
-                              "values": {
-                                "TIER_UNSPECIFIED": 0,
-                                "ENTERPRISE": 1,
-                                "DEVOPS": 2
                               }
                             }
                           }
@@ -5112,6 +5112,93 @@
             "cc_enable_arenas": true
           },
           "nested": {
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
             "fieldBehavior": {
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
@@ -5202,93 +5289,6 @@
                   "id": 1
                 },
                 "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "http": {
-              "type": "HttpRule",
-              "id": 72295728,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Http": {
-              "fields": {
-                "rules": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 1
-                },
-                "fullyDecodeReservedExpansion": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "HttpRule": {
-              "oneofs": {
-                "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
-                }
-              },
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "get": {
-                  "type": "string",
-                  "id": 2
-                },
-                "put": {
-                  "type": "string",
-                  "id": 3
-                },
-                "post": {
-                  "type": "string",
-                  "id": 4
-                },
-                "delete": {
-                  "type": "string",
-                  "id": 5
-                },
-                "patch": {
-                  "type": "string",
-                  "id": 6
-                },
-                "custom": {
-                  "type": "CustomHttpPattern",
-                  "id": 8
-                },
-                "body": {
-                  "type": "string",
-                  "id": 7
-                },
-                "responseBody": {
-                  "type": "string",
-                  "id": 12
-                },
-                "additionalBindings": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 11
-                }
-              }
-            },
-            "CustomHttpPattern": {
-              "fields": {
-                "kind": {
-                  "type": "string",
-                  "id": 1
-                },
-                "path": {
                   "type": "string",
                   "id": 2
                 }
