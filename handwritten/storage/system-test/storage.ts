@@ -84,6 +84,7 @@ import {
 } from '../src';
 import * as nock from 'nock';
 import {Transform} from 'stream';
+import {gzipSync} from 'zlib';
 
 interface ErrorCallbackFunction {
   (err: Error | null): void;
@@ -131,12 +132,6 @@ describe('storage', () => {
     },
     html: {
       path: path.join(__dirname, '../../system-test/data/long-html-file.html'),
-    },
-    gzip: {
-      path: path.join(
-        __dirname,
-        '../../system-test/data/long-html-file.html.gz'
-      ),
     },
   };
 
@@ -2521,7 +2516,7 @@ describe('storage', () => {
       });
     });
 
-    it('should upload a gzipped file and download it', done => {
+    it('should upload a gzipped file and download it', async () => {
       const options = {
         metadata: {
           contentEncoding: 'gzip',
@@ -2529,33 +2524,29 @@ describe('storage', () => {
         },
       };
 
-      const expectedContents = fs
-        .readFileSync(FILES.html.path, 'utf-8')
-        // eslint-disable-next-line no-control-regex
-        .replace(new RegExp('\r\n', 'g'), '\n');
+      const expectedContents = fs.readFileSync(FILES.html.path, 'utf-8');
 
-      bucket.upload(FILES.gzip.path, options, (err, file) => {
-        assert.ifError(err);
+      // Prepare temporary gzip file for upload
+      tmp.setGracefulCleanup();
+      const {name: tmpGzFilePath} = tmp.fileSync({postfix: '.gz'});
+      fs.writeFileSync(tmpGzFilePath, gzipSync(expectedContents));
 
-        // Sometimes this file is not found immediately; include some
-        // retry to attempt to make the test less flaky.
-        let attempt = 0;
-        const downloadCallback = (err: Error | null, contents: {}) => {
-          // If we got an error, gracefully retry a few times.
-          if (err) {
-            attempt += 1;
-            if (attempt >= 5) {
-              return assert.ifError(err);
-            }
-            return file!.download(downloadCallback);
-          }
-
-          // Ensure the contents match.
-          assert.strictEqual(contents.toString(), expectedContents);
-          file!.delete(done);
-        };
-        file!.download(downloadCallback);
+      const file: File = await new Promise((resolve, reject) => {
+        bucket.upload(tmpGzFilePath, options, (err, file) => {
+          if (err || !file) return reject(err);
+          resolve(file);
+        });
       });
+
+      const contents: Buffer = await new Promise((resolve, reject) => {
+        return file.download((error, content) => {
+          if (error) return reject(error);
+          resolve(content);
+        });
+      });
+
+      assert.strictEqual(contents.toString(), expectedContents);
+      await file.delete();
     });
 
     it('should skip validation if file is served decompressed', async () => {
