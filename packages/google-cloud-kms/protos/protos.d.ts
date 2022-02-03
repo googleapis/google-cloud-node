@@ -26,6 +26,975 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Represents an EkmService */
+                class EkmService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new EkmService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new EkmService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): EkmService;
+
+                    /**
+                     * Calls ListEkmConnections.
+                     * @param request ListEkmConnectionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListEkmConnectionsResponse
+                     */
+                    public listEkmConnections(request: google.cloud.kms.v1.IListEkmConnectionsRequest, callback: google.cloud.kms.v1.EkmService.ListEkmConnectionsCallback): void;
+
+                    /**
+                     * Calls ListEkmConnections.
+                     * @param request ListEkmConnectionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listEkmConnections(request: google.cloud.kms.v1.IListEkmConnectionsRequest): Promise<google.cloud.kms.v1.ListEkmConnectionsResponse>;
+
+                    /**
+                     * Calls GetEkmConnection.
+                     * @param request GetEkmConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EkmConnection
+                     */
+                    public getEkmConnection(request: google.cloud.kms.v1.IGetEkmConnectionRequest, callback: google.cloud.kms.v1.EkmService.GetEkmConnectionCallback): void;
+
+                    /**
+                     * Calls GetEkmConnection.
+                     * @param request GetEkmConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEkmConnection(request: google.cloud.kms.v1.IGetEkmConnectionRequest): Promise<google.cloud.kms.v1.EkmConnection>;
+
+                    /**
+                     * Calls CreateEkmConnection.
+                     * @param request CreateEkmConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EkmConnection
+                     */
+                    public createEkmConnection(request: google.cloud.kms.v1.ICreateEkmConnectionRequest, callback: google.cloud.kms.v1.EkmService.CreateEkmConnectionCallback): void;
+
+                    /**
+                     * Calls CreateEkmConnection.
+                     * @param request CreateEkmConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createEkmConnection(request: google.cloud.kms.v1.ICreateEkmConnectionRequest): Promise<google.cloud.kms.v1.EkmConnection>;
+
+                    /**
+                     * Calls UpdateEkmConnection.
+                     * @param request UpdateEkmConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EkmConnection
+                     */
+                    public updateEkmConnection(request: google.cloud.kms.v1.IUpdateEkmConnectionRequest, callback: google.cloud.kms.v1.EkmService.UpdateEkmConnectionCallback): void;
+
+                    /**
+                     * Calls UpdateEkmConnection.
+                     * @param request UpdateEkmConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateEkmConnection(request: google.cloud.kms.v1.IUpdateEkmConnectionRequest): Promise<google.cloud.kms.v1.EkmConnection>;
+                }
+
+                namespace EkmService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.EkmService#listEkmConnections}.
+                     * @param error Error, if any
+                     * @param [response] ListEkmConnectionsResponse
+                     */
+                    type ListEkmConnectionsCallback = (error: (Error|null), response?: google.cloud.kms.v1.ListEkmConnectionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.EkmService#getEkmConnection}.
+                     * @param error Error, if any
+                     * @param [response] EkmConnection
+                     */
+                    type GetEkmConnectionCallback = (error: (Error|null), response?: google.cloud.kms.v1.EkmConnection) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.EkmService#createEkmConnection}.
+                     * @param error Error, if any
+                     * @param [response] EkmConnection
+                     */
+                    type CreateEkmConnectionCallback = (error: (Error|null), response?: google.cloud.kms.v1.EkmConnection) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.EkmService#updateEkmConnection}.
+                     * @param error Error, if any
+                     * @param [response] EkmConnection
+                     */
+                    type UpdateEkmConnectionCallback = (error: (Error|null), response?: google.cloud.kms.v1.EkmConnection) => void;
+                }
+
+                /** Properties of a ListEkmConnectionsRequest. */
+                interface IListEkmConnectionsRequest {
+
+                    /** ListEkmConnectionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListEkmConnectionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListEkmConnectionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListEkmConnectionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListEkmConnectionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListEkmConnectionsRequest. */
+                class ListEkmConnectionsRequest implements IListEkmConnectionsRequest {
+
+                    /**
+                     * Constructs a new ListEkmConnectionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IListEkmConnectionsRequest);
+
+                    /** ListEkmConnectionsRequest parent. */
+                    public parent: string;
+
+                    /** ListEkmConnectionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListEkmConnectionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListEkmConnectionsRequest filter. */
+                    public filter: string;
+
+                    /** ListEkmConnectionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListEkmConnectionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEkmConnectionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IListEkmConnectionsRequest): google.cloud.kms.v1.ListEkmConnectionsRequest;
+
+                    /**
+                     * Encodes the specified ListEkmConnectionsRequest message. Does not implicitly {@link google.cloud.kms.v1.ListEkmConnectionsRequest.verify|verify} messages.
+                     * @param message ListEkmConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IListEkmConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEkmConnectionsRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListEkmConnectionsRequest.verify|verify} messages.
+                     * @param message ListEkmConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IListEkmConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEkmConnectionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEkmConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ListEkmConnectionsRequest;
+
+                    /**
+                     * Decodes a ListEkmConnectionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEkmConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ListEkmConnectionsRequest;
+
+                    /**
+                     * Verifies a ListEkmConnectionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEkmConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEkmConnectionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ListEkmConnectionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListEkmConnectionsRequest message. Also converts values to other types if specified.
+                     * @param message ListEkmConnectionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ListEkmConnectionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEkmConnectionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListEkmConnectionsResponse. */
+                interface IListEkmConnectionsResponse {
+
+                    /** ListEkmConnectionsResponse ekmConnections */
+                    ekmConnections?: (google.cloud.kms.v1.IEkmConnection[]|null);
+
+                    /** ListEkmConnectionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListEkmConnectionsResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListEkmConnectionsResponse. */
+                class ListEkmConnectionsResponse implements IListEkmConnectionsResponse {
+
+                    /**
+                     * Constructs a new ListEkmConnectionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IListEkmConnectionsResponse);
+
+                    /** ListEkmConnectionsResponse ekmConnections. */
+                    public ekmConnections: google.cloud.kms.v1.IEkmConnection[];
+
+                    /** ListEkmConnectionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListEkmConnectionsResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListEkmConnectionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEkmConnectionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IListEkmConnectionsResponse): google.cloud.kms.v1.ListEkmConnectionsResponse;
+
+                    /**
+                     * Encodes the specified ListEkmConnectionsResponse message. Does not implicitly {@link google.cloud.kms.v1.ListEkmConnectionsResponse.verify|verify} messages.
+                     * @param message ListEkmConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IListEkmConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEkmConnectionsResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListEkmConnectionsResponse.verify|verify} messages.
+                     * @param message ListEkmConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IListEkmConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEkmConnectionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEkmConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ListEkmConnectionsResponse;
+
+                    /**
+                     * Decodes a ListEkmConnectionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEkmConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ListEkmConnectionsResponse;
+
+                    /**
+                     * Verifies a ListEkmConnectionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEkmConnectionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEkmConnectionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ListEkmConnectionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListEkmConnectionsResponse message. Also converts values to other types if specified.
+                     * @param message ListEkmConnectionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ListEkmConnectionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEkmConnectionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetEkmConnectionRequest. */
+                interface IGetEkmConnectionRequest {
+
+                    /** GetEkmConnectionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetEkmConnectionRequest. */
+                class GetEkmConnectionRequest implements IGetEkmConnectionRequest {
+
+                    /**
+                     * Constructs a new GetEkmConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IGetEkmConnectionRequest);
+
+                    /** GetEkmConnectionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetEkmConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEkmConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IGetEkmConnectionRequest): google.cloud.kms.v1.GetEkmConnectionRequest;
+
+                    /**
+                     * Encodes the specified GetEkmConnectionRequest message. Does not implicitly {@link google.cloud.kms.v1.GetEkmConnectionRequest.verify|verify} messages.
+                     * @param message GetEkmConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IGetEkmConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEkmConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetEkmConnectionRequest.verify|verify} messages.
+                     * @param message GetEkmConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IGetEkmConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEkmConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEkmConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.GetEkmConnectionRequest;
+
+                    /**
+                     * Decodes a GetEkmConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEkmConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.GetEkmConnectionRequest;
+
+                    /**
+                     * Verifies a GetEkmConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEkmConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEkmConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.GetEkmConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a GetEkmConnectionRequest message. Also converts values to other types if specified.
+                     * @param message GetEkmConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.GetEkmConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEkmConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateEkmConnectionRequest. */
+                interface ICreateEkmConnectionRequest {
+
+                    /** CreateEkmConnectionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateEkmConnectionRequest ekmConnectionId */
+                    ekmConnectionId?: (string|null);
+
+                    /** CreateEkmConnectionRequest ekmConnection */
+                    ekmConnection?: (google.cloud.kms.v1.IEkmConnection|null);
+                }
+
+                /** Represents a CreateEkmConnectionRequest. */
+                class CreateEkmConnectionRequest implements ICreateEkmConnectionRequest {
+
+                    /**
+                     * Constructs a new CreateEkmConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.ICreateEkmConnectionRequest);
+
+                    /** CreateEkmConnectionRequest parent. */
+                    public parent: string;
+
+                    /** CreateEkmConnectionRequest ekmConnectionId. */
+                    public ekmConnectionId: string;
+
+                    /** CreateEkmConnectionRequest ekmConnection. */
+                    public ekmConnection?: (google.cloud.kms.v1.IEkmConnection|null);
+
+                    /**
+                     * Creates a new CreateEkmConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateEkmConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.ICreateEkmConnectionRequest): google.cloud.kms.v1.CreateEkmConnectionRequest;
+
+                    /**
+                     * Encodes the specified CreateEkmConnectionRequest message. Does not implicitly {@link google.cloud.kms.v1.CreateEkmConnectionRequest.verify|verify} messages.
+                     * @param message CreateEkmConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.ICreateEkmConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateEkmConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.CreateEkmConnectionRequest.verify|verify} messages.
+                     * @param message CreateEkmConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.ICreateEkmConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateEkmConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateEkmConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.CreateEkmConnectionRequest;
+
+                    /**
+                     * Decodes a CreateEkmConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateEkmConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.CreateEkmConnectionRequest;
+
+                    /**
+                     * Verifies a CreateEkmConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateEkmConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateEkmConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.CreateEkmConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateEkmConnectionRequest message. Also converts values to other types if specified.
+                     * @param message CreateEkmConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.CreateEkmConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateEkmConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateEkmConnectionRequest. */
+                interface IUpdateEkmConnectionRequest {
+
+                    /** UpdateEkmConnectionRequest ekmConnection */
+                    ekmConnection?: (google.cloud.kms.v1.IEkmConnection|null);
+
+                    /** UpdateEkmConnectionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateEkmConnectionRequest. */
+                class UpdateEkmConnectionRequest implements IUpdateEkmConnectionRequest {
+
+                    /**
+                     * Constructs a new UpdateEkmConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IUpdateEkmConnectionRequest);
+
+                    /** UpdateEkmConnectionRequest ekmConnection. */
+                    public ekmConnection?: (google.cloud.kms.v1.IEkmConnection|null);
+
+                    /** UpdateEkmConnectionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateEkmConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateEkmConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IUpdateEkmConnectionRequest): google.cloud.kms.v1.UpdateEkmConnectionRequest;
+
+                    /**
+                     * Encodes the specified UpdateEkmConnectionRequest message. Does not implicitly {@link google.cloud.kms.v1.UpdateEkmConnectionRequest.verify|verify} messages.
+                     * @param message UpdateEkmConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IUpdateEkmConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateEkmConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.UpdateEkmConnectionRequest.verify|verify} messages.
+                     * @param message UpdateEkmConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IUpdateEkmConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateEkmConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateEkmConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.UpdateEkmConnectionRequest;
+
+                    /**
+                     * Decodes an UpdateEkmConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateEkmConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.UpdateEkmConnectionRequest;
+
+                    /**
+                     * Verifies an UpdateEkmConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateEkmConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateEkmConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.UpdateEkmConnectionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateEkmConnectionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateEkmConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.UpdateEkmConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateEkmConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Certificate. */
+                interface ICertificate {
+
+                    /** Certificate rawDer */
+                    rawDer?: (Uint8Array|string|null);
+
+                    /** Certificate parsed */
+                    parsed?: (boolean|null);
+
+                    /** Certificate issuer */
+                    issuer?: (string|null);
+
+                    /** Certificate subject */
+                    subject?: (string|null);
+
+                    /** Certificate subjectAlternativeDnsNames */
+                    subjectAlternativeDnsNames?: (string[]|null);
+
+                    /** Certificate notBeforeTime */
+                    notBeforeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Certificate notAfterTime */
+                    notAfterTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Certificate serialNumber */
+                    serialNumber?: (string|null);
+
+                    /** Certificate sha256Fingerprint */
+                    sha256Fingerprint?: (string|null);
+                }
+
+                /** Represents a Certificate. */
+                class Certificate implements ICertificate {
+
+                    /**
+                     * Constructs a new Certificate.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.ICertificate);
+
+                    /** Certificate rawDer. */
+                    public rawDer: (Uint8Array|string);
+
+                    /** Certificate parsed. */
+                    public parsed: boolean;
+
+                    /** Certificate issuer. */
+                    public issuer: string;
+
+                    /** Certificate subject. */
+                    public subject: string;
+
+                    /** Certificate subjectAlternativeDnsNames. */
+                    public subjectAlternativeDnsNames: string[];
+
+                    /** Certificate notBeforeTime. */
+                    public notBeforeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Certificate notAfterTime. */
+                    public notAfterTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Certificate serialNumber. */
+                    public serialNumber: string;
+
+                    /** Certificate sha256Fingerprint. */
+                    public sha256Fingerprint: string;
+
+                    /**
+                     * Creates a new Certificate instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Certificate instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.ICertificate): google.cloud.kms.v1.Certificate;
+
+                    /**
+                     * Encodes the specified Certificate message. Does not implicitly {@link google.cloud.kms.v1.Certificate.verify|verify} messages.
+                     * @param message Certificate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.ICertificate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Certificate message, length delimited. Does not implicitly {@link google.cloud.kms.v1.Certificate.verify|verify} messages.
+                     * @param message Certificate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.ICertificate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Certificate message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Certificate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.Certificate;
+
+                    /**
+                     * Decodes a Certificate message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Certificate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.Certificate;
+
+                    /**
+                     * Verifies a Certificate message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Certificate message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Certificate
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.Certificate;
+
+                    /**
+                     * Creates a plain object from a Certificate message. Also converts values to other types if specified.
+                     * @param message Certificate
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.Certificate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Certificate to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an EkmConnection. */
+                interface IEkmConnection {
+
+                    /** EkmConnection name */
+                    name?: (string|null);
+
+                    /** EkmConnection createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** EkmConnection serviceResolvers */
+                    serviceResolvers?: (google.cloud.kms.v1.EkmConnection.IServiceResolver[]|null);
+
+                    /** EkmConnection etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents an EkmConnection. */
+                class EkmConnection implements IEkmConnection {
+
+                    /**
+                     * Constructs a new EkmConnection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IEkmConnection);
+
+                    /** EkmConnection name. */
+                    public name: string;
+
+                    /** EkmConnection createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** EkmConnection serviceResolvers. */
+                    public serviceResolvers: google.cloud.kms.v1.EkmConnection.IServiceResolver[];
+
+                    /** EkmConnection etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new EkmConnection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EkmConnection instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IEkmConnection): google.cloud.kms.v1.EkmConnection;
+
+                    /**
+                     * Encodes the specified EkmConnection message. Does not implicitly {@link google.cloud.kms.v1.EkmConnection.verify|verify} messages.
+                     * @param message EkmConnection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IEkmConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EkmConnection message, length delimited. Does not implicitly {@link google.cloud.kms.v1.EkmConnection.verify|verify} messages.
+                     * @param message EkmConnection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IEkmConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EkmConnection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EkmConnection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.EkmConnection;
+
+                    /**
+                     * Decodes an EkmConnection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EkmConnection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.EkmConnection;
+
+                    /**
+                     * Verifies an EkmConnection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EkmConnection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EkmConnection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.EkmConnection;
+
+                    /**
+                     * Creates a plain object from an EkmConnection message. Also converts values to other types if specified.
+                     * @param message EkmConnection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.EkmConnection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EkmConnection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace EkmConnection {
+
+                    /** Properties of a ServiceResolver. */
+                    interface IServiceResolver {
+
+                        /** ServiceResolver serviceDirectoryService */
+                        serviceDirectoryService?: (string|null);
+
+                        /** ServiceResolver endpointFilter */
+                        endpointFilter?: (string|null);
+
+                        /** ServiceResolver hostname */
+                        hostname?: (string|null);
+
+                        /** ServiceResolver serverCertificates */
+                        serverCertificates?: (google.cloud.kms.v1.ICertificate[]|null);
+                    }
+
+                    /** Represents a ServiceResolver. */
+                    class ServiceResolver implements IServiceResolver {
+
+                        /**
+                         * Constructs a new ServiceResolver.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.EkmConnection.IServiceResolver);
+
+                        /** ServiceResolver serviceDirectoryService. */
+                        public serviceDirectoryService: string;
+
+                        /** ServiceResolver endpointFilter. */
+                        public endpointFilter: string;
+
+                        /** ServiceResolver hostname. */
+                        public hostname: string;
+
+                        /** ServiceResolver serverCertificates. */
+                        public serverCertificates: google.cloud.kms.v1.ICertificate[];
+
+                        /**
+                         * Creates a new ServiceResolver instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ServiceResolver instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.EkmConnection.IServiceResolver): google.cloud.kms.v1.EkmConnection.ServiceResolver;
+
+                        /**
+                         * Encodes the specified ServiceResolver message. Does not implicitly {@link google.cloud.kms.v1.EkmConnection.ServiceResolver.verify|verify} messages.
+                         * @param message ServiceResolver message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.EkmConnection.IServiceResolver, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ServiceResolver message, length delimited. Does not implicitly {@link google.cloud.kms.v1.EkmConnection.ServiceResolver.verify|verify} messages.
+                         * @param message ServiceResolver message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.EkmConnection.IServiceResolver, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ServiceResolver message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ServiceResolver
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.EkmConnection.ServiceResolver;
+
+                        /**
+                         * Decodes a ServiceResolver message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ServiceResolver
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.EkmConnection.ServiceResolver;
+
+                        /**
+                         * Verifies a ServiceResolver message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ServiceResolver message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ServiceResolver
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.EkmConnection.ServiceResolver;
+
+                        /**
+                         * Creates a plain object from a ServiceResolver message. Also converts values to other types if specified.
+                         * @param message ServiceResolver
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.EkmConnection.ServiceResolver, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ServiceResolver to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
                 /** Properties of a KeyRing. */
                 interface IKeyRing {
 
@@ -154,6 +1123,9 @@ export namespace google {
 
                     /** CryptoKey destroyScheduledDuration */
                     destroyScheduledDuration?: (google.protobuf.IDuration|null);
+
+                    /** CryptoKey cryptoKeyBackend */
+                    cryptoKeyBackend?: (string|null);
                 }
 
                 /** Represents a CryptoKey. */
@@ -194,6 +1166,9 @@ export namespace google {
 
                     /** CryptoKey destroyScheduledDuration. */
                     public destroyScheduledDuration?: (google.protobuf.IDuration|null);
+
+                    /** CryptoKey cryptoKeyBackend. */
+                    public cryptoKeyBackend: string;
 
                     /** CryptoKey rotationSchedule. */
                     public rotationSchedule?: "rotationPeriod";
@@ -385,6 +1360,9 @@ export namespace google {
 
                     /** KeyOperationAttestation content */
                     content?: (Uint8Array|string|null);
+
+                    /** KeyOperationAttestation certChains */
+                    certChains?: (google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains|null);
                 }
 
                 /** Represents a KeyOperationAttestation. */
@@ -401,6 +1379,9 @@ export namespace google {
 
                     /** KeyOperationAttestation content. */
                     public content: (Uint8Array|string);
+
+                    /** KeyOperationAttestation certChains. */
+                    public certChains?: (google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains|null);
 
                     /**
                      * Creates a new KeyOperationAttestation instance using the specified properties.
@@ -480,6 +1461,108 @@ export namespace google {
                         ATTESTATION_FORMAT_UNSPECIFIED = 0,
                         CAVIUM_V1_COMPRESSED = 3,
                         CAVIUM_V2_COMPRESSED = 4
+                    }
+
+                    /** Properties of a CertificateChains. */
+                    interface ICertificateChains {
+
+                        /** CertificateChains caviumCerts */
+                        caviumCerts?: (string[]|null);
+
+                        /** CertificateChains googleCardCerts */
+                        googleCardCerts?: (string[]|null);
+
+                        /** CertificateChains googlePartitionCerts */
+                        googlePartitionCerts?: (string[]|null);
+                    }
+
+                    /** Represents a CertificateChains. */
+                    class CertificateChains implements ICertificateChains {
+
+                        /**
+                         * Constructs a new CertificateChains.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains);
+
+                        /** CertificateChains caviumCerts. */
+                        public caviumCerts: string[];
+
+                        /** CertificateChains googleCardCerts. */
+                        public googleCardCerts: string[];
+
+                        /** CertificateChains googlePartitionCerts. */
+                        public googlePartitionCerts: string[];
+
+                        /**
+                         * Creates a new CertificateChains instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateChains instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains): google.cloud.kms.v1.KeyOperationAttestation.CertificateChains;
+
+                        /**
+                         * Encodes the specified CertificateChains message. Does not implicitly {@link google.cloud.kms.v1.KeyOperationAttestation.CertificateChains.verify|verify} messages.
+                         * @param message CertificateChains message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateChains message, length delimited. Does not implicitly {@link google.cloud.kms.v1.KeyOperationAttestation.CertificateChains.verify|verify} messages.
+                         * @param message CertificateChains message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateChains message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateChains
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.KeyOperationAttestation.CertificateChains;
+
+                        /**
+                         * Decodes a CertificateChains message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateChains
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.KeyOperationAttestation.CertificateChains;
+
+                        /**
+                         * Verifies a CertificateChains message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateChains message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateChains
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.KeyOperationAttestation.CertificateChains;
+
+                        /**
+                         * Creates a plain object from a CertificateChains message. Also converts values to other types if specified.
+                         * @param message CertificateChains
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.KeyOperationAttestation.CertificateChains, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateChains to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
                     }
                 }
 
@@ -961,6 +2044,21 @@ export namespace google {
 
                 namespace ImportJob {
 
+                    /** ImportMethod enum. */
+                    enum ImportMethod {
+                        IMPORT_METHOD_UNSPECIFIED = 0,
+                        RSA_OAEP_3072_SHA1_AES_256 = 1,
+                        RSA_OAEP_4096_SHA1_AES_256 = 2
+                    }
+
+                    /** ImportJobState enum. */
+                    enum ImportJobState {
+                        IMPORT_JOB_STATE_UNSPECIFIED = 0,
+                        PENDING_GENERATION = 1,
+                        ACTIVE = 2,
+                        EXPIRED = 3
+                    }
+
                     /** Properties of a WrappingPublicKey. */
                     interface IWrappingPublicKey {
 
@@ -1050,29 +2148,6 @@ export namespace google {
                          */
                         public toJSON(): { [k: string]: any };
                     }
-
-                    /** ImportMethod enum. */
-                    enum ImportMethod {
-                        IMPORT_METHOD_UNSPECIFIED = 0,
-                        RSA_OAEP_3072_SHA1_AES_256 = 1,
-                        RSA_OAEP_4096_SHA1_AES_256 = 2
-                    }
-
-                    /** ImportJobState enum. */
-                    enum ImportJobState {
-                        IMPORT_JOB_STATE_UNSPECIFIED = 0,
-                        PENDING_GENERATION = 1,
-                        ACTIVE = 2,
-                        EXPIRED = 3
-                    }
-                }
-
-                /** ProtectionLevel enum. */
-                enum ProtectionLevel {
-                    PROTECTION_LEVEL_UNSPECIFIED = 0,
-                    SOFTWARE = 1,
-                    HSM = 2,
-                    EXTERNAL = 3
                 }
 
                 /** Properties of an ExternalProtectionLevelOptions. */
@@ -1080,6 +2155,9 @@ export namespace google {
 
                     /** ExternalProtectionLevelOptions externalKeyUri */
                     externalKeyUri?: (string|null);
+
+                    /** ExternalProtectionLevelOptions ekmConnectionKeyPath */
+                    ekmConnectionKeyPath?: (string|null);
                 }
 
                 /** Represents an ExternalProtectionLevelOptions. */
@@ -1093,6 +2171,9 @@ export namespace google {
 
                     /** ExternalProtectionLevelOptions externalKeyUri. */
                     public externalKeyUri: string;
+
+                    /** ExternalProtectionLevelOptions ekmConnectionKeyPath. */
+                    public ekmConnectionKeyPath: string;
 
                     /**
                      * Creates a new ExternalProtectionLevelOptions instance using the specified properties.
@@ -1163,6 +2244,15 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** ProtectionLevel enum. */
+                enum ProtectionLevel {
+                    PROTECTION_LEVEL_UNSPECIFIED = 0,
+                    SOFTWARE = 1,
+                    HSM = 2,
+                    EXTERNAL = 3,
+                    EXTERNAL_VPC = 4
                 }
 
                 /** Represents a KeyManagementService */
@@ -5809,256 +6899,6 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
         /** Properties of a Http. */
         interface IHttp {
 
@@ -6393,6 +7233,256 @@ export namespace google {
 
             /**
              * Converts this CustomHttpPattern to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -9528,97 +10618,91 @@ export namespace google {
             }
         }
 
-        /** Properties of a Duration. */
-        interface IDuration {
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
 
-            /** Duration seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Duration nanos */
-            nanos?: (number|null);
+            /** FieldMask paths */
+            paths?: (string[]|null);
         }
 
-        /** Represents a Duration. */
-        class Duration implements IDuration {
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
 
             /**
-             * Constructs a new Duration.
+             * Constructs a new FieldMask.
              * @param [properties] Properties to set
              */
-            constructor(properties?: google.protobuf.IDuration);
+            constructor(properties?: google.protobuf.IFieldMask);
 
-            /** Duration seconds. */
-            public seconds: (number|Long|string);
-
-            /** Duration nanos. */
-            public nanos: number;
+            /** FieldMask paths. */
+            public paths: string[];
 
             /**
-             * Creates a new Duration instance using the specified properties.
+             * Creates a new FieldMask instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns Duration instance
+             * @returns FieldMask instance
              */
-            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
 
             /**
-             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a Duration message from the specified reader or buffer.
+             * Decodes a FieldMask message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns Duration
+             * @returns FieldMask
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
 
             /**
-             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns Duration
+             * @returns FieldMask
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
 
             /**
-             * Verifies a Duration message.
+             * Verifies a FieldMask message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns Duration
+             * @returns FieldMask
              */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
 
             /**
-             * Creates a plain object from a Duration message. Also converts values to other types if specified.
-             * @param message Duration
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this Duration to JSON.
+             * Converts this FieldMask to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -9715,6 +10799,102 @@ export namespace google {
 
             /**
              * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -10525,96 +11705,6 @@ export namespace google {
 
             /**
              * Converts this BytesValue to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a FieldMask. */
-        interface IFieldMask {
-
-            /** FieldMask paths */
-            paths?: (string[]|null);
-        }
-
-        /** Represents a FieldMask. */
-        class FieldMask implements IFieldMask {
-
-            /**
-             * Constructs a new FieldMask.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFieldMask);
-
-            /** FieldMask paths. */
-            public paths: string[];
-
-            /**
-             * Creates a new FieldMask instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldMask instance
-             */
-            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
-
-            /**
-             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
-
-            /**
-             * Verifies a FieldMask message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldMask
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
-
-            /**
-             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-             * @param message FieldMask
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldMask to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };

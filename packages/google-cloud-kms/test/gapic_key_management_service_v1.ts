@@ -4414,6 +4414,71 @@ describe('v1.KeyManagementServiceClient', () => {
       });
     });
 
+    describe('ekmConnection', () => {
+      const fakePath = '/rendered/path/ekmConnection';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        ekm_connection: 'ekmConnectionValue',
+      };
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.ekmConnectionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ekmConnectionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ekmConnectionPath', () => {
+        const result = client.ekmConnectionPath(
+          'projectValue',
+          'locationValue',
+          'ekmConnectionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.ekmConnectionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEkmConnectionName', () => {
+        const result = client.matchProjectFromEkmConnectionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.ekmConnectionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEkmConnectionName', () => {
+        const result = client.matchLocationFromEkmConnectionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.ekmConnectionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEkmConnectionFromEkmConnectionName', () => {
+        const result = client.matchEkmConnectionFromEkmConnectionName(fakePath);
+        assert.strictEqual(result, 'ekmConnectionValue');
+        assert(
+          (client.pathTemplates.ekmConnectionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('importJob', () => {
       const fakePath = '/rendered/path/importJob';
       const expectedParameters = {

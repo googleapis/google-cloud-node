@@ -15,43 +15,41 @@
 
 'use strict';
 
-function main(parent, cryptoKeyVersion) {
-  // [START cloudkms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_async]
+function main(ekmConnection, updateMask) {
+  // [START cloudkms_v1_generated_EkmService_UpdateEkmConnection_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name google.cloud.kms.v1.CryptoKey.name  of the
-   *  CryptoKey google.cloud.kms.v1.CryptoKey  associated with the
-   *  CryptoKeyVersions google.cloud.kms.v1.CryptoKeyVersion.
+   *  Required. EkmConnection google.cloud.kms.v1.EkmConnection  with updated
+   *  values.
    */
-  // const parent = 'abc123'
+  // const ekmConnection = {}
   /**
-   *  Required. A CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  with
-   *  initial field values.
+   *  Required. List of fields to be updated in this request.
    */
-  // const cryptoKeyVersion = {}
+  // const updateMask = {}
 
   // Imports the Kms library
-  const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;
+  const {EkmServiceClient} = require('@google-cloud/kms').v1;
 
   // Instantiates a client
-  const kmsClient = new KeyManagementServiceClient();
+  const kmsClient = new EkmServiceClient();
 
-  async function callCreateCryptoKeyVersion() {
+  async function callUpdateEkmConnection() {
     // Construct request
     const request = {
-      parent,
-      cryptoKeyVersion,
+      ekmConnection,
+      updateMask,
     };
 
     // Run request
-    const response = await kmsClient.createCryptoKeyVersion(request);
+    const response = await kmsClient.updateEkmConnection(request);
     console.log(response);
   }
 
-  callCreateCryptoKeyVersion();
-  // [END cloudkms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_async]
+  callUpdateEkmConnection();
+  // [END cloudkms_v1_generated_EkmService_UpdateEkmConnection_async]
 }
 
 process.on('unhandledRejection', err => {

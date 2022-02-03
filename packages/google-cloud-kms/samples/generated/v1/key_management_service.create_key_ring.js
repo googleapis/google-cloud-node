@@ -22,7 +22,8 @@ function main(parent, keyRingId, keyRing) {
    */
   /**
    *  Required. The resource name of the location associated with the
-   *  KeyRings google.cloud.kms.v1.KeyRing, in the format `projects/* /locations/*`.
+   *  KeyRings google.cloud.kms.v1.KeyRing, in the format
+   *  `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
@@ -31,7 +32,8 @@ function main(parent, keyRingId, keyRing) {
    */
   // const keyRingId = 'abc123'
   /**
-   *  Required. A KeyRing google.cloud.kms.v1.KeyRing  with initial field values.
+   *  Required. A KeyRing google.cloud.kms.v1.KeyRing  with initial field
+   *  values.
    */
   // const keyRing = {}
 

@@ -21,7 +21,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name google.cloud.kms.v1.KeyRing.name  of the KeyRing google.cloud.kms.v1.KeyRing  to get.
+   *  Required. The name google.cloud.kms.v1.KeyRing.name  of the
+   *  KeyRing google.cloud.kms.v1.KeyRing  to get.
    */
   // const name = 'abc123'
 

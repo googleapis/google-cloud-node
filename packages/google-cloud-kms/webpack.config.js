@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'KeyManagementService',
-    filename: './key-management-service.js',
+    library: 'EkmService',
+    filename: './ekm-service.js',
   },
   node: {
     child_process: 'empty',

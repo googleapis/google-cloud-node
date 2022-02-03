@@ -185,6 +185,9 @@ export class KeyManagementServiceClient {
       cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
       ),
+      ekmConnectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ekmConnections/{ekm_connection}'
+      ),
       importJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/importJobs/{import_job}'
       ),
@@ -392,7 +395,8 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to get.
+   *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRing} to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -470,13 +474,15 @@ export class KeyManagementServiceClient {
     return this.innerApiCalls.getKeyRing(request, options, callback);
   }
   /**
-   * Returns metadata for a given {@link google.cloud.kms.v1.CryptoKey|CryptoKey}, as well as its
-   * {@link google.cloud.kms.v1.CryptoKey.primary|primary} {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
+   * Returns metadata for a given {@link google.cloud.kms.v1.CryptoKey|CryptoKey}, as
+   * well as its {@link google.cloud.kms.v1.CryptoKey.primary|primary}
+   * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to get.
+   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -554,12 +560,14 @@ export class KeyManagementServiceClient {
     return this.innerApiCalls.getCryptoKey(request, options, callback);
   }
   /**
-   * Returns metadata for a given {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
+   * Returns metadata for a given
+   * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to get.
+   *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -639,16 +647,18 @@ export class KeyManagementServiceClient {
     return this.innerApiCalls.getCryptoKeyVersion(request, options, callback);
   }
   /**
-   * Returns the public key for the given {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}. The
+   * Returns the public key for the given
+   * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}. The
    * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
-   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN|ASYMMETRIC_SIGN} or
+   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN|ASYMMETRIC_SIGN}
+   * or
    * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT|ASYMMETRIC_DECRYPT}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} public key to
-   *   get.
+   *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} public key to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -731,7 +741,8 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The {@link google.cloud.kms.v1.ImportJob.name|name} of the {@link google.cloud.kms.v1.ImportJob|ImportJob} to get.
+   *   Required. The {@link google.cloud.kms.v1.ImportJob.name|name} of the
+   *   {@link google.cloud.kms.v1.ImportJob|ImportJob} to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -809,18 +820,21 @@ export class KeyManagementServiceClient {
     return this.innerApiCalls.getImportJob(request, options, callback);
   }
   /**
-   * Create a new {@link google.cloud.kms.v1.KeyRing|KeyRing} in a given Project and Location.
+   * Create a new {@link google.cloud.kms.v1.KeyRing|KeyRing} in a given Project and
+   * Location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format `projects/* /locations/*`.
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format
+   *   `projects/* /locations/*`.
    * @param {string} request.keyRingId
    *   Required. It must be unique within a location and match the regular
    *   expression `[a-zA-Z0-9_-]{1,63}`
    * @param {google.cloud.kms.v1.KeyRing} request.keyRing
-   *   Required. A {@link google.cloud.kms.v1.KeyRing|KeyRing} with initial field values.
+   *   Required. A {@link google.cloud.kms.v1.KeyRing|KeyRing} with initial field
+   *   values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -898,7 +912,8 @@ export class KeyManagementServiceClient {
     return this.innerApiCalls.createKeyRing(request, options, callback);
   }
   /**
-   * Create a new {@link google.cloud.kms.v1.CryptoKey|CryptoKey} within a {@link google.cloud.kms.v1.KeyRing|KeyRing}.
+   * Create a new {@link google.cloud.kms.v1.CryptoKey|CryptoKey} within a
+   * {@link google.cloud.kms.v1.KeyRing|KeyRing}.
    *
    * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} and
    * {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.algorithm|CryptoKey.version_template.algorithm}
@@ -907,17 +922,21 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the KeyRing associated with the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKeys}.
+   *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the KeyRing
+   *   associated with the {@link google.cloud.kms.v1.CryptoKey|CryptoKeys}.
    * @param {string} request.cryptoKeyId
    *   Required. It must be unique within a KeyRing and match the regular
    *   expression `[a-zA-Z0-9_-]{1,63}`
    * @param {google.cloud.kms.v1.CryptoKey} request.cryptoKey
-   *   Required. A {@link google.cloud.kms.v1.CryptoKey|CryptoKey} with initial field values.
+   *   Required. A {@link google.cloud.kms.v1.CryptoKey|CryptoKey} with initial field
+   *   values.
    * @param {boolean} request.skipInitialVersionCreation
-   *   If set to true, the request will create a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} without any
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}. You must manually call
-   *   {@link google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion|CreateCryptoKeyVersion} or
+   *   If set to true, the request will create a
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} without any
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}. You must
+   *   manually call
+   *   {@link google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion|CreateCryptoKeyVersion}
+   *   or
    *   {@link google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion|ImportCryptoKeyVersion}
    *   before you can use this {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
    * @param {object} [options]
@@ -997,7 +1016,8 @@ export class KeyManagementServiceClient {
     return this.innerApiCalls.createCryptoKey(request, options, callback);
   }
   /**
-   * Create a new {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} in a {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
+   * Create a new {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} in a
+   * {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
    *
    * The server will assign the next sequential id. If unset,
    * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} will be set to
@@ -1006,10 +1026,12 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} associated with
-   *   the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}.
+   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} associated with the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}.
    * @param {google.cloud.kms.v1.CryptoKeyVersion} request.cryptoKeyVersion
-   *   Required. A {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with initial field values.
+   *   Required. A {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with
+   *   initial field values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1099,44 +1121,54 @@ export class KeyManagementServiceClient {
     );
   }
   /**
-   * Import wrapped key material into a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
+   * Import wrapped key material into a
+   * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
    *
-   * All requests must specify a {@link google.cloud.kms.v1.CryptoKey|CryptoKey}. If a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} is
-   * additionally specified in the request, key material will be reimported into
-   * that version. Otherwise, a new version will be created, and will be
-   * assigned the next sequential id within the {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
+   * All requests must specify a {@link google.cloud.kms.v1.CryptoKey|CryptoKey}. If
+   * a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} is additionally
+   * specified in the request, key material will be reimported into that
+   * version. Otherwise, a new version will be created, and will be assigned the
+   * next sequential id within the {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to be imported into.
+   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to be imported into.
    *
    *   The create permission is only required on this key when creating a new
    *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
    * @param {string} [request.cryptoKeyVersion]
-   *   Optional. The optional {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of an existing
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to target for an import operation.
-   *   If this field is not present, a new {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} containing the
+   *   Optional. The optional {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of
+   *   an existing {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to
+   *   target for an import operation. If this field is not present, a new
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} containing the
    *   supplied key material is created.
    *
    *   If this field is present, the supplied key material is imported into
-   *   the existing {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}. To import into an existing
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}, the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} must be a child of
-   *   {@link google.cloud.kms.v1.ImportCryptoKeyVersionRequest.parent|ImportCryptoKeyVersionRequest.parent}, have been previously created via
-   *   {@link |ImportCryptoKeyVersion}, and be in
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED} or
+   *   the existing {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}. To
+   *   import into an existing
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}, the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} must be a child of
+   *   {@link google.cloud.kms.v1.ImportCryptoKeyVersionRequest.parent|ImportCryptoKeyVersionRequest.parent},
+   *   have been previously created via {@link |ImportCryptoKeyVersion}, and be in
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED}
+   *   or
    *   {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.IMPORT_FAILED|IMPORT_FAILED}
    *   state. The key material and algorithm must match the previous
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} exactly if the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} has ever contained
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} exactly if the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} has ever contained
    *   key material.
    * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm} request.algorithm
-   *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|algorithm} of
-   *   the key being imported. This does not need to match the
-   *   {@link google.cloud.kms.v1.CryptoKey.version_template|version_template} of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} this
-   *   version imports into.
+   *   Required. The
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|algorithm}
+   *   of the key being imported. This does not need to match the
+   *   {@link google.cloud.kms.v1.CryptoKey.version_template|version_template} of the
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} this version imports into.
    * @param {string} request.importJob
-   *   Required. The {@link google.cloud.kms.v1.ImportJob.name|name} of the {@link google.cloud.kms.v1.ImportJob|ImportJob} that was used to
-   *   wrap this key material.
+   *   Required. The {@link google.cloud.kms.v1.ImportJob.name|name} of the
+   *   {@link google.cloud.kms.v1.ImportJob|ImportJob} that was used to wrap this key
+   *   material.
    * @param {Buffer} request.rsaAesWrappedKey
    *   Wrapped key material produced with
    *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA1_AES_256|RSA_OAEP_3072_SHA1_AES_256}
@@ -1146,8 +1178,9 @@ export class KeyManagementServiceClient {
    *   This field contains the concatenation of two wrapped keys:
    *   <ol>
    *     <li>An ephemeral AES-256 wrapping key wrapped with the
-   *         {@link google.cloud.kms.v1.ImportJob.public_key|public_key} using RSAES-OAEP with SHA-1,
-   *         MGF1 with SHA-1, and an empty label.
+   *         {@link google.cloud.kms.v1.ImportJob.public_key|public_key} using
+   *         RSAES-OAEP with SHA-1/SHA-256, MGF1 with SHA-1/SHA-256, and an
+   *         empty label.
    *     </li>
    *     <li>The key to be imported, wrapped with the ephemeral AES-256 key
    *         using AES-KWP (RFC 5649).
@@ -1250,20 +1283,24 @@ export class KeyManagementServiceClient {
     );
   }
   /**
-   * Create a new {@link google.cloud.kms.v1.ImportJob|ImportJob} within a {@link google.cloud.kms.v1.KeyRing|KeyRing}.
+   * Create a new {@link google.cloud.kms.v1.ImportJob|ImportJob} within a
+   * {@link google.cloud.kms.v1.KeyRing|KeyRing}.
    *
-   * {@link google.cloud.kms.v1.ImportJob.import_method|ImportJob.import_method} is required.
+   * {@link google.cloud.kms.v1.ImportJob.import_method|ImportJob.import_method} is
+   * required.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the {@link google.cloud.kms.v1.KeyRing|KeyRing} associated with the
+   *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRing} associated with the
    *   {@link google.cloud.kms.v1.ImportJob|ImportJobs}.
    * @param {string} request.importJobId
    *   Required. It must be unique within a KeyRing and match the regular
    *   expression `[a-zA-Z0-9_-]{1,63}`
    * @param {google.cloud.kms.v1.ImportJob} request.importJob
-   *   Required. An {@link google.cloud.kms.v1.ImportJob|ImportJob} with initial field values.
+   *   Required. An {@link google.cloud.kms.v1.ImportJob|ImportJob} with initial field
+   *   values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1426,18 +1463,24 @@ export class KeyManagementServiceClient {
     return this.innerApiCalls.updateCryptoKey(request, options, callback);
   }
   /**
-   * Update a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}'s metadata.
+   * Update a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}'s
+   * metadata.
    *
    * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} may be changed between
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED|ENABLED} and
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED|DISABLED} using this
-   * method. See {@link google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion|DestroyCryptoKeyVersion} and {@link google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion|RestoreCryptoKeyVersion} to
-   * move between other states.
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED|ENABLED}
+   * and
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED|DISABLED}
+   * using this method. See
+   * {@link google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion|DestroyCryptoKeyVersion}
+   * and
+   * {@link google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion|RestoreCryptoKeyVersion}
+   * to move between other states.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.kms.v1.CryptoKeyVersion} request.cryptoKeyVersion
-   *   Required. {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with updated values.
+   *   Required. {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with
+   *   updated values.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. List of fields to be updated in this request.
    * @param {object} [options]
@@ -1529,7 +1572,9 @@ export class KeyManagementServiceClient {
     );
   }
   /**
-   * Update the version of a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} that will be used in {@link google.cloud.kms.v1.KeyManagementService.Encrypt|Encrypt}.
+   * Update the version of a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} that
+   * will be used in
+   * {@link google.cloud.kms.v1.KeyManagementService.Encrypt|Encrypt}.
    *
    * Returns an error if called on a key whose purpose is not
    * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
@@ -1537,9 +1582,11 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to update.
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to update.
    * @param {string} request.cryptoKeyVersionId
-   *   Required. The id of the child {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use as primary.
+   *   Required. The id of the child
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use as primary.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1635,24 +1682,33 @@ export class KeyManagementServiceClient {
     );
   }
   /**
-   * Schedule a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} for destruction.
+   * Schedule a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} for
+   * destruction.
    *
-   * Upon calling this method, {@link google.cloud.kms.v1.CryptoKeyVersion.state|CryptoKeyVersion.state} will be set to
+   * Upon calling this method,
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.state|CryptoKeyVersion.state} will
+   * be set to
    * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED|DESTROY_SCHEDULED},
-   * and {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} will be set to the time
-   * {@link google.cloud.kms.v1.CryptoKey.destroy_scheduled_duration|destroy_scheduled_duration} in the
-   * future. At that time, the {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} will
-   * automatically change to
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED}, and the key
-   * material will be irrevocably destroyed.
+   * and {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} will
+   * be set to the time
+   * {@link google.cloud.kms.v1.CryptoKey.destroy_scheduled_duration|destroy_scheduled_duration}
+   * in the future. At that time, the
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} will automatically
+   * change to
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED},
+   * and the key material will be irrevocably destroyed.
    *
-   * Before the {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} is reached,
-   * {@link google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion|RestoreCryptoKeyVersion} may be called to reverse the process.
+   * Before the
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} is
+   * reached,
+   * {@link google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion|RestoreCryptoKeyVersion}
+   * may be called to reverse the process.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to destroy.
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to destroy.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1746,14 +1802,17 @@ export class KeyManagementServiceClient {
    * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED|DESTROY_SCHEDULED}
    * state.
    *
-   * Upon restoration of the CryptoKeyVersion, {@link google.cloud.kms.v1.CryptoKeyVersion.state|state}
-   * will be set to {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED|DISABLED},
-   * and {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} will be cleared.
+   * Upon restoration of the CryptoKeyVersion,
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} will be set to
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED|DISABLED},
+   * and {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} will
+   * be cleared.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to restore.
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to restore.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1843,66 +1902,83 @@ export class KeyManagementServiceClient {
     );
   }
   /**
-   * Encrypts data, so that it can only be recovered by a call to {@link google.cloud.kms.v1.KeyManagementService.Decrypt|Decrypt}.
-   * The {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
+   * Encrypts data, so that it can only be recovered by a call to
+   * {@link google.cloud.kms.v1.KeyManagementService.Decrypt|Decrypt}. The
+   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
    * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} or {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
-   *   to use for encryption.
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} or
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+   *   encryption.
    *
-   *   If a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} is specified, the server will use its
-   *   {@link google.cloud.kms.v1.CryptoKey.primary|primary version}.
+   *   If a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} is specified, the server
+   *   will use its {@link google.cloud.kms.v1.CryptoKey.primary|primary version}.
    * @param {Buffer} request.plaintext
    *   Required. The data to encrypt. Must be no larger than 64KiB.
    *
    *   The maximum size depends on the key version's
-   *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}. For
-   *   {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE} keys, the plaintext must be no larger
-   *   than 64KiB. For {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of the
-   *   plaintext and additional_authenticated_data fields must be no larger than
-   *   8KiB.
+   *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}.
+   *   For {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE} keys, the
+   *   plaintext must be no larger than 64KiB. For
+   *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of
+   *   the plaintext and additional_authenticated_data fields must be no larger
+   *   than 8KiB.
    * @param {Buffer} [request.additionalAuthenticatedData]
-   *   Optional. Optional data that, if specified, must also be provided during decryption
-   *   through {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}.
+   *   Optional. Optional data that, if specified, must also be provided during
+   *   decryption through
+   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}.
    *
    *   The maximum size depends on the key version's
-   *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}. For
-   *   {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE} keys, the AAD must be no larger than
-   *   64KiB. For {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of the
-   *   plaintext and additional_authenticated_data fields must be no larger than
-   *   8KiB.
+   *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}.
+   *   For {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE} keys, the AAD
+   *   must be no larger than 64KiB. For
+   *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of
+   *   the plaintext and additional_authenticated_data fields must be no larger
+   *   than 8KiB.
    * @param {google.protobuf.Int64Value} [request.plaintextCrc32c]
-   *   Optional. An optional CRC32C checksum of the {@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext}. If
-   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the
-   *   received {@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext} using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
-   *   fails. If you receive a checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext}) is equal to
-   *   {@link google.cloud.kms.v1.EncryptRequest.plaintext_crc32c|EncryptRequest.plaintext_crc32c}, and if so, perform a limited number of
-   *   retries. A persistent mismatch may indicate an issue in your computation of
-   *   the CRC32C checksum.
-   *   Note: This field is defined as int64 for reasons of compatibility across
-   *   different languages. However, it is a non-negative integer, which will
-   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-   *   that support this type.
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received
+   *   {@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext}
+   *   using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext})
+   *   is equal to
+   *   {@link google.cloud.kms.v1.EncryptRequest.plaintext_crc32c|EncryptRequest.plaintext_crc32c},
+   *   and if so, perform a limited number of retries. A persistent mismatch may
+   *   indicate an issue in your computation of the CRC32C checksum. Note: This
+   *   field is defined as int64 for reasons of compatibility across different
+   *   languages. However, it is a non-negative integer, which will never exceed
+   *   2^32-1, and can be safely downconverted to uint32 in languages that support
+   *   this type.
    * @param {google.protobuf.Int64Value} [request.additionalAuthenticatedDataCrc32c]
    *   Optional. An optional CRC32C checksum of the
-   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}. If specified,
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the received
-   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data} using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
-   *   fails. If you receive a checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}) is equal to
-   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data_crc32c|EncryptRequest.additional_authenticated_data_crc32c}, and if so, perform
-   *   a limited number of retries. A persistent mismatch may indicate an issue in
-   *   your computation of the CRC32C checksum.
-   *   Note: This field is defined as int64 for reasons of compatibility across
-   *   different languages. However, it is a non-negative integer, which will
-   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-   *   that support this type.
+   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received
+   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}
+   *   using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data})
+   *   is equal to
+   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data_crc32c|EncryptRequest.additional_authenticated_data_crc32c},
+   *   and if so, perform a limited number of retries. A persistent mismatch may
+   *   indicate an issue in your computation of the CRC32C checksum. Note: This
+   *   field is defined as int64 for reasons of compatibility across different
+   *   languages. However, it is a non-negative integer, which will never exceed
+   *   2^32-1, and can be safely downconverted to uint32 in languages that support
+   *   this type.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1980,14 +2056,17 @@ export class KeyManagementServiceClient {
     return this.innerApiCalls.encrypt(request, options, callback);
   }
   /**
-   * Decrypts data that was protected by {@link google.cloud.kms.v1.KeyManagementService.Encrypt|Encrypt}. The {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
-   * must be {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
+   * Decrypts data that was protected by
+   * {@link google.cloud.kms.v1.KeyManagementService.Encrypt|Encrypt}. The
+   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
+   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to use for decryption.
-   *   The server will choose the appropriate version.
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to use for decryption. The
+   *   server will choose the appropriate version.
    * @param {Buffer} request.ciphertext
    *   Required. The encrypted data originally returned in
    *   {@link google.cloud.kms.v1.EncryptResponse.ciphertext|EncryptResponse.ciphertext}.
@@ -1995,34 +2074,45 @@ export class KeyManagementServiceClient {
    *   Optional. Optional data that must match the data originally supplied in
    *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}.
    * @param {google.protobuf.Int64Value} [request.ciphertextCrc32c]
-   *   Optional. An optional CRC32C checksum of the {@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext}. If
-   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the
-   *   received {@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext} using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
-   *   fails. If you receive a checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext}) is equal to
-   *   {@link google.cloud.kms.v1.DecryptRequest.ciphertext_crc32c|DecryptRequest.ciphertext_crc32c}, and if so, perform a limited number
-   *   of retries. A persistent mismatch may indicate an issue in your computation
-   *   of the CRC32C checksum.
-   *   Note: This field is defined as int64 for reasons of compatibility across
-   *   different languages. However, it is a non-negative integer, which will
-   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-   *   that support this type.
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received
+   *   {@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext}
+   *   using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext})
+   *   is equal to
+   *   {@link google.cloud.kms.v1.DecryptRequest.ciphertext_crc32c|DecryptRequest.ciphertext_crc32c},
+   *   and if so, perform a limited number of retries. A persistent mismatch may
+   *   indicate an issue in your computation of the CRC32C checksum. Note: This
+   *   field is defined as int64 for reasons of compatibility across different
+   *   languages. However, it is a non-negative integer, which will never exceed
+   *   2^32-1, and can be safely downconverted to uint32 in languages that support
+   *   this type.
    * @param {google.protobuf.Int64Value} [request.additionalAuthenticatedDataCrc32c]
    *   Optional. An optional CRC32C checksum of the
-   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}. If specified,
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the received
-   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data} using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
-   *   fails. If you receive a checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}) is equal to
-   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data_crc32c|DecryptRequest.additional_authenticated_data_crc32c}, and if so, perform
-   *   a limited number of retries. A persistent mismatch may indicate an issue in
-   *   your computation of the CRC32C checksum.
-   *   Note: This field is defined as int64 for reasons of compatibility across
-   *   different languages. However, it is a non-negative integer, which will
-   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-   *   that support this type.
+   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received
+   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}
+   *   using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data})
+   *   is equal to
+   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data_crc32c|DecryptRequest.additional_authenticated_data_crc32c},
+   *   and if so, perform a limited number of retries. A persistent mismatch may
+   *   indicate an issue in your computation of the CRC32C checksum. Note: This
+   *   field is defined as int64 for reasons of compatibility across different
+   *   languages. However, it is a non-negative integer, which will never exceed
+   *   2^32-1, and can be safely downconverted to uint32 in languages that support
+   *   this type.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2100,50 +2190,71 @@ export class KeyManagementServiceClient {
     return this.innerApiCalls.decrypt(request, options, callback);
   }
   /**
-   * Signs data using a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
+   * Signs data using a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
+   * with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
    * ASYMMETRIC_SIGN, producing a signature that can be verified with the public
-   * key retrieved from {@link google.cloud.kms.v1.KeyManagementService.GetPublicKey|GetPublicKey}.
+   * key retrieved from
+   * {@link google.cloud.kms.v1.KeyManagementService.GetPublicKey|GetPublicKey}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for signing.
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+   *   signing.
    * @param {google.cloud.kms.v1.Digest} [request.digest]
    *   Optional. The digest of the data to sign. The digest must be produced with
    *   the same digest algorithm as specified by the key version's
    *   {@link google.cloud.kms.v1.CryptoKeyVersion.algorithm|algorithm}.
+   *
+   *   This field may not be supplied if
+   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data}
+   *   is supplied.
    * @param {google.protobuf.Int64Value} [request.digestCrc32c]
-   *   Optional. An optional CRC32C checksum of the {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}. If
-   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the
-   *   received {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest} using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
-   *   fails. If you receive a checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}) is equal to
-   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest_crc32c|AsymmetricSignRequest.digest_crc32c}, and if so, perform a limited
-   *   number of retries. A persistent mismatch may indicate an issue in your
-   *   computation of the CRC32C checksum.
-   *   Note: This field is defined as int64 for reasons of compatibility across
-   *   different languages. However, it is a non-negative integer, which will
-   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-   *   that support this type.
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received
+   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}
+   *   using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest})
+   *   is equal to
+   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest_crc32c|AsymmetricSignRequest.digest_crc32c},
+   *   and if so, perform a limited number of retries. A persistent mismatch may
+   *   indicate an issue in your computation of the CRC32C checksum. Note: This
+   *   field is defined as int64 for reasons of compatibility across different
+   *   languages. However, it is a non-negative integer, which will never exceed
+   *   2^32-1, and can be safely downconverted to uint32 in languages that support
+   *   this type.
    * @param {Buffer} [request.data]
-   *   Optional. This field will only be honored for RAW_PKCS1 keys.
-   *   The data to sign. A digest is computed over the data that will be signed,
-   *   PKCS #1 padding is applied to the digest directly and then encrypted.
+   *   Optional. The data to sign.
+   *   It can't be supplied if
+   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}
+   *   is supplied.
    * @param {google.protobuf.Int64Value} [request.dataCrc32c]
-   *   Optional. An optional CRC32C checksum of the {@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data}. If
-   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the
-   *   received {@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data} using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
-   *   fails. If you receive a checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data}) is equal to
-   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data_crc32c|AsymmetricSignRequest.data_crc32c}, and if so, perform a limited
-   *   number of retries. A persistent mismatch may indicate an issue in your
-   *   computation of the CRC32C checksum.
-   *   Note: This field is defined as int64 for reasons of compatibility across
-   *   different languages. However, it is a non-negative integer, which will
-   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-   *   that support this type.
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received
+   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data}
+   *   using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data})
+   *   is equal to
+   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data_crc32c|AsymmetricSignRequest.data_crc32c},
+   *   and if so, perform a limited number of retries. A persistent mismatch may
+   *   indicate an issue in your computation of the CRC32C checksum. Note: This
+   *   field is defined as int64 for reasons of compatibility across different
+   *   languages. However, it is a non-negative integer, which will never exceed
+   *   2^32-1, and can be safely downconverted to uint32 in languages that support
+   *   this type.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2222,31 +2333,41 @@ export class KeyManagementServiceClient {
   }
   /**
    * Decrypts data that was encrypted with a public key retrieved from
-   * {@link google.cloud.kms.v1.KeyManagementService.GetPublicKey|GetPublicKey} corresponding to a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with
-   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} ASYMMETRIC_DECRYPT.
+   * {@link google.cloud.kms.v1.KeyManagementService.GetPublicKey|GetPublicKey}
+   * corresponding to a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
+   * with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
+   * ASYMMETRIC_DECRYPT.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
    *   decryption.
    * @param {Buffer} request.ciphertext
-   *   Required. The data encrypted with the named {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}'s public
-   *   key using OAEP.
+   *   Required. The data encrypted with the named
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}'s public key using
+   *   OAEP.
    * @param {google.protobuf.Int64Value} [request.ciphertextCrc32c]
-   *   Optional. An optional CRC32C checksum of the {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext}.
-   *   If specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the
-   *   received {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext} using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
-   *   fails. If you receive a checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext}) is equal to
-   *   {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext_crc32c|AsymmetricDecryptRequest.ciphertext_crc32c}, and if so, perform a
-   *   limited number of retries. A persistent mismatch may indicate an issue in
-   *   your computation of the CRC32C checksum.
-   *   Note: This field is defined as int64 for reasons of compatibility across
-   *   different languages. However, it is a non-negative integer, which will
-   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-   *   that support this type.
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received
+   *   {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext}
+   *   using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext})
+   *   is equal to
+   *   {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext_crc32c|AsymmetricDecryptRequest.ciphertext_crc32c},
+   *   and if so, perform a limited number of retries. A persistent mismatch may
+   *   indicate an issue in your computation of the CRC32C checksum. Note: This
+   *   field is defined as int64 for reasons of compatibility across different
+   *   languages. However, it is a non-negative integer, which will never exceed
+   *   2^32-1, and can be safely downconverted to uint32 in languages that support
+   *   this type.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2326,31 +2447,37 @@ export class KeyManagementServiceClient {
     return this.innerApiCalls.asymmetricDecrypt(request, options, callback);
   }
   /**
-   * Signs data using a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
-   * MAC, producing a tag that can be verified by another source with the
-   * same key.
+   * Signs data using a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
+   * with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} MAC,
+   * producing a tag that can be verified by another source with the same key.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for signing.
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+   *   signing.
    * @param {Buffer} request.data
-   *   Required. The data to sign. The MAC tag is computed over this data field based on
-   *   the specific algorithm.
+   *   Required. The data to sign. The MAC tag is computed over this data field
+   *   based on the specific algorithm.
    * @param {google.protobuf.Int64Value} [request.dataCrc32c]
-   *   Optional. An optional CRC32C checksum of the {@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data}. If
-   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the
-   *   received {@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data} using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
-   *   fails. If you receive a checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data}) is equal to
-   *   {@link google.cloud.kms.v1.MacSignRequest.data_crc32c|MacSignRequest.data_crc32c}, and if so, perform a limited
-   *   number of retries. A persistent mismatch may indicate an issue in your
-   *   computation of the CRC32C checksum.
-   *   Note: This field is defined as int64 for reasons of compatibility across
-   *   different languages. However, it is a non-negative integer, which will
-   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-   *   that support this type.
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data}. If
+   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
+   *   will verify the integrity of the received
+   *   {@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data} using this
+   *   checksum. {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
+   *   will report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data}) is
+   *   equal to
+   *   {@link google.cloud.kms.v1.MacSignRequest.data_crc32c|MacSignRequest.data_crc32c},
+   *   and if so, perform a limited number of retries. A persistent mismatch may
+   *   indicate an issue in your computation of the CRC32C checksum. Note: This
+   *   field is defined as int64 for reasons of compatibility across different
+   *   languages. However, it is a non-negative integer, which will never exceed
+   *   2^32-1, and can be safely downconverted to uint32 in languages that support
+   *   this type.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2428,47 +2555,59 @@ export class KeyManagementServiceClient {
     return this.innerApiCalls.macSign(request, options, callback);
   }
   /**
-   * Verifies MAC tag using a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
-   * MAC, and returns a response that indicates whether or not the verification
-   * was successful.
+   * Verifies MAC tag using a
+   * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with
+   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} MAC, and returns
+   * a response that indicates whether or not the verification was successful.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for verification.
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+   *   verification.
    * @param {Buffer} request.data
-   *   Required. The data used previously as a {@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data} to generate the MAC
-   *   tag.
+   *   Required. The data used previously as a
+   *   {@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data} to generate
+   *   the MAC tag.
    * @param {google.protobuf.Int64Value} [request.dataCrc32c]
-   *   Optional. An optional CRC32C checksum of the {@link google.cloud.kms.v1.MacVerifyRequest.data|MacVerifyRequest.data}. If
-   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the
-   *   received {@link google.cloud.kms.v1.MacVerifyRequest.data|MacVerifyRequest.data} using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
-   *   fails. If you receive a checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.MacVerifyRequest.data|MacVerifyRequest.data}) is equal to
-   *   {@link google.cloud.kms.v1.MacVerifyRequest.data_crc32c|MacVerifyRequest.data_crc32c}, and if so, perform a limited
-   *   number of retries. A persistent mismatch may indicate an issue in your
-   *   computation of the CRC32C checksum.
-   *   Note: This field is defined as int64 for reasons of compatibility across
-   *   different languages. However, it is a non-negative integer, which will
-   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-   *   that support this type.
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.MacVerifyRequest.data|MacVerifyRequest.data}. If
+   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
+   *   will verify the integrity of the received
+   *   {@link google.cloud.kms.v1.MacVerifyRequest.data|MacVerifyRequest.data} using
+   *   this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C({@link google.cloud.kms.v1.MacVerifyRequest.data|MacVerifyRequest.data})
+   *   is equal to
+   *   {@link google.cloud.kms.v1.MacVerifyRequest.data_crc32c|MacVerifyRequest.data_crc32c},
+   *   and if so, perform a limited number of retries. A persistent mismatch may
+   *   indicate an issue in your computation of the CRC32C checksum. Note: This
+   *   field is defined as int64 for reasons of compatibility across different
+   *   languages. However, it is a non-negative integer, which will never exceed
+   *   2^32-1, and can be safely downconverted to uint32 in languages that support
+   *   this type.
    * @param {Buffer} request.mac
    *   Required. The signature to verify.
    * @param {google.protobuf.Int64Value} [request.macCrc32c]
-   *   Optional. An optional CRC32C checksum of the {@link google.cloud.kms.v1.MacVerifyRequest.mac|MacVerifyRequest.mac}. If
-   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will verify the integrity of the
-   *   received {@link google.cloud.kms.v1.MacVerifyRequest.mac|MacVerifyRequest.mac} using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will report an error if the checksum verification
-   *   fails. If you receive a checksum error, your client should verify that
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.MacVerifyRequest.mac|MacVerifyRequest.mac}. If
+   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
+   *   will verify the integrity of the received
+   *   {@link google.cloud.kms.v1.MacVerifyRequest.mac|MacVerifyRequest.mac} using this
+   *   checksum. {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
+   *   will report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
    *   CRC32C({@link |MacVerifyRequest.tag}) is equal to
-   *   {@link google.cloud.kms.v1.MacVerifyRequest.mac_crc32c|MacVerifyRequest.mac_crc32c}, and if so, perform a limited
-   *   number of retries. A persistent mismatch may indicate an issue in your
-   *   computation of the CRC32C checksum.
-   *   Note: This field is defined as int64 for reasons of compatibility across
-   *   different languages. However, it is a non-negative integer, which will
-   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-   *   that support this type.
+   *   {@link google.cloud.kms.v1.MacVerifyRequest.mac_crc32c|MacVerifyRequest.mac_crc32c},
+   *   and if so, perform a limited number of retries. A persistent mismatch may
+   *   indicate an issue in your computation of the CRC32C checksum. Note: This
+   *   field is defined as int64 for reasons of compatibility across different
+   *   languages. However, it is a non-negative integer, which will never exceed
+   *   2^32-1, and can be safely downconverted to uint32 in languages that support
+   *   this type.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2558,8 +2697,10 @@ export class KeyManagementServiceClient {
    *   The length in bytes of the amount of randomness to retrieve.  Minimum 8
    *   bytes, maximum 1024 bytes.
    * @param {google.cloud.kms.v1.ProtectionLevel} request.protectionLevel
-   *   The {@link google.cloud.kms.v1.ProtectionLevel|ProtectionLevel} to use when generating the random data. Defaults to
-   *   {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE}.
+   *   The {@link google.cloud.kms.v1.ProtectionLevel|ProtectionLevel} to use when
+   *   generating the random data. Currently, only
+   *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} protection level is
+   *   supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2646,12 +2787,16 @@ export class KeyManagementServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format `projects/* /locations/*`.
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format
+   *   `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the
-   *   response.  Further {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
-   *   including the {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token} in a subsequent
-   *   request.  If unspecified, the server will pick an appropriate default.
+   *   Optional. Optional limit on the number of
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the response. Further
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
+   *   including the
+   *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}
+   *   in a subsequent request.  If unspecified, the server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}.
@@ -2751,12 +2896,16 @@ export class KeyManagementServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format `projects/* /locations/*`.
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format
+   *   `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the
-   *   response.  Further {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
-   *   including the {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token} in a subsequent
-   *   request.  If unspecified, the server will pick an appropriate default.
+   *   Optional. Optional limit on the number of
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the response. Further
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
+   *   including the
+   *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}
+   *   in a subsequent request.  If unspecified, the server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}.
@@ -2812,12 +2961,16 @@ export class KeyManagementServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format `projects/* /locations/*`.
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format
+   *   `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the
-   *   response.  Further {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
-   *   including the {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token} in a subsequent
-   *   request.  If unspecified, the server will pick an appropriate default.
+   *   Optional. Optional limit on the number of
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the response. Further
+   *   {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
+   *   including the
+   *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}
+   *   in a subsequent request.  If unspecified, the server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}.
@@ -2871,13 +3024,16 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to list, in the format
-   *   `projects/* /locations/* /keyRings/*`.
+   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
+   *   to list, in the format `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the
-   *   response.  Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be obtained by
-   *   including the {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token} in a subsequent
-   *   request.  If unspecified, the server will pick an appropriate default.
+   *   Optional. Optional limit on the number of
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the response.
+   *   Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be
+   *   obtained by including the
+   *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}
+   *   in a subsequent request.  If unspecified, the server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}.
@@ -2978,13 +3134,16 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to list, in the format
-   *   `projects/* /locations/* /keyRings/*`.
+   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
+   *   to list, in the format `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the
-   *   response.  Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be obtained by
-   *   including the {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token} in a subsequent
-   *   request.  If unspecified, the server will pick an appropriate default.
+   *   Optional. Optional limit on the number of
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the response.
+   *   Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be
+   *   obtained by including the
+   *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}
+   *   in a subsequent request.  If unspecified, the server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}.
@@ -3041,13 +3200,16 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to list, in the format
-   *   `projects/* /locations/* /keyRings/*`.
+   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
+   *   to list, in the format `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the
-   *   response.  Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be obtained by
-   *   including the {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token} in a subsequent
-   *   request.  If unspecified, the server will pick an appropriate default.
+   *   Optional. Optional limit on the number of
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the response.
+   *   Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be
+   *   obtained by including the
+   *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}
+   *   in a subsequent request.  If unspecified, the server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}.
@@ -3103,14 +3265,17 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
    *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to
-   *   include in the response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} can
-   *   subsequently be obtained by including the
-   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token} in a subsequent request.
-   *   If unspecified, the server will pick an appropriate default.
+   *   Optional. Optional limit on the number of
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to include in the
+   *   response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}
+   *   can subsequently be obtained by including the
+   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}
+   *   in a subsequent request. If unspecified, the server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}.
@@ -3219,14 +3384,17 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
    *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to
-   *   include in the response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} can
-   *   subsequently be obtained by including the
-   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token} in a subsequent request.
-   *   If unspecified, the server will pick an appropriate default.
+   *   Optional. Optional limit on the number of
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to include in the
+   *   response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}
+   *   can subsequently be obtained by including the
+   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}
+   *   in a subsequent request. If unspecified, the server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}.
@@ -3283,14 +3451,17 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
    *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to
-   *   include in the response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} can
-   *   subsequently be obtained by including the
-   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token} in a subsequent request.
-   *   If unspecified, the server will pick an appropriate default.
+   *   Optional. Optional limit on the number of
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to include in the
+   *   response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}
+   *   can subsequently be obtained by including the
+   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}
+   *   in a subsequent request. If unspecified, the server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}.
@@ -3346,13 +3517,16 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to list, in the format
-   *   `projects/* /locations/* /keyRings/*`.
+   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
+   *   to list, in the format `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the
-   *   response. Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be obtained by
-   *   including the {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token} in a subsequent
-   *   request. If unspecified, the server will pick an appropriate default.
+   *   Optional. Optional limit on the number of
+   *   {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the response.
+   *   Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be
+   *   obtained by including the
+   *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}
+   *   in a subsequent request. If unspecified, the server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}.
@@ -3451,13 +3625,16 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to list, in the format
-   *   `projects/* /locations/* /keyRings/*`.
+   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
+   *   to list, in the format `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the
-   *   response. Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be obtained by
-   *   including the {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token} in a subsequent
-   *   request. If unspecified, the server will pick an appropriate default.
+   *   Optional. Optional limit on the number of
+   *   {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the response.
+   *   Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be
+   *   obtained by including the
+   *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}
+   *   in a subsequent request. If unspecified, the server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}.
@@ -3512,13 +3689,16 @@ export class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing} to list, in the format
-   *   `projects/* /locations/* /keyRings/*`.
+   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
+   *   to list, in the format `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the
-   *   response. Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be obtained by
-   *   including the {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token} in a subsequent
-   *   request. If unspecified, the server will pick an appropriate default.
+   *   Optional. Optional limit on the number of
+   *   {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the response.
+   *   Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be
+   *   obtained by including the
+   *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}
+   *   in a subsequent request. If unspecified, the server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. Optional pagination token, returned earlier via
    *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}.
@@ -3870,6 +4050,58 @@ export class KeyManagementServiceClient {
     return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
       cryptoKeyVersionName
     ).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified ekmConnection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} ekm_connection
+   * @returns {string} Resource name string.
+   */
+  ekmConnectionPath(project: string, location: string, ekmConnection: string) {
+    return this.pathTemplates.ekmConnectionPathTemplate.render({
+      project: project,
+      location: location,
+      ekm_connection: ekmConnection,
+    });
+  }
+
+  /**
+   * Parse the project from EkmConnection resource.
+   *
+   * @param {string} ekmConnectionName
+   *   A fully-qualified path representing EkmConnection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEkmConnectionName(ekmConnectionName: string) {
+    return this.pathTemplates.ekmConnectionPathTemplate.match(ekmConnectionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from EkmConnection resource.
+   *
+   * @param {string} ekmConnectionName
+   *   A fully-qualified path representing EkmConnection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEkmConnectionName(ekmConnectionName: string) {
+    return this.pathTemplates.ekmConnectionPathTemplate.match(ekmConnectionName)
+      .location;
+  }
+
+  /**
+   * Parse the ekm_connection from EkmConnection resource.
+   *
+   * @param {string} ekmConnectionName
+   *   A fully-qualified path representing EkmConnection resource.
+   * @returns {string} A string representing the ekm_connection.
+   */
+  matchEkmConnectionFromEkmConnectionName(ekmConnectionName: string) {
+    return this.pathTemplates.ekmConnectionPathTemplate.match(ekmConnectionName)
+      .ekm_connection;
   }
 
   /**

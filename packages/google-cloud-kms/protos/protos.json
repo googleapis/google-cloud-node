@@ -14,9 +14,343 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "KmsProto",
                     "java_package": "com.google.cloud.kms.v1",
-                    "php_namespace": "Google\\Cloud\\Kms\\V1"
+                    "php_namespace": "Google\\Cloud\\Kms\\V1",
+                    "(google.api.resource_definition).type": "servicedirectory.googleapis.com/Service",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}"
                   },
                   "nested": {
+                    "EkmService": {
+                      "options": {
+                        "(google.api.default_host)": "cloudkms.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloudkms"
+                      },
+                      "methods": {
+                        "ListEkmConnections": {
+                          "requestType": "ListEkmConnectionsRequest",
+                          "responseType": "ListEkmConnectionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/ekmConnections",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/ekmConnections"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetEkmConnection": {
+                          "requestType": "GetEkmConnectionRequest",
+                          "responseType": "EkmConnection",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/ekmConnections/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/ekmConnections/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateEkmConnection": {
+                          "requestType": "CreateEkmConnectionRequest",
+                          "responseType": "EkmConnection",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/ekmConnections",
+                            "(google.api.http).body": "ekm_connection",
+                            "(google.api.method_signature)": "parent,ekm_connection_id,ekm_connection"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/ekmConnections",
+                                "body": "ekm_connection"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,ekm_connection_id,ekm_connection"
+                            }
+                          ]
+                        },
+                        "UpdateEkmConnection": {
+                          "requestType": "UpdateEkmConnectionRequest",
+                          "responseType": "EkmConnection",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{ekm_connection.name=projects/*/locations/*/ekmConnections/*}",
+                            "(google.api.http).body": "ekm_connection",
+                            "(google.api.method_signature)": "ekm_connection,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{ekm_connection.name=projects/*/locations/*/ekmConnections/*}",
+                                "body": "ekm_connection"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "ekm_connection,update_mask"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListEkmConnectionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListEkmConnectionsResponse": {
+                      "fields": {
+                        "ekmConnections": {
+                          "rule": "repeated",
+                          "type": "EkmConnection",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetEkmConnectionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/EkmConnection"
+                          }
+                        }
+                      }
+                    },
+                    "CreateEkmConnectionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "ekmConnectionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "ekmConnection": {
+                          "type": "EkmConnection",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateEkmConnectionRequest": {
+                      "fields": {
+                        "ekmConnection": {
+                          "type": "EkmConnection",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Certificate": {
+                      "fields": {
+                        "rawDer": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parsed": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "issuer": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "subject": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "subjectAlternativeDnsNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "notBeforeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "notAfterTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "serialNumber": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sha256Fingerprint": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "EkmConnection": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/EkmConnection",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/ekmConnections/{ekm_connection}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "serviceResolvers": {
+                          "rule": "repeated",
+                          "type": "ServiceResolver",
+                          "id": 3
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "ServiceResolver": {
+                          "fields": {
+                            "serviceDirectoryService": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "servicedirectory.googleapis.com/Service"
+                              }
+                            },
+                            "endpointFilter": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "hostname": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "serverCertificates": {
+                              "rule": "repeated",
+                              "type": "Certificate",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "KeyRing": {
                       "options": {
                         "(google.api.resource).type": "cloudkms.googleapis.com/KeyRing",
@@ -110,6 +444,14 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "cryptoKeyBackend": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "*"
+                          }
                         }
                       },
                       "nested": {
@@ -154,6 +496,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "certChains": {
+                          "type": "CertificateChains",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -162,6 +511,25 @@
                             "ATTESTATION_FORMAT_UNSPECIFIED": 0,
                             "CAVIUM_V1_COMPRESSED": 3,
                             "CAVIUM_V2_COMPRESSED": 4
+                          }
+                        },
+                        "CertificateChains": {
+                          "fields": {
+                            "caviumCerts": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "googleCardCerts": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "googlePartitionCerts": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            }
                           }
                         }
                       }
@@ -421,14 +789,6 @@
                         }
                       },
                       "nested": {
-                        "WrappingPublicKey": {
-                          "fields": {
-                            "pem": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
                         "ImportMethod": {
                           "values": {
                             "IMPORT_METHOD_UNSPECIFIED": 0,
@@ -443,6 +803,26 @@
                             "ACTIVE": 2,
                             "EXPIRED": 3
                           }
+                        },
+                        "WrappingPublicKey": {
+                          "fields": {
+                            "pem": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExternalProtectionLevelOptions": {
+                      "fields": {
+                        "externalKeyUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "ekmConnectionKeyPath": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -451,15 +831,8 @@
                         "PROTECTION_LEVEL_UNSPECIFIED": 0,
                         "SOFTWARE": 1,
                         "HSM": 2,
-                        "EXTERNAL": 3
-                      }
-                    },
-                    "ExternalProtectionLevelOptions": {
-                      "fields": {
-                        "externalKeyUri": {
-                          "type": "string",
-                          "id": 1
-                        }
+                        "EXTERNAL": 3,
+                        "EXTERNAL_VPC": 4
                       }
                     },
                     "KeyManagementService": {
@@ -1924,107 +2297,12 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
           },
           "nested": {
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -2127,6 +2405,101 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
             }
           }
         },
@@ -3037,7 +3410,16 @@
                 }
               }
             },
-            "Duration": {
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Timestamp": {
               "fields": {
                 "seconds": {
                   "type": "int64",
@@ -3049,7 +3431,7 @@
                 }
               }
             },
-            "Timestamp": {
+            "Duration": {
               "fields": {
                 "seconds": {
                   "type": "int64",
@@ -3129,15 +3511,6 @@
               "fields": {
                 "value": {
                   "type": "bytes",
-                  "id": 1
-                }
-              }
-            },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
                   "id": 1
                 }
               }

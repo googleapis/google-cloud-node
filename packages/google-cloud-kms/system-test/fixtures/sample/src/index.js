@@ -20,6 +20,7 @@
 const kms = require('@google-cloud/kms');
 
 function main() {
+  const ekmServiceClient = new kms.EkmServiceClient();
   const keyManagementServiceClient = new kms.KeyManagementServiceClient();
 }
 

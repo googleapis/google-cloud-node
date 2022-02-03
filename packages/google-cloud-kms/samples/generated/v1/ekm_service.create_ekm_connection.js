@@ -15,43 +15,49 @@
 
 'use strict';
 
-function main(parent, cryptoKeyVersion) {
-  // [START cloudkms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_async]
+function main(parent, ekmConnectionId, ekmConnection) {
+  // [START cloudkms_v1_generated_EkmService_CreateEkmConnection_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name google.cloud.kms.v1.CryptoKey.name  of the
-   *  CryptoKey google.cloud.kms.v1.CryptoKey  associated with the
-   *  CryptoKeyVersions google.cloud.kms.v1.CryptoKeyVersion.
+   *  Required. The resource name of the location associated with the
+   *  EkmConnection google.cloud.kms.v1.EkmConnection, in the format
+   *  `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. A CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  with
+   *  Required. It must be unique within a location and match the regular
+   *  expression `[a-zA-Z0-9_-]{1,63}`.
+   */
+  // const ekmConnectionId = 'abc123'
+  /**
+   *  Required. An EkmConnection google.cloud.kms.v1.EkmConnection  with
    *  initial field values.
    */
-  // const cryptoKeyVersion = {}
+  // const ekmConnection = {}
 
   // Imports the Kms library
-  const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;
+  const {EkmServiceClient} = require('@google-cloud/kms').v1;
 
   // Instantiates a client
-  const kmsClient = new KeyManagementServiceClient();
+  const kmsClient = new EkmServiceClient();
 
-  async function callCreateCryptoKeyVersion() {
+  async function callCreateEkmConnection() {
     // Construct request
     const request = {
       parent,
-      cryptoKeyVersion,
+      ekmConnectionId,
+      ekmConnection,
     };
 
     // Run request
-    const response = await kmsClient.createCryptoKeyVersion(request);
+    const response = await kmsClient.createEkmConnection(request);
     console.log(response);
   }
 
-  callCreateCryptoKeyVersion();
-  // [END cloudkms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_async]
+  callCreateEkmConnection();
+  // [END cloudkms_v1_generated_EkmService_CreateEkmConnection_async]
 }
 
 process.on('unhandledRejection', err => {

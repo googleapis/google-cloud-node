@@ -22,14 +22,18 @@ function main(parent) {
    */
   /**
    *  Required. The resource name of the location associated with the
-   *  KeyRings google.cloud.kms.v1.KeyRing, in the format `projects/* /locations/*`.
+   *  KeyRings google.cloud.kms.v1.KeyRing, in the format
+   *  `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Optional limit on the number of KeyRings google.cloud.kms.v1.KeyRing  to include in the
-   *  response.  Further KeyRings google.cloud.kms.v1.KeyRing  can subsequently be obtained by
-   *  including the ListKeyRingsResponse.next_page_token google.cloud.kms.v1.ListKeyRingsResponse.next_page_token  in a subsequent
-   *  request.  If unspecified, the server will pick an appropriate default.
+   *  Optional. Optional limit on the number of
+   *  KeyRings google.cloud.kms.v1.KeyRing  to include in the response. Further
+   *  KeyRings google.cloud.kms.v1.KeyRing  can subsequently be obtained by
+   *  including the
+   *  ListKeyRingsResponse.next_page_token google.cloud.kms.v1.ListKeyRingsResponse.next_page_token 
+   *  in a subsequent request.  If unspecified, the server will pick an
+   *  appropriate default.
    */
   // const pageSize = 1234
   /**

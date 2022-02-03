@@ -5,6 +5,64 @@
   "protoPackage": "google.cloud.kms.v1",
   "libraryPackage": "@google-cloud/kms",
   "services": {
+    "EkmService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EkmServiceClient",
+          "rpcs": {
+            "GetEkmConnection": {
+              "methods": [
+                "getEkmConnection"
+              ]
+            },
+            "CreateEkmConnection": {
+              "methods": [
+                "createEkmConnection"
+              ]
+            },
+            "UpdateEkmConnection": {
+              "methods": [
+                "updateEkmConnection"
+              ]
+            },
+            "ListEkmConnections": {
+              "methods": [
+                "listEkmConnections",
+                "listEkmConnectionsStream",
+                "listEkmConnectionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EkmServiceClient",
+          "rpcs": {
+            "GetEkmConnection": {
+              "methods": [
+                "getEkmConnection"
+              ]
+            },
+            "CreateEkmConnection": {
+              "methods": [
+                "createEkmConnection"
+              ]
+            },
+            "UpdateEkmConnection": {
+              "methods": [
+                "updateEkmConnection"
+              ]
+            },
+            "ListEkmConnections": {
+              "methods": [
+                "listEkmConnections",
+                "listEkmConnectionsStream",
+                "listEkmConnectionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "KeyManagementService": {
       "clients": {
         "grpc": {

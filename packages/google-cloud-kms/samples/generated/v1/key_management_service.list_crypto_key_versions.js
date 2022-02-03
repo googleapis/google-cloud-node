@@ -21,16 +21,19 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the CryptoKey google.cloud.kms.v1.CryptoKey  to list, in the format
+   *  Required. The resource name of the
+   *  CryptoKey google.cloud.kms.v1.CryptoKey  to list, in the format
    *  `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Optional limit on the number of CryptoKeyVersions google.cloud.kms.v1.CryptoKeyVersion  to
-   *  include in the response. Further CryptoKeyVersions google.cloud.kms.v1.CryptoKeyVersion  can
-   *  subsequently be obtained by including the
-   *  ListCryptoKeyVersionsResponse.next_page_token google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token  in a subsequent request.
-   *  If unspecified, the server will pick an appropriate default.
+   *  Optional. Optional limit on the number of
+   *  CryptoKeyVersions google.cloud.kms.v1.CryptoKeyVersion  to include in the
+   *  response. Further CryptoKeyVersions google.cloud.kms.v1.CryptoKeyVersion 
+   *  can subsequently be obtained by including the
+   *  ListCryptoKeyVersionsResponse.next_page_token google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token 
+   *  in a subsequent request. If unspecified, the server will pick an
+   *  appropriate default.
    */
   // const pageSize = 1234
   /**

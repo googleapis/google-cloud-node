@@ -31,8 +31,10 @@ function main() {
    */
   // const lengthBytes = 1234
   /**
-   *  The ProtectionLevel google.cloud.kms.v1.ProtectionLevel  to use when generating the random data. Defaults to
-   *  SOFTWARE google.cloud.kms.v1.ProtectionLevel.SOFTWARE.
+   *  The ProtectionLevel google.cloud.kms.v1.ProtectionLevel  to use when
+   *  generating the random data. Currently, only
+   *  HSM google.cloud.kms.v1.ProtectionLevel.HSM  protection level is
+   *  supported.
    */
   // const protectionLevel = {}
 

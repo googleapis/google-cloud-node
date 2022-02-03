@@ -21,11 +21,13 @@ function main(name, cryptoKeyVersionId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the CryptoKey google.cloud.kms.v1.CryptoKey  to update.
+   *  Required. The resource name of the
+   *  CryptoKey google.cloud.kms.v1.CryptoKey  to update.
    */
   // const name = 'abc123'
   /**
-   *  Required. The id of the child CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  to use as primary.
+   *  Required. The id of the child
+   *  CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  to use as primary.
    */
   // const cryptoKeyVersionId = 'abc123'
 

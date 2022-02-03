@@ -16,9 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {KeyManagementServiceClient} from '@google-cloud/kms';
+import {EkmServiceClient, KeyManagementServiceClient} from '@google-cloud/kms';
 
 // check that the client class type name can be used
+function doStuffWithEkmServiceClient(client: EkmServiceClient) {
+  client.close();
+}
 function doStuffWithKeyManagementServiceClient(
   client: KeyManagementServiceClient
 ) {
@@ -26,6 +29,9 @@ function doStuffWithKeyManagementServiceClient(
 }
 
 function main() {
+  // check that the client instance can be created
+  const ekmServiceClient = new EkmServiceClient();
+  doStuffWithEkmServiceClient(ekmServiceClient);
   // check that the client instance can be created
   const keyManagementServiceClient = new KeyManagementServiceClient();
   doStuffWithKeyManagementServiceClient(keyManagementServiceClient);

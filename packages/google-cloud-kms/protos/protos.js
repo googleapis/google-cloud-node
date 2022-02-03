@@ -66,6 +66,2304 @@
                      */
                     var v1 = {};
     
+                    v1.EkmService = (function() {
+    
+                        /**
+                         * Constructs a new EkmService service.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents an EkmService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function EkmService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (EkmService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = EkmService;
+    
+                        /**
+                         * Creates new EkmService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {EkmService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        EkmService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.EkmService#listEkmConnections}.
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @typedef ListEkmConnectionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.ListEkmConnectionsResponse} [response] ListEkmConnectionsResponse
+                         */
+    
+                        /**
+                         * Calls ListEkmConnections.
+                         * @function listEkmConnections
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IListEkmConnectionsRequest} request ListEkmConnectionsRequest message or plain object
+                         * @param {google.cloud.kms.v1.EkmService.ListEkmConnectionsCallback} callback Node-style callback called with the error, if any, and ListEkmConnectionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(EkmService.prototype.listEkmConnections = function listEkmConnections(request, callback) {
+                            return this.rpcCall(listEkmConnections, $root.google.cloud.kms.v1.ListEkmConnectionsRequest, $root.google.cloud.kms.v1.ListEkmConnectionsResponse, request, callback);
+                        }, "name", { value: "ListEkmConnections" });
+    
+                        /**
+                         * Calls ListEkmConnections.
+                         * @function listEkmConnections
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IListEkmConnectionsRequest} request ListEkmConnectionsRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.ListEkmConnectionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.EkmService#getEkmConnection}.
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @typedef GetEkmConnectionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.EkmConnection} [response] EkmConnection
+                         */
+    
+                        /**
+                         * Calls GetEkmConnection.
+                         * @function getEkmConnection
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IGetEkmConnectionRequest} request GetEkmConnectionRequest message or plain object
+                         * @param {google.cloud.kms.v1.EkmService.GetEkmConnectionCallback} callback Node-style callback called with the error, if any, and EkmConnection
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(EkmService.prototype.getEkmConnection = function getEkmConnection(request, callback) {
+                            return this.rpcCall(getEkmConnection, $root.google.cloud.kms.v1.GetEkmConnectionRequest, $root.google.cloud.kms.v1.EkmConnection, request, callback);
+                        }, "name", { value: "GetEkmConnection" });
+    
+                        /**
+                         * Calls GetEkmConnection.
+                         * @function getEkmConnection
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IGetEkmConnectionRequest} request GetEkmConnectionRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.EkmConnection>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.EkmService#createEkmConnection}.
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @typedef CreateEkmConnectionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.EkmConnection} [response] EkmConnection
+                         */
+    
+                        /**
+                         * Calls CreateEkmConnection.
+                         * @function createEkmConnection
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.ICreateEkmConnectionRequest} request CreateEkmConnectionRequest message or plain object
+                         * @param {google.cloud.kms.v1.EkmService.CreateEkmConnectionCallback} callback Node-style callback called with the error, if any, and EkmConnection
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(EkmService.prototype.createEkmConnection = function createEkmConnection(request, callback) {
+                            return this.rpcCall(createEkmConnection, $root.google.cloud.kms.v1.CreateEkmConnectionRequest, $root.google.cloud.kms.v1.EkmConnection, request, callback);
+                        }, "name", { value: "CreateEkmConnection" });
+    
+                        /**
+                         * Calls CreateEkmConnection.
+                         * @function createEkmConnection
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.ICreateEkmConnectionRequest} request CreateEkmConnectionRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.EkmConnection>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.EkmService#updateEkmConnection}.
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @typedef UpdateEkmConnectionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.EkmConnection} [response] EkmConnection
+                         */
+    
+                        /**
+                         * Calls UpdateEkmConnection.
+                         * @function updateEkmConnection
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IUpdateEkmConnectionRequest} request UpdateEkmConnectionRequest message or plain object
+                         * @param {google.cloud.kms.v1.EkmService.UpdateEkmConnectionCallback} callback Node-style callback called with the error, if any, and EkmConnection
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(EkmService.prototype.updateEkmConnection = function updateEkmConnection(request, callback) {
+                            return this.rpcCall(updateEkmConnection, $root.google.cloud.kms.v1.UpdateEkmConnectionRequest, $root.google.cloud.kms.v1.EkmConnection, request, callback);
+                        }, "name", { value: "UpdateEkmConnection" });
+    
+                        /**
+                         * Calls UpdateEkmConnection.
+                         * @function updateEkmConnection
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IUpdateEkmConnectionRequest} request UpdateEkmConnectionRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.EkmConnection>} Promise
+                         * @variation 2
+                         */
+    
+                        return EkmService;
+                    })();
+    
+                    v1.ListEkmConnectionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListEkmConnectionsRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IListEkmConnectionsRequest
+                         * @property {string|null} [parent] ListEkmConnectionsRequest parent
+                         * @property {number|null} [pageSize] ListEkmConnectionsRequest pageSize
+                         * @property {string|null} [pageToken] ListEkmConnectionsRequest pageToken
+                         * @property {string|null} [filter] ListEkmConnectionsRequest filter
+                         * @property {string|null} [orderBy] ListEkmConnectionsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListEkmConnectionsRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a ListEkmConnectionsRequest.
+                         * @implements IListEkmConnectionsRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IListEkmConnectionsRequest=} [properties] Properties to set
+                         */
+                        function ListEkmConnectionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListEkmConnectionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @instance
+                         */
+                        ListEkmConnectionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListEkmConnectionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @instance
+                         */
+                        ListEkmConnectionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListEkmConnectionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @instance
+                         */
+                        ListEkmConnectionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListEkmConnectionsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @instance
+                         */
+                        ListEkmConnectionsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListEkmConnectionsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @instance
+                         */
+                        ListEkmConnectionsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListEkmConnectionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IListEkmConnectionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ListEkmConnectionsRequest} ListEkmConnectionsRequest instance
+                         */
+                        ListEkmConnectionsRequest.create = function create(properties) {
+                            return new ListEkmConnectionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListEkmConnectionsRequest message. Does not implicitly {@link google.cloud.kms.v1.ListEkmConnectionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IListEkmConnectionsRequest} message ListEkmConnectionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEkmConnectionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListEkmConnectionsRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListEkmConnectionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IListEkmConnectionsRequest} message ListEkmConnectionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEkmConnectionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListEkmConnectionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ListEkmConnectionsRequest} ListEkmConnectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEkmConnectionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListEkmConnectionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                case 5:
+                                    message.orderBy = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListEkmConnectionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ListEkmConnectionsRequest} ListEkmConnectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEkmConnectionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListEkmConnectionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListEkmConnectionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListEkmConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ListEkmConnectionsRequest} ListEkmConnectionsRequest
+                         */
+                        ListEkmConnectionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ListEkmConnectionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ListEkmConnectionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListEkmConnectionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ListEkmConnectionsRequest} message ListEkmConnectionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListEkmConnectionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListEkmConnectionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListEkmConnectionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListEkmConnectionsRequest;
+                    })();
+    
+                    v1.ListEkmConnectionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListEkmConnectionsResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IListEkmConnectionsResponse
+                         * @property {Array.<google.cloud.kms.v1.IEkmConnection>|null} [ekmConnections] ListEkmConnectionsResponse ekmConnections
+                         * @property {string|null} [nextPageToken] ListEkmConnectionsResponse nextPageToken
+                         * @property {number|null} [totalSize] ListEkmConnectionsResponse totalSize
+                         */
+    
+                        /**
+                         * Constructs a new ListEkmConnectionsResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a ListEkmConnectionsResponse.
+                         * @implements IListEkmConnectionsResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IListEkmConnectionsResponse=} [properties] Properties to set
+                         */
+                        function ListEkmConnectionsResponse(properties) {
+                            this.ekmConnections = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListEkmConnectionsResponse ekmConnections.
+                         * @member {Array.<google.cloud.kms.v1.IEkmConnection>} ekmConnections
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsResponse
+                         * @instance
+                         */
+                        ListEkmConnectionsResponse.prototype.ekmConnections = $util.emptyArray;
+    
+                        /**
+                         * ListEkmConnectionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsResponse
+                         * @instance
+                         */
+                        ListEkmConnectionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListEkmConnectionsResponse totalSize.
+                         * @member {number} totalSize
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsResponse
+                         * @instance
+                         */
+                        ListEkmConnectionsResponse.prototype.totalSize = 0;
+    
+                        /**
+                         * Creates a new ListEkmConnectionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IListEkmConnectionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ListEkmConnectionsResponse} ListEkmConnectionsResponse instance
+                         */
+                        ListEkmConnectionsResponse.create = function create(properties) {
+                            return new ListEkmConnectionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListEkmConnectionsResponse message. Does not implicitly {@link google.cloud.kms.v1.ListEkmConnectionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IListEkmConnectionsResponse} message ListEkmConnectionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEkmConnectionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ekmConnections != null && message.ekmConnections.length)
+                                for (var i = 0; i < message.ekmConnections.length; ++i)
+                                    $root.google.cloud.kms.v1.EkmConnection.encode(message.ekmConnections[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalSize);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListEkmConnectionsResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListEkmConnectionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IListEkmConnectionsResponse} message ListEkmConnectionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEkmConnectionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListEkmConnectionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ListEkmConnectionsResponse} ListEkmConnectionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEkmConnectionsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListEkmConnectionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.ekmConnections && message.ekmConnections.length))
+                                        message.ekmConnections = [];
+                                    message.ekmConnections.push($root.google.cloud.kms.v1.EkmConnection.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                case 3:
+                                    message.totalSize = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListEkmConnectionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ListEkmConnectionsResponse} ListEkmConnectionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEkmConnectionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListEkmConnectionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListEkmConnectionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ekmConnections != null && message.hasOwnProperty("ekmConnections")) {
+                                if (!Array.isArray(message.ekmConnections))
+                                    return "ekmConnections: array expected";
+                                for (var i = 0; i < message.ekmConnections.length; ++i) {
+                                    var error = $root.google.cloud.kms.v1.EkmConnection.verify(message.ekmConnections[i]);
+                                    if (error)
+                                        return "ekmConnections." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (!$util.isInteger(message.totalSize))
+                                    return "totalSize: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListEkmConnectionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ListEkmConnectionsResponse} ListEkmConnectionsResponse
+                         */
+                        ListEkmConnectionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ListEkmConnectionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ListEkmConnectionsResponse();
+                            if (object.ekmConnections) {
+                                if (!Array.isArray(object.ekmConnections))
+                                    throw TypeError(".google.cloud.kms.v1.ListEkmConnectionsResponse.ekmConnections: array expected");
+                                message.ekmConnections = [];
+                                for (var i = 0; i < object.ekmConnections.length; ++i) {
+                                    if (typeof object.ekmConnections[i] !== "object")
+                                        throw TypeError(".google.cloud.kms.v1.ListEkmConnectionsResponse.ekmConnections: object expected");
+                                    message.ekmConnections[i] = $root.google.cloud.kms.v1.EkmConnection.fromObject(object.ekmConnections[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.totalSize != null)
+                                message.totalSize = object.totalSize | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListEkmConnectionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.ListEkmConnectionsResponse} message ListEkmConnectionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListEkmConnectionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.ekmConnections = [];
+                            if (options.defaults) {
+                                object.nextPageToken = "";
+                                object.totalSize = 0;
+                            }
+                            if (message.ekmConnections && message.ekmConnections.length) {
+                                object.ekmConnections = [];
+                                for (var j = 0; j < message.ekmConnections.length; ++j)
+                                    object.ekmConnections[j] = $root.google.cloud.kms.v1.EkmConnection.toObject(message.ekmConnections[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                object.totalSize = message.totalSize;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListEkmConnectionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ListEkmConnectionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListEkmConnectionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListEkmConnectionsResponse;
+                    })();
+    
+                    v1.GetEkmConnectionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetEkmConnectionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IGetEkmConnectionRequest
+                         * @property {string|null} [name] GetEkmConnectionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetEkmConnectionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a GetEkmConnectionRequest.
+                         * @implements IGetEkmConnectionRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IGetEkmConnectionRequest=} [properties] Properties to set
+                         */
+                        function GetEkmConnectionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetEkmConnectionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.GetEkmConnectionRequest
+                         * @instance
+                         */
+                        GetEkmConnectionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetEkmConnectionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.GetEkmConnectionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetEkmConnectionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.GetEkmConnectionRequest} GetEkmConnectionRequest instance
+                         */
+                        GetEkmConnectionRequest.create = function create(properties) {
+                            return new GetEkmConnectionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetEkmConnectionRequest message. Does not implicitly {@link google.cloud.kms.v1.GetEkmConnectionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.GetEkmConnectionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetEkmConnectionRequest} message GetEkmConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEkmConnectionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetEkmConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetEkmConnectionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.GetEkmConnectionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetEkmConnectionRequest} message GetEkmConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEkmConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetEkmConnectionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.GetEkmConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.GetEkmConnectionRequest} GetEkmConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEkmConnectionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetEkmConnectionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetEkmConnectionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.GetEkmConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.GetEkmConnectionRequest} GetEkmConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEkmConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetEkmConnectionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.GetEkmConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetEkmConnectionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetEkmConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.GetEkmConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.GetEkmConnectionRequest} GetEkmConnectionRequest
+                         */
+                        GetEkmConnectionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.GetEkmConnectionRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.GetEkmConnectionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetEkmConnectionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.GetEkmConnectionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.GetEkmConnectionRequest} message GetEkmConnectionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetEkmConnectionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetEkmConnectionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.GetEkmConnectionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetEkmConnectionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetEkmConnectionRequest;
+                    })();
+    
+                    v1.CreateEkmConnectionRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateEkmConnectionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface ICreateEkmConnectionRequest
+                         * @property {string|null} [parent] CreateEkmConnectionRequest parent
+                         * @property {string|null} [ekmConnectionId] CreateEkmConnectionRequest ekmConnectionId
+                         * @property {google.cloud.kms.v1.IEkmConnection|null} [ekmConnection] CreateEkmConnectionRequest ekmConnection
+                         */
+    
+                        /**
+                         * Constructs a new CreateEkmConnectionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a CreateEkmConnectionRequest.
+                         * @implements ICreateEkmConnectionRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.ICreateEkmConnectionRequest=} [properties] Properties to set
+                         */
+                        function CreateEkmConnectionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateEkmConnectionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.kms.v1.CreateEkmConnectionRequest
+                         * @instance
+                         */
+                        CreateEkmConnectionRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateEkmConnectionRequest ekmConnectionId.
+                         * @member {string} ekmConnectionId
+                         * @memberof google.cloud.kms.v1.CreateEkmConnectionRequest
+                         * @instance
+                         */
+                        CreateEkmConnectionRequest.prototype.ekmConnectionId = "";
+    
+                        /**
+                         * CreateEkmConnectionRequest ekmConnection.
+                         * @member {google.cloud.kms.v1.IEkmConnection|null|undefined} ekmConnection
+                         * @memberof google.cloud.kms.v1.CreateEkmConnectionRequest
+                         * @instance
+                         */
+                        CreateEkmConnectionRequest.prototype.ekmConnection = null;
+    
+                        /**
+                         * Creates a new CreateEkmConnectionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.CreateEkmConnectionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateEkmConnectionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.CreateEkmConnectionRequest} CreateEkmConnectionRequest instance
+                         */
+                        CreateEkmConnectionRequest.create = function create(properties) {
+                            return new CreateEkmConnectionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateEkmConnectionRequest message. Does not implicitly {@link google.cloud.kms.v1.CreateEkmConnectionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.CreateEkmConnectionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateEkmConnectionRequest} message CreateEkmConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateEkmConnectionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.ekmConnectionId != null && Object.hasOwnProperty.call(message, "ekmConnectionId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.ekmConnectionId);
+                            if (message.ekmConnection != null && Object.hasOwnProperty.call(message, "ekmConnection"))
+                                $root.google.cloud.kms.v1.EkmConnection.encode(message.ekmConnection, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateEkmConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.CreateEkmConnectionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.CreateEkmConnectionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateEkmConnectionRequest} message CreateEkmConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateEkmConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateEkmConnectionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.CreateEkmConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.CreateEkmConnectionRequest} CreateEkmConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateEkmConnectionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CreateEkmConnectionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.ekmConnectionId = reader.string();
+                                    break;
+                                case 3:
+                                    message.ekmConnection = $root.google.cloud.kms.v1.EkmConnection.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateEkmConnectionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.CreateEkmConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.CreateEkmConnectionRequest} CreateEkmConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateEkmConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateEkmConnectionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.CreateEkmConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateEkmConnectionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.ekmConnectionId != null && message.hasOwnProperty("ekmConnectionId"))
+                                if (!$util.isString(message.ekmConnectionId))
+                                    return "ekmConnectionId: string expected";
+                            if (message.ekmConnection != null && message.hasOwnProperty("ekmConnection")) {
+                                var error = $root.google.cloud.kms.v1.EkmConnection.verify(message.ekmConnection);
+                                if (error)
+                                    return "ekmConnection." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateEkmConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.CreateEkmConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.CreateEkmConnectionRequest} CreateEkmConnectionRequest
+                         */
+                        CreateEkmConnectionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.CreateEkmConnectionRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.CreateEkmConnectionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.ekmConnectionId != null)
+                                message.ekmConnectionId = String(object.ekmConnectionId);
+                            if (object.ekmConnection != null) {
+                                if (typeof object.ekmConnection !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.CreateEkmConnectionRequest.ekmConnection: object expected");
+                                message.ekmConnection = $root.google.cloud.kms.v1.EkmConnection.fromObject(object.ekmConnection);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateEkmConnectionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.CreateEkmConnectionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.CreateEkmConnectionRequest} message CreateEkmConnectionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateEkmConnectionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.ekmConnectionId = "";
+                                object.ekmConnection = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.ekmConnectionId != null && message.hasOwnProperty("ekmConnectionId"))
+                                object.ekmConnectionId = message.ekmConnectionId;
+                            if (message.ekmConnection != null && message.hasOwnProperty("ekmConnection"))
+                                object.ekmConnection = $root.google.cloud.kms.v1.EkmConnection.toObject(message.ekmConnection, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateEkmConnectionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.CreateEkmConnectionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateEkmConnectionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateEkmConnectionRequest;
+                    })();
+    
+                    v1.UpdateEkmConnectionRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateEkmConnectionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IUpdateEkmConnectionRequest
+                         * @property {google.cloud.kms.v1.IEkmConnection|null} [ekmConnection] UpdateEkmConnectionRequest ekmConnection
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateEkmConnectionRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateEkmConnectionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents an UpdateEkmConnectionRequest.
+                         * @implements IUpdateEkmConnectionRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IUpdateEkmConnectionRequest=} [properties] Properties to set
+                         */
+                        function UpdateEkmConnectionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateEkmConnectionRequest ekmConnection.
+                         * @member {google.cloud.kms.v1.IEkmConnection|null|undefined} ekmConnection
+                         * @memberof google.cloud.kms.v1.UpdateEkmConnectionRequest
+                         * @instance
+                         */
+                        UpdateEkmConnectionRequest.prototype.ekmConnection = null;
+    
+                        /**
+                         * UpdateEkmConnectionRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.kms.v1.UpdateEkmConnectionRequest
+                         * @instance
+                         */
+                        UpdateEkmConnectionRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateEkmConnectionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.UpdateEkmConnectionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IUpdateEkmConnectionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.UpdateEkmConnectionRequest} UpdateEkmConnectionRequest instance
+                         */
+                        UpdateEkmConnectionRequest.create = function create(properties) {
+                            return new UpdateEkmConnectionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateEkmConnectionRequest message. Does not implicitly {@link google.cloud.kms.v1.UpdateEkmConnectionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.UpdateEkmConnectionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IUpdateEkmConnectionRequest} message UpdateEkmConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateEkmConnectionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ekmConnection != null && Object.hasOwnProperty.call(message, "ekmConnection"))
+                                $root.google.cloud.kms.v1.EkmConnection.encode(message.ekmConnection, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateEkmConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.UpdateEkmConnectionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.UpdateEkmConnectionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IUpdateEkmConnectionRequest} message UpdateEkmConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateEkmConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateEkmConnectionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.UpdateEkmConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.UpdateEkmConnectionRequest} UpdateEkmConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateEkmConnectionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.UpdateEkmConnectionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.ekmConnection = $root.google.cloud.kms.v1.EkmConnection.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateEkmConnectionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.UpdateEkmConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.UpdateEkmConnectionRequest} UpdateEkmConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateEkmConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateEkmConnectionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.UpdateEkmConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateEkmConnectionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ekmConnection != null && message.hasOwnProperty("ekmConnection")) {
+                                var error = $root.google.cloud.kms.v1.EkmConnection.verify(message.ekmConnection);
+                                if (error)
+                                    return "ekmConnection." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateEkmConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.UpdateEkmConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.UpdateEkmConnectionRequest} UpdateEkmConnectionRequest
+                         */
+                        UpdateEkmConnectionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.UpdateEkmConnectionRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.UpdateEkmConnectionRequest();
+                            if (object.ekmConnection != null) {
+                                if (typeof object.ekmConnection !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.UpdateEkmConnectionRequest.ekmConnection: object expected");
+                                message.ekmConnection = $root.google.cloud.kms.v1.EkmConnection.fromObject(object.ekmConnection);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.UpdateEkmConnectionRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateEkmConnectionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.UpdateEkmConnectionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.UpdateEkmConnectionRequest} message UpdateEkmConnectionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateEkmConnectionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.ekmConnection = null;
+                                object.updateMask = null;
+                            }
+                            if (message.ekmConnection != null && message.hasOwnProperty("ekmConnection"))
+                                object.ekmConnection = $root.google.cloud.kms.v1.EkmConnection.toObject(message.ekmConnection, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateEkmConnectionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.UpdateEkmConnectionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateEkmConnectionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateEkmConnectionRequest;
+                    })();
+    
+                    v1.Certificate = (function() {
+    
+                        /**
+                         * Properties of a Certificate.
+                         * @memberof google.cloud.kms.v1
+                         * @interface ICertificate
+                         * @property {Uint8Array|null} [rawDer] Certificate rawDer
+                         * @property {boolean|null} [parsed] Certificate parsed
+                         * @property {string|null} [issuer] Certificate issuer
+                         * @property {string|null} [subject] Certificate subject
+                         * @property {Array.<string>|null} [subjectAlternativeDnsNames] Certificate subjectAlternativeDnsNames
+                         * @property {google.protobuf.ITimestamp|null} [notBeforeTime] Certificate notBeforeTime
+                         * @property {google.protobuf.ITimestamp|null} [notAfterTime] Certificate notAfterTime
+                         * @property {string|null} [serialNumber] Certificate serialNumber
+                         * @property {string|null} [sha256Fingerprint] Certificate sha256Fingerprint
+                         */
+    
+                        /**
+                         * Constructs a new Certificate.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a Certificate.
+                         * @implements ICertificate
+                         * @constructor
+                         * @param {google.cloud.kms.v1.ICertificate=} [properties] Properties to set
+                         */
+                        function Certificate(properties) {
+                            this.subjectAlternativeDnsNames = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Certificate rawDer.
+                         * @member {Uint8Array} rawDer
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @instance
+                         */
+                        Certificate.prototype.rawDer = $util.newBuffer([]);
+    
+                        /**
+                         * Certificate parsed.
+                         * @member {boolean} parsed
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @instance
+                         */
+                        Certificate.prototype.parsed = false;
+    
+                        /**
+                         * Certificate issuer.
+                         * @member {string} issuer
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @instance
+                         */
+                        Certificate.prototype.issuer = "";
+    
+                        /**
+                         * Certificate subject.
+                         * @member {string} subject
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @instance
+                         */
+                        Certificate.prototype.subject = "";
+    
+                        /**
+                         * Certificate subjectAlternativeDnsNames.
+                         * @member {Array.<string>} subjectAlternativeDnsNames
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @instance
+                         */
+                        Certificate.prototype.subjectAlternativeDnsNames = $util.emptyArray;
+    
+                        /**
+                         * Certificate notBeforeTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} notBeforeTime
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @instance
+                         */
+                        Certificate.prototype.notBeforeTime = null;
+    
+                        /**
+                         * Certificate notAfterTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} notAfterTime
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @instance
+                         */
+                        Certificate.prototype.notAfterTime = null;
+    
+                        /**
+                         * Certificate serialNumber.
+                         * @member {string} serialNumber
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @instance
+                         */
+                        Certificate.prototype.serialNumber = "";
+    
+                        /**
+                         * Certificate sha256Fingerprint.
+                         * @member {string} sha256Fingerprint
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @instance
+                         */
+                        Certificate.prototype.sha256Fingerprint = "";
+    
+                        /**
+                         * Creates a new Certificate instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @static
+                         * @param {google.cloud.kms.v1.ICertificate=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.Certificate} Certificate instance
+                         */
+                        Certificate.create = function create(properties) {
+                            return new Certificate(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Certificate message. Does not implicitly {@link google.cloud.kms.v1.Certificate.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @static
+                         * @param {google.cloud.kms.v1.ICertificate} message Certificate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Certificate.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.rawDer != null && Object.hasOwnProperty.call(message, "rawDer"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.rawDer);
+                            if (message.parsed != null && Object.hasOwnProperty.call(message, "parsed"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.parsed);
+                            if (message.issuer != null && Object.hasOwnProperty.call(message, "issuer"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.issuer);
+                            if (message.subject != null && Object.hasOwnProperty.call(message, "subject"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.subject);
+                            if (message.subjectAlternativeDnsNames != null && message.subjectAlternativeDnsNames.length)
+                                for (var i = 0; i < message.subjectAlternativeDnsNames.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.subjectAlternativeDnsNames[i]);
+                            if (message.notBeforeTime != null && Object.hasOwnProperty.call(message, "notBeforeTime"))
+                                $root.google.protobuf.Timestamp.encode(message.notBeforeTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.notAfterTime != null && Object.hasOwnProperty.call(message, "notAfterTime"))
+                                $root.google.protobuf.Timestamp.encode(message.notAfterTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.serialNumber != null && Object.hasOwnProperty.call(message, "serialNumber"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.serialNumber);
+                            if (message.sha256Fingerprint != null && Object.hasOwnProperty.call(message, "sha256Fingerprint"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.sha256Fingerprint);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Certificate message, length delimited. Does not implicitly {@link google.cloud.kms.v1.Certificate.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @static
+                         * @param {google.cloud.kms.v1.ICertificate} message Certificate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Certificate.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Certificate message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.Certificate} Certificate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Certificate.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.Certificate();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.rawDer = reader.bytes();
+                                    break;
+                                case 2:
+                                    message.parsed = reader.bool();
+                                    break;
+                                case 3:
+                                    message.issuer = reader.string();
+                                    break;
+                                case 4:
+                                    message.subject = reader.string();
+                                    break;
+                                case 5:
+                                    if (!(message.subjectAlternativeDnsNames && message.subjectAlternativeDnsNames.length))
+                                        message.subjectAlternativeDnsNames = [];
+                                    message.subjectAlternativeDnsNames.push(reader.string());
+                                    break;
+                                case 6:
+                                    message.notBeforeTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.notAfterTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.serialNumber = reader.string();
+                                    break;
+                                case 9:
+                                    message.sha256Fingerprint = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Certificate message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.Certificate} Certificate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Certificate.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Certificate message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Certificate.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.rawDer != null && message.hasOwnProperty("rawDer"))
+                                if (!(message.rawDer && typeof message.rawDer.length === "number" || $util.isString(message.rawDer)))
+                                    return "rawDer: buffer expected";
+                            if (message.parsed != null && message.hasOwnProperty("parsed"))
+                                if (typeof message.parsed !== "boolean")
+                                    return "parsed: boolean expected";
+                            if (message.issuer != null && message.hasOwnProperty("issuer"))
+                                if (!$util.isString(message.issuer))
+                                    return "issuer: string expected";
+                            if (message.subject != null && message.hasOwnProperty("subject"))
+                                if (!$util.isString(message.subject))
+                                    return "subject: string expected";
+                            if (message.subjectAlternativeDnsNames != null && message.hasOwnProperty("subjectAlternativeDnsNames")) {
+                                if (!Array.isArray(message.subjectAlternativeDnsNames))
+                                    return "subjectAlternativeDnsNames: array expected";
+                                for (var i = 0; i < message.subjectAlternativeDnsNames.length; ++i)
+                                    if (!$util.isString(message.subjectAlternativeDnsNames[i]))
+                                        return "subjectAlternativeDnsNames: string[] expected";
+                            }
+                            if (message.notBeforeTime != null && message.hasOwnProperty("notBeforeTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.notBeforeTime);
+                                if (error)
+                                    return "notBeforeTime." + error;
+                            }
+                            if (message.notAfterTime != null && message.hasOwnProperty("notAfterTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.notAfterTime);
+                                if (error)
+                                    return "notAfterTime." + error;
+                            }
+                            if (message.serialNumber != null && message.hasOwnProperty("serialNumber"))
+                                if (!$util.isString(message.serialNumber))
+                                    return "serialNumber: string expected";
+                            if (message.sha256Fingerprint != null && message.hasOwnProperty("sha256Fingerprint"))
+                                if (!$util.isString(message.sha256Fingerprint))
+                                    return "sha256Fingerprint: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Certificate message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.Certificate} Certificate
+                         */
+                        Certificate.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.Certificate)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.Certificate();
+                            if (object.rawDer != null)
+                                if (typeof object.rawDer === "string")
+                                    $util.base64.decode(object.rawDer, message.rawDer = $util.newBuffer($util.base64.length(object.rawDer)), 0);
+                                else if (object.rawDer.length)
+                                    message.rawDer = object.rawDer;
+                            if (object.parsed != null)
+                                message.parsed = Boolean(object.parsed);
+                            if (object.issuer != null)
+                                message.issuer = String(object.issuer);
+                            if (object.subject != null)
+                                message.subject = String(object.subject);
+                            if (object.subjectAlternativeDnsNames) {
+                                if (!Array.isArray(object.subjectAlternativeDnsNames))
+                                    throw TypeError(".google.cloud.kms.v1.Certificate.subjectAlternativeDnsNames: array expected");
+                                message.subjectAlternativeDnsNames = [];
+                                for (var i = 0; i < object.subjectAlternativeDnsNames.length; ++i)
+                                    message.subjectAlternativeDnsNames[i] = String(object.subjectAlternativeDnsNames[i]);
+                            }
+                            if (object.notBeforeTime != null) {
+                                if (typeof object.notBeforeTime !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.Certificate.notBeforeTime: object expected");
+                                message.notBeforeTime = $root.google.protobuf.Timestamp.fromObject(object.notBeforeTime);
+                            }
+                            if (object.notAfterTime != null) {
+                                if (typeof object.notAfterTime !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.Certificate.notAfterTime: object expected");
+                                message.notAfterTime = $root.google.protobuf.Timestamp.fromObject(object.notAfterTime);
+                            }
+                            if (object.serialNumber != null)
+                                message.serialNumber = String(object.serialNumber);
+                            if (object.sha256Fingerprint != null)
+                                message.sha256Fingerprint = String(object.sha256Fingerprint);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Certificate message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @static
+                         * @param {google.cloud.kms.v1.Certificate} message Certificate
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Certificate.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.subjectAlternativeDnsNames = [];
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.rawDer = "";
+                                else {
+                                    object.rawDer = [];
+                                    if (options.bytes !== Array)
+                                        object.rawDer = $util.newBuffer(object.rawDer);
+                                }
+                                object.parsed = false;
+                                object.issuer = "";
+                                object.subject = "";
+                                object.notBeforeTime = null;
+                                object.notAfterTime = null;
+                                object.serialNumber = "";
+                                object.sha256Fingerprint = "";
+                            }
+                            if (message.rawDer != null && message.hasOwnProperty("rawDer"))
+                                object.rawDer = options.bytes === String ? $util.base64.encode(message.rawDer, 0, message.rawDer.length) : options.bytes === Array ? Array.prototype.slice.call(message.rawDer) : message.rawDer;
+                            if (message.parsed != null && message.hasOwnProperty("parsed"))
+                                object.parsed = message.parsed;
+                            if (message.issuer != null && message.hasOwnProperty("issuer"))
+                                object.issuer = message.issuer;
+                            if (message.subject != null && message.hasOwnProperty("subject"))
+                                object.subject = message.subject;
+                            if (message.subjectAlternativeDnsNames && message.subjectAlternativeDnsNames.length) {
+                                object.subjectAlternativeDnsNames = [];
+                                for (var j = 0; j < message.subjectAlternativeDnsNames.length; ++j)
+                                    object.subjectAlternativeDnsNames[j] = message.subjectAlternativeDnsNames[j];
+                            }
+                            if (message.notBeforeTime != null && message.hasOwnProperty("notBeforeTime"))
+                                object.notBeforeTime = $root.google.protobuf.Timestamp.toObject(message.notBeforeTime, options);
+                            if (message.notAfterTime != null && message.hasOwnProperty("notAfterTime"))
+                                object.notAfterTime = $root.google.protobuf.Timestamp.toObject(message.notAfterTime, options);
+                            if (message.serialNumber != null && message.hasOwnProperty("serialNumber"))
+                                object.serialNumber = message.serialNumber;
+                            if (message.sha256Fingerprint != null && message.hasOwnProperty("sha256Fingerprint"))
+                                object.sha256Fingerprint = message.sha256Fingerprint;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Certificate to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.Certificate
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Certificate.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Certificate;
+                    })();
+    
+                    v1.EkmConnection = (function() {
+    
+                        /**
+                         * Properties of an EkmConnection.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IEkmConnection
+                         * @property {string|null} [name] EkmConnection name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] EkmConnection createTime
+                         * @property {Array.<google.cloud.kms.v1.EkmConnection.IServiceResolver>|null} [serviceResolvers] EkmConnection serviceResolvers
+                         * @property {string|null} [etag] EkmConnection etag
+                         */
+    
+                        /**
+                         * Constructs a new EkmConnection.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents an EkmConnection.
+                         * @implements IEkmConnection
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IEkmConnection=} [properties] Properties to set
+                         */
+                        function EkmConnection(properties) {
+                            this.serviceResolvers = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EkmConnection name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @instance
+                         */
+                        EkmConnection.prototype.name = "";
+    
+                        /**
+                         * EkmConnection createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @instance
+                         */
+                        EkmConnection.prototype.createTime = null;
+    
+                        /**
+                         * EkmConnection serviceResolvers.
+                         * @member {Array.<google.cloud.kms.v1.EkmConnection.IServiceResolver>} serviceResolvers
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @instance
+                         */
+                        EkmConnection.prototype.serviceResolvers = $util.emptyArray;
+    
+                        /**
+                         * EkmConnection etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @instance
+                         */
+                        EkmConnection.prototype.etag = "";
+    
+                        /**
+                         * Creates a new EkmConnection instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @static
+                         * @param {google.cloud.kms.v1.IEkmConnection=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.EkmConnection} EkmConnection instance
+                         */
+                        EkmConnection.create = function create(properties) {
+                            return new EkmConnection(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EkmConnection message. Does not implicitly {@link google.cloud.kms.v1.EkmConnection.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @static
+                         * @param {google.cloud.kms.v1.IEkmConnection} message EkmConnection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EkmConnection.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.serviceResolvers != null && message.serviceResolvers.length)
+                                for (var i = 0; i < message.serviceResolvers.length; ++i)
+                                    $root.google.cloud.kms.v1.EkmConnection.ServiceResolver.encode(message.serviceResolvers[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EkmConnection message, length delimited. Does not implicitly {@link google.cloud.kms.v1.EkmConnection.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @static
+                         * @param {google.cloud.kms.v1.IEkmConnection} message EkmConnection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EkmConnection.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EkmConnection message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.EkmConnection} EkmConnection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EkmConnection.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.EkmConnection();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    if (!(message.serviceResolvers && message.serviceResolvers.length))
+                                        message.serviceResolvers = [];
+                                    message.serviceResolvers.push($root.google.cloud.kms.v1.EkmConnection.ServiceResolver.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    message.etag = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EkmConnection message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.EkmConnection} EkmConnection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EkmConnection.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EkmConnection message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EkmConnection.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.serviceResolvers != null && message.hasOwnProperty("serviceResolvers")) {
+                                if (!Array.isArray(message.serviceResolvers))
+                                    return "serviceResolvers: array expected";
+                                for (var i = 0; i < message.serviceResolvers.length; ++i) {
+                                    var error = $root.google.cloud.kms.v1.EkmConnection.ServiceResolver.verify(message.serviceResolvers[i]);
+                                    if (error)
+                                        return "serviceResolvers." + error;
+                                }
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EkmConnection message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.EkmConnection} EkmConnection
+                         */
+                        EkmConnection.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.EkmConnection)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.EkmConnection();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.EkmConnection.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.serviceResolvers) {
+                                if (!Array.isArray(object.serviceResolvers))
+                                    throw TypeError(".google.cloud.kms.v1.EkmConnection.serviceResolvers: array expected");
+                                message.serviceResolvers = [];
+                                for (var i = 0; i < object.serviceResolvers.length; ++i) {
+                                    if (typeof object.serviceResolvers[i] !== "object")
+                                        throw TypeError(".google.cloud.kms.v1.EkmConnection.serviceResolvers: object expected");
+                                    message.serviceResolvers[i] = $root.google.cloud.kms.v1.EkmConnection.ServiceResolver.fromObject(object.serviceResolvers[i]);
+                                }
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EkmConnection message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @static
+                         * @param {google.cloud.kms.v1.EkmConnection} message EkmConnection
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EkmConnection.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.serviceResolvers = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.serviceResolvers && message.serviceResolvers.length) {
+                                object.serviceResolvers = [];
+                                for (var j = 0; j < message.serviceResolvers.length; ++j)
+                                    object.serviceResolvers[j] = $root.google.cloud.kms.v1.EkmConnection.ServiceResolver.toObject(message.serviceResolvers[j], options);
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EkmConnection to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EkmConnection.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        EkmConnection.ServiceResolver = (function() {
+    
+                            /**
+                             * Properties of a ServiceResolver.
+                             * @memberof google.cloud.kms.v1.EkmConnection
+                             * @interface IServiceResolver
+                             * @property {string|null} [serviceDirectoryService] ServiceResolver serviceDirectoryService
+                             * @property {string|null} [endpointFilter] ServiceResolver endpointFilter
+                             * @property {string|null} [hostname] ServiceResolver hostname
+                             * @property {Array.<google.cloud.kms.v1.ICertificate>|null} [serverCertificates] ServiceResolver serverCertificates
+                             */
+    
+                            /**
+                             * Constructs a new ServiceResolver.
+                             * @memberof google.cloud.kms.v1.EkmConnection
+                             * @classdesc Represents a ServiceResolver.
+                             * @implements IServiceResolver
+                             * @constructor
+                             * @param {google.cloud.kms.v1.EkmConnection.IServiceResolver=} [properties] Properties to set
+                             */
+                            function ServiceResolver(properties) {
+                                this.serverCertificates = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ServiceResolver serviceDirectoryService.
+                             * @member {string} serviceDirectoryService
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @instance
+                             */
+                            ServiceResolver.prototype.serviceDirectoryService = "";
+    
+                            /**
+                             * ServiceResolver endpointFilter.
+                             * @member {string} endpointFilter
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @instance
+                             */
+                            ServiceResolver.prototype.endpointFilter = "";
+    
+                            /**
+                             * ServiceResolver hostname.
+                             * @member {string} hostname
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @instance
+                             */
+                            ServiceResolver.prototype.hostname = "";
+    
+                            /**
+                             * ServiceResolver serverCertificates.
+                             * @member {Array.<google.cloud.kms.v1.ICertificate>} serverCertificates
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @instance
+                             */
+                            ServiceResolver.prototype.serverCertificates = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ServiceResolver instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @static
+                             * @param {google.cloud.kms.v1.EkmConnection.IServiceResolver=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.EkmConnection.ServiceResolver} ServiceResolver instance
+                             */
+                            ServiceResolver.create = function create(properties) {
+                                return new ServiceResolver(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ServiceResolver message. Does not implicitly {@link google.cloud.kms.v1.EkmConnection.ServiceResolver.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @static
+                             * @param {google.cloud.kms.v1.EkmConnection.IServiceResolver} message ServiceResolver message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ServiceResolver.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.serviceDirectoryService != null && Object.hasOwnProperty.call(message, "serviceDirectoryService"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceDirectoryService);
+                                if (message.endpointFilter != null && Object.hasOwnProperty.call(message, "endpointFilter"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.endpointFilter);
+                                if (message.hostname != null && Object.hasOwnProperty.call(message, "hostname"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.hostname);
+                                if (message.serverCertificates != null && message.serverCertificates.length)
+                                    for (var i = 0; i < message.serverCertificates.length; ++i)
+                                        $root.google.cloud.kms.v1.Certificate.encode(message.serverCertificates[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ServiceResolver message, length delimited. Does not implicitly {@link google.cloud.kms.v1.EkmConnection.ServiceResolver.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @static
+                             * @param {google.cloud.kms.v1.EkmConnection.IServiceResolver} message ServiceResolver message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ServiceResolver.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ServiceResolver message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.EkmConnection.ServiceResolver} ServiceResolver
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ServiceResolver.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.EkmConnection.ServiceResolver();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.serviceDirectoryService = reader.string();
+                                        break;
+                                    case 2:
+                                        message.endpointFilter = reader.string();
+                                        break;
+                                    case 3:
+                                        message.hostname = reader.string();
+                                        break;
+                                    case 4:
+                                        if (!(message.serverCertificates && message.serverCertificates.length))
+                                            message.serverCertificates = [];
+                                        message.serverCertificates.push($root.google.cloud.kms.v1.Certificate.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ServiceResolver message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.EkmConnection.ServiceResolver} ServiceResolver
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ServiceResolver.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ServiceResolver message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ServiceResolver.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.serviceDirectoryService != null && message.hasOwnProperty("serviceDirectoryService"))
+                                    if (!$util.isString(message.serviceDirectoryService))
+                                        return "serviceDirectoryService: string expected";
+                                if (message.endpointFilter != null && message.hasOwnProperty("endpointFilter"))
+                                    if (!$util.isString(message.endpointFilter))
+                                        return "endpointFilter: string expected";
+                                if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                    if (!$util.isString(message.hostname))
+                                        return "hostname: string expected";
+                                if (message.serverCertificates != null && message.hasOwnProperty("serverCertificates")) {
+                                    if (!Array.isArray(message.serverCertificates))
+                                        return "serverCertificates: array expected";
+                                    for (var i = 0; i < message.serverCertificates.length; ++i) {
+                                        var error = $root.google.cloud.kms.v1.Certificate.verify(message.serverCertificates[i]);
+                                        if (error)
+                                            return "serverCertificates." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ServiceResolver message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.EkmConnection.ServiceResolver} ServiceResolver
+                             */
+                            ServiceResolver.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.EkmConnection.ServiceResolver)
+                                    return object;
+                                var message = new $root.google.cloud.kms.v1.EkmConnection.ServiceResolver();
+                                if (object.serviceDirectoryService != null)
+                                    message.serviceDirectoryService = String(object.serviceDirectoryService);
+                                if (object.endpointFilter != null)
+                                    message.endpointFilter = String(object.endpointFilter);
+                                if (object.hostname != null)
+                                    message.hostname = String(object.hostname);
+                                if (object.serverCertificates) {
+                                    if (!Array.isArray(object.serverCertificates))
+                                        throw TypeError(".google.cloud.kms.v1.EkmConnection.ServiceResolver.serverCertificates: array expected");
+                                    message.serverCertificates = [];
+                                    for (var i = 0; i < object.serverCertificates.length; ++i) {
+                                        if (typeof object.serverCertificates[i] !== "object")
+                                            throw TypeError(".google.cloud.kms.v1.EkmConnection.ServiceResolver.serverCertificates: object expected");
+                                        message.serverCertificates[i] = $root.google.cloud.kms.v1.Certificate.fromObject(object.serverCertificates[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ServiceResolver message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @static
+                             * @param {google.cloud.kms.v1.EkmConnection.ServiceResolver} message ServiceResolver
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ServiceResolver.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.serverCertificates = [];
+                                if (options.defaults) {
+                                    object.serviceDirectoryService = "";
+                                    object.endpointFilter = "";
+                                    object.hostname = "";
+                                }
+                                if (message.serviceDirectoryService != null && message.hasOwnProperty("serviceDirectoryService"))
+                                    object.serviceDirectoryService = message.serviceDirectoryService;
+                                if (message.endpointFilter != null && message.hasOwnProperty("endpointFilter"))
+                                    object.endpointFilter = message.endpointFilter;
+                                if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                    object.hostname = message.hostname;
+                                if (message.serverCertificates && message.serverCertificates.length) {
+                                    object.serverCertificates = [];
+                                    for (var j = 0; j < message.serverCertificates.length; ++j)
+                                        object.serverCertificates[j] = $root.google.cloud.kms.v1.Certificate.toObject(message.serverCertificates[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ServiceResolver to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.EkmConnection.ServiceResolver
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ServiceResolver.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ServiceResolver;
+                        })();
+    
+                        return EkmConnection;
+                    })();
+    
                     v1.KeyRing = (function() {
     
                         /**
@@ -297,6 +2595,7 @@
                          * @property {Object.<string,string>|null} [labels] CryptoKey labels
                          * @property {boolean|null} [importOnly] CryptoKey importOnly
                          * @property {google.protobuf.IDuration|null} [destroyScheduledDuration] CryptoKey destroyScheduledDuration
+                         * @property {string|null} [cryptoKeyBackend] CryptoKey cryptoKeyBackend
                          */
     
                         /**
@@ -395,6 +2694,14 @@
                          */
                         CryptoKey.prototype.destroyScheduledDuration = null;
     
+                        /**
+                         * CryptoKey cryptoKeyBackend.
+                         * @member {string} cryptoKeyBackend
+                         * @memberof google.cloud.kms.v1.CryptoKey
+                         * @instance
+                         */
+                        CryptoKey.prototype.cryptoKeyBackend = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -454,6 +2761,8 @@
                                 writer.uint32(/* id 13, wireType 0 =*/104).bool(message.importOnly);
                             if (message.destroyScheduledDuration != null && Object.hasOwnProperty.call(message, "destroyScheduledDuration"))
                                 $root.google.protobuf.Duration.encode(message.destroyScheduledDuration, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.cryptoKeyBackend != null && Object.hasOwnProperty.call(message, "cryptoKeyBackend"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.cryptoKeyBackend);
                             return writer;
                         };
     
@@ -536,6 +2845,9 @@
                                     break;
                                 case 14:
                                     message.destroyScheduledDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                case 15:
+                                    message.cryptoKeyBackend = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -631,6 +2943,9 @@
                                 if (error)
                                     return "destroyScheduledDuration." + error;
                             }
+                            if (message.cryptoKeyBackend != null && message.hasOwnProperty("cryptoKeyBackend"))
+                                if (!$util.isString(message.cryptoKeyBackend))
+                                    return "cryptoKeyBackend: string expected";
                             return null;
                         };
     
@@ -709,6 +3024,8 @@
                                     throw TypeError(".google.cloud.kms.v1.CryptoKey.destroyScheduledDuration: object expected");
                                 message.destroyScheduledDuration = $root.google.protobuf.Duration.fromObject(object.destroyScheduledDuration);
                             }
+                            if (object.cryptoKeyBackend != null)
+                                message.cryptoKeyBackend = String(object.cryptoKeyBackend);
                             return message;
                         };
     
@@ -736,6 +3053,7 @@
                                 object.versionTemplate = null;
                                 object.importOnly = false;
                                 object.destroyScheduledDuration = null;
+                                object.cryptoKeyBackend = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -764,6 +3082,8 @@
                                 object.importOnly = message.importOnly;
                             if (message.destroyScheduledDuration != null && message.hasOwnProperty("destroyScheduledDuration"))
                                 object.destroyScheduledDuration = $root.google.protobuf.Duration.toObject(message.destroyScheduledDuration, options);
+                            if (message.cryptoKeyBackend != null && message.hasOwnProperty("cryptoKeyBackend"))
+                                object.cryptoKeyBackend = message.cryptoKeyBackend;
                             return object;
                         };
     
@@ -953,6 +3273,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.algorithm != null && message.hasOwnProperty("algorithm"))
@@ -1017,6 +3338,10 @@
                             case "EXTERNAL":
                             case 3:
                                 message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
                                 break;
                             }
                             switch (object.algorithm) {
@@ -1170,6 +3495,7 @@
                          * @interface IKeyOperationAttestation
                          * @property {google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|null} [format] KeyOperationAttestation format
                          * @property {Uint8Array|null} [content] KeyOperationAttestation content
+                         * @property {google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains|null} [certChains] KeyOperationAttestation certChains
                          */
     
                         /**
@@ -1204,6 +3530,14 @@
                         KeyOperationAttestation.prototype.content = $util.newBuffer([]);
     
                         /**
+                         * KeyOperationAttestation certChains.
+                         * @member {google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains|null|undefined} certChains
+                         * @memberof google.cloud.kms.v1.KeyOperationAttestation
+                         * @instance
+                         */
+                        KeyOperationAttestation.prototype.certChains = null;
+    
+                        /**
                          * Creates a new KeyOperationAttestation instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.KeyOperationAttestation
@@ -1231,6 +3565,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.format);
                             if (message.content != null && Object.hasOwnProperty.call(message, "content"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.content);
+                            if (message.certChains != null && Object.hasOwnProperty.call(message, "certChains"))
+                                $root.google.cloud.kms.v1.KeyOperationAttestation.CertificateChains.encode(message.certChains, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -1270,6 +3606,9 @@
                                     break;
                                 case 5:
                                     message.content = reader.bytes();
+                                    break;
+                                case 6:
+                                    message.certChains = $root.google.cloud.kms.v1.KeyOperationAttestation.CertificateChains.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1318,6 +3657,11 @@
                             if (message.content != null && message.hasOwnProperty("content"))
                                 if (!(message.content && typeof message.content.length === "number" || $util.isString(message.content)))
                                     return "content: buffer expected";
+                            if (message.certChains != null && message.hasOwnProperty("certChains")) {
+                                var error = $root.google.cloud.kms.v1.KeyOperationAttestation.CertificateChains.verify(message.certChains);
+                                if (error)
+                                    return "certChains." + error;
+                            }
                             return null;
                         };
     
@@ -1352,6 +3696,11 @@
                                     $util.base64.decode(object.content, message.content = $util.newBuffer($util.base64.length(object.content)), 0);
                                 else if (object.content.length)
                                     message.content = object.content;
+                            if (object.certChains != null) {
+                                if (typeof object.certChains !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.KeyOperationAttestation.certChains: object expected");
+                                message.certChains = $root.google.cloud.kms.v1.KeyOperationAttestation.CertificateChains.fromObject(object.certChains);
+                            }
                             return message;
                         };
     
@@ -1377,11 +3726,14 @@
                                     if (options.bytes !== Array)
                                         object.content = $util.newBuffer(object.content);
                                 }
+                                object.certChains = null;
                             }
                             if (message.format != null && message.hasOwnProperty("format"))
                                 object.format = options.enums === String ? $root.google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat[message.format] : message.format;
                             if (message.content != null && message.hasOwnProperty("content"))
                                 object.content = options.bytes === String ? $util.base64.encode(message.content, 0, message.content.length) : options.bytes === Array ? Array.prototype.slice.call(message.content) : message.content;
+                            if (message.certChains != null && message.hasOwnProperty("certChains"))
+                                object.certChains = $root.google.cloud.kms.v1.KeyOperationAttestation.CertificateChains.toObject(message.certChains, options);
                             return object;
                         };
     
@@ -1410,6 +3762,286 @@
                             values[valuesById[3] = "CAVIUM_V1_COMPRESSED"] = 3;
                             values[valuesById[4] = "CAVIUM_V2_COMPRESSED"] = 4;
                             return values;
+                        })();
+    
+                        KeyOperationAttestation.CertificateChains = (function() {
+    
+                            /**
+                             * Properties of a CertificateChains.
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation
+                             * @interface ICertificateChains
+                             * @property {Array.<string>|null} [caviumCerts] CertificateChains caviumCerts
+                             * @property {Array.<string>|null} [googleCardCerts] CertificateChains googleCardCerts
+                             * @property {Array.<string>|null} [googlePartitionCerts] CertificateChains googlePartitionCerts
+                             */
+    
+                            /**
+                             * Constructs a new CertificateChains.
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation
+                             * @classdesc Represents a CertificateChains.
+                             * @implements ICertificateChains
+                             * @constructor
+                             * @param {google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains=} [properties] Properties to set
+                             */
+                            function CertificateChains(properties) {
+                                this.caviumCerts = [];
+                                this.googleCardCerts = [];
+                                this.googlePartitionCerts = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CertificateChains caviumCerts.
+                             * @member {Array.<string>} caviumCerts
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation.CertificateChains
+                             * @instance
+                             */
+                            CertificateChains.prototype.caviumCerts = $util.emptyArray;
+    
+                            /**
+                             * CertificateChains googleCardCerts.
+                             * @member {Array.<string>} googleCardCerts
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation.CertificateChains
+                             * @instance
+                             */
+                            CertificateChains.prototype.googleCardCerts = $util.emptyArray;
+    
+                            /**
+                             * CertificateChains googlePartitionCerts.
+                             * @member {Array.<string>} googlePartitionCerts
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation.CertificateChains
+                             * @instance
+                             */
+                            CertificateChains.prototype.googlePartitionCerts = $util.emptyArray;
+    
+                            /**
+                             * Creates a new CertificateChains instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation.CertificateChains
+                             * @static
+                             * @param {google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.KeyOperationAttestation.CertificateChains} CertificateChains instance
+                             */
+                            CertificateChains.create = function create(properties) {
+                                return new CertificateChains(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateChains message. Does not implicitly {@link google.cloud.kms.v1.KeyOperationAttestation.CertificateChains.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation.CertificateChains
+                             * @static
+                             * @param {google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains} message CertificateChains message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateChains.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.caviumCerts != null && message.caviumCerts.length)
+                                    for (var i = 0; i < message.caviumCerts.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.caviumCerts[i]);
+                                if (message.googleCardCerts != null && message.googleCardCerts.length)
+                                    for (var i = 0; i < message.googleCardCerts.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.googleCardCerts[i]);
+                                if (message.googlePartitionCerts != null && message.googlePartitionCerts.length)
+                                    for (var i = 0; i < message.googlePartitionCerts.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.googlePartitionCerts[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateChains message, length delimited. Does not implicitly {@link google.cloud.kms.v1.KeyOperationAttestation.CertificateChains.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation.CertificateChains
+                             * @static
+                             * @param {google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains} message CertificateChains message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateChains.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CertificateChains message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation.CertificateChains
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.KeyOperationAttestation.CertificateChains} CertificateChains
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateChains.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.KeyOperationAttestation.CertificateChains();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.caviumCerts && message.caviumCerts.length))
+                                            message.caviumCerts = [];
+                                        message.caviumCerts.push(reader.string());
+                                        break;
+                                    case 2:
+                                        if (!(message.googleCardCerts && message.googleCardCerts.length))
+                                            message.googleCardCerts = [];
+                                        message.googleCardCerts.push(reader.string());
+                                        break;
+                                    case 3:
+                                        if (!(message.googlePartitionCerts && message.googlePartitionCerts.length))
+                                            message.googlePartitionCerts = [];
+                                        message.googlePartitionCerts.push(reader.string());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CertificateChains message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation.CertificateChains
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.KeyOperationAttestation.CertificateChains} CertificateChains
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateChains.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CertificateChains message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation.CertificateChains
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CertificateChains.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.caviumCerts != null && message.hasOwnProperty("caviumCerts")) {
+                                    if (!Array.isArray(message.caviumCerts))
+                                        return "caviumCerts: array expected";
+                                    for (var i = 0; i < message.caviumCerts.length; ++i)
+                                        if (!$util.isString(message.caviumCerts[i]))
+                                            return "caviumCerts: string[] expected";
+                                }
+                                if (message.googleCardCerts != null && message.hasOwnProperty("googleCardCerts")) {
+                                    if (!Array.isArray(message.googleCardCerts))
+                                        return "googleCardCerts: array expected";
+                                    for (var i = 0; i < message.googleCardCerts.length; ++i)
+                                        if (!$util.isString(message.googleCardCerts[i]))
+                                            return "googleCardCerts: string[] expected";
+                                }
+                                if (message.googlePartitionCerts != null && message.hasOwnProperty("googlePartitionCerts")) {
+                                    if (!Array.isArray(message.googlePartitionCerts))
+                                        return "googlePartitionCerts: array expected";
+                                    for (var i = 0; i < message.googlePartitionCerts.length; ++i)
+                                        if (!$util.isString(message.googlePartitionCerts[i]))
+                                            return "googlePartitionCerts: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CertificateChains message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation.CertificateChains
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.KeyOperationAttestation.CertificateChains} CertificateChains
+                             */
+                            CertificateChains.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.KeyOperationAttestation.CertificateChains)
+                                    return object;
+                                var message = new $root.google.cloud.kms.v1.KeyOperationAttestation.CertificateChains();
+                                if (object.caviumCerts) {
+                                    if (!Array.isArray(object.caviumCerts))
+                                        throw TypeError(".google.cloud.kms.v1.KeyOperationAttestation.CertificateChains.caviumCerts: array expected");
+                                    message.caviumCerts = [];
+                                    for (var i = 0; i < object.caviumCerts.length; ++i)
+                                        message.caviumCerts[i] = String(object.caviumCerts[i]);
+                                }
+                                if (object.googleCardCerts) {
+                                    if (!Array.isArray(object.googleCardCerts))
+                                        throw TypeError(".google.cloud.kms.v1.KeyOperationAttestation.CertificateChains.googleCardCerts: array expected");
+                                    message.googleCardCerts = [];
+                                    for (var i = 0; i < object.googleCardCerts.length; ++i)
+                                        message.googleCardCerts[i] = String(object.googleCardCerts[i]);
+                                }
+                                if (object.googlePartitionCerts) {
+                                    if (!Array.isArray(object.googlePartitionCerts))
+                                        throw TypeError(".google.cloud.kms.v1.KeyOperationAttestation.CertificateChains.googlePartitionCerts: array expected");
+                                    message.googlePartitionCerts = [];
+                                    for (var i = 0; i < object.googlePartitionCerts.length; ++i)
+                                        message.googlePartitionCerts[i] = String(object.googlePartitionCerts[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CertificateChains message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation.CertificateChains
+                             * @static
+                             * @param {google.cloud.kms.v1.KeyOperationAttestation.CertificateChains} message CertificateChains
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CertificateChains.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.caviumCerts = [];
+                                    object.googleCardCerts = [];
+                                    object.googlePartitionCerts = [];
+                                }
+                                if (message.caviumCerts && message.caviumCerts.length) {
+                                    object.caviumCerts = [];
+                                    for (var j = 0; j < message.caviumCerts.length; ++j)
+                                        object.caviumCerts[j] = message.caviumCerts[j];
+                                }
+                                if (message.googleCardCerts && message.googleCardCerts.length) {
+                                    object.googleCardCerts = [];
+                                    for (var j = 0; j < message.googleCardCerts.length; ++j)
+                                        object.googleCardCerts[j] = message.googleCardCerts[j];
+                                }
+                                if (message.googlePartitionCerts && message.googlePartitionCerts.length) {
+                                    object.googlePartitionCerts = [];
+                                    for (var j = 0; j < message.googlePartitionCerts.length; ++j)
+                                        object.googlePartitionCerts[j] = message.googlePartitionCerts[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CertificateChains to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.KeyOperationAttestation.CertificateChains
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CertificateChains.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return CertificateChains;
                         })();
     
                         return KeyOperationAttestation;
@@ -1752,6 +4384,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.algorithm != null && message.hasOwnProperty("algorithm"))
@@ -1896,6 +4529,10 @@
                             case "EXTERNAL":
                             case 3:
                                 message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
                                 break;
                             }
                             switch (object.algorithm) {
@@ -2454,6 +5091,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -2598,6 +5236,10 @@
                             case "EXTERNAL":
                             case 3:
                                 message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
                                 break;
                             }
                             return message;
@@ -2926,6 +5568,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -3015,6 +5658,10 @@
                             case "EXTERNAL":
                             case 3:
                                 message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -3126,6 +5773,40 @@
                         ImportJob.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * ImportMethod enum.
+                         * @name google.cloud.kms.v1.ImportJob.ImportMethod
+                         * @enum {number}
+                         * @property {number} IMPORT_METHOD_UNSPECIFIED=0 IMPORT_METHOD_UNSPECIFIED value
+                         * @property {number} RSA_OAEP_3072_SHA1_AES_256=1 RSA_OAEP_3072_SHA1_AES_256 value
+                         * @property {number} RSA_OAEP_4096_SHA1_AES_256=2 RSA_OAEP_4096_SHA1_AES_256 value
+                         */
+                        ImportJob.ImportMethod = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "IMPORT_METHOD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RSA_OAEP_3072_SHA1_AES_256"] = 1;
+                            values[valuesById[2] = "RSA_OAEP_4096_SHA1_AES_256"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ImportJobState enum.
+                         * @name google.cloud.kms.v1.ImportJob.ImportJobState
+                         * @enum {number}
+                         * @property {number} IMPORT_JOB_STATE_UNSPECIFIED=0 IMPORT_JOB_STATE_UNSPECIFIED value
+                         * @property {number} PENDING_GENERATION=1 PENDING_GENERATION value
+                         * @property {number} ACTIVE=2 ACTIVE value
+                         * @property {number} EXPIRED=3 EXPIRED value
+                         */
+                        ImportJob.ImportJobState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "IMPORT_JOB_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PENDING_GENERATION"] = 1;
+                            values[valuesById[2] = "ACTIVE"] = 2;
+                            values[valuesById[3] = "EXPIRED"] = 3;
+                            return values;
+                        })();
     
                         ImportJob.WrappingPublicKey = (function() {
     
@@ -3314,59 +5995,7 @@
                             return WrappingPublicKey;
                         })();
     
-                        /**
-                         * ImportMethod enum.
-                         * @name google.cloud.kms.v1.ImportJob.ImportMethod
-                         * @enum {number}
-                         * @property {number} IMPORT_METHOD_UNSPECIFIED=0 IMPORT_METHOD_UNSPECIFIED value
-                         * @property {number} RSA_OAEP_3072_SHA1_AES_256=1 RSA_OAEP_3072_SHA1_AES_256 value
-                         * @property {number} RSA_OAEP_4096_SHA1_AES_256=2 RSA_OAEP_4096_SHA1_AES_256 value
-                         */
-                        ImportJob.ImportMethod = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "IMPORT_METHOD_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "RSA_OAEP_3072_SHA1_AES_256"] = 1;
-                            values[valuesById[2] = "RSA_OAEP_4096_SHA1_AES_256"] = 2;
-                            return values;
-                        })();
-    
-                        /**
-                         * ImportJobState enum.
-                         * @name google.cloud.kms.v1.ImportJob.ImportJobState
-                         * @enum {number}
-                         * @property {number} IMPORT_JOB_STATE_UNSPECIFIED=0 IMPORT_JOB_STATE_UNSPECIFIED value
-                         * @property {number} PENDING_GENERATION=1 PENDING_GENERATION value
-                         * @property {number} ACTIVE=2 ACTIVE value
-                         * @property {number} EXPIRED=3 EXPIRED value
-                         */
-                        ImportJob.ImportJobState = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "IMPORT_JOB_STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "PENDING_GENERATION"] = 1;
-                            values[valuesById[2] = "ACTIVE"] = 2;
-                            values[valuesById[3] = "EXPIRED"] = 3;
-                            return values;
-                        })();
-    
                         return ImportJob;
-                    })();
-    
-                    /**
-                     * ProtectionLevel enum.
-                     * @name google.cloud.kms.v1.ProtectionLevel
-                     * @enum {number}
-                     * @property {number} PROTECTION_LEVEL_UNSPECIFIED=0 PROTECTION_LEVEL_UNSPECIFIED value
-                     * @property {number} SOFTWARE=1 SOFTWARE value
-                     * @property {number} HSM=2 HSM value
-                     * @property {number} EXTERNAL=3 EXTERNAL value
-                     */
-                    v1.ProtectionLevel = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "PROTECTION_LEVEL_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "SOFTWARE"] = 1;
-                        values[valuesById[2] = "HSM"] = 2;
-                        values[valuesById[3] = "EXTERNAL"] = 3;
-                        return values;
                     })();
     
                     v1.ExternalProtectionLevelOptions = (function() {
@@ -3376,6 +6005,7 @@
                          * @memberof google.cloud.kms.v1
                          * @interface IExternalProtectionLevelOptions
                          * @property {string|null} [externalKeyUri] ExternalProtectionLevelOptions externalKeyUri
+                         * @property {string|null} [ekmConnectionKeyPath] ExternalProtectionLevelOptions ekmConnectionKeyPath
                          */
     
                         /**
@@ -3400,6 +6030,14 @@
                          * @instance
                          */
                         ExternalProtectionLevelOptions.prototype.externalKeyUri = "";
+    
+                        /**
+                         * ExternalProtectionLevelOptions ekmConnectionKeyPath.
+                         * @member {string} ekmConnectionKeyPath
+                         * @memberof google.cloud.kms.v1.ExternalProtectionLevelOptions
+                         * @instance
+                         */
+                        ExternalProtectionLevelOptions.prototype.ekmConnectionKeyPath = "";
     
                         /**
                          * Creates a new ExternalProtectionLevelOptions instance using the specified properties.
@@ -3427,6 +6065,8 @@
                                 writer = $Writer.create();
                             if (message.externalKeyUri != null && Object.hasOwnProperty.call(message, "externalKeyUri"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.externalKeyUri);
+                            if (message.ekmConnectionKeyPath != null && Object.hasOwnProperty.call(message, "ekmConnectionKeyPath"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.ekmConnectionKeyPath);
                             return writer;
                         };
     
@@ -3463,6 +6103,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.externalKeyUri = reader.string();
+                                    break;
+                                case 2:
+                                    message.ekmConnectionKeyPath = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3502,6 +6145,9 @@
                             if (message.externalKeyUri != null && message.hasOwnProperty("externalKeyUri"))
                                 if (!$util.isString(message.externalKeyUri))
                                     return "externalKeyUri: string expected";
+                            if (message.ekmConnectionKeyPath != null && message.hasOwnProperty("ekmConnectionKeyPath"))
+                                if (!$util.isString(message.ekmConnectionKeyPath))
+                                    return "ekmConnectionKeyPath: string expected";
                             return null;
                         };
     
@@ -3519,6 +6165,8 @@
                             var message = new $root.google.cloud.kms.v1.ExternalProtectionLevelOptions();
                             if (object.externalKeyUri != null)
                                 message.externalKeyUri = String(object.externalKeyUri);
+                            if (object.ekmConnectionKeyPath != null)
+                                message.ekmConnectionKeyPath = String(object.ekmConnectionKeyPath);
                             return message;
                         };
     
@@ -3535,10 +6183,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.externalKeyUri = "";
+                                object.ekmConnectionKeyPath = "";
+                            }
                             if (message.externalKeyUri != null && message.hasOwnProperty("externalKeyUri"))
                                 object.externalKeyUri = message.externalKeyUri;
+                            if (message.ekmConnectionKeyPath != null && message.hasOwnProperty("ekmConnectionKeyPath"))
+                                object.ekmConnectionKeyPath = message.ekmConnectionKeyPath;
                             return object;
                         };
     
@@ -3554,6 +6206,26 @@
                         };
     
                         return ExternalProtectionLevelOptions;
+                    })();
+    
+                    /**
+                     * ProtectionLevel enum.
+                     * @name google.cloud.kms.v1.ProtectionLevel
+                     * @enum {number}
+                     * @property {number} PROTECTION_LEVEL_UNSPECIFIED=0 PROTECTION_LEVEL_UNSPECIFIED value
+                     * @property {number} SOFTWARE=1 SOFTWARE value
+                     * @property {number} HSM=2 HSM value
+                     * @property {number} EXTERNAL=3 EXTERNAL value
+                     * @property {number} EXTERNAL_VPC=4 EXTERNAL_VPC value
+                     */
+                    v1.ProtectionLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "PROTECTION_LEVEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SOFTWARE"] = 1;
+                        values[valuesById[2] = "HSM"] = 2;
+                        values[valuesById[3] = "EXTERNAL"] = 3;
+                        values[valuesById[4] = "EXTERNAL_VPC"] = 4;
+                        return values;
                     })();
     
                     v1.KeyManagementService = (function() {
@@ -11848,6 +14520,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -11885,6 +14558,10 @@
                             case "EXTERNAL":
                             case 3:
                                 message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
                                 break;
                             }
                             return message;
@@ -12156,6 +14833,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -12205,6 +14883,10 @@
                             case "EXTERNAL":
                             case 3:
                                 message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
                                 break;
                             }
                             return message;
@@ -12457,6 +15139,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -12502,6 +15185,10 @@
                             case "EXTERNAL":
                             case 3:
                                 message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
                                 break;
                             }
                             return message;
@@ -12782,6 +15469,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -12831,6 +15519,10 @@
                             case "EXTERNAL":
                             case 3:
                                 message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
                                 break;
                             }
                             return message;
@@ -13083,6 +15775,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -13128,6 +15821,10 @@
                             case "EXTERNAL":
                             case 3:
                                 message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
                                 break;
                             }
                             return message;
@@ -13391,6 +16088,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -13438,6 +16136,10 @@
                             case "EXTERNAL":
                             case 3:
                                 message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
                                 break;
                             }
                             return message;
@@ -13719,6 +16421,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -13762,6 +16465,10 @@
                             case "EXTERNAL":
                             case 3:
                                 message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
                                 break;
                             }
                             return message;
@@ -14538,667 +17245,6 @@
              * @namespace
              */
             var api = {};
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                return values;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    this.style = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * ResourceDescriptor style.
-                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.style = $util.emptyArray;
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    if (message.style != null && message.style.length) {
-                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
-                        for (var i = 0; i < message.style.length; ++i)
-                            writer.int32(message.style[i]);
-                        writer.ldelim();
-                    }
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        case 10:
-                            if (!(message.style && message.style.length))
-                                message.style = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
-                                    message.style.push(reader.int32());
-                            } else
-                                message.style.push(reader.int32());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
-                        if (!Array.isArray(message.style))
-                            return "style: array expected";
-                        for (var i = 0; i < message.style.length; ++i)
-                            switch (message.style[i]) {
-                            default:
-                                return "style: enum value[] expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    if (object.style) {
-                        if (!Array.isArray(object.style))
-                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
-                        message.style = [];
-                        for (var i = 0; i < object.style.length; ++i)
-                            switch (object.style[i]) {
-                            default:
-                            case "STYLE_UNSPECIFIED":
-                            case 0:
-                                message.style[i] = 0;
-                                break;
-                            case "DECLARATIVE_FRIENDLY":
-                            case 1:
-                                message.style[i] = 1;
-                                break;
-                            }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.pattern = [];
-                        object.style = [];
-                    }
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    if (message.style && message.style.length) {
-                        object.style = [];
-                        for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {number}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * Style enum.
-                 * @name google.api.ResourceDescriptor.Style
-                 * @enum {number}
-                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
-                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
-                 */
-                ResourceDescriptor.Style = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ResourceReference;
-            })();
     
             api.Http = (function() {
     
@@ -16102,6 +18148,667 @@
                 };
     
                 return CustomHttpPattern;
+            })();
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        case 10:
+                            if (!(message.style && message.style.length))
+                                message.style = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.style.push(reader.int32());
+                            } else
+                                message.style.push(reader.int32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
             })();
     
             return api;
@@ -24801,25 +27508,25 @@
                 return GeneratedCodeInfo;
             })();
     
-            protobuf.Duration = (function() {
+            protobuf.FieldMask = (function() {
     
                 /**
-                 * Properties of a Duration.
+                 * Properties of a FieldMask.
                  * @memberof google.protobuf
-                 * @interface IDuration
-                 * @property {number|Long|null} [seconds] Duration seconds
-                 * @property {number|null} [nanos] Duration nanos
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
                  */
     
                 /**
-                 * Constructs a new Duration.
+                 * Constructs a new FieldMask.
                  * @memberof google.protobuf
-                 * @classdesc Represents a Duration.
-                 * @implements IDuration
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
                  * @constructor
-                 * @param {google.protobuf.IDuration=} [properties] Properties to set
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
                  */
-                function Duration(properties) {
+                function FieldMask(properties) {
+                    this.paths = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -24827,88 +27534,78 @@
                 }
     
                 /**
-                 * Duration seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Duration
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
                  * @instance
                  */
-                Duration.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                FieldMask.prototype.paths = $util.emptyArray;
     
                 /**
-                 * Duration nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Duration
-                 * @instance
-                 */
-                Duration.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Duration instance using the specified properties.
+                 * Creates a new FieldMask instance using the specified properties.
                  * @function create
-                 * @memberof google.protobuf.Duration
+                 * @memberof google.protobuf.FieldMask
                  * @static
-                 * @param {google.protobuf.IDuration=} [properties] Properties to set
-                 * @returns {google.protobuf.Duration} Duration instance
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
                  */
-                Duration.create = function create(properties) {
-                    return new Duration(properties);
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
                 };
     
                 /**
-                 * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
                  * @function encode
-                 * @memberof google.protobuf.Duration
+                 * @memberof google.protobuf.FieldMask
                  * @static
-                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Duration.encode = function encode(message, writer) {
+                FieldMask.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
                     return writer;
                 };
     
                 /**
-                 * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
                  * @function encodeDelimited
-                 * @memberof google.protobuf.Duration
+                 * @memberof google.protobuf.FieldMask
                  * @static
-                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Duration.encodeDelimited = function encodeDelimited(message, writer) {
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
                     return this.encode(message, writer).ldelim();
                 };
     
                 /**
-                 * Decodes a Duration message from the specified reader or buffer.
+                 * Decodes a FieldMask message from the specified reader or buffer.
                  * @function decode
-                 * @memberof google.protobuf.Duration
+                 * @memberof google.protobuf.FieldMask
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Duration} Duration
+                 * @returns {google.protobuf.FieldMask} FieldMask
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
+                            if (!(message.paths && message.paths.length))
+                                message.paths = [];
+                            message.paths.push(reader.string());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -24919,110 +27616,99 @@
                 };
     
                 /**
-                 * Decodes a Duration message from the specified reader or buffer, length delimited.
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
                  * @function decodeDelimited
-                 * @memberof google.protobuf.Duration
+                 * @memberof google.protobuf.FieldMask
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Duration} Duration
+                 * @returns {google.protobuf.FieldMask} FieldMask
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decodeDelimited = function decodeDelimited(reader) {
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
                 };
     
                 /**
-                 * Verifies a Duration message.
+                 * Verifies a FieldMask message.
                  * @function verify
-                 * @memberof google.protobuf.Duration
+                 * @memberof google.protobuf.FieldMask
                  * @static
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Duration.verify = function verify(message) {
+                FieldMask.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
                     return null;
                 };
     
                 /**
-                 * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
                  * @function fromObject
-                 * @memberof google.protobuf.Duration
+                 * @memberof google.protobuf.FieldMask
                  * @static
                  * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Duration} Duration
+                 * @returns {google.protobuf.FieldMask} FieldMask
                  */
-                Duration.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Duration)
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
                         return object;
-                    var message = new $root.google.protobuf.Duration();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
                     return message;
                 };
     
                 /**
-                 * Creates a plain object from a Duration message. Also converts values to other types if specified.
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
                  * @function toObject
-                 * @memberof google.protobuf.Duration
+                 * @memberof google.protobuf.FieldMask
                  * @static
-                 * @param {google.protobuf.Duration} message Duration
+                 * @param {google.protobuf.FieldMask} message FieldMask
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Duration.toObject = function toObject(message, options) {
+                FieldMask.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
                     }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
                     return object;
                 };
     
                 /**
-                 * Converts this Duration to JSON.
+                 * Converts this FieldMask to JSON.
                  * @function toJSON
-                 * @memberof google.protobuf.Duration
+                 * @memberof google.protobuf.FieldMask
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Duration.prototype.toJSON = function toJSON() {
+                FieldMask.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
-                return Duration;
+                return FieldMask;
             })();
     
             protobuf.Timestamp = (function() {
@@ -25247,6 +27933,230 @@
                 };
     
                 return Timestamp;
+            })();
+    
+            protobuf.Duration = (function() {
+    
+                /**
+                 * Properties of a Duration.
+                 * @memberof google.protobuf
+                 * @interface IDuration
+                 * @property {number|Long|null} [seconds] Duration seconds
+                 * @property {number|null} [nanos] Duration nanos
+                 */
+    
+                /**
+                 * Constructs a new Duration.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Duration.
+                 * @implements IDuration
+                 * @constructor
+                 * @param {google.protobuf.IDuration=} [properties] Properties to set
+                 */
+                function Duration(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Duration seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 */
+                Duration.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Duration nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 */
+                Duration.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Duration instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration=} [properties] Properties to set
+                 * @returns {google.protobuf.Duration} Duration instance
+                 */
+                Duration.create = function create(properties) {
+                    return new Duration(properties);
+                };
+    
+                /**
+                 * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Duration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Duration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Duration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Duration} Duration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Duration.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.seconds = reader.int64();
+                            break;
+                        case 2:
+                            message.nanos = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Duration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Duration} Duration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Duration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Duration message.
+                 * @function verify
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Duration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Duration} Duration
+                 */
+                Duration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Duration)
+                        return object;
+                    var message = new $root.google.protobuf.Duration();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Duration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.Duration} message Duration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Duration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Duration to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Duration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Duration;
             })();
     
             protobuf.DoubleValue = (function() {
@@ -26967,209 +29877,6 @@
                 };
     
                 return BytesValue;
-            })();
-    
-            protobuf.FieldMask = (function() {
-    
-                /**
-                 * Properties of a FieldMask.
-                 * @memberof google.protobuf
-                 * @interface IFieldMask
-                 * @property {Array.<string>|null} [paths] FieldMask paths
-                 */
-    
-                /**
-                 * Constructs a new FieldMask.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a FieldMask.
-                 * @implements IFieldMask
-                 * @constructor
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 */
-                function FieldMask(properties) {
-                    this.paths = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * FieldMask paths.
-                 * @member {Array.<string>} paths
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 */
-                FieldMask.prototype.paths = $util.emptyArray;
-    
-                /**
-                 * Creates a new FieldMask instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 * @returns {google.protobuf.FieldMask} FieldMask instance
-                 */
-                FieldMask.create = function create(properties) {
-                    return new FieldMask(properties);
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.paths != null && message.paths.length)
-                        for (var i = 0; i < message.paths.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            if (!(message.paths && message.paths.length))
-                                message.paths = [];
-                            message.paths.push(reader.string());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a FieldMask message.
-                 * @function verify
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                FieldMask.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.paths != null && message.hasOwnProperty("paths")) {
-                        if (!Array.isArray(message.paths))
-                            return "paths: array expected";
-                        for (var i = 0; i < message.paths.length; ++i)
-                            if (!$util.isString(message.paths[i]))
-                                return "paths: string[] expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 */
-                FieldMask.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.FieldMask)
-                        return object;
-                    var message = new $root.google.protobuf.FieldMask();
-                    if (object.paths) {
-                        if (!Array.isArray(object.paths))
-                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
-                        message.paths = [];
-                        for (var i = 0; i < object.paths.length; ++i)
-                            message.paths[i] = String(object.paths[i]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.FieldMask} message FieldMask
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                FieldMask.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.paths = [];
-                    if (message.paths && message.paths.length) {
-                        object.paths = [];
-                        for (var j = 0; j < message.paths.length; ++j)
-                            object.paths[j] = message.paths[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this FieldMask to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                FieldMask.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return FieldMask;
             })();
     
             return protobuf;

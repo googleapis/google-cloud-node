@@ -21,7 +21,8 @@ function main(cryptoKeyVersion, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  with updated values.
+   *  Required. CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  with
+   *  updated values.
    */
   // const cryptoKeyVersion = {}
   /**

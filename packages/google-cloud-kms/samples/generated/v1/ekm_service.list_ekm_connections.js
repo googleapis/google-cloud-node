@@ -16,28 +16,29 @@
 'use strict';
 
 function main(parent) {
-  // [START cloudkms_v1_generated_KeyManagementService_ListImportJobs_async]
+  // [START cloudkms_v1_generated_EkmService_ListEkmConnections_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the KeyRing google.cloud.kms.v1.KeyRing 
-   *  to list, in the format `projects/* /locations/* /keyRings/*`.
+   *  Required. The resource name of the location associated with the
+   *  EkmConnections google.cloud.kms.v1.EkmConnection  to list, in the format
+   *  `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
    *  Optional. Optional limit on the number of
-   *  ImportJobs google.cloud.kms.v1.ImportJob  to include in the response.
-   *  Further ImportJobs google.cloud.kms.v1.ImportJob  can subsequently be
-   *  obtained by including the
-   *  ListImportJobsResponse.next_page_token google.cloud.kms.v1.ListImportJobsResponse.next_page_token 
+   *  EkmConnections google.cloud.kms.v1.EkmConnection  to include in the
+   *  response. Further EkmConnections google.cloud.kms.v1.EkmConnection  can
+   *  subsequently be obtained by including the
+   *  ListEkmConnectionsResponse.next_page_token google.cloud.kms.v1.ListEkmConnectionsResponse.next_page_token 
    *  in a subsequent request. If unspecified, the server will pick an
    *  appropriate default.
    */
   // const pageSize = 1234
   /**
    *  Optional. Optional pagination token, returned earlier via
-   *  ListImportJobsResponse.next_page_token google.cloud.kms.v1.ListImportJobsResponse.next_page_token.
+   *  ListEkmConnectionsResponse.next_page_token google.cloud.kms.v1.ListEkmConnectionsResponse.next_page_token.
    */
   // const pageToken = 'abc123'
   /**
@@ -49,33 +50,33 @@ function main(parent) {
   // const filter = 'abc123'
   /**
    *  Optional. Specify how the results should be sorted. If not specified, the
-   *  results will be sorted in the default order. For more information, see
+   *  results will be sorted in the default order.  For more information, see
    *  Sorting and filtering list
    *  results (https://cloud.google.com/kms/docs/sorting-and-filtering).
    */
   // const orderBy = 'abc123'
 
   // Imports the Kms library
-  const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;
+  const {EkmServiceClient} = require('@google-cloud/kms').v1;
 
   // Instantiates a client
-  const kmsClient = new KeyManagementServiceClient();
+  const kmsClient = new EkmServiceClient();
 
-  async function callListImportJobs() {
+  async function callListEkmConnections() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await kmsClient.listImportJobsAsync(request);
+    const iterable = await kmsClient.listEkmConnectionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListImportJobs();
-  // [END cloudkms_v1_generated_KeyManagementService_ListImportJobs_async]
+  callListEkmConnections();
+  // [END cloudkms_v1_generated_EkmService_ListEkmConnections_async]
 }
 
 process.on('unhandledRejection', err => {

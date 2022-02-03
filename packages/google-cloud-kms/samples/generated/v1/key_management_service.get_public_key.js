@@ -21,8 +21,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name google.cloud.kms.v1.CryptoKeyVersion.name  of the CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  public key to
-   *  get.
+   *  Required. The name google.cloud.kms.v1.CryptoKeyVersion.name  of the
+   *  CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  public key to get.
    */
   // const name = 'abc123'
 

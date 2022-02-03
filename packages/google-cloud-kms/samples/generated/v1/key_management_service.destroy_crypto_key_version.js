@@ -21,7 +21,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  to destroy.
+   *  Required. The resource name of the
+   *  CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  to destroy.
    */
   // const name = 'abc123'
 
