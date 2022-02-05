@@ -17,7 +17,7 @@ jobs:
       - run: npm install
       - run: npm run system-test
       - name: coverage
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2
         with:
           name: actions system-test
           fail_ci_if_error: false
