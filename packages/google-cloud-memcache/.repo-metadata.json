@@ -5,10 +5,12 @@
   "repo": "googleapis/nodejs-memcache",
   "default_version": "v1",
   "name_pretty": "Memorystore for Memcached",
-  "release_level": "ga",
+  "release_level": "stable",
   "distribution_name": "@google-cloud/memcache",
   "name": "memcache",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/memcache/latest",
   "api_id": "memcache.googleapis.com",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/5169231"
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5169231",
+  "api_shortname": "memcache",
+  "library_type": "GAPIC_AUTO"
 }
