@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [5.9.0](https://github.com/googleapis/nodejs-security-center/compare/v5.8.0...v5.9.0) (2022-02-04)
+
+
+### Features
+
+* Release the access field in the v1 finding proto, which represents an access event tied to the finding ([6bbb738](https://github.com/googleapis/nodejs-security-center/commit/6bbb73850a1ed0ee3481ddbdc55c52e7bfa8fc0f))
+* Release the access field in the v1 finding proto, which represents an access event tied to the finding docs: added more clarification around what event_time means on a v1 finding ([#457](https://github.com/googleapis/nodejs-security-center/issues/457)) ([6bbb738](https://github.com/googleapis/nodejs-security-center/commit/6bbb73850a1ed0ee3481ddbdc55c52e7bfa8fc0f))
+
 ## [5.8.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.7.0...v5.8.0) (2021-11-22)
 
 
