@@ -2,7 +2,7 @@
   "name": "@google-cloud/dataplex",
   "version": "0.1.0",
   "description": "dataplex client for Node.js",
-  "repository": "googleapis/googleapis/nodejs-dataplex",
+  "repository": "googleapis/nodejs-dataplex",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
