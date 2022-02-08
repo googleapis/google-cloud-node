@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-gke-hub/compare/v2.0.0...v2.1.0) (2022-02-03)
+
+
+### Features
+
+* add `kubernetes_resource` field docs: update API annotation ([#119](https://github.com/googleapis/nodejs-gke-hub/issues/119)) ([f8e5fba](https://github.com/googleapis/nodejs-gke-hub/commit/f8e5fba6ec3f51c1c23d793886a316385d6eeab9))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.4.0...v2.0.0) (2021-11-25)
 
 
