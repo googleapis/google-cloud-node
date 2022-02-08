@@ -433,6 +433,13 @@
                         }
                       },
                       "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "VALIDATION": 1,
+                            "ENFORCEMENT": 2
+                          }
+                        },
                         "InventoryFilter": {
                           "fields": {
                             "osShortName": {
@@ -605,6 +612,13 @@
                                 }
                               },
                               "nested": {
+                                "DesiredState": {
+                                  "values": {
+                                    "DESIRED_STATE_UNSPECIFIED": 0,
+                                    "INSTALLED": 1,
+                                    "REMOVED": 2
+                                  }
+                                },
                                 "Deb": {
                                   "fields": {
                                     "source": {
@@ -693,13 +707,6 @@
                                       "type": "string",
                                       "id": 2
                                     }
-                                  }
-                                },
-                                "DesiredState": {
-                                  "values": {
-                                    "DESIRED_STATE_UNSPECIFIED": 0,
-                                    "INSTALLED": 1,
-                                    "REMOVED": 2
                                   }
                                 }
                               }
@@ -983,13 +990,6 @@
                               }
                             }
                           }
-                        },
-                        "Mode": {
-                          "values": {
-                            "MODE_UNSPECIFIED": 0,
-                            "VALIDATION": 1,
-                            "ENFORCEMENT": 2
-                          }
                         }
                       }
                     },
@@ -1099,6 +1099,13 @@
                             }
                           },
                           "nested": {
+                            "ComplianceState": {
+                              "values": {
+                                "UNKNOWN": 0,
+                                "COMPLIANT": 1,
+                                "NON_COMPLIANT": 2
+                              }
+                            },
                             "OSPolicyResourceCompliance": {
                               "oneofs": {
                                 "output": {
@@ -1154,6 +1161,13 @@
                                     }
                                   }
                                 },
+                                "ComplianceState": {
+                                  "values": {
+                                    "UNKNOWN": 0,
+                                    "COMPLIANT": 1,
+                                    "NON_COMPLIANT": 2
+                                  }
+                                },
                                 "ExecResourceOutput": {
                                   "fields": {
                                     "enforcementOutput": {
@@ -1161,21 +1175,7 @@
                                       "id": 2
                                     }
                                   }
-                                },
-                                "ComplianceState": {
-                                  "values": {
-                                    "UNKNOWN": 0,
-                                    "COMPLIANT": 1,
-                                    "NON_COMPLIANT": 2
-                                  }
                                 }
-                              }
-                            },
-                            "ComplianceState": {
-                              "values": {
-                                "UNKNOWN": 0,
-                                "COMPLIANT": 1,
-                                "NON_COMPLIANT": 2
                               }
                             }
                           }
@@ -1716,6 +1716,66 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "UpdatePatchDeployment": {
+                          "requestType": "UpdatePatchDeploymentRequest",
+                          "responseType": "PatchDeployment",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{patch_deployment.name=projects/*/patchDeployments/*}",
+                            "(google.api.http).body": "patch_deployment",
+                            "(google.api.method_signature)": "patch_deployment,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{patch_deployment.name=projects/*/patchDeployments/*}",
+                                "body": "patch_deployment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "patch_deployment,update_mask"
+                            }
+                          ]
+                        },
+                        "PausePatchDeployment": {
+                          "requestType": "PausePatchDeploymentRequest",
+                          "responseType": "PatchDeployment",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/patchDeployments/*}:pause",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/patchDeployments/*}:pause",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ResumePatchDeployment": {
+                          "requestType": "ResumePatchDeploymentRequest",
+                          "responseType": "PatchDeployment",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/patchDeployments/*}:resume",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/patchDeployments/*}:resume",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1805,6 +1865,22 @@
                           "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "PAUSED": 2
                           }
                         }
                       }
@@ -1957,6 +2033,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "dayOffset": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2038,6 +2121,48 @@
                       }
                     },
                     "DeletePatchDeploymentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchDeployment"
+                          }
+                        }
+                      }
+                    },
+                    "UpdatePatchDeploymentRequest": {
+                      "fields": {
+                        "patchDeployment": {
+                          "type": "PatchDeployment",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PausePatchDeploymentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/PatchDeployment"
+                          }
+                        }
+                      }
+                    },
+                    "ResumePatchDeploymentRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
@@ -2277,6 +2402,18 @@
                         }
                       },
                       "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STARTED": 1,
+                            "INSTANCE_LOOKUP": 2,
+                            "PATCHING": 3,
+                            "SUCCEEDED": 4,
+                            "COMPLETED_WITH_ERRORS": 5,
+                            "CANCELED": 6,
+                            "TIMED_OUT": 7
+                          }
+                        },
                         "InstanceDetailsSummary": {
                           "fields": {
                             "pendingInstanceCount": {
@@ -2340,18 +2477,6 @@
                               "id": 15
                             }
                           }
-                        },
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "STARTED": 1,
-                            "INSTANCE_LOOKUP": 2,
-                            "PATCHING": 3,
-                            "SUCCEEDED": 4,
-                            "COMPLETED_WITH_ERRORS": 5,
-                            "CANCELED": 6,
-                            "TIMED_OUT": 7
-                          }
                         }
                       }
                     },
@@ -2388,6 +2513,10 @@
                         "postStep": {
                           "type": "ExecStep",
                           "id": 9
+                        },
+                        "migInstancesAllowed": {
+                          "type": "bool",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -5289,7 +5418,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "HttpProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -5390,6 +5519,22 @@
                 }
               }
             },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -5476,22 +5621,6 @@
                   "id": 2
                 }
               }
-            },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
             }
           }
         },

@@ -4368,6 +4368,22 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * Mode enum.
+                         * @name google.cloud.osconfig.v1.OSPolicy.Mode
+                         * @enum {number}
+                         * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                         * @property {number} VALIDATION=1 VALIDATION value
+                         * @property {number} ENFORCEMENT=2 ENFORCEMENT value
+                         */
+                        OSPolicy.Mode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "VALIDATION"] = 1;
+                            values[valuesById[2] = "ENFORCEMENT"] = 2;
+                            return values;
+                        })();
+    
                         OSPolicy.InventoryFilter = (function() {
     
                             /**
@@ -6116,6 +6132,22 @@
                                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                                 };
     
+                                /**
+                                 * DesiredState enum.
+                                 * @name google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.DesiredState
+                                 * @enum {number}
+                                 * @property {number} DESIRED_STATE_UNSPECIFIED=0 DESIRED_STATE_UNSPECIFIED value
+                                 * @property {number} INSTALLED=1 INSTALLED value
+                                 * @property {number} REMOVED=2 REMOVED value
+                                 */
+                                PackageResource.DesiredState = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "DESIRED_STATE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "INSTALLED"] = 1;
+                                    values[valuesById[2] = "REMOVED"] = 2;
+                                    return values;
+                                })();
+    
                                 PackageResource.Deb = (function() {
     
                                     /**
@@ -7523,22 +7555,6 @@
                                     };
     
                                     return MSI;
-                                })();
-    
-                                /**
-                                 * DesiredState enum.
-                                 * @name google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.DesiredState
-                                 * @enum {number}
-                                 * @property {number} DESIRED_STATE_UNSPECIFIED=0 DESIRED_STATE_UNSPECIFIED value
-                                 * @property {number} INSTALLED=1 INSTALLED value
-                                 * @property {number} REMOVED=2 REMOVED value
-                                 */
-                                PackageResource.DesiredState = (function() {
-                                    var valuesById = {}, values = Object.create(valuesById);
-                                    values[valuesById[0] = "DESIRED_STATE_UNSPECIFIED"] = 0;
-                                    values[valuesById[1] = "INSTALLED"] = 1;
-                                    values[valuesById[2] = "REMOVED"] = 2;
-                                    return values;
                                 })();
     
                                 return PackageResource;
@@ -10124,22 +10140,6 @@
                             return ResourceGroup;
                         })();
     
-                        /**
-                         * Mode enum.
-                         * @name google.cloud.osconfig.v1.OSPolicy.Mode
-                         * @enum {number}
-                         * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
-                         * @property {number} VALIDATION=1 VALIDATION value
-                         * @property {number} ENFORCEMENT=2 ENFORCEMENT value
-                         */
-                        OSPolicy.Mode = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "VALIDATION"] = 1;
-                            values[valuesById[2] = "ENFORCEMENT"] = 2;
-                            return values;
-                        })();
-    
                         return OSPolicy;
                     })();
     
@@ -11428,6 +11428,22 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            /**
+                             * ComplianceState enum.
+                             * @name google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.ComplianceState
+                             * @enum {number}
+                             * @property {number} UNKNOWN=0 UNKNOWN value
+                             * @property {number} COMPLIANT=1 COMPLIANT value
+                             * @property {number} NON_COMPLIANT=2 NON_COMPLIANT value
+                             */
+                            OSPolicyCompliance.ComplianceState = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "UNKNOWN"] = 0;
+                                values[valuesById[1] = "COMPLIANT"] = 1;
+                                values[valuesById[2] = "NON_COMPLIANT"] = 2;
+                                return values;
+                            })();
+    
                             OSPolicyCompliance.OSPolicyResourceCompliance = (function() {
     
                                 /**
@@ -12024,6 +12040,22 @@
                                     return OSPolicyResourceConfigStep;
                                 })();
     
+                                /**
+                                 * ComplianceState enum.
+                                 * @name google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ComplianceState
+                                 * @enum {number}
+                                 * @property {number} UNKNOWN=0 UNKNOWN value
+                                 * @property {number} COMPLIANT=1 COMPLIANT value
+                                 * @property {number} NON_COMPLIANT=2 NON_COMPLIANT value
+                                 */
+                                OSPolicyResourceCompliance.ComplianceState = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "UNKNOWN"] = 0;
+                                    values[valuesById[1] = "COMPLIANT"] = 1;
+                                    values[valuesById[2] = "NON_COMPLIANT"] = 2;
+                                    return values;
+                                })();
+    
                                 OSPolicyResourceCompliance.ExecResourceOutput = (function() {
     
                                     /**
@@ -12220,39 +12252,7 @@
                                     return ExecResourceOutput;
                                 })();
     
-                                /**
-                                 * ComplianceState enum.
-                                 * @name google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ComplianceState
-                                 * @enum {number}
-                                 * @property {number} UNKNOWN=0 UNKNOWN value
-                                 * @property {number} COMPLIANT=1 COMPLIANT value
-                                 * @property {number} NON_COMPLIANT=2 NON_COMPLIANT value
-                                 */
-                                OSPolicyResourceCompliance.ComplianceState = (function() {
-                                    var valuesById = {}, values = Object.create(valuesById);
-                                    values[valuesById[0] = "UNKNOWN"] = 0;
-                                    values[valuesById[1] = "COMPLIANT"] = 1;
-                                    values[valuesById[2] = "NON_COMPLIANT"] = 2;
-                                    return values;
-                                })();
-    
                                 return OSPolicyResourceCompliance;
-                            })();
-    
-                            /**
-                             * ComplianceState enum.
-                             * @name google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.ComplianceState
-                             * @enum {number}
-                             * @property {number} UNKNOWN=0 UNKNOWN value
-                             * @property {number} COMPLIANT=1 COMPLIANT value
-                             * @property {number} NON_COMPLIANT=2 NON_COMPLIANT value
-                             */
-                            OSPolicyCompliance.ComplianceState = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "UNKNOWN"] = 0;
-                                values[valuesById[1] = "COMPLIANT"] = 1;
-                                values[valuesById[2] = "NON_COMPLIANT"] = 2;
-                                return values;
                             })();
     
                             return OSPolicyCompliance;
@@ -16462,6 +16462,105 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.osconfig.v1.OsConfigService#updatePatchDeployment}.
+                         * @memberof google.cloud.osconfig.v1.OsConfigService
+                         * @typedef UpdatePatchDeploymentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.osconfig.v1.PatchDeployment} [response] PatchDeployment
+                         */
+    
+                        /**
+                         * Calls UpdatePatchDeployment.
+                         * @function updatePatchDeployment
+                         * @memberof google.cloud.osconfig.v1.OsConfigService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest} request UpdatePatchDeploymentRequest message or plain object
+                         * @param {google.cloud.osconfig.v1.OsConfigService.UpdatePatchDeploymentCallback} callback Node-style callback called with the error, if any, and PatchDeployment
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsConfigService.prototype.updatePatchDeployment = function updatePatchDeployment(request, callback) {
+                            return this.rpcCall(updatePatchDeployment, $root.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest, $root.google.cloud.osconfig.v1.PatchDeployment, request, callback);
+                        }, "name", { value: "UpdatePatchDeployment" });
+    
+                        /**
+                         * Calls UpdatePatchDeployment.
+                         * @function updatePatchDeployment
+                         * @memberof google.cloud.osconfig.v1.OsConfigService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest} request UpdatePatchDeploymentRequest message or plain object
+                         * @returns {Promise<google.cloud.osconfig.v1.PatchDeployment>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.osconfig.v1.OsConfigService#pausePatchDeployment}.
+                         * @memberof google.cloud.osconfig.v1.OsConfigService
+                         * @typedef PausePatchDeploymentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.osconfig.v1.PatchDeployment} [response] PatchDeployment
+                         */
+    
+                        /**
+                         * Calls PausePatchDeployment.
+                         * @function pausePatchDeployment
+                         * @memberof google.cloud.osconfig.v1.OsConfigService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IPausePatchDeploymentRequest} request PausePatchDeploymentRequest message or plain object
+                         * @param {google.cloud.osconfig.v1.OsConfigService.PausePatchDeploymentCallback} callback Node-style callback called with the error, if any, and PatchDeployment
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsConfigService.prototype.pausePatchDeployment = function pausePatchDeployment(request, callback) {
+                            return this.rpcCall(pausePatchDeployment, $root.google.cloud.osconfig.v1.PausePatchDeploymentRequest, $root.google.cloud.osconfig.v1.PatchDeployment, request, callback);
+                        }, "name", { value: "PausePatchDeployment" });
+    
+                        /**
+                         * Calls PausePatchDeployment.
+                         * @function pausePatchDeployment
+                         * @memberof google.cloud.osconfig.v1.OsConfigService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IPausePatchDeploymentRequest} request PausePatchDeploymentRequest message or plain object
+                         * @returns {Promise<google.cloud.osconfig.v1.PatchDeployment>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.osconfig.v1.OsConfigService#resumePatchDeployment}.
+                         * @memberof google.cloud.osconfig.v1.OsConfigService
+                         * @typedef ResumePatchDeploymentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.osconfig.v1.PatchDeployment} [response] PatchDeployment
+                         */
+    
+                        /**
+                         * Calls ResumePatchDeployment.
+                         * @function resumePatchDeployment
+                         * @memberof google.cloud.osconfig.v1.OsConfigService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IResumePatchDeploymentRequest} request ResumePatchDeploymentRequest message or plain object
+                         * @param {google.cloud.osconfig.v1.OsConfigService.ResumePatchDeploymentCallback} callback Node-style callback called with the error, if any, and PatchDeployment
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsConfigService.prototype.resumePatchDeployment = function resumePatchDeployment(request, callback) {
+                            return this.rpcCall(resumePatchDeployment, $root.google.cloud.osconfig.v1.ResumePatchDeploymentRequest, $root.google.cloud.osconfig.v1.PatchDeployment, request, callback);
+                        }, "name", { value: "ResumePatchDeployment" });
+    
+                        /**
+                         * Calls ResumePatchDeployment.
+                         * @function resumePatchDeployment
+                         * @memberof google.cloud.osconfig.v1.OsConfigService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IResumePatchDeploymentRequest} request ResumePatchDeploymentRequest message or plain object
+                         * @returns {Promise<google.cloud.osconfig.v1.PatchDeployment>} Promise
+                         * @variation 2
+                         */
+    
                         return OsConfigService;
                     })();
     
@@ -16482,6 +16581,7 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] PatchDeployment updateTime
                          * @property {google.protobuf.ITimestamp|null} [lastExecuteTime] PatchDeployment lastExecuteTime
                          * @property {google.cloud.osconfig.v1.IPatchRollout|null} [rollout] PatchDeployment rollout
+                         * @property {google.cloud.osconfig.v1.PatchDeployment.State|null} [state] PatchDeployment state
                          */
     
                         /**
@@ -16587,6 +16687,14 @@
                          */
                         PatchDeployment.prototype.rollout = null;
     
+                        /**
+                         * PatchDeployment state.
+                         * @member {google.cloud.osconfig.v1.PatchDeployment.State} state
+                         * @memberof google.cloud.osconfig.v1.PatchDeployment
+                         * @instance
+                         */
+                        PatchDeployment.prototype.state = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -16647,6 +16755,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.lastExecuteTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.rollout != null && Object.hasOwnProperty.call(message, "rollout"))
                                 $root.google.cloud.osconfig.v1.PatchRollout.encode(message.rollout, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.state);
                             return writer;
                         };
     
@@ -16713,6 +16823,9 @@
                                     break;
                                 case 11:
                                     message.rollout = $root.google.cloud.osconfig.v1.PatchRollout.decode(reader, reader.uint32());
+                                    break;
+                                case 12:
+                                    message.state = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -16809,6 +16922,15 @@
                                 if (error)
                                     return "rollout." + error;
                             }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -16873,6 +16995,20 @@
                                     throw TypeError(".google.cloud.osconfig.v1.PatchDeployment.rollout: object expected");
                                 message.rollout = $root.google.cloud.osconfig.v1.PatchRollout.fromObject(object.rollout);
                             }
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ACTIVE":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "PAUSED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -16899,6 +17035,7 @@
                                 object.updateTime = null;
                                 object.lastExecuteTime = null;
                                 object.rollout = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -16928,6 +17065,8 @@
                                 object.lastExecuteTime = $root.google.protobuf.Timestamp.toObject(message.lastExecuteTime, options);
                             if (message.rollout != null && message.hasOwnProperty("rollout"))
                                 object.rollout = $root.google.cloud.osconfig.v1.PatchRollout.toObject(message.rollout, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.osconfig.v1.PatchDeployment.State[message.state] : message.state;
                             return object;
                         };
     
@@ -16941,6 +17080,22 @@
                         PatchDeployment.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.osconfig.v1.PatchDeployment.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} ACTIVE=1 ACTIVE value
+                         * @property {number} PAUSED=2 PAUSED value
+                         */
+                        PatchDeployment.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ACTIVE"] = 1;
+                            values[valuesById[2] = "PAUSED"] = 2;
+                            return values;
+                        })();
     
                         return PatchDeployment;
                     })();
@@ -18086,6 +18241,7 @@
                          * @interface IWeekDayOfMonth
                          * @property {number|null} [weekOrdinal] WeekDayOfMonth weekOrdinal
                          * @property {google.type.DayOfWeek|null} [dayOfWeek] WeekDayOfMonth dayOfWeek
+                         * @property {number|null} [dayOffset] WeekDayOfMonth dayOffset
                          */
     
                         /**
@@ -18120,6 +18276,14 @@
                         WeekDayOfMonth.prototype.dayOfWeek = 0;
     
                         /**
+                         * WeekDayOfMonth dayOffset.
+                         * @member {number} dayOffset
+                         * @memberof google.cloud.osconfig.v1.WeekDayOfMonth
+                         * @instance
+                         */
+                        WeekDayOfMonth.prototype.dayOffset = 0;
+    
+                        /**
                          * Creates a new WeekDayOfMonth instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.osconfig.v1.WeekDayOfMonth
@@ -18147,6 +18311,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.weekOrdinal);
                             if (message.dayOfWeek != null && Object.hasOwnProperty.call(message, "dayOfWeek"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dayOfWeek);
+                            if (message.dayOffset != null && Object.hasOwnProperty.call(message, "dayOffset"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.dayOffset);
                             return writer;
                         };
     
@@ -18186,6 +18352,9 @@
                                     break;
                                 case 2:
                                     message.dayOfWeek = reader.int32();
+                                    break;
+                                case 3:
+                                    message.dayOffset = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -18239,6 +18408,9 @@
                                 case 7:
                                     break;
                                 }
+                            if (message.dayOffset != null && message.hasOwnProperty("dayOffset"))
+                                if (!$util.isInteger(message.dayOffset))
+                                    return "dayOffset: integer expected";
                             return null;
                         };
     
@@ -18290,6 +18462,8 @@
                                 message.dayOfWeek = 7;
                                 break;
                             }
+                            if (object.dayOffset != null)
+                                message.dayOffset = object.dayOffset | 0;
                             return message;
                         };
     
@@ -18309,11 +18483,14 @@
                             if (options.defaults) {
                                 object.weekOrdinal = 0;
                                 object.dayOfWeek = options.enums === String ? "DAY_OF_WEEK_UNSPECIFIED" : 0;
+                                object.dayOffset = 0;
                             }
                             if (message.weekOrdinal != null && message.hasOwnProperty("weekOrdinal"))
                                 object.weekOrdinal = message.weekOrdinal;
                             if (message.dayOfWeek != null && message.hasOwnProperty("dayOfWeek"))
                                 object.dayOfWeek = options.enums === String ? $root.google.type.DayOfWeek[message.dayOfWeek] : message.dayOfWeek;
+                            if (message.dayOffset != null && message.hasOwnProperty("dayOffset"))
+                                object.dayOffset = message.dayOffset;
                             return object;
                         };
     
@@ -19403,6 +19580,600 @@
                         };
     
                         return DeletePatchDeploymentRequest;
+                    })();
+    
+                    v1.UpdatePatchDeploymentRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdatePatchDeploymentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IUpdatePatchDeploymentRequest
+                         * @property {google.cloud.osconfig.v1.IPatchDeployment|null} [patchDeployment] UpdatePatchDeploymentRequest patchDeployment
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdatePatchDeploymentRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdatePatchDeploymentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents an UpdatePatchDeploymentRequest.
+                         * @implements IUpdatePatchDeploymentRequest
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest=} [properties] Properties to set
+                         */
+                        function UpdatePatchDeploymentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdatePatchDeploymentRequest patchDeployment.
+                         * @member {google.cloud.osconfig.v1.IPatchDeployment|null|undefined} patchDeployment
+                         * @memberof google.cloud.osconfig.v1.UpdatePatchDeploymentRequest
+                         * @instance
+                         */
+                        UpdatePatchDeploymentRequest.prototype.patchDeployment = null;
+    
+                        /**
+                         * UpdatePatchDeploymentRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.osconfig.v1.UpdatePatchDeploymentRequest
+                         * @instance
+                         */
+                        UpdatePatchDeploymentRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdatePatchDeploymentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.UpdatePatchDeploymentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.UpdatePatchDeploymentRequest} UpdatePatchDeploymentRequest instance
+                         */
+                        UpdatePatchDeploymentRequest.create = function create(properties) {
+                            return new UpdatePatchDeploymentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePatchDeploymentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.UpdatePatchDeploymentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.UpdatePatchDeploymentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest} message UpdatePatchDeploymentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePatchDeploymentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.patchDeployment != null && Object.hasOwnProperty.call(message, "patchDeployment"))
+                                $root.google.cloud.osconfig.v1.PatchDeployment.encode(message.patchDeployment, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePatchDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.UpdatePatchDeploymentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.UpdatePatchDeploymentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest} message UpdatePatchDeploymentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePatchDeploymentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdatePatchDeploymentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.UpdatePatchDeploymentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.UpdatePatchDeploymentRequest} UpdatePatchDeploymentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePatchDeploymentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.patchDeployment = $root.google.cloud.osconfig.v1.PatchDeployment.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdatePatchDeploymentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.UpdatePatchDeploymentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.UpdatePatchDeploymentRequest} UpdatePatchDeploymentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePatchDeploymentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdatePatchDeploymentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.UpdatePatchDeploymentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdatePatchDeploymentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.patchDeployment != null && message.hasOwnProperty("patchDeployment")) {
+                                var error = $root.google.cloud.osconfig.v1.PatchDeployment.verify(message.patchDeployment);
+                                if (error)
+                                    return "patchDeployment." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdatePatchDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.UpdatePatchDeploymentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.UpdatePatchDeploymentRequest} UpdatePatchDeploymentRequest
+                         */
+                        UpdatePatchDeploymentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest();
+                            if (object.patchDeployment != null) {
+                                if (typeof object.patchDeployment !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.UpdatePatchDeploymentRequest.patchDeployment: object expected");
+                                message.patchDeployment = $root.google.cloud.osconfig.v1.PatchDeployment.fromObject(object.patchDeployment);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.UpdatePatchDeploymentRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdatePatchDeploymentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.UpdatePatchDeploymentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.UpdatePatchDeploymentRequest} message UpdatePatchDeploymentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdatePatchDeploymentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.patchDeployment = null;
+                                object.updateMask = null;
+                            }
+                            if (message.patchDeployment != null && message.hasOwnProperty("patchDeployment"))
+                                object.patchDeployment = $root.google.cloud.osconfig.v1.PatchDeployment.toObject(message.patchDeployment, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdatePatchDeploymentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.UpdatePatchDeploymentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdatePatchDeploymentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdatePatchDeploymentRequest;
+                    })();
+    
+                    v1.PausePatchDeploymentRequest = (function() {
+    
+                        /**
+                         * Properties of a PausePatchDeploymentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IPausePatchDeploymentRequest
+                         * @property {string|null} [name] PausePatchDeploymentRequest name
+                         */
+    
+                        /**
+                         * Constructs a new PausePatchDeploymentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a PausePatchDeploymentRequest.
+                         * @implements IPausePatchDeploymentRequest
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IPausePatchDeploymentRequest=} [properties] Properties to set
+                         */
+                        function PausePatchDeploymentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PausePatchDeploymentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.osconfig.v1.PausePatchDeploymentRequest
+                         * @instance
+                         */
+                        PausePatchDeploymentRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new PausePatchDeploymentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.PausePatchDeploymentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IPausePatchDeploymentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.PausePatchDeploymentRequest} PausePatchDeploymentRequest instance
+                         */
+                        PausePatchDeploymentRequest.create = function create(properties) {
+                            return new PausePatchDeploymentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PausePatchDeploymentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.PausePatchDeploymentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.PausePatchDeploymentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IPausePatchDeploymentRequest} message PausePatchDeploymentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PausePatchDeploymentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PausePatchDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.PausePatchDeploymentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.PausePatchDeploymentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IPausePatchDeploymentRequest} message PausePatchDeploymentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PausePatchDeploymentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PausePatchDeploymentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.PausePatchDeploymentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.PausePatchDeploymentRequest} PausePatchDeploymentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PausePatchDeploymentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.PausePatchDeploymentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PausePatchDeploymentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.PausePatchDeploymentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.PausePatchDeploymentRequest} PausePatchDeploymentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PausePatchDeploymentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PausePatchDeploymentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.PausePatchDeploymentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PausePatchDeploymentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PausePatchDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.PausePatchDeploymentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.PausePatchDeploymentRequest} PausePatchDeploymentRequest
+                         */
+                        PausePatchDeploymentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.PausePatchDeploymentRequest)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.PausePatchDeploymentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PausePatchDeploymentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.PausePatchDeploymentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.PausePatchDeploymentRequest} message PausePatchDeploymentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PausePatchDeploymentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PausePatchDeploymentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.PausePatchDeploymentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PausePatchDeploymentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PausePatchDeploymentRequest;
+                    })();
+    
+                    v1.ResumePatchDeploymentRequest = (function() {
+    
+                        /**
+                         * Properties of a ResumePatchDeploymentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IResumePatchDeploymentRequest
+                         * @property {string|null} [name] ResumePatchDeploymentRequest name
+                         */
+    
+                        /**
+                         * Constructs a new ResumePatchDeploymentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a ResumePatchDeploymentRequest.
+                         * @implements IResumePatchDeploymentRequest
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IResumePatchDeploymentRequest=} [properties] Properties to set
+                         */
+                        function ResumePatchDeploymentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResumePatchDeploymentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.osconfig.v1.ResumePatchDeploymentRequest
+                         * @instance
+                         */
+                        ResumePatchDeploymentRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new ResumePatchDeploymentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.ResumePatchDeploymentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IResumePatchDeploymentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.ResumePatchDeploymentRequest} ResumePatchDeploymentRequest instance
+                         */
+                        ResumePatchDeploymentRequest.create = function create(properties) {
+                            return new ResumePatchDeploymentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResumePatchDeploymentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.ResumePatchDeploymentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.ResumePatchDeploymentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IResumePatchDeploymentRequest} message ResumePatchDeploymentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResumePatchDeploymentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResumePatchDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ResumePatchDeploymentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ResumePatchDeploymentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IResumePatchDeploymentRequest} message ResumePatchDeploymentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResumePatchDeploymentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResumePatchDeploymentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.ResumePatchDeploymentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.ResumePatchDeploymentRequest} ResumePatchDeploymentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResumePatchDeploymentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.ResumePatchDeploymentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResumePatchDeploymentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ResumePatchDeploymentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.ResumePatchDeploymentRequest} ResumePatchDeploymentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResumePatchDeploymentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResumePatchDeploymentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.ResumePatchDeploymentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResumePatchDeploymentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResumePatchDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.ResumePatchDeploymentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.ResumePatchDeploymentRequest} ResumePatchDeploymentRequest
+                         */
+                        ResumePatchDeploymentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.ResumePatchDeploymentRequest)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.ResumePatchDeploymentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResumePatchDeploymentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.ResumePatchDeploymentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.ResumePatchDeploymentRequest} message ResumePatchDeploymentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResumePatchDeploymentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResumePatchDeploymentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.ResumePatchDeploymentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResumePatchDeploymentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ResumePatchDeploymentRequest;
                     })();
     
                     v1.ExecutePatchJobRequest = (function() {
@@ -21868,6 +22639,32 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * State enum.
+                         * @name google.cloud.osconfig.v1.PatchJob.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} STARTED=1 STARTED value
+                         * @property {number} INSTANCE_LOOKUP=2 INSTANCE_LOOKUP value
+                         * @property {number} PATCHING=3 PATCHING value
+                         * @property {number} SUCCEEDED=4 SUCCEEDED value
+                         * @property {number} COMPLETED_WITH_ERRORS=5 COMPLETED_WITH_ERRORS value
+                         * @property {number} CANCELED=6 CANCELED value
+                         * @property {number} TIMED_OUT=7 TIMED_OUT value
+                         */
+                        PatchJob.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STARTED"] = 1;
+                            values[valuesById[2] = "INSTANCE_LOOKUP"] = 2;
+                            values[valuesById[3] = "PATCHING"] = 3;
+                            values[valuesById[4] = "SUCCEEDED"] = 4;
+                            values[valuesById[5] = "COMPLETED_WITH_ERRORS"] = 5;
+                            values[valuesById[6] = "CANCELED"] = 6;
+                            values[valuesById[7] = "TIMED_OUT"] = 7;
+                            return values;
+                        })();
+    
                         PatchJob.InstanceDetailsSummary = (function() {
     
                             /**
@@ -22574,32 +23371,6 @@
                             return InstanceDetailsSummary;
                         })();
     
-                        /**
-                         * State enum.
-                         * @name google.cloud.osconfig.v1.PatchJob.State
-                         * @enum {number}
-                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                         * @property {number} STARTED=1 STARTED value
-                         * @property {number} INSTANCE_LOOKUP=2 INSTANCE_LOOKUP value
-                         * @property {number} PATCHING=3 PATCHING value
-                         * @property {number} SUCCEEDED=4 SUCCEEDED value
-                         * @property {number} COMPLETED_WITH_ERRORS=5 COMPLETED_WITH_ERRORS value
-                         * @property {number} CANCELED=6 CANCELED value
-                         * @property {number} TIMED_OUT=7 TIMED_OUT value
-                         */
-                        PatchJob.State = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "STARTED"] = 1;
-                            values[valuesById[2] = "INSTANCE_LOOKUP"] = 2;
-                            values[valuesById[3] = "PATCHING"] = 3;
-                            values[valuesById[4] = "SUCCEEDED"] = 4;
-                            values[valuesById[5] = "COMPLETED_WITH_ERRORS"] = 5;
-                            values[valuesById[6] = "CANCELED"] = 6;
-                            values[valuesById[7] = "TIMED_OUT"] = 7;
-                            return values;
-                        })();
-    
                         return PatchJob;
                     })();
     
@@ -22617,6 +23388,7 @@
                          * @property {google.cloud.osconfig.v1.IWindowsUpdateSettings|null} [windowsUpdate] PatchConfig windowsUpdate
                          * @property {google.cloud.osconfig.v1.IExecStep|null} [preStep] PatchConfig preStep
                          * @property {google.cloud.osconfig.v1.IExecStep|null} [postStep] PatchConfig postStep
+                         * @property {boolean|null} [migInstancesAllowed] PatchConfig migInstancesAllowed
                          */
     
                         /**
@@ -22699,6 +23471,14 @@
                         PatchConfig.prototype.postStep = null;
     
                         /**
+                         * PatchConfig migInstancesAllowed.
+                         * @member {boolean} migInstancesAllowed
+                         * @memberof google.cloud.osconfig.v1.PatchConfig
+                         * @instance
+                         */
+                        PatchConfig.prototype.migInstancesAllowed = false;
+    
+                        /**
                          * Creates a new PatchConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.osconfig.v1.PatchConfig
@@ -22738,6 +23518,8 @@
                                 $root.google.cloud.osconfig.v1.ExecStep.encode(message.preStep, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.postStep != null && Object.hasOwnProperty.call(message, "postStep"))
                                 $root.google.cloud.osconfig.v1.ExecStep.encode(message.postStep, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.migInstancesAllowed != null && Object.hasOwnProperty.call(message, "migInstancesAllowed"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.migInstancesAllowed);
                             return writer;
                         };
     
@@ -22795,6 +23577,9 @@
                                     break;
                                 case 9:
                                     message.postStep = $root.google.cloud.osconfig.v1.ExecStep.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.migInstancesAllowed = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -22876,6 +23661,9 @@
                                 if (error)
                                     return "postStep." + error;
                             }
+                            if (message.migInstancesAllowed != null && message.hasOwnProperty("migInstancesAllowed"))
+                                if (typeof message.migInstancesAllowed !== "boolean")
+                                    return "migInstancesAllowed: boolean expected";
                             return null;
                         };
     
@@ -22944,6 +23732,8 @@
                                     throw TypeError(".google.cloud.osconfig.v1.PatchConfig.postStep: object expected");
                                 message.postStep = $root.google.cloud.osconfig.v1.ExecStep.fromObject(object.postStep);
                             }
+                            if (object.migInstancesAllowed != null)
+                                message.migInstancesAllowed = Boolean(object.migInstancesAllowed);
                             return message;
                         };
     
@@ -22969,6 +23759,7 @@
                                 object.windowsUpdate = null;
                                 object.preStep = null;
                                 object.postStep = null;
+                                object.migInstancesAllowed = false;
                             }
                             if (message.rebootConfig != null && message.hasOwnProperty("rebootConfig"))
                                 object.rebootConfig = options.enums === String ? $root.google.cloud.osconfig.v1.PatchConfig.RebootConfig[message.rebootConfig] : message.rebootConfig;
@@ -22986,6 +23777,8 @@
                                 object.preStep = $root.google.cloud.osconfig.v1.ExecStep.toObject(message.preStep, options);
                             if (message.postStep != null && message.hasOwnProperty("postStep"))
                                 object.postStep = $root.google.cloud.osconfig.v1.ExecStep.toObject(message.postStep, options);
+                            if (message.migInstancesAllowed != null && message.hasOwnProperty("migInstancesAllowed"))
+                                object.migInstancesAllowed = message.migInstancesAllowed;
                             return object;
                         };
     
@@ -56859,8 +57652,8 @@
                  * @property {boolean|null} [deprecated] MethodOptions deprecated
                  * @property {google.protobuf.MethodOptions.IdempotencyLevel|null} [idempotencyLevel] MethodOptions idempotencyLevel
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
-                 * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
+                 * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
                  * @property {google.longrunning.IOperationInfo|null} [".google.longrunning.operationInfo"] MethodOptions .google.longrunning.operationInfo
                  */
     
@@ -56906,20 +57699,20 @@
                 MethodOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
-                 * MethodOptions .google.api.http.
-                 * @member {google.api.IHttpRule|null|undefined} .google.api.http
-                 * @memberof google.protobuf.MethodOptions
-                 * @instance
-                 */
-                MethodOptions.prototype[".google.api.http"] = null;
-    
-                /**
                  * MethodOptions .google.api.methodSignature.
                  * @member {Array.<string>} .google.api.methodSignature
                  * @memberof google.protobuf.MethodOptions
                  * @instance
                  */
                 MethodOptions.prototype[".google.api.methodSignature"] = $util.emptyArray;
+    
+                /**
+                 * MethodOptions .google.api.http.
+                 * @member {google.api.IHttpRule|null|undefined} .google.api.http
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype[".google.api.http"] = null;
     
                 /**
                  * MethodOptions .google.longrunning.operationInfo.
@@ -57012,13 +57805,13 @@
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                             break;
-                        case 72295728:
-                            message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
-                            break;
                         case 1051:
                             if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
                                 message[".google.api.methodSignature"] = [];
                             message[".google.api.methodSignature"].push(reader.string());
+                            break;
+                        case 72295728:
+                            message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
                             break;
                         case 1049:
                             message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
@@ -57079,17 +57872,17 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http")) {
-                        var error = $root.google.api.HttpRule.verify(message[".google.api.http"]);
-                        if (error)
-                            return ".google.api.http." + error;
-                    }
                     if (message[".google.api.methodSignature"] != null && message.hasOwnProperty(".google.api.methodSignature")) {
                         if (!Array.isArray(message[".google.api.methodSignature"]))
                             return ".google.api.methodSignature: array expected";
                         for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
                             if (!$util.isString(message[".google.api.methodSignature"][i]))
                                 return ".google.api.methodSignature: string[] expected";
+                    }
+                    if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http")) {
+                        var error = $root.google.api.HttpRule.verify(message[".google.api.http"]);
+                        if (error)
+                            return ".google.api.http." + error;
                     }
                     if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo")) {
                         var error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"]);
@@ -57137,17 +57930,17 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
-                    if (object[".google.api.http"] != null) {
-                        if (typeof object[".google.api.http"] !== "object")
-                            throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
-                        message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"]);
-                    }
                     if (object[".google.api.methodSignature"]) {
                         if (!Array.isArray(object[".google.api.methodSignature"]))
                             throw TypeError(".google.protobuf.MethodOptions..google.api.methodSignature: array expected");
                         message[".google.api.methodSignature"] = [];
                         for (var i = 0; i < object[".google.api.methodSignature"].length; ++i)
                             message[".google.api.methodSignature"][i] = String(object[".google.api.methodSignature"][i]);
+                    }
+                    if (object[".google.api.http"] != null) {
+                        if (typeof object[".google.api.http"] !== "object")
+                            throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
+                        message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"]);
                     }
                     if (object[".google.longrunning.operationInfo"] != null) {
                         if (typeof object[".google.longrunning.operationInfo"] !== "object")

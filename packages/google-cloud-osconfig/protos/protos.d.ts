@@ -1653,6 +1653,13 @@ export namespace google {
 
                 namespace OSPolicy {
 
+                    /** Mode enum. */
+                    enum Mode {
+                        MODE_UNSPECIFIED = 0,
+                        VALIDATION = 1,
+                        ENFORCEMENT = 2
+                    }
+
                     /** Properties of an InventoryFilter. */
                     interface IInventoryFilter {
 
@@ -2317,6 +2324,13 @@ export namespace google {
 
                         namespace PackageResource {
 
+                            /** DesiredState enum. */
+                            enum DesiredState {
+                                DESIRED_STATE_UNSPECIFIED = 0,
+                                INSTALLED = 1,
+                                REMOVED = 2
+                            }
+
                             /** Properties of a Deb. */
                             interface IDeb {
 
@@ -2963,13 +2977,6 @@ export namespace google {
                                  * @returns JSON object
                                  */
                                 public toJSON(): { [k: string]: any };
-                            }
-
-                            /** DesiredState enum. */
-                            enum DesiredState {
-                                DESIRED_STATE_UNSPECIFIED = 0,
-                                INSTALLED = 1,
-                                REMOVED = 2
                             }
                         }
 
@@ -3974,13 +3981,6 @@ export namespace google {
                          */
                         public toJSON(): { [k: string]: any };
                     }
-
-                    /** Mode enum. */
-                    enum Mode {
-                        MODE_UNSPECIFIED = 0,
-                        VALIDATION = 1,
-                        ENFORCEMENT = 2
-                    }
                 }
 
                 /** Properties of a GetOSPolicyAssignmentReportRequest. */
@@ -4509,6 +4509,13 @@ export namespace google {
 
                     namespace OSPolicyCompliance {
 
+                        /** ComplianceState enum. */
+                        enum ComplianceState {
+                            UNKNOWN = 0,
+                            COMPLIANT = 1,
+                            NON_COMPLIANT = 2
+                        }
+
                         /** Properties of a OSPolicyResourceCompliance. */
                         interface IOSPolicyResourceCompliance {
 
@@ -4736,6 +4743,13 @@ export namespace google {
                                 }
                             }
 
+                            /** ComplianceState enum. */
+                            enum ComplianceState {
+                                UNKNOWN = 0,
+                                COMPLIANT = 1,
+                                NON_COMPLIANT = 2
+                            }
+
                             /** Properties of an ExecResourceOutput. */
                             interface IExecResourceOutput {
 
@@ -4825,20 +4839,6 @@ export namespace google {
                                  */
                                 public toJSON(): { [k: string]: any };
                             }
-
-                            /** ComplianceState enum. */
-                            enum ComplianceState {
-                                UNKNOWN = 0,
-                                COMPLIANT = 1,
-                                NON_COMPLIANT = 2
-                            }
-                        }
-
-                        /** ComplianceState enum. */
-                        enum ComplianceState {
-                            UNKNOWN = 0,
-                            COMPLIANT = 1,
-                            NON_COMPLIANT = 2
                         }
                     }
                 }
@@ -6562,6 +6562,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public deletePatchDeployment(request: google.cloud.osconfig.v1.IDeletePatchDeploymentRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdatePatchDeployment.
+                     * @param request UpdatePatchDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PatchDeployment
+                     */
+                    public updatePatchDeployment(request: google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest, callback: google.cloud.osconfig.v1.OsConfigService.UpdatePatchDeploymentCallback): void;
+
+                    /**
+                     * Calls UpdatePatchDeployment.
+                     * @param request UpdatePatchDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updatePatchDeployment(request: google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest): Promise<google.cloud.osconfig.v1.PatchDeployment>;
+
+                    /**
+                     * Calls PausePatchDeployment.
+                     * @param request PausePatchDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PatchDeployment
+                     */
+                    public pausePatchDeployment(request: google.cloud.osconfig.v1.IPausePatchDeploymentRequest, callback: google.cloud.osconfig.v1.OsConfigService.PausePatchDeploymentCallback): void;
+
+                    /**
+                     * Calls PausePatchDeployment.
+                     * @param request PausePatchDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public pausePatchDeployment(request: google.cloud.osconfig.v1.IPausePatchDeploymentRequest): Promise<google.cloud.osconfig.v1.PatchDeployment>;
+
+                    /**
+                     * Calls ResumePatchDeployment.
+                     * @param request ResumePatchDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PatchDeployment
+                     */
+                    public resumePatchDeployment(request: google.cloud.osconfig.v1.IResumePatchDeploymentRequest, callback: google.cloud.osconfig.v1.OsConfigService.ResumePatchDeploymentCallback): void;
+
+                    /**
+                     * Calls ResumePatchDeployment.
+                     * @param request ResumePatchDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resumePatchDeployment(request: google.cloud.osconfig.v1.IResumePatchDeploymentRequest): Promise<google.cloud.osconfig.v1.PatchDeployment>;
                 }
 
                 namespace OsConfigService {
@@ -6628,6 +6670,27 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeletePatchDeploymentCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.osconfig.v1.OsConfigService#updatePatchDeployment}.
+                     * @param error Error, if any
+                     * @param [response] PatchDeployment
+                     */
+                    type UpdatePatchDeploymentCallback = (error: (Error|null), response?: google.cloud.osconfig.v1.PatchDeployment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.osconfig.v1.OsConfigService#pausePatchDeployment}.
+                     * @param error Error, if any
+                     * @param [response] PatchDeployment
+                     */
+                    type PausePatchDeploymentCallback = (error: (Error|null), response?: google.cloud.osconfig.v1.PatchDeployment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.osconfig.v1.OsConfigService#resumePatchDeployment}.
+                     * @param error Error, if any
+                     * @param [response] PatchDeployment
+                     */
+                    type ResumePatchDeploymentCallback = (error: (Error|null), response?: google.cloud.osconfig.v1.PatchDeployment) => void;
                 }
 
                 /** Properties of a PatchDeployment. */
@@ -6665,6 +6728,9 @@ export namespace google {
 
                     /** PatchDeployment rollout */
                     rollout?: (google.cloud.osconfig.v1.IPatchRollout|null);
+
+                    /** PatchDeployment state */
+                    state?: (google.cloud.osconfig.v1.PatchDeployment.State|keyof typeof google.cloud.osconfig.v1.PatchDeployment.State|null);
                 }
 
                 /** Represents a PatchDeployment. */
@@ -6708,6 +6774,9 @@ export namespace google {
 
                     /** PatchDeployment rollout. */
                     public rollout?: (google.cloud.osconfig.v1.IPatchRollout|null);
+
+                    /** PatchDeployment state. */
+                    public state: (google.cloud.osconfig.v1.PatchDeployment.State|keyof typeof google.cloud.osconfig.v1.PatchDeployment.State);
 
                     /** PatchDeployment schedule. */
                     public schedule?: ("oneTimeSchedule"|"recurringSchedule");
@@ -6781,6 +6850,16 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace PatchDeployment {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        PAUSED = 2
+                    }
                 }
 
                 /** Properties of an OneTimeSchedule. */
@@ -7222,6 +7301,9 @@ export namespace google {
 
                     /** WeekDayOfMonth dayOfWeek */
                     dayOfWeek?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
+
+                    /** WeekDayOfMonth dayOffset */
+                    dayOffset?: (number|null);
                 }
 
                 /** Represents a WeekDayOfMonth. */
@@ -7238,6 +7320,9 @@ export namespace google {
 
                     /** WeekDayOfMonth dayOfWeek. */
                     public dayOfWeek: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+
+                    /** WeekDayOfMonth dayOffset. */
+                    public dayOffset: number;
 
                     /**
                      * Creates a new WeekDayOfMonth instance using the specified properties.
@@ -7785,6 +7870,282 @@ export namespace google {
 
                     /**
                      * Converts this DeletePatchDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdatePatchDeploymentRequest. */
+                interface IUpdatePatchDeploymentRequest {
+
+                    /** UpdatePatchDeploymentRequest patchDeployment */
+                    patchDeployment?: (google.cloud.osconfig.v1.IPatchDeployment|null);
+
+                    /** UpdatePatchDeploymentRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdatePatchDeploymentRequest. */
+                class UpdatePatchDeploymentRequest implements IUpdatePatchDeploymentRequest {
+
+                    /**
+                     * Constructs a new UpdatePatchDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest);
+
+                    /** UpdatePatchDeploymentRequest patchDeployment. */
+                    public patchDeployment?: (google.cloud.osconfig.v1.IPatchDeployment|null);
+
+                    /** UpdatePatchDeploymentRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdatePatchDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdatePatchDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest): google.cloud.osconfig.v1.UpdatePatchDeploymentRequest;
+
+                    /**
+                     * Encodes the specified UpdatePatchDeploymentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.UpdatePatchDeploymentRequest.verify|verify} messages.
+                     * @param message UpdatePatchDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdatePatchDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.UpdatePatchDeploymentRequest.verify|verify} messages.
+                     * @param message UpdatePatchDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdatePatchDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdatePatchDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.UpdatePatchDeploymentRequest;
+
+                    /**
+                     * Decodes an UpdatePatchDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdatePatchDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.UpdatePatchDeploymentRequest;
+
+                    /**
+                     * Verifies an UpdatePatchDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdatePatchDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdatePatchDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.UpdatePatchDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from an UpdatePatchDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message UpdatePatchDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.UpdatePatchDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdatePatchDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PausePatchDeploymentRequest. */
+                interface IPausePatchDeploymentRequest {
+
+                    /** PausePatchDeploymentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a PausePatchDeploymentRequest. */
+                class PausePatchDeploymentRequest implements IPausePatchDeploymentRequest {
+
+                    /**
+                     * Constructs a new PausePatchDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IPausePatchDeploymentRequest);
+
+                    /** PausePatchDeploymentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new PausePatchDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PausePatchDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IPausePatchDeploymentRequest): google.cloud.osconfig.v1.PausePatchDeploymentRequest;
+
+                    /**
+                     * Encodes the specified PausePatchDeploymentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.PausePatchDeploymentRequest.verify|verify} messages.
+                     * @param message PausePatchDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IPausePatchDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PausePatchDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.PausePatchDeploymentRequest.verify|verify} messages.
+                     * @param message PausePatchDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IPausePatchDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PausePatchDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PausePatchDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.PausePatchDeploymentRequest;
+
+                    /**
+                     * Decodes a PausePatchDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PausePatchDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.PausePatchDeploymentRequest;
+
+                    /**
+                     * Verifies a PausePatchDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PausePatchDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PausePatchDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.PausePatchDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from a PausePatchDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message PausePatchDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.PausePatchDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PausePatchDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ResumePatchDeploymentRequest. */
+                interface IResumePatchDeploymentRequest {
+
+                    /** ResumePatchDeploymentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a ResumePatchDeploymentRequest. */
+                class ResumePatchDeploymentRequest implements IResumePatchDeploymentRequest {
+
+                    /**
+                     * Constructs a new ResumePatchDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IResumePatchDeploymentRequest);
+
+                    /** ResumePatchDeploymentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ResumePatchDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResumePatchDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IResumePatchDeploymentRequest): google.cloud.osconfig.v1.ResumePatchDeploymentRequest;
+
+                    /**
+                     * Encodes the specified ResumePatchDeploymentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.ResumePatchDeploymentRequest.verify|verify} messages.
+                     * @param message ResumePatchDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IResumePatchDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResumePatchDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ResumePatchDeploymentRequest.verify|verify} messages.
+                     * @param message ResumePatchDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IResumePatchDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResumePatchDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResumePatchDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.ResumePatchDeploymentRequest;
+
+                    /**
+                     * Decodes a ResumePatchDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResumePatchDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.ResumePatchDeploymentRequest;
+
+                    /**
+                     * Verifies a ResumePatchDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResumePatchDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResumePatchDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.ResumePatchDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from a ResumePatchDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message ResumePatchDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.ResumePatchDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResumePatchDeploymentRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -8710,6 +9071,18 @@ export namespace google {
 
                 namespace PatchJob {
 
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        STARTED = 1,
+                        INSTANCE_LOOKUP = 2,
+                        PATCHING = 3,
+                        SUCCEEDED = 4,
+                        COMPLETED_WITH_ERRORS = 5,
+                        CANCELED = 6,
+                        TIMED_OUT = 7
+                    }
+
                     /** Properties of an InstanceDetailsSummary. */
                     interface IInstanceDetailsSummary {
 
@@ -8883,18 +9256,6 @@ export namespace google {
                          */
                         public toJSON(): { [k: string]: any };
                     }
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        STARTED = 1,
-                        INSTANCE_LOOKUP = 2,
-                        PATCHING = 3,
-                        SUCCEEDED = 4,
-                        COMPLETED_WITH_ERRORS = 5,
-                        CANCELED = 6,
-                        TIMED_OUT = 7
-                    }
                 }
 
                 /** Properties of a PatchConfig. */
@@ -8923,6 +9284,9 @@ export namespace google {
 
                     /** PatchConfig postStep */
                     postStep?: (google.cloud.osconfig.v1.IExecStep|null);
+
+                    /** PatchConfig migInstancesAllowed */
+                    migInstancesAllowed?: (boolean|null);
                 }
 
                 /** Represents a PatchConfig. */
@@ -8957,6 +9321,9 @@ export namespace google {
 
                     /** PatchConfig postStep. */
                     public postStep?: (google.cloud.osconfig.v1.IExecStep|null);
+
+                    /** PatchConfig migInstancesAllowed. */
+                    public migInstancesAllowed: boolean;
 
                     /**
                      * Creates a new PatchConfig instance using the specified properties.
@@ -22227,11 +22594,11 @@ export namespace google {
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
-            /** MethodOptions .google.api.http */
-            ".google.api.http"?: (google.api.IHttpRule|null);
-
             /** MethodOptions .google.api.methodSignature */
             ".google.api.methodSignature"?: (string[]|null);
+
+            /** MethodOptions .google.api.http */
+            ".google.api.http"?: (google.api.IHttpRule|null);
 
             /** MethodOptions .google.longrunning.operationInfo */
             ".google.longrunning.operationInfo"?: (google.longrunning.IOperationInfo|null);

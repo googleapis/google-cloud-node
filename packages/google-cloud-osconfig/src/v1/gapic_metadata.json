@@ -40,6 +40,21 @@
                 "deletePatchDeployment"
               ]
             },
+            "UpdatePatchDeployment": {
+              "methods": [
+                "updatePatchDeployment"
+              ]
+            },
+            "PausePatchDeployment": {
+              "methods": [
+                "pausePatchDeployment"
+              ]
+            },
+            "ResumePatchDeployment": {
+              "methods": [
+                "resumePatchDeployment"
+              ]
+            },
             "ListPatchJobs": {
               "methods": [
                 "listPatchJobs",
@@ -94,6 +109,21 @@
             "DeletePatchDeployment": {
               "methods": [
                 "deletePatchDeployment"
+              ]
+            },
+            "UpdatePatchDeployment": {
+              "methods": [
+                "updatePatchDeployment"
+              ]
+            },
+            "PausePatchDeployment": {
+              "methods": [
+                "pausePatchDeployment"
+              ]
+            },
+            "ResumePatchDeployment": {
+              "methods": [
+                "resumePatchDeployment"
               ]
             },
             "ListPatchJobs": {

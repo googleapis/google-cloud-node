@@ -267,6 +267,9 @@ export class OsConfigServiceClient {
       'getPatchDeployment',
       'listPatchDeployments',
       'deletePatchDeployment',
+      'updatePatchDeployment',
+      'pausePatchDeployment',
+      'resumePatchDeployment',
     ];
     for (const methodName of osConfigServiceStubMethods) {
       const callPromise = this.osConfigServiceStub.then(
@@ -916,6 +919,286 @@ export class OsConfigServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.deletePatchDeployment(request, options, callback);
+  }
+  /**
+   * Update an OS Config patch deployment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.osconfig.v1.PatchDeployment} request.patchDeployment
+   *   Required. The patch deployment to Update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask that controls which fields of the patch deployment
+   *   should be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PatchDeployment]{@link google.cloud.osconfig.v1.PatchDeployment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/os_config_service.update_patch_deployment.js</caption>
+   * region_tag:osconfig_v1_generated_OsConfigService_UpdatePatchDeployment_async
+   */
+  updatePatchDeployment(
+    request?: protos.google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      protos.google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updatePatchDeployment(
+    request: protos.google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      | protos.google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updatePatchDeployment(
+    request: protos.google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest,
+    callback: Callback<
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      | protos.google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updatePatchDeployment(
+    request?: protos.google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.osconfig.v1.IPatchDeployment,
+          | protos.google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      | protos.google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      protos.google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'patch_deployment.name': request.patchDeployment!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updatePatchDeployment(request, options, callback);
+  }
+  /**
+   * Change state of patch deployment to "PAUSED".
+   * Patch deployment in paused state doesn't generate patch jobs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the patch deployment in the form
+   *   `projects/* /patchDeployments/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PatchDeployment]{@link google.cloud.osconfig.v1.PatchDeployment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/os_config_service.pause_patch_deployment.js</caption>
+   * region_tag:osconfig_v1_generated_OsConfigService_PausePatchDeployment_async
+   */
+  pausePatchDeployment(
+    request?: protos.google.cloud.osconfig.v1.IPausePatchDeploymentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      protos.google.cloud.osconfig.v1.IPausePatchDeploymentRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  pausePatchDeployment(
+    request: protos.google.cloud.osconfig.v1.IPausePatchDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      | protos.google.cloud.osconfig.v1.IPausePatchDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pausePatchDeployment(
+    request: protos.google.cloud.osconfig.v1.IPausePatchDeploymentRequest,
+    callback: Callback<
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      | protos.google.cloud.osconfig.v1.IPausePatchDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pausePatchDeployment(
+    request?: protos.google.cloud.osconfig.v1.IPausePatchDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.osconfig.v1.IPatchDeployment,
+          | protos.google.cloud.osconfig.v1.IPausePatchDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      | protos.google.cloud.osconfig.v1.IPausePatchDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      protos.google.cloud.osconfig.v1.IPausePatchDeploymentRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.pausePatchDeployment(request, options, callback);
+  }
+  /**
+   * Change state of patch deployment back to "ACTIVE".
+   * Patch deployment in active state continues to generate patch jobs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the patch deployment in the form
+   *   `projects/* /patchDeployments/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PatchDeployment]{@link google.cloud.osconfig.v1.PatchDeployment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/os_config_service.resume_patch_deployment.js</caption>
+   * region_tag:osconfig_v1_generated_OsConfigService_ResumePatchDeployment_async
+   */
+  resumePatchDeployment(
+    request?: protos.google.cloud.osconfig.v1.IResumePatchDeploymentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      protos.google.cloud.osconfig.v1.IResumePatchDeploymentRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  resumePatchDeployment(
+    request: protos.google.cloud.osconfig.v1.IResumePatchDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      | protos.google.cloud.osconfig.v1.IResumePatchDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumePatchDeployment(
+    request: protos.google.cloud.osconfig.v1.IResumePatchDeploymentRequest,
+    callback: Callback<
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      | protos.google.cloud.osconfig.v1.IResumePatchDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumePatchDeployment(
+    request?: protos.google.cloud.osconfig.v1.IResumePatchDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.osconfig.v1.IPatchDeployment,
+          | protos.google.cloud.osconfig.v1.IResumePatchDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      | protos.google.cloud.osconfig.v1.IResumePatchDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1.IPatchDeployment,
+      protos.google.cloud.osconfig.v1.IResumePatchDeploymentRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.resumePatchDeployment(request, options, callback);
   }
 
   /**
