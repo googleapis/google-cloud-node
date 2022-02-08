@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/googleapis/nodejs-video-transcoder/compare/v1.8.1...v1.9.0) (2022-02-04)
+
+
+### Features
+
+* **samples:** add samples and tests for adding captions to videos ([#143](https://github.com/googleapis/nodejs-video-transcoder/issues/143)) ([52ca4ff](https://github.com/googleapis/nodejs-video-transcoder/commit/52ca4ff401a21af3c825c1bbe6dc03947bd4c0e0))
+
 ### [1.8.1](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.8.0...v1.8.1) (2021-12-02)
 
 
