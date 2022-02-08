@@ -55,6 +55,16 @@
                 "lookupEntry"
               ]
             },
+            "ModifyEntryOverview": {
+              "methods": [
+                "modifyEntryOverview"
+              ]
+            },
+            "ModifyEntryContacts": {
+              "methods": [
+                "modifyEntryContacts"
+              ]
+            },
             "CreateTagTemplate": {
               "methods": [
                 "createTagTemplate"
@@ -113,6 +123,16 @@
             "DeleteTag": {
               "methods": [
                 "deleteTag"
+              ]
+            },
+            "StarEntry": {
+              "methods": [
+                "starEntry"
+              ]
+            },
+            "UnstarEntry": {
+              "methods": [
+                "unstarEntry"
               ]
             },
             "SetIamPolicy": {
@@ -208,6 +228,16 @@
                 "lookupEntry"
               ]
             },
+            "ModifyEntryOverview": {
+              "methods": [
+                "modifyEntryOverview"
+              ]
+            },
+            "ModifyEntryContacts": {
+              "methods": [
+                "modifyEntryContacts"
+              ]
+            },
             "CreateTagTemplate": {
               "methods": [
                 "createTagTemplate"
@@ -266,6 +296,16 @@
             "DeleteTag": {
               "methods": [
                 "deleteTag"
+              ]
+            },
+            "StarEntry": {
+              "methods": [
+                "starEntry"
+              ]
+            },
+            "UnstarEntry": {
+              "methods": [
+                "unstarEntry"
               ]
             },
             "SetIamPolicy": {

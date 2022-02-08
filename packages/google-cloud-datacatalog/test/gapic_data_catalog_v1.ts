@@ -1171,6 +1171,230 @@ describe('v1.DataCatalogClient', () => {
     });
   });
 
+  describe('modifyEntryOverview', () => {
+    it('invokes modifyEntryOverview without error', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.EntryOverview()
+      );
+      client.innerApiCalls.modifyEntryOverview =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.modifyEntryOverview(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.modifyEntryOverview as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes modifyEntryOverview without error using callback', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.EntryOverview()
+      );
+      client.innerApiCalls.modifyEntryOverview =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.modifyEntryOverview(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.datacatalog.v1.IEntryOverview | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.modifyEntryOverview as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes modifyEntryOverview with error', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.modifyEntryOverview = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.modifyEntryOverview(request), expectedError);
+      assert(
+        (client.innerApiCalls.modifyEntryOverview as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('modifyEntryContacts', () => {
+    it('invokes modifyEntryContacts without error', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.ModifyEntryContactsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.Contacts()
+      );
+      client.innerApiCalls.modifyEntryContacts =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.modifyEntryContacts(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.modifyEntryContacts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes modifyEntryContacts without error using callback', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.ModifyEntryContactsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.Contacts()
+      );
+      client.innerApiCalls.modifyEntryContacts =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.modifyEntryContacts(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.datacatalog.v1.IContacts | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.modifyEntryContacts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes modifyEntryContacts with error', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.ModifyEntryContactsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.modifyEntryContacts = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.modifyEntryContacts(request), expectedError);
+      assert(
+        (client.innerApiCalls.modifyEntryContacts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('createTagTemplate', () => {
     it('invokes createTagTemplate without error', async () => {
       const client = new datacatalogModule.v1.DataCatalogClient({
@@ -2514,6 +2738,225 @@ describe('v1.DataCatalogClient', () => {
       await assert.rejects(client.deleteTag(request), expectedError);
       assert(
         (client.innerApiCalls.deleteTag as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('starEntry', () => {
+    it('invokes starEntry without error', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.StarEntryRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.StarEntryResponse()
+      );
+      client.innerApiCalls.starEntry = stubSimpleCall(expectedResponse);
+      const [response] = await client.starEntry(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.starEntry as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes starEntry without error using callback', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.StarEntryRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.StarEntryResponse()
+      );
+      client.innerApiCalls.starEntry =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.starEntry(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.datacatalog.v1.IStarEntryResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.starEntry as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes starEntry with error', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.StarEntryRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.starEntry = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.starEntry(request), expectedError);
+      assert(
+        (client.innerApiCalls.starEntry as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('unstarEntry', () => {
+    it('invokes unstarEntry without error', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.UnstarEntryRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.UnstarEntryResponse()
+      );
+      client.innerApiCalls.unstarEntry = stubSimpleCall(expectedResponse);
+      const [response] = await client.unstarEntry(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.unstarEntry as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes unstarEntry without error using callback', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.UnstarEntryRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.UnstarEntryResponse()
+      );
+      client.innerApiCalls.unstarEntry =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.unstarEntry(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.datacatalog.v1.IUnstarEntryResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.unstarEntry as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes unstarEntry with error', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.UnstarEntryRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.unstarEntry = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.unstarEntry(request), expectedError);
+      assert(
+        (client.innerApiCalls.unstarEntry as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );

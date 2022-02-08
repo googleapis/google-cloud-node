@@ -85,6 +85,18 @@
                         }
                       }
                     },
+                    "PersonalDetails": {
+                      "fields": {
+                        "starred": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "starTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
                     "IntegratedSystem": {
                       "values": {
                         "INTEGRATED_SYSTEM_UNSPECIFIED": 0,
@@ -348,6 +360,38 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ModifyEntryOverview": {
+                          "requestType": "ModifyEntryOverviewRequest",
+                          "responseType": "EntryOverview",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/entryGroups/*/entries/*}:modifyEntryOverview",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/entryGroups/*/entries/*}:modifyEntryOverview",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "ModifyEntryContacts": {
+                          "requestType": "ModifyEntryContactsRequest",
+                          "responseType": "Contacts",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/entryGroups/*/entries/*}:modifyEntryContacts",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/entryGroups/*/entries/*}:modifyEntryContacts",
+                                "body": "*"
+                              }
                             }
                           ]
                         },
@@ -630,6 +674,46 @@
                             }
                           ]
                         },
+                        "StarEntry": {
+                          "requestType": "StarEntryRequest",
+                          "responseType": "StarEntryResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/entryGroups/*/entries/*}:star",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/entryGroups/*/entries/*}:star",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UnstarEntry": {
+                          "requestType": "UnstarEntryRequest",
+                          "responseType": "UnstarEntryResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/entryGroups/*/entries/*}:unstar",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/entryGroups/*/entries/*}:unstar",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
                           "responseType": "google.iam.v1.Policy",
@@ -775,10 +859,18 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "starredOnly": {
+                              "type": "bool",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "includePublicTagTemplates": {
                               "type": "bool",
                               "id": 19,
                               "options": {
+                                "deprecated": true,
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -1107,6 +1199,10 @@
                           "type": "string",
                           "id": 4
                         },
+                        "businessContext": {
+                          "type": "BusinessContext",
+                          "id": 37
+                        },
                         "schema": {
                           "type": "Schema",
                           "id": 5
@@ -1130,6 +1226,13 @@
                         "dataSource": {
                           "type": "DataSource",
                           "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "personalDetails": {
+                          "type": "PersonalDetails",
+                          "id": 26,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1197,6 +1300,13 @@
                         }
                       },
                       "nested": {
+                        "RoutineType": {
+                          "values": {
+                            "ROUTINE_TYPE_UNSPECIFIED": 0,
+                            "SCALAR_FUNCTION": 1,
+                            "PROCEDURE": 2
+                          }
+                        },
                         "Argument": {
                           "fields": {
                             "name": {
@@ -1222,12 +1332,48 @@
                               }
                             }
                           }
+                        }
+                      }
+                    },
+                    "BusinessContext": {
+                      "fields": {
+                        "entryOverview": {
+                          "type": "EntryOverview",
+                          "id": 1
                         },
-                        "RoutineType": {
-                          "values": {
-                            "ROUTINE_TYPE_UNSPECIFIED": 0,
-                            "SCALAR_FUNCTION": 1,
-                            "PROCEDURE": 2
+                        "contacts": {
+                          "type": "Contacts",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "EntryOverview": {
+                      "fields": {
+                        "overview": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Contacts": {
+                      "fields": {
+                        "people": {
+                          "rule": "repeated",
+                          "type": "Person",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Person": {
+                          "fields": {
+                            "designation": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "email": {
+                              "type": "string",
+                              "id": 2
+                            }
                           }
                         }
                       }
@@ -1553,6 +1699,74 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "StarEntryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
+                        }
+                      }
+                    },
+                    "StarEntryResponse": {
+                      "fields": {}
+                    },
+                    "UnstarEntryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
+                        }
+                      }
+                    },
+                    "UnstarEntryResponse": {
+                      "fields": {}
+                    },
+                    "ModifyEntryOverviewRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
+                        },
+                        "entryOverview": {
+                          "type": "EntryOverview",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ModifyEntryContactsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
+                        },
+                        "contacts": {
+                          "type": "Contacts",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -2032,6 +2246,16 @@
                         }
                       },
                       "nested": {
+                        "PrimitiveType": {
+                          "values": {
+                            "PRIMITIVE_TYPE_UNSPECIFIED": 0,
+                            "DOUBLE": 1,
+                            "STRING": 2,
+                            "BOOL": 3,
+                            "TIMESTAMP": 4,
+                            "RICHTEXT": 5
+                          }
+                        },
                         "EnumType": {
                           "fields": {
                             "allowedValues": {
@@ -2052,16 +2276,6 @@
                                 }
                               }
                             }
-                          }
-                        },
-                        "PrimitiveType": {
-                          "values": {
-                            "PRIMITIVE_TYPE_UNSPECIFIED": 0,
-                            "DOUBLE": 1,
-                            "STRING": 2,
-                            "BOOL": 3,
-                            "TIMESTAMP": 4,
-                            "RICHTEXT": 5
                           }
                         }
                       }

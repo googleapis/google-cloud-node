@@ -83,6 +83,16 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
+        "ModifyEntryOverview": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ModifyEntryContacts": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateTagTemplate": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -146,6 +156,16 @@
         "ListTags": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
+        "StarEntry": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UnstarEntry": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetIamPolicy": {

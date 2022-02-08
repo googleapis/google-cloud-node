@@ -15,25 +15,19 @@
 
 'use strict';
 
-function main(tagTemplate) {
-  // [START datacatalog_v1_generated_DataCatalog_UpdateTagTemplate_async]
+function main(name, contacts) {
+  // [START datacatalog_v1_generated_DataCatalog_ModifyEntryContacts_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The template to update. The `name` field must be set.
+   *  Required. The full resource name of the entry.
    */
-  // const tagTemplate = {}
+  // const name = 'abc123'
   /**
-   *  Names of fields whose values to overwrite on a tag template. Currently,
-   *  only `display_name` and `is_publicly_readable` can be overwritten.
-   *  If this parameter is absent or empty, all modifiable fields
-   *  are overwritten. If such fields are non-required and omitted in the
-   *  request body, their values are emptied.
-   *  Note: Updating the `is_publicly_readable` field may require up to 12
-   *  hours to take effect in search results.
+   *  Required. The new value for the Contacts.
    */
-  // const updateMask = {}
+  // const contacts = {}
 
   // Imports the Datacatalog library
   const {DataCatalogClient} = require('@google-cloud/datacatalog').v1;
@@ -41,19 +35,20 @@ function main(tagTemplate) {
   // Instantiates a client
   const datacatalogClient = new DataCatalogClient();
 
-  async function callUpdateTagTemplate() {
+  async function callModifyEntryContacts() {
     // Construct request
     const request = {
-      tagTemplate,
+      name,
+      contacts,
     };
 
     // Run request
-    const response = await datacatalogClient.updateTagTemplate(request);
+    const response = await datacatalogClient.modifyEntryContacts(request);
     console.log(response);
   }
 
-  callUpdateTagTemplate();
-  // [END datacatalog_v1_generated_DataCatalog_UpdateTagTemplate_async]
+  callModifyEntryContacts();
+  // [END datacatalog_v1_generated_DataCatalog_ModifyEntryContacts_async]
 }
 
 process.on('unhandledRejection', err => {

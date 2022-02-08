@@ -285,6 +285,8 @@ export class DataCatalogClient {
       'getEntry',
       'lookupEntry',
       'listEntries',
+      'modifyEntryOverview',
+      'modifyEntryContacts',
       'createTagTemplate',
       'getTagTemplate',
       'updateTagTemplate',
@@ -298,6 +300,8 @@ export class DataCatalogClient {
       'updateTag',
       'deleteTag',
       'listTags',
+      'starEntry',
+      'unstarEntry',
       'setIamPolicy',
       'getIamPolicy',
       'testIamPermissions',
@@ -1330,6 +1334,212 @@ export class DataCatalogClient {
     return this.innerApiCalls.lookupEntry(request, options, callback);
   }
   /**
+   * Modifies entry overview, part of the business context of an
+   * {@link google.cloud.datacatalog.v1.Entry|Entry}.
+   *
+   * To call this method, you must have the `datacatalog.entries.updateOverview`
+   * IAM permission on the corresponding project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The full resource name of the entry.
+   * @param {google.cloud.datacatalog.v1.EntryOverview} request.entryOverview
+   *   Required. The new value for the Entry Overview.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EntryOverview]{@link google.cloud.datacatalog.v1.EntryOverview}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_catalog.modify_entry_overview.js</caption>
+   * region_tag:datacatalog_v1_generated_DataCatalog_ModifyEntryOverview_async
+   */
+  modifyEntryOverview(
+    request?: protos.google.cloud.datacatalog.v1.IModifyEntryOverviewRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IEntryOverview,
+      (
+        | protos.google.cloud.datacatalog.v1.IModifyEntryOverviewRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  modifyEntryOverview(
+    request: protos.google.cloud.datacatalog.v1.IModifyEntryOverviewRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IEntryOverview,
+      | protos.google.cloud.datacatalog.v1.IModifyEntryOverviewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  modifyEntryOverview(
+    request: protos.google.cloud.datacatalog.v1.IModifyEntryOverviewRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IEntryOverview,
+      | protos.google.cloud.datacatalog.v1.IModifyEntryOverviewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  modifyEntryOverview(
+    request?: protos.google.cloud.datacatalog.v1.IModifyEntryOverviewRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.datacatalog.v1.IEntryOverview,
+          | protos.google.cloud.datacatalog.v1.IModifyEntryOverviewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datacatalog.v1.IEntryOverview,
+      | protos.google.cloud.datacatalog.v1.IModifyEntryOverviewRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IEntryOverview,
+      (
+        | protos.google.cloud.datacatalog.v1.IModifyEntryOverviewRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.modifyEntryOverview(request, options, callback);
+  }
+  /**
+   * Modifies contacts, part of the business context of an
+   * {@link google.cloud.datacatalog.v1.Entry|Entry}.
+   *
+   * To call this method, you must have the `datacatalog.entries.updateContacts`
+   * IAM permission on the corresponding project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The full resource name of the entry.
+   * @param {google.cloud.datacatalog.v1.Contacts} request.contacts
+   *   Required. The new value for the Contacts.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Contacts]{@link google.cloud.datacatalog.v1.Contacts}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_catalog.modify_entry_contacts.js</caption>
+   * region_tag:datacatalog_v1_generated_DataCatalog_ModifyEntryContacts_async
+   */
+  modifyEntryContacts(
+    request?: protos.google.cloud.datacatalog.v1.IModifyEntryContactsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IContacts,
+      (
+        | protos.google.cloud.datacatalog.v1.IModifyEntryContactsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  modifyEntryContacts(
+    request: protos.google.cloud.datacatalog.v1.IModifyEntryContactsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IContacts,
+      | protos.google.cloud.datacatalog.v1.IModifyEntryContactsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  modifyEntryContacts(
+    request: protos.google.cloud.datacatalog.v1.IModifyEntryContactsRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IContacts,
+      | protos.google.cloud.datacatalog.v1.IModifyEntryContactsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  modifyEntryContacts(
+    request?: protos.google.cloud.datacatalog.v1.IModifyEntryContactsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.datacatalog.v1.IContacts,
+          | protos.google.cloud.datacatalog.v1.IModifyEntryContactsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datacatalog.v1.IContacts,
+      | protos.google.cloud.datacatalog.v1.IModifyEntryContactsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IContacts,
+      (
+        | protos.google.cloud.datacatalog.v1.IModifyEntryContactsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.modifyEntryContacts(request, options, callback);
+  }
+  /**
    * Creates a tag template.
    *
    * You must enable the Data Catalog API in the project identified by the
@@ -1549,9 +1759,7 @@ export class DataCatalogClient {
    *   request body, their values are emptied.
    *
    *   Note: Updating the `is_publicly_readable` field may require up to 12
-   *   hours to take effect in search results. Additionally, it also requires
-   *   the `tagTemplates.getIamPolicy` and `tagTemplates.setIamPolicy`
-   *   permissions.
+   *   hours to take effect in search results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2583,6 +2791,178 @@ export class DataCatalogClient {
     return this.innerApiCalls.deleteTag(request, options, callback);
   }
   /**
+   * Marks an {@link google.cloud.datacatalog.v1.Entry|Entry} as starred by
+   * the current user. Starring information is private to each user.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the entry to mark as starred.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [StarEntryResponse]{@link google.cloud.datacatalog.v1.StarEntryResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_catalog.star_entry.js</caption>
+   * region_tag:datacatalog_v1_generated_DataCatalog_StarEntry_async
+   */
+  starEntry(
+    request?: protos.google.cloud.datacatalog.v1.IStarEntryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IStarEntryResponse,
+      protos.google.cloud.datacatalog.v1.IStarEntryRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  starEntry(
+    request: protos.google.cloud.datacatalog.v1.IStarEntryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IStarEntryResponse,
+      protos.google.cloud.datacatalog.v1.IStarEntryRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  starEntry(
+    request: protos.google.cloud.datacatalog.v1.IStarEntryRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IStarEntryResponse,
+      protos.google.cloud.datacatalog.v1.IStarEntryRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  starEntry(
+    request?: protos.google.cloud.datacatalog.v1.IStarEntryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.datacatalog.v1.IStarEntryResponse,
+          | protos.google.cloud.datacatalog.v1.IStarEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datacatalog.v1.IStarEntryResponse,
+      protos.google.cloud.datacatalog.v1.IStarEntryRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IStarEntryResponse,
+      protos.google.cloud.datacatalog.v1.IStarEntryRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.starEntry(request, options, callback);
+  }
+  /**
+   * Marks an {@link google.cloud.datacatalog.v1.Entry|Entry} as NOT starred by
+   * the current user. Starring information is private to each user.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the entry to mark as **not** starred.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [UnstarEntryResponse]{@link google.cloud.datacatalog.v1.UnstarEntryResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_catalog.unstar_entry.js</caption>
+   * region_tag:datacatalog_v1_generated_DataCatalog_UnstarEntry_async
+   */
+  unstarEntry(
+    request?: protos.google.cloud.datacatalog.v1.IUnstarEntryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IUnstarEntryResponse,
+      protos.google.cloud.datacatalog.v1.IUnstarEntryRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  unstarEntry(
+    request: protos.google.cloud.datacatalog.v1.IUnstarEntryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IUnstarEntryResponse,
+      protos.google.cloud.datacatalog.v1.IUnstarEntryRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  unstarEntry(
+    request: protos.google.cloud.datacatalog.v1.IUnstarEntryRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IUnstarEntryResponse,
+      protos.google.cloud.datacatalog.v1.IUnstarEntryRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  unstarEntry(
+    request?: protos.google.cloud.datacatalog.v1.IUnstarEntryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.datacatalog.v1.IUnstarEntryResponse,
+          | protos.google.cloud.datacatalog.v1.IUnstarEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datacatalog.v1.IUnstarEntryResponse,
+      protos.google.cloud.datacatalog.v1.IUnstarEntryRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IUnstarEntryResponse,
+      protos.google.cloud.datacatalog.v1.IUnstarEntryRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.unstarEntry(request, options, callback);
+  }
+  /**
    * Sets an access control policy for a resource. Replaces any existing
    * policy.
    *
@@ -2957,6 +3337,7 @@ export class DataCatalogClient {
    *
    *   * `relevance` that can only be descending
    *   * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
+   *   * `default` that can only be descending
    *
    *   If this parameter is omitted, it defaults to the descending `relevance`.
    * @param {object} [options]
@@ -3088,6 +3469,7 @@ export class DataCatalogClient {
    *
    *   * `relevance` that can only be descending
    *   * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
+   *   * `default` that can only be descending
    *
    *   If this parameter is omitted, it defaults to the descending `relevance`.
    * @param {object} [options]
@@ -3167,6 +3549,7 @@ export class DataCatalogClient {
    *
    *   * `relevance` that can only be descending
    *   * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
+   *   * `default` that can only be descending
    *
    *   If this parameter is omitted, it defaults to the descending `relevance`.
    * @param {object} [options]
@@ -3631,6 +4014,8 @@ export class DataCatalogClient {
   }
   /**
    * Lists tags assigned to an {@link google.cloud.datacatalog.v1.Entry|Entry}.
+   * The {@link google.cloud.datacatalog.v1.Tag.column|columns} in the response are
+   * lowercased.
    *
    * @param {Object} request
    *   The request object that will be sent.

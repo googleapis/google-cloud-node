@@ -15,25 +15,15 @@
 
 'use strict';
 
-function main(tagTemplate) {
-  // [START datacatalog_v1_generated_DataCatalog_UpdateTagTemplate_async]
+function main(name) {
+  // [START datacatalog_v1_generated_DataCatalog_StarEntry_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The template to update. The `name` field must be set.
+   *  Required. The name of the entry to mark as starred.
    */
-  // const tagTemplate = {}
-  /**
-   *  Names of fields whose values to overwrite on a tag template. Currently,
-   *  only `display_name` and `is_publicly_readable` can be overwritten.
-   *  If this parameter is absent or empty, all modifiable fields
-   *  are overwritten. If such fields are non-required and omitted in the
-   *  request body, their values are emptied.
-   *  Note: Updating the `is_publicly_readable` field may require up to 12
-   *  hours to take effect in search results.
-   */
-  // const updateMask = {}
+  // const name = 'abc123'
 
   // Imports the Datacatalog library
   const {DataCatalogClient} = require('@google-cloud/datacatalog').v1;
@@ -41,19 +31,19 @@ function main(tagTemplate) {
   // Instantiates a client
   const datacatalogClient = new DataCatalogClient();
 
-  async function callUpdateTagTemplate() {
+  async function callStarEntry() {
     // Construct request
     const request = {
-      tagTemplate,
+      name,
     };
 
     // Run request
-    const response = await datacatalogClient.updateTagTemplate(request);
+    const response = await datacatalogClient.starEntry(request);
     console.log(response);
   }
 
-  callUpdateTagTemplate();
-  // [END datacatalog_v1_generated_DataCatalog_UpdateTagTemplate_async]
+  callStarEntry();
+  // [END datacatalog_v1_generated_DataCatalog_StarEntry_async]
 }
 
 process.on('unhandledRejection', err => {
