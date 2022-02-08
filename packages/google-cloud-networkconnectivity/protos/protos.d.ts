@@ -386,6 +386,21 @@ export namespace google {
                     type DeleteSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    CREATING = 1,
+                    ACTIVE = 2,
+                    DELETING = 3
+                }
+
+                /** LocationFeature enum. */
+                enum LocationFeature {
+                    LOCATION_FEATURE_UNSPECIFIED = 0,
+                    SITE_TO_CLOUD_SPOKES = 1,
+                    SITE_TO_SITE_SPOKES = 2
+                }
+
                 /** Properties of a Hub. */
                 interface IHub {
 
@@ -518,19 +533,14 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** State enum. */
-                enum State {
-                    STATE_UNSPECIFIED = 0,
-                    CREATING = 1,
-                    ACTIVE = 2,
-                    DELETING = 3
-                }
-
                 /** Properties of a RoutingVPC. */
                 interface IRoutingVPC {
 
                     /** RoutingVPC uri */
                     uri?: (string|null);
+
+                    /** RoutingVPC requiredForNewSiteToSiteDataTransferSpokes */
+                    requiredForNewSiteToSiteDataTransferSpokes?: (boolean|null);
                 }
 
                 /** Represents a RoutingVPC. */
@@ -544,6 +554,9 @@ export namespace google {
 
                     /** RoutingVPC uri. */
                     public uri: string;
+
+                    /** RoutingVPC requiredForNewSiteToSiteDataTransferSpokes. */
+                    public requiredForNewSiteToSiteDataTransferSpokes: boolean;
 
                     /**
                      * Creates a new RoutingVPC instance using the specified properties.
@@ -2369,6 +2382,96 @@ export namespace google {
 
                     /**
                      * Converts this RouterApplianceInstance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a LocationMetadata. */
+                interface ILocationMetadata {
+
+                    /** LocationMetadata locationFeatures */
+                    locationFeatures?: (google.cloud.networkconnectivity.v1.LocationFeature[]|null);
+                }
+
+                /** Represents a LocationMetadata. */
+                class LocationMetadata implements ILocationMetadata {
+
+                    /**
+                     * Constructs a new LocationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.ILocationMetadata);
+
+                    /** LocationMetadata locationFeatures. */
+                    public locationFeatures: google.cloud.networkconnectivity.v1.LocationFeature[];
+
+                    /**
+                     * Creates a new LocationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LocationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.ILocationMetadata): google.cloud.networkconnectivity.v1.LocationMetadata;
+
+                    /**
+                     * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.networkconnectivity.v1.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.LocationMetadata;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.LocationMetadata;
+
+                    /**
+                     * Verifies a LocationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LocationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.LocationMetadata;
+
+                    /**
+                     * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                     * @param message LocationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.LocationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LocationMetadata to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -4360,18 +4463,6 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
-        }
-
         /** Properties of a Http. */
         interface IHttp {
 
@@ -4709,6 +4800,18 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7
         }
 
         /** Properties of a ResourceDescriptor. */

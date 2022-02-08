@@ -761,6 +761,40 @@
                         return HubService;
                     })();
     
+                    /**
+                     * State enum.
+                     * @name google.cloud.networkconnectivity.v1.State
+                     * @enum {number}
+                     * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                     * @property {number} CREATING=1 CREATING value
+                     * @property {number} ACTIVE=2 ACTIVE value
+                     * @property {number} DELETING=3 DELETING value
+                     */
+                    v1.State = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CREATING"] = 1;
+                        values[valuesById[2] = "ACTIVE"] = 2;
+                        values[valuesById[3] = "DELETING"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * LocationFeature enum.
+                     * @name google.cloud.networkconnectivity.v1.LocationFeature
+                     * @enum {number}
+                     * @property {number} LOCATION_FEATURE_UNSPECIFIED=0 LOCATION_FEATURE_UNSPECIFIED value
+                     * @property {number} SITE_TO_CLOUD_SPOKES=1 SITE_TO_CLOUD_SPOKES value
+                     * @property {number} SITE_TO_SITE_SPOKES=2 SITE_TO_SITE_SPOKES value
+                     */
+                    v1.LocationFeature = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LOCATION_FEATURE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SITE_TO_CLOUD_SPOKES"] = 1;
+                        values[valuesById[2] = "SITE_TO_SITE_SPOKES"] = 2;
+                        return values;
+                    })();
+    
                     v1.Hub = (function() {
     
                         /**
@@ -1194,24 +1228,6 @@
                         return Hub;
                     })();
     
-                    /**
-                     * State enum.
-                     * @name google.cloud.networkconnectivity.v1.State
-                     * @enum {number}
-                     * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                     * @property {number} CREATING=1 CREATING value
-                     * @property {number} ACTIVE=2 ACTIVE value
-                     * @property {number} DELETING=3 DELETING value
-                     */
-                    v1.State = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "CREATING"] = 1;
-                        values[valuesById[2] = "ACTIVE"] = 2;
-                        values[valuesById[3] = "DELETING"] = 3;
-                        return values;
-                    })();
-    
                     v1.RoutingVPC = (function() {
     
                         /**
@@ -1219,6 +1235,7 @@
                          * @memberof google.cloud.networkconnectivity.v1
                          * @interface IRoutingVPC
                          * @property {string|null} [uri] RoutingVPC uri
+                         * @property {boolean|null} [requiredForNewSiteToSiteDataTransferSpokes] RoutingVPC requiredForNewSiteToSiteDataTransferSpokes
                          */
     
                         /**
@@ -1243,6 +1260,14 @@
                          * @instance
                          */
                         RoutingVPC.prototype.uri = "";
+    
+                        /**
+                         * RoutingVPC requiredForNewSiteToSiteDataTransferSpokes.
+                         * @member {boolean} requiredForNewSiteToSiteDataTransferSpokes
+                         * @memberof google.cloud.networkconnectivity.v1.RoutingVPC
+                         * @instance
+                         */
+                        RoutingVPC.prototype.requiredForNewSiteToSiteDataTransferSpokes = false;
     
                         /**
                          * Creates a new RoutingVPC instance using the specified properties.
@@ -1270,6 +1295,8 @@
                                 writer = $Writer.create();
                             if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.requiredForNewSiteToSiteDataTransferSpokes != null && Object.hasOwnProperty.call(message, "requiredForNewSiteToSiteDataTransferSpokes"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.requiredForNewSiteToSiteDataTransferSpokes);
                             return writer;
                         };
     
@@ -1306,6 +1333,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.uri = reader.string();
+                                    break;
+                                case 2:
+                                    message.requiredForNewSiteToSiteDataTransferSpokes = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1345,6 +1375,9 @@
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 if (!$util.isString(message.uri))
                                     return "uri: string expected";
+                            if (message.requiredForNewSiteToSiteDataTransferSpokes != null && message.hasOwnProperty("requiredForNewSiteToSiteDataTransferSpokes"))
+                                if (typeof message.requiredForNewSiteToSiteDataTransferSpokes !== "boolean")
+                                    return "requiredForNewSiteToSiteDataTransferSpokes: boolean expected";
                             return null;
                         };
     
@@ -1362,6 +1395,8 @@
                             var message = new $root.google.cloud.networkconnectivity.v1.RoutingVPC();
                             if (object.uri != null)
                                 message.uri = String(object.uri);
+                            if (object.requiredForNewSiteToSiteDataTransferSpokes != null)
+                                message.requiredForNewSiteToSiteDataTransferSpokes = Boolean(object.requiredForNewSiteToSiteDataTransferSpokes);
                             return message;
                         };
     
@@ -1378,10 +1413,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.uri = "";
+                                object.requiredForNewSiteToSiteDataTransferSpokes = false;
+                            }
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
+                            if (message.requiredForNewSiteToSiteDataTransferSpokes != null && message.hasOwnProperty("requiredForNewSiteToSiteDataTransferSpokes"))
+                                object.requiredForNewSiteToSiteDataTransferSpokes = message.requiredForNewSiteToSiteDataTransferSpokes;
                             return object;
                         };
     
@@ -5670,6 +5709,237 @@
                         };
     
                         return RouterApplianceInstance;
+                    })();
+    
+                    v1.LocationMetadata = (function() {
+    
+                        /**
+                         * Properties of a LocationMetadata.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface ILocationMetadata
+                         * @property {Array.<google.cloud.networkconnectivity.v1.LocationFeature>|null} [locationFeatures] LocationMetadata locationFeatures
+                         */
+    
+                        /**
+                         * Constructs a new LocationMetadata.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a LocationMetadata.
+                         * @implements ILocationMetadata
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.ILocationMetadata=} [properties] Properties to set
+                         */
+                        function LocationMetadata(properties) {
+                            this.locationFeatures = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationMetadata locationFeatures.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.LocationFeature>} locationFeatures
+                         * @memberof google.cloud.networkconnectivity.v1.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.locationFeatures = $util.emptyArray;
+    
+                        /**
+                         * Creates a new LocationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ILocationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.LocationMetadata} LocationMetadata instance
+                         */
+                        LocationMetadata.create = function create(properties) {
+                            return new LocationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.networkconnectivity.v1.LocationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.locationFeatures != null && message.locationFeatures.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.locationFeatures.length; ++i)
+                                    writer.int32(message.locationFeatures[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.LocationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.LocationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.locationFeatures && message.locationFeatures.length))
+                                        message.locationFeatures = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.locationFeatures.push(reader.int32());
+                                    } else
+                                        message.locationFeatures.push(reader.int32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.locationFeatures != null && message.hasOwnProperty("locationFeatures")) {
+                                if (!Array.isArray(message.locationFeatures))
+                                    return "locationFeatures: array expected";
+                                for (var i = 0; i < message.locationFeatures.length; ++i)
+                                    switch (message.locationFeatures[i]) {
+                                    default:
+                                        return "locationFeatures: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.LocationMetadata} LocationMetadata
+                         */
+                        LocationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.LocationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.LocationMetadata();
+                            if (object.locationFeatures) {
+                                if (!Array.isArray(object.locationFeatures))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.LocationMetadata.locationFeatures: array expected");
+                                message.locationFeatures = [];
+                                for (var i = 0; i < object.locationFeatures.length; ++i)
+                                    switch (object.locationFeatures[i]) {
+                                    default:
+                                    case "LOCATION_FEATURE_UNSPECIFIED":
+                                    case 0:
+                                        message.locationFeatures[i] = 0;
+                                        break;
+                                    case "SITE_TO_CLOUD_SPOKES":
+                                    case 1:
+                                        message.locationFeatures[i] = 1;
+                                        break;
+                                    case "SITE_TO_SITE_SPOKES":
+                                    case 2:
+                                        message.locationFeatures[i] = 2;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.LocationMetadata} message LocationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.locationFeatures = [];
+                            if (message.locationFeatures && message.locationFeatures.length) {
+                                object.locationFeatures = [];
+                                for (var j = 0; j < message.locationFeatures.length; ++j)
+                                    object.locationFeatures[j] = options.enums === String ? $root.google.cloud.networkconnectivity.v1.LocationFeature[message.locationFeatures[j]] : message.locationFeatures[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.LocationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return LocationMetadata;
                     })();
     
                     return v1;
@@ -10495,32 +10765,6 @@
              */
             var api = {};
     
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                return values;
-            })();
-    
             api.Http = (function() {
     
                 /**
@@ -11423,6 +11667,32 @@
                 };
     
                 return CustomHttpPattern;
+            })();
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                return values;
             })();
     
             api.ResourceDescriptor = (function() {

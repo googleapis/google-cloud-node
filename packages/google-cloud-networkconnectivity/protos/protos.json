@@ -316,6 +316,21 @@
                         }
                       }
                     },
+                    "State": {
+                      "values": {
+                        "STATE_UNSPECIFIED": 0,
+                        "CREATING": 1,
+                        "ACTIVE": 2,
+                        "DELETING": 3
+                      }
+                    },
+                    "LocationFeature": {
+                      "values": {
+                        "LOCATION_FEATURE_UNSPECIFIED": 0,
+                        "SITE_TO_CLOUD_SPOKES": 1,
+                        "SITE_TO_SITE_SPOKES": 2
+                      }
+                    },
                     "Hub": {
                       "options": {
                         "(google.api.resource).type": "networkconnectivity.googleapis.com/Hub",
@@ -373,14 +388,6 @@
                         }
                       }
                     },
-                    "State": {
-                      "values": {
-                        "STATE_UNSPECIFIED": 0,
-                        "CREATING": 1,
-                        "ACTIVE": 2,
-                        "DELETING": 3
-                      }
-                    },
                     "RoutingVPC": {
                       "fields": {
                         "uri": {
@@ -388,6 +395,13 @@
                           "id": 1,
                           "options": {
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "requiredForNewSiteToSiteDataTransferSpokes": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -791,6 +805,15 @@
                         "ipAddress": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "LocationMetadata": {
+                      "fields": {
+                        "locationFeatures": {
+                          "rule": "repeated",
+                          "type": "LocationFeature",
+                          "id": 1
                         }
                       }
                     }
@@ -1551,24 +1574,6 @@
             "cc_enable_arenas": true
           },
           "nested": {
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -1654,6 +1659,24 @@
                   "type": "string",
                   "id": 2
                 }
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
               }
             },
             "methodSignature": {
