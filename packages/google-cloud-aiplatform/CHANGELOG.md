@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.15.0](https://github.com/googleapis/nodejs-ai-platform/compare/v1.14.1...v1.15.0) (2022-02-08)
+
+
+### Features
+
+* add dedicated_resources to DeployedIndex in aiplatform v1beta1 index_endpoint.proto feat: add Scaling to OnlineServingConfig in aiplatform v1beta1 featurestore.proto chore: sort imports ([#262](https://github.com/googleapis/nodejs-ai-platform/issues/262)) ([f3e31ec](https://github.com/googleapis/nodejs-ai-platform/commit/f3e31ecc11282ce5280b5149873bc65df4bf788b))
+* add dedicated_resources to DeployedIndex message in aiplatform v1 index_endpoint.proto chore: sort imports ([#261](https://github.com/googleapis/nodejs-ai-platform/issues/261)) ([8f7e61e](https://github.com/googleapis/nodejs-ai-platform/commit/8f7e61e32396e1c1dda6290a33b8edaf83a9b2a0))
+
 ### [1.14.1](https://github.com/googleapis/nodejs-ai-platform/compare/v1.14.0...v1.14.1) (2022-01-13)
 
 
