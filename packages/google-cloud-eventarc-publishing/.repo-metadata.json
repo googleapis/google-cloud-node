@@ -1,0 +1,15 @@
+{
+  "name": "publishing",
+  "name_pretty": "Eventarc Publishing API",
+  "product_documentation": "https://cloud.google.com/eventarc",
+  "client_documentation": "https://googleapis.dev/nodejs/publishing/latest/",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5972217",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-eventarc-publishing",
+  "distribution_name": "@google-cloud/eventarc-publishing",
+  "api_id": "publishing.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true
+}
+
