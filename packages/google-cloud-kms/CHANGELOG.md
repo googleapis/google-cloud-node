@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [2.11.0](https://github.com/googleapis/nodejs-kms/compare/v2.10.0...v2.11.0) (2022-02-03)
+
+
+### Features
+
+* add a new EkmService API ([#532](https://github.com/googleapis/nodejs-kms/issues/532)) ([f62a19c](https://github.com/googleapis/nodejs-kms/commit/f62a19ca3944a48e981cee17415f5b5456a7054a))
+
 ## [2.10.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.9.0...v2.10.0) (2021-10-19)
 
 

@@ -14,7 +14,7 @@
     "test": "c8 mocha --recursive test/ --timeout=800000"
   },
   "dependencies": {
-    "@google-cloud/kms": "^2.10.0",
+    "@google-cloud/kms": "^2.11.0",
     "fast-crc32c": "^2.0.0",
     "jslint": "^0.12.1"
   },
