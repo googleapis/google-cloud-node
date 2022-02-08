@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.11.0](https://github.com/googleapis/nodejs-secret-manager/compare/v3.10.1...v3.11.0) (2022-02-05)
+
+
+### Features
+
+* Checksums in Secret Manager ([#335](https://github.com/googleapis/nodejs-secret-manager/issues/335)) ([a5b394f](https://github.com/googleapis/nodejs-secret-manager/commit/a5b394f19788068d4feeb3007fded286595ac8c1))
+
 ### [3.10.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.10.0...v3.10.1) (2021-09-10)
 
 
