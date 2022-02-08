@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.10.0](https://github.com/googleapis/nodejs-video-transcoder/compare/v1.9.0...v1.10.0) (2022-02-08)
+
+
+### Features
+
+* **samples:** delete old test jobs ([#148](https://github.com/googleapis/nodejs-video-transcoder/issues/148)) ([ad94ca0](https://github.com/googleapis/nodejs-video-transcoder/commit/ad94ca047d33e5e99b7c2c626b826e1b8d95ba34))
+
+
+### Bug Fixes
+
+* Remove deprecated v1beta1 API that is no longer available ([#154](https://github.com/googleapis/nodejs-video-transcoder/issues/154)) ([76d9aab](https://github.com/googleapis/nodejs-video-transcoder/commit/76d9aabc9d55f636dfcbb6a6dc6d5bf17302d18d))
+
 ## [1.9.0](https://github.com/googleapis/nodejs-video-transcoder/compare/v1.8.1...v1.9.0) (2022-02-04)
 
 
