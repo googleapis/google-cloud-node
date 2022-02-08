@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.0](https://github.com/googleapis/nodejs-channel/compare/v1.5.0...v1.6.0) (2022-02-05)
+
+
+### Features
+
+* Change description for enum default value ([#120](https://github.com/googleapis/nodejs-channel/issues/120)) ([3b23a95](https://github.com/googleapis/nodejs-channel/commit/3b23a9556ce8fbf17ab5a8bfbd1697f69efcc689))
+* Change description for GCP ProvisionedService.provisioning_id value ([0b364e8](https://github.com/googleapis/nodejs-channel/commit/0b364e808302e058c1c8da24a91ec61a3024af27))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-channel/compare/v1.4.0...v1.5.0) (2021-10-27)
 
 
