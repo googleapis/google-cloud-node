@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.0](https://github.com/googleapis/nodejs-os-config/compare/v1.11.0...v1.12.0) (2022-02-08)
+
+
+### Features
+
+* Update osconfig v1 protos ([#183](https://github.com/googleapis/nodejs-os-config/issues/183)) ([8ce2c5a](https://github.com/googleapis/nodejs-os-config/commit/8ce2c5ab9cfe2d4d0e12a574135b737279b86b22))
+
 ## [1.11.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.10.0...v1.11.0) (2021-11-12)
 
 
