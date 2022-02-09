@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://github.com/googleapis/nodejs-filestore/compare/v1.1.1...v1.1.2) (2022-02-03)
+
+
+### Bug Fixes
+
+* update the pattern for "file.googleapis.com/Snapshot" resource for the Filestore V1Beta1 ([#43](https://github.com/googleapis/nodejs-filestore/issues/43)) ([1b6e7b7](https://github.com/googleapis/nodejs-filestore/commit/1b6e7b71d739c3c428410b343c824907e3d58cc6))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-filestore/compare/v1.1.0...v1.1.1) (2021-10-14)
 
 
