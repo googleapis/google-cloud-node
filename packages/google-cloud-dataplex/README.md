@@ -31,8 +31,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,41 @@ npm install @google-cloud/dataplex
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+
+// eslint-disable-next-line node/no-missing-require
+const {DataplexServiceClient} = require('@google-cloud/dataplex');
+
+// TODO(developer): replace with your prefered project ID.
+// const projectId = 'my-project'
+// const location = 'my-location'
+
+// Creates a client1046198160504
+// eslint-disable-next-line no-unused-vars
+const client = new DataplexServiceClient();
+
+async function listLakes() {
+  const [lakes] = await client.listLakes({
+    parent: `projects/${projectId}/locations/${location}`,
+  });
+  console.info(lakes);
+}
+listLakes();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-dataplex/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-dataplex/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataplex&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 

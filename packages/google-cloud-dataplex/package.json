@@ -24,6 +24,8 @@
     "dataplex service"
   ],
   "scripts": {
+    "samples-test": "c8 npm run samples-test-suite",
+    "samples-test-suite": "cd samples/ && npm link ../ && npm test && cd ../",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
@@ -44,6 +46,7 @@
     "@types/node": "^16.0.0",
     "@types/sinon": "^10.0.0",
     "c8": "^7.7.2",
+    "chai": "^4.3.6",
     "gts": "^3.1.0",
     "jsdoc": "^3.6.6",
     "jsdoc-fresh": "^1.0.2",
