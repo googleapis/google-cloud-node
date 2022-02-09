@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.23.0](https://github.com/googleapis/nodejs-asset/compare/v3.22.0...v3.23.0) (2022-02-08)
+
+
+### Features
+
+* Update osconfig v1 protos ([#602](https://github.com/googleapis/nodejs-asset/issues/602)) ([7816c8e](https://github.com/googleapis/nodejs-asset/commit/7816c8ec666cceeb06ac743904b888fa7f4af91a))
+
 ## [3.22.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.21.0...v3.22.0) (2021-11-12)
 
 
