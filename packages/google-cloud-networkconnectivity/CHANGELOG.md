@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/googleapis/nodejs-network-connectivity/compare/v1.4.2...v1.5.0) (2022-02-08)
+
+
+### Features
+
+* Add LocationMetadata message feat: Add RoutingVPC.required_for_new_site_to_site_data_transfer_spokes field docs: Update comments to reflect that spokes can now be created with data transfer disabled ([#114](https://github.com/googleapis/nodejs-network-connectivity/issues/114)) ([4cbecd9](https://github.com/googleapis/nodejs-network-connectivity/commit/4cbecd92941e66f1ba7f72879a3b36e23b4b4de2))
+
 ### [1.4.2](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.4.1...v1.4.2) (2021-11-23)
 
 
