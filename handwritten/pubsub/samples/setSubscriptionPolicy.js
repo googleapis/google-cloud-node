@@ -25,14 +25,14 @@
 // sample-metadata:
 //   title: Set Subscription IAM Policy
 //   description: Sets the IAM policy for a subscription.
-//   usage: node setSubscriptionPolicy.js <subscription-name>
+//   usage: node setSubscriptionPolicy.js <subscription-name-or-id>
 
-function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME') {
+function main(subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID') {
   // [START pubsub_set_subscription_policy]
   /**
    * TODO(developer): Uncomment this variable before running the sample.
    */
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -59,7 +59,7 @@ function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME') {
 
     // Updates the IAM policy for the subscription
     const [updatedPolicy] = await pubSubClient
-      .subscription(subscriptionName)
+      .subscription(subscriptionNameOrId)
       .iam.setPolicy(newPolicy);
 
     console.log('Updated policy for subscription: %j', updatedPolicy.bindings);

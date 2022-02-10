@@ -25,18 +25,18 @@
 // sample-metadata:
 //   title: Create Subscription
 //   description: Creates a new subscription.
-//   usage: node createSubscription.js <topic-name> <subscription-name>
+//   usage: node createSubscription.js <topic-name-or-id> <subscription-name-or-id>
 
 function main(
-  topicName = 'YOUR_TOPIC_NAME',
-  subscriptionName = 'YOUR_SUBSCRIPTION_NAME'
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
 ) {
   // [START pubsub_create_pull_subscription]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -46,8 +46,10 @@ function main(
 
   async function createSubscription() {
     // Creates a new subscription
-    await pubSubClient.topic(topicName).createSubscription(subscriptionName);
-    console.log(`Subscription ${subscriptionName} created.`);
+    await pubSubClient
+      .topic(topicNameOrId)
+      .createSubscription(subscriptionNameOrId);
+    console.log(`Subscription ${subscriptionNameOrId} created.`);
   }
 
   createSubscription().catch(console.error);

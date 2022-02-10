@@ -28,21 +28,21 @@
 //   title: OpenTelemetry Tracing
 //   description: Demonstrates how to enable OpenTelemetry tracing in
 //     a publisher or subscriber.
-//   usage: node openTelemetryTracing.js <topic-name> <subscription-name>
+//   usage: node openTelemetryTracing.js <topic-name-or-id> <subscription-name-or-id>
 
 const SUBSCRIBER_TIMEOUT = 10;
 
 function main(
-  topicName = 'YOUR_TOPIC_NAME',
-  subscriptionName = 'YOUR_SUBSCRIPTION_NAME',
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
   data = 'Hello, world!'
 ) {
   // [START opentelemetry_tracing]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const topicName = 'my-topic';
-  // const subscriptionName = 'my-subscription';
+  // const topicNameOrId = 'YOUR_TOPIC_OR_ID';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_OR_ID';
   // const data = 'Hello, world!";
 
   // Imports the Google Cloud client library
@@ -83,7 +83,7 @@ function main(
     // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
     const dataBuffer = Buffer.from(data);
     const messageId = await pubSubClient
-      .topic(topicName, enableOpenTelemetryTracing)
+      .topic(topicNameOrId, enableOpenTelemetryTracing)
       .publish(dataBuffer);
     console.log(`Message ${messageId} published.`);
   }
@@ -114,15 +114,15 @@ function main(
 
     // Listens for new messages from the topic
     pubSubClient
-      .subscription(subscriptionName, enableOpenTelemetryTracing)
+      .subscription(subscriptionNameOrId, enableOpenTelemetryTracing)
       .on('message', messageHandler);
     pubSubClient
-      .subscription(subscriptionName, enableOpenTelemetryTracing)
+      .subscription(subscriptionNameOrId, enableOpenTelemetryTracing)
       .on('error', errorHandler);
 
     setTimeout(() => {
       pubSubClient
-        .subscription(subscriptionName, enableOpenTelemetryTracing)
+        .subscription(subscriptionNameOrId, enableOpenTelemetryTracing)
         .removeAllListeners();
     }, SUBSCRIBER_TIMEOUT * 1000);
   }

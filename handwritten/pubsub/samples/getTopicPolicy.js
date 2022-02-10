@@ -25,14 +25,14 @@
 // sample-metadata:
 //   title: Get Topic Policy
 //   description: Gets the IAM policy for a topic.
-//   usage: node getTopicPolicy.js <topic-name>
+//   usage: node getTopicPolicy.js <topic-name-or-id>
 
-function main(topicName = 'YOUR_TOPIC_NAME') {
+function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
   // [START pubsub_get_topic_policy]
   /**
    * TODO(developer): Uncomment this variable before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -42,7 +42,7 @@ function main(topicName = 'YOUR_TOPIC_NAME') {
 
   async function getTopicPolicy() {
     // Retrieves the IAM policy for the topic
-    const [policy] = await pubSubClient.topic(topicName).iam.getPolicy();
+    const [policy] = await pubSubClient.topic(topicNameOrId).iam.getPolicy();
     console.log('Policy for topic: %j.', policy.bindings);
   }
 

@@ -25,14 +25,14 @@
 // sample-metadata:
 //   title: Delete Topic
 //   description: Deletes an existing topic.
-//   usage: node deleteTopic.js <topic-name>
+//   usage: node deleteTopic.js <topic-name-or-id>
 
-function main(topicName = 'YOUR_TOPIC_NAME') {
+function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
   // [START pubsub_delete_topic]
   /**
    * TODO(developer): Uncomment this variable before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -47,8 +47,8 @@ function main(topicName = 'YOUR_TOPIC_NAME') {
     // const topicName = 'my-topic';
 
     // Deletes the topic
-    await pubSubClient.topic(topicName).delete();
-    console.log(`Topic ${topicName} deleted.`);
+    await pubSubClient.topic(topicNameOrId).delete();
+    console.log(`Topic ${topicNameOrId} deleted.`);
   }
 
   deleteTopic().catch(console.error);

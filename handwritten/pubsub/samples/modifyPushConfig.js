@@ -25,18 +25,18 @@
 // sample-metadata:
 //   title: Modify Push Configuration
 //   description: Modifies the configuration of an existing push subscription.
-//   usage: node modifyPushConfig.js <topic-name> <subscription-name>
+//   usage: node modifyPushConfig.js <topic-name-or-id> <subscription-name-or-id>
 
 function main(
-  topicName = 'YOUR_TOPIC_NAME',
-  subscriptionName = 'YOUR_SUBSCRIPTION_NAME'
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
 ) {
   // [START pubsub_update_push_configuration]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -52,10 +52,12 @@ function main(
     };
 
     await pubSubClient
-      .topic(topicName)
-      .subscription(subscriptionName)
+      .topic(topicNameOrId)
+      .subscription(subscriptionNameOrId)
       .modifyPushConfig(options);
-    console.log(`Modified push config for subscription ${subscriptionName}.`);
+    console.log(
+      `Modified push config for subscription ${subscriptionNameOrId}.`
+    );
   }
 
   modifyPushConfig().catch(console.error);

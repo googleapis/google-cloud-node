@@ -25,11 +25,11 @@
 // sample-metadata:
 //   title: Publish With Retry Settings
 //   description: Publishes a message to a topic with retry settings.
-//   usage: node publishWithRetrySettings.js <project-id> <topic-name> <data>
+//   usage: node publishWithRetrySettings.js <project-id> <topic-name-or-id> <data>
 
 function main(
   projectId = 'YOUR_PROJECT_ID',
-  topicName = 'YOUR_TOPIC_NAME',
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   data = JSON.stringify({foo: 'bar'})
 ) {
   // [START pubsub_publisher_retry_settings]
@@ -37,7 +37,7 @@ function main(
    * TODO(developer): Uncomment these variables before running the sample.
    */
   // const projectId = 'YOUR_PROJECT_ID'
-  // const topicName = 'YOUR_TOPIC_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
   // const data = JSON.stringify({foo: 'bar'});
 
   // Imports the Google Cloud client library. v1 is for the lower level
@@ -52,7 +52,7 @@ function main(
   async function publishWithRetrySettings() {
     const formattedTopic = publisherClient.projectTopicPath(
       projectId,
-      topicName
+      topicNameOrId
     );
 
     // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)

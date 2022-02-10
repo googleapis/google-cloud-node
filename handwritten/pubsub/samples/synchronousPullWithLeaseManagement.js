@@ -24,21 +24,19 @@
 
 // sample-metadata:
 //   title: Synchronous Pull With Lease Management
-//   description: Receive messages synchronously,
-//      setting lease management properties.
-//   usage: node synchronousPullWithLeaseManagement.js
-//      <project-id> <subscription-name>
+//   description: Receive messages synchronously, setting lease management properties.
+//   usage: node synchronousPullWithLeaseManagement.js <project-id> <subscription-name-or-id>
 
 function main(
   projectId = 'YOUR_PROJECT_ID',
-  subscriptionName = 'YOUR_SUBSCRIPTION_NAME'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
 ) {
   // [START pubsub_subscriber_sync_pull_with_lease]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   // const projectId = 'YOUR_PROJECT_ID';
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
   // Imports the Google Cloud client library. v1 is for the lower level
   // proto access.
@@ -50,7 +48,7 @@ function main(
   async function synchronousPullWithLeaseManagement() {
     const formattedSubscription = subClient.subscriptionPath(
       projectId,
-      subscriptionName
+      subscriptionNameOrId
     );
 
     // The maximum number of messages returned for this request.

@@ -25,18 +25,18 @@
 // sample-metadata:
 //   title: Update Dead Letter Policy
 //   description: Update Dead Letter Policy in subscription.
-//   usage: node updateDeadLetterPolicy.js <topic-name> <subscription-name>
+//   usage: node updateDeadLetterPolicy.js <topic-name-or-id> <subscription-name-or-id>
 
 function main(
-  topicName = 'YOUR_TOPIC_NAME',
-  subscriptionName = 'YOUR_SUBSCRIPTION_NAME'
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
 ) {
   // [START pubsub_dead_letter_update_subscription]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -47,14 +47,14 @@ function main(
   async function updateDeadLetterPolicy() {
     const metadata = {
       deadLetterPolicy: {
-        deadLetterTopic: pubSubClient.topic(topicName).name,
+        deadLetterTopic: pubSubClient.topic(topicNameOrId).name,
         maxDeliveryAttempts: 15,
       },
     };
 
     await pubSubClient
-      .topic(topicName)
-      .subscription(subscriptionName)
+      .topic(topicNameOrId)
+      .subscription(subscriptionNameOrId)
       .setMetadata(metadata);
 
     console.log('Max delivery attempts updated successfully.');

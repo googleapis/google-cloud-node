@@ -25,16 +25,19 @@
 // sample-metadata:
 //   title: Listen For Messages With Custom Attributes
 //   description: Demonstrates how to receive and process custom attributes on messages.
-//   usage: node listenWithCustomAttributes.js <subscription-name> [timeout-in-seconds]
+//   usage: node listenWithCustomAttributes.js <subscription-name-or-id> [timeout-in-seconds]
 
-async function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 60) {
+async function main(
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+  timeout = 60
+) {
   timeout = Number(timeout);
 
   // [START pubsub_subscriber_async_pull_custom_attributes]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
   // const timeout = 60;
 
   // Imports the Google Cloud client library
@@ -45,7 +48,7 @@ async function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 60) {
 
   async function listenWithCustomAttributes() {
     // References an existing subscription, e.g. "my-subscription"
-    const subscription = pubSubClient.subscription(subscriptionName);
+    const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
     // Create an event handler to handle messages
     const messageHandler = message => {

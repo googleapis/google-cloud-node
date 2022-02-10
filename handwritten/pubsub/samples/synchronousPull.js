@@ -25,11 +25,11 @@
 // sample-metadata:
 //   title: Synchronous Pull
 //   description: Receive messages synchronously.
-//   usage: node synchronousPull.js <project-id> <subscription-name>
+//   usage: node synchronousPull.js <project-id> <subscription-name-or-id>
 
 function main(
   projectId = 'YOUR_PROJECT_ID',
-  subscriptionName = 'YOUR_SUBSCRIPTION_NAME'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
 ) {
   // [START pubsub_subscriber_sync_pull]
   /**
@@ -48,7 +48,7 @@ function main(
   async function synchronousPull() {
     const formattedSubscription = subClient.subscriptionPath(
       projectId,
-      subscriptionName
+      subscriptionNameOrId
     );
 
     // The maximum number of messages returned for this request.

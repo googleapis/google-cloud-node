@@ -17,7 +17,7 @@
 // sample-metadata:
 //   title: Quickstart
 //   description: A quick introduction to using the Pub/Sub client library.
-//   usage: node quickstart.js <project-id> <topic-name> <subscription-name>
+//   usage: node quickstart.js <project-id> <topic-name-or-id> <subscription-name-or-id>
 
 // [START pubsub_quickstart_create_topic]
 // Imports the Google Cloud client library
@@ -25,14 +25,14 @@ const {PubSub} = require('@google-cloud/pubsub');
 
 async function quickstart(
   projectId = 'your-project-id', // Your Google Cloud Platform project ID
-  topicName = 'my-topic', // Name for the new topic to create
+  topicNameOrId = 'my-topic', // Name for the new topic to create
   subscriptionName = 'my-sub' // Name for the new subscription to create
 ) {
   // Instantiates a client
   const pubsub = new PubSub({projectId});
 
   // Creates a new topic
-  const [topic] = await pubsub.createTopic(topicName);
+  const [topic] = await pubsub.createTopic(topicNameOrId);
   console.log(`Topic ${topic.name} created.`);
 
   // Creates a subscription on that new topic

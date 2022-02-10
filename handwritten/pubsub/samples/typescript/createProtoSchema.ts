@@ -29,7 +29,7 @@
 /**
  * TODO(developer): Uncomment these variables before running the sample.
  */
-// const schemaName = 'YOUR_SCHEMA_NAME';
+// const schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID';
 // const protoFile = 'path/to/a/proto/schema/file/(.proto)/formatted/in/protcol/buffers';
 
 // Imports the Google Cloud client library
@@ -40,10 +40,10 @@ import * as fs from 'fs';
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function createProtoSchema(schemaName: string, protoFile: string) {
+async function createProtoSchema(schemaNameOrId: string, protoFile: string) {
   const definition: string = fs.readFileSync(protoFile).toString();
   const schema = await pubSubClient.createSchema(
-    schemaName,
+    schemaNameOrId,
     SchemaTypes.ProtocolBuffer,
     definition
   );
@@ -54,10 +54,10 @@ async function createProtoSchema(schemaName: string, protoFile: string) {
 // [END pubsub_create_proto_schema]
 
 function main(
-  schemaName = 'YOUR_SCHEMA_NAME',
+  schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
   protoFile = 'path/to/a/proto/schema/file/(.proto)/formatted/in/protcol/buffers'
 ) {
-  createProtoSchema(schemaName, protoFile).catch(err => {
+  createProtoSchema(schemaNameOrId, protoFile).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

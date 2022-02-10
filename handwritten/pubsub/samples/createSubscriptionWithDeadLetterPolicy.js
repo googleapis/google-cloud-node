@@ -25,20 +25,20 @@
 // sample-metadata:
 //   title: Create Subscription With Dead Letter Policy
 //   description: Creates a new subscription With Dead Letter Policy.
-//   usage: node createSubscriptionWithDeadLetterPolicy.js <topic-name> <subscription-name> <dead-letter-topic-name>
+//   usage: node createSubscriptionWithDeadLetterPolicy.js <topic-name-or-id> <subscription-name-or-id> <dead-letter-topic-name-or-id>
 
 function main(
-  topicName = 'YOUR_TOPIC_NAME',
-  subscriptionName = 'YOUR_SUBSCRIPTION_NAME',
-  deadLetterTopicName = 'YOUR_DEAD_LETTER_TOPIC_NAME'
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+  deadLetterTopicNameOrId = 'YOUR_DEAD_LETTER_TOPIC_NAME_OR_ID'
 ) {
   // [START pubsub_dead_letter_create_subscription]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
-  // const deadLetterTopicName = 'YOUR_DEAD_LETTER_TOPIC_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
+  // const deadLetterTopicNameOrId = 'YOUR_DEAD_LETTER_TOPIC_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -48,14 +48,16 @@ function main(
 
   async function createSubscriptionWithDeadLetterPolicy() {
     // Creates a new subscription
-    await pubSubClient.topic(topicName).createSubscription(subscriptionName, {
-      deadLetterPolicy: {
-        deadLetterTopic: pubSubClient.topic(deadLetterTopicName).name,
-        maxDeliveryAttempts: 10,
-      },
-    });
+    await pubSubClient
+      .topic(topicNameOrId)
+      .createSubscription(subscriptionNameOrId, {
+        deadLetterPolicy: {
+          deadLetterTopic: pubSubClient.topic(deadLetterTopicNameOrId).name,
+          maxDeliveryAttempts: 10,
+        },
+      });
     console.log(
-      `Created subscription ${subscriptionName} with dead letter topic ${deadLetterTopicName}.`
+      `Created subscription ${subscriptionNameOrId} with dead letter topic ${deadLetterTopicNameOrId}.`
     );
     console.log(
       'To process dead letter messages, remember to add a subscription to your dead letter topic.'

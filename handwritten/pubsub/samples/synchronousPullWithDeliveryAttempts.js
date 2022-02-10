@@ -25,18 +25,18 @@
 // sample-metadata:
 //   title: Synchronous Pull with delivery attempt.
 //   description: Receive messages synchronously with delivery attempt.
-//   usage: node synchronousPullWithDeliveryAttempts.js <project-id> <subscription-name>
+//   usage: node synchronousPullWithDeliveryAttempts.js <project-id> <subscription-name-or-id>
 
 function main(
   projectId = 'YOUR_PROJECT_ID',
-  subscriptionName = 'YOUR_SUBSCRIPTION_NAME'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
 ) {
   // [START pubsub_dead_letter_delivery_attempt]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   // const projectId = 'YOUR_PROJECT_ID';
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
   // Imports the Google Cloud client library. v1 is for the lower level
   // proto access.
@@ -48,7 +48,7 @@ function main(
   async function synchronousPullWithDeliveryAttempts() {
     const formattedSubscription = subClient.subscriptionPath(
       projectId,
-      subscriptionName
+      subscriptionNameOrId
     );
 
     // The maximum number of messages returned for this request.

@@ -39,7 +39,7 @@ const pubSubClient = new PubSub();
 
 async function listSchemas() {
   for await (const s of pubSubClient.listSchemas()) {
-    console.log(await s.name);
+    console.log(s.name);
   }
   console.log('Listed schemas.');
 }

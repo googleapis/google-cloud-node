@@ -23,13 +23,13 @@
 // sample-metadata:
 //   title: Publish with flow control
 //   description: Publishes to a topic using publisher-side flow control.
-//   usage: node publishWithFlowControl.js <topic-name>
+//   usage: node publishWithFlowControl.js <topic-name-or-id>
 
 // [START pubsub_publisher_flow_control]
 /**
  * TODO(developer): Uncomment this variable before running the sample.
  */
-// const topicName = 'YOUR_TOPIC_NAME';
+// const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
 // Imports the Google Cloud client library
 import {PubSub, PublishOptions} from '@google-cloud/pubsub';
@@ -37,7 +37,7 @@ import {PubSub, PublishOptions} from '@google-cloud/pubsub';
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function publishWithFlowControl(topicName: string) {
+async function publishWithFlowControl(topicNameOrId: string) {
   // Create publisher options
   const options: PublishOptions = {
     flowControlOptions: {
@@ -47,7 +47,7 @@ async function publishWithFlowControl(topicName: string) {
   };
 
   // Get a publisher.
-  const topic = pubSubClient.topic(topicName, options);
+  const topic = pubSubClient.topic(topicNameOrId, options);
 
   // For flow controlled publishing, we'll use a publisher flow controller
   // instead of `topic.publish()`.
@@ -73,8 +73,8 @@ async function publishWithFlowControl(topicName: string) {
 }
 // [END pubsub_publisher_flow_control]
 
-function main(topicName = 'YOUR_TOPIC_NAME') {
-  publishWithFlowControl(topicName).catch(err => {
+function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
+  publishWithFlowControl(topicNameOrId).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

@@ -25,14 +25,14 @@
 // sample-metadata:
 //   title: Create Topic
 //   description: Creates a new topic.
-//   usage: node createTopic.js <topic-name>
+//   usage: node createTopic.js <topic-name-or-id>
 
-async function main(topicName = 'YOUR_TOPIC_NAME') {
+async function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
   // [START pubsub_create_topic]
   /**
    * TODO(developer): Uncomment this variable before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -42,8 +42,8 @@ async function main(topicName = 'YOUR_TOPIC_NAME') {
 
   async function createTopic() {
     // Creates a new topic
-    await pubSubClient.createTopic(topicName);
-    console.log(`Topic ${topicName} created.`);
+    await pubSubClient.createTopic(topicNameOrId);
+    console.log(`Topic ${topicNameOrId} created.`);
   }
 
   createTopic();

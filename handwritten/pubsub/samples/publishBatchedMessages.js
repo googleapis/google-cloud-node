@@ -25,10 +25,10 @@
 // sample-metadata:
 //   title: Publish Batched Messages
 //   description: Publishes messages to a topic using custom batching settings.
-//   usage: node publishBatchedMessages.js <topic-name> <data> [max-messages [max-wait-in-seconds]]
+//   usage: node publishBatchedMessages.js <topic-name-or-id> <data> [max-messages [max-wait-in-seconds]]
 
 function main(
-  topicName = 'YOUR_TOPIC_NAME',
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   data = JSON.stringify({foo: 'bar'}),
   maxMessages = 10,
   maxWaitTime = 10
@@ -55,7 +55,7 @@ function main(
     // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
     const dataBuffer = Buffer.from(data);
 
-    const batchPublisher = pubSubClient.topic(topicName, {
+    const batchPublisher = pubSubClient.topic(topicNameOrId, {
       batching: {
         maxMessages: maxMessages,
         maxMilliseconds: maxWaitTime * 1000,

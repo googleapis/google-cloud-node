@@ -25,14 +25,14 @@
 // sample-metadata:
 //   title: Test Subscription Permissions
 //   description: Tests the permissions for a subscription.
-//   usage: node testSubscriptionPermissions.js <subscription-name>
+//   usage: node testSubscriptionPermissions.js <subscription-name-or-id>
 
-function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME') {
+function main(subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID') {
   // [START pubsub_test_subscription_permissions]
   /**
    * TODO(developer): Uncomment this variable before running the sample.
    */
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -48,7 +48,7 @@ function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME') {
 
     // Tests the IAM policy for the specified subscription
     const [permissions] = await pubSubClient
-      .subscription(subscriptionName)
+      .subscription(subscriptionNameOrId)
       .iam.testPermissions(permissionsToTest);
 
     console.log('Tested permissions for subscription: %j', permissions);

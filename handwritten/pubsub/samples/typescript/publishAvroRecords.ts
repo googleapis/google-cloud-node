@@ -29,7 +29,7 @@
 /**
  * TODO(developer): Uncomment this variable before running the sample.
  */
-// const topicName = 'YOUR_TOPIC_NAME';
+// const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
 // Imports the Google Cloud client library
 import {PubSub, Encodings} from '@google-cloud/pubsub';
@@ -46,14 +46,14 @@ interface ProvinceObject {
   post_abbr: string;
 }
 
-async function publishAvroRecords(topicName: string) {
+async function publishAvroRecords(topicNameOrId: string) {
   // Get the topic metadata to learn about its schema encoding.
-  const topic = pubSubClient.topic(topicName);
+  const topic = pubSubClient.topic(topicNameOrId);
   const [topicMetadata] = await topic.getMetadata();
   const topicSchemaMetadata = topicMetadata.schemaSettings;
 
   if (!topicSchemaMetadata) {
-    console.log(`Topic ${topicName} doesn't seem to have a schema.`);
+    console.log(`Topic ${topicNameOrId} doesn't seem to have a schema.`);
     return;
   }
   const schemaEncoding = topicSchemaMetadata.encoding;
@@ -91,8 +91,8 @@ async function publishAvroRecords(topicName: string) {
 }
 // [END pubsub_publish_avro_records]
 
-function main(topicName = 'YOUR_TOPIC_NAME') {
-  publishAvroRecords(topicName).catch(err => {
+function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
+  publishAvroRecords(topicNameOrId).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

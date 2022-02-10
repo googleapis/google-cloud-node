@@ -28,10 +28,10 @@
 //     with ordering. Please see "Create Subscription With Ordering" for
 //     information on setting up a subscription that will receive the
 //     messages with proper ordering.
-//   usage: node publishOrderedMessage.js <topic-name> <data>
+//   usage: node publishOrderedMessage.js <topic-name-or-id> <data>
 
 async function main(
-  topicName = 'YOUR_TOPIC_NAME',
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   data = JSON.stringify({foo: 'bar'}),
   orderingKey = 'key1'
 ) {
@@ -39,7 +39,7 @@ async function main(
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
   // const data = JSON.stringify({foo: 'bar'});
   // const orderingKey = 'key1';
 
@@ -66,7 +66,7 @@ async function main(
 
     // Publishes the message
     const messageId = await pubSubClient
-      .topic(topicName, {enableMessageOrdering: true})
+      .topic(topicNameOrId, {enableMessageOrdering: true})
       .publishMessage(message);
 
     console.log(`Message ${messageId} published.`);

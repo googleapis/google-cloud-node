@@ -25,17 +25,17 @@
 // sample-metadata:
 //   title: Publish Message With Custom Attributes
 //   description: Publishes a message with custom attributes to a topic.
-//   usage: node publishMessageWithCustomAttributes.js <topic-name> <data>
+//   usage: node publishMessageWithCustomAttributes.js <topic-name-or-id> <data>
 
 function main(
-  topicName = 'YOUR_TOPIC_NAME',
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   data = JSON.stringify({foo: 'bar'})
 ) {
   // [START pubsub_publish_custom_attributes]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
   // const data = JSON.stringify({foo: 'bar'});
 
   // Imports the Google Cloud client library
@@ -55,7 +55,7 @@ function main(
     };
 
     const messageId = await pubSubClient
-      .topic(topicName)
+      .topic(topicNameOrId)
       .publish(dataBuffer, customAttributes);
     console.log(`Message ${messageId} published.`);
   }

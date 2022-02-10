@@ -23,13 +23,13 @@
 // sample-metadata:
 //   title: Delete a previously created schema
 //   description: Deletes a schema which was previously created in the project.
-//   usage: node deleteSchema.js <schema-name>
+//   usage: node deleteSchema.js <schema-name-or-id>
 
 // [START pubsub_delete_schema]
 /**
  * TODO(developer): Uncomment this variable before running the sample.
  */
-// const schemaName = 'YOUR_SCHEMA_NAME';
+// const schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID';
 
 // Imports the Google Cloud client library
 import {PubSub} from '@google-cloud/pubsub';
@@ -37,16 +37,16 @@ import {PubSub} from '@google-cloud/pubsub';
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function deleteSchema(schemaName: string) {
-  const schema = pubSubClient.schema(schemaName);
+async function deleteSchema(schemaNameOrId: string) {
+  const schema = pubSubClient.schema(schemaNameOrId);
   const name = await schema.getName();
   await schema.delete();
   console.log(`Schema ${name} deleted.`);
 }
 // [END pubsub_delete_schema]
 
-function main(schemaName = 'YOUR_SCHEMA_NAME') {
-  deleteSchema(schemaName).catch(err => {
+function main(schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID') {
+  deleteSchema(schemaNameOrId).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

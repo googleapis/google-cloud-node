@@ -25,14 +25,14 @@
 // sample-metadata:
 //   title: Delete Subscription
 //   description: Deletes an existing subscription from a topic.
-//   usage: node deleteSubscription.js <subscription-name>
+//   usage: node deleteSubscription.js <subscription-name-or-id>
 
-function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME') {
+function main(subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID') {
   // [START pubsub_delete_subscription]
   /**
    * TODO(developer): Uncomment this variable before running the sample.
    */
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -42,8 +42,8 @@ function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME') {
 
   async function deleteSubscription() {
     // Deletes the subscription
-    await pubSubClient.subscription(subscriptionName).delete();
-    console.log(`Subscription ${subscriptionName} deleted.`);
+    await pubSubClient.subscription(subscriptionNameOrId).delete();
+    console.log(`Subscription ${subscriptionNameOrId} deleted.`);
   }
 
   deleteSubscription().catch(console.error);

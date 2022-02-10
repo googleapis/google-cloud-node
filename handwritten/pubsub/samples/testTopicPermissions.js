@@ -25,14 +25,14 @@
 // sample-metadata:
 //   title: Test Topic Permissions
 //   description: Tests the permissions for a topic.
-//   usage: node testTopicPermissions.js <topic-name>
+//   usage: node testTopicPermissions.js <topic-name-or-id>
 
-function main(topicName = 'YOUR_TOPIC_NAME') {
+function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
   // [START pubsub_test_topic_permissions]
   /**
    * TODO(developer): Uncomment this variable before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -49,7 +49,7 @@ function main(topicName = 'YOUR_TOPIC_NAME') {
 
     // Tests the IAM policy for the specified topic
     const [permissions] = await pubSubClient
-      .topic(topicName)
+      .topic(topicNameOrId)
       .iam.testPermissions(permissionsToTest);
 
     console.log('Tested permissions for topic: %j', permissions);

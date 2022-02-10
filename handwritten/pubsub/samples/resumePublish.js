@@ -26,10 +26,10 @@
 //   title: Resume Publish
 //   description: Demonstrates how to resume publishing on an ordering key if
 //     publishing fails for a message.
-//   usage: node resumePublish.js <topic-name> <data>
+//   usage: node resumePublish.js <topic-name-or-id> <data>
 
 async function main(
-  topicName = 'YOUR_TOPIC_NAME',
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   data = JSON.stringify({foo: 'bar'}),
   orderingKey = 'key1'
 ) {
@@ -37,7 +37,7 @@ async function main(
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
   // const data = JSON.stringify({foo: 'bar'});
   // const orderingKey = 'key1';
 
@@ -52,7 +52,7 @@ async function main(
     const dataBuffer = Buffer.from(data);
 
     // Publishes the message
-    const publisher = pubSubClient.topic(topicName, {
+    const publisher = pubSubClient.topic(topicNameOrId, {
       enableMessageOrdering: true,
     });
     try {

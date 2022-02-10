@@ -33,7 +33,7 @@
 /**
  * TODO(developer): Uncomment these variables before running the sample.
  */
-// const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+// const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 // const timeout = 60;
 
 // Imports the Google Cloud client library
@@ -45,9 +45,9 @@ const protobuf = require('protobufjs');
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function listenForProtobufMessages(subscriptionName, timeout) {
+async function listenForProtobufMessages(subscriptionNameOrId, timeout) {
   // References an existing subscription
-  const subscription = pubSubClient.subscription(subscriptionName);
+  const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
   // Make an decoder using the protobufjs library.
   //
@@ -98,10 +98,13 @@ async function listenForProtobufMessages(subscriptionName, timeout) {
 }
 // [END pubsub_subscribe_proto_messages]
 
-function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 60) {
+function main(
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+  timeout = 60
+) {
   timeout = Number(timeout);
 
-  listenForProtobufMessages(subscriptionName, timeout).catch(err => {
+  listenForProtobufMessages(subscriptionNameOrId, timeout).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

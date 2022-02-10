@@ -25,14 +25,14 @@
 // sample-metadata:
 //   title: Get Subscription Policy
 //   description: Gets the IAM policy for a subscription.
-//   usage: node getSubscriptionPolicy.js <subscription-name>
+//   usage: node getSubscriptionPolicy.js <subscription-name-or-id>
 
-function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME') {
+function main(subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID') {
   // [START pubsub_get_subscription_policy]
   /**
    * TODO(developer): Uncomment this variable before running the sample.
    */
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -43,7 +43,7 @@ function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME') {
   async function getSubscriptionPolicy() {
     // Retrieves the IAM policy for the subscription
     const [policy] = await pubSubClient
-      .subscription(subscriptionName)
+      .subscription(subscriptionNameOrId)
       .iam.getPolicy();
 
     console.log(`Policy for subscription: ${JSON.stringify(policy.bindings)}.`);

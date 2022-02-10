@@ -25,18 +25,18 @@
 // sample-metadata:
 //   title: Create Subscription with ordering enabled
 //   description: Creates a new subscription with ordering enabled.
-//   usage: node createSubscriptionWithOrdering.js <topic-name> <subscription-name>
+//   usage: node createSubscriptionWithOrdering.js <topic-name-or-id> <subscription-name-or-id>
 
 function main(
-  topicName = 'YOUR_TOPIC_NAME',
-  subscriptionName = 'YOUR_SUBSCRIPTION_NAME'
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
 ) {
   // [START pubsub_enable_subscription_ordering]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -46,11 +46,13 @@ function main(
 
   async function createSubscriptionWithOrdering() {
     // Creates a new subscription
-    await pubSubClient.topic(topicName).createSubscription(subscriptionName, {
-      enableMessageOrdering: true,
-    });
+    await pubSubClient
+      .topic(topicNameOrId)
+      .createSubscription(subscriptionNameOrId, {
+        enableMessageOrdering: true,
+      });
     console.log(
-      `Created subscription ${subscriptionName} with ordering enabled.`
+      `Created subscription ${subscriptionNameOrId} with ordering enabled.`
     );
     console.log(
       'To process messages in order, remember to add an ordering key to your messages.'

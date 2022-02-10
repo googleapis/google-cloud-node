@@ -25,13 +25,13 @@
 // sample-metadata:
 //   title: Get Subscription
 //   description: Gets the metadata for a subscription.
-//   usage: node getSubscription.js <subscription-name>
+//   usage: node getSubscription.js <subscription-name-or-id>
 
-function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME') {
+function main(subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID') {
   /**
    * TODO(developer): Uncomment this variable before running the sample.
    */
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -42,7 +42,7 @@ function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME') {
   async function getSubscription() {
     // Gets the metadata for the subscription
     const [metadata] = await pubSubClient
-      .subscription(subscriptionName)
+      .subscription(subscriptionNameOrId)
       .getMetadata();
 
     console.log(`Subscription: ${metadata.name}`);

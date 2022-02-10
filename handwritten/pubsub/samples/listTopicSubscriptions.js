@@ -25,14 +25,14 @@
 // sample-metadata:
 //   title: List Subscriptions On a Topic
 //   description: Lists all subscriptions in the current project, filtering by a topic.
-//   usage: node listTopicSubscriptions.js <topic-name>
+//   usage: node listTopicSubscriptions.js <topic-name-or-id>
 
-function main(topicName = 'YOUR_TOPIC_NAME') {
+function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
   // [START pubsub_list_topic_subscriptions]
   /**
    * TODO(developer): Uncomment this variable before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -43,10 +43,10 @@ function main(topicName = 'YOUR_TOPIC_NAME') {
   async function listTopicSubscriptions() {
     // Lists all subscriptions for the topic
     const [subscriptions] = await pubSubClient
-      .topic(topicName)
+      .topic(topicNameOrId)
       .getSubscriptions();
 
-    console.log(`Subscriptions for ${topicName}:`);
+    console.log(`Subscriptions for ${topicNameOrId}:`);
     subscriptions.forEach(subscription => console.log(subscription.name));
   }
 

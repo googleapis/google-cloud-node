@@ -27,13 +27,13 @@
 // sample-metadata:
 //   title: Publish Protobuf Messages to a Topic
 //   description: Publishes a message in protobuf form to a topic with a schema.
-//   usage: node publishProtobufMessages.js <topic-name>
+//   usage: node publishProtobufMessages.js <topic-name-or-id>
 
 // [START pubsub_publish_proto_messages]
 /**
  * TODO(developer): Uncomment this variable before running the sample.
  */
-// const topicName = 'YOUR_TOPIC_NAME';
+// const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
 // Imports the Google Cloud client library
 const {PubSub, Encodings} = require('@google-cloud/pubsub');
@@ -44,14 +44,14 @@ const protobuf = require('protobufjs');
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function publishProtobufMessages(topicName) {
+async function publishProtobufMessages(topicNameOrId) {
   // Get the topic metadata to learn about its schema.
-  const topic = pubSubClient.topic(topicName);
+  const topic = pubSubClient.topic(topicNameOrId);
   const [topicMetadata] = await topic.getMetadata();
   const topicSchemaMetadata = topicMetadata.schemaSettings;
 
   if (!topicSchemaMetadata) {
-    console.log(`Topic ${topicName} doesn't seem to have a schema.`);
+    console.log(`Topic ${topicNameOrId} doesn't seem to have a schema.`);
     return;
   }
   const schemaEncoding = topicSchemaMetadata.encoding;

@@ -25,16 +25,19 @@
 // sample-metadata:
 //   title: Listen For Errors
 //   description: Listens to messages and errors for a subscription.
-//   usage: node listenForErrors.js <subscription-name> [timeout-in-seconds]
+//   usage: node listenForErrors.js <subscription-name-or-id> [timeout-in-seconds]
 
-async function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 10) {
+async function main(
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+  timeout = 10
+) {
   timeout = Number(timeout);
 
   // [START pubsub_subscriber_error_listener]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
   // const timeout = 10;
 
   // Imports the Google Cloud client library
@@ -45,7 +48,7 @@ async function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 10) {
 
   function listenForErrors() {
     // References an existing subscription
-    const subscription = pubSubClient.subscription(subscriptionName);
+    const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
     // Create an event handler to handle messages
     const messageHandler = function (message) {

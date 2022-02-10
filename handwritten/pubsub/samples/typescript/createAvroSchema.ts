@@ -29,7 +29,7 @@
 /**
  * TODO(developer): Uncomment these variables before running the sample.
  */
-// const schemaName = 'YOUR_SCHEMA_NAME';
+// const schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID';
 // const avscFile = 'path/to/an/avro/schema/file/(.avsc)/formatted/in/json';
 
 // Imports the Google Cloud client library
@@ -40,10 +40,10 @@ import * as fs from 'fs';
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function createAvroSchema(schemaName: string, avscFile: string) {
+async function createAvroSchema(schemaNameOrId: string, avscFile: string) {
   const definition: string = fs.readFileSync(avscFile).toString();
   const schema = await pubSubClient.createSchema(
-    schemaName,
+    schemaNameOrId,
     SchemaTypes.Avro,
     definition
   );
@@ -54,10 +54,10 @@ async function createAvroSchema(schemaName: string, avscFile: string) {
 // [END pubsub_create_avro_schema]
 
 function main(
-  schemaName = 'YOUR_SCHEMA_NAME',
+  schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
   avscFile = 'path/to/an/avro/schema/file/(.avsc)/formatted/in/json'
 ) {
-  createAvroSchema(schemaName, avscFile).catch(err => {
+  createAvroSchema(schemaNameOrId, avscFile).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

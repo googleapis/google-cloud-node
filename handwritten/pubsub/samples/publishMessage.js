@@ -25,10 +25,10 @@
 // sample-metadata:
 //   title: Publish Message
 //   description: Publishes a message to a topic.
-//   usage: node publishMessage.js <topic-name> <data>
+//   usage: node publishMessage.js <topic-name-or-id> <data>
 
 function main(
-  topicName = 'YOUR_TOPIC_NAME',
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   data = JSON.stringify({foo: 'bar'})
 ) {
   // [START pubsub_publish_with_error_handler]
@@ -36,7 +36,7 @@ function main(
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const topicName = 'YOUR_TOPIC_NAME';
+  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
   // const data = JSON.stringify({foo: 'bar'});
 
   // Imports the Google Cloud client library
@@ -50,7 +50,9 @@ function main(
     const dataBuffer = Buffer.from(data);
 
     try {
-      const messageId = await pubSubClient.topic(topicName).publish(dataBuffer);
+      const messageId = await pubSubClient
+        .topic(topicNameOrId)
+        .publish(dataBuffer);
       console.log(`Message ${messageId} published.`);
     } catch (error) {
       console.error(`Received error while publishing: ${error.message}`);

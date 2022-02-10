@@ -23,13 +23,13 @@
 // sample-metadata:
 //   title: Listen For Avro Records
 //   description: Listens for records in Avro encoding from a subscription.
-//   usage: node listenForAvroRecords.js <subscription-name> [timeout-in-seconds]
+//   usage: node listenForAvroRecords.js <subscription-name-or-id> [timeout-in-seconds]
 
 // [START pubsub_subscribe_avro_records]
 /**
  * TODO(developer): Uncomment these variables before running the sample.
  */
-// const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+// const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 // const timeout = 60;
 
 // Imports the Google Cloud client library
@@ -44,9 +44,9 @@ import * as avro from 'avro-js';
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-function listenForAvroRecords(subscriptionName: string, timeout: number) {
+function listenForAvroRecords(subscriptionNameOrId: string, timeout: number) {
   // References an existing subscription
-  const subscription = pubSubClient.subscription(subscriptionName);
+  const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
   // Make an encoder using the official avro-js library.
   const definition = fs
@@ -92,11 +92,14 @@ function listenForAvroRecords(subscriptionName: string, timeout: number) {
 }
 // [END pubsub_subscribe_avro_records]
 
-function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 60) {
+function main(
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+  timeout = 60
+) {
   timeout = Number(timeout);
 
   try {
-    listenForAvroRecords(subscriptionName, timeout);
+    listenForAvroRecords(subscriptionNameOrId, timeout);
   } catch (err) {
     console.error(err.message);
     process.exitCode = 1;

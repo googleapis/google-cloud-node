@@ -25,9 +25,12 @@
 // sample-metadata:
 //   title: Listen For Messages
 //   description: Listens for messages from a subscription.
-//   usage: node listenForMessages.js <subscription-name> [timeout-in-seconds]
+//   usage: node listenForMessages.js <subscription-name-or-id> [timeout-in-seconds]
 
-function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 60) {
+function main(
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+  timeout = 60
+) {
   timeout = Number(timeout);
 
   // [START pubsub_subscriber_async_pull]
@@ -35,7 +38,7 @@ function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 60) {
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
   // const timeout = 60;
 
   // Imports the Google Cloud client library
@@ -46,7 +49,7 @@ function main(subscriptionName = 'YOUR_SUBSCRIPTION_NAME', timeout = 60) {
 
   function listenForMessages() {
     // References an existing subscription
-    const subscription = pubSubClient.subscription(subscriptionName);
+    const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
     // Create an event handler to handle messages
     let messageCount = 0;

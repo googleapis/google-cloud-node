@@ -26,11 +26,11 @@
 //   title: Subscribe With Flow Control Settings
 //   description: Listen to messages with flow control settings, which are
 //     properties of the client/listener instance.
-//   usage: node subscribeWithFlowControlSettings.js <subscription-name>
+//   usage: node subscribeWithFlowControlSettings.js <subscription-name-or-id>
 //     [max-in-progress [timeout-in-seconds]]
 
 function main(
-  subscriptionName = 'YOUR_SUBSCRIPTION_NAME',
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
   maxInProgress = 1,
   timeout = 10
 ) {
@@ -41,7 +41,7 @@ function main(
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const subscriptionName = 'YOUR_SUBSCRIPTION_NAME';
+  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
   // const maxInProgress = 5;
   // const timeout = 10;
 
@@ -61,7 +61,7 @@ function main(
     // References an existing subscription.
     // Note that flow control settings are not persistent across subscribers.
     const subscription = pubSubClient.subscription(
-      subscriptionName,
+      subscriptionNameOrId,
       subscriberOptions
     );
 

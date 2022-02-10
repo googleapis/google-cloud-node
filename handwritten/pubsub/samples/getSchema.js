@@ -33,7 +33,7 @@
 /**
  * TODO(developer): Uncomment this variable before running the sample.
  */
-// const schemaName = 'YOUR_SCHEMA_NAME';
+// const schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID';
 
 // Imports the Google Cloud client library
 const {PubSub} = require('@google-cloud/pubsub');
@@ -41,16 +41,16 @@ const {PubSub} = require('@google-cloud/pubsub');
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function getSchema(schemaName) {
-  const schema = pubSubClient.schema(schemaName);
+async function getSchema(schemaNameOrId) {
+  const schema = pubSubClient.schema(schemaNameOrId);
   const info = await schema.get();
   const fullName = await schema.getName();
   console.log(`Schema ${fullName} info: ${JSON.stringify(info, null, 4)}.`);
 }
 // [END pubsub_get_schema]
 
-function main(schemaName = 'YOUR_SCHEMA_NAME') {
-  getSchema(schemaName).catch(err => {
+function main(schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID') {
+  getSchema(schemaNameOrId).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });
