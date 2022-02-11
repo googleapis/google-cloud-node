@@ -1129,6 +1129,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "secondaryIpRange": {
+                          "type": "string",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "host": {
                           "type": "string",
                           "id": 10,

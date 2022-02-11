@@ -5943,6 +5943,7 @@
                          * @property {string|null} [alternativeLocationId] Instance alternativeLocationId
                          * @property {string|null} [redisVersion] Instance redisVersion
                          * @property {string|null} [reservedIpRange] Instance reservedIpRange
+                         * @property {string|null} [secondaryIpRange] Instance secondaryIpRange
                          * @property {string|null} [host] Instance host
                          * @property {number|null} [port] Instance port
                          * @property {string|null} [currentLocationId] Instance currentLocationId
@@ -6042,6 +6043,14 @@
                          * @instance
                          */
                         Instance.prototype.reservedIpRange = "";
+    
+                        /**
+                         * Instance secondaryIpRange.
+                         * @member {string} secondaryIpRange
+                         * @memberof google.cloud.redis.v1beta1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.secondaryIpRange = "";
     
                         /**
                          * Instance host.
@@ -6302,6 +6311,8 @@
                                 $root.google.cloud.redis.v1beta1.MaintenancePolicy.encode(message.maintenancePolicy, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                             if (message.maintenanceSchedule != null && Object.hasOwnProperty.call(message, "maintenanceSchedule"))
                                 $root.google.cloud.redis.v1beta1.MaintenanceSchedule.encode(message.maintenanceSchedule, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
+                            if (message.secondaryIpRange != null && Object.hasOwnProperty.call(message, "secondaryIpRange"))
+                                writer.uint32(/* id 30, wireType 2 =*/242).string(message.secondaryIpRange);
                             if (message.replicaCount != null && Object.hasOwnProperty.call(message, "replicaCount"))
                                 writer.uint32(/* id 31, wireType 0 =*/248).int32(message.replicaCount);
                             if (message.nodes != null && message.nodes.length)
@@ -6388,6 +6399,9 @@
                                     break;
                                 case 9:
                                     message.reservedIpRange = reader.string();
+                                    break;
+                                case 30:
+                                    message.secondaryIpRange = reader.string();
                                     break;
                                 case 10:
                                     message.host = reader.string();
@@ -6542,6 +6556,9 @@
                             if (message.reservedIpRange != null && message.hasOwnProperty("reservedIpRange"))
                                 if (!$util.isString(message.reservedIpRange))
                                     return "reservedIpRange: string expected";
+                            if (message.secondaryIpRange != null && message.hasOwnProperty("secondaryIpRange"))
+                                if (!$util.isString(message.secondaryIpRange))
+                                    return "secondaryIpRange: string expected";
                             if (message.host != null && message.hasOwnProperty("host"))
                                 if (!$util.isString(message.host))
                                     return "host: string expected";
@@ -6706,6 +6723,8 @@
                                 message.redisVersion = String(object.redisVersion);
                             if (object.reservedIpRange != null)
                                 message.reservedIpRange = String(object.reservedIpRange);
+                            if (object.secondaryIpRange != null)
+                                message.secondaryIpRange = String(object.secondaryIpRange);
                             if (object.host != null)
                                 message.host = String(object.host);
                             if (object.port != null)
@@ -6915,6 +6934,7 @@
                                 object.transitEncryptionMode = options.enums === String ? "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED" : 0;
                                 object.maintenancePolicy = null;
                                 object.maintenanceSchedule = null;
+                                object.secondaryIpRange = "";
                                 object.replicaCount = 0;
                                 object.readEndpoint = "";
                                 object.readEndpointPort = 0;
@@ -6979,6 +6999,8 @@
                                 object.maintenancePolicy = $root.google.cloud.redis.v1beta1.MaintenancePolicy.toObject(message.maintenancePolicy, options);
                             if (message.maintenanceSchedule != null && message.hasOwnProperty("maintenanceSchedule"))
                                 object.maintenanceSchedule = $root.google.cloud.redis.v1beta1.MaintenanceSchedule.toObject(message.maintenanceSchedule, options);
+                            if (message.secondaryIpRange != null && message.hasOwnProperty("secondaryIpRange"))
+                                object.secondaryIpRange = message.secondaryIpRange;
                             if (message.replicaCount != null && message.hasOwnProperty("replicaCount"))
                                 object.replicaCount = message.replicaCount;
                             if (message.nodes && message.nodes.length) {

@@ -2621,6 +2621,9 @@ export namespace google {
                     /** Instance reservedIpRange */
                     reservedIpRange?: (string|null);
 
+                    /** Instance secondaryIpRange */
+                    secondaryIpRange?: (string|null);
+
                     /** Instance host */
                     host?: (string|null);
 
@@ -2720,6 +2723,9 @@ export namespace google {
 
                     /** Instance reservedIpRange. */
                     public reservedIpRange: string;
+
+                    /** Instance secondaryIpRange. */
+                    public secondaryIpRange: string;
 
                     /** Instance host. */
                     public host: string;
