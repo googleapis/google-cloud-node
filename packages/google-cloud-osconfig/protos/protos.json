@@ -3368,6 +3368,9 @@
                   },
                   "nested": {
                     "OSPolicyResourceConfigStep": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "type": {
                           "type": "Type",
@@ -3384,6 +3387,9 @@
                       },
                       "nested": {
                         "Type": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "values": {
                             "TYPE_UNSPECIFIED": 0,
                             "VALIDATION": 1,
@@ -3393,6 +3399,9 @@
                           }
                         },
                         "Outcome": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "values": {
                             "OUTCOME_UNSPECIFIED": 0,
                             "SUCCEEDED": 1,
@@ -3402,6 +3411,9 @@
                       }
                     },
                     "OSPolicyResourceCompliance": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "oneofs": {
                         "output": {
                           "oneof": [
@@ -3430,6 +3442,9 @@
                       },
                       "nested": {
                         "ExecResourceOutput": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "enforcementOutput": {
                               "type": "bytes",
@@ -3440,6 +3455,9 @@
                       }
                     },
                     "OSPolicyComplianceState": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "values": {
                         "OS_POLICY_COMPLIANCE_STATE_UNSPECIFIED": 0,
                         "COMPLIANT": 1,
@@ -3450,6 +3468,7 @@
                     },
                     "InstanceOSPoliciesCompliance": {
                       "options": {
+                        "deprecated": true,
                         "(google.api.resource).type": "osconfig.googleapis.com/InstanceOSPoliciesCompliance",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/instanceOSPoliciesCompliances/{instance}"
                       },
@@ -3514,6 +3533,9 @@
                       },
                       "nested": {
                         "OSPolicyCompliance": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "osPolicyId": {
                               "type": "string",
@@ -3540,6 +3562,9 @@
                       }
                     },
                     "GetInstanceOSPoliciesComplianceRequest": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -3552,6 +3577,9 @@
                       }
                     },
                     "ListInstanceOSPoliciesCompliancesRequest": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "parent": {
                           "type": "string",
@@ -3576,6 +3604,9 @@
                       }
                     },
                     "ListInstanceOSPoliciesCompliancesResponse": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "instanceOsPoliciesCompliances": {
                           "rule": "repeated",
@@ -4008,11 +4039,33 @@
                         }
                       },
                       "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "VALIDATION": 1,
+                            "ENFORCEMENT": 2
+                          }
+                        },
                         "OSFilter": {
                           "fields": {
                             "osShortName": {
                               "type": "string",
                               "id": 1
+                            },
+                            "osVersion": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "InventoryFilter": {
+                          "fields": {
+                            "osShortName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "osVersion": {
                               "type": "string",
@@ -4177,6 +4230,13 @@
                                 }
                               },
                               "nested": {
+                                "DesiredState": {
+                                  "values": {
+                                    "DESIRED_STATE_UNSPECIFIED": 0,
+                                    "INSTALLED": 1,
+                                    "REMOVED": 2
+                                  }
+                                },
                                 "Deb": {
                                   "fields": {
                                     "source": {
@@ -4265,13 +4325,6 @@
                                       "type": "string",
                                       "id": 2
                                     }
-                                  }
-                                },
-                                "DesiredState": {
-                                  "values": {
-                                    "DESIRED_STATE_UNSPECIFIED": 0,
-                                    "INSTALLED": 1,
-                                    "REMOVED": 2
                                   }
                                 }
                               }
@@ -4543,7 +4596,15 @@
                           "fields": {
                             "osFilter": {
                               "type": "OSFilter",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "inventoryFilters": {
+                              "rule": "repeated",
+                              "type": "InventoryFilter",
+                              "id": 3
                             },
                             "resources": {
                               "rule": "repeated",
@@ -4554,12 +4615,194 @@
                               }
                             }
                           }
+                        }
+                      }
+                    },
+                    "GetOSPolicyAssignmentReportRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/OSPolicyAssignmentReport"
+                          }
+                        }
+                      }
+                    },
+                    "ListOSPolicyAssignmentReportsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/InstanceOSPolicyAssignment"
+                          }
                         },
-                        "Mode": {
-                          "values": {
-                            "MODE_UNSPECIFIED": 0,
-                            "VALIDATION": 1,
-                            "ENFORCEMENT": 2
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListOSPolicyAssignmentReportsResponse": {
+                      "fields": {
+                        "osPolicyAssignmentReports": {
+                          "rule": "repeated",
+                          "type": "OSPolicyAssignmentReport",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OSPolicyAssignmentReport": {
+                      "options": {
+                        "(google.api.resource).type": "osconfig.googleapis.com/OSPolicyAssignmentReport",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}/report"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "instance": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "osPolicyAssignment": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/OSPolicyAssignment"
+                          }
+                        },
+                        "osPolicyCompliances": {
+                          "rule": "repeated",
+                          "type": "OSPolicyCompliance",
+                          "id": 4
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "lastRunId": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "OSPolicyCompliance": {
+                          "fields": {
+                            "osPolicyId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "complianceState": {
+                              "type": "ComplianceState",
+                              "id": 2
+                            },
+                            "complianceStateReason": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "osPolicyResourceCompliances": {
+                              "rule": "repeated",
+                              "type": "OSPolicyResourceCompliance",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "ComplianceState": {
+                              "values": {
+                                "UNKNOWN": 0,
+                                "COMPLIANT": 1,
+                                "NON_COMPLIANT": 2
+                              }
+                            },
+                            "OSPolicyResourceCompliance": {
+                              "oneofs": {
+                                "output": {
+                                  "oneof": [
+                                    "execResourceOutput"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "osPolicyResourceId": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "configSteps": {
+                                  "rule": "repeated",
+                                  "type": "OSPolicyResourceConfigStep",
+                                  "id": 2
+                                },
+                                "complianceState": {
+                                  "type": "ComplianceState",
+                                  "id": 3
+                                },
+                                "complianceStateReason": {
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "execResourceOutput": {
+                                  "type": "ExecResourceOutput",
+                                  "id": 5
+                                }
+                              },
+                              "nested": {
+                                "OSPolicyResourceConfigStep": {
+                                  "fields": {
+                                    "type": {
+                                      "type": "Type",
+                                      "id": 1
+                                    },
+                                    "errorMessage": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  },
+                                  "nested": {
+                                    "Type": {
+                                      "values": {
+                                        "TYPE_UNSPECIFIED": 0,
+                                        "VALIDATION": 1,
+                                        "DESIRED_STATE_CHECK": 2,
+                                        "DESIRED_STATE_ENFORCEMENT": 3,
+                                        "DESIRED_STATE_CHECK_POST_ENFORCEMENT": 4
+                                      }
+                                    }
+                                  }
+                                },
+                                "ComplianceState": {
+                                  "values": {
+                                    "UNKNOWN": 0,
+                                    "COMPLIANT": 1,
+                                    "NON_COMPLIANT": 2
+                                  }
+                                },
+                                "ExecResourceOutput": {
+                                  "fields": {
+                                    "enforcementOutput": {
+                                      "type": "bytes",
+                                      "id": 2
+                                    }
+                                  }
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -4613,6 +4856,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8
                         },
                         "rolloutState": {
                           "type": "RolloutState",
@@ -4669,7 +4916,10 @@
                             "osShortNames": {
                               "rule": "repeated",
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "inclusionLabels": {
                               "rule": "repeated",
@@ -4680,6 +4930,28 @@
                               "rule": "repeated",
                               "type": "LabelSet",
                               "id": 4
+                            },
+                            "inventories": {
+                              "rule": "repeated",
+                              "type": "Inventory",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "Inventory": {
+                              "fields": {
+                                "osShortName": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "osVersion": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
                             }
                           }
                         },
@@ -5058,10 +5330,14 @@
                           "requestType": "GetInstanceOSPoliciesComplianceRequest",
                           "responseType": "InstanceOSPoliciesCompliance",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1alpha/{name=projects/*/locations/*/instanceOSPoliciesCompliances/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "get": "/v1alpha/{name=projects/*/locations/*/instanceOSPoliciesCompliances/*}"
@@ -5076,13 +5352,53 @@
                           "requestType": "ListInstanceOSPoliciesCompliancesRequest",
                           "responseType": "ListInstanceOSPoliciesCompliancesResponse",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1alpha/{parent=projects/*/locations/*}/instanceOSPoliciesCompliances",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
+                              "deprecated": true
+                            },
+                            {
                               "(google.api.http)": {
                                 "get": "/v1alpha/{parent=projects/*/locations/*}/instanceOSPoliciesCompliances"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetOSPolicyAssignmentReport": {
+                          "requestType": "GetOSPolicyAssignmentReportRequest",
+                          "responseType": "OSPolicyAssignmentReport",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=projects/*/locations/*/instances/*/osPolicyAssignments/*/report}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=projects/*/locations/*/instances/*/osPolicyAssignments/*/report}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListOSPolicyAssignmentReports": {
+                          "requestType": "ListOSPolicyAssignmentReportsRequest",
+                          "responseType": "ListOSPolicyAssignmentReportsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=projects/*/locations/*/instances/*/osPolicyAssignments/*}/reports",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=projects/*/locations/*/instances/*/osPolicyAssignments/*}/reports"
                               }
                             },
                             {
@@ -5203,12 +5519,18 @@
                             "installedInventoryItemIds": {
                               "rule": "repeated",
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "availableInventoryItemIds": {
                               "rule": "repeated",
                               "type": "string",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "createTime": {
                               "type": "google.protobuf.Timestamp",
@@ -5217,6 +5539,11 @@
                             "updateTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 5
+                            },
+                            "items": {
+                              "rule": "repeated",
+                              "type": "Item",
+                              "id": 6
                             }
                           },
                           "nested": {
@@ -5254,8 +5581,32 @@
                                     "url": {
                                       "type": "string",
                                       "id": 1
+                                    },
+                                    "source": {
+                                      "type": "string",
+                                      "id": 2
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "Item": {
+                              "fields": {
+                                "installedInventoryItemId": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "availableInventoryItemId": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "fixedCpeUri": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "upstreamFix": {
+                                  "type": "string",
+                                  "id": 4
                                 }
                               }
                             }

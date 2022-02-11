@@ -20,6 +20,11 @@
                 "getInstanceOSPoliciesCompliance"
               ]
             },
+            "GetOSPolicyAssignmentReport": {
+              "methods": [
+                "getOSPolicyAssignmentReport"
+              ]
+            },
             "GetInventory": {
               "methods": [
                 "getInventory"
@@ -64,6 +69,13 @@
                 "listInstanceOSPoliciesCompliances",
                 "listInstanceOSPoliciesCompliancesStream",
                 "listInstanceOSPoliciesCompliancesAsync"
+              ]
+            },
+            "ListOSPolicyAssignmentReports": {
+              "methods": [
+                "listOSPolicyAssignmentReports",
+                "listOSPolicyAssignmentReportsStream",
+                "listOSPolicyAssignmentReportsAsync"
               ]
             },
             "ListInventories": {
@@ -95,6 +107,11 @@
                 "getInstanceOSPoliciesCompliance"
               ]
             },
+            "GetOSPolicyAssignmentReport": {
+              "methods": [
+                "getOSPolicyAssignmentReport"
+              ]
+            },
             "GetInventory": {
               "methods": [
                 "getInventory"
@@ -139,6 +156,13 @@
                 "listInstanceOSPoliciesCompliances",
                 "listInstanceOSPoliciesCompliancesStream",
                 "listInstanceOSPoliciesCompliancesAsync"
+              ]
+            },
+            "ListOSPolicyAssignmentReports": {
+              "methods": [
+                "listOSPolicyAssignmentReports",
+                "listOSPolicyAssignmentReportsStream",
+                "listOSPolicyAssignmentReportsAsync"
               ]
             },
             "ListInventories": {

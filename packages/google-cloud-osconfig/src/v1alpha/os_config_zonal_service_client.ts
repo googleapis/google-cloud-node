@@ -179,6 +179,9 @@ export class OsConfigZonalServiceClient {
       oSPolicyAssignmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/osPolicyAssignments/{os_policy_assignment}'
       ),
+      oSPolicyAssignmentReportPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}/report'
+      ),
       vulnerabilityReportPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/vulnerabilityReport'
       ),
@@ -202,6 +205,11 @@ export class OsConfigZonalServiceClient {
         'pageToken',
         'nextPageToken',
         'instanceOsPoliciesCompliances'
+      ),
+      listOSPolicyAssignmentReports: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'osPolicyAssignmentReports'
       ),
       listInventories: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -335,6 +343,8 @@ export class OsConfigZonalServiceClient {
       'deleteOSPolicyAssignment',
       'getInstanceOSPoliciesCompliance',
       'listInstanceOSPoliciesCompliances',
+      'getOSPolicyAssignmentReport',
+      'listOSPolicyAssignmentReports',
       'getInventory',
       'listInventories',
       'getVulnerabilityReport',
@@ -553,6 +563,7 @@ export class OsConfigZonalServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.get_instance_o_s_policies_compliance.js</caption>
    * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_GetInstanceOSPoliciesCompliance_async
+   * @deprecated GetInstanceOSPoliciesCompliance is deprecated and may be removed in a future version.
    */
   getInstanceOSPoliciesCompliance(
     request?: protos.google.cloud.osconfig.v1alpha.IGetInstanceOSPoliciesComplianceRequest,
@@ -632,7 +643,122 @@ export class OsConfigZonalServiceClient {
         name: request.name || '',
       });
     this.initialize();
+    this.warn(
+      'DEP$OsConfigZonalService-$GetInstanceOSPoliciesCompliance',
+      'GetInstanceOSPoliciesCompliance is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.getInstanceOSPoliciesCompliance(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Get the OS policy asssignment report for the specified Compute Engine VM
+   * instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. API resource name for OS policy assignment report.
+   *
+   *   Format:
+   *   `/projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}/report`
+   *
+   *   For `{project}`, either `project-number` or `project-id` can be provided.
+   *   For `{instance_id}`, either Compute Engine `instance-id` or `instance-name`
+   *   can be provided.
+   *   For `{assignment_id}`, the OSPolicyAssignment id must be provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [OSPolicyAssignmentReport]{@link google.cloud.osconfig.v1alpha.OSPolicyAssignmentReport}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.get_o_s_policy_assignment_report.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_GetOSPolicyAssignmentReport_async
+   */
+  getOSPolicyAssignmentReport(
+    request?: protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentReportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport,
+      (
+        | protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentReportRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getOSPolicyAssignmentReport(
+    request: protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentReportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport,
+      | protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getOSPolicyAssignmentReport(
+    request: protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentReportRequest,
+    callback: Callback<
+      protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport,
+      | protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getOSPolicyAssignmentReport(
+    request?: protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentReportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport,
+          | protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport,
+      | protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport,
+      (
+        | protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentReportRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getOSPolicyAssignmentReport(
       request,
       options,
       callback
@@ -1750,6 +1876,7 @@ export class OsConfigZonalServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
+   * @deprecated ListInstanceOSPoliciesCompliances is deprecated and may be removed in a future version.
    */
   listInstanceOSPoliciesCompliances(
     request?: protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
@@ -1823,6 +1950,11 @@ export class OsConfigZonalServiceClient {
         parent: request.parent || '',
       });
     this.initialize();
+    this.warn(
+      'DEP$OsConfigZonalService-$ListInstanceOSPoliciesCompliances',
+      'ListInstanceOSPoliciesCompliances is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.listInstanceOSPoliciesCompliances(
       request,
       options,
@@ -1861,6 +1993,7 @@ export class OsConfigZonalServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
+   * @deprecated ListInstanceOSPoliciesCompliances is deprecated and may be removed in a future version.
    */
   listInstanceOSPoliciesCompliancesStream(
     request?: protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
@@ -1878,6 +2011,11 @@ export class OsConfigZonalServiceClient {
       this._defaults['listInstanceOSPoliciesCompliances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$OsConfigZonalService-$ListInstanceOSPoliciesCompliances',
+      'ListInstanceOSPoliciesCompliances is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listInstanceOSPoliciesCompliances.createStream(
       this.innerApiCalls.listInstanceOSPoliciesCompliances as gax.GaxCall,
       request,
@@ -1919,6 +2057,7 @@ export class OsConfigZonalServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.list_instance_o_s_policies_compliances.js</caption>
    * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_ListInstanceOSPoliciesCompliances_async
+   * @deprecated ListInstanceOSPoliciesCompliances is deprecated and may be removed in a future version.
    */
   listInstanceOSPoliciesCompliancesAsync(
     request?: protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
@@ -1936,11 +2075,285 @@ export class OsConfigZonalServiceClient {
       this._defaults['listInstanceOSPoliciesCompliances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$OsConfigZonalService-$ListInstanceOSPoliciesCompliances',
+      'ListInstanceOSPoliciesCompliances is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listInstanceOSPoliciesCompliances.asyncIterate(
       this.innerApiCalls['listInstanceOSPoliciesCompliances'] as GaxCall,
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1alpha.IInstanceOSPoliciesCompliance>;
+  }
+  /**
+   * List OS policy asssignment reports for all Compute Engine VM instances in
+   * the specified zone.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name.
+   *
+   *   Format:
+   *   `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}/reports`
+   *
+   *   For `{project}`, either `project-number` or `project-id` can be provided.
+   *   For `{instance}`, either `instance-name`, `instance-id`, or `-` can be
+   *   provided. If '-' is provided, the response will include
+   *   OSPolicyAssignmentReports for all instances in the project/location.
+   *   For `{assignment}`, either `assignment-id` or `-` can be provided. If '-'
+   *   is provided, the response will include OSPolicyAssignmentReports for all
+   *   OSPolicyAssignments in the project/location.
+   *   Either {instance} or {assignment} must be `-`.
+   *
+   *   For example:
+   *   `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/-/reports`
+   *    returns all reports for the instance
+   *   `projects/{project}/locations/{location}/instances/-/osPolicyAssignments/{assignment-id}/reports`
+   *    returns all the reports for the given assignment across all instances.
+   *   `projects/{project}/locations/{location}/instances/-/osPolicyAssignments/-/reports`
+   *    returns all the reports for all assignments across all instances.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return.
+   * @param {string} request.filter
+   *   If provided, this field specifies the criteria that must be met by the
+   *   `OSPolicyAssignmentReport` API resource that is included in the response.
+   * @param {string} request.pageToken
+   *   A pagination token returned from a previous call to the
+   *   `ListOSPolicyAssignmentReports` method that indicates where this listing
+   *   should continue from.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [OSPolicyAssignmentReport]{@link google.cloud.osconfig.v1alpha.OSPolicyAssignmentReport}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listOSPolicyAssignmentReportsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listOSPolicyAssignmentReports(
+    request?: protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport[],
+      protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest | null,
+      protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsResponse
+    ]
+  >;
+  listOSPolicyAssignmentReports(
+    request: protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest,
+      | protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport
+    >
+  ): void;
+  listOSPolicyAssignmentReports(
+    request: protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest,
+      | protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport
+    >
+  ): void;
+  listOSPolicyAssignmentReports(
+    request?: protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest,
+          | protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsResponse
+          | null
+          | undefined,
+          protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest,
+      | protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport
+    >
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport[],
+      protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest | null,
+      protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listOSPolicyAssignmentReports(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name.
+   *
+   *   Format:
+   *   `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}/reports`
+   *
+   *   For `{project}`, either `project-number` or `project-id` can be provided.
+   *   For `{instance}`, either `instance-name`, `instance-id`, or `-` can be
+   *   provided. If '-' is provided, the response will include
+   *   OSPolicyAssignmentReports for all instances in the project/location.
+   *   For `{assignment}`, either `assignment-id` or `-` can be provided. If '-'
+   *   is provided, the response will include OSPolicyAssignmentReports for all
+   *   OSPolicyAssignments in the project/location.
+   *   Either {instance} or {assignment} must be `-`.
+   *
+   *   For example:
+   *   `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/-/reports`
+   *    returns all reports for the instance
+   *   `projects/{project}/locations/{location}/instances/-/osPolicyAssignments/{assignment-id}/reports`
+   *    returns all the reports for the given assignment across all instances.
+   *   `projects/{project}/locations/{location}/instances/-/osPolicyAssignments/-/reports`
+   *    returns all the reports for all assignments across all instances.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return.
+   * @param {string} request.filter
+   *   If provided, this field specifies the criteria that must be met by the
+   *   `OSPolicyAssignmentReport` API resource that is included in the response.
+   * @param {string} request.pageToken
+   *   A pagination token returned from a previous call to the
+   *   `ListOSPolicyAssignmentReports` method that indicates where this listing
+   *   should continue from.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [OSPolicyAssignmentReport]{@link google.cloud.osconfig.v1alpha.OSPolicyAssignmentReport} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listOSPolicyAssignmentReportsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listOSPolicyAssignmentReportsStream(
+    request?: protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listOSPolicyAssignmentReports'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listOSPolicyAssignmentReports.createStream(
+      this.innerApiCalls.listOSPolicyAssignmentReports as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listOSPolicyAssignmentReports`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name.
+   *
+   *   Format:
+   *   `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}/reports`
+   *
+   *   For `{project}`, either `project-number` or `project-id` can be provided.
+   *   For `{instance}`, either `instance-name`, `instance-id`, or `-` can be
+   *   provided. If '-' is provided, the response will include
+   *   OSPolicyAssignmentReports for all instances in the project/location.
+   *   For `{assignment}`, either `assignment-id` or `-` can be provided. If '-'
+   *   is provided, the response will include OSPolicyAssignmentReports for all
+   *   OSPolicyAssignments in the project/location.
+   *   Either {instance} or {assignment} must be `-`.
+   *
+   *   For example:
+   *   `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/-/reports`
+   *    returns all reports for the instance
+   *   `projects/{project}/locations/{location}/instances/-/osPolicyAssignments/{assignment-id}/reports`
+   *    returns all the reports for the given assignment across all instances.
+   *   `projects/{project}/locations/{location}/instances/-/osPolicyAssignments/-/reports`
+   *    returns all the reports for all assignments across all instances.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return.
+   * @param {string} request.filter
+   *   If provided, this field specifies the criteria that must be met by the
+   *   `OSPolicyAssignmentReport` API resource that is included in the response.
+   * @param {string} request.pageToken
+   *   A pagination token returned from a previous call to the
+   *   `ListOSPolicyAssignmentReports` method that indicates where this listing
+   *   should continue from.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [OSPolicyAssignmentReport]{@link google.cloud.osconfig.v1alpha.OSPolicyAssignmentReport}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.list_o_s_policy_assignment_reports.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignmentReports_async
+   */
+  listOSPolicyAssignmentReportsAsync(
+    request?: protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listOSPolicyAssignmentReports'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listOSPolicyAssignmentReports.asyncIterate(
+      this.innerApiCalls['listOSPolicyAssignmentReports'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport>;
   }
   /**
    * List inventory data for all VM instances in the specified zone.
@@ -1950,11 +2363,9 @@ export class OsConfigZonalServiceClient {
    * @param {string} request.parent
    *   Required. The parent resource name.
    *
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+   *   Format: `projects/{project}/locations/{location}/instances/-`
    *
-   *   For `{project}`, either `project-number` or `project-id` can be
-   *   provided. For `{instance}`, only hyphen or dash character is supported to
-   *   list inventories across VMs.
+   *   For `{project}`, either `project-number` or `project-id` can be provided.
    * @param {google.cloud.osconfig.v1alpha.InventoryView} request.view
    *   Inventory view indicating what information should be included in the
    *   inventory resource. If unspecified, the default view is BASIC.
@@ -2062,11 +2473,9 @@ export class OsConfigZonalServiceClient {
    * @param {string} request.parent
    *   Required. The parent resource name.
    *
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+   *   Format: `projects/{project}/locations/{location}/instances/-`
    *
-   *   For `{project}`, either `project-number` or `project-id` can be
-   *   provided. For `{instance}`, only hyphen or dash character is supported to
-   *   list inventories across VMs.
+   *   For `{project}`, either `project-number` or `project-id` can be provided.
    * @param {google.cloud.osconfig.v1alpha.InventoryView} request.view
    *   Inventory view indicating what information should be included in the
    *   inventory resource. If unspecified, the default view is BASIC.
@@ -2122,11 +2531,9 @@ export class OsConfigZonalServiceClient {
    * @param {string} request.parent
    *   Required. The parent resource name.
    *
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+   *   Format: `projects/{project}/locations/{location}/instances/-`
    *
-   *   For `{project}`, either `project-number` or `project-id` can be
-   *   provided. For `{instance}`, only hyphen or dash character is supported to
-   *   list inventories across VMs.
+   *   For `{project}`, either `project-number` or `project-id` can be provided.
    * @param {google.cloud.osconfig.v1alpha.InventoryView} request.view
    *   Inventory view indicating what information should be included in the
    *   inventory resource. If unspecified, the default view is BASIC.
@@ -2181,11 +2588,9 @@ export class OsConfigZonalServiceClient {
    * @param {string} request.parent
    *   Required. The parent resource name.
    *
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+   *   Format: `projects/{project}/locations/{location}/instances/-`
    *
    *   For `{project}`, either `project-number` or `project-id` can be provided.
-   *   For `{instance}`, only `-` character is supported to list vulnerability
-   *   reports across VMs.
    * @param {number} request.pageSize
    *   The maximum number of results to return.
    * @param {string} request.pageToken
@@ -2294,11 +2699,9 @@ export class OsConfigZonalServiceClient {
    * @param {string} request.parent
    *   Required. The parent resource name.
    *
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+   *   Format: `projects/{project}/locations/{location}/instances/-`
    *
    *   For `{project}`, either `project-number` or `project-id` can be provided.
-   *   For `{instance}`, only `-` character is supported to list vulnerability
-   *   reports across VMs.
    * @param {number} request.pageSize
    *   The maximum number of results to return.
    * @param {string} request.pageToken
@@ -2351,11 +2754,9 @@ export class OsConfigZonalServiceClient {
    * @param {string} request.parent
    *   Required. The parent resource name.
    *
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+   *   Format: `projects/{project}/locations/{location}/instances/-`
    *
    *   For `{project}`, either `project-number` or `project-id` can be provided.
-   *   For `{instance}`, only `-` character is supported to list vulnerability
-   *   reports across VMs.
    * @param {number} request.pageSize
    *   The maximum number of results to return.
    * @param {string} request.pageToken
@@ -2579,6 +2980,89 @@ export class OsConfigZonalServiceClient {
     return this.pathTemplates.oSPolicyAssignmentPathTemplate.match(
       oSPolicyAssignmentName
     ).os_policy_assignment;
+  }
+
+  /**
+   * Return a fully-qualified oSPolicyAssignmentReport resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} assignment
+   * @returns {string} Resource name string.
+   */
+  oSPolicyAssignmentReportPath(
+    project: string,
+    location: string,
+    instance: string,
+    assignment: string
+  ) {
+    return this.pathTemplates.oSPolicyAssignmentReportPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      assignment: assignment,
+    });
+  }
+
+  /**
+   * Parse the project from OSPolicyAssignmentReport resource.
+   *
+   * @param {string} oSPolicyAssignmentReportName
+   *   A fully-qualified path representing OSPolicyAssignmentReport resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromOSPolicyAssignmentReportName(
+    oSPolicyAssignmentReportName: string
+  ) {
+    return this.pathTemplates.oSPolicyAssignmentReportPathTemplate.match(
+      oSPolicyAssignmentReportName
+    ).project;
+  }
+
+  /**
+   * Parse the location from OSPolicyAssignmentReport resource.
+   *
+   * @param {string} oSPolicyAssignmentReportName
+   *   A fully-qualified path representing OSPolicyAssignmentReport resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOSPolicyAssignmentReportName(
+    oSPolicyAssignmentReportName: string
+  ) {
+    return this.pathTemplates.oSPolicyAssignmentReportPathTemplate.match(
+      oSPolicyAssignmentReportName
+    ).location;
+  }
+
+  /**
+   * Parse the instance from OSPolicyAssignmentReport resource.
+   *
+   * @param {string} oSPolicyAssignmentReportName
+   *   A fully-qualified path representing OSPolicyAssignmentReport resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromOSPolicyAssignmentReportName(
+    oSPolicyAssignmentReportName: string
+  ) {
+    return this.pathTemplates.oSPolicyAssignmentReportPathTemplate.match(
+      oSPolicyAssignmentReportName
+    ).instance;
+  }
+
+  /**
+   * Parse the assignment from OSPolicyAssignmentReport resource.
+   *
+   * @param {string} oSPolicyAssignmentReportName
+   *   A fully-qualified path representing OSPolicyAssignmentReport resource.
+   * @returns {string} A string representing the assignment.
+   */
+  matchAssignmentFromOSPolicyAssignmentReportName(
+    oSPolicyAssignmentReportName: string
+  ) {
+    return this.pathTemplates.oSPolicyAssignmentReportPathTemplate.match(
+      oSPolicyAssignmentReportName
+    ).assignment;
   }
 
   /**

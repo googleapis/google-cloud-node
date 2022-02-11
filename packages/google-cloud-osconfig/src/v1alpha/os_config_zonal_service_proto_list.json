@@ -3,6 +3,7 @@
   "../../protos/google/cloud/osconfig/v1alpha/instance_os_policies_compliance.proto",
   "../../protos/google/cloud/osconfig/v1alpha/inventory.proto",
   "../../protos/google/cloud/osconfig/v1alpha/os_policy.proto",
+  "../../protos/google/cloud/osconfig/v1alpha/os_policy_assignment_reports.proto",
   "../../protos/google/cloud/osconfig/v1alpha/os_policy_assignments.proto",
   "../../protos/google/cloud/osconfig/v1alpha/osconfig_common.proto",
   "../../protos/google/cloud/osconfig/v1alpha/osconfig_zonal_service.proto",
