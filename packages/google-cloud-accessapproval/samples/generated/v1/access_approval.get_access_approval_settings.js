@@ -21,7 +21,8 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the AccessApprovalSettings to retrieve.
+   *  The name of the AccessApprovalSettings to retrieve.
+   *  Format: "{projects|folders|organizations}/{id}/accessApprovalSettings"
    */
   // const name = 'abc123'
 

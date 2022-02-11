@@ -272,6 +272,10 @@
                         "dismissTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 1
+                        },
+                        "implicit": {
+                          "type": "bool",
+                          "id": 2
                         }
                       }
                     },
@@ -284,6 +288,10 @@
                       }
                     },
                     "ApprovalRequest": {
+                      "options": {
+                        "(google.api.resource).type": "accessapproval.googleapis.com/ApprovalRequest",
+                        "(google.api.resource).pattern": "organizations/{organization}/approvalRequests/{approval_request}"
+                      },
                       "oneofs": {
                         "decision": {
                           "oneof": [
@@ -331,6 +339,12 @@
                         }
                       }
                     },
+                    "EnrollmentLevel": {
+                      "values": {
+                        "ENROLLMENT_LEVEL_UNSPECIFIED": 0,
+                        "BLOCK_ALL": 1
+                      }
+                    },
                     "EnrolledService": {
                       "fields": {
                         "cloudProduct": {
@@ -343,17 +357,18 @@
                         }
                       }
                     },
-                    "EnrollmentLevel": {
-                      "values": {
-                        "ENROLLMENT_LEVEL_UNSPECIFIED": 0,
-                        "BLOCK_ALL": 1
-                      }
-                    },
                     "AccessApprovalSettings": {
+                      "options": {
+                        "(google.api.resource).type": "accessapproval.googleapis.com/AccessApprovalSettings",
+                        "(google.api.resource).pattern": "organizations/{organization}/accessApprovalSettings"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "accessapproval.googleapis.com/AccessApprovalSettings"
+                          }
                         },
                         "notificationEmails": {
                           "rule": "repeated",
@@ -378,7 +393,10 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).child_type": "accessapproval.googleapis.com/ApprovalRequest"
+                          }
                         },
                         "filter": {
                           "type": "string",
@@ -411,7 +429,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "accessapproval.googleapis.com/ApprovalRequest"
+                          }
                         }
                       }
                     },
@@ -419,7 +440,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "accessapproval.googleapis.com/ApprovalRequest"
+                          }
                         },
                         "expireTime": {
                           "type": "google.protobuf.Timestamp",
@@ -431,7 +455,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "accessapproval.googleapis.com/ApprovalRequest"
+                          }
                         }
                       }
                     },
@@ -439,7 +466,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "accessapproval.googleapis.com/AccessApprovalSettings"
+                          }
                         }
                       }
                     },
@@ -459,7 +489,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "accessapproval.googleapis.com/AccessApprovalSettings"
+                          }
                         }
                       }
                     }
@@ -473,7 +506,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldBehaviorProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -598,6 +631,83 @@
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             }
           }

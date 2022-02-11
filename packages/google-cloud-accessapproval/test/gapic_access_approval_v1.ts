@@ -1196,4 +1196,366 @@ describe('v1.AccessApprovalClient', () => {
       );
     });
   });
+
+  describe('Path templates', () => {
+    describe('folderAccessApprovalSettings', () => {
+      const fakePath = '/rendered/path/folderAccessApprovalSettings';
+      const expectedParameters = {
+        folder: 'folderValue',
+      };
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderAccessApprovalSettingsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.folderAccessApprovalSettingsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('folderAccessApprovalSettingsPath', () => {
+        const result = client.folderAccessApprovalSettingsPath('folderValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderAccessApprovalSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderAccessApprovalSettingsName', () => {
+        const result =
+          client.matchFolderFromFolderAccessApprovalSettingsName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderAccessApprovalSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('folderApprovalRequest', () => {
+      const fakePath = '/rendered/path/folderApprovalRequest';
+      const expectedParameters = {
+        folder: 'folderValue',
+        approval_request: 'approvalRequestValue',
+      };
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderApprovalRequestPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.folderApprovalRequestPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('folderApprovalRequestPath', () => {
+        const result = client.folderApprovalRequestPath(
+          'folderValue',
+          'approvalRequestValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderApprovalRequestPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderApprovalRequestName', () => {
+        const result =
+          client.matchFolderFromFolderApprovalRequestName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderApprovalRequestPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchApprovalRequestFromFolderApprovalRequestName', () => {
+        const result =
+          client.matchApprovalRequestFromFolderApprovalRequestName(fakePath);
+        assert.strictEqual(result, 'approvalRequestValue');
+        assert(
+          (
+            client.pathTemplates.folderApprovalRequestPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationAccessApprovalSettings', () => {
+      const fakePath = '/rendered/path/organizationAccessApprovalSettings';
+      const expectedParameters = {
+        organization: 'organizationValue',
+      };
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationAccessApprovalSettingsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationAccessApprovalSettingsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationAccessApprovalSettingsPath', () => {
+        const result =
+          client.organizationAccessApprovalSettingsPath('organizationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationAccessApprovalSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationAccessApprovalSettingsName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationAccessApprovalSettingsName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationAccessApprovalSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationApprovalRequest', () => {
+      const fakePath = '/rendered/path/organizationApprovalRequest';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        approval_request: 'approvalRequestValue',
+      };
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationApprovalRequestPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationApprovalRequestPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationApprovalRequestPath', () => {
+        const result = client.organizationApprovalRequestPath(
+          'organizationValue',
+          'approvalRequestValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationApprovalRequestPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationApprovalRequestName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationApprovalRequestName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationApprovalRequestPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchApprovalRequestFromOrganizationApprovalRequestName', () => {
+        const result =
+          client.matchApprovalRequestFromOrganizationApprovalRequestName(
+            fakePath
+          );
+        assert.strictEqual(result, 'approvalRequestValue');
+        assert(
+          (
+            client.pathTemplates.organizationApprovalRequestPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('project', () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectAccessApprovalSettings', () => {
+      const fakePath = '/rendered/path/projectAccessApprovalSettings';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectAccessApprovalSettingsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectAccessApprovalSettingsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectAccessApprovalSettingsPath', () => {
+        const result = client.projectAccessApprovalSettingsPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectAccessApprovalSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectAccessApprovalSettingsName', () => {
+        const result =
+          client.matchProjectFromProjectAccessApprovalSettingsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectAccessApprovalSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectApprovalRequest', () => {
+      const fakePath = '/rendered/path/projectApprovalRequest';
+      const expectedParameters = {
+        project: 'projectValue',
+        approval_request: 'approvalRequestValue',
+      };
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectApprovalRequestPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectApprovalRequestPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectApprovalRequestPath', () => {
+        const result = client.projectApprovalRequestPath(
+          'projectValue',
+          'approvalRequestValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectApprovalRequestPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectApprovalRequestName', () => {
+        const result =
+          client.matchProjectFromProjectApprovalRequestName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectApprovalRequestPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchApprovalRequestFromProjectApprovalRequestName', () => {
+        const result =
+          client.matchApprovalRequestFromProjectApprovalRequestName(fakePath);
+        assert.strictEqual(result, 'approvalRequestValue');
+        assert(
+          (
+            client.pathTemplates.projectApprovalRequestPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+  });
 });

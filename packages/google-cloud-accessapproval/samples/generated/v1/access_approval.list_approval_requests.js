@@ -21,18 +21,22 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The parent resource. This may be "projects/{project_id}",
-   *  "folders/{folder_id}", or "organizations/{organization_id}".
+   *  The parent resource. This may be "projects/{project}",
+   *  "folders/{folder}", or "organizations/{organization}".
    */
   // const parent = 'abc123'
   /**
    *  A filter on the type of approval requests to retrieve. Must be one of the
    *  following values:
-   *  - not set: Requests that are pending or have active approvals.
-   *  - ALL: All requests.
-   *  - PENDING: Only pending requests.
-   *  - ACTIVE: Only active (i.e. currently approved) requests.
-   *  - DISMISSED: Only dismissed (including expired) requests.
+   *    * not set: Requests that are pending or have active approvals.
+   *    * ALL: All requests.
+   *    * PENDING: Only pending requests.
+   *    * ACTIVE: Only active (i.e. currently approved) requests.
+   *    * DISMISSED: Only requests that have been dismissed, or requests that
+   *      are not approved and past expiration.
+   *    * EXPIRED: Only requests that have been approved, and the approval has
+   *      expired.
+   *    * HISTORY: Active, dismissed and expired requests.
    */
   // const filter = 'abc123'
   /**

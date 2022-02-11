@@ -46,17 +46,17 @@ const version = require('../../../package.json').version;
  *
  *  - The API has a collection of
  *    {@link google.cloud.accessapproval.v1.ApprovalRequest|ApprovalRequest}
- *    resources, named `approvalRequests/{approval_request_id}`
+ *    resources, named `approvalRequests/{approval_request}`
  *  - The API has top-level settings per Project/Folder/Organization, named
  *    `accessApprovalSettings`
  *
  *  The service also periodically emails a list of recipients, defined at the
  *  Project/Folder/Organization level in the accessApprovalSettings, when there
  *  is a pending ApprovalRequest for them to act on. The ApprovalRequests can
- *  also optionally be published to a Cloud Pub/Sub topic owned by the customer
- *  (for Beta, the Pub/Sub setup is managed manually).
+ *  also optionally be published to a Pub/Sub topic owned by the customer
+ *  (contact support if you would like to enable Pub/Sub notifications).
  *
- *  ApprovalRequests can be approved or dismissed. Google personel can only
+ *  ApprovalRequests can be approved or dismissed. Google personnel can only
  *  access the indicated resource or resources if the request is approved
  *  (subject to some exclusions:
  *  https://cloud.google.com/access-approval/docs/overview#exclusions).
@@ -94,6 +94,7 @@ export class AccessApprovalClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   accessApprovalStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -190,6 +191,36 @@ export class AccessApprovalClient {
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      folderAccessApprovalSettingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/accessApprovalSettings'
+        ),
+      folderApprovalRequestPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/approvalRequests/{approval_request}'
+      ),
+      organizationAccessApprovalSettingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/accessApprovalSettings'
+        ),
+      organizationApprovalRequestPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/approvalRequests/{approval_request}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      projectAccessApprovalSettingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/accessApprovalSettings'
+        ),
+      projectApprovalRequestPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/approvalRequests/{approval_request}'
+      ),
+    };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
@@ -347,7 +378,9 @@ export class AccessApprovalClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Name of the approval request to retrieve.
+   *   The name of the approval request to retrieve.
+   *   Format:
+   *   "{projects|folders|organizations}/{id}/approvalRequests/{approval_request}"
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -660,7 +693,8 @@ export class AccessApprovalClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Name of the AccessApprovalSettings to retrieve.
+   *   The name of the AccessApprovalSettings to retrieve.
+   *   Format: "{projects|folders|organizations}/{id}/accessApprovalSettings"
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -983,18 +1017,21 @@ export class AccessApprovalClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource. This may be "projects/{project_id}",
-   *   "folders/{folder_id}", or "organizations/{organization_id}".
+   *   The parent resource. This may be "projects/{project}",
+   *   "folders/{folder}", or "organizations/{organization}".
    * @param {string} request.filter
    *   A filter on the type of approval requests to retrieve. Must be one of the
    *   following values:
    *
-   *   - [not set]: Requests that are pending or have active approvals.
-   *   - ALL: All requests.
-   *   - PENDING: Only pending requests.
-   *   - ACTIVE: Only active (i.e. currently approved) requests.
-   *   - DISMISSED: Only dismissed (including expired) requests.
-   *
+   *     * [not set]: Requests that are pending or have active approvals.
+   *     * ALL: All requests.
+   *     * PENDING: Only pending requests.
+   *     * ACTIVE: Only active (i.e. currently approved) requests.
+   *     * DISMISSED: Only requests that have been dismissed, or requests that
+   *       are not approved and past expiration.
+   *     * EXPIRED: Only requests that have been approved, and the approval has
+   *       expired.
+   *     * HISTORY: Active, dismissed and expired requests.
    * @param {number} request.pageSize
    *   Requested page size.
    * @param {string} request.pageToken
@@ -1092,18 +1129,21 @@ export class AccessApprovalClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource. This may be "projects/{project_id}",
-   *   "folders/{folder_id}", or "organizations/{organization_id}".
+   *   The parent resource. This may be "projects/{project}",
+   *   "folders/{folder}", or "organizations/{organization}".
    * @param {string} request.filter
    *   A filter on the type of approval requests to retrieve. Must be one of the
    *   following values:
    *
-   *   - [not set]: Requests that are pending or have active approvals.
-   *   - ALL: All requests.
-   *   - PENDING: Only pending requests.
-   *   - ACTIVE: Only active (i.e. currently approved) requests.
-   *   - DISMISSED: Only dismissed (including expired) requests.
-   *
+   *     * [not set]: Requests that are pending or have active approvals.
+   *     * ALL: All requests.
+   *     * PENDING: Only pending requests.
+   *     * ACTIVE: Only active (i.e. currently approved) requests.
+   *     * DISMISSED: Only requests that have been dismissed, or requests that
+   *       are not approved and past expiration.
+   *     * EXPIRED: Only requests that have been approved, and the approval has
+   *       expired.
+   *     * HISTORY: Active, dismissed and expired requests.
    * @param {number} request.pageSize
    *   Requested page size.
    * @param {string} request.pageToken
@@ -1149,18 +1189,21 @@ export class AccessApprovalClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource. This may be "projects/{project_id}",
-   *   "folders/{folder_id}", or "organizations/{organization_id}".
+   *   The parent resource. This may be "projects/{project}",
+   *   "folders/{folder}", or "organizations/{organization}".
    * @param {string} request.filter
    *   A filter on the type of approval requests to retrieve. Must be one of the
    *   following values:
    *
-   *   - [not set]: Requests that are pending or have active approvals.
-   *   - ALL: All requests.
-   *   - PENDING: Only pending requests.
-   *   - ACTIVE: Only active (i.e. currently approved) requests.
-   *   - DISMISSED: Only dismissed (including expired) requests.
-   *
+   *     * [not set]: Requests that are pending or have active approvals.
+   *     * ALL: All requests.
+   *     * PENDING: Only pending requests.
+   *     * ACTIVE: Only active (i.e. currently approved) requests.
+   *     * DISMISSED: Only requests that have been dismissed, or requests that
+   *       are not approved and past expiration.
+   *     * EXPIRED: Only requests that have been approved, and the approval has
+   *       expired.
+   *     * HISTORY: Active, dismissed and expired requests.
    * @param {number} request.pageSize
    *   Requested page size.
    * @param {string} request.pageToken
@@ -1198,6 +1241,248 @@ export class AccessApprovalClient {
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.accessapproval.v1.IApprovalRequest>;
+  }
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified folderAccessApprovalSettings resource name string.
+   *
+   * @param {string} folder
+   * @returns {string} Resource name string.
+   */
+  folderAccessApprovalSettingsPath(folder: string) {
+    return this.pathTemplates.folderAccessApprovalSettingsPathTemplate.render({
+      folder: folder,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderAccessApprovalSettings resource.
+   *
+   * @param {string} folderAccessApprovalSettingsName
+   *   A fully-qualified path representing folder_accessApprovalSettings resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderAccessApprovalSettingsName(
+    folderAccessApprovalSettingsName: string
+  ) {
+    return this.pathTemplates.folderAccessApprovalSettingsPathTemplate.match(
+      folderAccessApprovalSettingsName
+    ).folder;
+  }
+
+  /**
+   * Return a fully-qualified folderApprovalRequest resource name string.
+   *
+   * @param {string} folder
+   * @param {string} approval_request
+   * @returns {string} Resource name string.
+   */
+  folderApprovalRequestPath(folder: string, approvalRequest: string) {
+    return this.pathTemplates.folderApprovalRequestPathTemplate.render({
+      folder: folder,
+      approval_request: approvalRequest,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderApprovalRequest resource.
+   *
+   * @param {string} folderApprovalRequestName
+   *   A fully-qualified path representing folder_approval_request resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderApprovalRequestName(folderApprovalRequestName: string) {
+    return this.pathTemplates.folderApprovalRequestPathTemplate.match(
+      folderApprovalRequestName
+    ).folder;
+  }
+
+  /**
+   * Parse the approval_request from FolderApprovalRequest resource.
+   *
+   * @param {string} folderApprovalRequestName
+   *   A fully-qualified path representing folder_approval_request resource.
+   * @returns {string} A string representing the approval_request.
+   */
+  matchApprovalRequestFromFolderApprovalRequestName(
+    folderApprovalRequestName: string
+  ) {
+    return this.pathTemplates.folderApprovalRequestPathTemplate.match(
+      folderApprovalRequestName
+    ).approval_request;
+  }
+
+  /**
+   * Return a fully-qualified organizationAccessApprovalSettings resource name string.
+   *
+   * @param {string} organization
+   * @returns {string} Resource name string.
+   */
+  organizationAccessApprovalSettingsPath(organization: string) {
+    return this.pathTemplates.organizationAccessApprovalSettingsPathTemplate.render(
+      {
+        organization: organization,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationAccessApprovalSettings resource.
+   *
+   * @param {string} organizationAccessApprovalSettingsName
+   *   A fully-qualified path representing organization_accessApprovalSettings resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationAccessApprovalSettingsName(
+    organizationAccessApprovalSettingsName: string
+  ) {
+    return this.pathTemplates.organizationAccessApprovalSettingsPathTemplate.match(
+      organizationAccessApprovalSettingsName
+    ).organization;
+  }
+
+  /**
+   * Return a fully-qualified organizationApprovalRequest resource name string.
+   *
+   * @param {string} organization
+   * @param {string} approval_request
+   * @returns {string} Resource name string.
+   */
+  organizationApprovalRequestPath(
+    organization: string,
+    approvalRequest: string
+  ) {
+    return this.pathTemplates.organizationApprovalRequestPathTemplate.render({
+      organization: organization,
+      approval_request: approvalRequest,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationApprovalRequest resource.
+   *
+   * @param {string} organizationApprovalRequestName
+   *   A fully-qualified path representing organization_approval_request resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationApprovalRequestName(
+    organizationApprovalRequestName: string
+  ) {
+    return this.pathTemplates.organizationApprovalRequestPathTemplate.match(
+      organizationApprovalRequestName
+    ).organization;
+  }
+
+  /**
+   * Parse the approval_request from OrganizationApprovalRequest resource.
+   *
+   * @param {string} organizationApprovalRequestName
+   *   A fully-qualified path representing organization_approval_request resource.
+   * @returns {string} A string representing the approval_request.
+   */
+  matchApprovalRequestFromOrganizationApprovalRequestName(
+    organizationApprovalRequestName: string
+  ) {
+    return this.pathTemplates.organizationApprovalRequestPathTemplate.match(
+      organizationApprovalRequestName
+    ).approval_request;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectAccessApprovalSettings resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectAccessApprovalSettingsPath(project: string) {
+    return this.pathTemplates.projectAccessApprovalSettingsPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAccessApprovalSettings resource.
+   *
+   * @param {string} projectAccessApprovalSettingsName
+   *   A fully-qualified path representing project_accessApprovalSettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAccessApprovalSettingsName(
+    projectAccessApprovalSettingsName: string
+  ) {
+    return this.pathTemplates.projectAccessApprovalSettingsPathTemplate.match(
+      projectAccessApprovalSettingsName
+    ).project;
+  }
+
+  /**
+   * Return a fully-qualified projectApprovalRequest resource name string.
+   *
+   * @param {string} project
+   * @param {string} approval_request
+   * @returns {string} Resource name string.
+   */
+  projectApprovalRequestPath(project: string, approvalRequest: string) {
+    return this.pathTemplates.projectApprovalRequestPathTemplate.render({
+      project: project,
+      approval_request: approvalRequest,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectApprovalRequest resource.
+   *
+   * @param {string} projectApprovalRequestName
+   *   A fully-qualified path representing project_approval_request resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectApprovalRequestName(
+    projectApprovalRequestName: string
+  ) {
+    return this.pathTemplates.projectApprovalRequestPathTemplate.match(
+      projectApprovalRequestName
+    ).project;
+  }
+
+  /**
+   * Parse the approval_request from ProjectApprovalRequest resource.
+   *
+   * @param {string} projectApprovalRequestName
+   *   A fully-qualified path representing project_approval_request resource.
+   * @returns {string} A string representing the approval_request.
+   */
+  matchApprovalRequestFromProjectApprovalRequestName(
+    projectApprovalRequestName: string
+  ) {
+    return this.pathTemplates.projectApprovalRequestPathTemplate.match(
+      projectApprovalRequestName
+    ).approval_request;
   }
 
   /**

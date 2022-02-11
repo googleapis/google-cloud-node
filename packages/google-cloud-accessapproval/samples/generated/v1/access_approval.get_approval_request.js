@@ -21,7 +21,9 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the approval request to retrieve.
+   *  The name of the approval request to retrieve.
+   *  Format:
+   *  "{projects|folders|organizations}/{id}/approvalRequests/{approval_request}"
    */
   // const name = 'abc123'
 
