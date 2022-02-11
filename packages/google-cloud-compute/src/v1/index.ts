@@ -45,6 +45,7 @@ export {InterconnectLocationsClient} from './interconnect_locations_client';
 export {InterconnectsClient} from './interconnects_client';
 export {LicenseCodesClient} from './license_codes_client';
 export {LicensesClient} from './licenses_client';
+export {MachineImagesClient} from './machine_images_client';
 export {MachineTypesClient} from './machine_types_client';
 export {NetworkEndpointGroupsClient} from './network_endpoint_groups_client';
 export {NetworksClient} from './networks_client';

@@ -256,6 +256,11 @@
                 "patch"
               ]
             },
+            "SetEdgeSecurityPolicy": {
+              "methods": [
+                "setEdgeSecurityPolicy"
+              ]
+            },
             "Update": {
               "methods": [
                 "update"
@@ -301,6 +306,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetEdgeSecurityPolicy": {
+              "methods": [
+                "setEdgeSecurityPolicy"
               ]
             },
             "Update": {
@@ -357,6 +367,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetEdgeSecurityPolicy": {
+              "methods": [
+                "setEdgeSecurityPolicy"
               ]
             },
             "SetSecurityPolicy": {
@@ -421,6 +436,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetEdgeSecurityPolicy": {
+              "methods": [
+                "setEdgeSecurityPolicy"
               ]
             },
             "SetSecurityPolicy": {
@@ -2221,6 +2241,11 @@
                 "reset"
               ]
             },
+            "Resume": {
+              "methods": [
+                "resume"
+              ]
+            },
             "SendDiagnosticInterrupt": {
               "methods": [
                 "sendDiagnosticInterrupt"
@@ -2304,6 +2329,11 @@
             "Stop": {
               "methods": [
                 "stop"
+              ]
+            },
+            "Suspend": {
+              "methods": [
+                "suspend"
               ]
             },
             "TestIamPermissions": {
@@ -2447,6 +2477,11 @@
                 "reset"
               ]
             },
+            "Resume": {
+              "methods": [
+                "resume"
+              ]
+            },
             "SendDiagnosticInterrupt": {
               "methods": [
                 "sendDiagnosticInterrupt"
@@ -2530,6 +2565,11 @@
             "Stop": {
               "methods": [
                 "stop"
+              ]
+            },
+            "Suspend": {
+              "methods": [
+                "suspend"
               ]
             },
             "TestIamPermissions": {
@@ -2953,6 +2993,94 @@
         },
         "grpc-fallback": {
           "libraryClient": "LicensesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MachineImages": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MachineImagesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MachineImagesClient",
           "rpcs": {
             "Delete": {
               "methods": [
@@ -4180,6 +4308,11 @@
                 "insert"
               ]
             },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -4207,6 +4340,11 @@
             "Insert": {
               "methods": [
                 "insert"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
               ]
             },
             "AggregatedList": {
@@ -5399,6 +5537,11 @@
                 "testIamPermissions"
               ]
             },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -5451,6 +5594,11 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
               ]
             },
             "AggregatedList": {
@@ -6007,6 +6155,11 @@
                 "getIamPolicy"
               ]
             },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
             "SetIamPolicy": {
               "methods": [
                 "setIamPolicy"
@@ -6047,6 +6200,11 @@
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
               ]
             },
             "SetIamPolicy": {

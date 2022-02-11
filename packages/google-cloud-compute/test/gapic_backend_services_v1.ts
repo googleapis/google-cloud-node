@@ -969,6 +969,121 @@ describe('v1.BackendServicesClient', () => {
     });
   });
 
+  describe('setEdgeSecurityPolicy', () => {
+    it('invokes setEdgeSecurityPolicy without error', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setEdgeSecurityPolicy =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.setEdgeSecurityPolicy(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      assert(
+        (client.innerApiCalls.setEdgeSecurityPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setEdgeSecurityPolicy without error using callback', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setEdgeSecurityPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setEdgeSecurityPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setEdgeSecurityPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes setEdgeSecurityPolicy with error', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setEdgeSecurityPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.setEdgeSecurityPolicy(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.setEdgeSecurityPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('setSecurityPolicy', () => {
     it('invokes setSecurityPolicy without error', async () => {
       const client = new backendservicesModule.v1.BackendServicesClient({

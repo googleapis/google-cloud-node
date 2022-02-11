@@ -100,6 +100,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "Resume": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "SendDiagnosticInterrupt": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -165,6 +169,10 @@
           "retry_params_name": "default"
         },
         "Stop": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "Suspend": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

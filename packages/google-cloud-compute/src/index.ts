@@ -80,6 +80,8 @@ const LicenseCodesClient = v1.LicenseCodesClient;
 type LicenseCodesClient = v1.LicenseCodesClient;
 const LicensesClient = v1.LicensesClient;
 type LicensesClient = v1.LicensesClient;
+const MachineImagesClient = v1.MachineImagesClient;
+type MachineImagesClient = v1.MachineImagesClient;
 const MachineTypesClient = v1.MachineTypesClient;
 type MachineTypesClient = v1.MachineTypesClient;
 const NetworkEndpointGroupsClient = v1.NetworkEndpointGroupsClient;
@@ -215,6 +217,7 @@ export {
   InterconnectsClient,
   LicenseCodesClient,
   LicensesClient,
+  MachineImagesClient,
   MachineTypesClient,
   NetworkEndpointGroupsClient,
   NetworksClient,
@@ -299,6 +302,7 @@ export default {
   InterconnectsClient,
   LicenseCodesClient,
   LicensesClient,
+  MachineImagesClient,
   MachineTypesClient,
   NetworkEndpointGroupsClient,
   NetworksClient,

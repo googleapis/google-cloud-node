@@ -37,6 +37,10 @@ function main(instanceResource, project, zone) {
    */
   // const sourceInstanceTemplate = 'abc123'
   /**
+   *  Specifies the machine image to use to create the instance. This field is optional. It can be a full or partial URL. For example, the following are all valid URLs to a machine image: - https://www.googleapis.com/compute/v1/projects/project/global/global /machineImages/machineImage - projects/project/global/global/machineImages/machineImage - global/machineImages/machineImage
+   */
+  // const sourceMachineImage = 'abc123'
+  /**
    *  The name of the zone for this request.
    */
   // const zone = 'abc123'
