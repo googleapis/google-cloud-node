@@ -1,0 +1,15 @@
+{
+  "name": "livestream",
+  "name_pretty": "Live Stream API",
+  "product_documentation": "https://cloud.google.com/livestream/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/livestream/latest",
+  "issue_tracker": "https://github.com/googleapis/nodejs-video-live-stream/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-video-live-stream",
+  "distribution_name": "@google-cloud/livestream",
+  "api_id": "livestream.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true
+}
+
