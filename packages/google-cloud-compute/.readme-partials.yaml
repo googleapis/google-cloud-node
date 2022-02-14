@@ -1,0 +1,13 @@
+introduction: |-
+    > Node.js idiomatic client for [Compute Engine][product-docs].
+    [Compute Engine](https://cloud.google.com/compute/docs) is a
+    computing and hosting service that lets you create and run virtual
+    machines on Google infrastructure. Compute Engine offers scale,
+    performance, and value that lets you easily launch large compute
+    clusters on Google's infrastructure. There are no upfront
+    investments, and you can run thousands of virtual CPUs on a system
+    that offers quick, consistent performance.
+
+    This library is GA from version 3.1.0. It is
+    backwards-incompatible with prior versions 0.x.y, 1.x.y, 2.x.y,
+    and 3.0.y.
