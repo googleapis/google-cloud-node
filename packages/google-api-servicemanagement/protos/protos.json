@@ -4,9 +4,9 @@
       "nested": {
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "UsageProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -956,6 +956,65 @@
                 }
               }
             },
+            "ConfigChange": {
+              "fields": {
+                "element": {
+                  "type": "string",
+                  "id": 1
+                },
+                "oldValue": {
+                  "type": "string",
+                  "id": 2
+                },
+                "newValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "changeType": {
+                  "type": "ChangeType",
+                  "id": 4
+                },
+                "advices": {
+                  "rule": "repeated",
+                  "type": "Advice",
+                  "id": 5
+                }
+              }
+            },
+            "Advice": {
+              "fields": {
+                "description": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "ChangeType": {
+              "values": {
+                "CHANGE_TYPE_UNSPECIFIED": 0,
+                "ADDED": 1,
+                "REMOVED": 2,
+                "MODIFIED": 3
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
+              }
+            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -1043,276 +1102,21 @@
                 }
               }
             },
-            "ConfigChange": {
-              "fields": {
-                "element": {
-                  "type": "string",
-                  "id": 1
-                },
-                "oldValue": {
-                  "type": "string",
-                  "id": 2
-                },
-                "newValue": {
-                  "type": "string",
-                  "id": 3
-                },
-                "changeType": {
-                  "type": "ChangeType",
-                  "id": 4
-                },
-                "advices": {
-                  "rule": "repeated",
-                  "type": "Advice",
-                  "id": 5
-                }
-              }
-            },
-            "Advice": {
-              "fields": {
-                "description": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "ChangeType": {
-              "values": {
-                "CHANGE_TYPE_UNSPECIFIED": 0,
-                "ADDED": 1,
-                "REMOVED": 2,
-                "MODIFIED": 3
-              }
-            },
-            "fieldBehavior": {
+            "methodSignature": {
               "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
             },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
-              }
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
             },
-            "MetricDescriptor": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "type": {
-                  "type": "string",
-                  "id": 8
-                },
-                "labels": {
-                  "rule": "repeated",
-                  "type": "LabelDescriptor",
-                  "id": 2
-                },
-                "metricKind": {
-                  "type": "MetricKind",
-                  "id": 3
-                },
-                "valueType": {
-                  "type": "ValueType",
-                  "id": 4
-                },
-                "unit": {
-                  "type": "string",
-                  "id": 5
-                },
-                "description": {
-                  "type": "string",
-                  "id": 6
-                },
-                "displayName": {
-                  "type": "string",
-                  "id": 7
-                },
-                "metadata": {
-                  "type": "MetricDescriptorMetadata",
-                  "id": 10
-                },
-                "launchStage": {
-                  "type": "LaunchStage",
-                  "id": 12
-                },
-                "monitoredResourceTypes": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 13
-                }
-              },
-              "nested": {
-                "MetricDescriptorMetadata": {
-                  "fields": {
-                    "launchStage": {
-                      "type": "LaunchStage",
-                      "id": 1,
-                      "options": {
-                        "deprecated": true
-                      }
-                    },
-                    "samplePeriod": {
-                      "type": "google.protobuf.Duration",
-                      "id": 2
-                    },
-                    "ingestDelay": {
-                      "type": "google.protobuf.Duration",
-                      "id": 3
-                    }
-                  }
-                },
-                "MetricKind": {
-                  "values": {
-                    "METRIC_KIND_UNSPECIFIED": 0,
-                    "GAUGE": 1,
-                    "DELTA": 2,
-                    "CUMULATIVE": 3
-                  }
-                },
-                "ValueType": {
-                  "values": {
-                    "VALUE_TYPE_UNSPECIFIED": 0,
-                    "BOOL": 1,
-                    "INT64": 2,
-                    "DOUBLE": 3,
-                    "STRING": 4,
-                    "DISTRIBUTION": 5,
-                    "MONEY": 6
-                  }
-                }
-              }
-            },
-            "Metric": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 3
-                },
-                "labels": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "LabelDescriptor": {
-              "fields": {
-                "key": {
-                  "type": "string",
-                  "id": 1
-                },
-                "valueType": {
-                  "type": "ValueType",
-                  "id": 2
-                },
-                "description": {
-                  "type": "string",
-                  "id": 3
-                }
-              },
-              "nested": {
-                "ValueType": {
-                  "values": {
-                    "STRING": 0,
-                    "BOOL": 1,
-                    "INT64": 2
-                  }
-                }
-              }
-            },
-            "LaunchStage": {
-              "values": {
-                "LAUNCH_STAGE_UNSPECIFIED": 0,
-                "UNIMPLEMENTED": 6,
-                "PRELAUNCH": 7,
-                "EARLY_ACCESS": 1,
-                "ALPHA": 2,
-                "BETA": 3,
-                "GA": 4,
-                "DEPRECATED": 5
-              }
-            },
-            "Quota": {
-              "fields": {
-                "limits": {
-                  "rule": "repeated",
-                  "type": "QuotaLimit",
-                  "id": 3
-                },
-                "metricRules": {
-                  "rule": "repeated",
-                  "type": "MetricRule",
-                  "id": 4
-                }
-              }
-            },
-            "MetricRule": {
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "metricCosts": {
-                  "keyType": "string",
-                  "type": "int64",
-                  "id": 2
-                }
-              }
-            },
-            "QuotaLimit": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 6
-                },
-                "description": {
-                  "type": "string",
-                  "id": 2
-                },
-                "defaultLimit": {
-                  "type": "int64",
-                  "id": 3
-                },
-                "maxLimit": {
-                  "type": "int64",
-                  "id": 4
-                },
-                "freeTier": {
-                  "type": "int64",
-                  "id": 7
-                },
-                "duration": {
-                  "type": "string",
-                  "id": 5
-                },
-                "metric": {
-                  "type": "string",
-                  "id": 8
-                },
-                "unit": {
-                  "type": "string",
-                  "id": 9
-                },
-                "values": {
-                  "keyType": "string",
-                  "type": "int64",
-                  "id": 10
-                },
-                "displayName": {
-                  "type": "string",
-                  "id": 12
-                }
-              }
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
             },
             "Service": {
               "fields": {
@@ -1626,6 +1430,146 @@
                 }
               }
             },
+            "MetricDescriptor": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "type": {
+                  "type": "string",
+                  "id": 8
+                },
+                "labels": {
+                  "rule": "repeated",
+                  "type": "LabelDescriptor",
+                  "id": 2
+                },
+                "metricKind": {
+                  "type": "MetricKind",
+                  "id": 3
+                },
+                "valueType": {
+                  "type": "ValueType",
+                  "id": 4
+                },
+                "unit": {
+                  "type": "string",
+                  "id": 5
+                },
+                "description": {
+                  "type": "string",
+                  "id": 6
+                },
+                "displayName": {
+                  "type": "string",
+                  "id": 7
+                },
+                "metadata": {
+                  "type": "MetricDescriptorMetadata",
+                  "id": 10
+                },
+                "launchStage": {
+                  "type": "LaunchStage",
+                  "id": 12
+                },
+                "monitoredResourceTypes": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 13
+                }
+              },
+              "nested": {
+                "MetricDescriptorMetadata": {
+                  "fields": {
+                    "launchStage": {
+                      "type": "LaunchStage",
+                      "id": 1,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "samplePeriod": {
+                      "type": "google.protobuf.Duration",
+                      "id": 2
+                    },
+                    "ingestDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 3
+                    }
+                  }
+                },
+                "MetricKind": {
+                  "values": {
+                    "METRIC_KIND_UNSPECIFIED": 0,
+                    "GAUGE": 1,
+                    "DELTA": 2,
+                    "CUMULATIVE": 3
+                  }
+                },
+                "ValueType": {
+                  "values": {
+                    "VALUE_TYPE_UNSPECIFIED": 0,
+                    "BOOL": 1,
+                    "INT64": 2,
+                    "DOUBLE": 3,
+                    "STRING": 4,
+                    "DISTRIBUTION": 5,
+                    "MONEY": 6
+                  }
+                }
+              }
+            },
+            "Metric": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 3
+                },
+                "labels": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "LabelDescriptor": {
+              "fields": {
+                "key": {
+                  "type": "string",
+                  "id": 1
+                },
+                "valueType": {
+                  "type": "ValueType",
+                  "id": 2
+                },
+                "description": {
+                  "type": "string",
+                  "id": 3
+                }
+              },
+              "nested": {
+                "ValueType": {
+                  "values": {
+                    "STRING": 0,
+                    "BOOL": 1,
+                    "INT64": 2
+                  }
+                }
+              }
+            },
+            "LaunchStage": {
+              "values": {
+                "LAUNCH_STAGE_UNSPECIFIED": 0,
+                "UNIMPLEMENTED": 6,
+                "PRELAUNCH": 7,
+                "EARLY_ACCESS": 1,
+                "ALPHA": 2,
+                "BETA": 3,
+                "GA": 4,
+                "DEPRECATED": 5
+              }
+            },
             "Context": {
               "fields": {
                 "rules": {
@@ -1892,6 +1836,78 @@
                 }
               }
             },
+            "Quota": {
+              "fields": {
+                "limits": {
+                  "rule": "repeated",
+                  "type": "QuotaLimit",
+                  "id": 3
+                },
+                "metricRules": {
+                  "rule": "repeated",
+                  "type": "MetricRule",
+                  "id": 4
+                }
+              }
+            },
+            "MetricRule": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metricCosts": {
+                  "keyType": "string",
+                  "type": "int64",
+                  "id": 2
+                }
+              }
+            },
+            "QuotaLimit": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 6
+                },
+                "description": {
+                  "type": "string",
+                  "id": 2
+                },
+                "defaultLimit": {
+                  "type": "int64",
+                  "id": 3
+                },
+                "maxLimit": {
+                  "type": "int64",
+                  "id": 4
+                },
+                "freeTier": {
+                  "type": "int64",
+                  "id": 7
+                },
+                "duration": {
+                  "type": "string",
+                  "id": 5
+                },
+                "metric": {
+                  "type": "string",
+                  "id": 8
+                },
+                "unit": {
+                  "type": "string",
+                  "id": 9
+                },
+                "values": {
+                  "keyType": "string",
+                  "type": "int64",
+                  "id": 10
+                },
+                "displayName": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,
@@ -2049,22 +2065,6 @@
                   "id": 3
                 }
               }
-            },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
             }
           }
         },
@@ -2976,6 +2976,18 @@
                 }
               }
             },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -3402,18 +3414,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
-                }
-              }
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
                 }
               }
             }

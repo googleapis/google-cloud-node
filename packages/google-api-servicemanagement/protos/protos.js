@@ -8326,6 +8326,558 @@
                 return servicemanagement;
             })();
     
+            api.ConfigChange = (function() {
+    
+                /**
+                 * Properties of a ConfigChange.
+                 * @memberof google.api
+                 * @interface IConfigChange
+                 * @property {string|null} [element] ConfigChange element
+                 * @property {string|null} [oldValue] ConfigChange oldValue
+                 * @property {string|null} [newValue] ConfigChange newValue
+                 * @property {google.api.ChangeType|null} [changeType] ConfigChange changeType
+                 * @property {Array.<google.api.IAdvice>|null} [advices] ConfigChange advices
+                 */
+    
+                /**
+                 * Constructs a new ConfigChange.
+                 * @memberof google.api
+                 * @classdesc Represents a ConfigChange.
+                 * @implements IConfigChange
+                 * @constructor
+                 * @param {google.api.IConfigChange=} [properties] Properties to set
+                 */
+                function ConfigChange(properties) {
+                    this.advices = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ConfigChange element.
+                 * @member {string} element
+                 * @memberof google.api.ConfigChange
+                 * @instance
+                 */
+                ConfigChange.prototype.element = "";
+    
+                /**
+                 * ConfigChange oldValue.
+                 * @member {string} oldValue
+                 * @memberof google.api.ConfigChange
+                 * @instance
+                 */
+                ConfigChange.prototype.oldValue = "";
+    
+                /**
+                 * ConfigChange newValue.
+                 * @member {string} newValue
+                 * @memberof google.api.ConfigChange
+                 * @instance
+                 */
+                ConfigChange.prototype.newValue = "";
+    
+                /**
+                 * ConfigChange changeType.
+                 * @member {google.api.ChangeType} changeType
+                 * @memberof google.api.ConfigChange
+                 * @instance
+                 */
+                ConfigChange.prototype.changeType = 0;
+    
+                /**
+                 * ConfigChange advices.
+                 * @member {Array.<google.api.IAdvice>} advices
+                 * @memberof google.api.ConfigChange
+                 * @instance
+                 */
+                ConfigChange.prototype.advices = $util.emptyArray;
+    
+                /**
+                 * Creates a new ConfigChange instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ConfigChange
+                 * @static
+                 * @param {google.api.IConfigChange=} [properties] Properties to set
+                 * @returns {google.api.ConfigChange} ConfigChange instance
+                 */
+                ConfigChange.create = function create(properties) {
+                    return new ConfigChange(properties);
+                };
+    
+                /**
+                 * Encodes the specified ConfigChange message. Does not implicitly {@link google.api.ConfigChange.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ConfigChange
+                 * @static
+                 * @param {google.api.IConfigChange} message ConfigChange message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ConfigChange.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.element != null && Object.hasOwnProperty.call(message, "element"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.element);
+                    if (message.oldValue != null && Object.hasOwnProperty.call(message, "oldValue"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.oldValue);
+                    if (message.newValue != null && Object.hasOwnProperty.call(message, "newValue"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.newValue);
+                    if (message.changeType != null && Object.hasOwnProperty.call(message, "changeType"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.changeType);
+                    if (message.advices != null && message.advices.length)
+                        for (var i = 0; i < message.advices.length; ++i)
+                            $root.google.api.Advice.encode(message.advices[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ConfigChange message, length delimited. Does not implicitly {@link google.api.ConfigChange.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ConfigChange
+                 * @static
+                 * @param {google.api.IConfigChange} message ConfigChange message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ConfigChange.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ConfigChange message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ConfigChange
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ConfigChange} ConfigChange
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ConfigChange.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ConfigChange();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.element = reader.string();
+                            break;
+                        case 2:
+                            message.oldValue = reader.string();
+                            break;
+                        case 3:
+                            message.newValue = reader.string();
+                            break;
+                        case 4:
+                            message.changeType = reader.int32();
+                            break;
+                        case 5:
+                            if (!(message.advices && message.advices.length))
+                                message.advices = [];
+                            message.advices.push($root.google.api.Advice.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ConfigChange message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ConfigChange
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ConfigChange} ConfigChange
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ConfigChange.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ConfigChange message.
+                 * @function verify
+                 * @memberof google.api.ConfigChange
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ConfigChange.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.element != null && message.hasOwnProperty("element"))
+                        if (!$util.isString(message.element))
+                            return "element: string expected";
+                    if (message.oldValue != null && message.hasOwnProperty("oldValue"))
+                        if (!$util.isString(message.oldValue))
+                            return "oldValue: string expected";
+                    if (message.newValue != null && message.hasOwnProperty("newValue"))
+                        if (!$util.isString(message.newValue))
+                            return "newValue: string expected";
+                    if (message.changeType != null && message.hasOwnProperty("changeType"))
+                        switch (message.changeType) {
+                        default:
+                            return "changeType: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.advices != null && message.hasOwnProperty("advices")) {
+                        if (!Array.isArray(message.advices))
+                            return "advices: array expected";
+                        for (var i = 0; i < message.advices.length; ++i) {
+                            var error = $root.google.api.Advice.verify(message.advices[i]);
+                            if (error)
+                                return "advices." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ConfigChange message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ConfigChange
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ConfigChange} ConfigChange
+                 */
+                ConfigChange.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ConfigChange)
+                        return object;
+                    var message = new $root.google.api.ConfigChange();
+                    if (object.element != null)
+                        message.element = String(object.element);
+                    if (object.oldValue != null)
+                        message.oldValue = String(object.oldValue);
+                    if (object.newValue != null)
+                        message.newValue = String(object.newValue);
+                    switch (object.changeType) {
+                    case "CHANGE_TYPE_UNSPECIFIED":
+                    case 0:
+                        message.changeType = 0;
+                        break;
+                    case "ADDED":
+                    case 1:
+                        message.changeType = 1;
+                        break;
+                    case "REMOVED":
+                    case 2:
+                        message.changeType = 2;
+                        break;
+                    case "MODIFIED":
+                    case 3:
+                        message.changeType = 3;
+                        break;
+                    }
+                    if (object.advices) {
+                        if (!Array.isArray(object.advices))
+                            throw TypeError(".google.api.ConfigChange.advices: array expected");
+                        message.advices = [];
+                        for (var i = 0; i < object.advices.length; ++i) {
+                            if (typeof object.advices[i] !== "object")
+                                throw TypeError(".google.api.ConfigChange.advices: object expected");
+                            message.advices[i] = $root.google.api.Advice.fromObject(object.advices[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ConfigChange message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ConfigChange
+                 * @static
+                 * @param {google.api.ConfigChange} message ConfigChange
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ConfigChange.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.advices = [];
+                    if (options.defaults) {
+                        object.element = "";
+                        object.oldValue = "";
+                        object.newValue = "";
+                        object.changeType = options.enums === String ? "CHANGE_TYPE_UNSPECIFIED" : 0;
+                    }
+                    if (message.element != null && message.hasOwnProperty("element"))
+                        object.element = message.element;
+                    if (message.oldValue != null && message.hasOwnProperty("oldValue"))
+                        object.oldValue = message.oldValue;
+                    if (message.newValue != null && message.hasOwnProperty("newValue"))
+                        object.newValue = message.newValue;
+                    if (message.changeType != null && message.hasOwnProperty("changeType"))
+                        object.changeType = options.enums === String ? $root.google.api.ChangeType[message.changeType] : message.changeType;
+                    if (message.advices && message.advices.length) {
+                        object.advices = [];
+                        for (var j = 0; j < message.advices.length; ++j)
+                            object.advices[j] = $root.google.api.Advice.toObject(message.advices[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ConfigChange to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ConfigChange
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ConfigChange.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ConfigChange;
+            })();
+    
+            api.Advice = (function() {
+    
+                /**
+                 * Properties of an Advice.
+                 * @memberof google.api
+                 * @interface IAdvice
+                 * @property {string|null} [description] Advice description
+                 */
+    
+                /**
+                 * Constructs a new Advice.
+                 * @memberof google.api
+                 * @classdesc Represents an Advice.
+                 * @implements IAdvice
+                 * @constructor
+                 * @param {google.api.IAdvice=} [properties] Properties to set
+                 */
+                function Advice(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Advice description.
+                 * @member {string} description
+                 * @memberof google.api.Advice
+                 * @instance
+                 */
+                Advice.prototype.description = "";
+    
+                /**
+                 * Creates a new Advice instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.Advice
+                 * @static
+                 * @param {google.api.IAdvice=} [properties] Properties to set
+                 * @returns {google.api.Advice} Advice instance
+                 */
+                Advice.create = function create(properties) {
+                    return new Advice(properties);
+                };
+    
+                /**
+                 * Encodes the specified Advice message. Does not implicitly {@link google.api.Advice.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.Advice
+                 * @static
+                 * @param {google.api.IAdvice} message Advice message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Advice.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Advice message, length delimited. Does not implicitly {@link google.api.Advice.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.Advice
+                 * @static
+                 * @param {google.api.IAdvice} message Advice message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Advice.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Advice message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.Advice
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.Advice} Advice
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Advice.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Advice();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 2:
+                            message.description = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Advice message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.Advice
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.Advice} Advice
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Advice.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Advice message.
+                 * @function verify
+                 * @memberof google.api.Advice
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Advice.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Advice message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.Advice
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.Advice} Advice
+                 */
+                Advice.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.Advice)
+                        return object;
+                    var message = new $root.google.api.Advice();
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Advice message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.Advice
+                 * @static
+                 * @param {google.api.Advice} message Advice
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Advice.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.description = "";
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Advice to JSON.
+                 * @function toJSON
+                 * @memberof google.api.Advice
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Advice.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Advice;
+            })();
+    
+            /**
+             * ChangeType enum.
+             * @name google.api.ChangeType
+             * @enum {number}
+             * @property {number} CHANGE_TYPE_UNSPECIFIED=0 CHANGE_TYPE_UNSPECIFIED value
+             * @property {number} ADDED=1 ADDED value
+             * @property {number} REMOVED=2 REMOVED value
+             * @property {number} MODIFIED=3 MODIFIED value
+             */
+            api.ChangeType = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "CHANGE_TYPE_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "ADDED"] = 1;
+                values[valuesById[2] = "REMOVED"] = 2;
+                values[valuesById[3] = "MODIFIED"] = 3;
+                return values;
+            })();
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                return values;
+            })();
+    
             api.Http = (function() {
     
                 /**
@@ -9228,2959 +9780,6 @@
                 };
     
                 return CustomHttpPattern;
-            })();
-    
-            api.ConfigChange = (function() {
-    
-                /**
-                 * Properties of a ConfigChange.
-                 * @memberof google.api
-                 * @interface IConfigChange
-                 * @property {string|null} [element] ConfigChange element
-                 * @property {string|null} [oldValue] ConfigChange oldValue
-                 * @property {string|null} [newValue] ConfigChange newValue
-                 * @property {google.api.ChangeType|null} [changeType] ConfigChange changeType
-                 * @property {Array.<google.api.IAdvice>|null} [advices] ConfigChange advices
-                 */
-    
-                /**
-                 * Constructs a new ConfigChange.
-                 * @memberof google.api
-                 * @classdesc Represents a ConfigChange.
-                 * @implements IConfigChange
-                 * @constructor
-                 * @param {google.api.IConfigChange=} [properties] Properties to set
-                 */
-                function ConfigChange(properties) {
-                    this.advices = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ConfigChange element.
-                 * @member {string} element
-                 * @memberof google.api.ConfigChange
-                 * @instance
-                 */
-                ConfigChange.prototype.element = "";
-    
-                /**
-                 * ConfigChange oldValue.
-                 * @member {string} oldValue
-                 * @memberof google.api.ConfigChange
-                 * @instance
-                 */
-                ConfigChange.prototype.oldValue = "";
-    
-                /**
-                 * ConfigChange newValue.
-                 * @member {string} newValue
-                 * @memberof google.api.ConfigChange
-                 * @instance
-                 */
-                ConfigChange.prototype.newValue = "";
-    
-                /**
-                 * ConfigChange changeType.
-                 * @member {google.api.ChangeType} changeType
-                 * @memberof google.api.ConfigChange
-                 * @instance
-                 */
-                ConfigChange.prototype.changeType = 0;
-    
-                /**
-                 * ConfigChange advices.
-                 * @member {Array.<google.api.IAdvice>} advices
-                 * @memberof google.api.ConfigChange
-                 * @instance
-                 */
-                ConfigChange.prototype.advices = $util.emptyArray;
-    
-                /**
-                 * Creates a new ConfigChange instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ConfigChange
-                 * @static
-                 * @param {google.api.IConfigChange=} [properties] Properties to set
-                 * @returns {google.api.ConfigChange} ConfigChange instance
-                 */
-                ConfigChange.create = function create(properties) {
-                    return new ConfigChange(properties);
-                };
-    
-                /**
-                 * Encodes the specified ConfigChange message. Does not implicitly {@link google.api.ConfigChange.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ConfigChange
-                 * @static
-                 * @param {google.api.IConfigChange} message ConfigChange message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ConfigChange.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.element != null && Object.hasOwnProperty.call(message, "element"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.element);
-                    if (message.oldValue != null && Object.hasOwnProperty.call(message, "oldValue"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.oldValue);
-                    if (message.newValue != null && Object.hasOwnProperty.call(message, "newValue"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.newValue);
-                    if (message.changeType != null && Object.hasOwnProperty.call(message, "changeType"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.changeType);
-                    if (message.advices != null && message.advices.length)
-                        for (var i = 0; i < message.advices.length; ++i)
-                            $root.google.api.Advice.encode(message.advices[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ConfigChange message, length delimited. Does not implicitly {@link google.api.ConfigChange.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ConfigChange
-                 * @static
-                 * @param {google.api.IConfigChange} message ConfigChange message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ConfigChange.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ConfigChange message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ConfigChange
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ConfigChange} ConfigChange
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ConfigChange.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ConfigChange();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.element = reader.string();
-                            break;
-                        case 2:
-                            message.oldValue = reader.string();
-                            break;
-                        case 3:
-                            message.newValue = reader.string();
-                            break;
-                        case 4:
-                            message.changeType = reader.int32();
-                            break;
-                        case 5:
-                            if (!(message.advices && message.advices.length))
-                                message.advices = [];
-                            message.advices.push($root.google.api.Advice.decode(reader, reader.uint32()));
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ConfigChange message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ConfigChange
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ConfigChange} ConfigChange
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ConfigChange.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ConfigChange message.
-                 * @function verify
-                 * @memberof google.api.ConfigChange
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ConfigChange.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.element != null && message.hasOwnProperty("element"))
-                        if (!$util.isString(message.element))
-                            return "element: string expected";
-                    if (message.oldValue != null && message.hasOwnProperty("oldValue"))
-                        if (!$util.isString(message.oldValue))
-                            return "oldValue: string expected";
-                    if (message.newValue != null && message.hasOwnProperty("newValue"))
-                        if (!$util.isString(message.newValue))
-                            return "newValue: string expected";
-                    if (message.changeType != null && message.hasOwnProperty("changeType"))
-                        switch (message.changeType) {
-                        default:
-                            return "changeType: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                            break;
-                        }
-                    if (message.advices != null && message.hasOwnProperty("advices")) {
-                        if (!Array.isArray(message.advices))
-                            return "advices: array expected";
-                        for (var i = 0; i < message.advices.length; ++i) {
-                            var error = $root.google.api.Advice.verify(message.advices[i]);
-                            if (error)
-                                return "advices." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ConfigChange message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ConfigChange
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ConfigChange} ConfigChange
-                 */
-                ConfigChange.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ConfigChange)
-                        return object;
-                    var message = new $root.google.api.ConfigChange();
-                    if (object.element != null)
-                        message.element = String(object.element);
-                    if (object.oldValue != null)
-                        message.oldValue = String(object.oldValue);
-                    if (object.newValue != null)
-                        message.newValue = String(object.newValue);
-                    switch (object.changeType) {
-                    case "CHANGE_TYPE_UNSPECIFIED":
-                    case 0:
-                        message.changeType = 0;
-                        break;
-                    case "ADDED":
-                    case 1:
-                        message.changeType = 1;
-                        break;
-                    case "REMOVED":
-                    case 2:
-                        message.changeType = 2;
-                        break;
-                    case "MODIFIED":
-                    case 3:
-                        message.changeType = 3;
-                        break;
-                    }
-                    if (object.advices) {
-                        if (!Array.isArray(object.advices))
-                            throw TypeError(".google.api.ConfigChange.advices: array expected");
-                        message.advices = [];
-                        for (var i = 0; i < object.advices.length; ++i) {
-                            if (typeof object.advices[i] !== "object")
-                                throw TypeError(".google.api.ConfigChange.advices: object expected");
-                            message.advices[i] = $root.google.api.Advice.fromObject(object.advices[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ConfigChange message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ConfigChange
-                 * @static
-                 * @param {google.api.ConfigChange} message ConfigChange
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ConfigChange.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.advices = [];
-                    if (options.defaults) {
-                        object.element = "";
-                        object.oldValue = "";
-                        object.newValue = "";
-                        object.changeType = options.enums === String ? "CHANGE_TYPE_UNSPECIFIED" : 0;
-                    }
-                    if (message.element != null && message.hasOwnProperty("element"))
-                        object.element = message.element;
-                    if (message.oldValue != null && message.hasOwnProperty("oldValue"))
-                        object.oldValue = message.oldValue;
-                    if (message.newValue != null && message.hasOwnProperty("newValue"))
-                        object.newValue = message.newValue;
-                    if (message.changeType != null && message.hasOwnProperty("changeType"))
-                        object.changeType = options.enums === String ? $root.google.api.ChangeType[message.changeType] : message.changeType;
-                    if (message.advices && message.advices.length) {
-                        object.advices = [];
-                        for (var j = 0; j < message.advices.length; ++j)
-                            object.advices[j] = $root.google.api.Advice.toObject(message.advices[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ConfigChange to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ConfigChange
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ConfigChange.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ConfigChange;
-            })();
-    
-            api.Advice = (function() {
-    
-                /**
-                 * Properties of an Advice.
-                 * @memberof google.api
-                 * @interface IAdvice
-                 * @property {string|null} [description] Advice description
-                 */
-    
-                /**
-                 * Constructs a new Advice.
-                 * @memberof google.api
-                 * @classdesc Represents an Advice.
-                 * @implements IAdvice
-                 * @constructor
-                 * @param {google.api.IAdvice=} [properties] Properties to set
-                 */
-                function Advice(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Advice description.
-                 * @member {string} description
-                 * @memberof google.api.Advice
-                 * @instance
-                 */
-                Advice.prototype.description = "";
-    
-                /**
-                 * Creates a new Advice instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.Advice
-                 * @static
-                 * @param {google.api.IAdvice=} [properties] Properties to set
-                 * @returns {google.api.Advice} Advice instance
-                 */
-                Advice.create = function create(properties) {
-                    return new Advice(properties);
-                };
-    
-                /**
-                 * Encodes the specified Advice message. Does not implicitly {@link google.api.Advice.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.Advice
-                 * @static
-                 * @param {google.api.IAdvice} message Advice message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Advice.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Advice message, length delimited. Does not implicitly {@link google.api.Advice.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.Advice
-                 * @static
-                 * @param {google.api.IAdvice} message Advice message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Advice.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Advice message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.Advice
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.Advice} Advice
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Advice.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Advice();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 2:
-                            message.description = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Advice message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.Advice
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.Advice} Advice
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Advice.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Advice message.
-                 * @function verify
-                 * @memberof google.api.Advice
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Advice.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        if (!$util.isString(message.description))
-                            return "description: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Advice message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.Advice
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.Advice} Advice
-                 */
-                Advice.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.Advice)
-                        return object;
-                    var message = new $root.google.api.Advice();
-                    if (object.description != null)
-                        message.description = String(object.description);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Advice message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.Advice
-                 * @static
-                 * @param {google.api.Advice} message Advice
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Advice.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults)
-                        object.description = "";
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        object.description = message.description;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Advice to JSON.
-                 * @function toJSON
-                 * @memberof google.api.Advice
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Advice.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Advice;
-            })();
-    
-            /**
-             * ChangeType enum.
-             * @name google.api.ChangeType
-             * @enum {number}
-             * @property {number} CHANGE_TYPE_UNSPECIFIED=0 CHANGE_TYPE_UNSPECIFIED value
-             * @property {number} ADDED=1 ADDED value
-             * @property {number} REMOVED=2 REMOVED value
-             * @property {number} MODIFIED=3 MODIFIED value
-             */
-            api.ChangeType = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "CHANGE_TYPE_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "ADDED"] = 1;
-                values[valuesById[2] = "REMOVED"] = 2;
-                values[valuesById[3] = "MODIFIED"] = 3;
-                return values;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                return values;
-            })();
-    
-            api.MetricDescriptor = (function() {
-    
-                /**
-                 * Properties of a MetricDescriptor.
-                 * @memberof google.api
-                 * @interface IMetricDescriptor
-                 * @property {string|null} [name] MetricDescriptor name
-                 * @property {string|null} [type] MetricDescriptor type
-                 * @property {Array.<google.api.ILabelDescriptor>|null} [labels] MetricDescriptor labels
-                 * @property {google.api.MetricDescriptor.MetricKind|null} [metricKind] MetricDescriptor metricKind
-                 * @property {google.api.MetricDescriptor.ValueType|null} [valueType] MetricDescriptor valueType
-                 * @property {string|null} [unit] MetricDescriptor unit
-                 * @property {string|null} [description] MetricDescriptor description
-                 * @property {string|null} [displayName] MetricDescriptor displayName
-                 * @property {google.api.MetricDescriptor.IMetricDescriptorMetadata|null} [metadata] MetricDescriptor metadata
-                 * @property {google.api.LaunchStage|null} [launchStage] MetricDescriptor launchStage
-                 * @property {Array.<string>|null} [monitoredResourceTypes] MetricDescriptor monitoredResourceTypes
-                 */
-    
-                /**
-                 * Constructs a new MetricDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a MetricDescriptor.
-                 * @implements IMetricDescriptor
-                 * @constructor
-                 * @param {google.api.IMetricDescriptor=} [properties] Properties to set
-                 */
-                function MetricDescriptor(properties) {
-                    this.labels = [];
-                    this.monitoredResourceTypes = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * MetricDescriptor name.
-                 * @member {string} name
-                 * @memberof google.api.MetricDescriptor
-                 * @instance
-                 */
-                MetricDescriptor.prototype.name = "";
-    
-                /**
-                 * MetricDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.MetricDescriptor
-                 * @instance
-                 */
-                MetricDescriptor.prototype.type = "";
-    
-                /**
-                 * MetricDescriptor labels.
-                 * @member {Array.<google.api.ILabelDescriptor>} labels
-                 * @memberof google.api.MetricDescriptor
-                 * @instance
-                 */
-                MetricDescriptor.prototype.labels = $util.emptyArray;
-    
-                /**
-                 * MetricDescriptor metricKind.
-                 * @member {google.api.MetricDescriptor.MetricKind} metricKind
-                 * @memberof google.api.MetricDescriptor
-                 * @instance
-                 */
-                MetricDescriptor.prototype.metricKind = 0;
-    
-                /**
-                 * MetricDescriptor valueType.
-                 * @member {google.api.MetricDescriptor.ValueType} valueType
-                 * @memberof google.api.MetricDescriptor
-                 * @instance
-                 */
-                MetricDescriptor.prototype.valueType = 0;
-    
-                /**
-                 * MetricDescriptor unit.
-                 * @member {string} unit
-                 * @memberof google.api.MetricDescriptor
-                 * @instance
-                 */
-                MetricDescriptor.prototype.unit = "";
-    
-                /**
-                 * MetricDescriptor description.
-                 * @member {string} description
-                 * @memberof google.api.MetricDescriptor
-                 * @instance
-                 */
-                MetricDescriptor.prototype.description = "";
-    
-                /**
-                 * MetricDescriptor displayName.
-                 * @member {string} displayName
-                 * @memberof google.api.MetricDescriptor
-                 * @instance
-                 */
-                MetricDescriptor.prototype.displayName = "";
-    
-                /**
-                 * MetricDescriptor metadata.
-                 * @member {google.api.MetricDescriptor.IMetricDescriptorMetadata|null|undefined} metadata
-                 * @memberof google.api.MetricDescriptor
-                 * @instance
-                 */
-                MetricDescriptor.prototype.metadata = null;
-    
-                /**
-                 * MetricDescriptor launchStage.
-                 * @member {google.api.LaunchStage} launchStage
-                 * @memberof google.api.MetricDescriptor
-                 * @instance
-                 */
-                MetricDescriptor.prototype.launchStage = 0;
-    
-                /**
-                 * MetricDescriptor monitoredResourceTypes.
-                 * @member {Array.<string>} monitoredResourceTypes
-                 * @memberof google.api.MetricDescriptor
-                 * @instance
-                 */
-                MetricDescriptor.prototype.monitoredResourceTypes = $util.emptyArray;
-    
-                /**
-                 * Creates a new MetricDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.MetricDescriptor
-                 * @static
-                 * @param {google.api.IMetricDescriptor=} [properties] Properties to set
-                 * @returns {google.api.MetricDescriptor} MetricDescriptor instance
-                 */
-                MetricDescriptor.create = function create(properties) {
-                    return new MetricDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified MetricDescriptor message. Does not implicitly {@link google.api.MetricDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.MetricDescriptor
-                 * @static
-                 * @param {google.api.IMetricDescriptor} message MetricDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                MetricDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.labels != null && message.labels.length)
-                        for (var i = 0; i < message.labels.length; ++i)
-                            $root.google.api.LabelDescriptor.encode(message.labels[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.metricKind != null && Object.hasOwnProperty.call(message, "metricKind"))
-                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.metricKind);
-                    if (message.valueType != null && Object.hasOwnProperty.call(message, "valueType"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.valueType);
-                    if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.unit);
-                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
-                    if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.displayName);
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.type);
-                    if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
-                        $root.google.api.MetricDescriptor.MetricDescriptorMetadata.encode(message.metadata, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-                    if (message.launchStage != null && Object.hasOwnProperty.call(message, "launchStage"))
-                        writer.uint32(/* id 12, wireType 0 =*/96).int32(message.launchStage);
-                    if (message.monitoredResourceTypes != null && message.monitoredResourceTypes.length)
-                        for (var i = 0; i < message.monitoredResourceTypes.length; ++i)
-                            writer.uint32(/* id 13, wireType 2 =*/106).string(message.monitoredResourceTypes[i]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified MetricDescriptor message, length delimited. Does not implicitly {@link google.api.MetricDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.MetricDescriptor
-                 * @static
-                 * @param {google.api.IMetricDescriptor} message MetricDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                MetricDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a MetricDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.MetricDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.MetricDescriptor} MetricDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                MetricDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MetricDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.name = reader.string();
-                            break;
-                        case 8:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.labels && message.labels.length))
-                                message.labels = [];
-                            message.labels.push($root.google.api.LabelDescriptor.decode(reader, reader.uint32()));
-                            break;
-                        case 3:
-                            message.metricKind = reader.int32();
-                            break;
-                        case 4:
-                            message.valueType = reader.int32();
-                            break;
-                        case 5:
-                            message.unit = reader.string();
-                            break;
-                        case 6:
-                            message.description = reader.string();
-                            break;
-                        case 7:
-                            message.displayName = reader.string();
-                            break;
-                        case 10:
-                            message.metadata = $root.google.api.MetricDescriptor.MetricDescriptorMetadata.decode(reader, reader.uint32());
-                            break;
-                        case 12:
-                            message.launchStage = reader.int32();
-                            break;
-                        case 13:
-                            if (!(message.monitoredResourceTypes && message.monitoredResourceTypes.length))
-                                message.monitoredResourceTypes = [];
-                            message.monitoredResourceTypes.push(reader.string());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a MetricDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.MetricDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.MetricDescriptor} MetricDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                MetricDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a MetricDescriptor message.
-                 * @function verify
-                 * @memberof google.api.MetricDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                MetricDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        if (!$util.isString(message.name))
-                            return "name: string expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.labels != null && message.hasOwnProperty("labels")) {
-                        if (!Array.isArray(message.labels))
-                            return "labels: array expected";
-                        for (var i = 0; i < message.labels.length; ++i) {
-                            var error = $root.google.api.LabelDescriptor.verify(message.labels[i]);
-                            if (error)
-                                return "labels." + error;
-                        }
-                    }
-                    if (message.metricKind != null && message.hasOwnProperty("metricKind"))
-                        switch (message.metricKind) {
-                        default:
-                            return "metricKind: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                            break;
-                        }
-                    if (message.valueType != null && message.hasOwnProperty("valueType"))
-                        switch (message.valueType) {
-                        default:
-                            return "valueType: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                            break;
-                        }
-                    if (message.unit != null && message.hasOwnProperty("unit"))
-                        if (!$util.isString(message.unit))
-                            return "unit: string expected";
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        if (!$util.isString(message.description))
-                            return "description: string expected";
-                    if (message.displayName != null && message.hasOwnProperty("displayName"))
-                        if (!$util.isString(message.displayName))
-                            return "displayName: string expected";
-                    if (message.metadata != null && message.hasOwnProperty("metadata")) {
-                        var error = $root.google.api.MetricDescriptor.MetricDescriptorMetadata.verify(message.metadata);
-                        if (error)
-                            return "metadata." + error;
-                    }
-                    if (message.launchStage != null && message.hasOwnProperty("launchStage"))
-                        switch (message.launchStage) {
-                        default:
-                            return "launchStage: enum value expected";
-                        case 0:
-                        case 6:
-                        case 7:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                            break;
-                        }
-                    if (message.monitoredResourceTypes != null && message.hasOwnProperty("monitoredResourceTypes")) {
-                        if (!Array.isArray(message.monitoredResourceTypes))
-                            return "monitoredResourceTypes: array expected";
-                        for (var i = 0; i < message.monitoredResourceTypes.length; ++i)
-                            if (!$util.isString(message.monitoredResourceTypes[i]))
-                                return "monitoredResourceTypes: string[] expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a MetricDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.MetricDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.MetricDescriptor} MetricDescriptor
-                 */
-                MetricDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.MetricDescriptor)
-                        return object;
-                    var message = new $root.google.api.MetricDescriptor();
-                    if (object.name != null)
-                        message.name = String(object.name);
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.labels) {
-                        if (!Array.isArray(object.labels))
-                            throw TypeError(".google.api.MetricDescriptor.labels: array expected");
-                        message.labels = [];
-                        for (var i = 0; i < object.labels.length; ++i) {
-                            if (typeof object.labels[i] !== "object")
-                                throw TypeError(".google.api.MetricDescriptor.labels: object expected");
-                            message.labels[i] = $root.google.api.LabelDescriptor.fromObject(object.labels[i]);
-                        }
-                    }
-                    switch (object.metricKind) {
-                    case "METRIC_KIND_UNSPECIFIED":
-                    case 0:
-                        message.metricKind = 0;
-                        break;
-                    case "GAUGE":
-                    case 1:
-                        message.metricKind = 1;
-                        break;
-                    case "DELTA":
-                    case 2:
-                        message.metricKind = 2;
-                        break;
-                    case "CUMULATIVE":
-                    case 3:
-                        message.metricKind = 3;
-                        break;
-                    }
-                    switch (object.valueType) {
-                    case "VALUE_TYPE_UNSPECIFIED":
-                    case 0:
-                        message.valueType = 0;
-                        break;
-                    case "BOOL":
-                    case 1:
-                        message.valueType = 1;
-                        break;
-                    case "INT64":
-                    case 2:
-                        message.valueType = 2;
-                        break;
-                    case "DOUBLE":
-                    case 3:
-                        message.valueType = 3;
-                        break;
-                    case "STRING":
-                    case 4:
-                        message.valueType = 4;
-                        break;
-                    case "DISTRIBUTION":
-                    case 5:
-                        message.valueType = 5;
-                        break;
-                    case "MONEY":
-                    case 6:
-                        message.valueType = 6;
-                        break;
-                    }
-                    if (object.unit != null)
-                        message.unit = String(object.unit);
-                    if (object.description != null)
-                        message.description = String(object.description);
-                    if (object.displayName != null)
-                        message.displayName = String(object.displayName);
-                    if (object.metadata != null) {
-                        if (typeof object.metadata !== "object")
-                            throw TypeError(".google.api.MetricDescriptor.metadata: object expected");
-                        message.metadata = $root.google.api.MetricDescriptor.MetricDescriptorMetadata.fromObject(object.metadata);
-                    }
-                    switch (object.launchStage) {
-                    case "LAUNCH_STAGE_UNSPECIFIED":
-                    case 0:
-                        message.launchStage = 0;
-                        break;
-                    case "UNIMPLEMENTED":
-                    case 6:
-                        message.launchStage = 6;
-                        break;
-                    case "PRELAUNCH":
-                    case 7:
-                        message.launchStage = 7;
-                        break;
-                    case "EARLY_ACCESS":
-                    case 1:
-                        message.launchStage = 1;
-                        break;
-                    case "ALPHA":
-                    case 2:
-                        message.launchStage = 2;
-                        break;
-                    case "BETA":
-                    case 3:
-                        message.launchStage = 3;
-                        break;
-                    case "GA":
-                    case 4:
-                        message.launchStage = 4;
-                        break;
-                    case "DEPRECATED":
-                    case 5:
-                        message.launchStage = 5;
-                        break;
-                    }
-                    if (object.monitoredResourceTypes) {
-                        if (!Array.isArray(object.monitoredResourceTypes))
-                            throw TypeError(".google.api.MetricDescriptor.monitoredResourceTypes: array expected");
-                        message.monitoredResourceTypes = [];
-                        for (var i = 0; i < object.monitoredResourceTypes.length; ++i)
-                            message.monitoredResourceTypes[i] = String(object.monitoredResourceTypes[i]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a MetricDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.MetricDescriptor
-                 * @static
-                 * @param {google.api.MetricDescriptor} message MetricDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                MetricDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.labels = [];
-                        object.monitoredResourceTypes = [];
-                    }
-                    if (options.defaults) {
-                        object.name = "";
-                        object.metricKind = options.enums === String ? "METRIC_KIND_UNSPECIFIED" : 0;
-                        object.valueType = options.enums === String ? "VALUE_TYPE_UNSPECIFIED" : 0;
-                        object.unit = "";
-                        object.description = "";
-                        object.displayName = "";
-                        object.type = "";
-                        object.metadata = null;
-                        object.launchStage = options.enums === String ? "LAUNCH_STAGE_UNSPECIFIED" : 0;
-                    }
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        object.name = message.name;
-                    if (message.labels && message.labels.length) {
-                        object.labels = [];
-                        for (var j = 0; j < message.labels.length; ++j)
-                            object.labels[j] = $root.google.api.LabelDescriptor.toObject(message.labels[j], options);
-                    }
-                    if (message.metricKind != null && message.hasOwnProperty("metricKind"))
-                        object.metricKind = options.enums === String ? $root.google.api.MetricDescriptor.MetricKind[message.metricKind] : message.metricKind;
-                    if (message.valueType != null && message.hasOwnProperty("valueType"))
-                        object.valueType = options.enums === String ? $root.google.api.MetricDescriptor.ValueType[message.valueType] : message.valueType;
-                    if (message.unit != null && message.hasOwnProperty("unit"))
-                        object.unit = message.unit;
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        object.description = message.description;
-                    if (message.displayName != null && message.hasOwnProperty("displayName"))
-                        object.displayName = message.displayName;
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.metadata != null && message.hasOwnProperty("metadata"))
-                        object.metadata = $root.google.api.MetricDescriptor.MetricDescriptorMetadata.toObject(message.metadata, options);
-                    if (message.launchStage != null && message.hasOwnProperty("launchStage"))
-                        object.launchStage = options.enums === String ? $root.google.api.LaunchStage[message.launchStage] : message.launchStage;
-                    if (message.monitoredResourceTypes && message.monitoredResourceTypes.length) {
-                        object.monitoredResourceTypes = [];
-                        for (var j = 0; j < message.monitoredResourceTypes.length; ++j)
-                            object.monitoredResourceTypes[j] = message.monitoredResourceTypes[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this MetricDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.MetricDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                MetricDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                MetricDescriptor.MetricDescriptorMetadata = (function() {
-    
-                    /**
-                     * Properties of a MetricDescriptorMetadata.
-                     * @memberof google.api.MetricDescriptor
-                     * @interface IMetricDescriptorMetadata
-                     * @property {google.api.LaunchStage|null} [launchStage] MetricDescriptorMetadata launchStage
-                     * @property {google.protobuf.IDuration|null} [samplePeriod] MetricDescriptorMetadata samplePeriod
-                     * @property {google.protobuf.IDuration|null} [ingestDelay] MetricDescriptorMetadata ingestDelay
-                     */
-    
-                    /**
-                     * Constructs a new MetricDescriptorMetadata.
-                     * @memberof google.api.MetricDescriptor
-                     * @classdesc Represents a MetricDescriptorMetadata.
-                     * @implements IMetricDescriptorMetadata
-                     * @constructor
-                     * @param {google.api.MetricDescriptor.IMetricDescriptorMetadata=} [properties] Properties to set
-                     */
-                    function MetricDescriptorMetadata(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * MetricDescriptorMetadata launchStage.
-                     * @member {google.api.LaunchStage} launchStage
-                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
-                     * @instance
-                     */
-                    MetricDescriptorMetadata.prototype.launchStage = 0;
-    
-                    /**
-                     * MetricDescriptorMetadata samplePeriod.
-                     * @member {google.protobuf.IDuration|null|undefined} samplePeriod
-                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
-                     * @instance
-                     */
-                    MetricDescriptorMetadata.prototype.samplePeriod = null;
-    
-                    /**
-                     * MetricDescriptorMetadata ingestDelay.
-                     * @member {google.protobuf.IDuration|null|undefined} ingestDelay
-                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
-                     * @instance
-                     */
-                    MetricDescriptorMetadata.prototype.ingestDelay = null;
-    
-                    /**
-                     * Creates a new MetricDescriptorMetadata instance using the specified properties.
-                     * @function create
-                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
-                     * @static
-                     * @param {google.api.MetricDescriptor.IMetricDescriptorMetadata=} [properties] Properties to set
-                     * @returns {google.api.MetricDescriptor.MetricDescriptorMetadata} MetricDescriptorMetadata instance
-                     */
-                    MetricDescriptorMetadata.create = function create(properties) {
-                        return new MetricDescriptorMetadata(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified MetricDescriptorMetadata message. Does not implicitly {@link google.api.MetricDescriptor.MetricDescriptorMetadata.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
-                     * @static
-                     * @param {google.api.MetricDescriptor.IMetricDescriptorMetadata} message MetricDescriptorMetadata message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    MetricDescriptorMetadata.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.launchStage != null && Object.hasOwnProperty.call(message, "launchStage"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.launchStage);
-                        if (message.samplePeriod != null && Object.hasOwnProperty.call(message, "samplePeriod"))
-                            $root.google.protobuf.Duration.encode(message.samplePeriod, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        if (message.ingestDelay != null && Object.hasOwnProperty.call(message, "ingestDelay"))
-                            $root.google.protobuf.Duration.encode(message.ingestDelay, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified MetricDescriptorMetadata message, length delimited. Does not implicitly {@link google.api.MetricDescriptor.MetricDescriptorMetadata.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
-                     * @static
-                     * @param {google.api.MetricDescriptor.IMetricDescriptorMetadata} message MetricDescriptorMetadata message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    MetricDescriptorMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a MetricDescriptorMetadata message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.api.MetricDescriptor.MetricDescriptorMetadata} MetricDescriptorMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    MetricDescriptorMetadata.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MetricDescriptor.MetricDescriptorMetadata();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.launchStage = reader.int32();
-                                break;
-                            case 2:
-                                message.samplePeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                break;
-                            case 3:
-                                message.ingestDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a MetricDescriptorMetadata message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.api.MetricDescriptor.MetricDescriptorMetadata} MetricDescriptorMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    MetricDescriptorMetadata.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a MetricDescriptorMetadata message.
-                     * @function verify
-                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    MetricDescriptorMetadata.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.launchStage != null && message.hasOwnProperty("launchStage"))
-                            switch (message.launchStage) {
-                            default:
-                                return "launchStage: enum value expected";
-                            case 0:
-                            case 6:
-                            case 7:
-                            case 1:
-                            case 2:
-                            case 3:
-                            case 4:
-                            case 5:
-                                break;
-                            }
-                        if (message.samplePeriod != null && message.hasOwnProperty("samplePeriod")) {
-                            var error = $root.google.protobuf.Duration.verify(message.samplePeriod);
-                            if (error)
-                                return "samplePeriod." + error;
-                        }
-                        if (message.ingestDelay != null && message.hasOwnProperty("ingestDelay")) {
-                            var error = $root.google.protobuf.Duration.verify(message.ingestDelay);
-                            if (error)
-                                return "ingestDelay." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a MetricDescriptorMetadata message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.api.MetricDescriptor.MetricDescriptorMetadata} MetricDescriptorMetadata
-                     */
-                    MetricDescriptorMetadata.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.api.MetricDescriptor.MetricDescriptorMetadata)
-                            return object;
-                        var message = new $root.google.api.MetricDescriptor.MetricDescriptorMetadata();
-                        switch (object.launchStage) {
-                        case "LAUNCH_STAGE_UNSPECIFIED":
-                        case 0:
-                            message.launchStage = 0;
-                            break;
-                        case "UNIMPLEMENTED":
-                        case 6:
-                            message.launchStage = 6;
-                            break;
-                        case "PRELAUNCH":
-                        case 7:
-                            message.launchStage = 7;
-                            break;
-                        case "EARLY_ACCESS":
-                        case 1:
-                            message.launchStage = 1;
-                            break;
-                        case "ALPHA":
-                        case 2:
-                            message.launchStage = 2;
-                            break;
-                        case "BETA":
-                        case 3:
-                            message.launchStage = 3;
-                            break;
-                        case "GA":
-                        case 4:
-                            message.launchStage = 4;
-                            break;
-                        case "DEPRECATED":
-                        case 5:
-                            message.launchStage = 5;
-                            break;
-                        }
-                        if (object.samplePeriod != null) {
-                            if (typeof object.samplePeriod !== "object")
-                                throw TypeError(".google.api.MetricDescriptor.MetricDescriptorMetadata.samplePeriod: object expected");
-                            message.samplePeriod = $root.google.protobuf.Duration.fromObject(object.samplePeriod);
-                        }
-                        if (object.ingestDelay != null) {
-                            if (typeof object.ingestDelay !== "object")
-                                throw TypeError(".google.api.MetricDescriptor.MetricDescriptorMetadata.ingestDelay: object expected");
-                            message.ingestDelay = $root.google.protobuf.Duration.fromObject(object.ingestDelay);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a MetricDescriptorMetadata message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
-                     * @static
-                     * @param {google.api.MetricDescriptor.MetricDescriptorMetadata} message MetricDescriptorMetadata
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    MetricDescriptorMetadata.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.launchStage = options.enums === String ? "LAUNCH_STAGE_UNSPECIFIED" : 0;
-                            object.samplePeriod = null;
-                            object.ingestDelay = null;
-                        }
-                        if (message.launchStage != null && message.hasOwnProperty("launchStage"))
-                            object.launchStage = options.enums === String ? $root.google.api.LaunchStage[message.launchStage] : message.launchStage;
-                        if (message.samplePeriod != null && message.hasOwnProperty("samplePeriod"))
-                            object.samplePeriod = $root.google.protobuf.Duration.toObject(message.samplePeriod, options);
-                        if (message.ingestDelay != null && message.hasOwnProperty("ingestDelay"))
-                            object.ingestDelay = $root.google.protobuf.Duration.toObject(message.ingestDelay, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this MetricDescriptorMetadata to JSON.
-                     * @function toJSON
-                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    MetricDescriptorMetadata.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return MetricDescriptorMetadata;
-                })();
-    
-                /**
-                 * MetricKind enum.
-                 * @name google.api.MetricDescriptor.MetricKind
-                 * @enum {number}
-                 * @property {number} METRIC_KIND_UNSPECIFIED=0 METRIC_KIND_UNSPECIFIED value
-                 * @property {number} GAUGE=1 GAUGE value
-                 * @property {number} DELTA=2 DELTA value
-                 * @property {number} CUMULATIVE=3 CUMULATIVE value
-                 */
-                MetricDescriptor.MetricKind = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "METRIC_KIND_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "GAUGE"] = 1;
-                    values[valuesById[2] = "DELTA"] = 2;
-                    values[valuesById[3] = "CUMULATIVE"] = 3;
-                    return values;
-                })();
-    
-                /**
-                 * ValueType enum.
-                 * @name google.api.MetricDescriptor.ValueType
-                 * @enum {number}
-                 * @property {number} VALUE_TYPE_UNSPECIFIED=0 VALUE_TYPE_UNSPECIFIED value
-                 * @property {number} BOOL=1 BOOL value
-                 * @property {number} INT64=2 INT64 value
-                 * @property {number} DOUBLE=3 DOUBLE value
-                 * @property {number} STRING=4 STRING value
-                 * @property {number} DISTRIBUTION=5 DISTRIBUTION value
-                 * @property {number} MONEY=6 MONEY value
-                 */
-                MetricDescriptor.ValueType = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "VALUE_TYPE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "BOOL"] = 1;
-                    values[valuesById[2] = "INT64"] = 2;
-                    values[valuesById[3] = "DOUBLE"] = 3;
-                    values[valuesById[4] = "STRING"] = 4;
-                    values[valuesById[5] = "DISTRIBUTION"] = 5;
-                    values[valuesById[6] = "MONEY"] = 6;
-                    return values;
-                })();
-    
-                return MetricDescriptor;
-            })();
-    
-            api.Metric = (function() {
-    
-                /**
-                 * Properties of a Metric.
-                 * @memberof google.api
-                 * @interface IMetric
-                 * @property {string|null} [type] Metric type
-                 * @property {Object.<string,string>|null} [labels] Metric labels
-                 */
-    
-                /**
-                 * Constructs a new Metric.
-                 * @memberof google.api
-                 * @classdesc Represents a Metric.
-                 * @implements IMetric
-                 * @constructor
-                 * @param {google.api.IMetric=} [properties] Properties to set
-                 */
-                function Metric(properties) {
-                    this.labels = {};
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Metric type.
-                 * @member {string} type
-                 * @memberof google.api.Metric
-                 * @instance
-                 */
-                Metric.prototype.type = "";
-    
-                /**
-                 * Metric labels.
-                 * @member {Object.<string,string>} labels
-                 * @memberof google.api.Metric
-                 * @instance
-                 */
-                Metric.prototype.labels = $util.emptyObject;
-    
-                /**
-                 * Creates a new Metric instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.Metric
-                 * @static
-                 * @param {google.api.IMetric=} [properties] Properties to set
-                 * @returns {google.api.Metric} Metric instance
-                 */
-                Metric.create = function create(properties) {
-                    return new Metric(properties);
-                };
-    
-                /**
-                 * Encodes the specified Metric message. Does not implicitly {@link google.api.Metric.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.Metric
-                 * @static
-                 * @param {google.api.IMetric} message Metric message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Metric.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
-                        for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Metric message, length delimited. Does not implicitly {@link google.api.Metric.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.Metric
-                 * @static
-                 * @param {google.api.IMetric} message Metric message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Metric.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Metric message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.Metric
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.Metric} Metric
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Metric.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Metric(), key, value;
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 3:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (message.labels === $util.emptyObject)
-                                message.labels = {};
-                            var end2 = reader.uint32() + reader.pos;
-                            key = "";
-                            value = "";
-                            while (reader.pos < end2) {
-                                var tag2 = reader.uint32();
-                                switch (tag2 >>> 3) {
-                                case 1:
-                                    key = reader.string();
-                                    break;
-                                case 2:
-                                    value = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag2 & 7);
-                                    break;
-                                }
-                            }
-                            message.labels[key] = value;
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Metric message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.Metric
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.Metric} Metric
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Metric.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Metric message.
-                 * @function verify
-                 * @memberof google.api.Metric
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Metric.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.labels != null && message.hasOwnProperty("labels")) {
-                        if (!$util.isObject(message.labels))
-                            return "labels: object expected";
-                        var key = Object.keys(message.labels);
-                        for (var i = 0; i < key.length; ++i)
-                            if (!$util.isString(message.labels[key[i]]))
-                                return "labels: string{k:string} expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Metric message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.Metric
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.Metric} Metric
-                 */
-                Metric.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.Metric)
-                        return object;
-                    var message = new $root.google.api.Metric();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.labels) {
-                        if (typeof object.labels !== "object")
-                            throw TypeError(".google.api.Metric.labels: object expected");
-                        message.labels = {};
-                        for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
-                            message.labels[keys[i]] = String(object.labels[keys[i]]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Metric message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.Metric
-                 * @static
-                 * @param {google.api.Metric} message Metric
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Metric.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.objects || options.defaults)
-                        object.labels = {};
-                    if (options.defaults)
-                        object.type = "";
-                    var keys2;
-                    if (message.labels && (keys2 = Object.keys(message.labels)).length) {
-                        object.labels = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.labels[keys2[j]] = message.labels[keys2[j]];
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Metric to JSON.
-                 * @function toJSON
-                 * @memberof google.api.Metric
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Metric.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Metric;
-            })();
-    
-            api.LabelDescriptor = (function() {
-    
-                /**
-                 * Properties of a LabelDescriptor.
-                 * @memberof google.api
-                 * @interface ILabelDescriptor
-                 * @property {string|null} [key] LabelDescriptor key
-                 * @property {google.api.LabelDescriptor.ValueType|null} [valueType] LabelDescriptor valueType
-                 * @property {string|null} [description] LabelDescriptor description
-                 */
-    
-                /**
-                 * Constructs a new LabelDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a LabelDescriptor.
-                 * @implements ILabelDescriptor
-                 * @constructor
-                 * @param {google.api.ILabelDescriptor=} [properties] Properties to set
-                 */
-                function LabelDescriptor(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * LabelDescriptor key.
-                 * @member {string} key
-                 * @memberof google.api.LabelDescriptor
-                 * @instance
-                 */
-                LabelDescriptor.prototype.key = "";
-    
-                /**
-                 * LabelDescriptor valueType.
-                 * @member {google.api.LabelDescriptor.ValueType} valueType
-                 * @memberof google.api.LabelDescriptor
-                 * @instance
-                 */
-                LabelDescriptor.prototype.valueType = 0;
-    
-                /**
-                 * LabelDescriptor description.
-                 * @member {string} description
-                 * @memberof google.api.LabelDescriptor
-                 * @instance
-                 */
-                LabelDescriptor.prototype.description = "";
-    
-                /**
-                 * Creates a new LabelDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {google.api.ILabelDescriptor=} [properties] Properties to set
-                 * @returns {google.api.LabelDescriptor} LabelDescriptor instance
-                 */
-                LabelDescriptor.create = function create(properties) {
-                    return new LabelDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified LabelDescriptor message. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {google.api.ILabelDescriptor} message LabelDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                LabelDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.key != null && Object.hasOwnProperty.call(message, "key"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
-                    if (message.valueType != null && Object.hasOwnProperty.call(message, "valueType"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.valueType);
-                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified LabelDescriptor message, length delimited. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {google.api.ILabelDescriptor} message LabelDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                LabelDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a LabelDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.LabelDescriptor} LabelDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                LabelDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.LabelDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.key = reader.string();
-                            break;
-                        case 2:
-                            message.valueType = reader.int32();
-                            break;
-                        case 3:
-                            message.description = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a LabelDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.LabelDescriptor} LabelDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                LabelDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a LabelDescriptor message.
-                 * @function verify
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                LabelDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.key != null && message.hasOwnProperty("key"))
-                        if (!$util.isString(message.key))
-                            return "key: string expected";
-                    if (message.valueType != null && message.hasOwnProperty("valueType"))
-                        switch (message.valueType) {
-                        default:
-                            return "valueType: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        if (!$util.isString(message.description))
-                            return "description: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a LabelDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.LabelDescriptor} LabelDescriptor
-                 */
-                LabelDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.LabelDescriptor)
-                        return object;
-                    var message = new $root.google.api.LabelDescriptor();
-                    if (object.key != null)
-                        message.key = String(object.key);
-                    switch (object.valueType) {
-                    case "STRING":
-                    case 0:
-                        message.valueType = 0;
-                        break;
-                    case "BOOL":
-                    case 1:
-                        message.valueType = 1;
-                        break;
-                    case "INT64":
-                    case 2:
-                        message.valueType = 2;
-                        break;
-                    }
-                    if (object.description != null)
-                        message.description = String(object.description);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a LabelDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.LabelDescriptor
-                 * @static
-                 * @param {google.api.LabelDescriptor} message LabelDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                LabelDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.key = "";
-                        object.valueType = options.enums === String ? "STRING" : 0;
-                        object.description = "";
-                    }
-                    if (message.key != null && message.hasOwnProperty("key"))
-                        object.key = message.key;
-                    if (message.valueType != null && message.hasOwnProperty("valueType"))
-                        object.valueType = options.enums === String ? $root.google.api.LabelDescriptor.ValueType[message.valueType] : message.valueType;
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        object.description = message.description;
-                    return object;
-                };
-    
-                /**
-                 * Converts this LabelDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.LabelDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                LabelDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * ValueType enum.
-                 * @name google.api.LabelDescriptor.ValueType
-                 * @enum {number}
-                 * @property {number} STRING=0 STRING value
-                 * @property {number} BOOL=1 BOOL value
-                 * @property {number} INT64=2 INT64 value
-                 */
-                LabelDescriptor.ValueType = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STRING"] = 0;
-                    values[valuesById[1] = "BOOL"] = 1;
-                    values[valuesById[2] = "INT64"] = 2;
-                    return values;
-                })();
-    
-                return LabelDescriptor;
-            })();
-    
-            /**
-             * LaunchStage enum.
-             * @name google.api.LaunchStage
-             * @enum {number}
-             * @property {number} LAUNCH_STAGE_UNSPECIFIED=0 LAUNCH_STAGE_UNSPECIFIED value
-             * @property {number} UNIMPLEMENTED=6 UNIMPLEMENTED value
-             * @property {number} PRELAUNCH=7 PRELAUNCH value
-             * @property {number} EARLY_ACCESS=1 EARLY_ACCESS value
-             * @property {number} ALPHA=2 ALPHA value
-             * @property {number} BETA=3 BETA value
-             * @property {number} GA=4 GA value
-             * @property {number} DEPRECATED=5 DEPRECATED value
-             */
-            api.LaunchStage = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "LAUNCH_STAGE_UNSPECIFIED"] = 0;
-                values[valuesById[6] = "UNIMPLEMENTED"] = 6;
-                values[valuesById[7] = "PRELAUNCH"] = 7;
-                values[valuesById[1] = "EARLY_ACCESS"] = 1;
-                values[valuesById[2] = "ALPHA"] = 2;
-                values[valuesById[3] = "BETA"] = 3;
-                values[valuesById[4] = "GA"] = 4;
-                values[valuesById[5] = "DEPRECATED"] = 5;
-                return values;
-            })();
-    
-            api.Quota = (function() {
-    
-                /**
-                 * Properties of a Quota.
-                 * @memberof google.api
-                 * @interface IQuota
-                 * @property {Array.<google.api.IQuotaLimit>|null} [limits] Quota limits
-                 * @property {Array.<google.api.IMetricRule>|null} [metricRules] Quota metricRules
-                 */
-    
-                /**
-                 * Constructs a new Quota.
-                 * @memberof google.api
-                 * @classdesc Represents a Quota.
-                 * @implements IQuota
-                 * @constructor
-                 * @param {google.api.IQuota=} [properties] Properties to set
-                 */
-                function Quota(properties) {
-                    this.limits = [];
-                    this.metricRules = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Quota limits.
-                 * @member {Array.<google.api.IQuotaLimit>} limits
-                 * @memberof google.api.Quota
-                 * @instance
-                 */
-                Quota.prototype.limits = $util.emptyArray;
-    
-                /**
-                 * Quota metricRules.
-                 * @member {Array.<google.api.IMetricRule>} metricRules
-                 * @memberof google.api.Quota
-                 * @instance
-                 */
-                Quota.prototype.metricRules = $util.emptyArray;
-    
-                /**
-                 * Creates a new Quota instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.Quota
-                 * @static
-                 * @param {google.api.IQuota=} [properties] Properties to set
-                 * @returns {google.api.Quota} Quota instance
-                 */
-                Quota.create = function create(properties) {
-                    return new Quota(properties);
-                };
-    
-                /**
-                 * Encodes the specified Quota message. Does not implicitly {@link google.api.Quota.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.Quota
-                 * @static
-                 * @param {google.api.IQuota} message Quota message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Quota.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.limits != null && message.limits.length)
-                        for (var i = 0; i < message.limits.length; ++i)
-                            $root.google.api.QuotaLimit.encode(message.limits[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    if (message.metricRules != null && message.metricRules.length)
-                        for (var i = 0; i < message.metricRules.length; ++i)
-                            $root.google.api.MetricRule.encode(message.metricRules[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Quota message, length delimited. Does not implicitly {@link google.api.Quota.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.Quota
-                 * @static
-                 * @param {google.api.IQuota} message Quota message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Quota.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Quota message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.Quota
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.Quota} Quota
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Quota.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Quota();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 3:
-                            if (!(message.limits && message.limits.length))
-                                message.limits = [];
-                            message.limits.push($root.google.api.QuotaLimit.decode(reader, reader.uint32()));
-                            break;
-                        case 4:
-                            if (!(message.metricRules && message.metricRules.length))
-                                message.metricRules = [];
-                            message.metricRules.push($root.google.api.MetricRule.decode(reader, reader.uint32()));
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Quota message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.Quota
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.Quota} Quota
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Quota.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Quota message.
-                 * @function verify
-                 * @memberof google.api.Quota
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Quota.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.limits != null && message.hasOwnProperty("limits")) {
-                        if (!Array.isArray(message.limits))
-                            return "limits: array expected";
-                        for (var i = 0; i < message.limits.length; ++i) {
-                            var error = $root.google.api.QuotaLimit.verify(message.limits[i]);
-                            if (error)
-                                return "limits." + error;
-                        }
-                    }
-                    if (message.metricRules != null && message.hasOwnProperty("metricRules")) {
-                        if (!Array.isArray(message.metricRules))
-                            return "metricRules: array expected";
-                        for (var i = 0; i < message.metricRules.length; ++i) {
-                            var error = $root.google.api.MetricRule.verify(message.metricRules[i]);
-                            if (error)
-                                return "metricRules." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Quota message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.Quota
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.Quota} Quota
-                 */
-                Quota.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.Quota)
-                        return object;
-                    var message = new $root.google.api.Quota();
-                    if (object.limits) {
-                        if (!Array.isArray(object.limits))
-                            throw TypeError(".google.api.Quota.limits: array expected");
-                        message.limits = [];
-                        for (var i = 0; i < object.limits.length; ++i) {
-                            if (typeof object.limits[i] !== "object")
-                                throw TypeError(".google.api.Quota.limits: object expected");
-                            message.limits[i] = $root.google.api.QuotaLimit.fromObject(object.limits[i]);
-                        }
-                    }
-                    if (object.metricRules) {
-                        if (!Array.isArray(object.metricRules))
-                            throw TypeError(".google.api.Quota.metricRules: array expected");
-                        message.metricRules = [];
-                        for (var i = 0; i < object.metricRules.length; ++i) {
-                            if (typeof object.metricRules[i] !== "object")
-                                throw TypeError(".google.api.Quota.metricRules: object expected");
-                            message.metricRules[i] = $root.google.api.MetricRule.fromObject(object.metricRules[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Quota message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.Quota
-                 * @static
-                 * @param {google.api.Quota} message Quota
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Quota.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.limits = [];
-                        object.metricRules = [];
-                    }
-                    if (message.limits && message.limits.length) {
-                        object.limits = [];
-                        for (var j = 0; j < message.limits.length; ++j)
-                            object.limits[j] = $root.google.api.QuotaLimit.toObject(message.limits[j], options);
-                    }
-                    if (message.metricRules && message.metricRules.length) {
-                        object.metricRules = [];
-                        for (var j = 0; j < message.metricRules.length; ++j)
-                            object.metricRules[j] = $root.google.api.MetricRule.toObject(message.metricRules[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this Quota to JSON.
-                 * @function toJSON
-                 * @memberof google.api.Quota
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Quota.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Quota;
-            })();
-    
-            api.MetricRule = (function() {
-    
-                /**
-                 * Properties of a MetricRule.
-                 * @memberof google.api
-                 * @interface IMetricRule
-                 * @property {string|null} [selector] MetricRule selector
-                 * @property {Object.<string,number|Long>|null} [metricCosts] MetricRule metricCosts
-                 */
-    
-                /**
-                 * Constructs a new MetricRule.
-                 * @memberof google.api
-                 * @classdesc Represents a MetricRule.
-                 * @implements IMetricRule
-                 * @constructor
-                 * @param {google.api.IMetricRule=} [properties] Properties to set
-                 */
-                function MetricRule(properties) {
-                    this.metricCosts = {};
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * MetricRule selector.
-                 * @member {string} selector
-                 * @memberof google.api.MetricRule
-                 * @instance
-                 */
-                MetricRule.prototype.selector = "";
-    
-                /**
-                 * MetricRule metricCosts.
-                 * @member {Object.<string,number|Long>} metricCosts
-                 * @memberof google.api.MetricRule
-                 * @instance
-                 */
-                MetricRule.prototype.metricCosts = $util.emptyObject;
-    
-                /**
-                 * Creates a new MetricRule instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.MetricRule
-                 * @static
-                 * @param {google.api.IMetricRule=} [properties] Properties to set
-                 * @returns {google.api.MetricRule} MetricRule instance
-                 */
-                MetricRule.create = function create(properties) {
-                    return new MetricRule(properties);
-                };
-    
-                /**
-                 * Encodes the specified MetricRule message. Does not implicitly {@link google.api.MetricRule.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.MetricRule
-                 * @static
-                 * @param {google.api.IMetricRule} message MetricRule message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                MetricRule.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
-                    if (message.metricCosts != null && Object.hasOwnProperty.call(message, "metricCosts"))
-                        for (var keys = Object.keys(message.metricCosts), i = 0; i < keys.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).int64(message.metricCosts[keys[i]]).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified MetricRule message, length delimited. Does not implicitly {@link google.api.MetricRule.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.MetricRule
-                 * @static
-                 * @param {google.api.IMetricRule} message MetricRule message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                MetricRule.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a MetricRule message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.MetricRule
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.MetricRule} MetricRule
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                MetricRule.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MetricRule(), key, value;
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.selector = reader.string();
-                            break;
-                        case 2:
-                            if (message.metricCosts === $util.emptyObject)
-                                message.metricCosts = {};
-                            var end2 = reader.uint32() + reader.pos;
-                            key = "";
-                            value = 0;
-                            while (reader.pos < end2) {
-                                var tag2 = reader.uint32();
-                                switch (tag2 >>> 3) {
-                                case 1:
-                                    key = reader.string();
-                                    break;
-                                case 2:
-                                    value = reader.int64();
-                                    break;
-                                default:
-                                    reader.skipType(tag2 & 7);
-                                    break;
-                                }
-                            }
-                            message.metricCosts[key] = value;
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a MetricRule message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.MetricRule
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.MetricRule} MetricRule
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                MetricRule.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a MetricRule message.
-                 * @function verify
-                 * @memberof google.api.MetricRule
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                MetricRule.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.selector != null && message.hasOwnProperty("selector"))
-                        if (!$util.isString(message.selector))
-                            return "selector: string expected";
-                    if (message.metricCosts != null && message.hasOwnProperty("metricCosts")) {
-                        if (!$util.isObject(message.metricCosts))
-                            return "metricCosts: object expected";
-                        var key = Object.keys(message.metricCosts);
-                        for (var i = 0; i < key.length; ++i)
-                            if (!$util.isInteger(message.metricCosts[key[i]]) && !(message.metricCosts[key[i]] && $util.isInteger(message.metricCosts[key[i]].low) && $util.isInteger(message.metricCosts[key[i]].high)))
-                                return "metricCosts: integer|Long{k:string} expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a MetricRule message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.MetricRule
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.MetricRule} MetricRule
-                 */
-                MetricRule.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.MetricRule)
-                        return object;
-                    var message = new $root.google.api.MetricRule();
-                    if (object.selector != null)
-                        message.selector = String(object.selector);
-                    if (object.metricCosts) {
-                        if (typeof object.metricCosts !== "object")
-                            throw TypeError(".google.api.MetricRule.metricCosts: object expected");
-                        message.metricCosts = {};
-                        for (var keys = Object.keys(object.metricCosts), i = 0; i < keys.length; ++i)
-                            if ($util.Long)
-                                (message.metricCosts[keys[i]] = $util.Long.fromValue(object.metricCosts[keys[i]])).unsigned = false;
-                            else if (typeof object.metricCosts[keys[i]] === "string")
-                                message.metricCosts[keys[i]] = parseInt(object.metricCosts[keys[i]], 10);
-                            else if (typeof object.metricCosts[keys[i]] === "number")
-                                message.metricCosts[keys[i]] = object.metricCosts[keys[i]];
-                            else if (typeof object.metricCosts[keys[i]] === "object")
-                                message.metricCosts[keys[i]] = new $util.LongBits(object.metricCosts[keys[i]].low >>> 0, object.metricCosts[keys[i]].high >>> 0).toNumber();
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a MetricRule message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.MetricRule
-                 * @static
-                 * @param {google.api.MetricRule} message MetricRule
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                MetricRule.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.objects || options.defaults)
-                        object.metricCosts = {};
-                    if (options.defaults)
-                        object.selector = "";
-                    if (message.selector != null && message.hasOwnProperty("selector"))
-                        object.selector = message.selector;
-                    var keys2;
-                    if (message.metricCosts && (keys2 = Object.keys(message.metricCosts)).length) {
-                        object.metricCosts = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            if (typeof message.metricCosts[keys2[j]] === "number")
-                                object.metricCosts[keys2[j]] = options.longs === String ? String(message.metricCosts[keys2[j]]) : message.metricCosts[keys2[j]];
-                            else
-                                object.metricCosts[keys2[j]] = options.longs === String ? $util.Long.prototype.toString.call(message.metricCosts[keys2[j]]) : options.longs === Number ? new $util.LongBits(message.metricCosts[keys2[j]].low >>> 0, message.metricCosts[keys2[j]].high >>> 0).toNumber() : message.metricCosts[keys2[j]];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this MetricRule to JSON.
-                 * @function toJSON
-                 * @memberof google.api.MetricRule
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                MetricRule.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return MetricRule;
-            })();
-    
-            api.QuotaLimit = (function() {
-    
-                /**
-                 * Properties of a QuotaLimit.
-                 * @memberof google.api
-                 * @interface IQuotaLimit
-                 * @property {string|null} [name] QuotaLimit name
-                 * @property {string|null} [description] QuotaLimit description
-                 * @property {number|Long|null} [defaultLimit] QuotaLimit defaultLimit
-                 * @property {number|Long|null} [maxLimit] QuotaLimit maxLimit
-                 * @property {number|Long|null} [freeTier] QuotaLimit freeTier
-                 * @property {string|null} [duration] QuotaLimit duration
-                 * @property {string|null} [metric] QuotaLimit metric
-                 * @property {string|null} [unit] QuotaLimit unit
-                 * @property {Object.<string,number|Long>|null} [values] QuotaLimit values
-                 * @property {string|null} [displayName] QuotaLimit displayName
-                 */
-    
-                /**
-                 * Constructs a new QuotaLimit.
-                 * @memberof google.api
-                 * @classdesc Represents a QuotaLimit.
-                 * @implements IQuotaLimit
-                 * @constructor
-                 * @param {google.api.IQuotaLimit=} [properties] Properties to set
-                 */
-                function QuotaLimit(properties) {
-                    this.values = {};
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * QuotaLimit name.
-                 * @member {string} name
-                 * @memberof google.api.QuotaLimit
-                 * @instance
-                 */
-                QuotaLimit.prototype.name = "";
-    
-                /**
-                 * QuotaLimit description.
-                 * @member {string} description
-                 * @memberof google.api.QuotaLimit
-                 * @instance
-                 */
-                QuotaLimit.prototype.description = "";
-    
-                /**
-                 * QuotaLimit defaultLimit.
-                 * @member {number|Long} defaultLimit
-                 * @memberof google.api.QuotaLimit
-                 * @instance
-                 */
-                QuotaLimit.prototype.defaultLimit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * QuotaLimit maxLimit.
-                 * @member {number|Long} maxLimit
-                 * @memberof google.api.QuotaLimit
-                 * @instance
-                 */
-                QuotaLimit.prototype.maxLimit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * QuotaLimit freeTier.
-                 * @member {number|Long} freeTier
-                 * @memberof google.api.QuotaLimit
-                 * @instance
-                 */
-                QuotaLimit.prototype.freeTier = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * QuotaLimit duration.
-                 * @member {string} duration
-                 * @memberof google.api.QuotaLimit
-                 * @instance
-                 */
-                QuotaLimit.prototype.duration = "";
-    
-                /**
-                 * QuotaLimit metric.
-                 * @member {string} metric
-                 * @memberof google.api.QuotaLimit
-                 * @instance
-                 */
-                QuotaLimit.prototype.metric = "";
-    
-                /**
-                 * QuotaLimit unit.
-                 * @member {string} unit
-                 * @memberof google.api.QuotaLimit
-                 * @instance
-                 */
-                QuotaLimit.prototype.unit = "";
-    
-                /**
-                 * QuotaLimit values.
-                 * @member {Object.<string,number|Long>} values
-                 * @memberof google.api.QuotaLimit
-                 * @instance
-                 */
-                QuotaLimit.prototype.values = $util.emptyObject;
-    
-                /**
-                 * QuotaLimit displayName.
-                 * @member {string} displayName
-                 * @memberof google.api.QuotaLimit
-                 * @instance
-                 */
-                QuotaLimit.prototype.displayName = "";
-    
-                /**
-                 * Creates a new QuotaLimit instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.QuotaLimit
-                 * @static
-                 * @param {google.api.IQuotaLimit=} [properties] Properties to set
-                 * @returns {google.api.QuotaLimit} QuotaLimit instance
-                 */
-                QuotaLimit.create = function create(properties) {
-                    return new QuotaLimit(properties);
-                };
-    
-                /**
-                 * Encodes the specified QuotaLimit message. Does not implicitly {@link google.api.QuotaLimit.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.QuotaLimit
-                 * @static
-                 * @param {google.api.IQuotaLimit} message QuotaLimit message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                QuotaLimit.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
-                    if (message.defaultLimit != null && Object.hasOwnProperty.call(message, "defaultLimit"))
-                        writer.uint32(/* id 3, wireType 0 =*/24).int64(message.defaultLimit);
-                    if (message.maxLimit != null && Object.hasOwnProperty.call(message, "maxLimit"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int64(message.maxLimit);
-                    if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.duration);
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.name);
-                    if (message.freeTier != null && Object.hasOwnProperty.call(message, "freeTier"))
-                        writer.uint32(/* id 7, wireType 0 =*/56).int64(message.freeTier);
-                    if (message.metric != null && Object.hasOwnProperty.call(message, "metric"))
-                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.metric);
-                    if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
-                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.unit);
-                    if (message.values != null && Object.hasOwnProperty.call(message, "values"))
-                        for (var keys = Object.keys(message.values), i = 0; i < keys.length; ++i)
-                            writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).int64(message.values[keys[i]]).ldelim();
-                    if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                        writer.uint32(/* id 12, wireType 2 =*/98).string(message.displayName);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified QuotaLimit message, length delimited. Does not implicitly {@link google.api.QuotaLimit.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.QuotaLimit
-                 * @static
-                 * @param {google.api.IQuotaLimit} message QuotaLimit message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                QuotaLimit.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a QuotaLimit message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.QuotaLimit
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.QuotaLimit} QuotaLimit
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                QuotaLimit.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.QuotaLimit(), key, value;
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 6:
-                            message.name = reader.string();
-                            break;
-                        case 2:
-                            message.description = reader.string();
-                            break;
-                        case 3:
-                            message.defaultLimit = reader.int64();
-                            break;
-                        case 4:
-                            message.maxLimit = reader.int64();
-                            break;
-                        case 7:
-                            message.freeTier = reader.int64();
-                            break;
-                        case 5:
-                            message.duration = reader.string();
-                            break;
-                        case 8:
-                            message.metric = reader.string();
-                            break;
-                        case 9:
-                            message.unit = reader.string();
-                            break;
-                        case 10:
-                            if (message.values === $util.emptyObject)
-                                message.values = {};
-                            var end2 = reader.uint32() + reader.pos;
-                            key = "";
-                            value = 0;
-                            while (reader.pos < end2) {
-                                var tag2 = reader.uint32();
-                                switch (tag2 >>> 3) {
-                                case 1:
-                                    key = reader.string();
-                                    break;
-                                case 2:
-                                    value = reader.int64();
-                                    break;
-                                default:
-                                    reader.skipType(tag2 & 7);
-                                    break;
-                                }
-                            }
-                            message.values[key] = value;
-                            break;
-                        case 12:
-                            message.displayName = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a QuotaLimit message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.QuotaLimit
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.QuotaLimit} QuotaLimit
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                QuotaLimit.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a QuotaLimit message.
-                 * @function verify
-                 * @memberof google.api.QuotaLimit
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                QuotaLimit.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        if (!$util.isString(message.name))
-                            return "name: string expected";
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        if (!$util.isString(message.description))
-                            return "description: string expected";
-                    if (message.defaultLimit != null && message.hasOwnProperty("defaultLimit"))
-                        if (!$util.isInteger(message.defaultLimit) && !(message.defaultLimit && $util.isInteger(message.defaultLimit.low) && $util.isInteger(message.defaultLimit.high)))
-                            return "defaultLimit: integer|Long expected";
-                    if (message.maxLimit != null && message.hasOwnProperty("maxLimit"))
-                        if (!$util.isInteger(message.maxLimit) && !(message.maxLimit && $util.isInteger(message.maxLimit.low) && $util.isInteger(message.maxLimit.high)))
-                            return "maxLimit: integer|Long expected";
-                    if (message.freeTier != null && message.hasOwnProperty("freeTier"))
-                        if (!$util.isInteger(message.freeTier) && !(message.freeTier && $util.isInteger(message.freeTier.low) && $util.isInteger(message.freeTier.high)))
-                            return "freeTier: integer|Long expected";
-                    if (message.duration != null && message.hasOwnProperty("duration"))
-                        if (!$util.isString(message.duration))
-                            return "duration: string expected";
-                    if (message.metric != null && message.hasOwnProperty("metric"))
-                        if (!$util.isString(message.metric))
-                            return "metric: string expected";
-                    if (message.unit != null && message.hasOwnProperty("unit"))
-                        if (!$util.isString(message.unit))
-                            return "unit: string expected";
-                    if (message.values != null && message.hasOwnProperty("values")) {
-                        if (!$util.isObject(message.values))
-                            return "values: object expected";
-                        var key = Object.keys(message.values);
-                        for (var i = 0; i < key.length; ++i)
-                            if (!$util.isInteger(message.values[key[i]]) && !(message.values[key[i]] && $util.isInteger(message.values[key[i]].low) && $util.isInteger(message.values[key[i]].high)))
-                                return "values: integer|Long{k:string} expected";
-                    }
-                    if (message.displayName != null && message.hasOwnProperty("displayName"))
-                        if (!$util.isString(message.displayName))
-                            return "displayName: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a QuotaLimit message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.QuotaLimit
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.QuotaLimit} QuotaLimit
-                 */
-                QuotaLimit.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.QuotaLimit)
-                        return object;
-                    var message = new $root.google.api.QuotaLimit();
-                    if (object.name != null)
-                        message.name = String(object.name);
-                    if (object.description != null)
-                        message.description = String(object.description);
-                    if (object.defaultLimit != null)
-                        if ($util.Long)
-                            (message.defaultLimit = $util.Long.fromValue(object.defaultLimit)).unsigned = false;
-                        else if (typeof object.defaultLimit === "string")
-                            message.defaultLimit = parseInt(object.defaultLimit, 10);
-                        else if (typeof object.defaultLimit === "number")
-                            message.defaultLimit = object.defaultLimit;
-                        else if (typeof object.defaultLimit === "object")
-                            message.defaultLimit = new $util.LongBits(object.defaultLimit.low >>> 0, object.defaultLimit.high >>> 0).toNumber();
-                    if (object.maxLimit != null)
-                        if ($util.Long)
-                            (message.maxLimit = $util.Long.fromValue(object.maxLimit)).unsigned = false;
-                        else if (typeof object.maxLimit === "string")
-                            message.maxLimit = parseInt(object.maxLimit, 10);
-                        else if (typeof object.maxLimit === "number")
-                            message.maxLimit = object.maxLimit;
-                        else if (typeof object.maxLimit === "object")
-                            message.maxLimit = new $util.LongBits(object.maxLimit.low >>> 0, object.maxLimit.high >>> 0).toNumber();
-                    if (object.freeTier != null)
-                        if ($util.Long)
-                            (message.freeTier = $util.Long.fromValue(object.freeTier)).unsigned = false;
-                        else if (typeof object.freeTier === "string")
-                            message.freeTier = parseInt(object.freeTier, 10);
-                        else if (typeof object.freeTier === "number")
-                            message.freeTier = object.freeTier;
-                        else if (typeof object.freeTier === "object")
-                            message.freeTier = new $util.LongBits(object.freeTier.low >>> 0, object.freeTier.high >>> 0).toNumber();
-                    if (object.duration != null)
-                        message.duration = String(object.duration);
-                    if (object.metric != null)
-                        message.metric = String(object.metric);
-                    if (object.unit != null)
-                        message.unit = String(object.unit);
-                    if (object.values) {
-                        if (typeof object.values !== "object")
-                            throw TypeError(".google.api.QuotaLimit.values: object expected");
-                        message.values = {};
-                        for (var keys = Object.keys(object.values), i = 0; i < keys.length; ++i)
-                            if ($util.Long)
-                                (message.values[keys[i]] = $util.Long.fromValue(object.values[keys[i]])).unsigned = false;
-                            else if (typeof object.values[keys[i]] === "string")
-                                message.values[keys[i]] = parseInt(object.values[keys[i]], 10);
-                            else if (typeof object.values[keys[i]] === "number")
-                                message.values[keys[i]] = object.values[keys[i]];
-                            else if (typeof object.values[keys[i]] === "object")
-                                message.values[keys[i]] = new $util.LongBits(object.values[keys[i]].low >>> 0, object.values[keys[i]].high >>> 0).toNumber();
-                    }
-                    if (object.displayName != null)
-                        message.displayName = String(object.displayName);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a QuotaLimit message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.QuotaLimit
-                 * @static
-                 * @param {google.api.QuotaLimit} message QuotaLimit
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                QuotaLimit.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.objects || options.defaults)
-                        object.values = {};
-                    if (options.defaults) {
-                        object.description = "";
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.defaultLimit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.defaultLimit = options.longs === String ? "0" : 0;
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.maxLimit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.maxLimit = options.longs === String ? "0" : 0;
-                        object.duration = "";
-                        object.name = "";
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.freeTier = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.freeTier = options.longs === String ? "0" : 0;
-                        object.metric = "";
-                        object.unit = "";
-                        object.displayName = "";
-                    }
-                    if (message.description != null && message.hasOwnProperty("description"))
-                        object.description = message.description;
-                    if (message.defaultLimit != null && message.hasOwnProperty("defaultLimit"))
-                        if (typeof message.defaultLimit === "number")
-                            object.defaultLimit = options.longs === String ? String(message.defaultLimit) : message.defaultLimit;
-                        else
-                            object.defaultLimit = options.longs === String ? $util.Long.prototype.toString.call(message.defaultLimit) : options.longs === Number ? new $util.LongBits(message.defaultLimit.low >>> 0, message.defaultLimit.high >>> 0).toNumber() : message.defaultLimit;
-                    if (message.maxLimit != null && message.hasOwnProperty("maxLimit"))
-                        if (typeof message.maxLimit === "number")
-                            object.maxLimit = options.longs === String ? String(message.maxLimit) : message.maxLimit;
-                        else
-                            object.maxLimit = options.longs === String ? $util.Long.prototype.toString.call(message.maxLimit) : options.longs === Number ? new $util.LongBits(message.maxLimit.low >>> 0, message.maxLimit.high >>> 0).toNumber() : message.maxLimit;
-                    if (message.duration != null && message.hasOwnProperty("duration"))
-                        object.duration = message.duration;
-                    if (message.name != null && message.hasOwnProperty("name"))
-                        object.name = message.name;
-                    if (message.freeTier != null && message.hasOwnProperty("freeTier"))
-                        if (typeof message.freeTier === "number")
-                            object.freeTier = options.longs === String ? String(message.freeTier) : message.freeTier;
-                        else
-                            object.freeTier = options.longs === String ? $util.Long.prototype.toString.call(message.freeTier) : options.longs === Number ? new $util.LongBits(message.freeTier.low >>> 0, message.freeTier.high >>> 0).toNumber() : message.freeTier;
-                    if (message.metric != null && message.hasOwnProperty("metric"))
-                        object.metric = message.metric;
-                    if (message.unit != null && message.hasOwnProperty("unit"))
-                        object.unit = message.unit;
-                    var keys2;
-                    if (message.values && (keys2 = Object.keys(message.values)).length) {
-                        object.values = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            if (typeof message.values[keys2[j]] === "number")
-                                object.values[keys2[j]] = options.longs === String ? String(message.values[keys2[j]]) : message.values[keys2[j]];
-                            else
-                                object.values[keys2[j]] = options.longs === String ? $util.Long.prototype.toString.call(message.values[keys2[j]]) : options.longs === Number ? new $util.LongBits(message.values[keys2[j]].low >>> 0, message.values[keys2[j]].high >>> 0).toNumber() : message.values[keys2[j]];
-                    }
-                    if (message.displayName != null && message.hasOwnProperty("displayName"))
-                        object.displayName = message.displayName;
-                    return object;
-                };
-    
-                /**
-                 * Converts this QuotaLimit to JSON.
-                 * @function toJSON
-                 * @memberof google.api.QuotaLimit
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                QuotaLimit.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return QuotaLimit;
             })();
     
             api.Service = (function() {
@@ -15687,6 +13286,1426 @@
                 })();
     
                 return Billing;
+            })();
+    
+            api.MetricDescriptor = (function() {
+    
+                /**
+                 * Properties of a MetricDescriptor.
+                 * @memberof google.api
+                 * @interface IMetricDescriptor
+                 * @property {string|null} [name] MetricDescriptor name
+                 * @property {string|null} [type] MetricDescriptor type
+                 * @property {Array.<google.api.ILabelDescriptor>|null} [labels] MetricDescriptor labels
+                 * @property {google.api.MetricDescriptor.MetricKind|null} [metricKind] MetricDescriptor metricKind
+                 * @property {google.api.MetricDescriptor.ValueType|null} [valueType] MetricDescriptor valueType
+                 * @property {string|null} [unit] MetricDescriptor unit
+                 * @property {string|null} [description] MetricDescriptor description
+                 * @property {string|null} [displayName] MetricDescriptor displayName
+                 * @property {google.api.MetricDescriptor.IMetricDescriptorMetadata|null} [metadata] MetricDescriptor metadata
+                 * @property {google.api.LaunchStage|null} [launchStage] MetricDescriptor launchStage
+                 * @property {Array.<string>|null} [monitoredResourceTypes] MetricDescriptor monitoredResourceTypes
+                 */
+    
+                /**
+                 * Constructs a new MetricDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a MetricDescriptor.
+                 * @implements IMetricDescriptor
+                 * @constructor
+                 * @param {google.api.IMetricDescriptor=} [properties] Properties to set
+                 */
+                function MetricDescriptor(properties) {
+                    this.labels = [];
+                    this.monitoredResourceTypes = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * MetricDescriptor name.
+                 * @member {string} name
+                 * @memberof google.api.MetricDescriptor
+                 * @instance
+                 */
+                MetricDescriptor.prototype.name = "";
+    
+                /**
+                 * MetricDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.MetricDescriptor
+                 * @instance
+                 */
+                MetricDescriptor.prototype.type = "";
+    
+                /**
+                 * MetricDescriptor labels.
+                 * @member {Array.<google.api.ILabelDescriptor>} labels
+                 * @memberof google.api.MetricDescriptor
+                 * @instance
+                 */
+                MetricDescriptor.prototype.labels = $util.emptyArray;
+    
+                /**
+                 * MetricDescriptor metricKind.
+                 * @member {google.api.MetricDescriptor.MetricKind} metricKind
+                 * @memberof google.api.MetricDescriptor
+                 * @instance
+                 */
+                MetricDescriptor.prototype.metricKind = 0;
+    
+                /**
+                 * MetricDescriptor valueType.
+                 * @member {google.api.MetricDescriptor.ValueType} valueType
+                 * @memberof google.api.MetricDescriptor
+                 * @instance
+                 */
+                MetricDescriptor.prototype.valueType = 0;
+    
+                /**
+                 * MetricDescriptor unit.
+                 * @member {string} unit
+                 * @memberof google.api.MetricDescriptor
+                 * @instance
+                 */
+                MetricDescriptor.prototype.unit = "";
+    
+                /**
+                 * MetricDescriptor description.
+                 * @member {string} description
+                 * @memberof google.api.MetricDescriptor
+                 * @instance
+                 */
+                MetricDescriptor.prototype.description = "";
+    
+                /**
+                 * MetricDescriptor displayName.
+                 * @member {string} displayName
+                 * @memberof google.api.MetricDescriptor
+                 * @instance
+                 */
+                MetricDescriptor.prototype.displayName = "";
+    
+                /**
+                 * MetricDescriptor metadata.
+                 * @member {google.api.MetricDescriptor.IMetricDescriptorMetadata|null|undefined} metadata
+                 * @memberof google.api.MetricDescriptor
+                 * @instance
+                 */
+                MetricDescriptor.prototype.metadata = null;
+    
+                /**
+                 * MetricDescriptor launchStage.
+                 * @member {google.api.LaunchStage} launchStage
+                 * @memberof google.api.MetricDescriptor
+                 * @instance
+                 */
+                MetricDescriptor.prototype.launchStage = 0;
+    
+                /**
+                 * MetricDescriptor monitoredResourceTypes.
+                 * @member {Array.<string>} monitoredResourceTypes
+                 * @memberof google.api.MetricDescriptor
+                 * @instance
+                 */
+                MetricDescriptor.prototype.monitoredResourceTypes = $util.emptyArray;
+    
+                /**
+                 * Creates a new MetricDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.MetricDescriptor
+                 * @static
+                 * @param {google.api.IMetricDescriptor=} [properties] Properties to set
+                 * @returns {google.api.MetricDescriptor} MetricDescriptor instance
+                 */
+                MetricDescriptor.create = function create(properties) {
+                    return new MetricDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified MetricDescriptor message. Does not implicitly {@link google.api.MetricDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.MetricDescriptor
+                 * @static
+                 * @param {google.api.IMetricDescriptor} message MetricDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                MetricDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.labels != null && message.labels.length)
+                        for (var i = 0; i < message.labels.length; ++i)
+                            $root.google.api.LabelDescriptor.encode(message.labels[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.metricKind != null && Object.hasOwnProperty.call(message, "metricKind"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.metricKind);
+                    if (message.valueType != null && Object.hasOwnProperty.call(message, "valueType"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.valueType);
+                    if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.unit);
+                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                    if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.displayName);
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.type);
+                    if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                        $root.google.api.MetricDescriptor.MetricDescriptorMetadata.encode(message.metadata, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                    if (message.launchStage != null && Object.hasOwnProperty.call(message, "launchStage"))
+                        writer.uint32(/* id 12, wireType 0 =*/96).int32(message.launchStage);
+                    if (message.monitoredResourceTypes != null && message.monitoredResourceTypes.length)
+                        for (var i = 0; i < message.monitoredResourceTypes.length; ++i)
+                            writer.uint32(/* id 13, wireType 2 =*/106).string(message.monitoredResourceTypes[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified MetricDescriptor message, length delimited. Does not implicitly {@link google.api.MetricDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.MetricDescriptor
+                 * @static
+                 * @param {google.api.IMetricDescriptor} message MetricDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                MetricDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a MetricDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.MetricDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.MetricDescriptor} MetricDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                MetricDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MetricDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        case 8:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.labels && message.labels.length))
+                                message.labels = [];
+                            message.labels.push($root.google.api.LabelDescriptor.decode(reader, reader.uint32()));
+                            break;
+                        case 3:
+                            message.metricKind = reader.int32();
+                            break;
+                        case 4:
+                            message.valueType = reader.int32();
+                            break;
+                        case 5:
+                            message.unit = reader.string();
+                            break;
+                        case 6:
+                            message.description = reader.string();
+                            break;
+                        case 7:
+                            message.displayName = reader.string();
+                            break;
+                        case 10:
+                            message.metadata = $root.google.api.MetricDescriptor.MetricDescriptorMetadata.decode(reader, reader.uint32());
+                            break;
+                        case 12:
+                            message.launchStage = reader.int32();
+                            break;
+                        case 13:
+                            if (!(message.monitoredResourceTypes && message.monitoredResourceTypes.length))
+                                message.monitoredResourceTypes = [];
+                            message.monitoredResourceTypes.push(reader.string());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a MetricDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.MetricDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.MetricDescriptor} MetricDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                MetricDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a MetricDescriptor message.
+                 * @function verify
+                 * @memberof google.api.MetricDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                MetricDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.labels != null && message.hasOwnProperty("labels")) {
+                        if (!Array.isArray(message.labels))
+                            return "labels: array expected";
+                        for (var i = 0; i < message.labels.length; ++i) {
+                            var error = $root.google.api.LabelDescriptor.verify(message.labels[i]);
+                            if (error)
+                                return "labels." + error;
+                        }
+                    }
+                    if (message.metricKind != null && message.hasOwnProperty("metricKind"))
+                        switch (message.metricKind) {
+                        default:
+                            return "metricKind: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.valueType != null && message.hasOwnProperty("valueType"))
+                        switch (message.valueType) {
+                        default:
+                            return "valueType: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                            break;
+                        }
+                    if (message.unit != null && message.hasOwnProperty("unit"))
+                        if (!$util.isString(message.unit))
+                            return "unit: string expected";
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                        if (!$util.isString(message.displayName))
+                            return "displayName: string expected";
+                    if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                        var error = $root.google.api.MetricDescriptor.MetricDescriptorMetadata.verify(message.metadata);
+                        if (error)
+                            return "metadata." + error;
+                    }
+                    if (message.launchStage != null && message.hasOwnProperty("launchStage"))
+                        switch (message.launchStage) {
+                        default:
+                            return "launchStage: enum value expected";
+                        case 0:
+                        case 6:
+                        case 7:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                            break;
+                        }
+                    if (message.monitoredResourceTypes != null && message.hasOwnProperty("monitoredResourceTypes")) {
+                        if (!Array.isArray(message.monitoredResourceTypes))
+                            return "monitoredResourceTypes: array expected";
+                        for (var i = 0; i < message.monitoredResourceTypes.length; ++i)
+                            if (!$util.isString(message.monitoredResourceTypes[i]))
+                                return "monitoredResourceTypes: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a MetricDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.MetricDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.MetricDescriptor} MetricDescriptor
+                 */
+                MetricDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.MetricDescriptor)
+                        return object;
+                    var message = new $root.google.api.MetricDescriptor();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.labels) {
+                        if (!Array.isArray(object.labels))
+                            throw TypeError(".google.api.MetricDescriptor.labels: array expected");
+                        message.labels = [];
+                        for (var i = 0; i < object.labels.length; ++i) {
+                            if (typeof object.labels[i] !== "object")
+                                throw TypeError(".google.api.MetricDescriptor.labels: object expected");
+                            message.labels[i] = $root.google.api.LabelDescriptor.fromObject(object.labels[i]);
+                        }
+                    }
+                    switch (object.metricKind) {
+                    case "METRIC_KIND_UNSPECIFIED":
+                    case 0:
+                        message.metricKind = 0;
+                        break;
+                    case "GAUGE":
+                    case 1:
+                        message.metricKind = 1;
+                        break;
+                    case "DELTA":
+                    case 2:
+                        message.metricKind = 2;
+                        break;
+                    case "CUMULATIVE":
+                    case 3:
+                        message.metricKind = 3;
+                        break;
+                    }
+                    switch (object.valueType) {
+                    case "VALUE_TYPE_UNSPECIFIED":
+                    case 0:
+                        message.valueType = 0;
+                        break;
+                    case "BOOL":
+                    case 1:
+                        message.valueType = 1;
+                        break;
+                    case "INT64":
+                    case 2:
+                        message.valueType = 2;
+                        break;
+                    case "DOUBLE":
+                    case 3:
+                        message.valueType = 3;
+                        break;
+                    case "STRING":
+                    case 4:
+                        message.valueType = 4;
+                        break;
+                    case "DISTRIBUTION":
+                    case 5:
+                        message.valueType = 5;
+                        break;
+                    case "MONEY":
+                    case 6:
+                        message.valueType = 6;
+                        break;
+                    }
+                    if (object.unit != null)
+                        message.unit = String(object.unit);
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    if (object.displayName != null)
+                        message.displayName = String(object.displayName);
+                    if (object.metadata != null) {
+                        if (typeof object.metadata !== "object")
+                            throw TypeError(".google.api.MetricDescriptor.metadata: object expected");
+                        message.metadata = $root.google.api.MetricDescriptor.MetricDescriptorMetadata.fromObject(object.metadata);
+                    }
+                    switch (object.launchStage) {
+                    case "LAUNCH_STAGE_UNSPECIFIED":
+                    case 0:
+                        message.launchStage = 0;
+                        break;
+                    case "UNIMPLEMENTED":
+                    case 6:
+                        message.launchStage = 6;
+                        break;
+                    case "PRELAUNCH":
+                    case 7:
+                        message.launchStage = 7;
+                        break;
+                    case "EARLY_ACCESS":
+                    case 1:
+                        message.launchStage = 1;
+                        break;
+                    case "ALPHA":
+                    case 2:
+                        message.launchStage = 2;
+                        break;
+                    case "BETA":
+                    case 3:
+                        message.launchStage = 3;
+                        break;
+                    case "GA":
+                    case 4:
+                        message.launchStage = 4;
+                        break;
+                    case "DEPRECATED":
+                    case 5:
+                        message.launchStage = 5;
+                        break;
+                    }
+                    if (object.monitoredResourceTypes) {
+                        if (!Array.isArray(object.monitoredResourceTypes))
+                            throw TypeError(".google.api.MetricDescriptor.monitoredResourceTypes: array expected");
+                        message.monitoredResourceTypes = [];
+                        for (var i = 0; i < object.monitoredResourceTypes.length; ++i)
+                            message.monitoredResourceTypes[i] = String(object.monitoredResourceTypes[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a MetricDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.MetricDescriptor
+                 * @static
+                 * @param {google.api.MetricDescriptor} message MetricDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                MetricDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.labels = [];
+                        object.monitoredResourceTypes = [];
+                    }
+                    if (options.defaults) {
+                        object.name = "";
+                        object.metricKind = options.enums === String ? "METRIC_KIND_UNSPECIFIED" : 0;
+                        object.valueType = options.enums === String ? "VALUE_TYPE_UNSPECIFIED" : 0;
+                        object.unit = "";
+                        object.description = "";
+                        object.displayName = "";
+                        object.type = "";
+                        object.metadata = null;
+                        object.launchStage = options.enums === String ? "LAUNCH_STAGE_UNSPECIFIED" : 0;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.labels && message.labels.length) {
+                        object.labels = [];
+                        for (var j = 0; j < message.labels.length; ++j)
+                            object.labels[j] = $root.google.api.LabelDescriptor.toObject(message.labels[j], options);
+                    }
+                    if (message.metricKind != null && message.hasOwnProperty("metricKind"))
+                        object.metricKind = options.enums === String ? $root.google.api.MetricDescriptor.MetricKind[message.metricKind] : message.metricKind;
+                    if (message.valueType != null && message.hasOwnProperty("valueType"))
+                        object.valueType = options.enums === String ? $root.google.api.MetricDescriptor.ValueType[message.valueType] : message.valueType;
+                    if (message.unit != null && message.hasOwnProperty("unit"))
+                        object.unit = message.unit;
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                        object.displayName = message.displayName;
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.metadata != null && message.hasOwnProperty("metadata"))
+                        object.metadata = $root.google.api.MetricDescriptor.MetricDescriptorMetadata.toObject(message.metadata, options);
+                    if (message.launchStage != null && message.hasOwnProperty("launchStage"))
+                        object.launchStage = options.enums === String ? $root.google.api.LaunchStage[message.launchStage] : message.launchStage;
+                    if (message.monitoredResourceTypes && message.monitoredResourceTypes.length) {
+                        object.monitoredResourceTypes = [];
+                        for (var j = 0; j < message.monitoredResourceTypes.length; ++j)
+                            object.monitoredResourceTypes[j] = message.monitoredResourceTypes[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this MetricDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.MetricDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                MetricDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                MetricDescriptor.MetricDescriptorMetadata = (function() {
+    
+                    /**
+                     * Properties of a MetricDescriptorMetadata.
+                     * @memberof google.api.MetricDescriptor
+                     * @interface IMetricDescriptorMetadata
+                     * @property {google.api.LaunchStage|null} [launchStage] MetricDescriptorMetadata launchStage
+                     * @property {google.protobuf.IDuration|null} [samplePeriod] MetricDescriptorMetadata samplePeriod
+                     * @property {google.protobuf.IDuration|null} [ingestDelay] MetricDescriptorMetadata ingestDelay
+                     */
+    
+                    /**
+                     * Constructs a new MetricDescriptorMetadata.
+                     * @memberof google.api.MetricDescriptor
+                     * @classdesc Represents a MetricDescriptorMetadata.
+                     * @implements IMetricDescriptorMetadata
+                     * @constructor
+                     * @param {google.api.MetricDescriptor.IMetricDescriptorMetadata=} [properties] Properties to set
+                     */
+                    function MetricDescriptorMetadata(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MetricDescriptorMetadata launchStage.
+                     * @member {google.api.LaunchStage} launchStage
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @instance
+                     */
+                    MetricDescriptorMetadata.prototype.launchStage = 0;
+    
+                    /**
+                     * MetricDescriptorMetadata samplePeriod.
+                     * @member {google.protobuf.IDuration|null|undefined} samplePeriod
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @instance
+                     */
+                    MetricDescriptorMetadata.prototype.samplePeriod = null;
+    
+                    /**
+                     * MetricDescriptorMetadata ingestDelay.
+                     * @member {google.protobuf.IDuration|null|undefined} ingestDelay
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @instance
+                     */
+                    MetricDescriptorMetadata.prototype.ingestDelay = null;
+    
+                    /**
+                     * Creates a new MetricDescriptorMetadata instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @static
+                     * @param {google.api.MetricDescriptor.IMetricDescriptorMetadata=} [properties] Properties to set
+                     * @returns {google.api.MetricDescriptor.MetricDescriptorMetadata} MetricDescriptorMetadata instance
+                     */
+                    MetricDescriptorMetadata.create = function create(properties) {
+                        return new MetricDescriptorMetadata(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MetricDescriptorMetadata message. Does not implicitly {@link google.api.MetricDescriptor.MetricDescriptorMetadata.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @static
+                     * @param {google.api.MetricDescriptor.IMetricDescriptorMetadata} message MetricDescriptorMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MetricDescriptorMetadata.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.launchStage != null && Object.hasOwnProperty.call(message, "launchStage"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.launchStage);
+                        if (message.samplePeriod != null && Object.hasOwnProperty.call(message, "samplePeriod"))
+                            $root.google.protobuf.Duration.encode(message.samplePeriod, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.ingestDelay != null && Object.hasOwnProperty.call(message, "ingestDelay"))
+                            $root.google.protobuf.Duration.encode(message.ingestDelay, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MetricDescriptorMetadata message, length delimited. Does not implicitly {@link google.api.MetricDescriptor.MetricDescriptorMetadata.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @static
+                     * @param {google.api.MetricDescriptor.IMetricDescriptorMetadata} message MetricDescriptorMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MetricDescriptorMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MetricDescriptorMetadata message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.MetricDescriptor.MetricDescriptorMetadata} MetricDescriptorMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MetricDescriptorMetadata.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MetricDescriptor.MetricDescriptorMetadata();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.launchStage = reader.int32();
+                                break;
+                            case 2:
+                                message.samplePeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            case 3:
+                                message.ingestDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MetricDescriptorMetadata message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.MetricDescriptor.MetricDescriptorMetadata} MetricDescriptorMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MetricDescriptorMetadata.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MetricDescriptorMetadata message.
+                     * @function verify
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MetricDescriptorMetadata.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.launchStage != null && message.hasOwnProperty("launchStage"))
+                            switch (message.launchStage) {
+                            default:
+                                return "launchStage: enum value expected";
+                            case 0:
+                            case 6:
+                            case 7:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                                break;
+                            }
+                        if (message.samplePeriod != null && message.hasOwnProperty("samplePeriod")) {
+                            var error = $root.google.protobuf.Duration.verify(message.samplePeriod);
+                            if (error)
+                                return "samplePeriod." + error;
+                        }
+                        if (message.ingestDelay != null && message.hasOwnProperty("ingestDelay")) {
+                            var error = $root.google.protobuf.Duration.verify(message.ingestDelay);
+                            if (error)
+                                return "ingestDelay." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MetricDescriptorMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.MetricDescriptor.MetricDescriptorMetadata} MetricDescriptorMetadata
+                     */
+                    MetricDescriptorMetadata.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.MetricDescriptor.MetricDescriptorMetadata)
+                            return object;
+                        var message = new $root.google.api.MetricDescriptor.MetricDescriptorMetadata();
+                        switch (object.launchStage) {
+                        case "LAUNCH_STAGE_UNSPECIFIED":
+                        case 0:
+                            message.launchStage = 0;
+                            break;
+                        case "UNIMPLEMENTED":
+                        case 6:
+                            message.launchStage = 6;
+                            break;
+                        case "PRELAUNCH":
+                        case 7:
+                            message.launchStage = 7;
+                            break;
+                        case "EARLY_ACCESS":
+                        case 1:
+                            message.launchStage = 1;
+                            break;
+                        case "ALPHA":
+                        case 2:
+                            message.launchStage = 2;
+                            break;
+                        case "BETA":
+                        case 3:
+                            message.launchStage = 3;
+                            break;
+                        case "GA":
+                        case 4:
+                            message.launchStage = 4;
+                            break;
+                        case "DEPRECATED":
+                        case 5:
+                            message.launchStage = 5;
+                            break;
+                        }
+                        if (object.samplePeriod != null) {
+                            if (typeof object.samplePeriod !== "object")
+                                throw TypeError(".google.api.MetricDescriptor.MetricDescriptorMetadata.samplePeriod: object expected");
+                            message.samplePeriod = $root.google.protobuf.Duration.fromObject(object.samplePeriod);
+                        }
+                        if (object.ingestDelay != null) {
+                            if (typeof object.ingestDelay !== "object")
+                                throw TypeError(".google.api.MetricDescriptor.MetricDescriptorMetadata.ingestDelay: object expected");
+                            message.ingestDelay = $root.google.protobuf.Duration.fromObject(object.ingestDelay);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MetricDescriptorMetadata message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @static
+                     * @param {google.api.MetricDescriptor.MetricDescriptorMetadata} message MetricDescriptorMetadata
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MetricDescriptorMetadata.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.launchStage = options.enums === String ? "LAUNCH_STAGE_UNSPECIFIED" : 0;
+                            object.samplePeriod = null;
+                            object.ingestDelay = null;
+                        }
+                        if (message.launchStage != null && message.hasOwnProperty("launchStage"))
+                            object.launchStage = options.enums === String ? $root.google.api.LaunchStage[message.launchStage] : message.launchStage;
+                        if (message.samplePeriod != null && message.hasOwnProperty("samplePeriod"))
+                            object.samplePeriod = $root.google.protobuf.Duration.toObject(message.samplePeriod, options);
+                        if (message.ingestDelay != null && message.hasOwnProperty("ingestDelay"))
+                            object.ingestDelay = $root.google.protobuf.Duration.toObject(message.ingestDelay, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MetricDescriptorMetadata to JSON.
+                     * @function toJSON
+                     * @memberof google.api.MetricDescriptor.MetricDescriptorMetadata
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MetricDescriptorMetadata.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return MetricDescriptorMetadata;
+                })();
+    
+                /**
+                 * MetricKind enum.
+                 * @name google.api.MetricDescriptor.MetricKind
+                 * @enum {number}
+                 * @property {number} METRIC_KIND_UNSPECIFIED=0 METRIC_KIND_UNSPECIFIED value
+                 * @property {number} GAUGE=1 GAUGE value
+                 * @property {number} DELTA=2 DELTA value
+                 * @property {number} CUMULATIVE=3 CUMULATIVE value
+                 */
+                MetricDescriptor.MetricKind = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "METRIC_KIND_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "GAUGE"] = 1;
+                    values[valuesById[2] = "DELTA"] = 2;
+                    values[valuesById[3] = "CUMULATIVE"] = 3;
+                    return values;
+                })();
+    
+                /**
+                 * ValueType enum.
+                 * @name google.api.MetricDescriptor.ValueType
+                 * @enum {number}
+                 * @property {number} VALUE_TYPE_UNSPECIFIED=0 VALUE_TYPE_UNSPECIFIED value
+                 * @property {number} BOOL=1 BOOL value
+                 * @property {number} INT64=2 INT64 value
+                 * @property {number} DOUBLE=3 DOUBLE value
+                 * @property {number} STRING=4 STRING value
+                 * @property {number} DISTRIBUTION=5 DISTRIBUTION value
+                 * @property {number} MONEY=6 MONEY value
+                 */
+                MetricDescriptor.ValueType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "VALUE_TYPE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "BOOL"] = 1;
+                    values[valuesById[2] = "INT64"] = 2;
+                    values[valuesById[3] = "DOUBLE"] = 3;
+                    values[valuesById[4] = "STRING"] = 4;
+                    values[valuesById[5] = "DISTRIBUTION"] = 5;
+                    values[valuesById[6] = "MONEY"] = 6;
+                    return values;
+                })();
+    
+                return MetricDescriptor;
+            })();
+    
+            api.Metric = (function() {
+    
+                /**
+                 * Properties of a Metric.
+                 * @memberof google.api
+                 * @interface IMetric
+                 * @property {string|null} [type] Metric type
+                 * @property {Object.<string,string>|null} [labels] Metric labels
+                 */
+    
+                /**
+                 * Constructs a new Metric.
+                 * @memberof google.api
+                 * @classdesc Represents a Metric.
+                 * @implements IMetric
+                 * @constructor
+                 * @param {google.api.IMetric=} [properties] Properties to set
+                 */
+                function Metric(properties) {
+                    this.labels = {};
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Metric type.
+                 * @member {string} type
+                 * @memberof google.api.Metric
+                 * @instance
+                 */
+                Metric.prototype.type = "";
+    
+                /**
+                 * Metric labels.
+                 * @member {Object.<string,string>} labels
+                 * @memberof google.api.Metric
+                 * @instance
+                 */
+                Metric.prototype.labels = $util.emptyObject;
+    
+                /**
+                 * Creates a new Metric instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.Metric
+                 * @static
+                 * @param {google.api.IMetric=} [properties] Properties to set
+                 * @returns {google.api.Metric} Metric instance
+                 */
+                Metric.create = function create(properties) {
+                    return new Metric(properties);
+                };
+    
+                /**
+                 * Encodes the specified Metric message. Does not implicitly {@link google.api.Metric.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.Metric
+                 * @static
+                 * @param {google.api.IMetric} message Metric message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Metric.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                        for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Metric message, length delimited. Does not implicitly {@link google.api.Metric.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.Metric
+                 * @static
+                 * @param {google.api.IMetric} message Metric message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Metric.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Metric message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.Metric
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.Metric} Metric
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Metric.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Metric(), key, value;
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 3:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (message.labels === $util.emptyObject)
+                                message.labels = {};
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = "";
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.labels[key] = value;
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Metric message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.Metric
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.Metric} Metric
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Metric.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Metric message.
+                 * @function verify
+                 * @memberof google.api.Metric
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Metric.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.labels != null && message.hasOwnProperty("labels")) {
+                        if (!$util.isObject(message.labels))
+                            return "labels: object expected";
+                        var key = Object.keys(message.labels);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.labels[key[i]]))
+                                return "labels: string{k:string} expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Metric message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.Metric
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.Metric} Metric
+                 */
+                Metric.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.Metric)
+                        return object;
+                    var message = new $root.google.api.Metric();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.labels) {
+                        if (typeof object.labels !== "object")
+                            throw TypeError(".google.api.Metric.labels: object expected");
+                        message.labels = {};
+                        for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                            message.labels[keys[i]] = String(object.labels[keys[i]]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Metric message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.Metric
+                 * @static
+                 * @param {google.api.Metric} message Metric
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Metric.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.objects || options.defaults)
+                        object.labels = {};
+                    if (options.defaults)
+                        object.type = "";
+                    var keys2;
+                    if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                        object.labels = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.labels[keys2[j]] = message.labels[keys2[j]];
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Metric to JSON.
+                 * @function toJSON
+                 * @memberof google.api.Metric
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Metric.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Metric;
+            })();
+    
+            api.LabelDescriptor = (function() {
+    
+                /**
+                 * Properties of a LabelDescriptor.
+                 * @memberof google.api
+                 * @interface ILabelDescriptor
+                 * @property {string|null} [key] LabelDescriptor key
+                 * @property {google.api.LabelDescriptor.ValueType|null} [valueType] LabelDescriptor valueType
+                 * @property {string|null} [description] LabelDescriptor description
+                 */
+    
+                /**
+                 * Constructs a new LabelDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a LabelDescriptor.
+                 * @implements ILabelDescriptor
+                 * @constructor
+                 * @param {google.api.ILabelDescriptor=} [properties] Properties to set
+                 */
+                function LabelDescriptor(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * LabelDescriptor key.
+                 * @member {string} key
+                 * @memberof google.api.LabelDescriptor
+                 * @instance
+                 */
+                LabelDescriptor.prototype.key = "";
+    
+                /**
+                 * LabelDescriptor valueType.
+                 * @member {google.api.LabelDescriptor.ValueType} valueType
+                 * @memberof google.api.LabelDescriptor
+                 * @instance
+                 */
+                LabelDescriptor.prototype.valueType = 0;
+    
+                /**
+                 * LabelDescriptor description.
+                 * @member {string} description
+                 * @memberof google.api.LabelDescriptor
+                 * @instance
+                 */
+                LabelDescriptor.prototype.description = "";
+    
+                /**
+                 * Creates a new LabelDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {google.api.ILabelDescriptor=} [properties] Properties to set
+                 * @returns {google.api.LabelDescriptor} LabelDescriptor instance
+                 */
+                LabelDescriptor.create = function create(properties) {
+                    return new LabelDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified LabelDescriptor message. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {google.api.ILabelDescriptor} message LabelDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LabelDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                    if (message.valueType != null && Object.hasOwnProperty.call(message, "valueType"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.valueType);
+                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified LabelDescriptor message, length delimited. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {google.api.ILabelDescriptor} message LabelDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LabelDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a LabelDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.LabelDescriptor} LabelDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LabelDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.LabelDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.key = reader.string();
+                            break;
+                        case 2:
+                            message.valueType = reader.int32();
+                            break;
+                        case 3:
+                            message.description = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a LabelDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.LabelDescriptor} LabelDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LabelDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a LabelDescriptor message.
+                 * @function verify
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                LabelDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.key != null && message.hasOwnProperty("key"))
+                        if (!$util.isString(message.key))
+                            return "key: string expected";
+                    if (message.valueType != null && message.hasOwnProperty("valueType"))
+                        switch (message.valueType) {
+                        default:
+                            return "valueType: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a LabelDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.LabelDescriptor} LabelDescriptor
+                 */
+                LabelDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.LabelDescriptor)
+                        return object;
+                    var message = new $root.google.api.LabelDescriptor();
+                    if (object.key != null)
+                        message.key = String(object.key);
+                    switch (object.valueType) {
+                    case "STRING":
+                    case 0:
+                        message.valueType = 0;
+                        break;
+                    case "BOOL":
+                    case 1:
+                        message.valueType = 1;
+                        break;
+                    case "INT64":
+                    case 2:
+                        message.valueType = 2;
+                        break;
+                    }
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a LabelDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.LabelDescriptor
+                 * @static
+                 * @param {google.api.LabelDescriptor} message LabelDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                LabelDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.key = "";
+                        object.valueType = options.enums === String ? "STRING" : 0;
+                        object.description = "";
+                    }
+                    if (message.key != null && message.hasOwnProperty("key"))
+                        object.key = message.key;
+                    if (message.valueType != null && message.hasOwnProperty("valueType"))
+                        object.valueType = options.enums === String ? $root.google.api.LabelDescriptor.ValueType[message.valueType] : message.valueType;
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    return object;
+                };
+    
+                /**
+                 * Converts this LabelDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.LabelDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                LabelDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * ValueType enum.
+                 * @name google.api.LabelDescriptor.ValueType
+                 * @enum {number}
+                 * @property {number} STRING=0 STRING value
+                 * @property {number} BOOL=1 BOOL value
+                 * @property {number} INT64=2 INT64 value
+                 */
+                LabelDescriptor.ValueType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STRING"] = 0;
+                    values[valuesById[1] = "BOOL"] = 1;
+                    values[valuesById[2] = "INT64"] = 2;
+                    return values;
+                })();
+    
+                return LabelDescriptor;
+            })();
+    
+            /**
+             * LaunchStage enum.
+             * @name google.api.LaunchStage
+             * @enum {number}
+             * @property {number} LAUNCH_STAGE_UNSPECIFIED=0 LAUNCH_STAGE_UNSPECIFIED value
+             * @property {number} UNIMPLEMENTED=6 UNIMPLEMENTED value
+             * @property {number} PRELAUNCH=7 PRELAUNCH value
+             * @property {number} EARLY_ACCESS=1 EARLY_ACCESS value
+             * @property {number} ALPHA=2 ALPHA value
+             * @property {number} BETA=3 BETA value
+             * @property {number} GA=4 GA value
+             * @property {number} DEPRECATED=5 DEPRECATED value
+             */
+            api.LaunchStage = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "LAUNCH_STAGE_UNSPECIFIED"] = 0;
+                values[valuesById[6] = "UNIMPLEMENTED"] = 6;
+                values[valuesById[7] = "PRELAUNCH"] = 7;
+                values[valuesById[1] = "EARLY_ACCESS"] = 1;
+                values[valuesById[2] = "ALPHA"] = 2;
+                values[valuesById[3] = "BETA"] = 3;
+                values[valuesById[4] = "GA"] = 4;
+                values[valuesById[5] = "DEPRECATED"] = 5;
+                return values;
             })();
     
             api.Context = (function() {
@@ -19612,6 +18631,987 @@
                 })();
     
                 return Monitoring;
+            })();
+    
+            api.Quota = (function() {
+    
+                /**
+                 * Properties of a Quota.
+                 * @memberof google.api
+                 * @interface IQuota
+                 * @property {Array.<google.api.IQuotaLimit>|null} [limits] Quota limits
+                 * @property {Array.<google.api.IMetricRule>|null} [metricRules] Quota metricRules
+                 */
+    
+                /**
+                 * Constructs a new Quota.
+                 * @memberof google.api
+                 * @classdesc Represents a Quota.
+                 * @implements IQuota
+                 * @constructor
+                 * @param {google.api.IQuota=} [properties] Properties to set
+                 */
+                function Quota(properties) {
+                    this.limits = [];
+                    this.metricRules = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Quota limits.
+                 * @member {Array.<google.api.IQuotaLimit>} limits
+                 * @memberof google.api.Quota
+                 * @instance
+                 */
+                Quota.prototype.limits = $util.emptyArray;
+    
+                /**
+                 * Quota metricRules.
+                 * @member {Array.<google.api.IMetricRule>} metricRules
+                 * @memberof google.api.Quota
+                 * @instance
+                 */
+                Quota.prototype.metricRules = $util.emptyArray;
+    
+                /**
+                 * Creates a new Quota instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.Quota
+                 * @static
+                 * @param {google.api.IQuota=} [properties] Properties to set
+                 * @returns {google.api.Quota} Quota instance
+                 */
+                Quota.create = function create(properties) {
+                    return new Quota(properties);
+                };
+    
+                /**
+                 * Encodes the specified Quota message. Does not implicitly {@link google.api.Quota.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.Quota
+                 * @static
+                 * @param {google.api.IQuota} message Quota message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Quota.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.limits != null && message.limits.length)
+                        for (var i = 0; i < message.limits.length; ++i)
+                            $root.google.api.QuotaLimit.encode(message.limits[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.metricRules != null && message.metricRules.length)
+                        for (var i = 0; i < message.metricRules.length; ++i)
+                            $root.google.api.MetricRule.encode(message.metricRules[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Quota message, length delimited. Does not implicitly {@link google.api.Quota.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.Quota
+                 * @static
+                 * @param {google.api.IQuota} message Quota message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Quota.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Quota message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.Quota
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.Quota} Quota
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Quota.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Quota();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 3:
+                            if (!(message.limits && message.limits.length))
+                                message.limits = [];
+                            message.limits.push($root.google.api.QuotaLimit.decode(reader, reader.uint32()));
+                            break;
+                        case 4:
+                            if (!(message.metricRules && message.metricRules.length))
+                                message.metricRules = [];
+                            message.metricRules.push($root.google.api.MetricRule.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Quota message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.Quota
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.Quota} Quota
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Quota.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Quota message.
+                 * @function verify
+                 * @memberof google.api.Quota
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Quota.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.limits != null && message.hasOwnProperty("limits")) {
+                        if (!Array.isArray(message.limits))
+                            return "limits: array expected";
+                        for (var i = 0; i < message.limits.length; ++i) {
+                            var error = $root.google.api.QuotaLimit.verify(message.limits[i]);
+                            if (error)
+                                return "limits." + error;
+                        }
+                    }
+                    if (message.metricRules != null && message.hasOwnProperty("metricRules")) {
+                        if (!Array.isArray(message.metricRules))
+                            return "metricRules: array expected";
+                        for (var i = 0; i < message.metricRules.length; ++i) {
+                            var error = $root.google.api.MetricRule.verify(message.metricRules[i]);
+                            if (error)
+                                return "metricRules." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Quota message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.Quota
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.Quota} Quota
+                 */
+                Quota.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.Quota)
+                        return object;
+                    var message = new $root.google.api.Quota();
+                    if (object.limits) {
+                        if (!Array.isArray(object.limits))
+                            throw TypeError(".google.api.Quota.limits: array expected");
+                        message.limits = [];
+                        for (var i = 0; i < object.limits.length; ++i) {
+                            if (typeof object.limits[i] !== "object")
+                                throw TypeError(".google.api.Quota.limits: object expected");
+                            message.limits[i] = $root.google.api.QuotaLimit.fromObject(object.limits[i]);
+                        }
+                    }
+                    if (object.metricRules) {
+                        if (!Array.isArray(object.metricRules))
+                            throw TypeError(".google.api.Quota.metricRules: array expected");
+                        message.metricRules = [];
+                        for (var i = 0; i < object.metricRules.length; ++i) {
+                            if (typeof object.metricRules[i] !== "object")
+                                throw TypeError(".google.api.Quota.metricRules: object expected");
+                            message.metricRules[i] = $root.google.api.MetricRule.fromObject(object.metricRules[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Quota message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.Quota
+                 * @static
+                 * @param {google.api.Quota} message Quota
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Quota.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.limits = [];
+                        object.metricRules = [];
+                    }
+                    if (message.limits && message.limits.length) {
+                        object.limits = [];
+                        for (var j = 0; j < message.limits.length; ++j)
+                            object.limits[j] = $root.google.api.QuotaLimit.toObject(message.limits[j], options);
+                    }
+                    if (message.metricRules && message.metricRules.length) {
+                        object.metricRules = [];
+                        for (var j = 0; j < message.metricRules.length; ++j)
+                            object.metricRules[j] = $root.google.api.MetricRule.toObject(message.metricRules[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Quota to JSON.
+                 * @function toJSON
+                 * @memberof google.api.Quota
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Quota.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Quota;
+            })();
+    
+            api.MetricRule = (function() {
+    
+                /**
+                 * Properties of a MetricRule.
+                 * @memberof google.api
+                 * @interface IMetricRule
+                 * @property {string|null} [selector] MetricRule selector
+                 * @property {Object.<string,number|Long>|null} [metricCosts] MetricRule metricCosts
+                 */
+    
+                /**
+                 * Constructs a new MetricRule.
+                 * @memberof google.api
+                 * @classdesc Represents a MetricRule.
+                 * @implements IMetricRule
+                 * @constructor
+                 * @param {google.api.IMetricRule=} [properties] Properties to set
+                 */
+                function MetricRule(properties) {
+                    this.metricCosts = {};
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * MetricRule selector.
+                 * @member {string} selector
+                 * @memberof google.api.MetricRule
+                 * @instance
+                 */
+                MetricRule.prototype.selector = "";
+    
+                /**
+                 * MetricRule metricCosts.
+                 * @member {Object.<string,number|Long>} metricCosts
+                 * @memberof google.api.MetricRule
+                 * @instance
+                 */
+                MetricRule.prototype.metricCosts = $util.emptyObject;
+    
+                /**
+                 * Creates a new MetricRule instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.MetricRule
+                 * @static
+                 * @param {google.api.IMetricRule=} [properties] Properties to set
+                 * @returns {google.api.MetricRule} MetricRule instance
+                 */
+                MetricRule.create = function create(properties) {
+                    return new MetricRule(properties);
+                };
+    
+                /**
+                 * Encodes the specified MetricRule message. Does not implicitly {@link google.api.MetricRule.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.MetricRule
+                 * @static
+                 * @param {google.api.IMetricRule} message MetricRule message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                MetricRule.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
+                    if (message.metricCosts != null && Object.hasOwnProperty.call(message, "metricCosts"))
+                        for (var keys = Object.keys(message.metricCosts), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).int64(message.metricCosts[keys[i]]).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified MetricRule message, length delimited. Does not implicitly {@link google.api.MetricRule.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.MetricRule
+                 * @static
+                 * @param {google.api.IMetricRule} message MetricRule message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                MetricRule.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a MetricRule message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.MetricRule
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.MetricRule} MetricRule
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                MetricRule.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MetricRule(), key, value;
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.selector = reader.string();
+                            break;
+                        case 2:
+                            if (message.metricCosts === $util.emptyObject)
+                                message.metricCosts = {};
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = 0;
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = reader.int64();
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.metricCosts[key] = value;
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a MetricRule message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.MetricRule
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.MetricRule} MetricRule
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                MetricRule.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a MetricRule message.
+                 * @function verify
+                 * @memberof google.api.MetricRule
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                MetricRule.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.selector != null && message.hasOwnProperty("selector"))
+                        if (!$util.isString(message.selector))
+                            return "selector: string expected";
+                    if (message.metricCosts != null && message.hasOwnProperty("metricCosts")) {
+                        if (!$util.isObject(message.metricCosts))
+                            return "metricCosts: object expected";
+                        var key = Object.keys(message.metricCosts);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isInteger(message.metricCosts[key[i]]) && !(message.metricCosts[key[i]] && $util.isInteger(message.metricCosts[key[i]].low) && $util.isInteger(message.metricCosts[key[i]].high)))
+                                return "metricCosts: integer|Long{k:string} expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a MetricRule message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.MetricRule
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.MetricRule} MetricRule
+                 */
+                MetricRule.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.MetricRule)
+                        return object;
+                    var message = new $root.google.api.MetricRule();
+                    if (object.selector != null)
+                        message.selector = String(object.selector);
+                    if (object.metricCosts) {
+                        if (typeof object.metricCosts !== "object")
+                            throw TypeError(".google.api.MetricRule.metricCosts: object expected");
+                        message.metricCosts = {};
+                        for (var keys = Object.keys(object.metricCosts), i = 0; i < keys.length; ++i)
+                            if ($util.Long)
+                                (message.metricCosts[keys[i]] = $util.Long.fromValue(object.metricCosts[keys[i]])).unsigned = false;
+                            else if (typeof object.metricCosts[keys[i]] === "string")
+                                message.metricCosts[keys[i]] = parseInt(object.metricCosts[keys[i]], 10);
+                            else if (typeof object.metricCosts[keys[i]] === "number")
+                                message.metricCosts[keys[i]] = object.metricCosts[keys[i]];
+                            else if (typeof object.metricCosts[keys[i]] === "object")
+                                message.metricCosts[keys[i]] = new $util.LongBits(object.metricCosts[keys[i]].low >>> 0, object.metricCosts[keys[i]].high >>> 0).toNumber();
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a MetricRule message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.MetricRule
+                 * @static
+                 * @param {google.api.MetricRule} message MetricRule
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                MetricRule.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.objects || options.defaults)
+                        object.metricCosts = {};
+                    if (options.defaults)
+                        object.selector = "";
+                    if (message.selector != null && message.hasOwnProperty("selector"))
+                        object.selector = message.selector;
+                    var keys2;
+                    if (message.metricCosts && (keys2 = Object.keys(message.metricCosts)).length) {
+                        object.metricCosts = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            if (typeof message.metricCosts[keys2[j]] === "number")
+                                object.metricCosts[keys2[j]] = options.longs === String ? String(message.metricCosts[keys2[j]]) : message.metricCosts[keys2[j]];
+                            else
+                                object.metricCosts[keys2[j]] = options.longs === String ? $util.Long.prototype.toString.call(message.metricCosts[keys2[j]]) : options.longs === Number ? new $util.LongBits(message.metricCosts[keys2[j]].low >>> 0, message.metricCosts[keys2[j]].high >>> 0).toNumber() : message.metricCosts[keys2[j]];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this MetricRule to JSON.
+                 * @function toJSON
+                 * @memberof google.api.MetricRule
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                MetricRule.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return MetricRule;
+            })();
+    
+            api.QuotaLimit = (function() {
+    
+                /**
+                 * Properties of a QuotaLimit.
+                 * @memberof google.api
+                 * @interface IQuotaLimit
+                 * @property {string|null} [name] QuotaLimit name
+                 * @property {string|null} [description] QuotaLimit description
+                 * @property {number|Long|null} [defaultLimit] QuotaLimit defaultLimit
+                 * @property {number|Long|null} [maxLimit] QuotaLimit maxLimit
+                 * @property {number|Long|null} [freeTier] QuotaLimit freeTier
+                 * @property {string|null} [duration] QuotaLimit duration
+                 * @property {string|null} [metric] QuotaLimit metric
+                 * @property {string|null} [unit] QuotaLimit unit
+                 * @property {Object.<string,number|Long>|null} [values] QuotaLimit values
+                 * @property {string|null} [displayName] QuotaLimit displayName
+                 */
+    
+                /**
+                 * Constructs a new QuotaLimit.
+                 * @memberof google.api
+                 * @classdesc Represents a QuotaLimit.
+                 * @implements IQuotaLimit
+                 * @constructor
+                 * @param {google.api.IQuotaLimit=} [properties] Properties to set
+                 */
+                function QuotaLimit(properties) {
+                    this.values = {};
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * QuotaLimit name.
+                 * @member {string} name
+                 * @memberof google.api.QuotaLimit
+                 * @instance
+                 */
+                QuotaLimit.prototype.name = "";
+    
+                /**
+                 * QuotaLimit description.
+                 * @member {string} description
+                 * @memberof google.api.QuotaLimit
+                 * @instance
+                 */
+                QuotaLimit.prototype.description = "";
+    
+                /**
+                 * QuotaLimit defaultLimit.
+                 * @member {number|Long} defaultLimit
+                 * @memberof google.api.QuotaLimit
+                 * @instance
+                 */
+                QuotaLimit.prototype.defaultLimit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * QuotaLimit maxLimit.
+                 * @member {number|Long} maxLimit
+                 * @memberof google.api.QuotaLimit
+                 * @instance
+                 */
+                QuotaLimit.prototype.maxLimit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * QuotaLimit freeTier.
+                 * @member {number|Long} freeTier
+                 * @memberof google.api.QuotaLimit
+                 * @instance
+                 */
+                QuotaLimit.prototype.freeTier = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * QuotaLimit duration.
+                 * @member {string} duration
+                 * @memberof google.api.QuotaLimit
+                 * @instance
+                 */
+                QuotaLimit.prototype.duration = "";
+    
+                /**
+                 * QuotaLimit metric.
+                 * @member {string} metric
+                 * @memberof google.api.QuotaLimit
+                 * @instance
+                 */
+                QuotaLimit.prototype.metric = "";
+    
+                /**
+                 * QuotaLimit unit.
+                 * @member {string} unit
+                 * @memberof google.api.QuotaLimit
+                 * @instance
+                 */
+                QuotaLimit.prototype.unit = "";
+    
+                /**
+                 * QuotaLimit values.
+                 * @member {Object.<string,number|Long>} values
+                 * @memberof google.api.QuotaLimit
+                 * @instance
+                 */
+                QuotaLimit.prototype.values = $util.emptyObject;
+    
+                /**
+                 * QuotaLimit displayName.
+                 * @member {string} displayName
+                 * @memberof google.api.QuotaLimit
+                 * @instance
+                 */
+                QuotaLimit.prototype.displayName = "";
+    
+                /**
+                 * Creates a new QuotaLimit instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.QuotaLimit
+                 * @static
+                 * @param {google.api.IQuotaLimit=} [properties] Properties to set
+                 * @returns {google.api.QuotaLimit} QuotaLimit instance
+                 */
+                QuotaLimit.create = function create(properties) {
+                    return new QuotaLimit(properties);
+                };
+    
+                /**
+                 * Encodes the specified QuotaLimit message. Does not implicitly {@link google.api.QuotaLimit.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.QuotaLimit
+                 * @static
+                 * @param {google.api.IQuotaLimit} message QuotaLimit message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                QuotaLimit.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                    if (message.defaultLimit != null && Object.hasOwnProperty.call(message, "defaultLimit"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int64(message.defaultLimit);
+                    if (message.maxLimit != null && Object.hasOwnProperty.call(message, "maxLimit"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int64(message.maxLimit);
+                    if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.duration);
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.name);
+                    if (message.freeTier != null && Object.hasOwnProperty.call(message, "freeTier"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int64(message.freeTier);
+                    if (message.metric != null && Object.hasOwnProperty.call(message, "metric"))
+                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.metric);
+                    if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
+                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.unit);
+                    if (message.values != null && Object.hasOwnProperty.call(message, "values"))
+                        for (var keys = Object.keys(message.values), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).int64(message.values[keys[i]]).ldelim();
+                    if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                        writer.uint32(/* id 12, wireType 2 =*/98).string(message.displayName);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified QuotaLimit message, length delimited. Does not implicitly {@link google.api.QuotaLimit.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.QuotaLimit
+                 * @static
+                 * @param {google.api.IQuotaLimit} message QuotaLimit message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                QuotaLimit.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a QuotaLimit message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.QuotaLimit
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.QuotaLimit} QuotaLimit
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                QuotaLimit.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.QuotaLimit(), key, value;
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 6:
+                            message.name = reader.string();
+                            break;
+                        case 2:
+                            message.description = reader.string();
+                            break;
+                        case 3:
+                            message.defaultLimit = reader.int64();
+                            break;
+                        case 4:
+                            message.maxLimit = reader.int64();
+                            break;
+                        case 7:
+                            message.freeTier = reader.int64();
+                            break;
+                        case 5:
+                            message.duration = reader.string();
+                            break;
+                        case 8:
+                            message.metric = reader.string();
+                            break;
+                        case 9:
+                            message.unit = reader.string();
+                            break;
+                        case 10:
+                            if (message.values === $util.emptyObject)
+                                message.values = {};
+                            var end2 = reader.uint32() + reader.pos;
+                            key = "";
+                            value = 0;
+                            while (reader.pos < end2) {
+                                var tag2 = reader.uint32();
+                                switch (tag2 >>> 3) {
+                                case 1:
+                                    key = reader.string();
+                                    break;
+                                case 2:
+                                    value = reader.int64();
+                                    break;
+                                default:
+                                    reader.skipType(tag2 & 7);
+                                    break;
+                                }
+                            }
+                            message.values[key] = value;
+                            break;
+                        case 12:
+                            message.displayName = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a QuotaLimit message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.QuotaLimit
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.QuotaLimit} QuotaLimit
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                QuotaLimit.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a QuotaLimit message.
+                 * @function verify
+                 * @memberof google.api.QuotaLimit
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                QuotaLimit.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    if (message.defaultLimit != null && message.hasOwnProperty("defaultLimit"))
+                        if (!$util.isInteger(message.defaultLimit) && !(message.defaultLimit && $util.isInteger(message.defaultLimit.low) && $util.isInteger(message.defaultLimit.high)))
+                            return "defaultLimit: integer|Long expected";
+                    if (message.maxLimit != null && message.hasOwnProperty("maxLimit"))
+                        if (!$util.isInteger(message.maxLimit) && !(message.maxLimit && $util.isInteger(message.maxLimit.low) && $util.isInteger(message.maxLimit.high)))
+                            return "maxLimit: integer|Long expected";
+                    if (message.freeTier != null && message.hasOwnProperty("freeTier"))
+                        if (!$util.isInteger(message.freeTier) && !(message.freeTier && $util.isInteger(message.freeTier.low) && $util.isInteger(message.freeTier.high)))
+                            return "freeTier: integer|Long expected";
+                    if (message.duration != null && message.hasOwnProperty("duration"))
+                        if (!$util.isString(message.duration))
+                            return "duration: string expected";
+                    if (message.metric != null && message.hasOwnProperty("metric"))
+                        if (!$util.isString(message.metric))
+                            return "metric: string expected";
+                    if (message.unit != null && message.hasOwnProperty("unit"))
+                        if (!$util.isString(message.unit))
+                            return "unit: string expected";
+                    if (message.values != null && message.hasOwnProperty("values")) {
+                        if (!$util.isObject(message.values))
+                            return "values: object expected";
+                        var key = Object.keys(message.values);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isInteger(message.values[key[i]]) && !(message.values[key[i]] && $util.isInteger(message.values[key[i]].low) && $util.isInteger(message.values[key[i]].high)))
+                                return "values: integer|Long{k:string} expected";
+                    }
+                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                        if (!$util.isString(message.displayName))
+                            return "displayName: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a QuotaLimit message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.QuotaLimit
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.QuotaLimit} QuotaLimit
+                 */
+                QuotaLimit.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.QuotaLimit)
+                        return object;
+                    var message = new $root.google.api.QuotaLimit();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    if (object.defaultLimit != null)
+                        if ($util.Long)
+                            (message.defaultLimit = $util.Long.fromValue(object.defaultLimit)).unsigned = false;
+                        else if (typeof object.defaultLimit === "string")
+                            message.defaultLimit = parseInt(object.defaultLimit, 10);
+                        else if (typeof object.defaultLimit === "number")
+                            message.defaultLimit = object.defaultLimit;
+                        else if (typeof object.defaultLimit === "object")
+                            message.defaultLimit = new $util.LongBits(object.defaultLimit.low >>> 0, object.defaultLimit.high >>> 0).toNumber();
+                    if (object.maxLimit != null)
+                        if ($util.Long)
+                            (message.maxLimit = $util.Long.fromValue(object.maxLimit)).unsigned = false;
+                        else if (typeof object.maxLimit === "string")
+                            message.maxLimit = parseInt(object.maxLimit, 10);
+                        else if (typeof object.maxLimit === "number")
+                            message.maxLimit = object.maxLimit;
+                        else if (typeof object.maxLimit === "object")
+                            message.maxLimit = new $util.LongBits(object.maxLimit.low >>> 0, object.maxLimit.high >>> 0).toNumber();
+                    if (object.freeTier != null)
+                        if ($util.Long)
+                            (message.freeTier = $util.Long.fromValue(object.freeTier)).unsigned = false;
+                        else if (typeof object.freeTier === "string")
+                            message.freeTier = parseInt(object.freeTier, 10);
+                        else if (typeof object.freeTier === "number")
+                            message.freeTier = object.freeTier;
+                        else if (typeof object.freeTier === "object")
+                            message.freeTier = new $util.LongBits(object.freeTier.low >>> 0, object.freeTier.high >>> 0).toNumber();
+                    if (object.duration != null)
+                        message.duration = String(object.duration);
+                    if (object.metric != null)
+                        message.metric = String(object.metric);
+                    if (object.unit != null)
+                        message.unit = String(object.unit);
+                    if (object.values) {
+                        if (typeof object.values !== "object")
+                            throw TypeError(".google.api.QuotaLimit.values: object expected");
+                        message.values = {};
+                        for (var keys = Object.keys(object.values), i = 0; i < keys.length; ++i)
+                            if ($util.Long)
+                                (message.values[keys[i]] = $util.Long.fromValue(object.values[keys[i]])).unsigned = false;
+                            else if (typeof object.values[keys[i]] === "string")
+                                message.values[keys[i]] = parseInt(object.values[keys[i]], 10);
+                            else if (typeof object.values[keys[i]] === "number")
+                                message.values[keys[i]] = object.values[keys[i]];
+                            else if (typeof object.values[keys[i]] === "object")
+                                message.values[keys[i]] = new $util.LongBits(object.values[keys[i]].low >>> 0, object.values[keys[i]].high >>> 0).toNumber();
+                    }
+                    if (object.displayName != null)
+                        message.displayName = String(object.displayName);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a QuotaLimit message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.QuotaLimit
+                 * @static
+                 * @param {google.api.QuotaLimit} message QuotaLimit
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                QuotaLimit.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.objects || options.defaults)
+                        object.values = {};
+                    if (options.defaults) {
+                        object.description = "";
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.defaultLimit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.defaultLimit = options.longs === String ? "0" : 0;
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.maxLimit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.maxLimit = options.longs === String ? "0" : 0;
+                        object.duration = "";
+                        object.name = "";
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.freeTier = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.freeTier = options.longs === String ? "0" : 0;
+                        object.metric = "";
+                        object.unit = "";
+                        object.displayName = "";
+                    }
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    if (message.defaultLimit != null && message.hasOwnProperty("defaultLimit"))
+                        if (typeof message.defaultLimit === "number")
+                            object.defaultLimit = options.longs === String ? String(message.defaultLimit) : message.defaultLimit;
+                        else
+                            object.defaultLimit = options.longs === String ? $util.Long.prototype.toString.call(message.defaultLimit) : options.longs === Number ? new $util.LongBits(message.defaultLimit.low >>> 0, message.defaultLimit.high >>> 0).toNumber() : message.defaultLimit;
+                    if (message.maxLimit != null && message.hasOwnProperty("maxLimit"))
+                        if (typeof message.maxLimit === "number")
+                            object.maxLimit = options.longs === String ? String(message.maxLimit) : message.maxLimit;
+                        else
+                            object.maxLimit = options.longs === String ? $util.Long.prototype.toString.call(message.maxLimit) : options.longs === Number ? new $util.LongBits(message.maxLimit.low >>> 0, message.maxLimit.high >>> 0).toNumber() : message.maxLimit;
+                    if (message.duration != null && message.hasOwnProperty("duration"))
+                        object.duration = message.duration;
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.freeTier != null && message.hasOwnProperty("freeTier"))
+                        if (typeof message.freeTier === "number")
+                            object.freeTier = options.longs === String ? String(message.freeTier) : message.freeTier;
+                        else
+                            object.freeTier = options.longs === String ? $util.Long.prototype.toString.call(message.freeTier) : options.longs === Number ? new $util.LongBits(message.freeTier.low >>> 0, message.freeTier.high >>> 0).toNumber() : message.freeTier;
+                    if (message.metric != null && message.hasOwnProperty("metric"))
+                        object.metric = message.metric;
+                    if (message.unit != null && message.hasOwnProperty("unit"))
+                        object.unit = message.unit;
+                    var keys2;
+                    if (message.values && (keys2 = Object.keys(message.values)).length) {
+                        object.values = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            if (typeof message.values[keys2[j]] === "number")
+                                object.values[keys2[j]] = options.longs === String ? String(message.values[keys2[j]]) : message.values[keys2[j]];
+                            else
+                                object.values[keys2[j]] = options.longs === String ? $util.Long.prototype.toString.call(message.values[keys2[j]]) : options.longs === Number ? new $util.LongBits(message.values[keys2[j]].low >>> 0, message.values[keys2[j]].high >>> 0).toNumber() : message.values[keys2[j]];
+                    }
+                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                        object.displayName = message.displayName;
+                    return object;
+                };
+    
+                /**
+                 * Converts this QuotaLimit to JSON.
+                 * @function toJSON
+                 * @memberof google.api.QuotaLimit
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                QuotaLimit.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return QuotaLimit;
             })();
     
             api.ResourceDescriptor = (function() {
@@ -30354,6 +30354,230 @@
                 return GeneratedCodeInfo;
             })();
     
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.seconds = reader.int64();
+                            break;
+                        case 2:
+                            message.nanos = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Timestamp;
+            })();
+    
             protobuf.Duration = (function() {
     
                 /**
@@ -36639,230 +36863,6 @@
                 };
     
                 return FieldMask;
-            })();
-    
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Timestamp;
             })();
     
             return protobuf;

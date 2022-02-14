@@ -3710,6 +3710,230 @@ export namespace google {
             }
         }
 
+        /** Properties of a ConfigChange. */
+        interface IConfigChange {
+
+            /** ConfigChange element */
+            element?: (string|null);
+
+            /** ConfigChange oldValue */
+            oldValue?: (string|null);
+
+            /** ConfigChange newValue */
+            newValue?: (string|null);
+
+            /** ConfigChange changeType */
+            changeType?: (google.api.ChangeType|keyof typeof google.api.ChangeType|null);
+
+            /** ConfigChange advices */
+            advices?: (google.api.IAdvice[]|null);
+        }
+
+        /** Represents a ConfigChange. */
+        class ConfigChange implements IConfigChange {
+
+            /**
+             * Constructs a new ConfigChange.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IConfigChange);
+
+            /** ConfigChange element. */
+            public element: string;
+
+            /** ConfigChange oldValue. */
+            public oldValue: string;
+
+            /** ConfigChange newValue. */
+            public newValue: string;
+
+            /** ConfigChange changeType. */
+            public changeType: (google.api.ChangeType|keyof typeof google.api.ChangeType);
+
+            /** ConfigChange advices. */
+            public advices: google.api.IAdvice[];
+
+            /**
+             * Creates a new ConfigChange instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ConfigChange instance
+             */
+            public static create(properties?: google.api.IConfigChange): google.api.ConfigChange;
+
+            /**
+             * Encodes the specified ConfigChange message. Does not implicitly {@link google.api.ConfigChange.verify|verify} messages.
+             * @param message ConfigChange message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IConfigChange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ConfigChange message, length delimited. Does not implicitly {@link google.api.ConfigChange.verify|verify} messages.
+             * @param message ConfigChange message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IConfigChange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ConfigChange message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ConfigChange
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ConfigChange;
+
+            /**
+             * Decodes a ConfigChange message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ConfigChange
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ConfigChange;
+
+            /**
+             * Verifies a ConfigChange message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ConfigChange message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ConfigChange
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ConfigChange;
+
+            /**
+             * Creates a plain object from a ConfigChange message. Also converts values to other types if specified.
+             * @param message ConfigChange
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ConfigChange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ConfigChange to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of an Advice. */
+        interface IAdvice {
+
+            /** Advice description */
+            description?: (string|null);
+        }
+
+        /** Represents an Advice. */
+        class Advice implements IAdvice {
+
+            /**
+             * Constructs a new Advice.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IAdvice);
+
+            /** Advice description. */
+            public description: string;
+
+            /**
+             * Creates a new Advice instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Advice instance
+             */
+            public static create(properties?: google.api.IAdvice): google.api.Advice;
+
+            /**
+             * Encodes the specified Advice message. Does not implicitly {@link google.api.Advice.verify|verify} messages.
+             * @param message Advice message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IAdvice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Advice message, length delimited. Does not implicitly {@link google.api.Advice.verify|verify} messages.
+             * @param message Advice message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IAdvice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Advice message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Advice
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Advice;
+
+            /**
+             * Decodes an Advice message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Advice
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Advice;
+
+            /**
+             * Verifies an Advice message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Advice message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Advice
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Advice;
+
+            /**
+             * Creates a plain object from an Advice message. Also converts values to other types if specified.
+             * @param message Advice
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Advice, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Advice to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** ChangeType enum. */
+        enum ChangeType {
+            CHANGE_TYPE_UNSPECIFIED = 0,
+            ADDED = 1,
+            REMOVED = 2,
+            MODIFIED = 3
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7
+        }
+
         /** Properties of a Http. */
         interface IHttp {
 
@@ -4044,1060 +4268,6 @@ export namespace google {
 
             /**
              * Converts this CustomHttpPattern to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a ConfigChange. */
-        interface IConfigChange {
-
-            /** ConfigChange element */
-            element?: (string|null);
-
-            /** ConfigChange oldValue */
-            oldValue?: (string|null);
-
-            /** ConfigChange newValue */
-            newValue?: (string|null);
-
-            /** ConfigChange changeType */
-            changeType?: (google.api.ChangeType|keyof typeof google.api.ChangeType|null);
-
-            /** ConfigChange advices */
-            advices?: (google.api.IAdvice[]|null);
-        }
-
-        /** Represents a ConfigChange. */
-        class ConfigChange implements IConfigChange {
-
-            /**
-             * Constructs a new ConfigChange.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IConfigChange);
-
-            /** ConfigChange element. */
-            public element: string;
-
-            /** ConfigChange oldValue. */
-            public oldValue: string;
-
-            /** ConfigChange newValue. */
-            public newValue: string;
-
-            /** ConfigChange changeType. */
-            public changeType: (google.api.ChangeType|keyof typeof google.api.ChangeType);
-
-            /** ConfigChange advices. */
-            public advices: google.api.IAdvice[];
-
-            /**
-             * Creates a new ConfigChange instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ConfigChange instance
-             */
-            public static create(properties?: google.api.IConfigChange): google.api.ConfigChange;
-
-            /**
-             * Encodes the specified ConfigChange message. Does not implicitly {@link google.api.ConfigChange.verify|verify} messages.
-             * @param message ConfigChange message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IConfigChange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ConfigChange message, length delimited. Does not implicitly {@link google.api.ConfigChange.verify|verify} messages.
-             * @param message ConfigChange message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IConfigChange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ConfigChange message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ConfigChange
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ConfigChange;
-
-            /**
-             * Decodes a ConfigChange message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ConfigChange
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ConfigChange;
-
-            /**
-             * Verifies a ConfigChange message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ConfigChange message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ConfigChange
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ConfigChange;
-
-            /**
-             * Creates a plain object from a ConfigChange message. Also converts values to other types if specified.
-             * @param message ConfigChange
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ConfigChange, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ConfigChange to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of an Advice. */
-        interface IAdvice {
-
-            /** Advice description */
-            description?: (string|null);
-        }
-
-        /** Represents an Advice. */
-        class Advice implements IAdvice {
-
-            /**
-             * Constructs a new Advice.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IAdvice);
-
-            /** Advice description. */
-            public description: string;
-
-            /**
-             * Creates a new Advice instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Advice instance
-             */
-            public static create(properties?: google.api.IAdvice): google.api.Advice;
-
-            /**
-             * Encodes the specified Advice message. Does not implicitly {@link google.api.Advice.verify|verify} messages.
-             * @param message Advice message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IAdvice, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Advice message, length delimited. Does not implicitly {@link google.api.Advice.verify|verify} messages.
-             * @param message Advice message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IAdvice, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Advice message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Advice
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Advice;
-
-            /**
-             * Decodes an Advice message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Advice
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Advice;
-
-            /**
-             * Verifies an Advice message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Advice message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Advice
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Advice;
-
-            /**
-             * Creates a plain object from an Advice message. Also converts values to other types if specified.
-             * @param message Advice
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Advice, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Advice to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** ChangeType enum. */
-        enum ChangeType {
-            CHANGE_TYPE_UNSPECIFIED = 0,
-            ADDED = 1,
-            REMOVED = 2,
-            MODIFIED = 3
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
-        }
-
-        /** Properties of a MetricDescriptor. */
-        interface IMetricDescriptor {
-
-            /** MetricDescriptor name */
-            name?: (string|null);
-
-            /** MetricDescriptor type */
-            type?: (string|null);
-
-            /** MetricDescriptor labels */
-            labels?: (google.api.ILabelDescriptor[]|null);
-
-            /** MetricDescriptor metricKind */
-            metricKind?: (google.api.MetricDescriptor.MetricKind|keyof typeof google.api.MetricDescriptor.MetricKind|null);
-
-            /** MetricDescriptor valueType */
-            valueType?: (google.api.MetricDescriptor.ValueType|keyof typeof google.api.MetricDescriptor.ValueType|null);
-
-            /** MetricDescriptor unit */
-            unit?: (string|null);
-
-            /** MetricDescriptor description */
-            description?: (string|null);
-
-            /** MetricDescriptor displayName */
-            displayName?: (string|null);
-
-            /** MetricDescriptor metadata */
-            metadata?: (google.api.MetricDescriptor.IMetricDescriptorMetadata|null);
-
-            /** MetricDescriptor launchStage */
-            launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
-
-            /** MetricDescriptor monitoredResourceTypes */
-            monitoredResourceTypes?: (string[]|null);
-        }
-
-        /** Represents a MetricDescriptor. */
-        class MetricDescriptor implements IMetricDescriptor {
-
-            /**
-             * Constructs a new MetricDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IMetricDescriptor);
-
-            /** MetricDescriptor name. */
-            public name: string;
-
-            /** MetricDescriptor type. */
-            public type: string;
-
-            /** MetricDescriptor labels. */
-            public labels: google.api.ILabelDescriptor[];
-
-            /** MetricDescriptor metricKind. */
-            public metricKind: (google.api.MetricDescriptor.MetricKind|keyof typeof google.api.MetricDescriptor.MetricKind);
-
-            /** MetricDescriptor valueType. */
-            public valueType: (google.api.MetricDescriptor.ValueType|keyof typeof google.api.MetricDescriptor.ValueType);
-
-            /** MetricDescriptor unit. */
-            public unit: string;
-
-            /** MetricDescriptor description. */
-            public description: string;
-
-            /** MetricDescriptor displayName. */
-            public displayName: string;
-
-            /** MetricDescriptor metadata. */
-            public metadata?: (google.api.MetricDescriptor.IMetricDescriptorMetadata|null);
-
-            /** MetricDescriptor launchStage. */
-            public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
-
-            /** MetricDescriptor monitoredResourceTypes. */
-            public monitoredResourceTypes: string[];
-
-            /**
-             * Creates a new MetricDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns MetricDescriptor instance
-             */
-            public static create(properties?: google.api.IMetricDescriptor): google.api.MetricDescriptor;
-
-            /**
-             * Encodes the specified MetricDescriptor message. Does not implicitly {@link google.api.MetricDescriptor.verify|verify} messages.
-             * @param message MetricDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IMetricDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified MetricDescriptor message, length delimited. Does not implicitly {@link google.api.MetricDescriptor.verify|verify} messages.
-             * @param message MetricDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IMetricDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a MetricDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns MetricDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.MetricDescriptor;
-
-            /**
-             * Decodes a MetricDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns MetricDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.MetricDescriptor;
-
-            /**
-             * Verifies a MetricDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a MetricDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns MetricDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.MetricDescriptor;
-
-            /**
-             * Creates a plain object from a MetricDescriptor message. Also converts values to other types if specified.
-             * @param message MetricDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.MetricDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this MetricDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace MetricDescriptor {
-
-            /** Properties of a MetricDescriptorMetadata. */
-            interface IMetricDescriptorMetadata {
-
-                /** MetricDescriptorMetadata launchStage */
-                launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
-
-                /** MetricDescriptorMetadata samplePeriod */
-                samplePeriod?: (google.protobuf.IDuration|null);
-
-                /** MetricDescriptorMetadata ingestDelay */
-                ingestDelay?: (google.protobuf.IDuration|null);
-            }
-
-            /** Represents a MetricDescriptorMetadata. */
-            class MetricDescriptorMetadata implements IMetricDescriptorMetadata {
-
-                /**
-                 * Constructs a new MetricDescriptorMetadata.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.api.MetricDescriptor.IMetricDescriptorMetadata);
-
-                /** MetricDescriptorMetadata launchStage. */
-                public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
-
-                /** MetricDescriptorMetadata samplePeriod. */
-                public samplePeriod?: (google.protobuf.IDuration|null);
-
-                /** MetricDescriptorMetadata ingestDelay. */
-                public ingestDelay?: (google.protobuf.IDuration|null);
-
-                /**
-                 * Creates a new MetricDescriptorMetadata instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns MetricDescriptorMetadata instance
-                 */
-                public static create(properties?: google.api.MetricDescriptor.IMetricDescriptorMetadata): google.api.MetricDescriptor.MetricDescriptorMetadata;
-
-                /**
-                 * Encodes the specified MetricDescriptorMetadata message. Does not implicitly {@link google.api.MetricDescriptor.MetricDescriptorMetadata.verify|verify} messages.
-                 * @param message MetricDescriptorMetadata message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.api.MetricDescriptor.IMetricDescriptorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified MetricDescriptorMetadata message, length delimited. Does not implicitly {@link google.api.MetricDescriptor.MetricDescriptorMetadata.verify|verify} messages.
-                 * @param message MetricDescriptorMetadata message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.api.MetricDescriptor.IMetricDescriptorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a MetricDescriptorMetadata message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns MetricDescriptorMetadata
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.MetricDescriptor.MetricDescriptorMetadata;
-
-                /**
-                 * Decodes a MetricDescriptorMetadata message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns MetricDescriptorMetadata
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.MetricDescriptor.MetricDescriptorMetadata;
-
-                /**
-                 * Verifies a MetricDescriptorMetadata message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a MetricDescriptorMetadata message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns MetricDescriptorMetadata
-                 */
-                public static fromObject(object: { [k: string]: any }): google.api.MetricDescriptor.MetricDescriptorMetadata;
-
-                /**
-                 * Creates a plain object from a MetricDescriptorMetadata message. Also converts values to other types if specified.
-                 * @param message MetricDescriptorMetadata
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.api.MetricDescriptor.MetricDescriptorMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this MetricDescriptorMetadata to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-            }
-
-            /** MetricKind enum. */
-            enum MetricKind {
-                METRIC_KIND_UNSPECIFIED = 0,
-                GAUGE = 1,
-                DELTA = 2,
-                CUMULATIVE = 3
-            }
-
-            /** ValueType enum. */
-            enum ValueType {
-                VALUE_TYPE_UNSPECIFIED = 0,
-                BOOL = 1,
-                INT64 = 2,
-                DOUBLE = 3,
-                STRING = 4,
-                DISTRIBUTION = 5,
-                MONEY = 6
-            }
-        }
-
-        /** Properties of a Metric. */
-        interface IMetric {
-
-            /** Metric type */
-            type?: (string|null);
-
-            /** Metric labels */
-            labels?: ({ [k: string]: string }|null);
-        }
-
-        /** Represents a Metric. */
-        class Metric implements IMetric {
-
-            /**
-             * Constructs a new Metric.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IMetric);
-
-            /** Metric type. */
-            public type: string;
-
-            /** Metric labels. */
-            public labels: { [k: string]: string };
-
-            /**
-             * Creates a new Metric instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Metric instance
-             */
-            public static create(properties?: google.api.IMetric): google.api.Metric;
-
-            /**
-             * Encodes the specified Metric message. Does not implicitly {@link google.api.Metric.verify|verify} messages.
-             * @param message Metric message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IMetric, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Metric message, length delimited. Does not implicitly {@link google.api.Metric.verify|verify} messages.
-             * @param message Metric message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IMetric, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Metric message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Metric
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Metric;
-
-            /**
-             * Decodes a Metric message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Metric
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Metric;
-
-            /**
-             * Verifies a Metric message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Metric message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Metric
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Metric;
-
-            /**
-             * Creates a plain object from a Metric message. Also converts values to other types if specified.
-             * @param message Metric
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Metric, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Metric to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a LabelDescriptor. */
-        interface ILabelDescriptor {
-
-            /** LabelDescriptor key */
-            key?: (string|null);
-
-            /** LabelDescriptor valueType */
-            valueType?: (google.api.LabelDescriptor.ValueType|keyof typeof google.api.LabelDescriptor.ValueType|null);
-
-            /** LabelDescriptor description */
-            description?: (string|null);
-        }
-
-        /** Represents a LabelDescriptor. */
-        class LabelDescriptor implements ILabelDescriptor {
-
-            /**
-             * Constructs a new LabelDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ILabelDescriptor);
-
-            /** LabelDescriptor key. */
-            public key: string;
-
-            /** LabelDescriptor valueType. */
-            public valueType: (google.api.LabelDescriptor.ValueType|keyof typeof google.api.LabelDescriptor.ValueType);
-
-            /** LabelDescriptor description. */
-            public description: string;
-
-            /**
-             * Creates a new LabelDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns LabelDescriptor instance
-             */
-            public static create(properties?: google.api.ILabelDescriptor): google.api.LabelDescriptor;
-
-            /**
-             * Encodes the specified LabelDescriptor message. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
-             * @param message LabelDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ILabelDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified LabelDescriptor message, length delimited. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
-             * @param message LabelDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ILabelDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a LabelDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns LabelDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.LabelDescriptor;
-
-            /**
-             * Decodes a LabelDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns LabelDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.LabelDescriptor;
-
-            /**
-             * Verifies a LabelDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a LabelDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns LabelDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.LabelDescriptor;
-
-            /**
-             * Creates a plain object from a LabelDescriptor message. Also converts values to other types if specified.
-             * @param message LabelDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.LabelDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this LabelDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace LabelDescriptor {
-
-            /** ValueType enum. */
-            enum ValueType {
-                STRING = 0,
-                BOOL = 1,
-                INT64 = 2
-            }
-        }
-
-        /** LaunchStage enum. */
-        enum LaunchStage {
-            LAUNCH_STAGE_UNSPECIFIED = 0,
-            UNIMPLEMENTED = 6,
-            PRELAUNCH = 7,
-            EARLY_ACCESS = 1,
-            ALPHA = 2,
-            BETA = 3,
-            GA = 4,
-            DEPRECATED = 5
-        }
-
-        /** Properties of a Quota. */
-        interface IQuota {
-
-            /** Quota limits */
-            limits?: (google.api.IQuotaLimit[]|null);
-
-            /** Quota metricRules */
-            metricRules?: (google.api.IMetricRule[]|null);
-        }
-
-        /** Represents a Quota. */
-        class Quota implements IQuota {
-
-            /**
-             * Constructs a new Quota.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IQuota);
-
-            /** Quota limits. */
-            public limits: google.api.IQuotaLimit[];
-
-            /** Quota metricRules. */
-            public metricRules: google.api.IMetricRule[];
-
-            /**
-             * Creates a new Quota instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Quota instance
-             */
-            public static create(properties?: google.api.IQuota): google.api.Quota;
-
-            /**
-             * Encodes the specified Quota message. Does not implicitly {@link google.api.Quota.verify|verify} messages.
-             * @param message Quota message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IQuota, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Quota message, length delimited. Does not implicitly {@link google.api.Quota.verify|verify} messages.
-             * @param message Quota message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IQuota, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Quota message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Quota
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Quota;
-
-            /**
-             * Decodes a Quota message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Quota
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Quota;
-
-            /**
-             * Verifies a Quota message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Quota message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Quota
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Quota;
-
-            /**
-             * Creates a plain object from a Quota message. Also converts values to other types if specified.
-             * @param message Quota
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Quota, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Quota to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a MetricRule. */
-        interface IMetricRule {
-
-            /** MetricRule selector */
-            selector?: (string|null);
-
-            /** MetricRule metricCosts */
-            metricCosts?: ({ [k: string]: (number|Long|string) }|null);
-        }
-
-        /** Represents a MetricRule. */
-        class MetricRule implements IMetricRule {
-
-            /**
-             * Constructs a new MetricRule.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IMetricRule);
-
-            /** MetricRule selector. */
-            public selector: string;
-
-            /** MetricRule metricCosts. */
-            public metricCosts: { [k: string]: (number|Long|string) };
-
-            /**
-             * Creates a new MetricRule instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns MetricRule instance
-             */
-            public static create(properties?: google.api.IMetricRule): google.api.MetricRule;
-
-            /**
-             * Encodes the specified MetricRule message. Does not implicitly {@link google.api.MetricRule.verify|verify} messages.
-             * @param message MetricRule message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IMetricRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified MetricRule message, length delimited. Does not implicitly {@link google.api.MetricRule.verify|verify} messages.
-             * @param message MetricRule message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IMetricRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a MetricRule message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns MetricRule
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.MetricRule;
-
-            /**
-             * Decodes a MetricRule message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns MetricRule
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.MetricRule;
-
-            /**
-             * Verifies a MetricRule message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a MetricRule message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns MetricRule
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.MetricRule;
-
-            /**
-             * Creates a plain object from a MetricRule message. Also converts values to other types if specified.
-             * @param message MetricRule
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.MetricRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this MetricRule to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a QuotaLimit. */
-        interface IQuotaLimit {
-
-            /** QuotaLimit name */
-            name?: (string|null);
-
-            /** QuotaLimit description */
-            description?: (string|null);
-
-            /** QuotaLimit defaultLimit */
-            defaultLimit?: (number|Long|string|null);
-
-            /** QuotaLimit maxLimit */
-            maxLimit?: (number|Long|string|null);
-
-            /** QuotaLimit freeTier */
-            freeTier?: (number|Long|string|null);
-
-            /** QuotaLimit duration */
-            duration?: (string|null);
-
-            /** QuotaLimit metric */
-            metric?: (string|null);
-
-            /** QuotaLimit unit */
-            unit?: (string|null);
-
-            /** QuotaLimit values */
-            values?: ({ [k: string]: (number|Long|string) }|null);
-
-            /** QuotaLimit displayName */
-            displayName?: (string|null);
-        }
-
-        /** Represents a QuotaLimit. */
-        class QuotaLimit implements IQuotaLimit {
-
-            /**
-             * Constructs a new QuotaLimit.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IQuotaLimit);
-
-            /** QuotaLimit name. */
-            public name: string;
-
-            /** QuotaLimit description. */
-            public description: string;
-
-            /** QuotaLimit defaultLimit. */
-            public defaultLimit: (number|Long|string);
-
-            /** QuotaLimit maxLimit. */
-            public maxLimit: (number|Long|string);
-
-            /** QuotaLimit freeTier. */
-            public freeTier: (number|Long|string);
-
-            /** QuotaLimit duration. */
-            public duration: string;
-
-            /** QuotaLimit metric. */
-            public metric: string;
-
-            /** QuotaLimit unit. */
-            public unit: string;
-
-            /** QuotaLimit values. */
-            public values: { [k: string]: (number|Long|string) };
-
-            /** QuotaLimit displayName. */
-            public displayName: string;
-
-            /**
-             * Creates a new QuotaLimit instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns QuotaLimit instance
-             */
-            public static create(properties?: google.api.IQuotaLimit): google.api.QuotaLimit;
-
-            /**
-             * Encodes the specified QuotaLimit message. Does not implicitly {@link google.api.QuotaLimit.verify|verify} messages.
-             * @param message QuotaLimit message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IQuotaLimit, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified QuotaLimit message, length delimited. Does not implicitly {@link google.api.QuotaLimit.verify|verify} messages.
-             * @param message QuotaLimit message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IQuotaLimit, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a QuotaLimit message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns QuotaLimit
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.QuotaLimit;
-
-            /**
-             * Decodes a QuotaLimit message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns QuotaLimit
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.QuotaLimit;
-
-            /**
-             * Verifies a QuotaLimit message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a QuotaLimit message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns QuotaLimit
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.QuotaLimit;
-
-            /**
-             * Creates a plain object from a QuotaLimit message. Also converts values to other types if specified.
-             * @param message QuotaLimit
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.QuotaLimit, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this QuotaLimit to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -6380,6 +5550,500 @@ export namespace google {
                  */
                 public toJSON(): { [k: string]: any };
             }
+        }
+
+        /** Properties of a MetricDescriptor. */
+        interface IMetricDescriptor {
+
+            /** MetricDescriptor name */
+            name?: (string|null);
+
+            /** MetricDescriptor type */
+            type?: (string|null);
+
+            /** MetricDescriptor labels */
+            labels?: (google.api.ILabelDescriptor[]|null);
+
+            /** MetricDescriptor metricKind */
+            metricKind?: (google.api.MetricDescriptor.MetricKind|keyof typeof google.api.MetricDescriptor.MetricKind|null);
+
+            /** MetricDescriptor valueType */
+            valueType?: (google.api.MetricDescriptor.ValueType|keyof typeof google.api.MetricDescriptor.ValueType|null);
+
+            /** MetricDescriptor unit */
+            unit?: (string|null);
+
+            /** MetricDescriptor description */
+            description?: (string|null);
+
+            /** MetricDescriptor displayName */
+            displayName?: (string|null);
+
+            /** MetricDescriptor metadata */
+            metadata?: (google.api.MetricDescriptor.IMetricDescriptorMetadata|null);
+
+            /** MetricDescriptor launchStage */
+            launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
+
+            /** MetricDescriptor monitoredResourceTypes */
+            monitoredResourceTypes?: (string[]|null);
+        }
+
+        /** Represents a MetricDescriptor. */
+        class MetricDescriptor implements IMetricDescriptor {
+
+            /**
+             * Constructs a new MetricDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IMetricDescriptor);
+
+            /** MetricDescriptor name. */
+            public name: string;
+
+            /** MetricDescriptor type. */
+            public type: string;
+
+            /** MetricDescriptor labels. */
+            public labels: google.api.ILabelDescriptor[];
+
+            /** MetricDescriptor metricKind. */
+            public metricKind: (google.api.MetricDescriptor.MetricKind|keyof typeof google.api.MetricDescriptor.MetricKind);
+
+            /** MetricDescriptor valueType. */
+            public valueType: (google.api.MetricDescriptor.ValueType|keyof typeof google.api.MetricDescriptor.ValueType);
+
+            /** MetricDescriptor unit. */
+            public unit: string;
+
+            /** MetricDescriptor description. */
+            public description: string;
+
+            /** MetricDescriptor displayName. */
+            public displayName: string;
+
+            /** MetricDescriptor metadata. */
+            public metadata?: (google.api.MetricDescriptor.IMetricDescriptorMetadata|null);
+
+            /** MetricDescriptor launchStage. */
+            public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
+
+            /** MetricDescriptor monitoredResourceTypes. */
+            public monitoredResourceTypes: string[];
+
+            /**
+             * Creates a new MetricDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns MetricDescriptor instance
+             */
+            public static create(properties?: google.api.IMetricDescriptor): google.api.MetricDescriptor;
+
+            /**
+             * Encodes the specified MetricDescriptor message. Does not implicitly {@link google.api.MetricDescriptor.verify|verify} messages.
+             * @param message MetricDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IMetricDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified MetricDescriptor message, length delimited. Does not implicitly {@link google.api.MetricDescriptor.verify|verify} messages.
+             * @param message MetricDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IMetricDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a MetricDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns MetricDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.MetricDescriptor;
+
+            /**
+             * Decodes a MetricDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns MetricDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.MetricDescriptor;
+
+            /**
+             * Verifies a MetricDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a MetricDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns MetricDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.MetricDescriptor;
+
+            /**
+             * Creates a plain object from a MetricDescriptor message. Also converts values to other types if specified.
+             * @param message MetricDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.MetricDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this MetricDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace MetricDescriptor {
+
+            /** Properties of a MetricDescriptorMetadata. */
+            interface IMetricDescriptorMetadata {
+
+                /** MetricDescriptorMetadata launchStage */
+                launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
+
+                /** MetricDescriptorMetadata samplePeriod */
+                samplePeriod?: (google.protobuf.IDuration|null);
+
+                /** MetricDescriptorMetadata ingestDelay */
+                ingestDelay?: (google.protobuf.IDuration|null);
+            }
+
+            /** Represents a MetricDescriptorMetadata. */
+            class MetricDescriptorMetadata implements IMetricDescriptorMetadata {
+
+                /**
+                 * Constructs a new MetricDescriptorMetadata.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.MetricDescriptor.IMetricDescriptorMetadata);
+
+                /** MetricDescriptorMetadata launchStage. */
+                public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
+
+                /** MetricDescriptorMetadata samplePeriod. */
+                public samplePeriod?: (google.protobuf.IDuration|null);
+
+                /** MetricDescriptorMetadata ingestDelay. */
+                public ingestDelay?: (google.protobuf.IDuration|null);
+
+                /**
+                 * Creates a new MetricDescriptorMetadata instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MetricDescriptorMetadata instance
+                 */
+                public static create(properties?: google.api.MetricDescriptor.IMetricDescriptorMetadata): google.api.MetricDescriptor.MetricDescriptorMetadata;
+
+                /**
+                 * Encodes the specified MetricDescriptorMetadata message. Does not implicitly {@link google.api.MetricDescriptor.MetricDescriptorMetadata.verify|verify} messages.
+                 * @param message MetricDescriptorMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.MetricDescriptor.IMetricDescriptorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MetricDescriptorMetadata message, length delimited. Does not implicitly {@link google.api.MetricDescriptor.MetricDescriptorMetadata.verify|verify} messages.
+                 * @param message MetricDescriptorMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.MetricDescriptor.IMetricDescriptorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MetricDescriptorMetadata message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MetricDescriptorMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.MetricDescriptor.MetricDescriptorMetadata;
+
+                /**
+                 * Decodes a MetricDescriptorMetadata message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MetricDescriptorMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.MetricDescriptor.MetricDescriptorMetadata;
+
+                /**
+                 * Verifies a MetricDescriptorMetadata message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MetricDescriptorMetadata message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MetricDescriptorMetadata
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.MetricDescriptor.MetricDescriptorMetadata;
+
+                /**
+                 * Creates a plain object from a MetricDescriptorMetadata message. Also converts values to other types if specified.
+                 * @param message MetricDescriptorMetadata
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.MetricDescriptor.MetricDescriptorMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MetricDescriptorMetadata to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** MetricKind enum. */
+            enum MetricKind {
+                METRIC_KIND_UNSPECIFIED = 0,
+                GAUGE = 1,
+                DELTA = 2,
+                CUMULATIVE = 3
+            }
+
+            /** ValueType enum. */
+            enum ValueType {
+                VALUE_TYPE_UNSPECIFIED = 0,
+                BOOL = 1,
+                INT64 = 2,
+                DOUBLE = 3,
+                STRING = 4,
+                DISTRIBUTION = 5,
+                MONEY = 6
+            }
+        }
+
+        /** Properties of a Metric. */
+        interface IMetric {
+
+            /** Metric type */
+            type?: (string|null);
+
+            /** Metric labels */
+            labels?: ({ [k: string]: string }|null);
+        }
+
+        /** Represents a Metric. */
+        class Metric implements IMetric {
+
+            /**
+             * Constructs a new Metric.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IMetric);
+
+            /** Metric type. */
+            public type: string;
+
+            /** Metric labels. */
+            public labels: { [k: string]: string };
+
+            /**
+             * Creates a new Metric instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Metric instance
+             */
+            public static create(properties?: google.api.IMetric): google.api.Metric;
+
+            /**
+             * Encodes the specified Metric message. Does not implicitly {@link google.api.Metric.verify|verify} messages.
+             * @param message Metric message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Metric message, length delimited. Does not implicitly {@link google.api.Metric.verify|verify} messages.
+             * @param message Metric message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Metric message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Metric
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Metric;
+
+            /**
+             * Decodes a Metric message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Metric
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Metric;
+
+            /**
+             * Verifies a Metric message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Metric message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Metric
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Metric;
+
+            /**
+             * Creates a plain object from a Metric message. Also converts values to other types if specified.
+             * @param message Metric
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Metric, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Metric to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a LabelDescriptor. */
+        interface ILabelDescriptor {
+
+            /** LabelDescriptor key */
+            key?: (string|null);
+
+            /** LabelDescriptor valueType */
+            valueType?: (google.api.LabelDescriptor.ValueType|keyof typeof google.api.LabelDescriptor.ValueType|null);
+
+            /** LabelDescriptor description */
+            description?: (string|null);
+        }
+
+        /** Represents a LabelDescriptor. */
+        class LabelDescriptor implements ILabelDescriptor {
+
+            /**
+             * Constructs a new LabelDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ILabelDescriptor);
+
+            /** LabelDescriptor key. */
+            public key: string;
+
+            /** LabelDescriptor valueType. */
+            public valueType: (google.api.LabelDescriptor.ValueType|keyof typeof google.api.LabelDescriptor.ValueType);
+
+            /** LabelDescriptor description. */
+            public description: string;
+
+            /**
+             * Creates a new LabelDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns LabelDescriptor instance
+             */
+            public static create(properties?: google.api.ILabelDescriptor): google.api.LabelDescriptor;
+
+            /**
+             * Encodes the specified LabelDescriptor message. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
+             * @param message LabelDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ILabelDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified LabelDescriptor message, length delimited. Does not implicitly {@link google.api.LabelDescriptor.verify|verify} messages.
+             * @param message LabelDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ILabelDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a LabelDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns LabelDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.LabelDescriptor;
+
+            /**
+             * Decodes a LabelDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns LabelDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.LabelDescriptor;
+
+            /**
+             * Verifies a LabelDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a LabelDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns LabelDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.LabelDescriptor;
+
+            /**
+             * Creates a plain object from a LabelDescriptor message. Also converts values to other types if specified.
+             * @param message LabelDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.LabelDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this LabelDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace LabelDescriptor {
+
+            /** ValueType enum. */
+            enum ValueType {
+                STRING = 0,
+                BOOL = 1,
+                INT64 = 2
+            }
+        }
+
+        /** LaunchStage enum. */
+        enum LaunchStage {
+            LAUNCH_STAGE_UNSPECIFIED = 0,
+            UNIMPLEMENTED = 6,
+            PRELAUNCH = 7,
+            EARLY_ACCESS = 1,
+            ALPHA = 2,
+            BETA = 3,
+            GA = 4,
+            DEPRECATED = 5
         }
 
         /** Properties of a Context. */
@@ -7916,6 +7580,342 @@ export namespace google {
                  */
                 public toJSON(): { [k: string]: any };
             }
+        }
+
+        /** Properties of a Quota. */
+        interface IQuota {
+
+            /** Quota limits */
+            limits?: (google.api.IQuotaLimit[]|null);
+
+            /** Quota metricRules */
+            metricRules?: (google.api.IMetricRule[]|null);
+        }
+
+        /** Represents a Quota. */
+        class Quota implements IQuota {
+
+            /**
+             * Constructs a new Quota.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IQuota);
+
+            /** Quota limits. */
+            public limits: google.api.IQuotaLimit[];
+
+            /** Quota metricRules. */
+            public metricRules: google.api.IMetricRule[];
+
+            /**
+             * Creates a new Quota instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Quota instance
+             */
+            public static create(properties?: google.api.IQuota): google.api.Quota;
+
+            /**
+             * Encodes the specified Quota message. Does not implicitly {@link google.api.Quota.verify|verify} messages.
+             * @param message Quota message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IQuota, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Quota message, length delimited. Does not implicitly {@link google.api.Quota.verify|verify} messages.
+             * @param message Quota message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IQuota, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Quota message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Quota
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Quota;
+
+            /**
+             * Decodes a Quota message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Quota
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Quota;
+
+            /**
+             * Verifies a Quota message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Quota message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Quota
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Quota;
+
+            /**
+             * Creates a plain object from a Quota message. Also converts values to other types if specified.
+             * @param message Quota
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Quota, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Quota to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a MetricRule. */
+        interface IMetricRule {
+
+            /** MetricRule selector */
+            selector?: (string|null);
+
+            /** MetricRule metricCosts */
+            metricCosts?: ({ [k: string]: (number|Long|string) }|null);
+        }
+
+        /** Represents a MetricRule. */
+        class MetricRule implements IMetricRule {
+
+            /**
+             * Constructs a new MetricRule.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IMetricRule);
+
+            /** MetricRule selector. */
+            public selector: string;
+
+            /** MetricRule metricCosts. */
+            public metricCosts: { [k: string]: (number|Long|string) };
+
+            /**
+             * Creates a new MetricRule instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns MetricRule instance
+             */
+            public static create(properties?: google.api.IMetricRule): google.api.MetricRule;
+
+            /**
+             * Encodes the specified MetricRule message. Does not implicitly {@link google.api.MetricRule.verify|verify} messages.
+             * @param message MetricRule message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IMetricRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified MetricRule message, length delimited. Does not implicitly {@link google.api.MetricRule.verify|verify} messages.
+             * @param message MetricRule message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IMetricRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a MetricRule message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns MetricRule
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.MetricRule;
+
+            /**
+             * Decodes a MetricRule message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns MetricRule
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.MetricRule;
+
+            /**
+             * Verifies a MetricRule message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a MetricRule message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns MetricRule
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.MetricRule;
+
+            /**
+             * Creates a plain object from a MetricRule message. Also converts values to other types if specified.
+             * @param message MetricRule
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.MetricRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this MetricRule to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a QuotaLimit. */
+        interface IQuotaLimit {
+
+            /** QuotaLimit name */
+            name?: (string|null);
+
+            /** QuotaLimit description */
+            description?: (string|null);
+
+            /** QuotaLimit defaultLimit */
+            defaultLimit?: (number|Long|string|null);
+
+            /** QuotaLimit maxLimit */
+            maxLimit?: (number|Long|string|null);
+
+            /** QuotaLimit freeTier */
+            freeTier?: (number|Long|string|null);
+
+            /** QuotaLimit duration */
+            duration?: (string|null);
+
+            /** QuotaLimit metric */
+            metric?: (string|null);
+
+            /** QuotaLimit unit */
+            unit?: (string|null);
+
+            /** QuotaLimit values */
+            values?: ({ [k: string]: (number|Long|string) }|null);
+
+            /** QuotaLimit displayName */
+            displayName?: (string|null);
+        }
+
+        /** Represents a QuotaLimit. */
+        class QuotaLimit implements IQuotaLimit {
+
+            /**
+             * Constructs a new QuotaLimit.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IQuotaLimit);
+
+            /** QuotaLimit name. */
+            public name: string;
+
+            /** QuotaLimit description. */
+            public description: string;
+
+            /** QuotaLimit defaultLimit. */
+            public defaultLimit: (number|Long|string);
+
+            /** QuotaLimit maxLimit. */
+            public maxLimit: (number|Long|string);
+
+            /** QuotaLimit freeTier. */
+            public freeTier: (number|Long|string);
+
+            /** QuotaLimit duration. */
+            public duration: string;
+
+            /** QuotaLimit metric. */
+            public metric: string;
+
+            /** QuotaLimit unit. */
+            public unit: string;
+
+            /** QuotaLimit values. */
+            public values: { [k: string]: (number|Long|string) };
+
+            /** QuotaLimit displayName. */
+            public displayName: string;
+
+            /**
+             * Creates a new QuotaLimit instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns QuotaLimit instance
+             */
+            public static create(properties?: google.api.IQuotaLimit): google.api.QuotaLimit;
+
+            /**
+             * Encodes the specified QuotaLimit message. Does not implicitly {@link google.api.QuotaLimit.verify|verify} messages.
+             * @param message QuotaLimit message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IQuotaLimit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified QuotaLimit message, length delimited. Does not implicitly {@link google.api.QuotaLimit.verify|verify} messages.
+             * @param message QuotaLimit message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IQuotaLimit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a QuotaLimit message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns QuotaLimit
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.QuotaLimit;
+
+            /**
+             * Decodes a QuotaLimit message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns QuotaLimit
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.QuotaLimit;
+
+            /**
+             * Verifies a QuotaLimit message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a QuotaLimit message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns QuotaLimit
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.QuotaLimit;
+
+            /**
+             * Creates a plain object from a QuotaLimit message. Also converts values to other types if specified.
+             * @param message QuotaLimit
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.QuotaLimit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this QuotaLimit to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -11871,6 +11871,102 @@ export namespace google {
             }
         }
 
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -14404,102 +14500,6 @@ export namespace google {
 
             /**
              * Converts this FieldMask to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
