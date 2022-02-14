@@ -1,4 +1,6 @@
 [
+  "../../protos/google/cloud/eventarc/v1/channel.proto",
+  "../../protos/google/cloud/eventarc/v1/channel_connection.proto",
   "../../protos/google/cloud/eventarc/v1/eventarc.proto",
   "../../protos/google/cloud/eventarc/v1/trigger.proto"
 ]

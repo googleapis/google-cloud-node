@@ -15,25 +15,21 @@
 
 'use strict';
 
-function main(name, validateOnly) {
-  // [START eventarc_v1_generated_Eventarc_DeleteTrigger_async]
+function main(validateOnly) {
+  // [START eventarc_v1_generated_Eventarc_UpdateChannel_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the trigger to be deleted.
+   *  The channel to be updated.
    */
-  // const name = 'abc123'
+  // const channel = {}
   /**
-   *  If provided, the trigger will only be deleted if the etag matches the
-   *  current etag on the resource.
+   *  The fields to be updated; only fields explicitly provided are updated.
+   *  If no field mask is provided, all provided fields in the request are
+   *  updated. To update all fields, provide a field mask of "*".
    */
-  // const etag = 'abc123'
-  /**
-   *  If set to true, and the trigger is not found, the request will succeed
-   *  but no action will be taken on the server.
-   */
-  // const allowMissing = true
+  // const updateMask = {}
   /**
    *  Required. If set, validate the request and preview the review, but do not
    *  post it.
@@ -46,21 +42,20 @@ function main(name, validateOnly) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function callDeleteTrigger() {
+  async function callUpdateChannel() {
     // Construct request
     const request = {
-      name,
       validateOnly,
     };
 
     // Run request
-    const [operation] = await eventarcClient.deleteTrigger(request);
+    const [operation] = await eventarcClient.updateChannel(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteTrigger();
-  // [END eventarc_v1_generated_Eventarc_DeleteTrigger_async]
+  callUpdateChannel();
+  // [END eventarc_v1_generated_Eventarc_UpdateChannel_async]
 }
 
 process.on('unhandledRejection', err => {

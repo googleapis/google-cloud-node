@@ -15,6 +15,16 @@
                 "getTrigger"
               ]
             },
+            "GetChannel": {
+              "methods": [
+                "getChannel"
+              ]
+            },
+            "GetChannelConnection": {
+              "methods": [
+                "getChannelConnection"
+              ]
+            },
             "CreateTrigger": {
               "methods": [
                 "createTrigger"
@@ -30,11 +40,50 @@
                 "deleteTrigger"
               ]
             },
+            "CreateChannel": {
+              "methods": [
+                "createChannel"
+              ]
+            },
+            "UpdateChannel": {
+              "methods": [
+                "updateChannel"
+              ]
+            },
+            "DeleteChannel": {
+              "methods": [
+                "deleteChannel"
+              ]
+            },
+            "CreateChannelConnection": {
+              "methods": [
+                "createChannelConnection"
+              ]
+            },
+            "DeleteChannelConnection": {
+              "methods": [
+                "deleteChannelConnection"
+              ]
+            },
             "ListTriggers": {
               "methods": [
                 "listTriggers",
                 "listTriggersStream",
                 "listTriggersAsync"
+              ]
+            },
+            "ListChannels": {
+              "methods": [
+                "listChannels",
+                "listChannelsStream",
+                "listChannelsAsync"
+              ]
+            },
+            "ListChannelConnections": {
+              "methods": [
+                "listChannelConnections",
+                "listChannelConnectionsStream",
+                "listChannelConnectionsAsync"
               ]
             }
           }
@@ -47,6 +96,16 @@
                 "getTrigger"
               ]
             },
+            "GetChannel": {
+              "methods": [
+                "getChannel"
+              ]
+            },
+            "GetChannelConnection": {
+              "methods": [
+                "getChannelConnection"
+              ]
+            },
             "CreateTrigger": {
               "methods": [
                 "createTrigger"
@@ -62,11 +121,50 @@
                 "deleteTrigger"
               ]
             },
+            "CreateChannel": {
+              "methods": [
+                "createChannel"
+              ]
+            },
+            "UpdateChannel": {
+              "methods": [
+                "updateChannel"
+              ]
+            },
+            "DeleteChannel": {
+              "methods": [
+                "deleteChannel"
+              ]
+            },
+            "CreateChannelConnection": {
+              "methods": [
+                "createChannelConnection"
+              ]
+            },
+            "DeleteChannelConnection": {
+              "methods": [
+                "deleteChannelConnection"
+              ]
+            },
             "ListTriggers": {
               "methods": [
                 "listTriggers",
                 "listTriggersStream",
                 "listTriggersAsync"
+              ]
+            },
+            "ListChannels": {
+              "methods": [
+                "listChannels",
+                "listChannelsStream",
+                "listChannelsAsync"
+              ]
+            },
+            "ListChannelConnections": {
+              "methods": [
+                "listChannelConnections",
+                "listChannelConnectionsStream",
+                "listChannelConnectionsAsync"
               ]
             }
           }

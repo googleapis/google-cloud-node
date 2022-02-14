@@ -336,6 +336,229 @@ describe('v1.EventarcClient', () => {
     });
   });
 
+  describe('getChannel', () => {
+    it('invokes getChannel without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetChannelRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.Channel()
+      );
+      client.innerApiCalls.getChannel = stubSimpleCall(expectedResponse);
+      const [response] = await client.getChannel(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getChannel without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetChannelRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.Channel()
+      );
+      client.innerApiCalls.getChannel =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getChannel(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IChannel | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getChannel with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetChannelRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getChannel = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getChannel(request), expectedError);
+      assert(
+        (client.innerApiCalls.getChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('getChannelConnection', () => {
+    it('invokes getChannelConnection without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetChannelConnectionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ChannelConnection()
+      );
+      client.innerApiCalls.getChannelConnection =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getChannelConnection(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getChannelConnection as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getChannelConnection without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetChannelConnectionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ChannelConnection()
+      );
+      client.innerApiCalls.getChannelConnection =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getChannelConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IChannelConnection | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getChannelConnection as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getChannelConnection with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.GetChannelConnectionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getChannelConnection = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getChannelConnection(request), expectedError);
+      assert(
+        (client.innerApiCalls.getChannelConnection as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('createTrigger', () => {
     it('invokes createTrigger without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
@@ -922,6 +1145,988 @@ describe('v1.EventarcClient', () => {
     });
   });
 
+  describe('createChannel', () => {
+    it('invokes createChannel without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateChannelRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createChannel =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createChannel(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createChannel without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateChannelRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createChannel =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createChannel(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IChannel,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createChannel with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateChannelRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createChannel = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createChannel(request), expectedError);
+      assert(
+        (client.innerApiCalls.createChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createChannel with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateChannelRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createChannel = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createChannel(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.createChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkCreateChannelProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateChannelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateChannelProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateChannelProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateChannel', () => {
+    it('invokes updateChannel without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateChannelRequest()
+      );
+      request.channel = {};
+      request.channel.name = '';
+      const expectedHeaderRequestParams = 'channel.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateChannel =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateChannel(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateChannel without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateChannelRequest()
+      );
+      request.channel = {};
+      request.channel.name = '';
+      const expectedHeaderRequestParams = 'channel.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateChannel =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateChannel(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IChannel,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateChannel with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateChannelRequest()
+      );
+      request.channel = {};
+      request.channel.name = '';
+      const expectedHeaderRequestParams = 'channel.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateChannel = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateChannel(request), expectedError);
+      assert(
+        (client.innerApiCalls.updateChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateChannel with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.UpdateChannelRequest()
+      );
+      request.channel = {};
+      request.channel.name = '';
+      const expectedHeaderRequestParams = 'channel.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateChannel = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateChannel(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.updateChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkUpdateChannelProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateChannelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateChannelProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateChannelProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteChannel', () => {
+    it('invokes deleteChannel without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteChannelRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteChannel =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteChannel(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteChannel without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteChannelRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteChannel =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteChannel(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IChannel,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteChannel with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteChannelRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteChannel = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteChannel(request), expectedError);
+      assert(
+        (client.innerApiCalls.deleteChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteChannel with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteChannelRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteChannel = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteChannel(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.deleteChannel as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkDeleteChannelProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteChannelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteChannelProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteChannelProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createChannelConnection', () => {
+    it('invokes createChannelConnection without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateChannelConnectionRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createChannelConnection =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createChannelConnection(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createChannelConnection as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createChannelConnection without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateChannelConnectionRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createChannelConnection =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createChannelConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IChannelConnection,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IChannelConnection,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createChannelConnection as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createChannelConnection with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateChannelConnectionRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createChannelConnection = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createChannelConnection(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.createChannelConnection as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createChannelConnection with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.CreateChannelConnectionRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createChannelConnection = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createChannelConnection(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.createChannelConnection as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkCreateChannelConnectionProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateChannelConnectionProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateChannelConnectionProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateChannelConnectionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteChannelConnection', () => {
+    it('invokes deleteChannelConnection without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteChannelConnectionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteChannelConnection =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteChannelConnection(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteChannelConnection as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteChannelConnection without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteChannelConnectionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteChannelConnection =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteChannelConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.eventarc.v1.IChannelConnection,
+              protos.google.cloud.eventarc.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.eventarc.v1.IChannelConnection,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteChannelConnection as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteChannelConnection with call error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteChannelConnectionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteChannelConnection = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteChannelConnection(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.deleteChannelConnection as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteChannelConnection with LRO error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.DeleteChannelConnectionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteChannelConnection = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteChannelConnection(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.deleteChannelConnection as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkDeleteChannelConnectionProgress without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteChannelConnectionProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteChannelConnectionProgress with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteChannelConnectionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listTriggers', () => {
     it('invokes listTriggers without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
@@ -1205,7 +2410,756 @@ describe('v1.EventarcClient', () => {
     });
   });
 
+  describe('listChannels', () => {
+    it('invokes listChannels without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
+      ];
+      client.innerApiCalls.listChannels = stubSimpleCall(expectedResponse);
+      const [response] = await client.listChannels(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listChannels as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listChannels without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
+      ];
+      client.innerApiCalls.listChannels =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listChannels(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IChannel[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listChannels as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listChannels with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listChannels = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listChannels(request), expectedError);
+      assert(
+        (client.innerApiCalls.listChannels as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listChannelsStream without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
+      ];
+      client.descriptors.page.listChannels.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listChannelsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.Channel[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.Channel) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listChannels.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listChannels, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listChannels.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listChannelsStream with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listChannels.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listChannelsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.Channel[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.Channel) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listChannels.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listChannels, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listChannels.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listChannels without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
+        generateSampleMessage(new protos.google.cloud.eventarc.v1.Channel()),
+      ];
+      client.descriptors.page.listChannels.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.eventarc.v1.IChannel[] = [];
+      const iterable = client.listChannelsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listChannels.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listChannels.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listChannels with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listChannels.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listChannelsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.eventarc.v1.IChannel[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listChannels.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listChannels.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('listChannelConnections', () => {
+    it('invokes listChannelConnections without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.ChannelConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.ChannelConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.ChannelConnection()
+        ),
+      ];
+      client.innerApiCalls.listChannelConnections =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listChannelConnections(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listChannelConnections as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listChannelConnections without error using callback', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.ChannelConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.ChannelConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.ChannelConnection()
+        ),
+      ];
+      client.innerApiCalls.listChannelConnections =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listChannelConnections(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.eventarc.v1.IChannelConnection[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listChannelConnections as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listChannelConnections with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listChannelConnections = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listChannelConnections(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.listChannelConnections as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listChannelConnectionsStream without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.ChannelConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.ChannelConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.ChannelConnection()
+        ),
+      ];
+      client.descriptors.page.listChannelConnections.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listChannelConnectionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.ChannelConnection[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.ChannelConnection) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listChannelConnections
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listChannelConnections, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listChannelConnections
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listChannelConnectionsStream with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listChannelConnections.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listChannelConnectionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.eventarc.v1.ChannelConnection[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.eventarc.v1.ChannelConnection) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listChannelConnections
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listChannelConnections, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listChannelConnections
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listChannelConnections without error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.ChannelConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.ChannelConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.eventarc.v1.ChannelConnection()
+        ),
+      ];
+      client.descriptors.page.listChannelConnections.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.eventarc.v1.IChannelConnection[] =
+        [];
+      const iterable = client.listChannelConnectionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listChannelConnections
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listChannelConnections
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listChannelConnections with error', async () => {
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listChannelConnections.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listChannelConnectionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.eventarc.v1.IChannelConnection[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listChannelConnections
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listChannelConnections
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('Path templates', () => {
+    describe('channel', () => {
+      const fakePath = '/rendered/path/channel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        channel: 'channelValue',
+      };
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.channelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.channelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('channelPath', () => {
+        const result = client.channelPath(
+          'projectValue',
+          'locationValue',
+          'channelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.channelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromChannelName', () => {
+        const result = client.matchProjectFromChannelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.channelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromChannelName', () => {
+        const result = client.matchLocationFromChannelName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.channelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchChannelFromChannelName', () => {
+        const result = client.matchChannelFromChannelName(fakePath);
+        assert.strictEqual(result, 'channelValue');
+        assert(
+          (client.pathTemplates.channelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('channelConnection', () => {
+      const fakePath = '/rendered/path/channelConnection';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        channel_connection: 'channelConnectionValue',
+      };
+      const client = new eventarcModule.v1.EventarcClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.channelConnectionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.channelConnectionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('channelConnectionPath', () => {
+        const result = client.channelConnectionPath(
+          'projectValue',
+          'locationValue',
+          'channelConnectionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.channelConnectionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromChannelConnectionName', () => {
+        const result = client.matchProjectFromChannelConnectionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.channelConnectionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromChannelConnectionName', () => {
+        const result = client.matchLocationFromChannelConnectionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.channelConnectionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchChannelConnectionFromChannelConnectionName', () => {
+        const result =
+          client.matchChannelConnectionFromChannelConnectionName(fakePath);
+        assert.strictEqual(result, 'channelConnectionValue');
+        assert(
+          (
+            client.pathTemplates.channelConnectionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('location', () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {

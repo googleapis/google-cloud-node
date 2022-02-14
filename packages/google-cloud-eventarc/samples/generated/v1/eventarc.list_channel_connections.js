@@ -15,30 +15,27 @@
 
 'use strict';
 
-function main(name, validateOnly) {
-  // [START eventarc_v1_generated_Eventarc_DeleteTrigger_async]
+function main(parent) {
+  // [START eventarc_v1_generated_Eventarc_ListChannelConnections_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the trigger to be deleted.
+   *  Required. The parent collection from which to list channel connections.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  If provided, the trigger will only be deleted if the etag matches the
-   *  current etag on the resource.
+   *  The maximum number of channel connections to return on each page.
+   *  Note: The service may send fewer responses.
    */
-  // const etag = 'abc123'
+  // const pageSize = 1234
   /**
-   *  If set to true, and the trigger is not found, the request will succeed
-   *  but no action will be taken on the server.
+   *  The page token; provide the value from the `next_page_token` field in a
+   *  previous `ListChannelConnections` call to retrieve the subsequent page.
+   *  When paginating, all other parameters provided to `ListChannelConnetions`
+   *  match the call that provided the page token.
    */
-  // const allowMissing = true
-  /**
-   *  Required. If set, validate the request and preview the review, but do not
-   *  post it.
-   */
-  // const validateOnly = true
+  // const pageToken = 'abc123'
 
   // Imports the Eventarc library
   const {EventarcClient} = require('@google-cloud/eventarc').v1;
@@ -46,21 +43,21 @@ function main(name, validateOnly) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function callDeleteTrigger() {
+  async function callListChannelConnections() {
     // Construct request
     const request = {
-      name,
-      validateOnly,
+      parent,
     };
 
     // Run request
-    const [operation] = await eventarcClient.deleteTrigger(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await eventarcClient.listChannelConnectionsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callDeleteTrigger();
-  // [END eventarc_v1_generated_Eventarc_DeleteTrigger_async]
+  callListChannelConnections();
+  // [END eventarc_v1_generated_Eventarc_ListChannelConnections_async]
 }
 
 process.on('unhandledRejection', err => {

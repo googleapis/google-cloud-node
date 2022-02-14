@@ -39,6 +39,42 @@
         "DeleteTrigger": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "GetChannel": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListChannels": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateChannel": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateChannel": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteChannel": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetChannelConnection": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListChannelConnections": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateChannelConnection": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteChannelConnection": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

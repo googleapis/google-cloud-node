@@ -15,30 +15,15 @@
 
 'use strict';
 
-function main(name, validateOnly) {
-  // [START eventarc_v1_generated_Eventarc_DeleteTrigger_async]
+function main(name) {
+  // [START eventarc_v1_generated_Eventarc_GetChannel_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the trigger to be deleted.
+   *  Required. The name of the channel to get.
    */
   // const name = 'abc123'
-  /**
-   *  If provided, the trigger will only be deleted if the etag matches the
-   *  current etag on the resource.
-   */
-  // const etag = 'abc123'
-  /**
-   *  If set to true, and the trigger is not found, the request will succeed
-   *  but no action will be taken on the server.
-   */
-  // const allowMissing = true
-  /**
-   *  Required. If set, validate the request and preview the review, but do not
-   *  post it.
-   */
-  // const validateOnly = true
 
   // Imports the Eventarc library
   const {EventarcClient} = require('@google-cloud/eventarc').v1;
@@ -46,21 +31,19 @@ function main(name, validateOnly) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function callDeleteTrigger() {
+  async function callGetChannel() {
     // Construct request
     const request = {
       name,
-      validateOnly,
     };
 
     // Run request
-    const [operation] = await eventarcClient.deleteTrigger(request);
-    const [response] = await operation.promise();
+    const response = await eventarcClient.getChannel(request);
     console.log(response);
   }
 
-  callDeleteTrigger();
-  // [END eventarc_v1_generated_Eventarc_DeleteTrigger_async]
+  callGetChannel();
+  // [END eventarc_v1_generated_Eventarc_GetChannel_async]
 }
 
 process.on('unhandledRejection', err => {

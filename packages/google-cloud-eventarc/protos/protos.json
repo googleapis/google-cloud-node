@@ -8,17 +8,153 @@
               "nested": {
                 "v1": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.Eventarc.V1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/eventarc/v1;eventarc",
                     "java_multiple_files": true,
                     "java_outer_classname": "TriggerProto",
                     "java_package": "com.google.cloud.eventarc.v1",
-                    "csharp_namespace": "Google.Cloud.Eventarc.V1",
                     "php_namespace": "Google\\Cloud\\Eventarc\\V1",
                     "ruby_package": "Google::Cloud::Eventarc::V1",
                     "(google.api.resource_definition).type": "run.googleapis.com/Service",
                     "(google.api.resource_definition).pattern": "*"
                   },
                   "nested": {
+                    "Channel": {
+                      "options": {
+                        "(google.api.resource).type": "eventarc.googleapis.com/Channel",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/channels/{channel}",
+                        "(google.api.resource).plural": "channels",
+                        "(google.api.resource).singular": "channel"
+                      },
+                      "oneofs": {
+                        "transport": {
+                          "oneof": [
+                            "pubsubTopic"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "provider": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pubsubTopic": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "activationToken": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PENDING": 1,
+                            "ACTIVE": 2,
+                            "INACTIVE": 3
+                          }
+                        }
+                      }
+                    },
+                    "ChannelConnection": {
+                      "options": {
+                        "(google.api.resource).type": "eventarc.googleapis.com/ChannelConnection",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/channelConnections/{channel_connection}",
+                        "(google.api.resource).plural": "channelConnections",
+                        "(google.api.resource).singular": "channelConnection"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "channel": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "eventarc.googleapis.com/Channel"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "activationToken": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "Eventarc": {
                       "options": {
                         "(google.api.default_host)": "eventarc.googleapis.com",
@@ -138,6 +274,214 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Trigger",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetChannel": {
+                          "requestType": "GetChannelRequest",
+                          "responseType": "Channel",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/channels/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/channels/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListChannels": {
+                          "requestType": "ListChannelsRequest",
+                          "responseType": "ListChannelsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/channels",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/channels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateChannel": {
+                          "requestType": "CreateChannelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/channels",
+                            "(google.api.http).body": "channel",
+                            "(google.api.method_signature)": "parent,channel,channel_id",
+                            "(google.longrunning.operation_info).response_type": "Channel",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/channels",
+                                "body": "channel"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,channel,channel_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Channel",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateChannel": {
+                          "requestType": "UpdateChannelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{channel.name=projects/*/locations/*/channels/*}",
+                            "(google.api.http).body": "channel",
+                            "(google.api.method_signature)": "channel,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Channel",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{channel.name=projects/*/locations/*/channels/*}",
+                                "body": "channel"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "channel,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Channel",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteChannel": {
+                          "requestType": "DeleteChannelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/channels/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Channel",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/channels/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Channel",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetChannelConnection": {
+                          "requestType": "GetChannelConnectionRequest",
+                          "responseType": "ChannelConnection",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/channelConnections/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/channelConnections/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListChannelConnections": {
+                          "requestType": "ListChannelConnectionsRequest",
+                          "responseType": "ListChannelConnectionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/channelConnections",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/channelConnections"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateChannelConnection": {
+                          "requestType": "CreateChannelConnectionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/channelConnections",
+                            "(google.api.http).body": "channel_connection",
+                            "(google.api.method_signature)": "parent,channel_connection,channel_connection_id",
+                            "(google.longrunning.operation_info).response_type": "ChannelConnection",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/channelConnections",
+                                "body": "channel_connection"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,channel_connection,channel_connection_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ChannelConnection",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteChannelConnection": {
+                          "requestType": "DeleteChannelConnectionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/channelConnections/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "ChannelConnection",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/channelConnections/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ChannelConnection",
                                 "metadata_type": "OperationMetadata"
                               }
                             }
@@ -282,6 +626,219 @@
                         }
                       }
                     },
+                    "GetChannelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "eventarc.googleapis.com/Channel"
+                          }
+                        }
+                      }
+                    },
+                    "ListChannelsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "eventarc.googleapis.com/Channel"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListChannelsResponse": {
+                      "fields": {
+                        "channels": {
+                          "rule": "repeated",
+                          "type": "Channel",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateChannelRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "eventarc.googleapis.com/Channel"
+                          }
+                        },
+                        "channel": {
+                          "type": "Channel",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "channelId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateChannelRequest": {
+                      "fields": {
+                        "channel": {
+                          "type": "Channel",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteChannelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "eventarc.googleapis.com/Channel"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetChannelConnectionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "eventarc.googleapis.com/ChannelConnection"
+                          }
+                        }
+                      }
+                    },
+                    "ListChannelConnectionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "eventarc.googleapis.com/ChannelConnection"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListChannelConnectionsResponse": {
+                      "fields": {
+                        "channelConnections": {
+                          "rule": "repeated",
+                          "type": "ChannelConnection",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateChannelConnectionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "eventarc.googleapis.com/ChannelConnection"
+                          }
+                        },
+                        "channelConnection": {
+                          "type": "ChannelConnection",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "channelConnectionId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteChannelConnectionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "eventarc.googleapis.com/ChannelConnection"
+                          }
+                        }
+                      }
+                    },
                     "OperationMetadata": {
                       "fields": {
                         "createTime": {
@@ -409,6 +966,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "channel": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "etag": {
                           "type": "string",
                           "id": 99,
@@ -433,6 +997,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "operator": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -440,7 +1011,9 @@
                       "oneofs": {
                         "descriptor": {
                           "oneof": [
-                            "cloudRun"
+                            "cloudRun",
+                            "cloudFunction",
+                            "gke"
                           ]
                         }
                       },
@@ -448,6 +1021,17 @@
                         "cloudRun": {
                           "type": "CloudRun",
                           "id": 1
+                        },
+                        "cloudFunction": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudfunctions.googleapis.com/CloudFunction"
+                          }
+                        },
+                        "gke": {
+                          "type": "GKE",
+                          "id": 3
                         }
                       }
                     },
@@ -492,6 +1076,45 @@
                         }
                       }
                     },
+                    "GKE": {
+                      "fields": {
+                        "cluster": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "namespace": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "path": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "Pubsub": {
                       "fields": {
                         "topic": {
@@ -520,7 +1143,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
+            "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -612,22 +1235,6 @@
                   "id": 2
                 }
               }
-            },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
             },
             "fieldBehavior": {
               "rule": "repeated",
@@ -723,6 +1330,22 @@
                   "id": 2
                 }
               }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
             }
           }
         },

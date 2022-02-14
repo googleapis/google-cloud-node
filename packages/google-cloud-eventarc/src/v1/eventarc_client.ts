@@ -167,6 +167,12 @@ export class EventarcClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      channelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/channels/{channel}'
+      ),
+      channelConnectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/channelConnections/{channel_connection}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -186,6 +192,16 @@ export class EventarcClient {
         'pageToken',
         'nextPageToken',
         'triggers'
+      ),
+      listChannels: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'channels'
+      ),
+      listChannelConnections: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'channelConnections'
       ),
     };
 
@@ -219,6 +235,36 @@ export class EventarcClient {
     const deleteTriggerMetadata = protoFilesRoot.lookup(
       '.google.cloud.eventarc.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createChannelResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.Channel'
+    ) as gax.protobuf.Type;
+    const createChannelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateChannelResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.Channel'
+    ) as gax.protobuf.Type;
+    const updateChannelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteChannelResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.Channel'
+    ) as gax.protobuf.Type;
+    const deleteChannelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const createChannelConnectionResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.ChannelConnection'
+    ) as gax.protobuf.Type;
+    const createChannelConnectionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteChannelConnectionResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.ChannelConnection'
+    ) as gax.protobuf.Type;
+    const deleteChannelConnectionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createTrigger: new this._gaxModule.LongrunningDescriptor(
@@ -235,6 +281,39 @@ export class EventarcClient {
         this.operationsClient,
         deleteTriggerResponse.decode.bind(deleteTriggerResponse),
         deleteTriggerMetadata.decode.bind(deleteTriggerMetadata)
+      ),
+      createChannel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createChannelResponse.decode.bind(createChannelResponse),
+        createChannelMetadata.decode.bind(createChannelMetadata)
+      ),
+      updateChannel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateChannelResponse.decode.bind(updateChannelResponse),
+        updateChannelMetadata.decode.bind(updateChannelMetadata)
+      ),
+      deleteChannel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteChannelResponse.decode.bind(deleteChannelResponse),
+        deleteChannelMetadata.decode.bind(deleteChannelMetadata)
+      ),
+      createChannelConnection: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createChannelConnectionResponse.decode.bind(
+          createChannelConnectionResponse
+        ),
+        createChannelConnectionMetadata.decode.bind(
+          createChannelConnectionMetadata
+        )
+      ),
+      deleteChannelConnection: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteChannelConnectionResponse.decode.bind(
+          deleteChannelConnectionResponse
+        ),
+        deleteChannelConnectionMetadata.decode.bind(
+          deleteChannelConnectionMetadata
+        )
       ),
     };
 
@@ -293,6 +372,15 @@ export class EventarcClient {
       'createTrigger',
       'updateTrigger',
       'deleteTrigger',
+      'getChannel',
+      'listChannels',
+      'createChannel',
+      'updateChannel',
+      'deleteChannel',
+      'getChannelConnection',
+      'listChannelConnections',
+      'createChannelConnection',
+      'deleteChannelConnection',
     ];
     for (const methodName of eventarcStubMethods) {
       const callPromise = this.eventarcStub.then(
@@ -461,6 +549,180 @@ export class EventarcClient {
     this.initialize();
     return this.innerApiCalls.getTrigger(request, options, callback);
   }
+  /**
+   * Get a single Channel.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the channel to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Channel]{@link google.cloud.eventarc.v1.Channel}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.get_channel.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_GetChannel_async
+   */
+  getChannel(
+    request?: protos.google.cloud.eventarc.v1.IGetChannelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IChannel,
+      protos.google.cloud.eventarc.v1.IGetChannelRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getChannel(
+    request: protos.google.cloud.eventarc.v1.IGetChannelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IChannel,
+      protos.google.cloud.eventarc.v1.IGetChannelRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getChannel(
+    request: protos.google.cloud.eventarc.v1.IGetChannelRequest,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IChannel,
+      protos.google.cloud.eventarc.v1.IGetChannelRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getChannel(
+    request?: protos.google.cloud.eventarc.v1.IGetChannelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.eventarc.v1.IChannel,
+          protos.google.cloud.eventarc.v1.IGetChannelRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.eventarc.v1.IChannel,
+      protos.google.cloud.eventarc.v1.IGetChannelRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IChannel,
+      protos.google.cloud.eventarc.v1.IGetChannelRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getChannel(request, options, callback);
+  }
+  /**
+   * Get a single ChannelConnection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the channel connection to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ChannelConnection]{@link google.cloud.eventarc.v1.ChannelConnection}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.get_channel_connection.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_GetChannelConnection_async
+   */
+  getChannelConnection(
+    request?: protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IChannelConnection,
+      protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getChannelConnection(
+    request: protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IChannelConnection,
+      | protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getChannelConnection(
+    request: protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IChannelConnection,
+      | protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getChannelConnection(
+    request?: protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.eventarc.v1.IChannelConnection,
+          | protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.eventarc.v1.IChannelConnection,
+      | protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IChannelConnection,
+      protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getChannelConnection(request, options, callback);
+  }
 
   /**
    * Create a new trigger in a particular project and location.
@@ -474,7 +736,7 @@ export class EventarcClient {
    * @param {string} request.triggerId
    *   Required. The user-provided ID to be assigned to the trigger.
    * @param {boolean} request.validateOnly
-   *   Required. If set, validate the request and preview the review, but do not actually
+   *   Required. If set, validate the request and preview the review, but do not
    *   post it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -614,14 +876,14 @@ export class EventarcClient {
    * @param {google.cloud.eventarc.v1.Trigger} request.trigger
    *   The trigger to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The fields to be updated; only fields explicitly provided will be updated.
-   *   If no field mask is provided, all provided fields in the request will be
+   *   The fields to be updated; only fields explicitly provided are updated.
+   *   If no field mask is provided, all provided fields in the request are
    *   updated. To update all fields, provide a field mask of "*".
    * @param {boolean} request.allowMissing
    *   If set to true, and the trigger is not found, a new trigger will be
    *   created. In this situation, `update_mask` is ignored.
    * @param {boolean} request.validateOnly
-   *   Required. If set, validate the request and preview the review, but do not actually
+   *   Required. If set, validate the request and preview the review, but do not
    *   post it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -767,7 +1029,7 @@ export class EventarcClient {
    *   If set to true, and the trigger is not found, the request will succeed
    *   but no action will be taken on the server.
    * @param {boolean} request.validateOnly
-   *   Required. If set, validate the request and preview the review, but do not actually
+   *   Required. If set, validate the request and preview the review, but do not
    *   post it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -900,6 +1162,720 @@ export class EventarcClient {
     >;
   }
   /**
+   * Create a new channel in a particular project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection in which to add this channel.
+   * @param {google.cloud.eventarc.v1.Channel} request.channel
+   *   Required. The channel to create.
+   * @param {string} request.channelId
+   *   Required. The user-provided ID to be assigned to the channel.
+   * @param {boolean} request.validateOnly
+   *   Required. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.create_channel.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_CreateChannel_async
+   */
+  createChannel(
+    request?: protos.google.cloud.eventarc.v1.ICreateChannelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createChannel(
+    request: protos.google.cloud.eventarc.v1.ICreateChannelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createChannel(
+    request: protos.google.cloud.eventarc.v1.ICreateChannelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createChannel(
+    request?: protos.google.cloud.eventarc.v1.ICreateChannelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannel,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createChannel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createChannel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.create_channel.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_CreateChannel_async
+   */
+  async checkCreateChannelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.Channel,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createChannel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.Channel,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Update a single channel.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.eventarc.v1.Channel} request.channel
+   *   The channel to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The fields to be updated; only fields explicitly provided are updated.
+   *   If no field mask is provided, all provided fields in the request are
+   *   updated. To update all fields, provide a field mask of "*".
+   * @param {boolean} request.validateOnly
+   *   Required. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.update_channel.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_UpdateChannel_async
+   */
+  updateChannel(
+    request?: protos.google.cloud.eventarc.v1.IUpdateChannelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateChannel(
+    request: protos.google.cloud.eventarc.v1.IUpdateChannelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateChannel(
+    request: protos.google.cloud.eventarc.v1.IUpdateChannelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateChannel(
+    request?: protos.google.cloud.eventarc.v1.IUpdateChannelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannel,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'channel.name': request.channel!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateChannel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateChannel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.update_channel.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_UpdateChannel_async
+   */
+  async checkUpdateChannelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.Channel,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateChannel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.Channel,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Delete a single channel.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the channel to be deleted.
+   * @param {boolean} request.validateOnly
+   *   Required. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.delete_channel.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_DeleteChannel_async
+   */
+  deleteChannel(
+    request?: protos.google.cloud.eventarc.v1.IDeleteChannelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteChannel(
+    request: protos.google.cloud.eventarc.v1.IDeleteChannelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteChannel(
+    request: protos.google.cloud.eventarc.v1.IDeleteChannelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteChannel(
+    request?: protos.google.cloud.eventarc.v1.IDeleteChannelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannel,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannel,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteChannel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteChannel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.delete_channel.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_DeleteChannel_async
+   */
+  async checkDeleteChannelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.Channel,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteChannel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.Channel,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Create a new ChannelConnection in a particular project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection in which to add this channel connection.
+   * @param {google.cloud.eventarc.v1.ChannelConnection} request.channelConnection
+   *   Required. Channel connection to create.
+   * @param {string} request.channelConnectionId
+   *   Required. The user-provided ID to be assigned to the channel connection.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.create_channel_connection.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_CreateChannelConnection_async
+   */
+  createChannelConnection(
+    request?: protos.google.cloud.eventarc.v1.ICreateChannelConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannelConnection,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createChannelConnection(
+    request: protos.google.cloud.eventarc.v1.ICreateChannelConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannelConnection,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createChannelConnection(
+    request: protos.google.cloud.eventarc.v1.ICreateChannelConnectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannelConnection,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createChannelConnection(
+    request?: protos.google.cloud.eventarc.v1.ICreateChannelConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannelConnection,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannelConnection,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannelConnection,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createChannelConnection(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `createChannelConnection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.create_channel_connection.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_CreateChannelConnection_async
+   */
+  async checkCreateChannelConnectionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.ChannelConnection,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createChannelConnection,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.ChannelConnection,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Delete a single ChannelConnection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the channel connection to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.delete_channel_connection.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_DeleteChannelConnection_async
+   */
+  deleteChannelConnection(
+    request?: protos.google.cloud.eventarc.v1.IDeleteChannelConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannelConnection,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteChannelConnection(
+    request: protos.google.cloud.eventarc.v1.IDeleteChannelConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannelConnection,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteChannelConnection(
+    request: protos.google.cloud.eventarc.v1.IDeleteChannelConnectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannelConnection,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteChannelConnection(
+    request?: protos.google.cloud.eventarc.v1.IDeleteChannelConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannelConnection,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannelConnection,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IChannelConnection,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteChannelConnection(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteChannelConnection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.delete_channel_connection.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_DeleteChannelConnection_async
+   */
+  async checkDeleteChannelConnectionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.ChannelConnection,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteChannelConnection,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.ChannelConnection,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
    * List triggers.
    *
    * @param {Object} request
@@ -916,9 +1892,9 @@ export class EventarcClient {
    *   When paginating, all other parameters provided to `ListTriggers` must match
    *   the call that provided the page token.
    * @param {string} request.orderBy
-   *   The sorting order of the resources returned. Value should be a comma
-   *   separated list of fields. The default sorting oder is ascending. To specify
-   *   descending order for a field, append a ` desc` suffix; for example:
+   *   The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
    *   `name desc, trigger_id`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1018,9 +1994,9 @@ export class EventarcClient {
    *   When paginating, all other parameters provided to `ListTriggers` must match
    *   the call that provided the page token.
    * @param {string} request.orderBy
-   *   The sorting order of the resources returned. Value should be a comma
-   *   separated list of fields. The default sorting oder is ascending. To specify
-   *   descending order for a field, append a ` desc` suffix; for example:
+   *   The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
    *   `name desc, trigger_id`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1074,9 +2050,9 @@ export class EventarcClient {
    *   When paginating, all other parameters provided to `ListTriggers` must match
    *   the call that provided the page token.
    * @param {string} request.orderBy
-   *   The sorting order of the resources returned. Value should be a comma
-   *   separated list of fields. The default sorting oder is ascending. To specify
-   *   descending order for a field, append a ` desc` suffix; for example:
+   *   The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
    *   `name desc, trigger_id`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1112,9 +2088,540 @@ export class EventarcClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.eventarc.v1.ITrigger>;
   }
+  /**
+   * List channels.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list channels on.
+   * @param {number} request.pageSize
+   *   The maximum number of channels to return on each page.
+   *   Note: The service may send fewer.
+   * @param {string} request.pageToken
+   *   The page token; provide the value from the `next_page_token` field in a
+   *   previous `ListChannels` call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListChannels` must
+   *   match the call that provided the page token.
+   * @param {string} request.orderBy
+   *   The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, channel_id`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Channel]{@link google.cloud.eventarc.v1.Channel}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listChannelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listChannels(
+    request?: protos.google.cloud.eventarc.v1.IListChannelsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IChannel[],
+      protos.google.cloud.eventarc.v1.IListChannelsRequest | null,
+      protos.google.cloud.eventarc.v1.IListChannelsResponse
+    ]
+  >;
+  listChannels(
+    request: protos.google.cloud.eventarc.v1.IListChannelsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListChannelsRequest,
+      protos.google.cloud.eventarc.v1.IListChannelsResponse | null | undefined,
+      protos.google.cloud.eventarc.v1.IChannel
+    >
+  ): void;
+  listChannels(
+    request: protos.google.cloud.eventarc.v1.IListChannelsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListChannelsRequest,
+      protos.google.cloud.eventarc.v1.IListChannelsResponse | null | undefined,
+      protos.google.cloud.eventarc.v1.IChannel
+    >
+  ): void;
+  listChannels(
+    request?: protos.google.cloud.eventarc.v1.IListChannelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListChannelsRequest,
+          | protos.google.cloud.eventarc.v1.IListChannelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IChannel
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListChannelsRequest,
+      protos.google.cloud.eventarc.v1.IListChannelsResponse | null | undefined,
+      protos.google.cloud.eventarc.v1.IChannel
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IChannel[],
+      protos.google.cloud.eventarc.v1.IListChannelsRequest | null,
+      protos.google.cloud.eventarc.v1.IListChannelsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listChannels(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list channels on.
+   * @param {number} request.pageSize
+   *   The maximum number of channels to return on each page.
+   *   Note: The service may send fewer.
+   * @param {string} request.pageToken
+   *   The page token; provide the value from the `next_page_token` field in a
+   *   previous `ListChannels` call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListChannels` must
+   *   match the call that provided the page token.
+   * @param {string} request.orderBy
+   *   The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, channel_id`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Channel]{@link google.cloud.eventarc.v1.Channel} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listChannelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listChannelsStream(
+    request?: protos.google.cloud.eventarc.v1.IListChannelsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listChannels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listChannels.createStream(
+      this.innerApiCalls.listChannels as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listChannels`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list channels on.
+   * @param {number} request.pageSize
+   *   The maximum number of channels to return on each page.
+   *   Note: The service may send fewer.
+   * @param {string} request.pageToken
+   *   The page token; provide the value from the `next_page_token` field in a
+   *   previous `ListChannels` call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListChannels` must
+   *   match the call that provided the page token.
+   * @param {string} request.orderBy
+   *   The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, channel_id`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Channel]{@link google.cloud.eventarc.v1.Channel}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.list_channels.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_ListChannels_async
+   */
+  listChannelsAsync(
+    request?: protos.google.cloud.eventarc.v1.IListChannelsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.eventarc.v1.IChannel> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listChannels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listChannels.asyncIterate(
+      this.innerApiCalls['listChannels'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.eventarc.v1.IChannel>;
+  }
+  /**
+   * List channel connections.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection from which to list channel connections.
+   * @param {number} request.pageSize
+   *   The maximum number of channel connections to return on each page.
+   *   Note: The service may send fewer responses.
+   * @param {string} request.pageToken
+   *   The page token; provide the value from the `next_page_token` field in a
+   *   previous `ListChannelConnections` call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListChannelConnetions`
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ChannelConnection]{@link google.cloud.eventarc.v1.ChannelConnection}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listChannelConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listChannelConnections(
+    request?: protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IChannelConnection[],
+      protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest | null,
+      protos.google.cloud.eventarc.v1.IListChannelConnectionsResponse
+    ]
+  >;
+  listChannelConnections(
+    request: protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest,
+      | protos.google.cloud.eventarc.v1.IListChannelConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.eventarc.v1.IChannelConnection
+    >
+  ): void;
+  listChannelConnections(
+    request: protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest,
+      | protos.google.cloud.eventarc.v1.IListChannelConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.eventarc.v1.IChannelConnection
+    >
+  ): void;
+  listChannelConnections(
+    request?: protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest,
+          | protos.google.cloud.eventarc.v1.IListChannelConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IChannelConnection
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest,
+      | protos.google.cloud.eventarc.v1.IListChannelConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.eventarc.v1.IChannelConnection
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IChannelConnection[],
+      protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest | null,
+      protos.google.cloud.eventarc.v1.IListChannelConnectionsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listChannelConnections(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection from which to list channel connections.
+   * @param {number} request.pageSize
+   *   The maximum number of channel connections to return on each page.
+   *   Note: The service may send fewer responses.
+   * @param {string} request.pageToken
+   *   The page token; provide the value from the `next_page_token` field in a
+   *   previous `ListChannelConnections` call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListChannelConnetions`
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ChannelConnection]{@link google.cloud.eventarc.v1.ChannelConnection} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listChannelConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listChannelConnectionsStream(
+    request?: protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listChannelConnections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listChannelConnections.createStream(
+      this.innerApiCalls.listChannelConnections as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listChannelConnections`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection from which to list channel connections.
+   * @param {number} request.pageSize
+   *   The maximum number of channel connections to return on each page.
+   *   Note: The service may send fewer responses.
+   * @param {string} request.pageToken
+   *   The page token; provide the value from the `next_page_token` field in a
+   *   previous `ListChannelConnections` call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListChannelConnetions`
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ChannelConnection]{@link google.cloud.eventarc.v1.ChannelConnection}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.list_channel_connections.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_ListChannelConnections_async
+   */
+  listChannelConnectionsAsync(
+    request?: protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.eventarc.v1.IChannelConnection> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listChannelConnections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listChannelConnections.asyncIterate(
+      this.innerApiCalls['listChannelConnections'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.eventarc.v1.IChannelConnection>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified channel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} channel
+   * @returns {string} Resource name string.
+   */
+  channelPath(project: string, location: string, channel: string) {
+    return this.pathTemplates.channelPathTemplate.render({
+      project: project,
+      location: location,
+      channel: channel,
+    });
+  }
+
+  /**
+   * Parse the project from Channel resource.
+   *
+   * @param {string} channelName
+   *   A fully-qualified path representing Channel resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromChannelName(channelName: string) {
+    return this.pathTemplates.channelPathTemplate.match(channelName).project;
+  }
+
+  /**
+   * Parse the location from Channel resource.
+   *
+   * @param {string} channelName
+   *   A fully-qualified path representing Channel resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromChannelName(channelName: string) {
+    return this.pathTemplates.channelPathTemplate.match(channelName).location;
+  }
+
+  /**
+   * Parse the channel from Channel resource.
+   *
+   * @param {string} channelName
+   *   A fully-qualified path representing Channel resource.
+   * @returns {string} A string representing the channel.
+   */
+  matchChannelFromChannelName(channelName: string) {
+    return this.pathTemplates.channelPathTemplate.match(channelName).channel;
+  }
+
+  /**
+   * Return a fully-qualified channelConnection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} channel_connection
+   * @returns {string} Resource name string.
+   */
+  channelConnectionPath(
+    project: string,
+    location: string,
+    channelConnection: string
+  ) {
+    return this.pathTemplates.channelConnectionPathTemplate.render({
+      project: project,
+      location: location,
+      channel_connection: channelConnection,
+    });
+  }
+
+  /**
+   * Parse the project from ChannelConnection resource.
+   *
+   * @param {string} channelConnectionName
+   *   A fully-qualified path representing ChannelConnection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromChannelConnectionName(channelConnectionName: string) {
+    return this.pathTemplates.channelConnectionPathTemplate.match(
+      channelConnectionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ChannelConnection resource.
+   *
+   * @param {string} channelConnectionName
+   *   A fully-qualified path representing ChannelConnection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromChannelConnectionName(channelConnectionName: string) {
+    return this.pathTemplates.channelConnectionPathTemplate.match(
+      channelConnectionName
+    ).location;
+  }
+
+  /**
+   * Parse the channel_connection from ChannelConnection resource.
+   *
+   * @param {string} channelConnectionName
+   *   A fully-qualified path representing ChannelConnection resource.
+   * @returns {string} A string representing the channel_connection.
+   */
+  matchChannelConnectionFromChannelConnectionName(
+    channelConnectionName: string
+  ) {
+    return this.pathTemplates.channelConnectionPathTemplate.match(
+      channelConnectionName
+    ).channel_connection;
+  }
 
   /**
    * Return a fully-qualified location resource name string.

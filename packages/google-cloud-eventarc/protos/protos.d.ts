@@ -26,6 +26,272 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Properties of a Channel. */
+                interface IChannel {
+
+                    /** Channel name */
+                    name?: (string|null);
+
+                    /** Channel uid */
+                    uid?: (string|null);
+
+                    /** Channel createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Channel updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Channel provider */
+                    provider?: (string|null);
+
+                    /** Channel pubsubTopic */
+                    pubsubTopic?: (string|null);
+
+                    /** Channel state */
+                    state?: (google.cloud.eventarc.v1.Channel.State|keyof typeof google.cloud.eventarc.v1.Channel.State|null);
+
+                    /** Channel activationToken */
+                    activationToken?: (string|null);
+                }
+
+                /** Represents a Channel. */
+                class Channel implements IChannel {
+
+                    /**
+                     * Constructs a new Channel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IChannel);
+
+                    /** Channel name. */
+                    public name: string;
+
+                    /** Channel uid. */
+                    public uid: string;
+
+                    /** Channel createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Channel updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Channel provider. */
+                    public provider: string;
+
+                    /** Channel pubsubTopic. */
+                    public pubsubTopic?: (string|null);
+
+                    /** Channel state. */
+                    public state: (google.cloud.eventarc.v1.Channel.State|keyof typeof google.cloud.eventarc.v1.Channel.State);
+
+                    /** Channel activationToken. */
+                    public activationToken: string;
+
+                    /** Channel transport. */
+                    public transport?: "pubsubTopic";
+
+                    /**
+                     * Creates a new Channel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Channel instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IChannel): google.cloud.eventarc.v1.Channel;
+
+                    /**
+                     * Encodes the specified Channel message. Does not implicitly {@link google.cloud.eventarc.v1.Channel.verify|verify} messages.
+                     * @param message Channel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IChannel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Channel message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Channel.verify|verify} messages.
+                     * @param message Channel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IChannel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Channel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Channel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.Channel;
+
+                    /**
+                     * Decodes a Channel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Channel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.Channel;
+
+                    /**
+                     * Verifies a Channel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Channel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Channel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.Channel;
+
+                    /**
+                     * Creates a plain object from a Channel message. Also converts values to other types if specified.
+                     * @param message Channel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.Channel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Channel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Channel {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 1,
+                        ACTIVE = 2,
+                        INACTIVE = 3
+                    }
+                }
+
+                /** Properties of a ChannelConnection. */
+                interface IChannelConnection {
+
+                    /** ChannelConnection name */
+                    name?: (string|null);
+
+                    /** ChannelConnection uid */
+                    uid?: (string|null);
+
+                    /** ChannelConnection channel */
+                    channel?: (string|null);
+
+                    /** ChannelConnection createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ChannelConnection updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ChannelConnection activationToken */
+                    activationToken?: (string|null);
+                }
+
+                /** Represents a ChannelConnection. */
+                class ChannelConnection implements IChannelConnection {
+
+                    /**
+                     * Constructs a new ChannelConnection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IChannelConnection);
+
+                    /** ChannelConnection name. */
+                    public name: string;
+
+                    /** ChannelConnection uid. */
+                    public uid: string;
+
+                    /** ChannelConnection channel. */
+                    public channel: string;
+
+                    /** ChannelConnection createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ChannelConnection updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ChannelConnection activationToken. */
+                    public activationToken: string;
+
+                    /**
+                     * Creates a new ChannelConnection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChannelConnection instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IChannelConnection): google.cloud.eventarc.v1.ChannelConnection;
+
+                    /**
+                     * Encodes the specified ChannelConnection message. Does not implicitly {@link google.cloud.eventarc.v1.ChannelConnection.verify|verify} messages.
+                     * @param message ChannelConnection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IChannelConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChannelConnection message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ChannelConnection.verify|verify} messages.
+                     * @param message ChannelConnection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IChannelConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChannelConnection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChannelConnection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.ChannelConnection;
+
+                    /**
+                     * Decodes a ChannelConnection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChannelConnection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.ChannelConnection;
+
+                    /**
+                     * Verifies a ChannelConnection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChannelConnection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChannelConnection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.ChannelConnection;
+
+                    /**
+                     * Creates a plain object from a ChannelConnection message. Also converts values to other types if specified.
+                     * @param message ChannelConnection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.ChannelConnection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChannelConnection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Represents an Eventarc */
                 class Eventarc extends $protobuf.rpc.Service {
 
@@ -115,6 +381,132 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteTrigger(request: google.cloud.eventarc.v1.IDeleteTriggerRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetChannel.
+                     * @param request GetChannelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Channel
+                     */
+                    public getChannel(request: google.cloud.eventarc.v1.IGetChannelRequest, callback: google.cloud.eventarc.v1.Eventarc.GetChannelCallback): void;
+
+                    /**
+                     * Calls GetChannel.
+                     * @param request GetChannelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getChannel(request: google.cloud.eventarc.v1.IGetChannelRequest): Promise<google.cloud.eventarc.v1.Channel>;
+
+                    /**
+                     * Calls ListChannels.
+                     * @param request ListChannelsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListChannelsResponse
+                     */
+                    public listChannels(request: google.cloud.eventarc.v1.IListChannelsRequest, callback: google.cloud.eventarc.v1.Eventarc.ListChannelsCallback): void;
+
+                    /**
+                     * Calls ListChannels.
+                     * @param request ListChannelsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listChannels(request: google.cloud.eventarc.v1.IListChannelsRequest): Promise<google.cloud.eventarc.v1.ListChannelsResponse>;
+
+                    /**
+                     * Calls CreateChannel.
+                     * @param request CreateChannelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createChannel(request: google.cloud.eventarc.v1.ICreateChannelRequest, callback: google.cloud.eventarc.v1.Eventarc.CreateChannelCallback): void;
+
+                    /**
+                     * Calls CreateChannel.
+                     * @param request CreateChannelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createChannel(request: google.cloud.eventarc.v1.ICreateChannelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateChannel.
+                     * @param request UpdateChannelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateChannel(request: google.cloud.eventarc.v1.IUpdateChannelRequest, callback: google.cloud.eventarc.v1.Eventarc.UpdateChannelCallback): void;
+
+                    /**
+                     * Calls UpdateChannel.
+                     * @param request UpdateChannelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateChannel(request: google.cloud.eventarc.v1.IUpdateChannelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteChannel.
+                     * @param request DeleteChannelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteChannel(request: google.cloud.eventarc.v1.IDeleteChannelRequest, callback: google.cloud.eventarc.v1.Eventarc.DeleteChannelCallback): void;
+
+                    /**
+                     * Calls DeleteChannel.
+                     * @param request DeleteChannelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteChannel(request: google.cloud.eventarc.v1.IDeleteChannelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetChannelConnection.
+                     * @param request GetChannelConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ChannelConnection
+                     */
+                    public getChannelConnection(request: google.cloud.eventarc.v1.IGetChannelConnectionRequest, callback: google.cloud.eventarc.v1.Eventarc.GetChannelConnectionCallback): void;
+
+                    /**
+                     * Calls GetChannelConnection.
+                     * @param request GetChannelConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getChannelConnection(request: google.cloud.eventarc.v1.IGetChannelConnectionRequest): Promise<google.cloud.eventarc.v1.ChannelConnection>;
+
+                    /**
+                     * Calls ListChannelConnections.
+                     * @param request ListChannelConnectionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListChannelConnectionsResponse
+                     */
+                    public listChannelConnections(request: google.cloud.eventarc.v1.IListChannelConnectionsRequest, callback: google.cloud.eventarc.v1.Eventarc.ListChannelConnectionsCallback): void;
+
+                    /**
+                     * Calls ListChannelConnections.
+                     * @param request ListChannelConnectionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listChannelConnections(request: google.cloud.eventarc.v1.IListChannelConnectionsRequest): Promise<google.cloud.eventarc.v1.ListChannelConnectionsResponse>;
+
+                    /**
+                     * Calls CreateChannelConnection.
+                     * @param request CreateChannelConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createChannelConnection(request: google.cloud.eventarc.v1.ICreateChannelConnectionRequest, callback: google.cloud.eventarc.v1.Eventarc.CreateChannelConnectionCallback): void;
+
+                    /**
+                     * Calls CreateChannelConnection.
+                     * @param request CreateChannelConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createChannelConnection(request: google.cloud.eventarc.v1.ICreateChannelConnectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteChannelConnection.
+                     * @param request DeleteChannelConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteChannelConnection(request: google.cloud.eventarc.v1.IDeleteChannelConnectionRequest, callback: google.cloud.eventarc.v1.Eventarc.DeleteChannelConnectionCallback): void;
+
+                    /**
+                     * Calls DeleteChannelConnection.
+                     * @param request DeleteChannelConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteChannelConnection(request: google.cloud.eventarc.v1.IDeleteChannelConnectionRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace Eventarc {
@@ -153,6 +545,69 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteTriggerCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#getChannel}.
+                     * @param error Error, if any
+                     * @param [response] Channel
+                     */
+                    type GetChannelCallback = (error: (Error|null), response?: google.cloud.eventarc.v1.Channel) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#listChannels}.
+                     * @param error Error, if any
+                     * @param [response] ListChannelsResponse
+                     */
+                    type ListChannelsCallback = (error: (Error|null), response?: google.cloud.eventarc.v1.ListChannelsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#createChannel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateChannelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#updateChannel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateChannelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#deleteChannel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteChannelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#getChannelConnection}.
+                     * @param error Error, if any
+                     * @param [response] ChannelConnection
+                     */
+                    type GetChannelConnectionCallback = (error: (Error|null), response?: google.cloud.eventarc.v1.ChannelConnection) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#listChannelConnections}.
+                     * @param error Error, if any
+                     * @param [response] ListChannelConnectionsResponse
+                     */
+                    type ListChannelConnectionsCallback = (error: (Error|null), response?: google.cloud.eventarc.v1.ListChannelConnectionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#createChannelConnection}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateChannelConnectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#deleteChannelConnection}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteChannelConnectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a GetTriggerRequest. */
@@ -779,6 +1234,1098 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a GetChannelRequest. */
+                interface IGetChannelRequest {
+
+                    /** GetChannelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetChannelRequest. */
+                class GetChannelRequest implements IGetChannelRequest {
+
+                    /**
+                     * Constructs a new GetChannelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IGetChannelRequest);
+
+                    /** GetChannelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetChannelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetChannelRequest instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IGetChannelRequest): google.cloud.eventarc.v1.GetChannelRequest;
+
+                    /**
+                     * Encodes the specified GetChannelRequest message. Does not implicitly {@link google.cloud.eventarc.v1.GetChannelRequest.verify|verify} messages.
+                     * @param message GetChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IGetChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetChannelRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GetChannelRequest.verify|verify} messages.
+                     * @param message GetChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IGetChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetChannelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.GetChannelRequest;
+
+                    /**
+                     * Decodes a GetChannelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.GetChannelRequest;
+
+                    /**
+                     * Verifies a GetChannelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetChannelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetChannelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.GetChannelRequest;
+
+                    /**
+                     * Creates a plain object from a GetChannelRequest message. Also converts values to other types if specified.
+                     * @param message GetChannelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.GetChannelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetChannelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListChannelsRequest. */
+                interface IListChannelsRequest {
+
+                    /** ListChannelsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListChannelsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListChannelsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListChannelsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListChannelsRequest. */
+                class ListChannelsRequest implements IListChannelsRequest {
+
+                    /**
+                     * Constructs a new ListChannelsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IListChannelsRequest);
+
+                    /** ListChannelsRequest parent. */
+                    public parent: string;
+
+                    /** ListChannelsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListChannelsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListChannelsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListChannelsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListChannelsRequest instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IListChannelsRequest): google.cloud.eventarc.v1.ListChannelsRequest;
+
+                    /**
+                     * Encodes the specified ListChannelsRequest message. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelsRequest.verify|verify} messages.
+                     * @param message ListChannelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IListChannelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListChannelsRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelsRequest.verify|verify} messages.
+                     * @param message ListChannelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IListChannelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListChannelsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListChannelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.ListChannelsRequest;
+
+                    /**
+                     * Decodes a ListChannelsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListChannelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.ListChannelsRequest;
+
+                    /**
+                     * Verifies a ListChannelsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListChannelsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListChannelsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.ListChannelsRequest;
+
+                    /**
+                     * Creates a plain object from a ListChannelsRequest message. Also converts values to other types if specified.
+                     * @param message ListChannelsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.ListChannelsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListChannelsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListChannelsResponse. */
+                interface IListChannelsResponse {
+
+                    /** ListChannelsResponse channels */
+                    channels?: (google.cloud.eventarc.v1.IChannel[]|null);
+
+                    /** ListChannelsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListChannelsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListChannelsResponse. */
+                class ListChannelsResponse implements IListChannelsResponse {
+
+                    /**
+                     * Constructs a new ListChannelsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IListChannelsResponse);
+
+                    /** ListChannelsResponse channels. */
+                    public channels: google.cloud.eventarc.v1.IChannel[];
+
+                    /** ListChannelsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListChannelsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListChannelsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListChannelsResponse instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IListChannelsResponse): google.cloud.eventarc.v1.ListChannelsResponse;
+
+                    /**
+                     * Encodes the specified ListChannelsResponse message. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelsResponse.verify|verify} messages.
+                     * @param message ListChannelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IListChannelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListChannelsResponse message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelsResponse.verify|verify} messages.
+                     * @param message ListChannelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IListChannelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListChannelsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListChannelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.ListChannelsResponse;
+
+                    /**
+                     * Decodes a ListChannelsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListChannelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.ListChannelsResponse;
+
+                    /**
+                     * Verifies a ListChannelsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListChannelsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListChannelsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.ListChannelsResponse;
+
+                    /**
+                     * Creates a plain object from a ListChannelsResponse message. Also converts values to other types if specified.
+                     * @param message ListChannelsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.ListChannelsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListChannelsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateChannelRequest. */
+                interface ICreateChannelRequest {
+
+                    /** CreateChannelRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateChannelRequest channel */
+                    channel?: (google.cloud.eventarc.v1.IChannel|null);
+
+                    /** CreateChannelRequest channelId */
+                    channelId?: (string|null);
+
+                    /** CreateChannelRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateChannelRequest. */
+                class CreateChannelRequest implements ICreateChannelRequest {
+
+                    /**
+                     * Constructs a new CreateChannelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.ICreateChannelRequest);
+
+                    /** CreateChannelRequest parent. */
+                    public parent: string;
+
+                    /** CreateChannelRequest channel. */
+                    public channel?: (google.cloud.eventarc.v1.IChannel|null);
+
+                    /** CreateChannelRequest channelId. */
+                    public channelId: string;
+
+                    /** CreateChannelRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateChannelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateChannelRequest instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.ICreateChannelRequest): google.cloud.eventarc.v1.CreateChannelRequest;
+
+                    /**
+                     * Encodes the specified CreateChannelRequest message. Does not implicitly {@link google.cloud.eventarc.v1.CreateChannelRequest.verify|verify} messages.
+                     * @param message CreateChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.ICreateChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateChannelRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.CreateChannelRequest.verify|verify} messages.
+                     * @param message CreateChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.ICreateChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateChannelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.CreateChannelRequest;
+
+                    /**
+                     * Decodes a CreateChannelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.CreateChannelRequest;
+
+                    /**
+                     * Verifies a CreateChannelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateChannelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateChannelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.CreateChannelRequest;
+
+                    /**
+                     * Creates a plain object from a CreateChannelRequest message. Also converts values to other types if specified.
+                     * @param message CreateChannelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.CreateChannelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateChannelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateChannelRequest. */
+                interface IUpdateChannelRequest {
+
+                    /** UpdateChannelRequest channel */
+                    channel?: (google.cloud.eventarc.v1.IChannel|null);
+
+                    /** UpdateChannelRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateChannelRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateChannelRequest. */
+                class UpdateChannelRequest implements IUpdateChannelRequest {
+
+                    /**
+                     * Constructs a new UpdateChannelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IUpdateChannelRequest);
+
+                    /** UpdateChannelRequest channel. */
+                    public channel?: (google.cloud.eventarc.v1.IChannel|null);
+
+                    /** UpdateChannelRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateChannelRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateChannelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateChannelRequest instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IUpdateChannelRequest): google.cloud.eventarc.v1.UpdateChannelRequest;
+
+                    /**
+                     * Encodes the specified UpdateChannelRequest message. Does not implicitly {@link google.cloud.eventarc.v1.UpdateChannelRequest.verify|verify} messages.
+                     * @param message UpdateChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IUpdateChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateChannelRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.UpdateChannelRequest.verify|verify} messages.
+                     * @param message UpdateChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IUpdateChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateChannelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.UpdateChannelRequest;
+
+                    /**
+                     * Decodes an UpdateChannelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.UpdateChannelRequest;
+
+                    /**
+                     * Verifies an UpdateChannelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateChannelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateChannelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.UpdateChannelRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateChannelRequest message. Also converts values to other types if specified.
+                     * @param message UpdateChannelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.UpdateChannelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateChannelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteChannelRequest. */
+                interface IDeleteChannelRequest {
+
+                    /** DeleteChannelRequest name */
+                    name?: (string|null);
+
+                    /** DeleteChannelRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a DeleteChannelRequest. */
+                class DeleteChannelRequest implements IDeleteChannelRequest {
+
+                    /**
+                     * Constructs a new DeleteChannelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IDeleteChannelRequest);
+
+                    /** DeleteChannelRequest name. */
+                    public name: string;
+
+                    /** DeleteChannelRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new DeleteChannelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteChannelRequest instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IDeleteChannelRequest): google.cloud.eventarc.v1.DeleteChannelRequest;
+
+                    /**
+                     * Encodes the specified DeleteChannelRequest message. Does not implicitly {@link google.cloud.eventarc.v1.DeleteChannelRequest.verify|verify} messages.
+                     * @param message DeleteChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IDeleteChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteChannelRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.DeleteChannelRequest.verify|verify} messages.
+                     * @param message DeleteChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IDeleteChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteChannelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.DeleteChannelRequest;
+
+                    /**
+                     * Decodes a DeleteChannelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.DeleteChannelRequest;
+
+                    /**
+                     * Verifies a DeleteChannelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteChannelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteChannelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.DeleteChannelRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteChannelRequest message. Also converts values to other types if specified.
+                     * @param message DeleteChannelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.DeleteChannelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteChannelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetChannelConnectionRequest. */
+                interface IGetChannelConnectionRequest {
+
+                    /** GetChannelConnectionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetChannelConnectionRequest. */
+                class GetChannelConnectionRequest implements IGetChannelConnectionRequest {
+
+                    /**
+                     * Constructs a new GetChannelConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IGetChannelConnectionRequest);
+
+                    /** GetChannelConnectionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetChannelConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetChannelConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IGetChannelConnectionRequest): google.cloud.eventarc.v1.GetChannelConnectionRequest;
+
+                    /**
+                     * Encodes the specified GetChannelConnectionRequest message. Does not implicitly {@link google.cloud.eventarc.v1.GetChannelConnectionRequest.verify|verify} messages.
+                     * @param message GetChannelConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IGetChannelConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetChannelConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GetChannelConnectionRequest.verify|verify} messages.
+                     * @param message GetChannelConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IGetChannelConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetChannelConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetChannelConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.GetChannelConnectionRequest;
+
+                    /**
+                     * Decodes a GetChannelConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetChannelConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.GetChannelConnectionRequest;
+
+                    /**
+                     * Verifies a GetChannelConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetChannelConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetChannelConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.GetChannelConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a GetChannelConnectionRequest message. Also converts values to other types if specified.
+                     * @param message GetChannelConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.GetChannelConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetChannelConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListChannelConnectionsRequest. */
+                interface IListChannelConnectionsRequest {
+
+                    /** ListChannelConnectionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListChannelConnectionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListChannelConnectionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListChannelConnectionsRequest. */
+                class ListChannelConnectionsRequest implements IListChannelConnectionsRequest {
+
+                    /**
+                     * Constructs a new ListChannelConnectionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IListChannelConnectionsRequest);
+
+                    /** ListChannelConnectionsRequest parent. */
+                    public parent: string;
+
+                    /** ListChannelConnectionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListChannelConnectionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListChannelConnectionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListChannelConnectionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IListChannelConnectionsRequest): google.cloud.eventarc.v1.ListChannelConnectionsRequest;
+
+                    /**
+                     * Encodes the specified ListChannelConnectionsRequest message. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelConnectionsRequest.verify|verify} messages.
+                     * @param message ListChannelConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IListChannelConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListChannelConnectionsRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelConnectionsRequest.verify|verify} messages.
+                     * @param message ListChannelConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IListChannelConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListChannelConnectionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListChannelConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.ListChannelConnectionsRequest;
+
+                    /**
+                     * Decodes a ListChannelConnectionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListChannelConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.ListChannelConnectionsRequest;
+
+                    /**
+                     * Verifies a ListChannelConnectionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListChannelConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListChannelConnectionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.ListChannelConnectionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListChannelConnectionsRequest message. Also converts values to other types if specified.
+                     * @param message ListChannelConnectionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.ListChannelConnectionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListChannelConnectionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListChannelConnectionsResponse. */
+                interface IListChannelConnectionsResponse {
+
+                    /** ListChannelConnectionsResponse channelConnections */
+                    channelConnections?: (google.cloud.eventarc.v1.IChannelConnection[]|null);
+
+                    /** ListChannelConnectionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListChannelConnectionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListChannelConnectionsResponse. */
+                class ListChannelConnectionsResponse implements IListChannelConnectionsResponse {
+
+                    /**
+                     * Constructs a new ListChannelConnectionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IListChannelConnectionsResponse);
+
+                    /** ListChannelConnectionsResponse channelConnections. */
+                    public channelConnections: google.cloud.eventarc.v1.IChannelConnection[];
+
+                    /** ListChannelConnectionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListChannelConnectionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListChannelConnectionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListChannelConnectionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IListChannelConnectionsResponse): google.cloud.eventarc.v1.ListChannelConnectionsResponse;
+
+                    /**
+                     * Encodes the specified ListChannelConnectionsResponse message. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelConnectionsResponse.verify|verify} messages.
+                     * @param message ListChannelConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IListChannelConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListChannelConnectionsResponse message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelConnectionsResponse.verify|verify} messages.
+                     * @param message ListChannelConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IListChannelConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListChannelConnectionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListChannelConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.ListChannelConnectionsResponse;
+
+                    /**
+                     * Decodes a ListChannelConnectionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListChannelConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.ListChannelConnectionsResponse;
+
+                    /**
+                     * Verifies a ListChannelConnectionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListChannelConnectionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListChannelConnectionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.ListChannelConnectionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListChannelConnectionsResponse message. Also converts values to other types if specified.
+                     * @param message ListChannelConnectionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.ListChannelConnectionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListChannelConnectionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateChannelConnectionRequest. */
+                interface ICreateChannelConnectionRequest {
+
+                    /** CreateChannelConnectionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateChannelConnectionRequest channelConnection */
+                    channelConnection?: (google.cloud.eventarc.v1.IChannelConnection|null);
+
+                    /** CreateChannelConnectionRequest channelConnectionId */
+                    channelConnectionId?: (string|null);
+                }
+
+                /** Represents a CreateChannelConnectionRequest. */
+                class CreateChannelConnectionRequest implements ICreateChannelConnectionRequest {
+
+                    /**
+                     * Constructs a new CreateChannelConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.ICreateChannelConnectionRequest);
+
+                    /** CreateChannelConnectionRequest parent. */
+                    public parent: string;
+
+                    /** CreateChannelConnectionRequest channelConnection. */
+                    public channelConnection?: (google.cloud.eventarc.v1.IChannelConnection|null);
+
+                    /** CreateChannelConnectionRequest channelConnectionId. */
+                    public channelConnectionId: string;
+
+                    /**
+                     * Creates a new CreateChannelConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateChannelConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.ICreateChannelConnectionRequest): google.cloud.eventarc.v1.CreateChannelConnectionRequest;
+
+                    /**
+                     * Encodes the specified CreateChannelConnectionRequest message. Does not implicitly {@link google.cloud.eventarc.v1.CreateChannelConnectionRequest.verify|verify} messages.
+                     * @param message CreateChannelConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.ICreateChannelConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateChannelConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.CreateChannelConnectionRequest.verify|verify} messages.
+                     * @param message CreateChannelConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.ICreateChannelConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateChannelConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateChannelConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.CreateChannelConnectionRequest;
+
+                    /**
+                     * Decodes a CreateChannelConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateChannelConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.CreateChannelConnectionRequest;
+
+                    /**
+                     * Verifies a CreateChannelConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateChannelConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateChannelConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.CreateChannelConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateChannelConnectionRequest message. Also converts values to other types if specified.
+                     * @param message CreateChannelConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.CreateChannelConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateChannelConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteChannelConnectionRequest. */
+                interface IDeleteChannelConnectionRequest {
+
+                    /** DeleteChannelConnectionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteChannelConnectionRequest. */
+                class DeleteChannelConnectionRequest implements IDeleteChannelConnectionRequest {
+
+                    /**
+                     * Constructs a new DeleteChannelConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IDeleteChannelConnectionRequest);
+
+                    /** DeleteChannelConnectionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteChannelConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteChannelConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IDeleteChannelConnectionRequest): google.cloud.eventarc.v1.DeleteChannelConnectionRequest;
+
+                    /**
+                     * Encodes the specified DeleteChannelConnectionRequest message. Does not implicitly {@link google.cloud.eventarc.v1.DeleteChannelConnectionRequest.verify|verify} messages.
+                     * @param message DeleteChannelConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IDeleteChannelConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteChannelConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.DeleteChannelConnectionRequest.verify|verify} messages.
+                     * @param message DeleteChannelConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IDeleteChannelConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteChannelConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteChannelConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.DeleteChannelConnectionRequest;
+
+                    /**
+                     * Decodes a DeleteChannelConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteChannelConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.DeleteChannelConnectionRequest;
+
+                    /**
+                     * Verifies a DeleteChannelConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteChannelConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteChannelConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.DeleteChannelConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteChannelConnectionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteChannelConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.DeleteChannelConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteChannelConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an OperationMetadata. */
                 interface IOperationMetadata {
 
@@ -935,6 +2482,9 @@ export namespace google {
                     /** Trigger labels */
                     labels?: ({ [k: string]: string }|null);
 
+                    /** Trigger channel */
+                    channel?: (string|null);
+
                     /** Trigger etag */
                     etag?: (string|null);
                 }
@@ -974,6 +2524,9 @@ export namespace google {
 
                     /** Trigger labels. */
                     public labels: { [k: string]: string };
+
+                    /** Trigger channel. */
+                    public channel: string;
 
                     /** Trigger etag. */
                     public etag: string;
@@ -1057,6 +2610,9 @@ export namespace google {
 
                     /** EventFilter value */
                     value?: (string|null);
+
+                    /** EventFilter operator */
+                    operator?: (string|null);
                 }
 
                 /** Represents an EventFilter. */
@@ -1073,6 +2629,9 @@ export namespace google {
 
                     /** EventFilter value. */
                     public value: string;
+
+                    /** EventFilter operator. */
+                    public operator: string;
 
                     /**
                      * Creates a new EventFilter instance using the specified properties.
@@ -1150,6 +2709,12 @@ export namespace google {
 
                     /** Destination cloudRun */
                     cloudRun?: (google.cloud.eventarc.v1.ICloudRun|null);
+
+                    /** Destination cloudFunction */
+                    cloudFunction?: (string|null);
+
+                    /** Destination gke */
+                    gke?: (google.cloud.eventarc.v1.IGKE|null);
                 }
 
                 /** Represents a Destination. */
@@ -1164,8 +2729,14 @@ export namespace google {
                     /** Destination cloudRun. */
                     public cloudRun?: (google.cloud.eventarc.v1.ICloudRun|null);
 
+                    /** Destination cloudFunction. */
+                    public cloudFunction?: (string|null);
+
+                    /** Destination gke. */
+                    public gke?: (google.cloud.eventarc.v1.IGKE|null);
+
                     /** Destination descriptor. */
-                    public descriptor?: "cloudRun";
+                    public descriptor?: ("cloudRun"|"cloudFunction"|"gke");
 
                     /**
                      * Creates a new Destination instance using the specified properties.
@@ -1428,6 +2999,120 @@ export namespace google {
 
                     /**
                      * Converts this CloudRun to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GKE. */
+                interface IGKE {
+
+                    /** GKE cluster */
+                    cluster?: (string|null);
+
+                    /** GKE location */
+                    location?: (string|null);
+
+                    /** GKE namespace */
+                    namespace?: (string|null);
+
+                    /** GKE service */
+                    service?: (string|null);
+
+                    /** GKE path */
+                    path?: (string|null);
+                }
+
+                /** Represents a GKE. */
+                class GKE implements IGKE {
+
+                    /**
+                     * Constructs a new GKE.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IGKE);
+
+                    /** GKE cluster. */
+                    public cluster: string;
+
+                    /** GKE location. */
+                    public location: string;
+
+                    /** GKE namespace. */
+                    public namespace: string;
+
+                    /** GKE service. */
+                    public service: string;
+
+                    /** GKE path. */
+                    public path: string;
+
+                    /**
+                     * Creates a new GKE instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GKE instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IGKE): google.cloud.eventarc.v1.GKE;
+
+                    /**
+                     * Encodes the specified GKE message. Does not implicitly {@link google.cloud.eventarc.v1.GKE.verify|verify} messages.
+                     * @param message GKE message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IGKE, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GKE message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GKE.verify|verify} messages.
+                     * @param message GKE message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IGKE, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GKE message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GKE
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.GKE;
+
+                    /**
+                     * Decodes a GKE message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GKE
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.GKE;
+
+                    /**
+                     * Verifies a GKE message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GKE message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GKE
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.GKE;
+
+                    /**
+                     * Creates a plain object from a GKE message. Also converts values to other types if specified.
+                     * @param message GKE
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.GKE, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GKE to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

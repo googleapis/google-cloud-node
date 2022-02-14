@@ -15,25 +15,23 @@
 
 'use strict';
 
-function main(name, validateOnly) {
-  // [START eventarc_v1_generated_Eventarc_DeleteTrigger_async]
+function main(parent, channel, channelId, validateOnly) {
+  // [START eventarc_v1_generated_Eventarc_CreateChannel_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the trigger to be deleted.
+   *  Required. The parent collection in which to add this channel.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  If provided, the trigger will only be deleted if the etag matches the
-   *  current etag on the resource.
+   *  Required. The channel to create.
    */
-  // const etag = 'abc123'
+  // const channel = {}
   /**
-   *  If set to true, and the trigger is not found, the request will succeed
-   *  but no action will be taken on the server.
+   *  Required. The user-provided ID to be assigned to the channel.
    */
-  // const allowMissing = true
+  // const channelId = 'abc123'
   /**
    *  Required. If set, validate the request and preview the review, but do not
    *  post it.
@@ -46,21 +44,23 @@ function main(name, validateOnly) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function callDeleteTrigger() {
+  async function callCreateChannel() {
     // Construct request
     const request = {
-      name,
+      parent,
+      channel,
+      channelId,
       validateOnly,
     };
 
     // Run request
-    const [operation] = await eventarcClient.deleteTrigger(request);
+    const [operation] = await eventarcClient.createChannel(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteTrigger();
-  // [END eventarc_v1_generated_Eventarc_DeleteTrigger_async]
+  callCreateChannel();
+  // [END eventarc_v1_generated_Eventarc_CreateChannel_async]
 }
 
 process.on('unhandledRejection', err => {

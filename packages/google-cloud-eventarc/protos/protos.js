@@ -66,6 +66,726 @@
                      */
                     var v1 = {};
     
+                    v1.Channel = (function() {
+    
+                        /**
+                         * Properties of a Channel.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IChannel
+                         * @property {string|null} [name] Channel name
+                         * @property {string|null} [uid] Channel uid
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Channel createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Channel updateTime
+                         * @property {string|null} [provider] Channel provider
+                         * @property {string|null} [pubsubTopic] Channel pubsubTopic
+                         * @property {google.cloud.eventarc.v1.Channel.State|null} [state] Channel state
+                         * @property {string|null} [activationToken] Channel activationToken
+                         */
+    
+                        /**
+                         * Constructs a new Channel.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a Channel.
+                         * @implements IChannel
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IChannel=} [properties] Properties to set
+                         */
+                        function Channel(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Channel name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @instance
+                         */
+                        Channel.prototype.name = "";
+    
+                        /**
+                         * Channel uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @instance
+                         */
+                        Channel.prototype.uid = "";
+    
+                        /**
+                         * Channel createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @instance
+                         */
+                        Channel.prototype.createTime = null;
+    
+                        /**
+                         * Channel updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @instance
+                         */
+                        Channel.prototype.updateTime = null;
+    
+                        /**
+                         * Channel provider.
+                         * @member {string} provider
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @instance
+                         */
+                        Channel.prototype.provider = "";
+    
+                        /**
+                         * Channel pubsubTopic.
+                         * @member {string|null|undefined} pubsubTopic
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @instance
+                         */
+                        Channel.prototype.pubsubTopic = null;
+    
+                        /**
+                         * Channel state.
+                         * @member {google.cloud.eventarc.v1.Channel.State} state
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @instance
+                         */
+                        Channel.prototype.state = 0;
+    
+                        /**
+                         * Channel activationToken.
+                         * @member {string} activationToken
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @instance
+                         */
+                        Channel.prototype.activationToken = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Channel transport.
+                         * @member {"pubsubTopic"|undefined} transport
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @instance
+                         */
+                        Object.defineProperty(Channel.prototype, "transport", {
+                            get: $util.oneOfGetter($oneOfFields = ["pubsubTopic"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Channel instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IChannel=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.Channel} Channel instance
+                         */
+                        Channel.create = function create(properties) {
+                            return new Channel(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Channel message. Does not implicitly {@link google.cloud.eventarc.v1.Channel.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IChannel} message Channel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Channel.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.provider != null && Object.hasOwnProperty.call(message, "provider"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.provider);
+                            if (message.pubsubTopic != null && Object.hasOwnProperty.call(message, "pubsubTopic"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.pubsubTopic);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.state);
+                            if (message.activationToken != null && Object.hasOwnProperty.call(message, "activationToken"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.activationToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Channel message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Channel.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IChannel} message Channel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Channel.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Channel message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.Channel} Channel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Channel.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.Channel();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.uid = reader.string();
+                                    break;
+                                case 5:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.provider = reader.string();
+                                    break;
+                                case 8:
+                                    message.pubsubTopic = reader.string();
+                                    break;
+                                case 9:
+                                    message.state = reader.int32();
+                                    break;
+                                case 10:
+                                    message.activationToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Channel message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.Channel} Channel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Channel.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Channel message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Channel.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.provider != null && message.hasOwnProperty("provider"))
+                                if (!$util.isString(message.provider))
+                                    return "provider: string expected";
+                            if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic")) {
+                                properties.transport = 1;
+                                if (!$util.isString(message.pubsubTopic))
+                                    return "pubsubTopic: string expected";
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.activationToken != null && message.hasOwnProperty("activationToken"))
+                                if (!$util.isString(message.activationToken))
+                                    return "activationToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Channel message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.Channel} Channel
+                         */
+                        Channel.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.Channel)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.Channel();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Channel.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Channel.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.provider != null)
+                                message.provider = String(object.provider);
+                            if (object.pubsubTopic != null)
+                                message.pubsubTopic = String(object.pubsubTopic);
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "PENDING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "INACTIVE":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            if (object.activationToken != null)
+                                message.activationToken = String(object.activationToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Channel message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @static
+                         * @param {google.cloud.eventarc.v1.Channel} message Channel
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Channel.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.uid = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.provider = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.activationToken = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.provider != null && message.hasOwnProperty("provider"))
+                                object.provider = message.provider;
+                            if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic")) {
+                                object.pubsubTopic = message.pubsubTopic;
+                                if (options.oneofs)
+                                    object.transport = "pubsubTopic";
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.eventarc.v1.Channel.State[message.state] : message.state;
+                            if (message.activationToken != null && message.hasOwnProperty("activationToken"))
+                                object.activationToken = message.activationToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Channel to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Channel.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.eventarc.v1.Channel.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} PENDING=1 PENDING value
+                         * @property {number} ACTIVE=2 ACTIVE value
+                         * @property {number} INACTIVE=3 INACTIVE value
+                         */
+                        Channel.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PENDING"] = 1;
+                            values[valuesById[2] = "ACTIVE"] = 2;
+                            values[valuesById[3] = "INACTIVE"] = 3;
+                            return values;
+                        })();
+    
+                        return Channel;
+                    })();
+    
+                    v1.ChannelConnection = (function() {
+    
+                        /**
+                         * Properties of a ChannelConnection.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IChannelConnection
+                         * @property {string|null} [name] ChannelConnection name
+                         * @property {string|null} [uid] ChannelConnection uid
+                         * @property {string|null} [channel] ChannelConnection channel
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ChannelConnection createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] ChannelConnection updateTime
+                         * @property {string|null} [activationToken] ChannelConnection activationToken
+                         */
+    
+                        /**
+                         * Constructs a new ChannelConnection.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ChannelConnection.
+                         * @implements IChannelConnection
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IChannelConnection=} [properties] Properties to set
+                         */
+                        function ChannelConnection(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ChannelConnection name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @instance
+                         */
+                        ChannelConnection.prototype.name = "";
+    
+                        /**
+                         * ChannelConnection uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @instance
+                         */
+                        ChannelConnection.prototype.uid = "";
+    
+                        /**
+                         * ChannelConnection channel.
+                         * @member {string} channel
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @instance
+                         */
+                        ChannelConnection.prototype.channel = "";
+    
+                        /**
+                         * ChannelConnection createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @instance
+                         */
+                        ChannelConnection.prototype.createTime = null;
+    
+                        /**
+                         * ChannelConnection updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @instance
+                         */
+                        ChannelConnection.prototype.updateTime = null;
+    
+                        /**
+                         * ChannelConnection activationToken.
+                         * @member {string} activationToken
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @instance
+                         */
+                        ChannelConnection.prototype.activationToken = "";
+    
+                        /**
+                         * Creates a new ChannelConnection instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IChannelConnection=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ChannelConnection} ChannelConnection instance
+                         */
+                        ChannelConnection.create = function create(properties) {
+                            return new ChannelConnection(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ChannelConnection message. Does not implicitly {@link google.cloud.eventarc.v1.ChannelConnection.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IChannelConnection} message ChannelConnection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChannelConnection.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                            if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.channel);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.activationToken != null && Object.hasOwnProperty.call(message, "activationToken"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.activationToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ChannelConnection message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ChannelConnection.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IChannelConnection} message ChannelConnection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChannelConnection.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ChannelConnection message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ChannelConnection} ChannelConnection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChannelConnection.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ChannelConnection();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.uid = reader.string();
+                                    break;
+                                case 5:
+                                    message.channel = reader.string();
+                                    break;
+                                case 6:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.activationToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ChannelConnection message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ChannelConnection} ChannelConnection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChannelConnection.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ChannelConnection message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ChannelConnection.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.channel != null && message.hasOwnProperty("channel"))
+                                if (!$util.isString(message.channel))
+                                    return "channel: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.activationToken != null && message.hasOwnProperty("activationToken"))
+                                if (!$util.isString(message.activationToken))
+                                    return "activationToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ChannelConnection message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ChannelConnection} ChannelConnection
+                         */
+                        ChannelConnection.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ChannelConnection)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ChannelConnection();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.channel != null)
+                                message.channel = String(object.channel);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.ChannelConnection.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.ChannelConnection.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.activationToken != null)
+                                message.activationToken = String(object.activationToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ChannelConnection message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ChannelConnection} message ChannelConnection
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ChannelConnection.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.uid = "";
+                                object.channel = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.activationToken = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.channel != null && message.hasOwnProperty("channel"))
+                                object.channel = message.channel;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.activationToken != null && message.hasOwnProperty("activationToken"))
+                                object.activationToken = message.activationToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ChannelConnection to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ChannelConnection
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ChannelConnection.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ChannelConnection;
+                    })();
+    
                     v1.Eventarc = (function() {
     
                         /**
@@ -259,6 +979,303 @@
                          * @memberof google.cloud.eventarc.v1.Eventarc
                          * @instance
                          * @param {google.cloud.eventarc.v1.IDeleteTriggerRequest} request DeleteTriggerRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#getChannel}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef GetChannelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.Channel} [response] Channel
+                         */
+    
+                        /**
+                         * Calls GetChannel.
+                         * @function getChannel
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetChannelRequest} request GetChannelRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.GetChannelCallback} callback Node-style callback called with the error, if any, and Channel
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.getChannel = function getChannel(request, callback) {
+                            return this.rpcCall(getChannel, $root.google.cloud.eventarc.v1.GetChannelRequest, $root.google.cloud.eventarc.v1.Channel, request, callback);
+                        }, "name", { value: "GetChannel" });
+    
+                        /**
+                         * Calls GetChannel.
+                         * @function getChannel
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetChannelRequest} request GetChannelRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.Channel>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#listChannels}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef ListChannelsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.ListChannelsResponse} [response] ListChannelsResponse
+                         */
+    
+                        /**
+                         * Calls ListChannels.
+                         * @function listChannels
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListChannelsRequest} request ListChannelsRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.ListChannelsCallback} callback Node-style callback called with the error, if any, and ListChannelsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.listChannels = function listChannels(request, callback) {
+                            return this.rpcCall(listChannels, $root.google.cloud.eventarc.v1.ListChannelsRequest, $root.google.cloud.eventarc.v1.ListChannelsResponse, request, callback);
+                        }, "name", { value: "ListChannels" });
+    
+                        /**
+                         * Calls ListChannels.
+                         * @function listChannels
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListChannelsRequest} request ListChannelsRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.ListChannelsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#createChannel}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef CreateChannelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateChannel.
+                         * @function createChannel
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.ICreateChannelRequest} request CreateChannelRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.CreateChannelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.createChannel = function createChannel(request, callback) {
+                            return this.rpcCall(createChannel, $root.google.cloud.eventarc.v1.CreateChannelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateChannel" });
+    
+                        /**
+                         * Calls CreateChannel.
+                         * @function createChannel
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.ICreateChannelRequest} request CreateChannelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#updateChannel}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef UpdateChannelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateChannel.
+                         * @function updateChannel
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IUpdateChannelRequest} request UpdateChannelRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.UpdateChannelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.updateChannel = function updateChannel(request, callback) {
+                            return this.rpcCall(updateChannel, $root.google.cloud.eventarc.v1.UpdateChannelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateChannel" });
+    
+                        /**
+                         * Calls UpdateChannel.
+                         * @function updateChannel
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IUpdateChannelRequest} request UpdateChannelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#deleteChannel}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef DeleteChannelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteChannel.
+                         * @function deleteChannel
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IDeleteChannelRequest} request DeleteChannelRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.DeleteChannelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.deleteChannel = function deleteChannel(request, callback) {
+                            return this.rpcCall(deleteChannel, $root.google.cloud.eventarc.v1.DeleteChannelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteChannel" });
+    
+                        /**
+                         * Calls DeleteChannel.
+                         * @function deleteChannel
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IDeleteChannelRequest} request DeleteChannelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#getChannelConnection}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef GetChannelConnectionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.ChannelConnection} [response] ChannelConnection
+                         */
+    
+                        /**
+                         * Calls GetChannelConnection.
+                         * @function getChannelConnection
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetChannelConnectionRequest} request GetChannelConnectionRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.GetChannelConnectionCallback} callback Node-style callback called with the error, if any, and ChannelConnection
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.getChannelConnection = function getChannelConnection(request, callback) {
+                            return this.rpcCall(getChannelConnection, $root.google.cloud.eventarc.v1.GetChannelConnectionRequest, $root.google.cloud.eventarc.v1.ChannelConnection, request, callback);
+                        }, "name", { value: "GetChannelConnection" });
+    
+                        /**
+                         * Calls GetChannelConnection.
+                         * @function getChannelConnection
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetChannelConnectionRequest} request GetChannelConnectionRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.ChannelConnection>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#listChannelConnections}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef ListChannelConnectionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.ListChannelConnectionsResponse} [response] ListChannelConnectionsResponse
+                         */
+    
+                        /**
+                         * Calls ListChannelConnections.
+                         * @function listChannelConnections
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListChannelConnectionsRequest} request ListChannelConnectionsRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.ListChannelConnectionsCallback} callback Node-style callback called with the error, if any, and ListChannelConnectionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.listChannelConnections = function listChannelConnections(request, callback) {
+                            return this.rpcCall(listChannelConnections, $root.google.cloud.eventarc.v1.ListChannelConnectionsRequest, $root.google.cloud.eventarc.v1.ListChannelConnectionsResponse, request, callback);
+                        }, "name", { value: "ListChannelConnections" });
+    
+                        /**
+                         * Calls ListChannelConnections.
+                         * @function listChannelConnections
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IListChannelConnectionsRequest} request ListChannelConnectionsRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.ListChannelConnectionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#createChannelConnection}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef CreateChannelConnectionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateChannelConnection.
+                         * @function createChannelConnection
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.ICreateChannelConnectionRequest} request CreateChannelConnectionRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.CreateChannelConnectionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.createChannelConnection = function createChannelConnection(request, callback) {
+                            return this.rpcCall(createChannelConnection, $root.google.cloud.eventarc.v1.CreateChannelConnectionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateChannelConnection" });
+    
+                        /**
+                         * Calls CreateChannelConnection.
+                         * @function createChannelConnection
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.ICreateChannelConnectionRequest} request CreateChannelConnectionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc#deleteChannelConnection}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef DeleteChannelConnectionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteChannelConnection.
+                         * @function deleteChannelConnection
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IDeleteChannelConnectionRequest} request DeleteChannelConnectionRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.DeleteChannelConnectionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.deleteChannelConnection = function deleteChannelConnection(request, callback) {
+                            return this.rpcCall(deleteChannelConnection, $root.google.cloud.eventarc.v1.DeleteChannelConnectionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteChannelConnection" });
+    
+                        /**
+                         * Calls DeleteChannelConnection.
+                         * @function deleteChannelConnection
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IDeleteChannelConnectionRequest} request DeleteChannelConnectionRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
@@ -1754,6 +2771,2541 @@
                         return DeleteTriggerRequest;
                     })();
     
+                    v1.GetChannelRequest = (function() {
+    
+                        /**
+                         * Properties of a GetChannelRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IGetChannelRequest
+                         * @property {string|null} [name] GetChannelRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetChannelRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a GetChannelRequest.
+                         * @implements IGetChannelRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IGetChannelRequest=} [properties] Properties to set
+                         */
+                        function GetChannelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetChannelRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.GetChannelRequest
+                         * @instance
+                         */
+                        GetChannelRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetChannelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.GetChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetChannelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.GetChannelRequest} GetChannelRequest instance
+                         */
+                        GetChannelRequest.create = function create(properties) {
+                            return new GetChannelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetChannelRequest message. Does not implicitly {@link google.cloud.eventarc.v1.GetChannelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.GetChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetChannelRequest} message GetChannelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetChannelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetChannelRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GetChannelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetChannelRequest} message GetChannelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetChannelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetChannelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.GetChannelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.GetChannelRequest} GetChannelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetChannelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.GetChannelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetChannelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetChannelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.GetChannelRequest} GetChannelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetChannelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetChannelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.GetChannelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetChannelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetChannelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.GetChannelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.GetChannelRequest} GetChannelRequest
+                         */
+                        GetChannelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.GetChannelRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.GetChannelRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetChannelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.GetChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.GetChannelRequest} message GetChannelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetChannelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetChannelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.GetChannelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetChannelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetChannelRequest;
+                    })();
+    
+                    v1.ListChannelsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListChannelsRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListChannelsRequest
+                         * @property {string|null} [parent] ListChannelsRequest parent
+                         * @property {number|null} [pageSize] ListChannelsRequest pageSize
+                         * @property {string|null} [pageToken] ListChannelsRequest pageToken
+                         * @property {string|null} [orderBy] ListChannelsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListChannelsRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListChannelsRequest.
+                         * @implements IListChannelsRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListChannelsRequest=} [properties] Properties to set
+                         */
+                        function ListChannelsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListChannelsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @instance
+                         */
+                        ListChannelsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListChannelsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @instance
+                         */
+                        ListChannelsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListChannelsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @instance
+                         */
+                        ListChannelsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListChannelsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @instance
+                         */
+                        ListChannelsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListChannelsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListChannelsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListChannelsRequest} ListChannelsRequest instance
+                         */
+                        ListChannelsRequest.create = function create(properties) {
+                            return new ListChannelsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListChannelsRequest message. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListChannelsRequest} message ListChannelsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListChannelsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListChannelsRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListChannelsRequest} message ListChannelsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListChannelsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListChannelsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListChannelsRequest} ListChannelsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListChannelsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListChannelsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.orderBy = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListChannelsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListChannelsRequest} ListChannelsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListChannelsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListChannelsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListChannelsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListChannelsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListChannelsRequest} ListChannelsRequest
+                         */
+                        ListChannelsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListChannelsRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListChannelsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListChannelsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListChannelsRequest} message ListChannelsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListChannelsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListChannelsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListChannelsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListChannelsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListChannelsRequest;
+                    })();
+    
+                    v1.ListChannelsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListChannelsResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListChannelsResponse
+                         * @property {Array.<google.cloud.eventarc.v1.IChannel>|null} [channels] ListChannelsResponse channels
+                         * @property {string|null} [nextPageToken] ListChannelsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListChannelsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListChannelsResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListChannelsResponse.
+                         * @implements IListChannelsResponse
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListChannelsResponse=} [properties] Properties to set
+                         */
+                        function ListChannelsResponse(properties) {
+                            this.channels = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListChannelsResponse channels.
+                         * @member {Array.<google.cloud.eventarc.v1.IChannel>} channels
+                         * @memberof google.cloud.eventarc.v1.ListChannelsResponse
+                         * @instance
+                         */
+                        ListChannelsResponse.prototype.channels = $util.emptyArray;
+    
+                        /**
+                         * ListChannelsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.eventarc.v1.ListChannelsResponse
+                         * @instance
+                         */
+                        ListChannelsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListChannelsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.eventarc.v1.ListChannelsResponse
+                         * @instance
+                         */
+                        ListChannelsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListChannelsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListChannelsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListChannelsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListChannelsResponse} ListChannelsResponse instance
+                         */
+                        ListChannelsResponse.create = function create(properties) {
+                            return new ListChannelsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListChannelsResponse message. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListChannelsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListChannelsResponse} message ListChannelsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListChannelsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.channels != null && message.channels.length)
+                                for (var i = 0; i < message.channels.length; ++i)
+                                    $root.google.cloud.eventarc.v1.Channel.encode(message.channels[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListChannelsResponse message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListChannelsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListChannelsResponse} message ListChannelsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListChannelsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListChannelsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListChannelsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListChannelsResponse} ListChannelsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListChannelsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListChannelsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.channels && message.channels.length))
+                                        message.channels = [];
+                                    message.channels.push($root.google.cloud.eventarc.v1.Channel.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.unreachable && message.unreachable.length))
+                                        message.unreachable = [];
+                                    message.unreachable.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListChannelsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListChannelsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListChannelsResponse} ListChannelsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListChannelsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListChannelsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListChannelsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListChannelsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.channels != null && message.hasOwnProperty("channels")) {
+                                if (!Array.isArray(message.channels))
+                                    return "channels: array expected";
+                                for (var i = 0; i < message.channels.length; ++i) {
+                                    var error = $root.google.cloud.eventarc.v1.Channel.verify(message.channels[i]);
+                                    if (error)
+                                        return "channels." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListChannelsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListChannelsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListChannelsResponse} ListChannelsResponse
+                         */
+                        ListChannelsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListChannelsResponse)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListChannelsResponse();
+                            if (object.channels) {
+                                if (!Array.isArray(object.channels))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListChannelsResponse.channels: array expected");
+                                message.channels = [];
+                                for (var i = 0; i < object.channels.length; ++i) {
+                                    if (typeof object.channels[i] !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.ListChannelsResponse.channels: object expected");
+                                    message.channels[i] = $root.google.cloud.eventarc.v1.Channel.fromObject(object.channels[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListChannelsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListChannelsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListChannelsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListChannelsResponse} message ListChannelsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListChannelsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.channels = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.channels && message.channels.length) {
+                                object.channels = [];
+                                for (var j = 0; j < message.channels.length; ++j)
+                                    object.channels[j] = $root.google.cloud.eventarc.v1.Channel.toObject(message.channels[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListChannelsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListChannelsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListChannelsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListChannelsResponse;
+                    })();
+    
+                    v1.CreateChannelRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateChannelRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface ICreateChannelRequest
+                         * @property {string|null} [parent] CreateChannelRequest parent
+                         * @property {google.cloud.eventarc.v1.IChannel|null} [channel] CreateChannelRequest channel
+                         * @property {string|null} [channelId] CreateChannelRequest channelId
+                         * @property {boolean|null} [validateOnly] CreateChannelRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreateChannelRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a CreateChannelRequest.
+                         * @implements ICreateChannelRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.ICreateChannelRequest=} [properties] Properties to set
+                         */
+                        function CreateChannelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateChannelRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @instance
+                         */
+                        CreateChannelRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateChannelRequest channel.
+                         * @member {google.cloud.eventarc.v1.IChannel|null|undefined} channel
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @instance
+                         */
+                        CreateChannelRequest.prototype.channel = null;
+    
+                        /**
+                         * CreateChannelRequest channelId.
+                         * @member {string} channelId
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @instance
+                         */
+                        CreateChannelRequest.prototype.channelId = "";
+    
+                        /**
+                         * CreateChannelRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @instance
+                         */
+                        CreateChannelRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreateChannelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateChannelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.CreateChannelRequest} CreateChannelRequest instance
+                         */
+                        CreateChannelRequest.create = function create(properties) {
+                            return new CreateChannelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateChannelRequest message. Does not implicitly {@link google.cloud.eventarc.v1.CreateChannelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateChannelRequest} message CreateChannelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateChannelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
+                                $root.google.cloud.eventarc.v1.Channel.encode(message.channel, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.channelId != null && Object.hasOwnProperty.call(message, "channelId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.channelId);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateChannelRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.CreateChannelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateChannelRequest} message CreateChannelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateChannelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateChannelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.CreateChannelRequest} CreateChannelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateChannelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.CreateChannelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.channel = $root.google.cloud.eventarc.v1.Channel.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.channelId = reader.string();
+                                    break;
+                                case 4:
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateChannelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.CreateChannelRequest} CreateChannelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateChannelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateChannelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateChannelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.channel != null && message.hasOwnProperty("channel")) {
+                                var error = $root.google.cloud.eventarc.v1.Channel.verify(message.channel);
+                                if (error)
+                                    return "channel." + error;
+                            }
+                            if (message.channelId != null && message.hasOwnProperty("channelId"))
+                                if (!$util.isString(message.channelId))
+                                    return "channelId: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateChannelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.CreateChannelRequest} CreateChannelRequest
+                         */
+                        CreateChannelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.CreateChannelRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.CreateChannelRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.channel != null) {
+                                if (typeof object.channel !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.CreateChannelRequest.channel: object expected");
+                                message.channel = $root.google.cloud.eventarc.v1.Channel.fromObject(object.channel);
+                            }
+                            if (object.channelId != null)
+                                message.channelId = String(object.channelId);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateChannelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.CreateChannelRequest} message CreateChannelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateChannelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.channel = null;
+                                object.channelId = "";
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.channel != null && message.hasOwnProperty("channel"))
+                                object.channel = $root.google.cloud.eventarc.v1.Channel.toObject(message.channel, options);
+                            if (message.channelId != null && message.hasOwnProperty("channelId"))
+                                object.channelId = message.channelId;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateChannelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.CreateChannelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateChannelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateChannelRequest;
+                    })();
+    
+                    v1.UpdateChannelRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateChannelRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IUpdateChannelRequest
+                         * @property {google.cloud.eventarc.v1.IChannel|null} [channel] UpdateChannelRequest channel
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateChannelRequest updateMask
+                         * @property {boolean|null} [validateOnly] UpdateChannelRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new UpdateChannelRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents an UpdateChannelRequest.
+                         * @implements IUpdateChannelRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IUpdateChannelRequest=} [properties] Properties to set
+                         */
+                        function UpdateChannelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateChannelRequest channel.
+                         * @member {google.cloud.eventarc.v1.IChannel|null|undefined} channel
+                         * @memberof google.cloud.eventarc.v1.UpdateChannelRequest
+                         * @instance
+                         */
+                        UpdateChannelRequest.prototype.channel = null;
+    
+                        /**
+                         * UpdateChannelRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.eventarc.v1.UpdateChannelRequest
+                         * @instance
+                         */
+                        UpdateChannelRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateChannelRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.UpdateChannelRequest
+                         * @instance
+                         */
+                        UpdateChannelRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new UpdateChannelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.UpdateChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateChannelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.UpdateChannelRequest} UpdateChannelRequest instance
+                         */
+                        UpdateChannelRequest.create = function create(properties) {
+                            return new UpdateChannelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateChannelRequest message. Does not implicitly {@link google.cloud.eventarc.v1.UpdateChannelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.UpdateChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateChannelRequest} message UpdateChannelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateChannelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
+                                $root.google.cloud.eventarc.v1.Channel.encode(message.channel, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateChannelRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.UpdateChannelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.UpdateChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateChannelRequest} message UpdateChannelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateChannelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateChannelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.UpdateChannelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.UpdateChannelRequest} UpdateChannelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateChannelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.UpdateChannelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.channel = $root.google.cloud.eventarc.v1.Channel.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateChannelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.UpdateChannelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.UpdateChannelRequest} UpdateChannelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateChannelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateChannelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.UpdateChannelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateChannelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.channel != null && message.hasOwnProperty("channel")) {
+                                var error = $root.google.cloud.eventarc.v1.Channel.verify(message.channel);
+                                if (error)
+                                    return "channel." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateChannelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.UpdateChannelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.UpdateChannelRequest} UpdateChannelRequest
+                         */
+                        UpdateChannelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.UpdateChannelRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.UpdateChannelRequest();
+                            if (object.channel != null) {
+                                if (typeof object.channel !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.UpdateChannelRequest.channel: object expected");
+                                message.channel = $root.google.cloud.eventarc.v1.Channel.fromObject(object.channel);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.UpdateChannelRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateChannelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.UpdateChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.UpdateChannelRequest} message UpdateChannelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateChannelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.channel = null;
+                                object.updateMask = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.channel != null && message.hasOwnProperty("channel"))
+                                object.channel = $root.google.cloud.eventarc.v1.Channel.toObject(message.channel, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateChannelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.UpdateChannelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateChannelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateChannelRequest;
+                    })();
+    
+                    v1.DeleteChannelRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteChannelRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IDeleteChannelRequest
+                         * @property {string|null} [name] DeleteChannelRequest name
+                         * @property {boolean|null} [validateOnly] DeleteChannelRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new DeleteChannelRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a DeleteChannelRequest.
+                         * @implements IDeleteChannelRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IDeleteChannelRequest=} [properties] Properties to set
+                         */
+                        function DeleteChannelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteChannelRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelRequest
+                         * @instance
+                         */
+                        DeleteChannelRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteChannelRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelRequest
+                         * @instance
+                         */
+                        DeleteChannelRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new DeleteChannelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteChannelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.DeleteChannelRequest} DeleteChannelRequest instance
+                         */
+                        DeleteChannelRequest.create = function create(properties) {
+                            return new DeleteChannelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteChannelRequest message. Does not implicitly {@link google.cloud.eventarc.v1.DeleteChannelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteChannelRequest} message DeleteChannelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteChannelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteChannelRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.DeleteChannelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteChannelRequest} message DeleteChannelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteChannelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteChannelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.DeleteChannelRequest} DeleteChannelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteChannelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.DeleteChannelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteChannelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.DeleteChannelRequest} DeleteChannelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteChannelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteChannelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteChannelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteChannelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.DeleteChannelRequest} DeleteChannelRequest
+                         */
+                        DeleteChannelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.DeleteChannelRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.DeleteChannelRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteChannelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.DeleteChannelRequest} message DeleteChannelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteChannelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.validateOnly = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteChannelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteChannelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteChannelRequest;
+                    })();
+    
+                    v1.GetChannelConnectionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetChannelConnectionRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IGetChannelConnectionRequest
+                         * @property {string|null} [name] GetChannelConnectionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetChannelConnectionRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a GetChannelConnectionRequest.
+                         * @implements IGetChannelConnectionRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IGetChannelConnectionRequest=} [properties] Properties to set
+                         */
+                        function GetChannelConnectionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetChannelConnectionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.GetChannelConnectionRequest
+                         * @instance
+                         */
+                        GetChannelConnectionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetChannelConnectionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.GetChannelConnectionRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetChannelConnectionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.GetChannelConnectionRequest} GetChannelConnectionRequest instance
+                         */
+                        GetChannelConnectionRequest.create = function create(properties) {
+                            return new GetChannelConnectionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetChannelConnectionRequest message. Does not implicitly {@link google.cloud.eventarc.v1.GetChannelConnectionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.GetChannelConnectionRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetChannelConnectionRequest} message GetChannelConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetChannelConnectionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetChannelConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GetChannelConnectionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetChannelConnectionRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetChannelConnectionRequest} message GetChannelConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetChannelConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetChannelConnectionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.GetChannelConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.GetChannelConnectionRequest} GetChannelConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetChannelConnectionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.GetChannelConnectionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetChannelConnectionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetChannelConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.GetChannelConnectionRequest} GetChannelConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetChannelConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetChannelConnectionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.GetChannelConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetChannelConnectionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetChannelConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.GetChannelConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.GetChannelConnectionRequest} GetChannelConnectionRequest
+                         */
+                        GetChannelConnectionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.GetChannelConnectionRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.GetChannelConnectionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetChannelConnectionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.GetChannelConnectionRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.GetChannelConnectionRequest} message GetChannelConnectionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetChannelConnectionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetChannelConnectionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.GetChannelConnectionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetChannelConnectionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetChannelConnectionRequest;
+                    })();
+    
+                    v1.ListChannelConnectionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListChannelConnectionsRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListChannelConnectionsRequest
+                         * @property {string|null} [parent] ListChannelConnectionsRequest parent
+                         * @property {number|null} [pageSize] ListChannelConnectionsRequest pageSize
+                         * @property {string|null} [pageToken] ListChannelConnectionsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListChannelConnectionsRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListChannelConnectionsRequest.
+                         * @implements IListChannelConnectionsRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListChannelConnectionsRequest=} [properties] Properties to set
+                         */
+                        function ListChannelConnectionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListChannelConnectionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsRequest
+                         * @instance
+                         */
+                        ListChannelConnectionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListChannelConnectionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsRequest
+                         * @instance
+                         */
+                        ListChannelConnectionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListChannelConnectionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsRequest
+                         * @instance
+                         */
+                        ListChannelConnectionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListChannelConnectionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListChannelConnectionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListChannelConnectionsRequest} ListChannelConnectionsRequest instance
+                         */
+                        ListChannelConnectionsRequest.create = function create(properties) {
+                            return new ListChannelConnectionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListChannelConnectionsRequest message. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelConnectionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListChannelConnectionsRequest} message ListChannelConnectionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListChannelConnectionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListChannelConnectionsRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelConnectionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListChannelConnectionsRequest} message ListChannelConnectionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListChannelConnectionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListChannelConnectionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListChannelConnectionsRequest} ListChannelConnectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListChannelConnectionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListChannelConnectionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListChannelConnectionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListChannelConnectionsRequest} ListChannelConnectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListChannelConnectionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListChannelConnectionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListChannelConnectionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListChannelConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListChannelConnectionsRequest} ListChannelConnectionsRequest
+                         */
+                        ListChannelConnectionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListChannelConnectionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListChannelConnectionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListChannelConnectionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListChannelConnectionsRequest} message ListChannelConnectionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListChannelConnectionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListChannelConnectionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListChannelConnectionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListChannelConnectionsRequest;
+                    })();
+    
+                    v1.ListChannelConnectionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListChannelConnectionsResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IListChannelConnectionsResponse
+                         * @property {Array.<google.cloud.eventarc.v1.IChannelConnection>|null} [channelConnections] ListChannelConnectionsResponse channelConnections
+                         * @property {string|null} [nextPageToken] ListChannelConnectionsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListChannelConnectionsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListChannelConnectionsResponse.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a ListChannelConnectionsResponse.
+                         * @implements IListChannelConnectionsResponse
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IListChannelConnectionsResponse=} [properties] Properties to set
+                         */
+                        function ListChannelConnectionsResponse(properties) {
+                            this.channelConnections = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListChannelConnectionsResponse channelConnections.
+                         * @member {Array.<google.cloud.eventarc.v1.IChannelConnection>} channelConnections
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsResponse
+                         * @instance
+                         */
+                        ListChannelConnectionsResponse.prototype.channelConnections = $util.emptyArray;
+    
+                        /**
+                         * ListChannelConnectionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsResponse
+                         * @instance
+                         */
+                        ListChannelConnectionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListChannelConnectionsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsResponse
+                         * @instance
+                         */
+                        ListChannelConnectionsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListChannelConnectionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListChannelConnectionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.ListChannelConnectionsResponse} ListChannelConnectionsResponse instance
+                         */
+                        ListChannelConnectionsResponse.create = function create(properties) {
+                            return new ListChannelConnectionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListChannelConnectionsResponse message. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelConnectionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListChannelConnectionsResponse} message ListChannelConnectionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListChannelConnectionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.channelConnections != null && message.channelConnections.length)
+                                for (var i = 0; i < message.channelConnections.length; ++i)
+                                    $root.google.cloud.eventarc.v1.ChannelConnection.encode(message.channelConnections[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListChannelConnectionsResponse message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.ListChannelConnectionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IListChannelConnectionsResponse} message ListChannelConnectionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListChannelConnectionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListChannelConnectionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.ListChannelConnectionsResponse} ListChannelConnectionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListChannelConnectionsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.ListChannelConnectionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.channelConnections && message.channelConnections.length))
+                                        message.channelConnections = [];
+                                    message.channelConnections.push($root.google.cloud.eventarc.v1.ChannelConnection.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.unreachable && message.unreachable.length))
+                                        message.unreachable = [];
+                                    message.unreachable.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListChannelConnectionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.ListChannelConnectionsResponse} ListChannelConnectionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListChannelConnectionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListChannelConnectionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListChannelConnectionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.channelConnections != null && message.hasOwnProperty("channelConnections")) {
+                                if (!Array.isArray(message.channelConnections))
+                                    return "channelConnections: array expected";
+                                for (var i = 0; i < message.channelConnections.length; ++i) {
+                                    var error = $root.google.cloud.eventarc.v1.ChannelConnection.verify(message.channelConnections[i]);
+                                    if (error)
+                                        return "channelConnections." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListChannelConnectionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.ListChannelConnectionsResponse} ListChannelConnectionsResponse
+                         */
+                        ListChannelConnectionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.ListChannelConnectionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.ListChannelConnectionsResponse();
+                            if (object.channelConnections) {
+                                if (!Array.isArray(object.channelConnections))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListChannelConnectionsResponse.channelConnections: array expected");
+                                message.channelConnections = [];
+                                for (var i = 0; i < object.channelConnections.length; ++i) {
+                                    if (typeof object.channelConnections[i] !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.ListChannelConnectionsResponse.channelConnections: object expected");
+                                    message.channelConnections[i] = $root.google.cloud.eventarc.v1.ChannelConnection.fromObject(object.channelConnections[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.eventarc.v1.ListChannelConnectionsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListChannelConnectionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsResponse
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ListChannelConnectionsResponse} message ListChannelConnectionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListChannelConnectionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.channelConnections = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.channelConnections && message.channelConnections.length) {
+                                object.channelConnections = [];
+                                for (var j = 0; j < message.channelConnections.length; ++j)
+                                    object.channelConnections[j] = $root.google.cloud.eventarc.v1.ChannelConnection.toObject(message.channelConnections[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListChannelConnectionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.ListChannelConnectionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListChannelConnectionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListChannelConnectionsResponse;
+                    })();
+    
+                    v1.CreateChannelConnectionRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateChannelConnectionRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface ICreateChannelConnectionRequest
+                         * @property {string|null} [parent] CreateChannelConnectionRequest parent
+                         * @property {google.cloud.eventarc.v1.IChannelConnection|null} [channelConnection] CreateChannelConnectionRequest channelConnection
+                         * @property {string|null} [channelConnectionId] CreateChannelConnectionRequest channelConnectionId
+                         */
+    
+                        /**
+                         * Constructs a new CreateChannelConnectionRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a CreateChannelConnectionRequest.
+                         * @implements ICreateChannelConnectionRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.ICreateChannelConnectionRequest=} [properties] Properties to set
+                         */
+                        function CreateChannelConnectionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateChannelConnectionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.eventarc.v1.CreateChannelConnectionRequest
+                         * @instance
+                         */
+                        CreateChannelConnectionRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateChannelConnectionRequest channelConnection.
+                         * @member {google.cloud.eventarc.v1.IChannelConnection|null|undefined} channelConnection
+                         * @memberof google.cloud.eventarc.v1.CreateChannelConnectionRequest
+                         * @instance
+                         */
+                        CreateChannelConnectionRequest.prototype.channelConnection = null;
+    
+                        /**
+                         * CreateChannelConnectionRequest channelConnectionId.
+                         * @member {string} channelConnectionId
+                         * @memberof google.cloud.eventarc.v1.CreateChannelConnectionRequest
+                         * @instance
+                         */
+                        CreateChannelConnectionRequest.prototype.channelConnectionId = "";
+    
+                        /**
+                         * Creates a new CreateChannelConnectionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.CreateChannelConnectionRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateChannelConnectionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.CreateChannelConnectionRequest} CreateChannelConnectionRequest instance
+                         */
+                        CreateChannelConnectionRequest.create = function create(properties) {
+                            return new CreateChannelConnectionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateChannelConnectionRequest message. Does not implicitly {@link google.cloud.eventarc.v1.CreateChannelConnectionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.CreateChannelConnectionRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateChannelConnectionRequest} message CreateChannelConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateChannelConnectionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.channelConnection != null && Object.hasOwnProperty.call(message, "channelConnection"))
+                                $root.google.cloud.eventarc.v1.ChannelConnection.encode(message.channelConnection, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.channelConnectionId != null && Object.hasOwnProperty.call(message, "channelConnectionId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.channelConnectionId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateChannelConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.CreateChannelConnectionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.CreateChannelConnectionRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.ICreateChannelConnectionRequest} message CreateChannelConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateChannelConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateChannelConnectionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.CreateChannelConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.CreateChannelConnectionRequest} CreateChannelConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateChannelConnectionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.CreateChannelConnectionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.channelConnection = $root.google.cloud.eventarc.v1.ChannelConnection.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.channelConnectionId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateChannelConnectionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.CreateChannelConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.CreateChannelConnectionRequest} CreateChannelConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateChannelConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateChannelConnectionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.CreateChannelConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateChannelConnectionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.channelConnection != null && message.hasOwnProperty("channelConnection")) {
+                                var error = $root.google.cloud.eventarc.v1.ChannelConnection.verify(message.channelConnection);
+                                if (error)
+                                    return "channelConnection." + error;
+                            }
+                            if (message.channelConnectionId != null && message.hasOwnProperty("channelConnectionId"))
+                                if (!$util.isString(message.channelConnectionId))
+                                    return "channelConnectionId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateChannelConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.CreateChannelConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.CreateChannelConnectionRequest} CreateChannelConnectionRequest
+                         */
+                        CreateChannelConnectionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.CreateChannelConnectionRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.CreateChannelConnectionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.channelConnection != null) {
+                                if (typeof object.channelConnection !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.CreateChannelConnectionRequest.channelConnection: object expected");
+                                message.channelConnection = $root.google.cloud.eventarc.v1.ChannelConnection.fromObject(object.channelConnection);
+                            }
+                            if (object.channelConnectionId != null)
+                                message.channelConnectionId = String(object.channelConnectionId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateChannelConnectionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.CreateChannelConnectionRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.CreateChannelConnectionRequest} message CreateChannelConnectionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateChannelConnectionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.channelConnection = null;
+                                object.channelConnectionId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.channelConnection != null && message.hasOwnProperty("channelConnection"))
+                                object.channelConnection = $root.google.cloud.eventarc.v1.ChannelConnection.toObject(message.channelConnection, options);
+                            if (message.channelConnectionId != null && message.hasOwnProperty("channelConnectionId"))
+                                object.channelConnectionId = message.channelConnectionId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateChannelConnectionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.CreateChannelConnectionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateChannelConnectionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateChannelConnectionRequest;
+                    })();
+    
+                    v1.DeleteChannelConnectionRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteChannelConnectionRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IDeleteChannelConnectionRequest
+                         * @property {string|null} [name] DeleteChannelConnectionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteChannelConnectionRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a DeleteChannelConnectionRequest.
+                         * @implements IDeleteChannelConnectionRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IDeleteChannelConnectionRequest=} [properties] Properties to set
+                         */
+                        function DeleteChannelConnectionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteChannelConnectionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelConnectionRequest
+                         * @instance
+                         */
+                        DeleteChannelConnectionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteChannelConnectionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelConnectionRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteChannelConnectionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.DeleteChannelConnectionRequest} DeleteChannelConnectionRequest instance
+                         */
+                        DeleteChannelConnectionRequest.create = function create(properties) {
+                            return new DeleteChannelConnectionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteChannelConnectionRequest message. Does not implicitly {@link google.cloud.eventarc.v1.DeleteChannelConnectionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelConnectionRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteChannelConnectionRequest} message DeleteChannelConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteChannelConnectionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteChannelConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.DeleteChannelConnectionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelConnectionRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IDeleteChannelConnectionRequest} message DeleteChannelConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteChannelConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteChannelConnectionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.DeleteChannelConnectionRequest} DeleteChannelConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteChannelConnectionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.DeleteChannelConnectionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteChannelConnectionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.DeleteChannelConnectionRequest} DeleteChannelConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteChannelConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteChannelConnectionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteChannelConnectionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteChannelConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.DeleteChannelConnectionRequest} DeleteChannelConnectionRequest
+                         */
+                        DeleteChannelConnectionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.DeleteChannelConnectionRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.DeleteChannelConnectionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteChannelConnectionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelConnectionRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.DeleteChannelConnectionRequest} message DeleteChannelConnectionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteChannelConnectionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteChannelConnectionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.DeleteChannelConnectionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteChannelConnectionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteChannelConnectionRequest;
+                    })();
+    
                     v1.OperationMetadata = (function() {
     
                         /**
@@ -2099,6 +5651,7 @@
                          * @property {google.cloud.eventarc.v1.IDestination|null} [destination] Trigger destination
                          * @property {google.cloud.eventarc.v1.ITransport|null} [transport] Trigger transport
                          * @property {Object.<string,string>|null} [labels] Trigger labels
+                         * @property {string|null} [channel] Trigger channel
                          * @property {string|null} [etag] Trigger etag
                          */
     
@@ -2192,6 +5745,14 @@
                         Trigger.prototype.labels = $util.emptyObject;
     
                         /**
+                         * Trigger channel.
+                         * @member {string} channel
+                         * @memberof google.cloud.eventarc.v1.Trigger
+                         * @instance
+                         */
+                        Trigger.prototype.channel = "";
+    
+                        /**
                          * Trigger etag.
                          * @member {string} etag
                          * @memberof google.cloud.eventarc.v1.Trigger
@@ -2243,6 +5804,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 12, wireType 2 =*/98).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.channel);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -2326,6 +5889,9 @@
                                         }
                                     }
                                     message.labels[key] = value;
+                                    break;
+                                case 13:
+                                    message.channel = reader.string();
                                     break;
                                 case 99:
                                     message.etag = reader.string();
@@ -2411,6 +5977,9 @@
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
                             }
+                            if (message.channel != null && message.hasOwnProperty("channel"))
+                                if (!$util.isString(message.channel))
+                                    return "channel: string expected";
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -2472,6 +6041,8 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.channel != null)
+                                message.channel = String(object.channel);
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             return message;
@@ -2502,6 +6073,7 @@
                                 object.serviceAccount = "";
                                 object.destination = null;
                                 object.transport = null;
+                                object.channel = "";
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -2529,6 +6101,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.channel != null && message.hasOwnProperty("channel"))
+                                object.channel = message.channel;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
@@ -2556,6 +6130,7 @@
                          * @interface IEventFilter
                          * @property {string|null} [attribute] EventFilter attribute
                          * @property {string|null} [value] EventFilter value
+                         * @property {string|null} [operator] EventFilter operator
                          */
     
                         /**
@@ -2590,6 +6165,14 @@
                         EventFilter.prototype.value = "";
     
                         /**
+                         * EventFilter operator.
+                         * @member {string} operator
+                         * @memberof google.cloud.eventarc.v1.EventFilter
+                         * @instance
+                         */
+                        EventFilter.prototype.operator = "";
+    
+                        /**
                          * Creates a new EventFilter instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.eventarc.v1.EventFilter
@@ -2617,6 +6200,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.attribute);
                             if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                            if (message.operator != null && Object.hasOwnProperty.call(message, "operator"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.operator);
                             return writer;
                         };
     
@@ -2656,6 +6241,9 @@
                                     break;
                                 case 2:
                                     message.value = reader.string();
+                                    break;
+                                case 3:
+                                    message.operator = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -2698,6 +6286,9 @@
                             if (message.value != null && message.hasOwnProperty("value"))
                                 if (!$util.isString(message.value))
                                     return "value: string expected";
+                            if (message.operator != null && message.hasOwnProperty("operator"))
+                                if (!$util.isString(message.operator))
+                                    return "operator: string expected";
                             return null;
                         };
     
@@ -2717,6 +6308,8 @@
                                 message.attribute = String(object.attribute);
                             if (object.value != null)
                                 message.value = String(object.value);
+                            if (object.operator != null)
+                                message.operator = String(object.operator);
                             return message;
                         };
     
@@ -2736,11 +6329,14 @@
                             if (options.defaults) {
                                 object.attribute = "";
                                 object.value = "";
+                                object.operator = "";
                             }
                             if (message.attribute != null && message.hasOwnProperty("attribute"))
                                 object.attribute = message.attribute;
                             if (message.value != null && message.hasOwnProperty("value"))
                                 object.value = message.value;
+                            if (message.operator != null && message.hasOwnProperty("operator"))
+                                object.operator = message.operator;
                             return object;
                         };
     
@@ -2765,6 +6361,8 @@
                          * @memberof google.cloud.eventarc.v1
                          * @interface IDestination
                          * @property {google.cloud.eventarc.v1.ICloudRun|null} [cloudRun] Destination cloudRun
+                         * @property {string|null} [cloudFunction] Destination cloudFunction
+                         * @property {google.cloud.eventarc.v1.IGKE|null} [gke] Destination gke
                          */
     
                         /**
@@ -2790,17 +6388,33 @@
                          */
                         Destination.prototype.cloudRun = null;
     
+                        /**
+                         * Destination cloudFunction.
+                         * @member {string|null|undefined} cloudFunction
+                         * @memberof google.cloud.eventarc.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.cloudFunction = null;
+    
+                        /**
+                         * Destination gke.
+                         * @member {google.cloud.eventarc.v1.IGKE|null|undefined} gke
+                         * @memberof google.cloud.eventarc.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.gke = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Destination descriptor.
-                         * @member {"cloudRun"|undefined} descriptor
+                         * @member {"cloudRun"|"cloudFunction"|"gke"|undefined} descriptor
                          * @memberof google.cloud.eventarc.v1.Destination
                          * @instance
                          */
                         Object.defineProperty(Destination.prototype, "descriptor", {
-                            get: $util.oneOfGetter($oneOfFields = ["cloudRun"]),
+                            get: $util.oneOfGetter($oneOfFields = ["cloudRun", "cloudFunction", "gke"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2830,6 +6444,10 @@
                                 writer = $Writer.create();
                             if (message.cloudRun != null && Object.hasOwnProperty.call(message, "cloudRun"))
                                 $root.google.cloud.eventarc.v1.CloudRun.encode(message.cloudRun, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.cloudFunction != null && Object.hasOwnProperty.call(message, "cloudFunction"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.cloudFunction);
+                            if (message.gke != null && Object.hasOwnProperty.call(message, "gke"))
+                                $root.google.cloud.eventarc.v1.GKE.encode(message.gke, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -2866,6 +6484,12 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.cloudRun = $root.google.cloud.eventarc.v1.CloudRun.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.cloudFunction = reader.string();
+                                    break;
+                                case 3:
+                                    message.gke = $root.google.cloud.eventarc.v1.GKE.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -2911,6 +6535,23 @@
                                         return "cloudRun." + error;
                                 }
                             }
+                            if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction")) {
+                                if (properties.descriptor === 1)
+                                    return "descriptor: multiple values";
+                                properties.descriptor = 1;
+                                if (!$util.isString(message.cloudFunction))
+                                    return "cloudFunction: string expected";
+                            }
+                            if (message.gke != null && message.hasOwnProperty("gke")) {
+                                if (properties.descriptor === 1)
+                                    return "descriptor: multiple values";
+                                properties.descriptor = 1;
+                                {
+                                    var error = $root.google.cloud.eventarc.v1.GKE.verify(message.gke);
+                                    if (error)
+                                        return "gke." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -2930,6 +6571,13 @@
                                 if (typeof object.cloudRun !== "object")
                                     throw TypeError(".google.cloud.eventarc.v1.Destination.cloudRun: object expected");
                                 message.cloudRun = $root.google.cloud.eventarc.v1.CloudRun.fromObject(object.cloudRun);
+                            }
+                            if (object.cloudFunction != null)
+                                message.cloudFunction = String(object.cloudFunction);
+                            if (object.gke != null) {
+                                if (typeof object.gke !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Destination.gke: object expected");
+                                message.gke = $root.google.cloud.eventarc.v1.GKE.fromObject(object.gke);
                             }
                             return message;
                         };
@@ -2951,6 +6599,16 @@
                                 object.cloudRun = $root.google.cloud.eventarc.v1.CloudRun.toObject(message.cloudRun, options);
                                 if (options.oneofs)
                                     object.descriptor = "cloudRun";
+                            }
+                            if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction")) {
+                                object.cloudFunction = message.cloudFunction;
+                                if (options.oneofs)
+                                    object.descriptor = "cloudFunction";
+                            }
+                            if (message.gke != null && message.hasOwnProperty("gke")) {
+                                object.gke = $root.google.cloud.eventarc.v1.GKE.toObject(message.gke, options);
+                                if (options.oneofs)
+                                    object.descriptor = "gke";
                             }
                             return object;
                         };
@@ -3410,6 +7068,282 @@
                         };
     
                         return CloudRun;
+                    })();
+    
+                    v1.GKE = (function() {
+    
+                        /**
+                         * Properties of a GKE.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IGKE
+                         * @property {string|null} [cluster] GKE cluster
+                         * @property {string|null} [location] GKE location
+                         * @property {string|null} [namespace] GKE namespace
+                         * @property {string|null} [service] GKE service
+                         * @property {string|null} [path] GKE path
+                         */
+    
+                        /**
+                         * Constructs a new GKE.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a GKE.
+                         * @implements IGKE
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IGKE=} [properties] Properties to set
+                         */
+                        function GKE(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GKE cluster.
+                         * @member {string} cluster
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @instance
+                         */
+                        GKE.prototype.cluster = "";
+    
+                        /**
+                         * GKE location.
+                         * @member {string} location
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @instance
+                         */
+                        GKE.prototype.location = "";
+    
+                        /**
+                         * GKE namespace.
+                         * @member {string} namespace
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @instance
+                         */
+                        GKE.prototype.namespace = "";
+    
+                        /**
+                         * GKE service.
+                         * @member {string} service
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @instance
+                         */
+                        GKE.prototype.service = "";
+    
+                        /**
+                         * GKE path.
+                         * @member {string} path
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @instance
+                         */
+                        GKE.prototype.path = "";
+    
+                        /**
+                         * Creates a new GKE instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGKE=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.GKE} GKE instance
+                         */
+                        GKE.create = function create(properties) {
+                            return new GKE(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GKE message. Does not implicitly {@link google.cloud.eventarc.v1.GKE.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGKE} message GKE message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GKE.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.cluster != null && Object.hasOwnProperty.call(message, "cluster"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.cluster);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                            if (message.namespace != null && Object.hasOwnProperty.call(message, "namespace"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.namespace);
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.service);
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.path);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GKE message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GKE.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGKE} message GKE message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GKE.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GKE message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.GKE} GKE
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GKE.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.GKE();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.cluster = reader.string();
+                                    break;
+                                case 2:
+                                    message.location = reader.string();
+                                    break;
+                                case 3:
+                                    message.namespace = reader.string();
+                                    break;
+                                case 4:
+                                    message.service = reader.string();
+                                    break;
+                                case 5:
+                                    message.path = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GKE message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.GKE} GKE
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GKE.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GKE message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GKE.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.cluster != null && message.hasOwnProperty("cluster"))
+                                if (!$util.isString(message.cluster))
+                                    return "cluster: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.namespace != null && message.hasOwnProperty("namespace"))
+                                if (!$util.isString(message.namespace))
+                                    return "namespace: string expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GKE message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.GKE} GKE
+                         */
+                        GKE.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.GKE)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.GKE();
+                            if (object.cluster != null)
+                                message.cluster = String(object.cluster);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.namespace != null)
+                                message.namespace = String(object.namespace);
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GKE message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @static
+                         * @param {google.cloud.eventarc.v1.GKE} message GKE
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GKE.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.cluster = "";
+                                object.location = "";
+                                object.namespace = "";
+                                object.service = "";
+                                object.path = "";
+                            }
+                            if (message.cluster != null && message.hasOwnProperty("cluster"))
+                                object.cluster = message.cluster;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            if (message.namespace != null && message.hasOwnProperty("namespace"))
+                                object.namespace = message.namespace;
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GKE to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.GKE
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GKE.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GKE;
                     })();
     
                     v1.Pubsub = (function() {

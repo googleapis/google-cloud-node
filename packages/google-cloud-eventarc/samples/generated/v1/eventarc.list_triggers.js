@@ -37,9 +37,9 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  The sorting order of the resources returned. Value should be a comma
-   *  separated list of fields. The default sorting oder is ascending. To specify
-   *  descending order for a field, append a ` desc` suffix; for example:
+   *  The sorting order of the resources returned. Value should be a
+   *  comma-separated list of fields. The default sorting order is ascending. To
+   *  specify descending order for a field, append a `desc` suffix; for example:
    *  `name desc, trigger_id`.
    */
   // const orderBy = 'abc123'
