@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+### [3.0.7](https://github.com/googleapis/nodejs-paginator/compare/v3.0.6...v3.0.7) (2022-02-14)
+
+
+### Bug Fixes
+
+* update signature of end to comply with update node types definition ([#311](https://github.com/googleapis/nodejs-paginator/issues/311)) ([79e6fbd](https://github.com/googleapis/nodejs-paginator/commit/79e6fbdae5008d874613d2919a6cf723708fc919))
+
 ### [3.0.6](https://www.github.com/googleapis/nodejs-paginator/compare/v3.0.5...v3.0.6) (2021-09-09)
 
 
