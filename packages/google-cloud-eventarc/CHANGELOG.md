@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/nodejs-eventarc/compare/v1.1.2...v1.2.0) (2022-02-14)
+
+
+### Features
+
+* Add Channel and ChannelConnection resources ([#51](https://github.com/googleapis/nodejs-eventarc/issues/51)) ([bfae8c3](https://github.com/googleapis/nodejs-eventarc/commit/bfae8c32b6a3d3dec9bab906777d0cfae962dab6))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-eventarc/compare/v1.1.1...v1.1.2) (2021-09-27)
 
 
