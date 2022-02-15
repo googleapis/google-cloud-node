@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.12.1](https://github.com/googleapis/nodejs-os-config/compare/v1.12.0...v1.12.1) (2022-02-11)
+
+
+### Bug Fixes
+
+* update third_party protos to the most actual version: ([#186](https://github.com/googleapis/nodejs-os-config/issues/186)) ([9aceeab](https://github.com/googleapis/nodejs-os-config/commit/9aceeab92c12856e88cb7e59db29ee41cfba5465))
+
 ## [1.12.0](https://github.com/googleapis/nodejs-os-config/compare/v1.11.0...v1.12.0) (2022-02-08)
 
 
