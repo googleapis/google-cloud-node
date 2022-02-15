@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [3.23.1](https://github.com/googleapis/nodejs-asset/compare/v3.23.0...v3.23.1) (2022-02-11)
+
+
+### Bug Fixes
+
+* Fix description of an interpreter field, validate if the field is not unspecified ([#604](https://github.com/googleapis/nodejs-asset/issues/604)) ([7cebebe](https://github.com/googleapis/nodejs-asset/commit/7cebebeae1b328289c68c590fd3738c89a59b74f))
+
 ## [3.23.0](https://github.com/googleapis/nodejs-asset/compare/v3.22.0...v3.23.0) (2022-02-08)
 
 
