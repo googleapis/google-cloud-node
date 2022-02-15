@@ -60,16 +60,6 @@
                 "createServiceRollout"
               ]
             },
-            "EnableService": {
-              "methods": [
-                "enableService"
-              ]
-            },
-            "DisableService": {
-              "methods": [
-                "disableService"
-              ]
-            },
             "ListServices": {
               "methods": [
                 "listServices",
@@ -144,16 +134,6 @@
             "CreateServiceRollout": {
               "methods": [
                 "createServiceRollout"
-              ]
-            },
-            "EnableService": {
-              "methods": [
-                "enableService"
-              ]
-            },
-            "DisableService": {
-              "methods": [
-                "disableService"
               ]
             },
             "ListServices": {

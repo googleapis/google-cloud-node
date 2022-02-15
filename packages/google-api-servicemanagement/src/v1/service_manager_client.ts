@@ -42,7 +42,7 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  [Google Service Management API](https://cloud.google.com/service-management/overview)
+ *  [Google Service Management API](/service-management/overview)
  * @class
  * @memberof v1
  */
@@ -224,18 +224,6 @@ export class ServiceManagerClient {
     const createServiceRolloutMetadata = protoFilesRoot.lookup(
       '.google.api.servicemanagement.v1.OperationMetadata'
     ) as gax.protobuf.Type;
-    const enableServiceResponse = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.EnableServiceResponse'
-    ) as gax.protobuf.Type;
-    const enableServiceMetadata = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
-    const disableServiceResponse = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.DisableServiceResponse'
-    ) as gax.protobuf.Type;
-    const disableServiceMetadata = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createService: new this._gaxModule.LongrunningDescriptor(
@@ -262,16 +250,6 @@ export class ServiceManagerClient {
         this.operationsClient,
         createServiceRolloutResponse.decode.bind(createServiceRolloutResponse),
         createServiceRolloutMetadata.decode.bind(createServiceRolloutMetadata)
-      ),
-      enableService: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        enableServiceResponse.decode.bind(enableServiceResponse),
-        enableServiceMetadata.decode.bind(enableServiceMetadata)
-      ),
-      disableService: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        disableServiceResponse.decode.bind(disableServiceResponse),
-        disableServiceMetadata.decode.bind(disableServiceMetadata)
       ),
     };
 
@@ -338,8 +316,6 @@ export class ServiceManagerClient {
       'getServiceRollout',
       'createServiceRollout',
       'generateConfigReport',
-      'enableService',
-      'disableService',
     ];
     for (const methodName of serviceManagerStubMethods) {
       const callPromise = this.serviceManagerStub.then(
@@ -529,7 +505,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service.  See the [overview](/service-management/overview)
    *   for naming requirements.  For example: `example.googleapis.com`.
    * @param {string} request.configId
    *   Required. The id of the service configuration resource.
@@ -642,7 +618,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service.  See the [overview](/service-management/overview)
    *   for naming requirements.  For example: `example.googleapis.com`.
    * @param {google.api.Service} request.serviceConfig
    *   Required. The service configuration resource.
@@ -742,7 +718,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service.  See the [overview](/service-management/overview)
    *   for naming requirements.  For example: `example.googleapis.com`.
    * @param {string} request.rolloutId
    *   Required. The id of the rollout resource.
@@ -952,7 +928,14 @@ export class ServiceManagerClient {
 
   /**
    * Creates a new managed service.
-   * Please note one producer project can own no more than 20 services.
+   *
+   * A managed service is immutable, and is subject to mandatory 30-day
+   * data retention. You cannot move a service or recreate it within 30 days
+   * after deletion.
+   *
+   * One producer project can own no more than 500 services. For security and
+   * reliability purposes, a production service should be hosted in a
+   * dedicated producer project.
    *
    * Operation<response: ManagedService>
    *
@@ -1097,7 +1080,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service.  See the [overview](/service-management/overview)
    *   for naming requirements.  For example: `example.googleapis.com`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1240,7 +1223,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service. See the [overview](/service-management/overview)
    *   for naming requirements. For example: `example.googleapis.com`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1390,7 +1373,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service.  See the [overview](/service-management/overview)
    *   for naming requirements.  For example: `example.googleapis.com`.
    * @param {google.api.servicemanagement.v1.ConfigSource} request.configSource
    *   Required. The source configuration for the service.
@@ -1547,7 +1530,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service.  See the [overview](/service-management/overview)
    *   for naming requirements.  For example: `example.googleapis.com`.
    * @param {google.api.servicemanagement.v1.Rollout} request.rollout
    *   Required. The rollout resource. The `service_name` field is output only.
@@ -1682,344 +1665,11 @@ export class ServiceManagerClient {
     >;
   }
   /**
-   * Enables a {@link google.api.servicemanagement.v1.ManagedService|service} for a project, so it can be used
-   * for the project. See
-   * [Cloud Auth Guide](https://cloud.google.com/docs/authentication) for
-   * more information.
-   *
-   * Operation<response: EnableServiceResponse>
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. Name of the service to enable. Specifying an unknown service name will
-   *   cause the request to fail.
-   * @param {string} request.consumerId
-   *   Required. The identity of consumer resource which service enablement will be
-   *   applied to.
-   *
-   *   The Google Service Management implementation accepts the following
-   *   forms:
-   *   - "project:<project_id>"
-   *
-   *   Note: this is made compatible with
-   *   google.api.servicecontrol.v1.Operation.consumer_id.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.enable_service.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_EnableService_async
-   * @deprecated EnableService is deprecated and may be removed in a future version.
-   */
-  enableService(
-    request?: protos.google.api.servicemanagement.v1.IEnableServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.api.servicemanagement.v1.IEnableServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  enableService(
-    request: protos.google.api.servicemanagement.v1.IEnableServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IEnableServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  enableService(
-    request: protos.google.api.servicemanagement.v1.IEnableServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IEnableServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  enableService(
-    request?: protos.google.api.servicemanagement.v1.IEnableServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.api.servicemanagement.v1.IEnableServiceResponse,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IEnableServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.api.servicemanagement.v1.IEnableServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        service_name: request.serviceName || '',
-      });
-    this.initialize();
-    this.warn(
-      'DEP$ServiceManager-$EnableService',
-      'EnableService is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
-    return this.innerApiCalls.enableService(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `enableService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.enable_service.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_EnableService_async
-   * @deprecated EnableService is deprecated and may be removed in a future version.
-   */
-  async checkEnableServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.api.servicemanagement.v1.EnableServiceResponse,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >
-  > {
-    this.warn(
-      'DEP$ServiceManager-$checkEnableServiceProgress',
-      'checkEnableServiceProgress is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.enableService,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.api.servicemanagement.v1.EnableServiceResponse,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >;
-  }
-  /**
-   * Disables a {@link google.api.servicemanagement.v1.ManagedService|service} for a project, so it can no longer be
-   * be used for the project. It prevents accidental usage that may cause
-   * unexpected billing charges or security leaks.
-   *
-   * Operation<response: DisableServiceResponse>
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. Name of the service to disable. Specifying an unknown service name
-   *   will cause the request to fail.
-   * @param {string} request.consumerId
-   *   Required. The identity of consumer resource which service disablement will be
-   *   applied to.
-   *
-   *   The Google Service Management implementation accepts the following
-   *   forms:
-   *   - "project:<project_id>"
-   *
-   *   Note: this is made compatible with
-   *   google.api.servicecontrol.v1.Operation.consumer_id.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.disable_service.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_DisableService_async
-   * @deprecated DisableService is deprecated and may be removed in a future version.
-   */
-  disableService(
-    request?: protos.google.api.servicemanagement.v1.IDisableServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.api.servicemanagement.v1.IDisableServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  disableService(
-    request: protos.google.api.servicemanagement.v1.IDisableServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IDisableServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  disableService(
-    request: protos.google.api.servicemanagement.v1.IDisableServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IDisableServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  disableService(
-    request?: protos.google.api.servicemanagement.v1.IDisableServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.api.servicemanagement.v1.IDisableServiceResponse,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IDisableServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.api.servicemanagement.v1.IDisableServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        service_name: request.serviceName || '',
-      });
-    this.initialize();
-    this.warn(
-      'DEP$ServiceManager-$DisableService',
-      'DisableService is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
-    return this.innerApiCalls.disableService(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `disableService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.disable_service.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_DisableService_async
-   * @deprecated DisableService is deprecated and may be removed in a future version.
-   */
-  async checkDisableServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.api.servicemanagement.v1.DisableServiceResponse,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >
-  > {
-    this.warn(
-      'DEP$ServiceManager-$checkDisableServiceProgress',
-      'checkDisableServiceProgress is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.disableService,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.api.servicemanagement.v1.DisableServiceResponse,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >;
-  }
-  /**
    * Lists managed services.
    *
    * Returns all public services. For authenticated users, also returns all
    * services the calling user has "servicemanagement.services.get" permission
    * for.
-   *
-   * **BETA:** If the caller specifies the `consumer_id`, it returns only the
-   * services enabled on the consumer. The `consumer_id` must have the format
-   * of "project:{PROJECT-ID}".
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2226,7 +1876,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service.  See the [overview](/service-management/overview)
    *   for naming requirements.  For example: `example.googleapis.com`.
    * @param {string} request.pageToken
    *   The token of the page to retrieve.
@@ -2326,7 +1976,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service.  See the [overview](/service-management/overview)
    *   for naming requirements.  For example: `example.googleapis.com`.
    * @param {string} request.pageToken
    *   The token of the page to retrieve.
@@ -2374,7 +2024,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service.  See the [overview](/service-management/overview)
    *   for naming requirements.  For example: `example.googleapis.com`.
    * @param {string} request.pageToken
    *   The token of the page to retrieve.
@@ -2422,7 +2072,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service.  See the [overview](/service-management/overview)
    *   for naming requirements.  For example: `example.googleapis.com`.
    * @param {string} request.pageToken
    *   The token of the page to retrieve.
@@ -2433,10 +2083,10 @@ export class ServiceManagerClient {
    *   Required. Use `filter` to return subset of rollouts.
    *   The following filters are supported:
    *     -- To limit the results to only those in
-   *        status (google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+   *        [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
    *        use filter='status=SUCCESS'
    *     -- To limit the results to those in
-   *        status (google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+   *        [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
    *        or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2531,7 +2181,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service.  See the [overview](/service-management/overview)
    *   for naming requirements.  For example: `example.googleapis.com`.
    * @param {string} request.pageToken
    *   The token of the page to retrieve.
@@ -2542,10 +2192,10 @@ export class ServiceManagerClient {
    *   Required. Use `filter` to return subset of rollouts.
    *   The following filters are supported:
    *     -- To limit the results to only those in
-   *        status (google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+   *        [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
    *        use filter='status=SUCCESS'
    *     -- To limit the results to those in
-   *        status (google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+   *        [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
    *        or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2588,7 +2238,7 @@ export class ServiceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.serviceName
-   *   Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+   *   Required. The name of the service.  See the [overview](/service-management/overview)
    *   for naming requirements.  For example: `example.googleapis.com`.
    * @param {string} request.pageToken
    *   The token of the page to retrieve.
@@ -2599,10 +2249,10 @@ export class ServiceManagerClient {
    *   Required. Use `filter` to return subset of rollouts.
    *   The following filters are supported:
    *     -- To limit the results to only those in
-   *        status (google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+   *        [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
    *        use filter='status=SUCCESS'
    *     -- To limit the results to those in
-   *        status (google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+   *        [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
    *        or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.

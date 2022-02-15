@@ -527,70 +527,6 @@
                               "(google.api.method_signature)": "new_config,old_config"
                             }
                           ]
-                        },
-                        "EnableService": {
-                          "requestType": "EnableServiceRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.http).post": "/v1/services/{service_name}:enable",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "service_name,consumer_id",
-                            "(google.longrunning.operation_info).response_type": "google.api.servicemanagement.v1.EnableServiceResponse",
-                            "(google.longrunning.operation_info).metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "deprecated": true
-                            },
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1/services/{service_name}:enable",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "service_name,consumer_id"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.api.servicemanagement.v1.EnableServiceResponse",
-                                "metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "DisableService": {
-                          "requestType": "DisableServiceRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.http).post": "/v1/services/{service_name}:disable",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "service_name,consumer_id",
-                            "(google.longrunning.operation_info).response_type": "google.api.servicemanagement.v1.DisableServiceResponse",
-                            "(google.longrunning.operation_info).metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "deprecated": true
-                            },
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1/services/{service_name}:disable",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "service_name,consumer_id"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "google.api.servicemanagement.v1.DisableServiceResponse",
-                                "metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
-                              }
-                            }
-                          ]
                         }
                       }
                     },
@@ -869,48 +805,6 @@
                           }
                         }
                       }
-                    },
-                    "EnableServiceRequest": {
-                      "fields": {
-                        "serviceName": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "consumerId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "EnableServiceResponse": {
-                      "fields": {}
-                    },
-                    "DisableServiceRequest": {
-                      "fields": {
-                        "serviceName": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "consumerId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "DisableServiceResponse": {
-                      "fields": {}
                     },
                     "GenerateConfigReportRequest": {
                       "fields": {
@@ -3407,15 +3301,6 @@
             },
             "Empty": {
               "fields": {}
-            },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
             }
           }
         },
