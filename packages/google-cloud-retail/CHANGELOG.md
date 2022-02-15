@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.0](https://github.com/googleapis/nodejs-retail/compare/v1.5.0...v1.6.0) (2022-02-15)
+
+
+### Features
+
+* add ControlService ([92d4d84](https://github.com/googleapis/nodejs-retail/commit/92d4d849b9c4093778cf81bd56e8ebc2d6afd98b))
+* add ServingConfigService ([92d4d84](https://github.com/googleapis/nodejs-retail/commit/92d4d849b9c4093778cf81bd56e8ebc2d6afd98b))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-retail/compare/v1.4.0...v1.5.0) (2021-11-23)
 
 
