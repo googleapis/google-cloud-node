@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'DataplexService',
-    filename: './dataplex-service.js',
+    library: 'ContentService',
+    filename: './content-service.js',
   },
   node: {
     child_process: 'empty',

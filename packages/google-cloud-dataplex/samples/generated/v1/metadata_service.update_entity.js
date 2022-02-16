@@ -15,18 +15,20 @@
 
 'use strict';
 
-function main(name) {
-  // [START dataplex_v1_generated_MetadataService_GetPartition_async]
+function main(entity) {
+  // [START dataplex_v1_generated_MetadataService_UpdateEntity_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the partition:
-   *  `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}`.
-   *  The {partition_value_path} segment consists of an ordered sequence of
-   *  partition values separated by "/". All values must be provided.
+   *  Required. Update description.
    */
-  // const name = 'abc123'
+  // const entity = {}
+  /**
+   *  Optional. Only validate the request, but do not perform mutations.
+   *  The default is false.
+   */
+  // const validateOnly = true
 
   // Imports the Dataplex library
   const {MetadataServiceClient} = require('@google-cloud/dataplex').v1;
@@ -34,19 +36,19 @@ function main(name) {
   // Instantiates a client
   const dataplexClient = new MetadataServiceClient();
 
-  async function callGetPartition() {
+  async function callUpdateEntity() {
     // Construct request
     const request = {
-      name,
+      entity,
     };
 
     // Run request
-    const response = await dataplexClient.getPartition(request);
+    const response = await dataplexClient.updateEntity(request);
     console.log(response);
   }
 
-  callGetPartition();
-  // [END dataplex_v1_generated_MetadataService_GetPartition_async]
+  callUpdateEntity();
+  // [END dataplex_v1_generated_MetadataService_UpdateEntity_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,6 +20,7 @@
 const dataplex = require('@google-cloud/dataplex');
 
 function main() {
+  const contentServiceClient = new dataplex.ContentServiceClient();
   const dataplexServiceClient = new dataplex.DataplexServiceClient();
   const metadataServiceClient = new dataplex.MetadataServiceClient();
 }

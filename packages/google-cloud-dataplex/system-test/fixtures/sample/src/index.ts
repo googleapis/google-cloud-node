@@ -17,11 +17,15 @@
 // ** All changes to this file may be overwritten. **
 
 import {
+  ContentServiceClient,
   DataplexServiceClient,
   MetadataServiceClient,
 } from '@google-cloud/dataplex';
 
 // check that the client class type name can be used
+function doStuffWithContentServiceClient(client: ContentServiceClient) {
+  client.close();
+}
 function doStuffWithDataplexServiceClient(client: DataplexServiceClient) {
   client.close();
 }
@@ -30,6 +34,9 @@ function doStuffWithMetadataServiceClient(client: MetadataServiceClient) {
 }
 
 function main() {
+  // check that the client instance can be created
+  const contentServiceClient = new ContentServiceClient();
+  doStuffWithContentServiceClient(contentServiceClient);
   // check that the client instance can be created
   const dataplexServiceClient = new DataplexServiceClient();
   doStuffWithDataplexServiceClient(dataplexServiceClient);

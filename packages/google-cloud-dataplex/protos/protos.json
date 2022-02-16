@@ -14,501 +14,10 @@
                     "java_package": "com.google.cloud.dataplex.v1"
                   },
                   "nested": {
-                    "DiscoveryEvent": {
-                      "oneofs": {
-                        "details": {
-                          "oneof": [
-                            "config",
-                            "entity",
-                            "partition",
-                            "action"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "message": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "lakeId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "zoneId": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "assetId": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "dataLocation": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "type": {
-                          "type": "EventType",
-                          "id": 10
-                        },
-                        "config": {
-                          "type": "ConfigDetails",
-                          "id": 20
-                        },
-                        "entity": {
-                          "type": "EntityDetails",
-                          "id": 21
-                        },
-                        "partition": {
-                          "type": "PartitionDetails",
-                          "id": 22
-                        },
-                        "action": {
-                          "type": "ActionDetails",
-                          "id": 23
-                        }
-                      },
-                      "nested": {
-                        "EventType": {
-                          "values": {
-                            "EVENT_TYPE_UNSPECIFIED": 0,
-                            "CONFIG": 1,
-                            "ENTITY_CREATED": 2,
-                            "ENTITY_UPDATED": 3,
-                            "ENTITY_DELETED": 4,
-                            "PARTITION_CREATED": 5,
-                            "PARTITION_UPDATED": 6,
-                            "PARTITION_DELETED": 7
-                          }
-                        },
-                        "EntityType": {
-                          "values": {
-                            "ENTITY_TYPE_UNSPECIFIED": 0,
-                            "TABLE": 1,
-                            "FILESET": 2
-                          }
-                        },
-                        "ConfigDetails": {
-                          "fields": {
-                            "parameters": {
-                              "keyType": "string",
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "EntityDetails": {
-                          "fields": {
-                            "entity": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "type": {
-                              "type": "EntityType",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "PartitionDetails": {
-                          "fields": {
-                            "partition": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "entity": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "type": {
-                              "type": "EntityType",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "ActionDetails": {
-                          "fields": {
-                            "type": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "JobEvent": {
-                      "fields": {
-                        "message": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "jobId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 5
-                        },
-                        "retries": {
-                          "type": "int32",
-                          "id": 6
-                        },
-                        "type": {
-                          "type": "Type",
-                          "id": 7
-                        },
-                        "service": {
-                          "type": "Service",
-                          "id": 8
-                        },
-                        "serviceJob": {
-                          "type": "string",
-                          "id": 9
-                        }
-                      },
-                      "nested": {
-                        "Type": {
-                          "values": {
-                            "TYPE_UNSPECIFIED": 0,
-                            "SPARK": 1,
-                            "NOTEBOOK": 2
-                          }
-                        },
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "SUCCEEDED": 1,
-                            "FAILED": 2,
-                            "CANCELLED": 3,
-                            "ABORTED": 4
-                          }
-                        },
-                        "Service": {
-                          "values": {
-                            "SERVICE_UNSPECIFIED": 0,
-                            "DATAPROC": 1
-                          }
-                        }
-                      }
-                    },
-                    "SessionEvent": {
-                      "oneofs": {
-                        "detail": {
-                          "oneof": [
-                            "query"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "message": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "userId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "sessionId": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "type": {
-                          "type": "EventType",
-                          "id": 4
-                        },
-                        "query": {
-                          "type": "QueryDetail",
-                          "id": 5
-                        }
-                      },
-                      "nested": {
-                        "EventType": {
-                          "values": {
-                            "EVENT_TYPE_UNSPECIFIED": 0,
-                            "START": 1,
-                            "STOP": 2,
-                            "QUERY": 3
-                          }
-                        },
-                        "QueryDetail": {
-                          "fields": {
-                            "queryId": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "queryText": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "engine": {
-                              "type": "Engine",
-                              "id": 3
-                            },
-                            "duration": {
-                              "type": "google.protobuf.Duration",
-                              "id": 4
-                            },
-                            "resultSizeBytes": {
-                              "type": "int64",
-                              "id": 5
-                            },
-                            "dataProcessedBytes": {
-                              "type": "int64",
-                              "id": 6
-                            }
-                          },
-                          "nested": {
-                            "Engine": {
-                              "values": {
-                                "ENGINE_UNSPECIFIED": 0,
-                                "SPARK_SQL": 1,
-                                "BIGQUERY": 2
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "MetadataService": {
+                    "Environment": {
                       "options": {
-                        "(google.api.default_host)": "dataplex.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "GetEntity": {
-                          "requestType": "GetEntityRequest",
-                          "responseType": "Entity",
-                          "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/lakes/*/zones/*/entities/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1/{name=projects/*/locations/*/lakes/*/zones/*/entities/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "ListEntities": {
-                          "requestType": "ListEntitiesRequest",
-                          "responseType": "ListEntitiesResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/lakes/*/zones/*}/entities",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1/{parent=projects/*/locations/*/lakes/*/zones/*}/entities"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "GetPartition": {
-                          "requestType": "GetPartitionRequest",
-                          "responseType": "Partition",
-                          "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/lakes/*/zones/*/entities/*/partitions/**}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1/{name=projects/*/locations/*/lakes/*/zones/*/entities/*/partitions/**}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "ListPartitions": {
-                          "requestType": "ListPartitionsRequest",
-                          "responseType": "ListPartitionsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/lakes/*/zones/*/entities/*}/partitions",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1/{parent=projects/*/locations/*/lakes/*/zones/*/entities/*}/partitions"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "ListEntitiesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Zone"
-                          }
-                        },
-                        "view": {
-                          "type": "EntityView",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "EntityView": {
-                          "values": {
-                            "ENTITY_VIEW_UNSPECIFIED": 0,
-                            "TABLES": 1,
-                            "FILESETS": 2
-                          }
-                        }
-                      }
-                    },
-                    "ListEntitiesResponse": {
-                      "fields": {
-                        "entities": {
-                          "rule": "repeated",
-                          "type": "Entity",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetEntityRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Entity"
-                          }
-                        },
-                        "view": {
-                          "type": "EntityView",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "EntityView": {
-                          "values": {
-                            "ENTITY_VIEW_UNSPECIFIED": 0,
-                            "BASIC": 1,
-                            "SCHEMA": 2,
-                            "FULL": 4
-                          }
-                        }
-                      }
-                    },
-                    "ListPartitionsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Entity"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListPartitionsResponse": {
-                      "fields": {
-                        "partitions": {
-                          "rule": "repeated",
-                          "type": "Partition",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetPartitionRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Partition"
-                          }
-                        }
-                      }
-                    },
-                    "Entity": {
-                      "options": {
-                        "(google.api.resource).type": "dataplex.googleapis.com/Entity",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}"
+                        "(google.api.resource).type": "dataplex.googleapis.com/Environment",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}"
                       },
                       "fields": {
                         "name": {
@@ -516,7 +25,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Entity"
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Environment"
                           }
                         },
                         "displayName": {
@@ -526,157 +35,237 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "description": {
+                        "uid": {
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 5,
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 6,
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
-                        "id": {
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
                           "type": "string",
                           "id": 7,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "etag": {
-                          "type": "string",
+                        "state": {
+                          "type": "State",
                           "id": 8,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
-                        "type": {
-                          "type": "Type",
-                          "id": 10,
+                        "infrastructureSpec": {
+                          "type": "InfrastructureSpec",
+                          "id": 100,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
-                        "asset": {
-                          "type": "string",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "dataPath": {
-                          "type": "string",
-                          "id": 12,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "dataPathPattern": {
-                          "type": "string",
-                          "id": 13,
+                        "sessionSpec": {
+                          "type": "SessionSpec",
+                          "id": 101,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "catalogEntry": {
-                          "type": "string",
-                          "id": 14,
+                        "sessionStatus": {
+                          "type": "SessionStatus",
+                          "id": 102,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
-                        "system": {
-                          "type": "StorageSystem",
-                          "id": 15,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "format": {
-                          "type": "StorageFormat",
-                          "id": 16,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "compatibility": {
-                          "type": "CompatibilityStatus",
-                          "id": 19,
+                        "endpoints": {
+                          "type": "Endpoints",
+                          "id": 200,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "schema": {
-                          "type": "Schema",
-                          "id": 50,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       },
                       "nested": {
-                        "Type": {
-                          "values": {
-                            "TYPE_UNSPECIFIED": 0,
-                            "TABLE": 1,
-                            "FILESET": 2
+                        "InfrastructureSpec": {
+                          "oneofs": {
+                            "resources": {
+                              "oneof": [
+                                "compute"
+                              ]
+                            },
+                            "runtime": {
+                              "oneof": [
+                                "osImage"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "compute": {
+                              "type": "ComputeResources",
+                              "id": 50,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "osImage": {
+                              "type": "OsImageRuntime",
+                              "id": 100,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ComputeResources": {
+                              "fields": {
+                                "diskSizeGb": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "nodeCount": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "maxNodeCount": {
+                                  "type": "int32",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "OsImageRuntime": {
+                              "fields": {
+                                "imageVersion": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "javaLibraries": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "pythonPackages": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "properties": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
                           }
                         },
-                        "CompatibilityStatus": {
+                        "SessionSpec": {
                           "fields": {
-                            "hiveMetastore": {
-                              "type": "Compatibility",
+                            "maxIdleDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "enableFastStartup": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SessionStatus": {
+                          "fields": {
+                            "active": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "Endpoints": {
+                          "fields": {
+                            "notebooks": {
+                              "type": "string",
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             },
-                            "bigquery": {
-                              "type": "Compatibility",
+                            "sql": {
+                              "type": "string",
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "Compatibility": {
-                              "fields": {
-                                "compatible": {
-                                  "type": "bool",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                },
-                                "reason": {
-                                  "type": "string",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                }
                               }
                             }
                           }
                         }
                       }
                     },
-                    "Partition": {
+                    "Content": {
                       "options": {
-                        "(google.api.resource).type": "dataplex.googleapis.com/Partition",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}"
+                        "(google.api.resource).type": "dataplex.googleapis.com/Content",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lakes/{lake}/content/{content}"
+                      },
+                      "oneofs": {
+                        "data": {
+                          "oneof": [
+                            "dataText"
+                          ]
+                        },
+                        "content": {
+                          "oneof": [
+                            "sqlScript",
+                            "notebook"
+                          ]
+                        }
                       },
                       "fields": {
                         "name": {
@@ -684,282 +273,144 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Partition"
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Content"
                           }
                         },
-                        "values": {
-                          "rule": "repeated",
+                        "uid": {
                           "type": "string",
                           "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "location": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "Schema": {
-                      "fields": {
-                        "userManaged": {
-                          "type": "bool",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "fields": {
-                          "rule": "repeated",
-                          "type": "SchemaField",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "partitionFields": {
-                          "rule": "repeated",
-                          "type": "PartitionField",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "partitionStyle": {
-                          "type": "PartitionStyle",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "Type": {
-                          "values": {
-                            "TYPE_UNSPECIFIED": 0,
-                            "BOOLEAN": 1,
-                            "BYTE": 2,
-                            "INT16": 3,
-                            "INT32": 4,
-                            "INT64": 5,
-                            "FLOAT": 6,
-                            "DOUBLE": 7,
-                            "DECIMAL": 8,
-                            "STRING": 9,
-                            "BINARY": 10,
-                            "TIMESTAMP": 11,
-                            "DATE": 12,
-                            "TIME": 13,
-                            "RECORD": 14,
-                            "NULL": 100
-                          }
-                        },
-                        "Mode": {
-                          "values": {
-                            "MODE_UNSPECIFIED": 0,
-                            "REQUIRED": 1,
-                            "NULLABLE": 2,
-                            "REPEATED": 3
-                          }
-                        },
-                        "SchemaField": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "description": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "type": {
-                              "type": "Type",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "mode": {
-                              "type": "Mode",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "fields": {
-                              "rule": "repeated",
-                              "type": "SchemaField",
-                              "id": 10,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "PartitionField": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "type": {
-                              "type": "Type",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "PartitionStyle": {
-                          "values": {
-                            "PARTITION_STYLE_UNSPECIFIED": 0,
-                            "HIVE_COMPATIBLE": 1
-                          }
-                        }
-                      }
-                    },
-                    "StorageFormat": {
-                      "oneofs": {
-                        "options": {
-                          "oneof": [
-                            "csv",
-                            "json"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "format": {
-                          "type": "Format",
-                          "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
-                        "compressionFormat": {
-                          "type": "CompressionFormat",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "mimeType": {
+                        "path": {
                           "type": "string",
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
-                        "csv": {
-                          "type": "CsvOptions",
-                          "id": 10,
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "json": {
-                          "type": "JsonOptions",
-                          "id": 11,
+                        "description": {
+                          "type": "string",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "dataText": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sqlScript": {
+                          "type": "SqlScript",
+                          "id": 100
+                        },
+                        "notebook": {
+                          "type": "Notebook",
+                          "id": 101
                         }
                       },
                       "nested": {
-                        "CsvOptions": {
+                        "SqlScript": {
                           "fields": {
-                            "encoding": {
-                              "type": "string",
+                            "engine": {
+                              "type": "QueryEngine",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
-                            },
-                            "headerRows": {
-                              "type": "int32",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "delimiter": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "quote": {
-                              "type": "string",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                            }
+                          },
+                          "nested": {
+                            "QueryEngine": {
+                              "values": {
+                                "QUERY_ENGINE_UNSPECIFIED": 0,
+                                "SPARK": 2
                               }
                             }
                           }
                         },
-                        "JsonOptions": {
+                        "Notebook": {
                           "fields": {
-                            "encoding": {
-                              "type": "string",
+                            "kernelType": {
+                              "type": "KernelType",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
-                          }
-                        },
-                        "Format": {
-                          "values": {
-                            "FORMAT_UNSPECIFIED": 0,
-                            "PARQUET": 1,
-                            "AVRO": 2,
-                            "ORC": 3,
-                            "CSV": 100,
-                            "JSON": 101,
-                            "IMAGE": 200,
-                            "AUDIO": 201,
-                            "VIDEO": 202,
-                            "TEXT": 203,
-                            "TFRECORD": 204,
-                            "OTHER": 1000,
-                            "UNKNOWN": 1001
-                          }
-                        },
-                        "CompressionFormat": {
-                          "values": {
-                            "COMPRESSION_FORMAT_UNSPECIFIED": 0,
-                            "GZIP": 2,
-                            "BZIP2": 3
+                          },
+                          "nested": {
+                            "KernelType": {
+                              "values": {
+                                "KERNEL_TYPE_UNSPECIFIED": 0,
+                                "PYTHON3": 1
+                              }
+                            }
                           }
                         }
                       }
                     },
-                    "StorageSystem": {
-                      "values": {
-                        "STORAGE_SYSTEM_UNSPECIFIED": 0,
-                        "CLOUD_STORAGE": 1,
-                        "BIGQUERY": 2
+                    "Session": {
+                      "options": {
+                        "(google.api.resource).type": "dataplex.googleapis.com/Session",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}/sessions/{session}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Session"
+                          }
+                        },
+                        "userId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
                       }
                     },
                     "Lake": {
@@ -1903,6 +1354,1395 @@
                         "ACTION_REQUIRED": 4
                       }
                     },
+                    "ContentService": {
+                      "options": {
+                        "(google.api.default_host)": "dataplex.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateContent": {
+                          "requestType": "CreateContentRequest",
+                          "responseType": "Content",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/lakes/*}/contentitems",
+                            "(google.api.http).body": "content",
+                            "(google.api.method_signature)": "parent,content"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/lakes/*}/contentitems",
+                                "body": "content"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,content"
+                            }
+                          ]
+                        },
+                        "UpdateContent": {
+                          "requestType": "UpdateContentRequest",
+                          "responseType": "Content",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{content.name=projects/*/locations/*/lakes/*/contentitems/**}",
+                            "(google.api.http).body": "content",
+                            "(google.api.method_signature)": "content,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{content.name=projects/*/locations/*/lakes/*/contentitems/**}",
+                                "body": "content"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "content,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteContent": {
+                          "requestType": "DeleteContentRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/lakes/*/contentitems/**}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/lakes/*/contentitems/**}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetContent": {
+                          "requestType": "GetContentRequest",
+                          "responseType": "Content",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/lakes/*/contentitems/**}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/lakes/*/contentitems/**}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListContent": {
+                          "requestType": "ListContentRequest",
+                          "responseType": "ListContentResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/lakes/*}/contentitems",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/lakes/*}/contentitems"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateContentRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Lake"
+                          }
+                        },
+                        "content": {
+                          "type": "Content",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateContentRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "content": {
+                          "type": "Content",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteContentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Content"
+                          }
+                        }
+                      }
+                    },
+                    "ListContentRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Lake"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListContentResponse": {
+                      "fields": {
+                        "content": {
+                          "rule": "repeated",
+                          "type": "Content",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetContentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Content"
+                          }
+                        },
+                        "view": {
+                          "type": "ContentView",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ContentView": {
+                          "values": {
+                            "CONTENT_VIEW_UNSPECIFIED": 0,
+                            "BASIC": 1,
+                            "FULL": 2
+                          }
+                        }
+                      }
+                    },
+                    "DiscoveryEvent": {
+                      "oneofs": {
+                        "details": {
+                          "oneof": [
+                            "config",
+                            "entity",
+                            "partition",
+                            "action"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "message": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "lakeId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "zoneId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "assetId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "dataLocation": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "type": {
+                          "type": "EventType",
+                          "id": 10
+                        },
+                        "config": {
+                          "type": "ConfigDetails",
+                          "id": 20
+                        },
+                        "entity": {
+                          "type": "EntityDetails",
+                          "id": 21
+                        },
+                        "partition": {
+                          "type": "PartitionDetails",
+                          "id": 22
+                        },
+                        "action": {
+                          "type": "ActionDetails",
+                          "id": 23
+                        }
+                      },
+                      "nested": {
+                        "EventType": {
+                          "values": {
+                            "EVENT_TYPE_UNSPECIFIED": 0,
+                            "CONFIG": 1,
+                            "ENTITY_CREATED": 2,
+                            "ENTITY_UPDATED": 3,
+                            "ENTITY_DELETED": 4,
+                            "PARTITION_CREATED": 5,
+                            "PARTITION_UPDATED": 6,
+                            "PARTITION_DELETED": 7
+                          }
+                        },
+                        "EntityType": {
+                          "values": {
+                            "ENTITY_TYPE_UNSPECIFIED": 0,
+                            "TABLE": 1,
+                            "FILESET": 2
+                          }
+                        },
+                        "ConfigDetails": {
+                          "fields": {
+                            "parameters": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "EntityDetails": {
+                          "fields": {
+                            "entity": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "type": {
+                              "type": "EntityType",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "PartitionDetails": {
+                          "fields": {
+                            "partition": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "entity": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "type": {
+                              "type": "EntityType",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ActionDetails": {
+                          "fields": {
+                            "type": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "JobEvent": {
+                      "fields": {
+                        "message": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "jobId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 5
+                        },
+                        "retries": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 7
+                        },
+                        "service": {
+                          "type": "Service",
+                          "id": 8
+                        },
+                        "serviceJob": {
+                          "type": "string",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "SPARK": 1,
+                            "NOTEBOOK": 2
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "SUCCEEDED": 1,
+                            "FAILED": 2,
+                            "CANCELLED": 3,
+                            "ABORTED": 4
+                          }
+                        },
+                        "Service": {
+                          "values": {
+                            "SERVICE_UNSPECIFIED": 0,
+                            "DATAPROC": 1
+                          }
+                        }
+                      }
+                    },
+                    "SessionEvent": {
+                      "oneofs": {
+                        "detail": {
+                          "oneof": [
+                            "query"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "message": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "userId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sessionId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "type": {
+                          "type": "EventType",
+                          "id": 4
+                        },
+                        "query": {
+                          "type": "QueryDetail",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "EventType": {
+                          "values": {
+                            "EVENT_TYPE_UNSPECIFIED": 0,
+                            "START": 1,
+                            "STOP": 2,
+                            "QUERY": 3
+                          }
+                        },
+                        "QueryDetail": {
+                          "fields": {
+                            "queryId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "queryText": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "engine": {
+                              "type": "Engine",
+                              "id": 3
+                            },
+                            "duration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 4
+                            },
+                            "resultSizeBytes": {
+                              "type": "int64",
+                              "id": 5
+                            },
+                            "dataProcessedBytes": {
+                              "type": "int64",
+                              "id": 6
+                            }
+                          },
+                          "nested": {
+                            "Engine": {
+                              "values": {
+                                "ENGINE_UNSPECIFIED": 0,
+                                "SPARK_SQL": 1,
+                                "BIGQUERY": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "MetadataService": {
+                      "options": {
+                        "(google.api.default_host)": "dataplex.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateEntity": {
+                          "requestType": "CreateEntityRequest",
+                          "responseType": "Entity",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/lakes/*/zones/*}/entities",
+                            "(google.api.http).body": "entity",
+                            "(google.api.method_signature)": "parent,entity"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/lakes/*/zones/*}/entities",
+                                "body": "entity"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,entity"
+                            }
+                          ]
+                        },
+                        "UpdateEntity": {
+                          "requestType": "UpdateEntityRequest",
+                          "responseType": "Entity",
+                          "options": {
+                            "(google.api.http).put": "/v1/{entity.name=projects/*/locations/*/lakes/*/zones/*/entities/*}",
+                            "(google.api.http).body": "entity"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "put": "/v1/{entity.name=projects/*/locations/*/lakes/*/zones/*/entities/*}",
+                                "body": "entity"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteEntity": {
+                          "requestType": "DeleteEntityRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/lakes/*/zones/*/entities/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/lakes/*/zones/*/entities/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetEntity": {
+                          "requestType": "GetEntityRequest",
+                          "responseType": "Entity",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/lakes/*/zones/*/entities/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/lakes/*/zones/*/entities/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListEntities": {
+                          "requestType": "ListEntitiesRequest",
+                          "responseType": "ListEntitiesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/lakes/*/zones/*}/entities",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/lakes/*/zones/*}/entities"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreatePartition": {
+                          "requestType": "CreatePartitionRequest",
+                          "responseType": "Partition",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/lakes/*/zones/*/entities/*}/partitions",
+                            "(google.api.http).body": "partition",
+                            "(google.api.method_signature)": "parent,partition"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/lakes/*/zones/*/entities/*}/partitions",
+                                "body": "partition"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,partition"
+                            }
+                          ]
+                        },
+                        "DeletePartition": {
+                          "requestType": "DeletePartitionRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/lakes/*/zones/*/entities/*/partitions/**}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/lakes/*/zones/*/entities/*/partitions/**}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetPartition": {
+                          "requestType": "GetPartitionRequest",
+                          "responseType": "Partition",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/lakes/*/zones/*/entities/*/partitions/**}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/lakes/*/zones/*/entities/*/partitions/**}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListPartitions": {
+                          "requestType": "ListPartitionsRequest",
+                          "responseType": "ListPartitionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/lakes/*/zones/*/entities/*}/partitions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/lakes/*/zones/*/entities/*}/partitions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateEntityRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Zone"
+                          }
+                        },
+                        "entity": {
+                          "type": "Entity",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateEntityRequest": {
+                      "fields": {
+                        "entity": {
+                          "type": "Entity",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteEntityRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Entity"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListEntitiesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Zone"
+                          }
+                        },
+                        "view": {
+                          "type": "EntityView",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EntityView": {
+                          "values": {
+                            "ENTITY_VIEW_UNSPECIFIED": 0,
+                            "TABLES": 1,
+                            "FILESETS": 2
+                          }
+                        }
+                      }
+                    },
+                    "ListEntitiesResponse": {
+                      "fields": {
+                        "entities": {
+                          "rule": "repeated",
+                          "type": "Entity",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetEntityRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Entity"
+                          }
+                        },
+                        "view": {
+                          "type": "EntityView",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EntityView": {
+                          "values": {
+                            "ENTITY_VIEW_UNSPECIFIED": 0,
+                            "BASIC": 1,
+                            "SCHEMA": 2,
+                            "FULL": 4
+                          }
+                        }
+                      }
+                    },
+                    "ListPartitionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Entity"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreatePartitionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Entity"
+                          }
+                        },
+                        "partition": {
+                          "type": "Partition",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeletePartitionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Partition"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListPartitionsResponse": {
+                      "fields": {
+                        "partitions": {
+                          "rule": "repeated",
+                          "type": "Partition",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetPartitionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Partition"
+                          }
+                        }
+                      }
+                    },
+                    "Entity": {
+                      "options": {
+                        "(google.api.resource).type": "dataplex.googleapis.com/Entity",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Entity"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "asset": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "dataPath": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "dataPathPattern": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "catalogEntry": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "system": {
+                          "type": "StorageSystem",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "format": {
+                          "type": "StorageFormat",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "compatibility": {
+                          "type": "CompatibilityStatus",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "schema": {
+                          "type": "Schema",
+                          "id": 50,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "TABLE": 1,
+                            "FILESET": 2
+                          }
+                        },
+                        "CompatibilityStatus": {
+                          "fields": {
+                            "hiveMetastore": {
+                              "type": "Compatibility",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "bigquery": {
+                              "type": "Compatibility",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Compatibility": {
+                              "fields": {
+                                "compatible": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "reason": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Partition": {
+                      "options": {
+                        "(google.api.resource).type": "dataplex.googleapis.com/Partition",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Partition"
+                          }
+                        },
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Schema": {
+                      "fields": {
+                        "userManaged": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "fields": {
+                          "rule": "repeated",
+                          "type": "SchemaField",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "partitionFields": {
+                          "rule": "repeated",
+                          "type": "PartitionField",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "partitionStyle": {
+                          "type": "PartitionStyle",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "BOOLEAN": 1,
+                            "BYTE": 2,
+                            "INT16": 3,
+                            "INT32": 4,
+                            "INT64": 5,
+                            "FLOAT": 6,
+                            "DOUBLE": 7,
+                            "DECIMAL": 8,
+                            "STRING": 9,
+                            "BINARY": 10,
+                            "TIMESTAMP": 11,
+                            "DATE": 12,
+                            "TIME": 13,
+                            "RECORD": 14,
+                            "NULL": 100
+                          }
+                        },
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "REQUIRED": 1,
+                            "NULLABLE": 2,
+                            "REPEATED": 3
+                          }
+                        },
+                        "SchemaField": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "mode": {
+                              "type": "Mode",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "fields": {
+                              "rule": "repeated",
+                              "type": "SchemaField",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "PartitionField": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            }
+                          }
+                        },
+                        "PartitionStyle": {
+                          "values": {
+                            "PARTITION_STYLE_UNSPECIFIED": 0,
+                            "HIVE_COMPATIBLE": 1
+                          }
+                        }
+                      }
+                    },
+                    "StorageFormat": {
+                      "oneofs": {
+                        "options": {
+                          "oneof": [
+                            "csv",
+                            "json"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "format": {
+                          "type": "Format",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "compressionFormat": {
+                          "type": "CompressionFormat",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "csv": {
+                          "type": "CsvOptions",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "json": {
+                          "type": "JsonOptions",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CsvOptions": {
+                          "fields": {
+                            "encoding": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "headerRows": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "delimiter": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "quote": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "JsonOptions": {
+                          "fields": {
+                            "encoding": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Format": {
+                          "values": {
+                            "FORMAT_UNSPECIFIED": 0,
+                            "PARQUET": 1,
+                            "AVRO": 2,
+                            "ORC": 3,
+                            "CSV": 100,
+                            "JSON": 101,
+                            "IMAGE": 200,
+                            "AUDIO": 201,
+                            "VIDEO": 202,
+                            "TEXT": 203,
+                            "TFRECORD": 204,
+                            "OTHER": 1000,
+                            "UNKNOWN": 1001
+                          }
+                        },
+                        "CompressionFormat": {
+                          "values": {
+                            "COMPRESSION_FORMAT_UNSPECIFIED": 0,
+                            "GZIP": 2,
+                            "BZIP2": 3
+                          }
+                        }
+                      }
+                    },
+                    "StorageSystem": {
+                      "values": {
+                        "STORAGE_SYSTEM_UNSPECIFIED": 0,
+                        "CLOUD_STORAGE": 1,
+                        "BIGQUERY": 2
+                      }
+                    },
                     "DataplexService": {
                       "options": {
                         "(google.api.default_host)": "dataplex.googleapis.com",
@@ -2488,6 +3328,142 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateEnvironment": {
+                          "requestType": "CreateEnvironmentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/lakes/*}/environments",
+                            "(google.api.http).body": "environment",
+                            "(google.api.method_signature)": "parent,environment,environment_id",
+                            "(google.longrunning.operation_info).response_type": "Environment",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/lakes/*}/environments",
+                                "body": "environment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,environment,environment_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Environment",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateEnvironment": {
+                          "requestType": "UpdateEnvironmentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{environment.name=projects/*/locations/*/lakes/*/environments/*}",
+                            "(google.api.http).body": "environment",
+                            "(google.api.method_signature)": "environment,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Environment",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{environment.name=projects/*/locations/*/lakes/*/environments/*}",
+                                "body": "environment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "environment,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Environment",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteEnvironment": {
+                          "requestType": "DeleteEnvironmentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/lakes/*/environments/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/lakes/*/environments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListEnvironments": {
+                          "requestType": "ListEnvironmentsRequest",
+                          "responseType": "ListEnvironmentsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/lakes/*}/environments",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/lakes/*}/environments"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetEnvironment": {
+                          "requestType": "GetEnvironmentRequest",
+                          "responseType": "Environment",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/lakes/*/environments/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/lakes/*/environments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListSessions": {
+                          "requestType": "ListSessionsRequest",
+                          "responseType": "ListSessionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/lakes/*/environments/*}/sessions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/lakes/*/environments/*}/sessions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         }
@@ -3250,6 +4226,180 @@
                         }
                       }
                     },
+                    "CreateEnvironmentRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Lake"
+                          }
+                        },
+                        "environmentId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "environment": {
+                          "type": "Environment",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateEnvironmentRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "environment": {
+                          "type": "Environment",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteEnvironmentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Environment"
+                          }
+                        }
+                      }
+                    },
+                    "ListEnvironmentsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Lake"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListEnvironmentsResponse": {
+                      "fields": {
+                        "environments": {
+                          "rule": "repeated",
+                          "type": "Environment",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetEnvironmentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Environment"
+                          }
+                        }
+                      }
+                    },
+                    "ListSessionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Environment"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSessionsResponse": {
+                      "fields": {
+                        "sessions": {
+                          "rule": "repeated",
+                          "type": "Session",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Task": {
                       "options": {
                         "(google.api.resource).type": "dataplex.googleapis.com/Task",
@@ -3698,7 +4848,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
+            "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -3790,22 +4940,6 @@
                   "id": 2
                 }
               }
-            },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
             },
             "fieldBehavior": {
               "rule": "repeated",
@@ -3901,6 +5035,22 @@
                   "id": 2
                 }
               }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
             }
           }
         },

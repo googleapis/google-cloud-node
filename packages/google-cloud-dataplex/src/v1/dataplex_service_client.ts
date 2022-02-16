@@ -173,8 +173,14 @@ export class DataplexServiceClient {
       assetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}'
       ),
+      contentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
+      ),
       entityPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
+      ),
+      environmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}'
       ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}/jobs/{job}'
@@ -199,6 +205,9 @@ export class DataplexServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}'
         ),
+      sessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}/sessions/{session}'
+      ),
       taskPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}'
       ),
@@ -250,6 +259,16 @@ export class DataplexServiceClient {
         'pageToken',
         'nextPageToken',
         'jobs'
+      ),
+      listEnvironments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'environments'
+      ),
+      listSessions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'sessions'
       ),
     };
 
@@ -337,6 +356,24 @@ export class DataplexServiceClient {
     const deleteTaskMetadata = protoFilesRoot.lookup(
       '.google.cloud.dataplex.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createEnvironmentResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.Environment'
+    ) as gax.protobuf.Type;
+    const createEnvironmentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateEnvironmentResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.Environment'
+    ) as gax.protobuf.Type;
+    const updateEnvironmentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteEnvironmentResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteEnvironmentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createLake: new this._gaxModule.LongrunningDescriptor(
@@ -398,6 +435,21 @@ export class DataplexServiceClient {
         this.operationsClient,
         deleteTaskResponse.decode.bind(deleteTaskResponse),
         deleteTaskMetadata.decode.bind(deleteTaskMetadata)
+      ),
+      createEnvironment: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createEnvironmentResponse.decode.bind(createEnvironmentResponse),
+        createEnvironmentMetadata.decode.bind(createEnvironmentMetadata)
+      ),
+      updateEnvironment: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateEnvironmentResponse.decode.bind(updateEnvironmentResponse),
+        updateEnvironmentMetadata.decode.bind(updateEnvironmentMetadata)
+      ),
+      deleteEnvironment: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteEnvironmentResponse.decode.bind(deleteEnvironmentResponse),
+        deleteEnvironmentMetadata.decode.bind(deleteEnvironmentMetadata)
       ),
     };
 
@@ -477,6 +529,12 @@ export class DataplexServiceClient {
       'listJobs',
       'getJob',
       'cancelJob',
+      'createEnvironment',
+      'updateEnvironment',
+      'deleteEnvironment',
+      'listEnvironments',
+      'getEnvironment',
+      'listSessions',
     ];
     for (const methodName of dataplexServiceStubMethods) {
       const callPromise = this.dataplexServiceStub.then(
@@ -1066,6 +1124,92 @@ export class DataplexServiceClient {
     this.initialize();
     return this.innerApiCalls.cancelJob(request, options, callback);
   }
+  /**
+   * Get environment resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the environment:
+   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}/environments/{environment_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Environment]{@link google.cloud.dataplex.v1.Environment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.get_environment.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_GetEnvironment_async
+   */
+  getEnvironment(
+    request?: protos.google.cloud.dataplex.v1.IGetEnvironmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IEnvironment,
+      protos.google.cloud.dataplex.v1.IGetEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getEnvironment(
+    request: protos.google.cloud.dataplex.v1.IGetEnvironmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IEnvironment,
+      protos.google.cloud.dataplex.v1.IGetEnvironmentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEnvironment(
+    request: protos.google.cloud.dataplex.v1.IGetEnvironmentRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IEnvironment,
+      protos.google.cloud.dataplex.v1.IGetEnvironmentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEnvironment(
+    request?: protos.google.cloud.dataplex.v1.IGetEnvironmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dataplex.v1.IEnvironment,
+          | protos.google.cloud.dataplex.v1.IGetEnvironmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IEnvironment,
+      protos.google.cloud.dataplex.v1.IGetEnvironmentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IEnvironment,
+      protos.google.cloud.dataplex.v1.IGetEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEnvironment(request, options, callback);
+  }
 
   /**
    * Creates a lake resource.
@@ -1074,7 +1218,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the lake location, of the form:
-   *   `projects/{project_number}/locations/{location_id}`
+   *   projects/{project_number}/locations/{location_id}
    *   where `location_id` refers to a GCP region.
    * @param {string} request.lakeId
    *   Required. Lake identifier.
@@ -2798,6 +2942,438 @@ export class DataplexServiceClient {
     >;
   }
   /**
+   * Create an environment resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
+   * @param {string} request.environmentId
+   *   Required. Environment identifier.
+   *   * Must contain only lowercase letters, numbers and hyphens.
+   *   * Must start with a letter.
+   *   * Must be between 1-63 characters.
+   *   * Must end with a number or a letter.
+   *   * Must be unique within the lake.
+   * @param {google.cloud.dataplex.v1.Environment} request.environment
+   *   Required. Environment resource.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.create_environment.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_CreateEnvironment_async
+   */
+  createEnvironment(
+    request?: protos.google.cloud.dataplex.v1.ICreateEnvironmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IEnvironment,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createEnvironment(
+    request: protos.google.cloud.dataplex.v1.ICreateEnvironmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IEnvironment,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createEnvironment(
+    request: protos.google.cloud.dataplex.v1.ICreateEnvironmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IEnvironment,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createEnvironment(
+    request?: protos.google.cloud.dataplex.v1.ICreateEnvironmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IEnvironment,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IEnvironment,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IEnvironment,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createEnvironment(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createEnvironment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.create_environment.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_CreateEnvironment_async
+   */
+  async checkCreateEnvironmentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.Environment,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createEnvironment,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.Environment,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Update the environment resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update.
+   * @param {google.cloud.dataplex.v1.Environment} request.environment
+   *   Required. Update description.
+   *   Only fields specified in `update_mask` are updated.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.update_environment.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_UpdateEnvironment_async
+   */
+  updateEnvironment(
+    request?: protos.google.cloud.dataplex.v1.IUpdateEnvironmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IEnvironment,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateEnvironment(
+    request: protos.google.cloud.dataplex.v1.IUpdateEnvironmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IEnvironment,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEnvironment(
+    request: protos.google.cloud.dataplex.v1.IUpdateEnvironmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IEnvironment,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEnvironment(
+    request?: protos.google.cloud.dataplex.v1.IUpdateEnvironmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IEnvironment,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IEnvironment,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IEnvironment,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'environment.name': request.environment!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateEnvironment(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateEnvironment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.update_environment.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_UpdateEnvironment_async
+   */
+  async checkUpdateEnvironmentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.Environment,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateEnvironment,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.Environment,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Delete the environment resource. All the child resources must have been
+   * deleted before environment deletion can be initiated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the environment:
+   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}/environments/{environment_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.delete_environment.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_DeleteEnvironment_async
+   */
+  deleteEnvironment(
+    request?: protos.google.cloud.dataplex.v1.IDeleteEnvironmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteEnvironment(
+    request: protos.google.cloud.dataplex.v1.IDeleteEnvironmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteEnvironment(
+    request: protos.google.cloud.dataplex.v1.IDeleteEnvironmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteEnvironment(
+    request?: protos.google.cloud.dataplex.v1.IDeleteEnvironmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteEnvironment(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteEnvironment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.delete_environment.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_DeleteEnvironment_async
+   */
+  async checkDeleteEnvironmentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteEnvironment,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
+  }
+  /**
    * Lists lake resources in a project and location.
    *
    * @param {Object} request
@@ -4439,6 +5015,426 @@ export class DataplexServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IJob>;
   }
+  /**
+   * Lists environments under the given lake.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of environments to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 environments will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListEnvironments` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListEnvironments` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Environment]{@link google.cloud.dataplex.v1.Environment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEnvironmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listEnvironments(
+    request?: protos.google.cloud.dataplex.v1.IListEnvironmentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IEnvironment[],
+      protos.google.cloud.dataplex.v1.IListEnvironmentsRequest | null,
+      protos.google.cloud.dataplex.v1.IListEnvironmentsResponse
+    ]
+  >;
+  listEnvironments(
+    request: protos.google.cloud.dataplex.v1.IListEnvironmentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListEnvironmentsRequest,
+      | protos.google.cloud.dataplex.v1.IListEnvironmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataplex.v1.IEnvironment
+    >
+  ): void;
+  listEnvironments(
+    request: protos.google.cloud.dataplex.v1.IListEnvironmentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListEnvironmentsRequest,
+      | protos.google.cloud.dataplex.v1.IListEnvironmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataplex.v1.IEnvironment
+    >
+  ): void;
+  listEnvironments(
+    request?: protos.google.cloud.dataplex.v1.IListEnvironmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEnvironmentsRequest,
+          | protos.google.cloud.dataplex.v1.IListEnvironmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IEnvironment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListEnvironmentsRequest,
+      | protos.google.cloud.dataplex.v1.IListEnvironmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataplex.v1.IEnvironment
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IEnvironment[],
+      protos.google.cloud.dataplex.v1.IListEnvironmentsRequest | null,
+      protos.google.cloud.dataplex.v1.IListEnvironmentsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listEnvironments(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of environments to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 environments will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListEnvironments` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListEnvironments` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Environment]{@link google.cloud.dataplex.v1.Environment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEnvironmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listEnvironmentsStream(
+    request?: protos.google.cloud.dataplex.v1.IListEnvironmentsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listEnvironments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEnvironments.createStream(
+      this.innerApiCalls.listEnvironments as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listEnvironments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of environments to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 environments will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListEnvironments` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListEnvironments` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Environment]{@link google.cloud.dataplex.v1.Environment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.list_environments.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_ListEnvironments_async
+   */
+  listEnvironmentsAsync(
+    request?: protos.google.cloud.dataplex.v1.IListEnvironmentsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.IEnvironment> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listEnvironments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEnvironments.asyncIterate(
+      this.innerApiCalls['listEnvironments'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dataplex.v1.IEnvironment>;
+  }
+  /**
+   * Lists session resources in an environment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent environment:
+   *   projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of sessions to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 sessions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListSessions` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListSessions` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Session]{@link google.cloud.dataplex.v1.Session}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSessionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSessions(
+    request?: protos.google.cloud.dataplex.v1.IListSessionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.ISession[],
+      protos.google.cloud.dataplex.v1.IListSessionsRequest | null,
+      protos.google.cloud.dataplex.v1.IListSessionsResponse
+    ]
+  >;
+  listSessions(
+    request: protos.google.cloud.dataplex.v1.IListSessionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListSessionsRequest,
+      protos.google.cloud.dataplex.v1.IListSessionsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.ISession
+    >
+  ): void;
+  listSessions(
+    request: protos.google.cloud.dataplex.v1.IListSessionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListSessionsRequest,
+      protos.google.cloud.dataplex.v1.IListSessionsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.ISession
+    >
+  ): void;
+  listSessions(
+    request?: protos.google.cloud.dataplex.v1.IListSessionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListSessionsRequest,
+          | protos.google.cloud.dataplex.v1.IListSessionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.ISession
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListSessionsRequest,
+      protos.google.cloud.dataplex.v1.IListSessionsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.ISession
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.ISession[],
+      protos.google.cloud.dataplex.v1.IListSessionsRequest | null,
+      protos.google.cloud.dataplex.v1.IListSessionsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSessions(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent environment:
+   *   projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of sessions to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 sessions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListSessions` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListSessions` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Session]{@link google.cloud.dataplex.v1.Session} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSessionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSessionsStream(
+    request?: protos.google.cloud.dataplex.v1.IListSessionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listSessions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSessions.createStream(
+      this.innerApiCalls.listSessions as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSessions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent environment:
+   *   projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of sessions to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 sessions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListSessions` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListSessions` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Session]{@link google.cloud.dataplex.v1.Session}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.list_sessions.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_ListSessions_async
+   */
+  listSessionsAsync(
+    request?: protos.google.cloud.dataplex.v1.IListSessionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.ISession> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listSessions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSessions.asyncIterate(
+      this.innerApiCalls['listSessions'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dataplex.v1.ISession>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -4525,6 +5521,73 @@ export class DataplexServiceClient {
   }
 
   /**
+   * Return a fully-qualified content resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} lake
+   * @param {string} content
+   * @returns {string} Resource name string.
+   */
+  contentPath(
+    project: string,
+    location: string,
+    lake: string,
+    content: string
+  ) {
+    return this.pathTemplates.contentPathTemplate.render({
+      project: project,
+      location: location,
+      lake: lake,
+      content: content,
+    });
+  }
+
+  /**
+   * Parse the project from Content resource.
+   *
+   * @param {string} contentName
+   *   A fully-qualified path representing Content resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromContentName(contentName: string) {
+    return this.pathTemplates.contentPathTemplate.match(contentName).project;
+  }
+
+  /**
+   * Parse the location from Content resource.
+   *
+   * @param {string} contentName
+   *   A fully-qualified path representing Content resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromContentName(contentName: string) {
+    return this.pathTemplates.contentPathTemplate.match(contentName).location;
+  }
+
+  /**
+   * Parse the lake from Content resource.
+   *
+   * @param {string} contentName
+   *   A fully-qualified path representing Content resource.
+   * @returns {string} A string representing the lake.
+   */
+  matchLakeFromContentName(contentName: string) {
+    return this.pathTemplates.contentPathTemplate.match(contentName).lake;
+  }
+
+  /**
+   * Parse the content from Content resource.
+   *
+   * @param {string} contentName
+   *   A fully-qualified path representing Content resource.
+   * @returns {string} A string representing the content.
+   */
+  matchContentFromContentName(contentName: string) {
+    return this.pathTemplates.contentPathTemplate.match(contentName).content;
+  }
+
+  /**
    * Return a fully-qualified entity resource name string.
    *
    * @param {string} project
@@ -4603,6 +5666,77 @@ export class DataplexServiceClient {
    */
   matchEntityFromEntityName(entityName: string) {
     return this.pathTemplates.entityPathTemplate.match(entityName).entity;
+  }
+
+  /**
+   * Return a fully-qualified environment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} lake
+   * @param {string} environment
+   * @returns {string} Resource name string.
+   */
+  environmentPath(
+    project: string,
+    location: string,
+    lake: string,
+    environment: string
+  ) {
+    return this.pathTemplates.environmentPathTemplate.render({
+      project: project,
+      location: location,
+      lake: lake,
+      environment: environment,
+    });
+  }
+
+  /**
+   * Parse the project from Environment resource.
+   *
+   * @param {string} environmentName
+   *   A fully-qualified path representing Environment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEnvironmentName(environmentName: string) {
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Environment resource.
+   *
+   * @param {string} environmentName
+   *   A fully-qualified path representing Environment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEnvironmentName(environmentName: string) {
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .location;
+  }
+
+  /**
+   * Parse the lake from Environment resource.
+   *
+   * @param {string} environmentName
+   *   A fully-qualified path representing Environment resource.
+   * @returns {string} A string representing the lake.
+   */
+  matchLakeFromEnvironmentName(environmentName: string) {
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .lake;
+  }
+
+  /**
+   * Parse the environment from Environment resource.
+   *
+   * @param {string} environmentName
+   *   A fully-qualified path representing Environment resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromEnvironmentName(environmentName: string) {
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .environment;
   }
 
   /**
@@ -5172,6 +6306,88 @@ export class DataplexServiceClient {
     return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
       projectLocationLakeZoneAssetActionName
     ).action;
+  }
+
+  /**
+   * Return a fully-qualified session resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} lake
+   * @param {string} environment
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  sessionPath(
+    project: string,
+    location: string,
+    lake: string,
+    environment: string,
+    session: string
+  ) {
+    return this.pathTemplates.sessionPathTemplate.render({
+      project: project,
+      location: location,
+      lake: lake,
+      environment: environment,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).project;
+  }
+
+  /**
+   * Parse the location from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).location;
+  }
+
+  /**
+   * Parse the lake from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the lake.
+   */
+  matchLakeFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).lake;
+  }
+
+  /**
+   * Parse the environment from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName)
+      .environment;
+  }
+
+  /**
+   * Parse the session from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).session;
   }
 
   /**

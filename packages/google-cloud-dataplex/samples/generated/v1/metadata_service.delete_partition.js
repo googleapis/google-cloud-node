@@ -16,17 +16,22 @@
 'use strict';
 
 function main(name) {
-  // [START dataplex_v1_generated_MetadataService_GetPartition_async]
+  // [START dataplex_v1_generated_MetadataService_DeletePartition_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the partition:
+   *  Required. The resource name of the partition.
+   *  format:
    *  `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}`.
    *  The {partition_value_path} segment consists of an ordered sequence of
    *  partition values separated by "/". All values must be provided.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. The etag associated with the partition if it was previously retrieved.
+   */
+  // const etag = 'abc123'
 
   // Imports the Dataplex library
   const {MetadataServiceClient} = require('@google-cloud/dataplex').v1;
@@ -34,19 +39,19 @@ function main(name) {
   // Instantiates a client
   const dataplexClient = new MetadataServiceClient();
 
-  async function callGetPartition() {
+  async function callDeletePartition() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await dataplexClient.getPartition(request);
+    const response = await dataplexClient.deletePartition(request);
     console.log(response);
   }
 
-  callGetPartition();
-  // [END dataplex_v1_generated_MetadataService_GetPartition_async]
+  callDeletePartition();
+  // [END dataplex_v1_generated_MetadataService_DeletePartition_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -15,38 +15,46 @@
 
 'use strict';
 
-function main(name) {
-  // [START dataplex_v1_generated_MetadataService_GetPartition_async]
+function main(updateMask, content) {
+  // [START dataplex_v1_generated_ContentService_UpdateContent_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the partition:
-   *  `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}`.
-   *  The {partition_value_path} segment consists of an ordered sequence of
-   *  partition values separated by "/". All values must be provided.
+   *  Required. Mask of fields to update.
    */
-  // const name = 'abc123'
+  // const updateMask = {}
+  /**
+   *  Required. Update description.
+   *  Only fields specified in `update_mask` are updated.
+   */
+  // const content = {}
+  /**
+   *  Optional. Only validate the request, but do not perform mutations.
+   *  The default is false.
+   */
+  // const validateOnly = true
 
   // Imports the Dataplex library
-  const {MetadataServiceClient} = require('@google-cloud/dataplex').v1;
+  const {ContentServiceClient} = require('@google-cloud/dataplex').v1;
 
   // Instantiates a client
-  const dataplexClient = new MetadataServiceClient();
+  const dataplexClient = new ContentServiceClient();
 
-  async function callGetPartition() {
+  async function callUpdateContent() {
     // Construct request
     const request = {
-      name,
+      updateMask,
+      content,
     };
 
     // Run request
-    const response = await dataplexClient.getPartition(request);
+    const response = await dataplexClient.updateContent(request);
     console.log(response);
   }
 
-  callGetPartition();
-  // [END dataplex_v1_generated_MetadataService_GetPartition_async]
+  callUpdateContent();
+  // [END dataplex_v1_generated_ContentService_UpdateContent_async]
 }
 
 process.on('unhandledRejection', err => {

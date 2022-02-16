@@ -27,8 +27,8 @@ function main(parent) {
   // const parent = 'abc123'
   /**
    *  Optional. Maximum number of partitions to return. The service may return fewer than
-   *  this value. If unspecified, at most 10 partitions will be returned. The
-   *  maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  this value. If unspecified, 100 partitions will be returned by default. The
+   *  maximum page size is 500; larger values will will be truncated to 500.
    */
   // const pageSize = 1234
   /**
@@ -39,7 +39,21 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Filter request.
+   *  Optional. Filter the partitions returned to the caller using a key vslue pair
+   *  expression. The filter expression supports:
+   *  - logical operators: AND, OR
+   *  - comparison operators: <, >, >=, <= ,=, !=
+   *  - LIKE operators:
+   *      - The right hand of a LIKE operator supports “.” and
+   *        “*” for wildcard searches, for example "value1 LIKE ".*oo.*"
+   *  - parenthetical grouping: ( )
+   *  Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
+   *  **Notes:**
+   *  - Keys to the left of operators are case insensitive.
+   *  - Partition results are sorted first by creation time, then by
+   *    lexicographic order.
+   *  - Up to 20 key value filter pairs are allowed, but due to performance
+   *    considerations, only the first 10 will be used as a filter.
    */
   // const filter = 'abc123'
 

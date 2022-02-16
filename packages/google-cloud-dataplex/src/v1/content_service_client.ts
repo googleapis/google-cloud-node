@@ -33,20 +33,19 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/metadata_service_client_config.json`.
+ * `src/v1/content_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './metadata_service_client_config.json';
+import * as gapicConfig from './content_service_client_config.json';
 
 const version = require('../../../package.json').version;
 
 /**
- *  Metadata service manages metadata resources such as tables, filesets and
- *  partitions.
+ *  ContentService manages Notebook and SQL Scripts for Dataplex.
  * @class
  * @memberof v1
  */
-export class MetadataServiceClient {
+export class ContentServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -64,10 +63,10 @@ export class MetadataServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  metadataServiceStub?: Promise<{[name: string]: Function}>;
+  contentServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of MetadataServiceClient.
+   * Construct an instance of ContentServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -102,7 +101,7 @@ export class MetadataServiceClient {
    */
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof MetadataServiceClient;
+    const staticMembers = this.constructor as typeof ContentServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -212,21 +211,16 @@ export class MetadataServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEntities: new this._gaxModule.PageDescriptor(
+      listContent: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'entities'
-      ),
-      listPartitions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'partitions'
+        'content'
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.dataplex.v1.MetadataService',
+      'google.cloud.dataplex.v1.ContentService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -254,38 +248,34 @@ export class MetadataServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.metadataServiceStub) {
-      return this.metadataServiceStub;
+    if (this.contentServiceStub) {
+      return this.contentServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.dataplex.v1.MetadataService.
-    this.metadataServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.dataplex.v1.ContentService.
+    this.contentServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.dataplex.v1.MetadataService'
+            'google.cloud.dataplex.v1.ContentService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.dataplex.v1.MetadataService,
+          (this._protos as any).google.cloud.dataplex.v1.ContentService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const metadataServiceStubMethods = [
-      'createEntity',
-      'updateEntity',
-      'deleteEntity',
-      'getEntity',
-      'listEntities',
-      'createPartition',
-      'deletePartition',
-      'getPartition',
-      'listPartitions',
+    const contentServiceStubMethods = [
+      'createContent',
+      'updateContent',
+      'deleteContent',
+      'getContent',
+      'listContent',
     ];
-    for (const methodName of metadataServiceStubMethods) {
-      const callPromise = this.metadataServiceStub.then(
+    for (const methodName of contentServiceStubMethods) {
+      const callPromise = this.contentServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -309,7 +299,7 @@ export class MetadataServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.metadataServiceStub;
+    return this.contentServiceStub;
   }
 
   /**
@@ -366,75 +356,75 @@ export class MetadataServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Create a metadata entity.
+   * Create a content.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the parent zone:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
-   * @param {google.cloud.dataplex.v1.Entity} request.entity
-   *   Required. Entity resource.
+   *   Required. The resource name of the parent lake:
+   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
+   * @param {google.cloud.dataplex.v1.Content} request.content
+   *   Required. Content resource.
    * @param {boolean} [request.validateOnly]
    *   Optional. Only validate the request, but do not perform mutations.
    *   The default is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Entity]{@link google.cloud.dataplex.v1.Entity}.
+   *   The first element of the array is an object representing [Content]{@link google.cloud.dataplex.v1.Content}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.create_entity.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_CreateEntity_async
+   * @example <caption>include:samples/generated/v1/content_service.create_content.js</caption>
+   * region_tag:dataplex_v1_generated_ContentService_CreateContent_async
    */
-  createEntity(
-    request?: protos.google.cloud.dataplex.v1.ICreateEntityRequest,
+  createContent(
+    request?: protos.google.cloud.dataplex.v1.ICreateContentRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.ICreateEntityRequest | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.ICreateContentRequest | undefined,
       {} | undefined
     ]
   >;
-  createEntity(
-    request: protos.google.cloud.dataplex.v1.ICreateEntityRequest,
+  createContent(
+    request: protos.google.cloud.dataplex.v1.ICreateContentRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.ICreateEntityRequest | null | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.ICreateContentRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createEntity(
-    request: protos.google.cloud.dataplex.v1.ICreateEntityRequest,
+  createContent(
+    request: protos.google.cloud.dataplex.v1.ICreateContentRequest,
     callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.ICreateEntityRequest | null | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.ICreateContentRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createEntity(
-    request?: protos.google.cloud.dataplex.v1.ICreateEntityRequest,
+  createContent(
+    request?: protos.google.cloud.dataplex.v1.ICreateContentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.dataplex.v1.IEntity,
-          | protos.google.cloud.dataplex.v1.ICreateEntityRequest
+          protos.google.cloud.dataplex.v1.IContent,
+          | protos.google.cloud.dataplex.v1.ICreateContentRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.ICreateEntityRequest | null | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.ICreateContentRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.ICreateEntityRequest | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.ICreateContentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -454,75 +444,78 @@ export class MetadataServiceClient {
         parent: request.parent || '',
       });
     this.initialize();
-    return this.innerApiCalls.createEntity(request, options, callback);
+    return this.innerApiCalls.createContent(request, options, callback);
   }
   /**
-   * Update a metadata entity. Only supports full resource update.
+   * Update a content. Only supports full resource update.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.dataplex.v1.Entity} request.entity
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update.
+   * @param {google.cloud.dataplex.v1.Content} request.content
    *   Required. Update description.
+   *   Only fields specified in `update_mask` are updated.
    * @param {boolean} [request.validateOnly]
    *   Optional. Only validate the request, but do not perform mutations.
    *   The default is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Entity]{@link google.cloud.dataplex.v1.Entity}.
+   *   The first element of the array is an object representing [Content]{@link google.cloud.dataplex.v1.Content}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.update_entity.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_UpdateEntity_async
+   * @example <caption>include:samples/generated/v1/content_service.update_content.js</caption>
+   * region_tag:dataplex_v1_generated_ContentService_UpdateContent_async
    */
-  updateEntity(
-    request?: protos.google.cloud.dataplex.v1.IUpdateEntityRequest,
+  updateContent(
+    request?: protos.google.cloud.dataplex.v1.IUpdateContentRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IUpdateEntityRequest | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.IUpdateContentRequest | undefined,
       {} | undefined
     ]
   >;
-  updateEntity(
-    request: protos.google.cloud.dataplex.v1.IUpdateEntityRequest,
+  updateContent(
+    request: protos.google.cloud.dataplex.v1.IUpdateContentRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IUpdateEntityRequest | null | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.IUpdateContentRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  updateEntity(
-    request: protos.google.cloud.dataplex.v1.IUpdateEntityRequest,
+  updateContent(
+    request: protos.google.cloud.dataplex.v1.IUpdateContentRequest,
     callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IUpdateEntityRequest | null | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.IUpdateContentRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  updateEntity(
-    request?: protos.google.cloud.dataplex.v1.IUpdateEntityRequest,
+  updateContent(
+    request?: protos.google.cloud.dataplex.v1.IUpdateContentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.dataplex.v1.IEntity,
-          | protos.google.cloud.dataplex.v1.IUpdateEntityRequest
+          protos.google.cloud.dataplex.v1.IContent,
+          | protos.google.cloud.dataplex.v1.IUpdateContentRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IUpdateEntityRequest | null | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.IUpdateContentRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IUpdateEntityRequest | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.IUpdateContentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -539,21 +532,19 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
-        'entity.name': request.entity!.name || '',
+        'content.name': request.content!.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.updateEntity(request, options, callback);
+    return this.innerApiCalls.updateContent(request, options, callback);
   }
   /**
-   * Delete a metadata entity.
+   * Delete a content.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the entity:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
-   * @param {string} request.etag
-   *   Required. The etag associated with the partition if it was previously retrieved.
+   *   Required. The resource name of the content:
+   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}/content/{content_id}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -561,56 +552,56 @@ export class MetadataServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.delete_entity.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_DeleteEntity_async
+   * @example <caption>include:samples/generated/v1/content_service.delete_content.js</caption>
+   * region_tag:dataplex_v1_generated_ContentService_DeleteContent_async
    */
-  deleteEntity(
-    request?: protos.google.cloud.dataplex.v1.IDeleteEntityRequest,
+  deleteContent(
+    request?: protos.google.cloud.dataplex.v1.IDeleteContentRequest,
     options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteEntityRequest | undefined,
+      protos.google.cloud.dataplex.v1.IDeleteContentRequest | undefined,
       {} | undefined
     ]
   >;
-  deleteEntity(
-    request: protos.google.cloud.dataplex.v1.IDeleteEntityRequest,
+  deleteContent(
+    request: protos.google.cloud.dataplex.v1.IDeleteContentRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteEntityRequest | null | undefined,
+      protos.google.cloud.dataplex.v1.IDeleteContentRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteEntity(
-    request: protos.google.cloud.dataplex.v1.IDeleteEntityRequest,
+  deleteContent(
+    request: protos.google.cloud.dataplex.v1.IDeleteContentRequest,
     callback: Callback<
       protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteEntityRequest | null | undefined,
+      protos.google.cloud.dataplex.v1.IDeleteContentRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteEntity(
-    request?: protos.google.cloud.dataplex.v1.IDeleteEntityRequest,
+  deleteContent(
+    request?: protos.google.cloud.dataplex.v1.IDeleteContentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataplex.v1.IDeleteEntityRequest
+          | protos.google.cloud.dataplex.v1.IDeleteContentRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteEntityRequest | null | undefined,
+      protos.google.cloud.dataplex.v1.IDeleteContentRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteEntityRequest | undefined,
+      protos.google.cloud.dataplex.v1.IDeleteContentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -630,74 +621,73 @@ export class MetadataServiceClient {
         name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteEntity(request, options, callback);
+    return this.innerApiCalls.deleteContent(request, options, callback);
   }
   /**
-   * Get a metadata entity.
+   * Get a content resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the entity:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}.`
-   * @param {google.cloud.dataplex.v1.GetEntityRequest.EntityView} [request.view]
-   *   Optional. Used to select the subset of entity information to return.
-   *   Defaults to `BASIC`.
+   *   Required. The resource name of the content:
+   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}/content/{content_id}
+   * @param {google.cloud.dataplex.v1.GetContentRequest.ContentView} [request.view]
+   *   Optional. Specify content view to make a partial request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Entity]{@link google.cloud.dataplex.v1.Entity}.
+   *   The first element of the array is an object representing [Content]{@link google.cloud.dataplex.v1.Content}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.get_entity.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_GetEntity_async
+   * @example <caption>include:samples/generated/v1/content_service.get_content.js</caption>
+   * region_tag:dataplex_v1_generated_ContentService_GetContent_async
    */
-  getEntity(
-    request?: protos.google.cloud.dataplex.v1.IGetEntityRequest,
+  getContent(
+    request?: protos.google.cloud.dataplex.v1.IGetContentRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IGetEntityRequest | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.IGetContentRequest | undefined,
       {} | undefined
     ]
   >;
-  getEntity(
-    request: protos.google.cloud.dataplex.v1.IGetEntityRequest,
+  getContent(
+    request: protos.google.cloud.dataplex.v1.IGetContentRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IGetEntityRequest | null | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.IGetContentRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  getEntity(
-    request: protos.google.cloud.dataplex.v1.IGetEntityRequest,
+  getContent(
+    request: protos.google.cloud.dataplex.v1.IGetContentRequest,
     callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IGetEntityRequest | null | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.IGetContentRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  getEntity(
-    request?: protos.google.cloud.dataplex.v1.IGetEntityRequest,
+  getContent(
+    request?: protos.google.cloud.dataplex.v1.IGetContentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.dataplex.v1.IEntity,
-          protos.google.cloud.dataplex.v1.IGetEntityRequest | null | undefined,
+          protos.google.cloud.dataplex.v1.IContent,
+          protos.google.cloud.dataplex.v1.IGetContentRequest | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IGetEntityRequest | null | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.IGetContentRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.dataplex.v1.IEntity,
-      protos.google.cloud.dataplex.v1.IGetEntityRequest | undefined,
+      protos.google.cloud.dataplex.v1.IContent,
+      protos.google.cloud.dataplex.v1.IGetContentRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -717,380 +707,97 @@ export class MetadataServiceClient {
         name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.getEntity(request, options, callback);
-  }
-  /**
-   * Create a metadata partition.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent zone:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
-   * @param {google.cloud.dataplex.v1.Partition} request.partition
-   *   Required. Partition resource.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the request, but do not perform mutations.
-   *   The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Partition]{@link google.cloud.dataplex.v1.Partition}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.create_partition.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_CreatePartition_async
-   */
-  createPartition(
-    request?: protos.google.cloud.dataplex.v1.ICreatePartitionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.ICreatePartitionRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  createPartition(
-    request: protos.google.cloud.dataplex.v1.ICreatePartitionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IPartition,
-      | protos.google.cloud.dataplex.v1.ICreatePartitionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPartition(
-    request: protos.google.cloud.dataplex.v1.ICreatePartitionRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IPartition,
-      | protos.google.cloud.dataplex.v1.ICreatePartitionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPartition(
-    request?: protos.google.cloud.dataplex.v1.ICreatePartitionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.dataplex.v1.IPartition,
-          | protos.google.cloud.dataplex.v1.ICreatePartitionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IPartition,
-      | protos.google.cloud.dataplex.v1.ICreatePartitionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.ICreatePartitionRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createPartition(request, options, callback);
-  }
-  /**
-   * Delete a metadata partition.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the partition.
-   *   format:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}`.
-   *   The {partition_value_path} segment consists of an ordered sequence of
-   *   partition values separated by "/". All values must be provided.
-   * @param {string} [request.etag]
-   *   Optional. The etag associated with the partition if it was previously retrieved.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.delete_partition.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_DeletePartition_async
-   */
-  deletePartition(
-    request?: protos.google.cloud.dataplex.v1.IDeletePartitionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeletePartitionRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  deletePartition(
-    request: protos.google.cloud.dataplex.v1.IDeletePartitionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataplex.v1.IDeletePartitionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePartition(
-    request: protos.google.cloud.dataplex.v1.IDeletePartitionRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataplex.v1.IDeletePartitionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePartition(
-    request?: protos.google.cloud.dataplex.v1.IDeletePartitionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataplex.v1.IDeletePartitionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataplex.v1.IDeletePartitionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeletePartitionRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deletePartition(request, options, callback);
-  }
-  /**
-   * Get a metadata partition of an entity.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the partition:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}`.
-   *   The {partition_value_path} segment consists of an ordered sequence of
-   *   partition values separated by "/". All values must be provided.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Partition]{@link google.cloud.dataplex.v1.Partition}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.get_partition.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_GetPartition_async
-   */
-  getPartition(
-    request?: protos.google.cloud.dataplex.v1.IGetPartitionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.IGetPartitionRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  getPartition(
-    request: protos.google.cloud.dataplex.v1.IGetPartitionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.IGetPartitionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPartition(
-    request: protos.google.cloud.dataplex.v1.IGetPartitionRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.IGetPartitionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPartition(
-    request?: protos.google.cloud.dataplex.v1.IGetPartitionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.dataplex.v1.IPartition,
-          | protos.google.cloud.dataplex.v1.IGetPartitionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.IGetPartitionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IPartition,
-      protos.google.cloud.dataplex.v1.IGetPartitionRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getPartition(request, options, callback);
+    return this.innerApiCalls.getContent(request, options, callback);
   }
 
   /**
-   * List metadata entities in a zone.
+   * List content.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the parent zone:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
-   * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
-   *   Required. Specify the entity view to make a partial list request.
+   *   Required. The resource name of the parent lake:
+   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of entities to return. The service may return fewer than
-   *   this value. If unspecified, 100 entities will be returned by default. The
-   *   maximum value is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of content to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 content will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntities` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListEntities` must match the call that provided the
-   *   page token.
+   *   Optional. Page token received from a previous `ListContent` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListContent` must match the call that provided the page
+   *   token.
    * @param {string} [request.filter]
-   *   Optional. The following filter parameters can be added to the URL to limit the
-   *   entities returned by the API:
+   *   Optional. Filter request. Filters are case-sensitive.
+   *   The following formats are supported:
    *
-   *   - Entity ID: ?filter="id=entityID"
-   *   - Asset ID: ?filter="asset=assetID"
-   *   - Data path ?filter="data_path=gs://my-bucket"
-   *   - Is HIVE compatible: ?filter=”hive_compatible=true”
-   *   - Is BigQuery compatible: ?filter=”bigquery_compatible=true”
+   *   labels.key1 = "value1"
+   *   labels:key1
+   *   type = "NOTEBOOK"
+   *   type = "SQL_SCRIPT"
+   *
+   *   These restrictions can be coinjoined with AND, OR and NOT conjunctions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Entity]{@link google.cloud.dataplex.v1.Entity}.
+   *   The first element of the array is Array of [Content]{@link google.cloud.dataplex.v1.Content}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listEntitiesAsync()`
+   *   We recommend using `listContentAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listEntities(
-    request?: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+  listContent(
+    request?: protos.google.cloud.dataplex.v1.IListContentRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.dataplex.v1.IEntity[],
-      protos.google.cloud.dataplex.v1.IListEntitiesRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse
+      protos.google.cloud.dataplex.v1.IContent[],
+      protos.google.cloud.dataplex.v1.IListContentRequest | null,
+      protos.google.cloud.dataplex.v1.IListContentResponse
     ]
   >;
-  listEntities(
-    request: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+  listContent(
+    request: protos.google.cloud.dataplex.v1.IListContentRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.IEntity
+      protos.google.cloud.dataplex.v1.IListContentRequest,
+      protos.google.cloud.dataplex.v1.IListContentResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IContent
     >
   ): void;
-  listEntities(
-    request: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+  listContent(
+    request: protos.google.cloud.dataplex.v1.IListContentRequest,
     callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.IEntity
+      protos.google.cloud.dataplex.v1.IListContentRequest,
+      protos.google.cloud.dataplex.v1.IListContentResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IContent
     >
   ): void;
-  listEntities(
-    request?: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+  listContent(
+    request?: protos.google.cloud.dataplex.v1.IListContentRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-          | protos.google.cloud.dataplex.v1.IListEntitiesResponse
+          protos.google.cloud.dataplex.v1.IListContentRequest,
+          | protos.google.cloud.dataplex.v1.IListContentResponse
           | null
           | undefined,
-          protos.google.cloud.dataplex.v1.IEntity
+          protos.google.cloud.dataplex.v1.IContent
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntitiesRequest,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.IEntity
+      protos.google.cloud.dataplex.v1.IListContentRequest,
+      protos.google.cloud.dataplex.v1.IListContentResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IContent
     >
   ): Promise<
     [
-      protos.google.cloud.dataplex.v1.IEntity[],
-      protos.google.cloud.dataplex.v1.IListEntitiesRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse
+      protos.google.cloud.dataplex.v1.IContent[],
+      protos.google.cloud.dataplex.v1.IListContentRequest | null,
+      protos.google.cloud.dataplex.v1.IListContentResponse
     ]
   > | void {
     request = request || {};
@@ -1109,7 +816,7 @@ export class MetadataServiceClient {
         parent: request.parent || '',
       });
     this.initialize();
-    return this.innerApiCalls.listEntities(request, options, callback);
+    return this.innerApiCalls.listContent(request, options, callback);
   }
 
   /**
@@ -1117,42 +824,41 @@ export class MetadataServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the parent zone:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
-   * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
-   *   Required. Specify the entity view to make a partial list request.
+   *   Required. The resource name of the parent lake:
+   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of entities to return. The service may return fewer than
-   *   this value. If unspecified, 100 entities will be returned by default. The
-   *   maximum value is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of content to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 content will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntities` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListEntities` must match the call that provided the
-   *   page token.
+   *   Optional. Page token received from a previous `ListContent` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListContent` must match the call that provided the page
+   *   token.
    * @param {string} [request.filter]
-   *   Optional. The following filter parameters can be added to the URL to limit the
-   *   entities returned by the API:
+   *   Optional. Filter request. Filters are case-sensitive.
+   *   The following formats are supported:
    *
-   *   - Entity ID: ?filter="id=entityID"
-   *   - Asset ID: ?filter="asset=assetID"
-   *   - Data path ?filter="data_path=gs://my-bucket"
-   *   - Is HIVE compatible: ?filter=”hive_compatible=true”
-   *   - Is BigQuery compatible: ?filter=”bigquery_compatible=true”
+   *   labels.key1 = "value1"
+   *   labels:key1
+   *   type = "NOTEBOOK"
+   *   type = "SQL_SCRIPT"
+   *
+   *   These restrictions can be coinjoined with AND, OR and NOT conjunctions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Entity]{@link google.cloud.dataplex.v1.Entity} on 'data' event.
+   *   An object stream which emits an object representing [Content]{@link google.cloud.dataplex.v1.Content} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEntitiesAsync()`
+   *   We recommend using `listContentAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listEntitiesStream(
-    request?: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+  listContentStream(
+    request?: protos.google.cloud.dataplex.v1.IListContentRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1163,62 +869,61 @@ export class MetadataServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const defaultCallSettings = this._defaults['listEntities'];
+    const defaultCallSettings = this._defaults['listContent'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listEntities.createStream(
-      this.innerApiCalls.listEntities as gax.GaxCall,
+    return this.descriptors.page.listContent.createStream(
+      this.innerApiCalls.listContent as gax.GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listEntities`, but returns an iterable object.
+   * Equivalent to `listContent`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the parent zone:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
-   * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
-   *   Required. Specify the entity view to make a partial list request.
+   *   Required. The resource name of the parent lake:
+   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of entities to return. The service may return fewer than
-   *   this value. If unspecified, 100 entities will be returned by default. The
-   *   maximum value is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of content to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 content will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntities` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListEntities` must match the call that provided the
-   *   page token.
+   *   Optional. Page token received from a previous `ListContent` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListContent` must match the call that provided the page
+   *   token.
    * @param {string} [request.filter]
-   *   Optional. The following filter parameters can be added to the URL to limit the
-   *   entities returned by the API:
+   *   Optional. Filter request. Filters are case-sensitive.
+   *   The following formats are supported:
    *
-   *   - Entity ID: ?filter="id=entityID"
-   *   - Asset ID: ?filter="asset=assetID"
-   *   - Data path ?filter="data_path=gs://my-bucket"
-   *   - Is HIVE compatible: ?filter=”hive_compatible=true”
-   *   - Is BigQuery compatible: ?filter=”bigquery_compatible=true”
+   *   labels.key1 = "value1"
+   *   labels:key1
+   *   type = "NOTEBOOK"
+   *   type = "SQL_SCRIPT"
+   *
+   *   These restrictions can be coinjoined with AND, OR and NOT conjunctions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Entity]{@link google.cloud.dataplex.v1.Entity}. The API will be called under the hood as needed, once per the page,
+   *   [Content]{@link google.cloud.dataplex.v1.Content}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.list_entities.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_ListEntities_async
+   * @example <caption>include:samples/generated/v1/content_service.list_content.js</caption>
+   * region_tag:dataplex_v1_generated_ContentService_ListContent_async
    */
-  listEntitiesAsync(
-    request?: protos.google.cloud.dataplex.v1.IListEntitiesRequest,
+  listContentAsync(
+    request?: protos.google.cloud.dataplex.v1.IListContentRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataplex.v1.IEntity> {
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.IContent> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1227,281 +932,14 @@ export class MetadataServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const defaultCallSettings = this._defaults['listEntities'];
+    const defaultCallSettings = this._defaults['listContent'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listEntities.asyncIterate(
-      this.innerApiCalls['listEntities'] as GaxCall,
+    return this.descriptors.page.listContent.asyncIterate(
+      this.innerApiCalls['listContent'] as GaxCall,
       request as unknown as RequestType,
       callSettings
-    ) as AsyncIterable<protos.google.cloud.dataplex.v1.IEntity>;
-  }
-  /**
-   * List metadata partitions of an entity.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent entity:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of partitions to return. The service may return fewer than
-   *   this value. If unspecified, 100 partitions will be returned by default. The
-   *   maximum page size is 500; larger values will will be truncated to 500.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListPartitions` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListPartitions` must match the call that provided the
-   *   page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key vslue pair
-   *   expression. The filter expression supports:
-   *
-   *   - logical operators: AND, OR
-   *   - comparison operators: <, >, >=, <= ,=, !=
-   *   - LIKE operators:
-   *       - The right hand of a LIKE operator supports “.” and
-   *         “*” for wildcard searches, for example "value1 LIKE ".*oo.*"
-   *   - parenthetical grouping: ( )
-   *
-   *   Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
-   *
-   *   **Notes:**
-   *
-   *   - Keys to the left of operators are case insensitive.
-   *   - Partition results are sorted first by creation time, then by
-   *     lexicographic order.
-   *   - Up to 20 key value filter pairs are allowed, but due to performance
-   *     considerations, only the first 10 will be used as a filter.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Partition]{@link google.cloud.dataplex.v1.Partition}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPartitionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listPartitions(
-    request?: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IPartition[],
-      protos.google.cloud.dataplex.v1.IListPartitionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListPartitionsResponse
-    ]
-  >;
-  listPartitions(
-    request: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-      | protos.google.cloud.dataplex.v1.IListPartitionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IPartition
-    >
-  ): void;
-  listPartitions(
-    request: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-      | protos.google.cloud.dataplex.v1.IListPartitionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IPartition
-    >
-  ): void;
-  listPartitions(
-    request?: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-          | protos.google.cloud.dataplex.v1.IListPartitionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IPartition
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-      | protos.google.cloud.dataplex.v1.IListPartitionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IPartition
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IPartition[],
-      protos.google.cloud.dataplex.v1.IListPartitionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListPartitionsResponse
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.listPartitions(request, options, callback);
-  }
-
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent entity:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of partitions to return. The service may return fewer than
-   *   this value. If unspecified, 100 partitions will be returned by default. The
-   *   maximum page size is 500; larger values will will be truncated to 500.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListPartitions` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListPartitions` must match the call that provided the
-   *   page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key vslue pair
-   *   expression. The filter expression supports:
-   *
-   *   - logical operators: AND, OR
-   *   - comparison operators: <, >, >=, <= ,=, !=
-   *   - LIKE operators:
-   *       - The right hand of a LIKE operator supports “.” and
-   *         “*” for wildcard searches, for example "value1 LIKE ".*oo.*"
-   *   - parenthetical grouping: ( )
-   *
-   *   Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
-   *
-   *   **Notes:**
-   *
-   *   - Keys to the left of operators are case insensitive.
-   *   - Partition results are sorted first by creation time, then by
-   *     lexicographic order.
-   *   - Up to 20 key value filter pairs are allowed, but due to performance
-   *     considerations, only the first 10 will be used as a filter.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [Partition]{@link google.cloud.dataplex.v1.Partition} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPartitionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listPartitionsStream(
-    request?: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-    options?: CallOptions
-  ): Transform {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
-      });
-    const defaultCallSettings = this._defaults['listPartitions'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    return this.descriptors.page.listPartitions.createStream(
-      this.innerApiCalls.listPartitions as gax.GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-  /**
-   * Equivalent to `listPartitions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent entity:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of partitions to return. The service may return fewer than
-   *   this value. If unspecified, 100 partitions will be returned by default. The
-   *   maximum page size is 500; larger values will will be truncated to 500.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListPartitions` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListPartitions` must match the call that provided the
-   *   page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key vslue pair
-   *   expression. The filter expression supports:
-   *
-   *   - logical operators: AND, OR
-   *   - comparison operators: <, >, >=, <= ,=, !=
-   *   - LIKE operators:
-   *       - The right hand of a LIKE operator supports “.” and
-   *         “*” for wildcard searches, for example "value1 LIKE ".*oo.*"
-   *   - parenthetical grouping: ( )
-   *
-   *   Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
-   *
-   *   **Notes:**
-   *
-   *   - Keys to the left of operators are case insensitive.
-   *   - Partition results are sorted first by creation time, then by
-   *     lexicographic order.
-   *   - Up to 20 key value filter pairs are allowed, but due to performance
-   *     considerations, only the first 10 will be used as a filter.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [Partition]{@link google.cloud.dataplex.v1.Partition}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/metadata_service.list_partitions.js</caption>
-   * region_tag:dataplex_v1_generated_MetadataService_ListPartitions_async
-   */
-  listPartitionsAsync(
-    request?: protos.google.cloud.dataplex.v1.IListPartitionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataplex.v1.IPartition> {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
-      });
-    const defaultCallSettings = this._defaults['listPartitions'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    return this.descriptors.page.listPartitions.asyncIterate(
-      this.innerApiCalls['listPartitions'] as GaxCall,
-      request as unknown as RequestType,
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.dataplex.v1.IPartition>;
+    ) as AsyncIterable<protos.google.cloud.dataplex.v1.IContent>;
   }
   // --------------------
   // -- Path templates --
@@ -2555,7 +1993,7 @@ export class MetadataServiceClient {
   close(): Promise<void> {
     this.initialize();
     if (!this._terminated) {
-      return this.metadataServiceStub!.then(stub => {
+      return this.contentServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

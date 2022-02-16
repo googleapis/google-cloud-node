@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as metadataserviceModule from '../src';
+import * as contentserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -112,49 +112,49 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.MetadataServiceClient', () => {
+describe('v1.ContentServiceClient', () => {
   it('has servicePath', () => {
     const servicePath =
-      metadataserviceModule.v1.MetadataServiceClient.servicePath;
+      contentserviceModule.v1.ContentServiceClient.servicePath;
     assert(servicePath);
   });
 
   it('has apiEndpoint', () => {
     const apiEndpoint =
-      metadataserviceModule.v1.MetadataServiceClient.apiEndpoint;
+      contentserviceModule.v1.ContentServiceClient.apiEndpoint;
     assert(apiEndpoint);
   });
 
   it('has port', () => {
-    const port = metadataserviceModule.v1.MetadataServiceClient.port;
+    const port = contentserviceModule.v1.ContentServiceClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
 
   it('should create a client with no option', () => {
-    const client = new metadataserviceModule.v1.MetadataServiceClient();
+    const client = new contentserviceModule.v1.ContentServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new metadataserviceModule.v1.MetadataServiceClient({
+    const client = new contentserviceModule.v1.ContentServiceClient({
       fallback: true,
     });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new metadataserviceModule.v1.MetadataServiceClient({
+    const client = new contentserviceModule.v1.ContentServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    assert.strictEqual(client.metadataServiceStub, undefined);
+    assert.strictEqual(client.contentServiceStub, undefined);
     await client.initialize();
-    assert(client.metadataServiceStub);
+    assert(client.contentServiceStub);
   });
 
   it('has close method', () => {
-    const client = new metadataserviceModule.v1.MetadataServiceClient({
+    const client = new contentserviceModule.v1.ContentServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -163,7 +163,7 @@ describe('v1.MetadataServiceClient', () => {
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new metadataserviceModule.v1.MetadataServiceClient({
+    const client = new contentserviceModule.v1.ContentServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -175,7 +175,7 @@ describe('v1.MetadataServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new metadataserviceModule.v1.MetadataServiceClient({
+    const client = new contentserviceModule.v1.ContentServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -195,15 +195,15 @@ describe('v1.MetadataServiceClient', () => {
     assert.strictEqual(result, fakeProjectId);
   });
 
-  describe('createEntity', () => {
-    it('invokes createEntity without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+  describe('createContent', () => {
+    it('invokes createContent without error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateEntityRequest()
+        new protos.google.cloud.dataplex.v1.CreateContentRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -215,26 +215,26 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Entity()
+        new protos.google.cloud.dataplex.v1.Content()
       );
-      client.innerApiCalls.createEntity = stubSimpleCall(expectedResponse);
-      const [response] = await client.createEntity(request);
+      client.innerApiCalls.createContent = stubSimpleCall(expectedResponse);
+      const [response] = await client.createContent(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.createEntity as SinonStub)
+        (client.innerApiCalls.createContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes createEntity without error using callback', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('invokes createContent without error using callback', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateEntityRequest()
+        new protos.google.cloud.dataplex.v1.CreateContentRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -246,16 +246,16 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Entity()
+        new protos.google.cloud.dataplex.v1.Content()
       );
-      client.innerApiCalls.createEntity =
+      client.innerApiCalls.createContent =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createEntity(
+        client.createContent(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IEntity | null
+            result?: protos.google.cloud.dataplex.v1.IContent | null
           ) => {
             if (err) {
               reject(err);
@@ -268,20 +268,20 @@ describe('v1.MetadataServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.createEntity as SinonStub)
+        (client.innerApiCalls.createContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes createEntity with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('invokes createContent with error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreateEntityRequest()
+        new protos.google.cloud.dataplex.v1.CreateContentRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -293,32 +293,32 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.createEntity = stubSimpleCall(
+      client.innerApiCalls.createContent = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.createEntity(request), expectedError);
+      await assert.rejects(client.createContent(request), expectedError);
       assert(
-        (client.innerApiCalls.createEntity as SinonStub)
+        (client.innerApiCalls.createContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
   });
 
-  describe('updateEntity', () => {
-    it('invokes updateEntity without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+  describe('updateContent', () => {
+    it('invokes updateContent without error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateEntityRequest()
+        new protos.google.cloud.dataplex.v1.UpdateContentRequest()
       );
-      request.entity = {};
-      request.entity.name = '';
-      const expectedHeaderRequestParams = 'entity.name=';
+      request.content = {};
+      request.content.name = '';
+      const expectedHeaderRequestParams = 'content.name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -327,30 +327,30 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Entity()
+        new protos.google.cloud.dataplex.v1.Content()
       );
-      client.innerApiCalls.updateEntity = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateEntity(request);
+      client.innerApiCalls.updateContent = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateContent(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.updateEntity as SinonStub)
+        (client.innerApiCalls.updateContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes updateEntity without error using callback', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('invokes updateContent without error using callback', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateEntityRequest()
+        new protos.google.cloud.dataplex.v1.UpdateContentRequest()
       );
-      request.entity = {};
-      request.entity.name = '';
-      const expectedHeaderRequestParams = 'entity.name=';
+      request.content = {};
+      request.content.name = '';
+      const expectedHeaderRequestParams = 'content.name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -359,16 +359,16 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Entity()
+        new protos.google.cloud.dataplex.v1.Content()
       );
-      client.innerApiCalls.updateEntity =
+      client.innerApiCalls.updateContent =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.updateEntity(
+        client.updateContent(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IEntity | null
+            result?: protos.google.cloud.dataplex.v1.IContent | null
           ) => {
             if (err) {
               reject(err);
@@ -381,24 +381,24 @@ describe('v1.MetadataServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.updateEntity as SinonStub)
+        (client.innerApiCalls.updateContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes updateEntity with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('invokes updateContent with error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.UpdateEntityRequest()
+        new protos.google.cloud.dataplex.v1.UpdateContentRequest()
       );
-      request.entity = {};
-      request.entity.name = '';
-      const expectedHeaderRequestParams = 'entity.name=';
+      request.content = {};
+      request.content.name = '';
+      const expectedHeaderRequestParams = 'content.name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -407,28 +407,28 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateEntity = stubSimpleCall(
+      client.innerApiCalls.updateContent = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.updateEntity(request), expectedError);
+      await assert.rejects(client.updateContent(request), expectedError);
       assert(
-        (client.innerApiCalls.updateEntity as SinonStub)
+        (client.innerApiCalls.updateContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
   });
 
-  describe('deleteEntity', () => {
-    it('invokes deleteEntity without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+  describe('deleteContent', () => {
+    it('invokes deleteContent without error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteEntityRequest()
+        new protos.google.cloud.dataplex.v1.DeleteContentRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -442,24 +442,24 @@ describe('v1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteEntity = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteEntity(request);
+      client.innerApiCalls.deleteContent = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteContent(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.deleteEntity as SinonStub)
+        (client.innerApiCalls.deleteContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes deleteEntity without error using callback', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('invokes deleteContent without error using callback', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteEntityRequest()
+        new protos.google.cloud.dataplex.v1.DeleteContentRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -473,10 +473,10 @@ describe('v1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteEntity =
+      client.innerApiCalls.deleteContent =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteEntity(
+        client.deleteContent(
           request,
           (
             err?: Error | null,
@@ -493,20 +493,20 @@ describe('v1.MetadataServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.deleteEntity as SinonStub)
+        (client.innerApiCalls.deleteContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes deleteEntity with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('invokes deleteContent with error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeleteEntityRequest()
+        new protos.google.cloud.dataplex.v1.DeleteContentRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -518,28 +518,28 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteEntity = stubSimpleCall(
+      client.innerApiCalls.deleteContent = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.deleteEntity(request), expectedError);
+      await assert.rejects(client.deleteContent(request), expectedError);
       assert(
-        (client.innerApiCalls.deleteEntity as SinonStub)
+        (client.innerApiCalls.deleteContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
   });
 
-  describe('getEntity', () => {
-    it('invokes getEntity without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+  describe('getContent', () => {
+    it('invokes getContent without error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetEntityRequest()
+        new protos.google.cloud.dataplex.v1.GetContentRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -551,26 +551,26 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Entity()
+        new protos.google.cloud.dataplex.v1.Content()
       );
-      client.innerApiCalls.getEntity = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEntity(request);
+      client.innerApiCalls.getContent = stubSimpleCall(expectedResponse);
+      const [response] = await client.getContent(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getEntity as SinonStub)
+        (client.innerApiCalls.getContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes getEntity without error using callback', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('invokes getContent without error using callback', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetEntityRequest()
+        new protos.google.cloud.dataplex.v1.GetContentRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -582,16 +582,16 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Entity()
+        new protos.google.cloud.dataplex.v1.Content()
       );
-      client.innerApiCalls.getEntity =
+      client.innerApiCalls.getContent =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getEntity(
+        client.getContent(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IEntity | null
+            result?: protos.google.cloud.dataplex.v1.IContent | null
           ) => {
             if (err) {
               reject(err);
@@ -604,20 +604,20 @@ describe('v1.MetadataServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getEntity as SinonStub)
+        (client.innerApiCalls.getContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes getEntity with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('invokes getContent with error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetEntityRequest()
+        new protos.google.cloud.dataplex.v1.GetContentRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -629,358 +629,28 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.getEntity = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getEntity(request), expectedError);
-      assert(
-        (client.innerApiCalls.getEntity as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('createPartition', () => {
-    it('invokes createPartition without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreatePartitionRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Partition()
-      );
-      client.innerApiCalls.createPartition = stubSimpleCall(expectedResponse);
-      const [response] = await client.createPartition(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createPartition as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes createPartition without error using callback', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreatePartitionRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Partition()
-      );
-      client.innerApiCalls.createPartition =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createPartition(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IPartition | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createPartition as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes createPartition with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.CreatePartitionRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createPartition = stubSimpleCall(
+      client.innerApiCalls.getContent = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.createPartition(request), expectedError);
+      await assert.rejects(client.getContent(request), expectedError);
       assert(
-        (client.innerApiCalls.createPartition as SinonStub)
+        (client.innerApiCalls.getContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
   });
 
-  describe('deletePartition', () => {
-    it('invokes deletePartition without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+  describe('listContent', () => {
+    it('invokes listContent without error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeletePartitionRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePartition = stubSimpleCall(expectedResponse);
-      const [response] = await client.deletePartition(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePartition as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes deletePartition without error using callback', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeletePartitionRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePartition =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deletePartition(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePartition as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes deletePartition with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.DeletePartitionRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePartition = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deletePartition(request), expectedError);
-      assert(
-        (client.innerApiCalls.deletePartition as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('getPartition', () => {
-    it('invokes getPartition without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetPartitionRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Partition()
-      );
-      client.innerApiCalls.getPartition = stubSimpleCall(expectedResponse);
-      const [response] = await client.getPartition(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPartition as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes getPartition without error using callback', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetPartitionRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.Partition()
-      );
-      client.innerApiCalls.getPartition =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPartition(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IPartition | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPartition as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes getPartition with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.GetPartitionRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPartition = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getPartition(request), expectedError);
-      assert(
-        (client.innerApiCalls.getPartition as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('listEntities', () => {
-    it('invokes listEntities without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEntitiesRequest()
+        new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -992,28 +662,28 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
+        generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
+        generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
+        generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
       ];
-      client.innerApiCalls.listEntities = stubSimpleCall(expectedResponse);
-      const [response] = await client.listEntities(request);
+      client.innerApiCalls.listContent = stubSimpleCall(expectedResponse);
+      const [response] = await client.listContent(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listEntities as SinonStub)
+        (client.innerApiCalls.listContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes listEntities without error using callback', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('invokes listContent without error using callback', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEntitiesRequest()
+        new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1025,18 +695,18 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
+        generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
+        generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
+        generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
       ];
-      client.innerApiCalls.listEntities =
+      client.innerApiCalls.listContent =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listEntities(
+        client.listContent(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IEntity[] | null
+            result?: protos.google.cloud.dataplex.v1.IContent[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1049,20 +719,20 @@ describe('v1.MetadataServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listEntities as SinonStub)
+        (client.innerApiCalls.listContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes listEntities with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('invokes listContent with error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEntitiesRequest()
+        new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1074,42 +744,42 @@ describe('v1.MetadataServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.listEntities = stubSimpleCall(
+      client.innerApiCalls.listContent = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.listEntities(request), expectedError);
+      await assert.rejects(client.listContent(request), expectedError);
       assert(
-        (client.innerApiCalls.listEntities as SinonStub)
+        (client.innerApiCalls.listContent as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes listEntitiesStream without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('invokes listContentStream without error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEntitiesRequest()
+        new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
+        generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
+        generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
+        generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
       ];
-      client.descriptors.page.listEntities.createStream =
+      client.descriptors.page.listContent.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listEntitiesStream(request);
+      const stream = client.listContentStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Entity[] = [];
+        const responses: protos.google.cloud.dataplex.v1.Content[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.dataplex.v1.Entity) => {
+          (response: protos.google.cloud.dataplex.v1.Content) => {
             responses.push(response);
           }
         );
@@ -1123,40 +793,40 @@ describe('v1.MetadataServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listEntities.createStream as SinonStub)
+        (client.descriptors.page.listContent.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listEntities, request)
+          .calledWith(client.innerApiCalls.listContent, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listEntities.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listContent.createStream as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('invokes listEntitiesStream with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('invokes listContentStream with error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEntitiesRequest()
+        new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEntities.createStream = stubPageStreamingCall(
+      client.descriptors.page.listContent.createStream = stubPageStreamingCall(
         undefined,
         expectedError
       );
-      const stream = client.listEntitiesStream(request);
+      const stream = client.listContentStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Entity[] = [];
+        const responses: protos.google.cloud.dataplex.v1.Content[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.dataplex.v1.Entity) => {
+          (response: protos.google.cloud.dataplex.v1.Content) => {
             responses.push(response);
           }
         );
@@ -1169,368 +839,89 @@ describe('v1.MetadataServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listEntities.createStream as SinonStub)
+        (client.descriptors.page.listContent.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listEntities, request)
+          .calledWith(client.innerApiCalls.listContent, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listEntities.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listContent.createStream as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('uses async iteration with listEntities without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('uses async iteration with listContent without error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEntitiesRequest()
+        new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
+        generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
+        generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
+        generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
       ];
-      client.descriptors.page.listEntities.asyncIterate =
+      client.descriptors.page.listContent.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataplex.v1.IEntity[] = [];
-      const iterable = client.listEntitiesAsync(request);
+      const responses: protos.google.cloud.dataplex.v1.IContent[] = [];
+      const iterable = client.listContentAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEntities.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listContent.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listEntities.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listContent.asyncIterate as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('uses async iteration with listEntities with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+    it('uses async iteration with listContent with error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListEntitiesRequest()
+        new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEntities.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listEntitiesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataplex.v1.IEntity[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEntities.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listEntities.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-  });
-
-  describe('listPartitions', () => {
-    it('invokes listPartitions without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListPartitionsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
-      ];
-      client.innerApiCalls.listPartitions = stubSimpleCall(expectedResponse);
-      const [response] = await client.listPartitions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPartitions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes listPartitions without error using callback', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListPartitionsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
-      ];
-      client.innerApiCalls.listPartitions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listPartitions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataplex.v1.IPartition[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPartitions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes listPartitions with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListPartitionsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listPartitions = stubSimpleCall(
+      client.descriptors.page.listContent.asyncIterate = stubAsyncIterationCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.listPartitions(request), expectedError);
-      assert(
-        (client.innerApiCalls.listPartitions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes listPartitionsStream without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListPartitionsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
-      ];
-      client.descriptors.page.listPartitions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listPartitionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Partition[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataplex.v1.Partition) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listPartitions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPartitions, request)
-      );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPartitions.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-
-    it('invokes listPartitionsStream with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListPartitionsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPartitions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listPartitionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataplex.v1.Partition[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataplex.v1.Partition) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listPartitions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPartitions, request)
-      );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPartitions.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-
-    it('uses async iteration with listPartitions without error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListPartitionsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
-        generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
-      ];
-      client.descriptors.page.listPartitions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataplex.v1.IPartition[] = [];
-      const iterable = client.listPartitionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPartitions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPartitions.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-
-    it('uses async iteration with listPartitions with error', async () => {
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataplex.v1.ListPartitionsRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPartitions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listPartitionsAsync(request);
+      const iterable = client.listContentAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataplex.v1.IPartition[] = [];
+        const responses: protos.google.cloud.dataplex.v1.IContent[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPartitions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listContent.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listPartitions.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listContent.asyncIterate as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1546,7 +937,7 @@ describe('v1.MetadataServiceClient', () => {
         zone: 'zoneValue',
         asset: 'assetValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1633,7 +1024,7 @@ describe('v1.MetadataServiceClient', () => {
         lake: 'lakeValue',
         content: 'contentValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1710,7 +1101,7 @@ describe('v1.MetadataServiceClient', () => {
         zone: 'zoneValue',
         entity: 'entityValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1797,7 +1188,7 @@ describe('v1.MetadataServiceClient', () => {
         lake: 'lakeValue',
         environment: 'environmentValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1874,7 +1265,7 @@ describe('v1.MetadataServiceClient', () => {
         task: 'taskValue',
         job: 'jobValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1960,7 +1351,7 @@ describe('v1.MetadataServiceClient', () => {
         location: 'locationValue',
         lake: 'lakeValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2027,7 +1418,7 @@ describe('v1.MetadataServiceClient', () => {
         entity: 'entityValue',
         partition: 'partitionValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2125,7 +1516,7 @@ describe('v1.MetadataServiceClient', () => {
         lake: 'lakeValue',
         action: 'actionValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2221,7 +1612,7 @@ describe('v1.MetadataServiceClient', () => {
         zone: 'zoneValue',
         action: 'actionValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2331,7 +1722,7 @@ describe('v1.MetadataServiceClient', () => {
         asset: 'assetValue',
         action: 'actionValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2461,7 +1852,7 @@ describe('v1.MetadataServiceClient', () => {
         environment: 'environmentValue',
         session: 'sessionValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2548,7 +1939,7 @@ describe('v1.MetadataServiceClient', () => {
         lake: 'lakeValue',
         task: 'taskValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2624,7 +2015,7 @@ describe('v1.MetadataServiceClient', () => {
         lake: 'lakeValue',
         zone: 'zoneValue',
       };
-      const client = new metadataserviceModule.v1.MetadataServiceClient({
+      const client = new contentserviceModule.v1.ContentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });

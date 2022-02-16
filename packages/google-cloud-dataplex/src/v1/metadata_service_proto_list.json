@@ -1,4 +1,6 @@
 [
+  "../../protos/google/cloud/dataplex/v1/analyze.proto",
+  "../../protos/google/cloud/dataplex/v1/content.proto",
   "../../protos/google/cloud/dataplex/v1/logs.proto",
   "../../protos/google/cloud/dataplex/v1/metadata.proto",
   "../../protos/google/cloud/dataplex/v1/resources.proto",

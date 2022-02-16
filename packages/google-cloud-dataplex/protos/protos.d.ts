@@ -26,2898 +26,1219 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
-                /** Properties of a DiscoveryEvent. */
-                interface IDiscoveryEvent {
+                /** Properties of an Environment. */
+                interface IEnvironment {
 
-                    /** DiscoveryEvent message */
-                    message?: (string|null);
-
-                    /** DiscoveryEvent lakeId */
-                    lakeId?: (string|null);
-
-                    /** DiscoveryEvent zoneId */
-                    zoneId?: (string|null);
-
-                    /** DiscoveryEvent assetId */
-                    assetId?: (string|null);
-
-                    /** DiscoveryEvent dataLocation */
-                    dataLocation?: (string|null);
-
-                    /** DiscoveryEvent type */
-                    type?: (google.cloud.dataplex.v1.DiscoveryEvent.EventType|keyof typeof google.cloud.dataplex.v1.DiscoveryEvent.EventType|null);
-
-                    /** DiscoveryEvent config */
-                    config?: (google.cloud.dataplex.v1.DiscoveryEvent.IConfigDetails|null);
-
-                    /** DiscoveryEvent entity */
-                    entity?: (google.cloud.dataplex.v1.DiscoveryEvent.IEntityDetails|null);
-
-                    /** DiscoveryEvent partition */
-                    partition?: (google.cloud.dataplex.v1.DiscoveryEvent.IPartitionDetails|null);
-
-                    /** DiscoveryEvent action */
-                    action?: (google.cloud.dataplex.v1.DiscoveryEvent.IActionDetails|null);
-                }
-
-                /** Represents a DiscoveryEvent. */
-                class DiscoveryEvent implements IDiscoveryEvent {
-
-                    /**
-                     * Constructs a new DiscoveryEvent.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataplex.v1.IDiscoveryEvent);
-
-                    /** DiscoveryEvent message. */
-                    public message: string;
-
-                    /** DiscoveryEvent lakeId. */
-                    public lakeId: string;
-
-                    /** DiscoveryEvent zoneId. */
-                    public zoneId: string;
-
-                    /** DiscoveryEvent assetId. */
-                    public assetId: string;
-
-                    /** DiscoveryEvent dataLocation. */
-                    public dataLocation: string;
-
-                    /** DiscoveryEvent type. */
-                    public type: (google.cloud.dataplex.v1.DiscoveryEvent.EventType|keyof typeof google.cloud.dataplex.v1.DiscoveryEvent.EventType);
-
-                    /** DiscoveryEvent config. */
-                    public config?: (google.cloud.dataplex.v1.DiscoveryEvent.IConfigDetails|null);
-
-                    /** DiscoveryEvent entity. */
-                    public entity?: (google.cloud.dataplex.v1.DiscoveryEvent.IEntityDetails|null);
-
-                    /** DiscoveryEvent partition. */
-                    public partition?: (google.cloud.dataplex.v1.DiscoveryEvent.IPartitionDetails|null);
-
-                    /** DiscoveryEvent action. */
-                    public action?: (google.cloud.dataplex.v1.DiscoveryEvent.IActionDetails|null);
-
-                    /** DiscoveryEvent details. */
-                    public details?: ("config"|"entity"|"partition"|"action");
-
-                    /**
-                     * Creates a new DiscoveryEvent instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DiscoveryEvent instance
-                     */
-                    public static create(properties?: google.cloud.dataplex.v1.IDiscoveryEvent): google.cloud.dataplex.v1.DiscoveryEvent;
-
-                    /**
-                     * Encodes the specified DiscoveryEvent message. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.verify|verify} messages.
-                     * @param message DiscoveryEvent message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataplex.v1.IDiscoveryEvent, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DiscoveryEvent message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.verify|verify} messages.
-                     * @param message DiscoveryEvent message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDiscoveryEvent, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DiscoveryEvent message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DiscoveryEvent
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DiscoveryEvent;
-
-                    /**
-                     * Decodes a DiscoveryEvent message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DiscoveryEvent
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DiscoveryEvent;
-
-                    /**
-                     * Verifies a DiscoveryEvent message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DiscoveryEvent message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DiscoveryEvent
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DiscoveryEvent;
-
-                    /**
-                     * Creates a plain object from a DiscoveryEvent message. Also converts values to other types if specified.
-                     * @param message DiscoveryEvent
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataplex.v1.DiscoveryEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DiscoveryEvent to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace DiscoveryEvent {
-
-                    /** EventType enum. */
-                    enum EventType {
-                        EVENT_TYPE_UNSPECIFIED = 0,
-                        CONFIG = 1,
-                        ENTITY_CREATED = 2,
-                        ENTITY_UPDATED = 3,
-                        ENTITY_DELETED = 4,
-                        PARTITION_CREATED = 5,
-                        PARTITION_UPDATED = 6,
-                        PARTITION_DELETED = 7
-                    }
-
-                    /** EntityType enum. */
-                    enum EntityType {
-                        ENTITY_TYPE_UNSPECIFIED = 0,
-                        TABLE = 1,
-                        FILESET = 2
-                    }
-
-                    /** Properties of a ConfigDetails. */
-                    interface IConfigDetails {
-
-                        /** ConfigDetails parameters */
-                        parameters?: ({ [k: string]: string }|null);
-                    }
-
-                    /** Represents a ConfigDetails. */
-                    class ConfigDetails implements IConfigDetails {
-
-                        /**
-                         * Constructs a new ConfigDetails.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IConfigDetails);
-
-                        /** ConfigDetails parameters. */
-                        public parameters: { [k: string]: string };
-
-                        /**
-                         * Creates a new ConfigDetails instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ConfigDetails instance
-                         */
-                        public static create(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IConfigDetails): google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails;
-
-                        /**
-                         * Encodes the specified ConfigDetails message. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails.verify|verify} messages.
-                         * @param message ConfigDetails message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dataplex.v1.DiscoveryEvent.IConfigDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ConfigDetails message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails.verify|verify} messages.
-                         * @param message ConfigDetails message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dataplex.v1.DiscoveryEvent.IConfigDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ConfigDetails message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ConfigDetails
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails;
-
-                        /**
-                         * Decodes a ConfigDetails message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ConfigDetails
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails;
-
-                        /**
-                         * Verifies a ConfigDetails message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ConfigDetails message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ConfigDetails
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails;
-
-                        /**
-                         * Creates a plain object from a ConfigDetails message. Also converts values to other types if specified.
-                         * @param message ConfigDetails
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ConfigDetails to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of an EntityDetails. */
-                    interface IEntityDetails {
-
-                        /** EntityDetails entity */
-                        entity?: (string|null);
-
-                        /** EntityDetails type */
-                        type?: (google.cloud.dataplex.v1.DiscoveryEvent.EntityType|keyof typeof google.cloud.dataplex.v1.DiscoveryEvent.EntityType|null);
-                    }
-
-                    /** Represents an EntityDetails. */
-                    class EntityDetails implements IEntityDetails {
-
-                        /**
-                         * Constructs a new EntityDetails.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IEntityDetails);
-
-                        /** EntityDetails entity. */
-                        public entity: string;
-
-                        /** EntityDetails type. */
-                        public type: (google.cloud.dataplex.v1.DiscoveryEvent.EntityType|keyof typeof google.cloud.dataplex.v1.DiscoveryEvent.EntityType);
-
-                        /**
-                         * Creates a new EntityDetails instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns EntityDetails instance
-                         */
-                        public static create(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IEntityDetails): google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails;
-
-                        /**
-                         * Encodes the specified EntityDetails message. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails.verify|verify} messages.
-                         * @param message EntityDetails message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dataplex.v1.DiscoveryEvent.IEntityDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified EntityDetails message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails.verify|verify} messages.
-                         * @param message EntityDetails message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dataplex.v1.DiscoveryEvent.IEntityDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an EntityDetails message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns EntityDetails
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails;
-
-                        /**
-                         * Decodes an EntityDetails message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns EntityDetails
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails;
-
-                        /**
-                         * Verifies an EntityDetails message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an EntityDetails message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns EntityDetails
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails;
-
-                        /**
-                         * Creates a plain object from an EntityDetails message. Also converts values to other types if specified.
-                         * @param message EntityDetails
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this EntityDetails to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a PartitionDetails. */
-                    interface IPartitionDetails {
-
-                        /** PartitionDetails partition */
-                        partition?: (string|null);
-
-                        /** PartitionDetails entity */
-                        entity?: (string|null);
-
-                        /** PartitionDetails type */
-                        type?: (google.cloud.dataplex.v1.DiscoveryEvent.EntityType|keyof typeof google.cloud.dataplex.v1.DiscoveryEvent.EntityType|null);
-                    }
-
-                    /** Represents a PartitionDetails. */
-                    class PartitionDetails implements IPartitionDetails {
-
-                        /**
-                         * Constructs a new PartitionDetails.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IPartitionDetails);
-
-                        /** PartitionDetails partition. */
-                        public partition: string;
-
-                        /** PartitionDetails entity. */
-                        public entity: string;
-
-                        /** PartitionDetails type. */
-                        public type: (google.cloud.dataplex.v1.DiscoveryEvent.EntityType|keyof typeof google.cloud.dataplex.v1.DiscoveryEvent.EntityType);
-
-                        /**
-                         * Creates a new PartitionDetails instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns PartitionDetails instance
-                         */
-                        public static create(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IPartitionDetails): google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails;
-
-                        /**
-                         * Encodes the specified PartitionDetails message. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails.verify|verify} messages.
-                         * @param message PartitionDetails message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dataplex.v1.DiscoveryEvent.IPartitionDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified PartitionDetails message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails.verify|verify} messages.
-                         * @param message PartitionDetails message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dataplex.v1.DiscoveryEvent.IPartitionDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a PartitionDetails message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns PartitionDetails
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails;
-
-                        /**
-                         * Decodes a PartitionDetails message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns PartitionDetails
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails;
-
-                        /**
-                         * Verifies a PartitionDetails message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a PartitionDetails message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns PartitionDetails
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails;
-
-                        /**
-                         * Creates a plain object from a PartitionDetails message. Also converts values to other types if specified.
-                         * @param message PartitionDetails
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this PartitionDetails to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of an ActionDetails. */
-                    interface IActionDetails {
-
-                        /** ActionDetails type */
-                        type?: (string|null);
-                    }
-
-                    /** Represents an ActionDetails. */
-                    class ActionDetails implements IActionDetails {
-
-                        /**
-                         * Constructs a new ActionDetails.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IActionDetails);
-
-                        /** ActionDetails type. */
-                        public type: string;
-
-                        /**
-                         * Creates a new ActionDetails instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ActionDetails instance
-                         */
-                        public static create(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IActionDetails): google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails;
-
-                        /**
-                         * Encodes the specified ActionDetails message. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails.verify|verify} messages.
-                         * @param message ActionDetails message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dataplex.v1.DiscoveryEvent.IActionDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ActionDetails message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails.verify|verify} messages.
-                         * @param message ActionDetails message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dataplex.v1.DiscoveryEvent.IActionDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an ActionDetails message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ActionDetails
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails;
-
-                        /**
-                         * Decodes an ActionDetails message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ActionDetails
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails;
-
-                        /**
-                         * Verifies an ActionDetails message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an ActionDetails message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ActionDetails
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails;
-
-                        /**
-                         * Creates a plain object from an ActionDetails message. Also converts values to other types if specified.
-                         * @param message ActionDetails
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ActionDetails to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-                }
-
-                /** Properties of a JobEvent. */
-                interface IJobEvent {
-
-                    /** JobEvent message */
-                    message?: (string|null);
-
-                    /** JobEvent jobId */
-                    jobId?: (string|null);
-
-                    /** JobEvent startTime */
-                    startTime?: (google.protobuf.ITimestamp|null);
-
-                    /** JobEvent endTime */
-                    endTime?: (google.protobuf.ITimestamp|null);
-
-                    /** JobEvent state */
-                    state?: (google.cloud.dataplex.v1.JobEvent.State|keyof typeof google.cloud.dataplex.v1.JobEvent.State|null);
-
-                    /** JobEvent retries */
-                    retries?: (number|null);
-
-                    /** JobEvent type */
-                    type?: (google.cloud.dataplex.v1.JobEvent.Type|keyof typeof google.cloud.dataplex.v1.JobEvent.Type|null);
-
-                    /** JobEvent service */
-                    service?: (google.cloud.dataplex.v1.JobEvent.Service|keyof typeof google.cloud.dataplex.v1.JobEvent.Service|null);
-
-                    /** JobEvent serviceJob */
-                    serviceJob?: (string|null);
-                }
-
-                /** Represents a JobEvent. */
-                class JobEvent implements IJobEvent {
-
-                    /**
-                     * Constructs a new JobEvent.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataplex.v1.IJobEvent);
-
-                    /** JobEvent message. */
-                    public message: string;
-
-                    /** JobEvent jobId. */
-                    public jobId: string;
-
-                    /** JobEvent startTime. */
-                    public startTime?: (google.protobuf.ITimestamp|null);
-
-                    /** JobEvent endTime. */
-                    public endTime?: (google.protobuf.ITimestamp|null);
-
-                    /** JobEvent state. */
-                    public state: (google.cloud.dataplex.v1.JobEvent.State|keyof typeof google.cloud.dataplex.v1.JobEvent.State);
-
-                    /** JobEvent retries. */
-                    public retries: number;
-
-                    /** JobEvent type. */
-                    public type: (google.cloud.dataplex.v1.JobEvent.Type|keyof typeof google.cloud.dataplex.v1.JobEvent.Type);
-
-                    /** JobEvent service. */
-                    public service: (google.cloud.dataplex.v1.JobEvent.Service|keyof typeof google.cloud.dataplex.v1.JobEvent.Service);
-
-                    /** JobEvent serviceJob. */
-                    public serviceJob: string;
-
-                    /**
-                     * Creates a new JobEvent instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns JobEvent instance
-                     */
-                    public static create(properties?: google.cloud.dataplex.v1.IJobEvent): google.cloud.dataplex.v1.JobEvent;
-
-                    /**
-                     * Encodes the specified JobEvent message. Does not implicitly {@link google.cloud.dataplex.v1.JobEvent.verify|verify} messages.
-                     * @param message JobEvent message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataplex.v1.IJobEvent, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified JobEvent message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.JobEvent.verify|verify} messages.
-                     * @param message JobEvent message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.IJobEvent, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a JobEvent message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns JobEvent
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.JobEvent;
-
-                    /**
-                     * Decodes a JobEvent message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns JobEvent
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.JobEvent;
-
-                    /**
-                     * Verifies a JobEvent message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a JobEvent message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns JobEvent
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.JobEvent;
-
-                    /**
-                     * Creates a plain object from a JobEvent message. Also converts values to other types if specified.
-                     * @param message JobEvent
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataplex.v1.JobEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this JobEvent to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace JobEvent {
-
-                    /** Type enum. */
-                    enum Type {
-                        TYPE_UNSPECIFIED = 0,
-                        SPARK = 1,
-                        NOTEBOOK = 2
-                    }
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        SUCCEEDED = 1,
-                        FAILED = 2,
-                        CANCELLED = 3,
-                        ABORTED = 4
-                    }
-
-                    /** Service enum. */
-                    enum Service {
-                        SERVICE_UNSPECIFIED = 0,
-                        DATAPROC = 1
-                    }
-                }
-
-                /** Properties of a SessionEvent. */
-                interface ISessionEvent {
-
-                    /** SessionEvent message */
-                    message?: (string|null);
-
-                    /** SessionEvent userId */
-                    userId?: (string|null);
-
-                    /** SessionEvent sessionId */
-                    sessionId?: (string|null);
-
-                    /** SessionEvent type */
-                    type?: (google.cloud.dataplex.v1.SessionEvent.EventType|keyof typeof google.cloud.dataplex.v1.SessionEvent.EventType|null);
-
-                    /** SessionEvent query */
-                    query?: (google.cloud.dataplex.v1.SessionEvent.IQueryDetail|null);
-                }
-
-                /** Represents a SessionEvent. */
-                class SessionEvent implements ISessionEvent {
-
-                    /**
-                     * Constructs a new SessionEvent.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataplex.v1.ISessionEvent);
-
-                    /** SessionEvent message. */
-                    public message: string;
-
-                    /** SessionEvent userId. */
-                    public userId: string;
-
-                    /** SessionEvent sessionId. */
-                    public sessionId: string;
-
-                    /** SessionEvent type. */
-                    public type: (google.cloud.dataplex.v1.SessionEvent.EventType|keyof typeof google.cloud.dataplex.v1.SessionEvent.EventType);
-
-                    /** SessionEvent query. */
-                    public query?: (google.cloud.dataplex.v1.SessionEvent.IQueryDetail|null);
-
-                    /** SessionEvent detail. */
-                    public detail?: "query";
-
-                    /**
-                     * Creates a new SessionEvent instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SessionEvent instance
-                     */
-                    public static create(properties?: google.cloud.dataplex.v1.ISessionEvent): google.cloud.dataplex.v1.SessionEvent;
-
-                    /**
-                     * Encodes the specified SessionEvent message. Does not implicitly {@link google.cloud.dataplex.v1.SessionEvent.verify|verify} messages.
-                     * @param message SessionEvent message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataplex.v1.ISessionEvent, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SessionEvent message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.SessionEvent.verify|verify} messages.
-                     * @param message SessionEvent message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.ISessionEvent, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SessionEvent message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SessionEvent
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.SessionEvent;
-
-                    /**
-                     * Decodes a SessionEvent message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SessionEvent
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.SessionEvent;
-
-                    /**
-                     * Verifies a SessionEvent message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SessionEvent message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SessionEvent
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.SessionEvent;
-
-                    /**
-                     * Creates a plain object from a SessionEvent message. Also converts values to other types if specified.
-                     * @param message SessionEvent
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataplex.v1.SessionEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SessionEvent to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace SessionEvent {
-
-                    /** EventType enum. */
-                    enum EventType {
-                        EVENT_TYPE_UNSPECIFIED = 0,
-                        START = 1,
-                        STOP = 2,
-                        QUERY = 3
-                    }
-
-                    /** Properties of a QueryDetail. */
-                    interface IQueryDetail {
-
-                        /** QueryDetail queryId */
-                        queryId?: (string|null);
-
-                        /** QueryDetail queryText */
-                        queryText?: (string|null);
-
-                        /** QueryDetail engine */
-                        engine?: (google.cloud.dataplex.v1.SessionEvent.QueryDetail.Engine|keyof typeof google.cloud.dataplex.v1.SessionEvent.QueryDetail.Engine|null);
-
-                        /** QueryDetail duration */
-                        duration?: (google.protobuf.IDuration|null);
-
-                        /** QueryDetail resultSizeBytes */
-                        resultSizeBytes?: (number|Long|string|null);
-
-                        /** QueryDetail dataProcessedBytes */
-                        dataProcessedBytes?: (number|Long|string|null);
-                    }
-
-                    /** Represents a QueryDetail. */
-                    class QueryDetail implements IQueryDetail {
-
-                        /**
-                         * Constructs a new QueryDetail.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dataplex.v1.SessionEvent.IQueryDetail);
-
-                        /** QueryDetail queryId. */
-                        public queryId: string;
-
-                        /** QueryDetail queryText. */
-                        public queryText: string;
-
-                        /** QueryDetail engine. */
-                        public engine: (google.cloud.dataplex.v1.SessionEvent.QueryDetail.Engine|keyof typeof google.cloud.dataplex.v1.SessionEvent.QueryDetail.Engine);
-
-                        /** QueryDetail duration. */
-                        public duration?: (google.protobuf.IDuration|null);
-
-                        /** QueryDetail resultSizeBytes. */
-                        public resultSizeBytes: (number|Long|string);
-
-                        /** QueryDetail dataProcessedBytes. */
-                        public dataProcessedBytes: (number|Long|string);
-
-                        /**
-                         * Creates a new QueryDetail instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns QueryDetail instance
-                         */
-                        public static create(properties?: google.cloud.dataplex.v1.SessionEvent.IQueryDetail): google.cloud.dataplex.v1.SessionEvent.QueryDetail;
-
-                        /**
-                         * Encodes the specified QueryDetail message. Does not implicitly {@link google.cloud.dataplex.v1.SessionEvent.QueryDetail.verify|verify} messages.
-                         * @param message QueryDetail message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dataplex.v1.SessionEvent.IQueryDetail, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified QueryDetail message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.SessionEvent.QueryDetail.verify|verify} messages.
-                         * @param message QueryDetail message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dataplex.v1.SessionEvent.IQueryDetail, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a QueryDetail message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns QueryDetail
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.SessionEvent.QueryDetail;
-
-                        /**
-                         * Decodes a QueryDetail message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns QueryDetail
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.SessionEvent.QueryDetail;
-
-                        /**
-                         * Verifies a QueryDetail message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a QueryDetail message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns QueryDetail
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.SessionEvent.QueryDetail;
-
-                        /**
-                         * Creates a plain object from a QueryDetail message. Also converts values to other types if specified.
-                         * @param message QueryDetail
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dataplex.v1.SessionEvent.QueryDetail, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this QueryDetail to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    namespace QueryDetail {
-
-                        /** Engine enum. */
-                        enum Engine {
-                            ENGINE_UNSPECIFIED = 0,
-                            SPARK_SQL = 1,
-                            BIGQUERY = 2
-                        }
-                    }
-                }
-
-                /** Represents a MetadataService */
-                class MetadataService extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new MetadataService service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new MetadataService service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): MetadataService;
-
-                    /**
-                     * Calls GetEntity.
-                     * @param request GetEntityRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Entity
-                     */
-                    public getEntity(request: google.cloud.dataplex.v1.IGetEntityRequest, callback: google.cloud.dataplex.v1.MetadataService.GetEntityCallback): void;
-
-                    /**
-                     * Calls GetEntity.
-                     * @param request GetEntityRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getEntity(request: google.cloud.dataplex.v1.IGetEntityRequest): Promise<google.cloud.dataplex.v1.Entity>;
-
-                    /**
-                     * Calls ListEntities.
-                     * @param request ListEntitiesRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListEntitiesResponse
-                     */
-                    public listEntities(request: google.cloud.dataplex.v1.IListEntitiesRequest, callback: google.cloud.dataplex.v1.MetadataService.ListEntitiesCallback): void;
-
-                    /**
-                     * Calls ListEntities.
-                     * @param request ListEntitiesRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listEntities(request: google.cloud.dataplex.v1.IListEntitiesRequest): Promise<google.cloud.dataplex.v1.ListEntitiesResponse>;
-
-                    /**
-                     * Calls GetPartition.
-                     * @param request GetPartitionRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Partition
-                     */
-                    public getPartition(request: google.cloud.dataplex.v1.IGetPartitionRequest, callback: google.cloud.dataplex.v1.MetadataService.GetPartitionCallback): void;
-
-                    /**
-                     * Calls GetPartition.
-                     * @param request GetPartitionRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getPartition(request: google.cloud.dataplex.v1.IGetPartitionRequest): Promise<google.cloud.dataplex.v1.Partition>;
-
-                    /**
-                     * Calls ListPartitions.
-                     * @param request ListPartitionsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListPartitionsResponse
-                     */
-                    public listPartitions(request: google.cloud.dataplex.v1.IListPartitionsRequest, callback: google.cloud.dataplex.v1.MetadataService.ListPartitionsCallback): void;
-
-                    /**
-                     * Calls ListPartitions.
-                     * @param request ListPartitionsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listPartitions(request: google.cloud.dataplex.v1.IListPartitionsRequest): Promise<google.cloud.dataplex.v1.ListPartitionsResponse>;
-                }
-
-                namespace MetadataService {
-
-                    /**
-                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#getEntity}.
-                     * @param error Error, if any
-                     * @param [response] Entity
-                     */
-                    type GetEntityCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Entity) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#listEntities}.
-                     * @param error Error, if any
-                     * @param [response] ListEntitiesResponse
-                     */
-                    type ListEntitiesCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.ListEntitiesResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#getPartition}.
-                     * @param error Error, if any
-                     * @param [response] Partition
-                     */
-                    type GetPartitionCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Partition) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#listPartitions}.
-                     * @param error Error, if any
-                     * @param [response] ListPartitionsResponse
-                     */
-                    type ListPartitionsCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.ListPartitionsResponse) => void;
-                }
-
-                /** Properties of a ListEntitiesRequest. */
-                interface IListEntitiesRequest {
-
-                    /** ListEntitiesRequest parent */
-                    parent?: (string|null);
-
-                    /** ListEntitiesRequest view */
-                    view?: (google.cloud.dataplex.v1.ListEntitiesRequest.EntityView|keyof typeof google.cloud.dataplex.v1.ListEntitiesRequest.EntityView|null);
-
-                    /** ListEntitiesRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** ListEntitiesRequest pageToken */
-                    pageToken?: (string|null);
-
-                    /** ListEntitiesRequest filter */
-                    filter?: (string|null);
-                }
-
-                /** Represents a ListEntitiesRequest. */
-                class ListEntitiesRequest implements IListEntitiesRequest {
-
-                    /**
-                     * Constructs a new ListEntitiesRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataplex.v1.IListEntitiesRequest);
-
-                    /** ListEntitiesRequest parent. */
-                    public parent: string;
-
-                    /** ListEntitiesRequest view. */
-                    public view: (google.cloud.dataplex.v1.ListEntitiesRequest.EntityView|keyof typeof google.cloud.dataplex.v1.ListEntitiesRequest.EntityView);
-
-                    /** ListEntitiesRequest pageSize. */
-                    public pageSize: number;
-
-                    /** ListEntitiesRequest pageToken. */
-                    public pageToken: string;
-
-                    /** ListEntitiesRequest filter. */
-                    public filter: string;
-
-                    /**
-                     * Creates a new ListEntitiesRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListEntitiesRequest instance
-                     */
-                    public static create(properties?: google.cloud.dataplex.v1.IListEntitiesRequest): google.cloud.dataplex.v1.ListEntitiesRequest;
-
-                    /**
-                     * Encodes the specified ListEntitiesRequest message. Does not implicitly {@link google.cloud.dataplex.v1.ListEntitiesRequest.verify|verify} messages.
-                     * @param message ListEntitiesRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataplex.v1.IListEntitiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListEntitiesRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListEntitiesRequest.verify|verify} messages.
-                     * @param message ListEntitiesRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListEntitiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListEntitiesRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListEntitiesRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListEntitiesRequest;
-
-                    /**
-                     * Decodes a ListEntitiesRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListEntitiesRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListEntitiesRequest;
-
-                    /**
-                     * Verifies a ListEntitiesRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListEntitiesRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListEntitiesRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListEntitiesRequest;
-
-                    /**
-                     * Creates a plain object from a ListEntitiesRequest message. Also converts values to other types if specified.
-                     * @param message ListEntitiesRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataplex.v1.ListEntitiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListEntitiesRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace ListEntitiesRequest {
-
-                    /** EntityView enum. */
-                    enum EntityView {
-                        ENTITY_VIEW_UNSPECIFIED = 0,
-                        TABLES = 1,
-                        FILESETS = 2
-                    }
-                }
-
-                /** Properties of a ListEntitiesResponse. */
-                interface IListEntitiesResponse {
-
-                    /** ListEntitiesResponse entities */
-                    entities?: (google.cloud.dataplex.v1.IEntity[]|null);
-
-                    /** ListEntitiesResponse nextPageToken */
-                    nextPageToken?: (string|null);
-                }
-
-                /** Represents a ListEntitiesResponse. */
-                class ListEntitiesResponse implements IListEntitiesResponse {
-
-                    /**
-                     * Constructs a new ListEntitiesResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataplex.v1.IListEntitiesResponse);
-
-                    /** ListEntitiesResponse entities. */
-                    public entities: google.cloud.dataplex.v1.IEntity[];
-
-                    /** ListEntitiesResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /**
-                     * Creates a new ListEntitiesResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListEntitiesResponse instance
-                     */
-                    public static create(properties?: google.cloud.dataplex.v1.IListEntitiesResponse): google.cloud.dataplex.v1.ListEntitiesResponse;
-
-                    /**
-                     * Encodes the specified ListEntitiesResponse message. Does not implicitly {@link google.cloud.dataplex.v1.ListEntitiesResponse.verify|verify} messages.
-                     * @param message ListEntitiesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataplex.v1.IListEntitiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListEntitiesResponse message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListEntitiesResponse.verify|verify} messages.
-                     * @param message ListEntitiesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListEntitiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListEntitiesResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListEntitiesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListEntitiesResponse;
-
-                    /**
-                     * Decodes a ListEntitiesResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListEntitiesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListEntitiesResponse;
-
-                    /**
-                     * Verifies a ListEntitiesResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListEntitiesResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListEntitiesResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListEntitiesResponse;
-
-                    /**
-                     * Creates a plain object from a ListEntitiesResponse message. Also converts values to other types if specified.
-                     * @param message ListEntitiesResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataplex.v1.ListEntitiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListEntitiesResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GetEntityRequest. */
-                interface IGetEntityRequest {
-
-                    /** GetEntityRequest name */
+                    /** Environment name */
                     name?: (string|null);
 
-                    /** GetEntityRequest view */
-                    view?: (google.cloud.dataplex.v1.GetEntityRequest.EntityView|keyof typeof google.cloud.dataplex.v1.GetEntityRequest.EntityView|null);
-                }
-
-                /** Represents a GetEntityRequest. */
-                class GetEntityRequest implements IGetEntityRequest {
-
-                    /**
-                     * Constructs a new GetEntityRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataplex.v1.IGetEntityRequest);
-
-                    /** GetEntityRequest name. */
-                    public name: string;
-
-                    /** GetEntityRequest view. */
-                    public view: (google.cloud.dataplex.v1.GetEntityRequest.EntityView|keyof typeof google.cloud.dataplex.v1.GetEntityRequest.EntityView);
-
-                    /**
-                     * Creates a new GetEntityRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetEntityRequest instance
-                     */
-                    public static create(properties?: google.cloud.dataplex.v1.IGetEntityRequest): google.cloud.dataplex.v1.GetEntityRequest;
-
-                    /**
-                     * Encodes the specified GetEntityRequest message. Does not implicitly {@link google.cloud.dataplex.v1.GetEntityRequest.verify|verify} messages.
-                     * @param message GetEntityRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataplex.v1.IGetEntityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetEntityRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.GetEntityRequest.verify|verify} messages.
-                     * @param message GetEntityRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.IGetEntityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetEntityRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetEntityRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.GetEntityRequest;
-
-                    /**
-                     * Decodes a GetEntityRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetEntityRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.GetEntityRequest;
-
-                    /**
-                     * Verifies a GetEntityRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetEntityRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetEntityRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.GetEntityRequest;
-
-                    /**
-                     * Creates a plain object from a GetEntityRequest message. Also converts values to other types if specified.
-                     * @param message GetEntityRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataplex.v1.GetEntityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetEntityRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace GetEntityRequest {
-
-                    /** EntityView enum. */
-                    enum EntityView {
-                        ENTITY_VIEW_UNSPECIFIED = 0,
-                        BASIC = 1,
-                        SCHEMA = 2,
-                        FULL = 4
-                    }
-                }
-
-                /** Properties of a ListPartitionsRequest. */
-                interface IListPartitionsRequest {
-
-                    /** ListPartitionsRequest parent */
-                    parent?: (string|null);
-
-                    /** ListPartitionsRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** ListPartitionsRequest pageToken */
-                    pageToken?: (string|null);
-
-                    /** ListPartitionsRequest filter */
-                    filter?: (string|null);
-                }
-
-                /** Represents a ListPartitionsRequest. */
-                class ListPartitionsRequest implements IListPartitionsRequest {
-
-                    /**
-                     * Constructs a new ListPartitionsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataplex.v1.IListPartitionsRequest);
-
-                    /** ListPartitionsRequest parent. */
-                    public parent: string;
-
-                    /** ListPartitionsRequest pageSize. */
-                    public pageSize: number;
-
-                    /** ListPartitionsRequest pageToken. */
-                    public pageToken: string;
-
-                    /** ListPartitionsRequest filter. */
-                    public filter: string;
-
-                    /**
-                     * Creates a new ListPartitionsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListPartitionsRequest instance
-                     */
-                    public static create(properties?: google.cloud.dataplex.v1.IListPartitionsRequest): google.cloud.dataplex.v1.ListPartitionsRequest;
-
-                    /**
-                     * Encodes the specified ListPartitionsRequest message. Does not implicitly {@link google.cloud.dataplex.v1.ListPartitionsRequest.verify|verify} messages.
-                     * @param message ListPartitionsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataplex.v1.IListPartitionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListPartitionsRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListPartitionsRequest.verify|verify} messages.
-                     * @param message ListPartitionsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListPartitionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListPartitionsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListPartitionsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListPartitionsRequest;
-
-                    /**
-                     * Decodes a ListPartitionsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListPartitionsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListPartitionsRequest;
-
-                    /**
-                     * Verifies a ListPartitionsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListPartitionsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListPartitionsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListPartitionsRequest;
-
-                    /**
-                     * Creates a plain object from a ListPartitionsRequest message. Also converts values to other types if specified.
-                     * @param message ListPartitionsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataplex.v1.ListPartitionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListPartitionsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a ListPartitionsResponse. */
-                interface IListPartitionsResponse {
-
-                    /** ListPartitionsResponse partitions */
-                    partitions?: (google.cloud.dataplex.v1.IPartition[]|null);
-
-                    /** ListPartitionsResponse nextPageToken */
-                    nextPageToken?: (string|null);
-                }
-
-                /** Represents a ListPartitionsResponse. */
-                class ListPartitionsResponse implements IListPartitionsResponse {
-
-                    /**
-                     * Constructs a new ListPartitionsResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataplex.v1.IListPartitionsResponse);
-
-                    /** ListPartitionsResponse partitions. */
-                    public partitions: google.cloud.dataplex.v1.IPartition[];
-
-                    /** ListPartitionsResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /**
-                     * Creates a new ListPartitionsResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListPartitionsResponse instance
-                     */
-                    public static create(properties?: google.cloud.dataplex.v1.IListPartitionsResponse): google.cloud.dataplex.v1.ListPartitionsResponse;
-
-                    /**
-                     * Encodes the specified ListPartitionsResponse message. Does not implicitly {@link google.cloud.dataplex.v1.ListPartitionsResponse.verify|verify} messages.
-                     * @param message ListPartitionsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataplex.v1.IListPartitionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListPartitionsResponse message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListPartitionsResponse.verify|verify} messages.
-                     * @param message ListPartitionsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListPartitionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListPartitionsResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListPartitionsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListPartitionsResponse;
-
-                    /**
-                     * Decodes a ListPartitionsResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListPartitionsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListPartitionsResponse;
-
-                    /**
-                     * Verifies a ListPartitionsResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListPartitionsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListPartitionsResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListPartitionsResponse;
-
-                    /**
-                     * Creates a plain object from a ListPartitionsResponse message. Also converts values to other types if specified.
-                     * @param message ListPartitionsResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataplex.v1.ListPartitionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListPartitionsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GetPartitionRequest. */
-                interface IGetPartitionRequest {
-
-                    /** GetPartitionRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a GetPartitionRequest. */
-                class GetPartitionRequest implements IGetPartitionRequest {
-
-                    /**
-                     * Constructs a new GetPartitionRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataplex.v1.IGetPartitionRequest);
-
-                    /** GetPartitionRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new GetPartitionRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetPartitionRequest instance
-                     */
-                    public static create(properties?: google.cloud.dataplex.v1.IGetPartitionRequest): google.cloud.dataplex.v1.GetPartitionRequest;
-
-                    /**
-                     * Encodes the specified GetPartitionRequest message. Does not implicitly {@link google.cloud.dataplex.v1.GetPartitionRequest.verify|verify} messages.
-                     * @param message GetPartitionRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataplex.v1.IGetPartitionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetPartitionRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.GetPartitionRequest.verify|verify} messages.
-                     * @param message GetPartitionRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.IGetPartitionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetPartitionRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetPartitionRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.GetPartitionRequest;
-
-                    /**
-                     * Decodes a GetPartitionRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetPartitionRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.GetPartitionRequest;
-
-                    /**
-                     * Verifies a GetPartitionRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetPartitionRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetPartitionRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.GetPartitionRequest;
-
-                    /**
-                     * Creates a plain object from a GetPartitionRequest message. Also converts values to other types if specified.
-                     * @param message GetPartitionRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataplex.v1.GetPartitionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetPartitionRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an Entity. */
-                interface IEntity {
-
-                    /** Entity name */
-                    name?: (string|null);
-
-                    /** Entity displayName */
+                    /** Environment displayName */
                     displayName?: (string|null);
 
-                    /** Entity description */
-                    description?: (string|null);
+                    /** Environment uid */
+                    uid?: (string|null);
 
-                    /** Entity createTime */
+                    /** Environment createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
-                    /** Entity updateTime */
+                    /** Environment updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
 
-                    /** Entity id */
-                    id?: (string|null);
+                    /** Environment labels */
+                    labels?: ({ [k: string]: string }|null);
 
-                    /** Entity etag */
-                    etag?: (string|null);
+                    /** Environment description */
+                    description?: (string|null);
 
-                    /** Entity type */
-                    type?: (google.cloud.dataplex.v1.Entity.Type|keyof typeof google.cloud.dataplex.v1.Entity.Type|null);
+                    /** Environment state */
+                    state?: (google.cloud.dataplex.v1.State|keyof typeof google.cloud.dataplex.v1.State|null);
 
-                    /** Entity asset */
-                    asset?: (string|null);
+                    /** Environment infrastructureSpec */
+                    infrastructureSpec?: (google.cloud.dataplex.v1.Environment.IInfrastructureSpec|null);
 
-                    /** Entity dataPath */
-                    dataPath?: (string|null);
+                    /** Environment sessionSpec */
+                    sessionSpec?: (google.cloud.dataplex.v1.Environment.ISessionSpec|null);
 
-                    /** Entity dataPathPattern */
-                    dataPathPattern?: (string|null);
+                    /** Environment sessionStatus */
+                    sessionStatus?: (google.cloud.dataplex.v1.Environment.ISessionStatus|null);
 
-                    /** Entity catalogEntry */
-                    catalogEntry?: (string|null);
-
-                    /** Entity system */
-                    system?: (google.cloud.dataplex.v1.StorageSystem|keyof typeof google.cloud.dataplex.v1.StorageSystem|null);
-
-                    /** Entity format */
-                    format?: (google.cloud.dataplex.v1.IStorageFormat|null);
-
-                    /** Entity compatibility */
-                    compatibility?: (google.cloud.dataplex.v1.Entity.ICompatibilityStatus|null);
-
-                    /** Entity schema */
-                    schema?: (google.cloud.dataplex.v1.ISchema|null);
+                    /** Environment endpoints */
+                    endpoints?: (google.cloud.dataplex.v1.Environment.IEndpoints|null);
                 }
 
-                /** Represents an Entity. */
-                class Entity implements IEntity {
+                /** Represents an Environment. */
+                class Environment implements IEnvironment {
 
                     /**
-                     * Constructs a new Entity.
+                     * Constructs a new Environment.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.dataplex.v1.IEntity);
+                    constructor(properties?: google.cloud.dataplex.v1.IEnvironment);
 
-                    /** Entity name. */
+                    /** Environment name. */
                     public name: string;
 
-                    /** Entity displayName. */
+                    /** Environment displayName. */
                     public displayName: string;
 
-                    /** Entity description. */
-                    public description: string;
+                    /** Environment uid. */
+                    public uid: string;
 
-                    /** Entity createTime. */
+                    /** Environment createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
-                    /** Entity updateTime. */
+                    /** Environment updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
-                    /** Entity id. */
-                    public id: string;
+                    /** Environment labels. */
+                    public labels: { [k: string]: string };
 
-                    /** Entity etag. */
-                    public etag: string;
+                    /** Environment description. */
+                    public description: string;
 
-                    /** Entity type. */
-                    public type: (google.cloud.dataplex.v1.Entity.Type|keyof typeof google.cloud.dataplex.v1.Entity.Type);
+                    /** Environment state. */
+                    public state: (google.cloud.dataplex.v1.State|keyof typeof google.cloud.dataplex.v1.State);
 
-                    /** Entity asset. */
-                    public asset: string;
+                    /** Environment infrastructureSpec. */
+                    public infrastructureSpec?: (google.cloud.dataplex.v1.Environment.IInfrastructureSpec|null);
 
-                    /** Entity dataPath. */
-                    public dataPath: string;
+                    /** Environment sessionSpec. */
+                    public sessionSpec?: (google.cloud.dataplex.v1.Environment.ISessionSpec|null);
 
-                    /** Entity dataPathPattern. */
-                    public dataPathPattern: string;
+                    /** Environment sessionStatus. */
+                    public sessionStatus?: (google.cloud.dataplex.v1.Environment.ISessionStatus|null);
 
-                    /** Entity catalogEntry. */
-                    public catalogEntry: string;
-
-                    /** Entity system. */
-                    public system: (google.cloud.dataplex.v1.StorageSystem|keyof typeof google.cloud.dataplex.v1.StorageSystem);
-
-                    /** Entity format. */
-                    public format?: (google.cloud.dataplex.v1.IStorageFormat|null);
-
-                    /** Entity compatibility. */
-                    public compatibility?: (google.cloud.dataplex.v1.Entity.ICompatibilityStatus|null);
-
-                    /** Entity schema. */
-                    public schema?: (google.cloud.dataplex.v1.ISchema|null);
+                    /** Environment endpoints. */
+                    public endpoints?: (google.cloud.dataplex.v1.Environment.IEndpoints|null);
 
                     /**
-                     * Creates a new Entity instance using the specified properties.
+                     * Creates a new Environment instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns Entity instance
+                     * @returns Environment instance
                      */
-                    public static create(properties?: google.cloud.dataplex.v1.IEntity): google.cloud.dataplex.v1.Entity;
+                    public static create(properties?: google.cloud.dataplex.v1.IEnvironment): google.cloud.dataplex.v1.Environment;
 
                     /**
-                     * Encodes the specified Entity message. Does not implicitly {@link google.cloud.dataplex.v1.Entity.verify|verify} messages.
-                     * @param message Entity message or plain object to encode
+                     * Encodes the specified Environment message. Does not implicitly {@link google.cloud.dataplex.v1.Environment.verify|verify} messages.
+                     * @param message Environment message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.dataplex.v1.IEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.dataplex.v1.IEnvironment, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Entity message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Entity.verify|verify} messages.
-                     * @param message Entity message or plain object to encode
+                     * Encodes the specified Environment message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Environment.verify|verify} messages.
+                     * @param message Environment message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.IEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IEnvironment, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes an Entity message from the specified reader or buffer.
+                     * Decodes an Environment message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns Entity
+                     * @returns Environment
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Entity;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Environment;
 
                     /**
-                     * Decodes an Entity message from the specified reader or buffer, length delimited.
+                     * Decodes an Environment message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns Entity
+                     * @returns Environment
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Entity;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Environment;
 
                     /**
-                     * Verifies an Entity message.
+                     * Verifies an Environment message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates an Entity message from a plain object. Also converts values to their respective internal types.
+                     * Creates an Environment message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns Entity
+                     * @returns Environment
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Entity;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Environment;
 
                     /**
-                     * Creates a plain object from an Entity message. Also converts values to other types if specified.
-                     * @param message Entity
+                     * Creates a plain object from an Environment message. Also converts values to other types if specified.
+                     * @param message Environment
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.dataplex.v1.Entity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.dataplex.v1.Environment, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this Entity to JSON.
+                     * Converts this Environment to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                namespace Entity {
+                namespace Environment {
 
-                    /** Type enum. */
-                    enum Type {
-                        TYPE_UNSPECIFIED = 0,
-                        TABLE = 1,
-                        FILESET = 2
+                    /** Properties of an InfrastructureSpec. */
+                    interface IInfrastructureSpec {
+
+                        /** InfrastructureSpec compute */
+                        compute?: (google.cloud.dataplex.v1.Environment.InfrastructureSpec.IComputeResources|null);
+
+                        /** InfrastructureSpec osImage */
+                        osImage?: (google.cloud.dataplex.v1.Environment.InfrastructureSpec.IOsImageRuntime|null);
                     }
 
-                    /** Properties of a CompatibilityStatus. */
-                    interface ICompatibilityStatus {
-
-                        /** CompatibilityStatus hiveMetastore */
-                        hiveMetastore?: (google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility|null);
-
-                        /** CompatibilityStatus bigquery */
-                        bigquery?: (google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility|null);
-                    }
-
-                    /** Represents a CompatibilityStatus. */
-                    class CompatibilityStatus implements ICompatibilityStatus {
+                    /** Represents an InfrastructureSpec. */
+                    class InfrastructureSpec implements IInfrastructureSpec {
 
                         /**
-                         * Constructs a new CompatibilityStatus.
+                         * Constructs a new InfrastructureSpec.
                          * @param [properties] Properties to set
                          */
-                        constructor(properties?: google.cloud.dataplex.v1.Entity.ICompatibilityStatus);
+                        constructor(properties?: google.cloud.dataplex.v1.Environment.IInfrastructureSpec);
 
-                        /** CompatibilityStatus hiveMetastore. */
-                        public hiveMetastore?: (google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility|null);
+                        /** InfrastructureSpec compute. */
+                        public compute?: (google.cloud.dataplex.v1.Environment.InfrastructureSpec.IComputeResources|null);
 
-                        /** CompatibilityStatus bigquery. */
-                        public bigquery?: (google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility|null);
+                        /** InfrastructureSpec osImage. */
+                        public osImage?: (google.cloud.dataplex.v1.Environment.InfrastructureSpec.IOsImageRuntime|null);
+
+                        /** InfrastructureSpec resources. */
+                        public resources?: "compute";
+
+                        /** InfrastructureSpec runtime. */
+                        public runtime?: "osImage";
 
                         /**
-                         * Creates a new CompatibilityStatus instance using the specified properties.
+                         * Creates a new InfrastructureSpec instance using the specified properties.
                          * @param [properties] Properties to set
-                         * @returns CompatibilityStatus instance
+                         * @returns InfrastructureSpec instance
                          */
-                        public static create(properties?: google.cloud.dataplex.v1.Entity.ICompatibilityStatus): google.cloud.dataplex.v1.Entity.CompatibilityStatus;
+                        public static create(properties?: google.cloud.dataplex.v1.Environment.IInfrastructureSpec): google.cloud.dataplex.v1.Environment.InfrastructureSpec;
 
                         /**
-                         * Encodes the specified CompatibilityStatus message. Does not implicitly {@link google.cloud.dataplex.v1.Entity.CompatibilityStatus.verify|verify} messages.
-                         * @param message CompatibilityStatus message or plain object to encode
+                         * Encodes the specified InfrastructureSpec message. Does not implicitly {@link google.cloud.dataplex.v1.Environment.InfrastructureSpec.verify|verify} messages.
+                         * @param message InfrastructureSpec message or plain object to encode
                          * @param [writer] Writer to encode to
                          * @returns Writer
                          */
-                        public static encode(message: google.cloud.dataplex.v1.Entity.ICompatibilityStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+                        public static encode(message: google.cloud.dataplex.v1.Environment.IInfrastructureSpec, writer?: $protobuf.Writer): $protobuf.Writer;
 
                         /**
-                         * Encodes the specified CompatibilityStatus message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Entity.CompatibilityStatus.verify|verify} messages.
-                         * @param message CompatibilityStatus message or plain object to encode
+                         * Encodes the specified InfrastructureSpec message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Environment.InfrastructureSpec.verify|verify} messages.
+                         * @param message InfrastructureSpec message or plain object to encode
                          * @param [writer] Writer to encode to
                          * @returns Writer
                          */
-                        public static encodeDelimited(message: google.cloud.dataplex.v1.Entity.ICompatibilityStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.Environment.IInfrastructureSpec, writer?: $protobuf.Writer): $protobuf.Writer;
 
                         /**
-                         * Decodes a CompatibilityStatus message from the specified reader or buffer.
+                         * Decodes an InfrastructureSpec message from the specified reader or buffer.
                          * @param reader Reader or buffer to decode from
                          * @param [length] Message length if known beforehand
-                         * @returns CompatibilityStatus
+                         * @returns InfrastructureSpec
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Entity.CompatibilityStatus;
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Environment.InfrastructureSpec;
 
                         /**
-                         * Decodes a CompatibilityStatus message from the specified reader or buffer, length delimited.
+                         * Decodes an InfrastructureSpec message from the specified reader or buffer, length delimited.
                          * @param reader Reader or buffer to decode from
-                         * @returns CompatibilityStatus
+                         * @returns InfrastructureSpec
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Entity.CompatibilityStatus;
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Environment.InfrastructureSpec;
 
                         /**
-                         * Verifies a CompatibilityStatus message.
+                         * Verifies an InfrastructureSpec message.
                          * @param message Plain object to verify
                          * @returns `null` if valid, otherwise the reason why it is not
                          */
                         public static verify(message: { [k: string]: any }): (string|null);
 
                         /**
-                         * Creates a CompatibilityStatus message from a plain object. Also converts values to their respective internal types.
+                         * Creates an InfrastructureSpec message from a plain object. Also converts values to their respective internal types.
                          * @param object Plain object
-                         * @returns CompatibilityStatus
+                         * @returns InfrastructureSpec
                          */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Entity.CompatibilityStatus;
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Environment.InfrastructureSpec;
 
                         /**
-                         * Creates a plain object from a CompatibilityStatus message. Also converts values to other types if specified.
-                         * @param message CompatibilityStatus
+                         * Creates a plain object from an InfrastructureSpec message. Also converts values to other types if specified.
+                         * @param message InfrastructureSpec
                          * @param [options] Conversion options
                          * @returns Plain object
                          */
-                        public static toObject(message: google.cloud.dataplex.v1.Entity.CompatibilityStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                        public static toObject(message: google.cloud.dataplex.v1.Environment.InfrastructureSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                         /**
-                         * Converts this CompatibilityStatus to JSON.
+                         * Converts this InfrastructureSpec to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
                     }
 
-                    namespace CompatibilityStatus {
+                    namespace InfrastructureSpec {
 
-                        /** Properties of a Compatibility. */
-                        interface ICompatibility {
+                        /** Properties of a ComputeResources. */
+                        interface IComputeResources {
 
-                            /** Compatibility compatible */
-                            compatible?: (boolean|null);
+                            /** ComputeResources diskSizeGb */
+                            diskSizeGb?: (number|null);
 
-                            /** Compatibility reason */
-                            reason?: (string|null);
+                            /** ComputeResources nodeCount */
+                            nodeCount?: (number|null);
+
+                            /** ComputeResources maxNodeCount */
+                            maxNodeCount?: (number|null);
                         }
 
-                        /** Represents a Compatibility. */
-                        class Compatibility implements ICompatibility {
+                        /** Represents a ComputeResources. */
+                        class ComputeResources implements IComputeResources {
 
                             /**
-                             * Constructs a new Compatibility.
+                             * Constructs a new ComputeResources.
                              * @param [properties] Properties to set
                              */
-                            constructor(properties?: google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility);
+                            constructor(properties?: google.cloud.dataplex.v1.Environment.InfrastructureSpec.IComputeResources);
 
-                            /** Compatibility compatible. */
-                            public compatible: boolean;
+                            /** ComputeResources diskSizeGb. */
+                            public diskSizeGb: number;
 
-                            /** Compatibility reason. */
-                            public reason: string;
+                            /** ComputeResources nodeCount. */
+                            public nodeCount: number;
+
+                            /** ComputeResources maxNodeCount. */
+                            public maxNodeCount: number;
 
                             /**
-                             * Creates a new Compatibility instance using the specified properties.
+                             * Creates a new ComputeResources instance using the specified properties.
                              * @param [properties] Properties to set
-                             * @returns Compatibility instance
+                             * @returns ComputeResources instance
                              */
-                            public static create(properties?: google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility): google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility;
+                            public static create(properties?: google.cloud.dataplex.v1.Environment.InfrastructureSpec.IComputeResources): google.cloud.dataplex.v1.Environment.InfrastructureSpec.ComputeResources;
 
                             /**
-                             * Encodes the specified Compatibility message. Does not implicitly {@link google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility.verify|verify} messages.
-                             * @param message Compatibility message or plain object to encode
+                             * Encodes the specified ComputeResources message. Does not implicitly {@link google.cloud.dataplex.v1.Environment.InfrastructureSpec.ComputeResources.verify|verify} messages.
+                             * @param message ComputeResources message or plain object to encode
                              * @param [writer] Writer to encode to
                              * @returns Writer
                              */
-                            public static encode(message: google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility, writer?: $protobuf.Writer): $protobuf.Writer;
+                            public static encode(message: google.cloud.dataplex.v1.Environment.InfrastructureSpec.IComputeResources, writer?: $protobuf.Writer): $protobuf.Writer;
 
                             /**
-                             * Encodes the specified Compatibility message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility.verify|verify} messages.
-                             * @param message Compatibility message or plain object to encode
+                             * Encodes the specified ComputeResources message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Environment.InfrastructureSpec.ComputeResources.verify|verify} messages.
+                             * @param message ComputeResources message or plain object to encode
                              * @param [writer] Writer to encode to
                              * @returns Writer
                              */
-                            public static encodeDelimited(message: google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility, writer?: $protobuf.Writer): $protobuf.Writer;
+                            public static encodeDelimited(message: google.cloud.dataplex.v1.Environment.InfrastructureSpec.IComputeResources, writer?: $protobuf.Writer): $protobuf.Writer;
 
                             /**
-                             * Decodes a Compatibility message from the specified reader or buffer.
+                             * Decodes a ComputeResources message from the specified reader or buffer.
                              * @param reader Reader or buffer to decode from
                              * @param [length] Message length if known beforehand
-                             * @returns Compatibility
+                             * @returns ComputeResources
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility;
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Environment.InfrastructureSpec.ComputeResources;
 
                             /**
-                             * Decodes a Compatibility message from the specified reader or buffer, length delimited.
+                             * Decodes a ComputeResources message from the specified reader or buffer, length delimited.
                              * @param reader Reader or buffer to decode from
-                             * @returns Compatibility
+                             * @returns ComputeResources
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility;
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Environment.InfrastructureSpec.ComputeResources;
 
                             /**
-                             * Verifies a Compatibility message.
+                             * Verifies a ComputeResources message.
                              * @param message Plain object to verify
                              * @returns `null` if valid, otherwise the reason why it is not
                              */
                             public static verify(message: { [k: string]: any }): (string|null);
 
                             /**
-                             * Creates a Compatibility message from a plain object. Also converts values to their respective internal types.
+                             * Creates a ComputeResources message from a plain object. Also converts values to their respective internal types.
                              * @param object Plain object
-                             * @returns Compatibility
+                             * @returns ComputeResources
                              */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility;
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Environment.InfrastructureSpec.ComputeResources;
 
                             /**
-                             * Creates a plain object from a Compatibility message. Also converts values to other types if specified.
-                             * @param message Compatibility
+                             * Creates a plain object from a ComputeResources message. Also converts values to other types if specified.
+                             * @param message ComputeResources
                              * @param [options] Conversion options
                              * @returns Plain object
                              */
-                            public static toObject(message: google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                            public static toObject(message: google.cloud.dataplex.v1.Environment.InfrastructureSpec.ComputeResources, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                             /**
-                             * Converts this Compatibility to JSON.
+                             * Converts this ComputeResources to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of an OsImageRuntime. */
+                        interface IOsImageRuntime {
+
+                            /** OsImageRuntime imageVersion */
+                            imageVersion?: (string|null);
+
+                            /** OsImageRuntime javaLibraries */
+                            javaLibraries?: (string[]|null);
+
+                            /** OsImageRuntime pythonPackages */
+                            pythonPackages?: (string[]|null);
+
+                            /** OsImageRuntime properties */
+                            properties?: ({ [k: string]: string }|null);
+                        }
+
+                        /** Represents an OsImageRuntime. */
+                        class OsImageRuntime implements IOsImageRuntime {
+
+                            /**
+                             * Constructs a new OsImageRuntime.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dataplex.v1.Environment.InfrastructureSpec.IOsImageRuntime);
+
+                            /** OsImageRuntime imageVersion. */
+                            public imageVersion: string;
+
+                            /** OsImageRuntime javaLibraries. */
+                            public javaLibraries: string[];
+
+                            /** OsImageRuntime pythonPackages. */
+                            public pythonPackages: string[];
+
+                            /** OsImageRuntime properties. */
+                            public properties: { [k: string]: string };
+
+                            /**
+                             * Creates a new OsImageRuntime instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns OsImageRuntime instance
+                             */
+                            public static create(properties?: google.cloud.dataplex.v1.Environment.InfrastructureSpec.IOsImageRuntime): google.cloud.dataplex.v1.Environment.InfrastructureSpec.OsImageRuntime;
+
+                            /**
+                             * Encodes the specified OsImageRuntime message. Does not implicitly {@link google.cloud.dataplex.v1.Environment.InfrastructureSpec.OsImageRuntime.verify|verify} messages.
+                             * @param message OsImageRuntime message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dataplex.v1.Environment.InfrastructureSpec.IOsImageRuntime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified OsImageRuntime message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Environment.InfrastructureSpec.OsImageRuntime.verify|verify} messages.
+                             * @param message OsImageRuntime message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dataplex.v1.Environment.InfrastructureSpec.IOsImageRuntime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an OsImageRuntime message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns OsImageRuntime
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Environment.InfrastructureSpec.OsImageRuntime;
+
+                            /**
+                             * Decodes an OsImageRuntime message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns OsImageRuntime
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Environment.InfrastructureSpec.OsImageRuntime;
+
+                            /**
+                             * Verifies an OsImageRuntime message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an OsImageRuntime message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns OsImageRuntime
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Environment.InfrastructureSpec.OsImageRuntime;
+
+                            /**
+                             * Creates a plain object from an OsImageRuntime message. Also converts values to other types if specified.
+                             * @param message OsImageRuntime
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dataplex.v1.Environment.InfrastructureSpec.OsImageRuntime, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this OsImageRuntime to JSON.
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
                         }
                     }
+
+                    /** Properties of a SessionSpec. */
+                    interface ISessionSpec {
+
+                        /** SessionSpec maxIdleDuration */
+                        maxIdleDuration?: (google.protobuf.IDuration|null);
+
+                        /** SessionSpec enableFastStartup */
+                        enableFastStartup?: (boolean|null);
+                    }
+
+                    /** Represents a SessionSpec. */
+                    class SessionSpec implements ISessionSpec {
+
+                        /**
+                         * Constructs a new SessionSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.Environment.ISessionSpec);
+
+                        /** SessionSpec maxIdleDuration. */
+                        public maxIdleDuration?: (google.protobuf.IDuration|null);
+
+                        /** SessionSpec enableFastStartup. */
+                        public enableFastStartup: boolean;
+
+                        /**
+                         * Creates a new SessionSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SessionSpec instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.Environment.ISessionSpec): google.cloud.dataplex.v1.Environment.SessionSpec;
+
+                        /**
+                         * Encodes the specified SessionSpec message. Does not implicitly {@link google.cloud.dataplex.v1.Environment.SessionSpec.verify|verify} messages.
+                         * @param message SessionSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.Environment.ISessionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SessionSpec message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Environment.SessionSpec.verify|verify} messages.
+                         * @param message SessionSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.Environment.ISessionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SessionSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SessionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Environment.SessionSpec;
+
+                        /**
+                         * Decodes a SessionSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SessionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Environment.SessionSpec;
+
+                        /**
+                         * Verifies a SessionSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SessionSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SessionSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Environment.SessionSpec;
+
+                        /**
+                         * Creates a plain object from a SessionSpec message. Also converts values to other types if specified.
+                         * @param message SessionSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.Environment.SessionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SessionSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a SessionStatus. */
+                    interface ISessionStatus {
+
+                        /** SessionStatus active */
+                        active?: (boolean|null);
+                    }
+
+                    /** Represents a SessionStatus. */
+                    class SessionStatus implements ISessionStatus {
+
+                        /**
+                         * Constructs a new SessionStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.Environment.ISessionStatus);
+
+                        /** SessionStatus active. */
+                        public active: boolean;
+
+                        /**
+                         * Creates a new SessionStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SessionStatus instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.Environment.ISessionStatus): google.cloud.dataplex.v1.Environment.SessionStatus;
+
+                        /**
+                         * Encodes the specified SessionStatus message. Does not implicitly {@link google.cloud.dataplex.v1.Environment.SessionStatus.verify|verify} messages.
+                         * @param message SessionStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.Environment.ISessionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SessionStatus message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Environment.SessionStatus.verify|verify} messages.
+                         * @param message SessionStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.Environment.ISessionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SessionStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SessionStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Environment.SessionStatus;
+
+                        /**
+                         * Decodes a SessionStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SessionStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Environment.SessionStatus;
+
+                        /**
+                         * Verifies a SessionStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SessionStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SessionStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Environment.SessionStatus;
+
+                        /**
+                         * Creates a plain object from a SessionStatus message. Also converts values to other types if specified.
+                         * @param message SessionStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.Environment.SessionStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SessionStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an Endpoints. */
+                    interface IEndpoints {
+
+                        /** Endpoints notebooks */
+                        notebooks?: (string|null);
+
+                        /** Endpoints sql */
+                        sql?: (string|null);
+                    }
+
+                    /** Represents an Endpoints. */
+                    class Endpoints implements IEndpoints {
+
+                        /**
+                         * Constructs a new Endpoints.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.Environment.IEndpoints);
+
+                        /** Endpoints notebooks. */
+                        public notebooks: string;
+
+                        /** Endpoints sql. */
+                        public sql: string;
+
+                        /**
+                         * Creates a new Endpoints instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Endpoints instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.Environment.IEndpoints): google.cloud.dataplex.v1.Environment.Endpoints;
+
+                        /**
+                         * Encodes the specified Endpoints message. Does not implicitly {@link google.cloud.dataplex.v1.Environment.Endpoints.verify|verify} messages.
+                         * @param message Endpoints message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.Environment.IEndpoints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Endpoints message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Environment.Endpoints.verify|verify} messages.
+                         * @param message Endpoints message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.Environment.IEndpoints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Endpoints message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Endpoints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Environment.Endpoints;
+
+                        /**
+                         * Decodes an Endpoints message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Endpoints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Environment.Endpoints;
+
+                        /**
+                         * Verifies an Endpoints message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Endpoints message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Endpoints
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Environment.Endpoints;
+
+                        /**
+                         * Creates a plain object from an Endpoints message. Also converts values to other types if specified.
+                         * @param message Endpoints
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.Environment.Endpoints, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Endpoints to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
 
-                /** Properties of a Partition. */
-                interface IPartition {
+                /** Properties of a Content. */
+                interface IContent {
 
-                    /** Partition name */
+                    /** Content name */
                     name?: (string|null);
 
-                    /** Partition values */
-                    values?: (string[]|null);
+                    /** Content uid */
+                    uid?: (string|null);
 
-                    /** Partition location */
-                    location?: (string|null);
+                    /** Content path */
+                    path?: (string|null);
 
-                    /** Partition etag */
-                    etag?: (string|null);
+                    /** Content createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Content updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Content labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Content description */
+                    description?: (string|null);
+
+                    /** Content dataText */
+                    dataText?: (string|null);
+
+                    /** Content sqlScript */
+                    sqlScript?: (google.cloud.dataplex.v1.Content.ISqlScript|null);
+
+                    /** Content notebook */
+                    notebook?: (google.cloud.dataplex.v1.Content.INotebook|null);
                 }
 
-                /** Represents a Partition. */
-                class Partition implements IPartition {
+                /** Represents a Content. */
+                class Content implements IContent {
 
                     /**
-                     * Constructs a new Partition.
+                     * Constructs a new Content.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.dataplex.v1.IPartition);
+                    constructor(properties?: google.cloud.dataplex.v1.IContent);
 
-                    /** Partition name. */
+                    /** Content name. */
                     public name: string;
 
-                    /** Partition values. */
-                    public values: string[];
+                    /** Content uid. */
+                    public uid: string;
 
-                    /** Partition location. */
-                    public location: string;
+                    /** Content path. */
+                    public path: string;
 
-                    /** Partition etag. */
-                    public etag: string;
+                    /** Content createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Content updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Content labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Content description. */
+                    public description: string;
+
+                    /** Content dataText. */
+                    public dataText?: (string|null);
+
+                    /** Content sqlScript. */
+                    public sqlScript?: (google.cloud.dataplex.v1.Content.ISqlScript|null);
+
+                    /** Content notebook. */
+                    public notebook?: (google.cloud.dataplex.v1.Content.INotebook|null);
+
+                    /** Content data. */
+                    public data?: "dataText";
+
+                    /** Content content. */
+                    public content?: ("sqlScript"|"notebook");
 
                     /**
-                     * Creates a new Partition instance using the specified properties.
+                     * Creates a new Content instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns Partition instance
+                     * @returns Content instance
                      */
-                    public static create(properties?: google.cloud.dataplex.v1.IPartition): google.cloud.dataplex.v1.Partition;
+                    public static create(properties?: google.cloud.dataplex.v1.IContent): google.cloud.dataplex.v1.Content;
 
                     /**
-                     * Encodes the specified Partition message. Does not implicitly {@link google.cloud.dataplex.v1.Partition.verify|verify} messages.
-                     * @param message Partition message or plain object to encode
+                     * Encodes the specified Content message. Does not implicitly {@link google.cloud.dataplex.v1.Content.verify|verify} messages.
+                     * @param message Content message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.dataplex.v1.IPartition, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.dataplex.v1.IContent, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Partition message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Partition.verify|verify} messages.
-                     * @param message Partition message or plain object to encode
+                     * Encodes the specified Content message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Content.verify|verify} messages.
+                     * @param message Content message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.IPartition, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IContent, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a Partition message from the specified reader or buffer.
+                     * Decodes a Content message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns Partition
+                     * @returns Content
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Partition;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Content;
 
                     /**
-                     * Decodes a Partition message from the specified reader or buffer, length delimited.
+                     * Decodes a Content message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns Partition
+                     * @returns Content
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Partition;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Content;
 
                     /**
-                     * Verifies a Partition message.
+                     * Verifies a Content message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a Partition message from a plain object. Also converts values to their respective internal types.
+                     * Creates a Content message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns Partition
+                     * @returns Content
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Partition;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Content;
 
                     /**
-                     * Creates a plain object from a Partition message. Also converts values to other types if specified.
-                     * @param message Partition
+                     * Creates a plain object from a Content message. Also converts values to other types if specified.
+                     * @param message Content
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.dataplex.v1.Partition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.dataplex.v1.Content, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this Partition to JSON.
+                     * Converts this Content to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a Schema. */
-                interface ISchema {
+                namespace Content {
 
-                    /** Schema userManaged */
-                    userManaged?: (boolean|null);
+                    /** Properties of a SqlScript. */
+                    interface ISqlScript {
 
-                    /** Schema fields */
-                    fields?: (google.cloud.dataplex.v1.Schema.ISchemaField[]|null);
+                        /** SqlScript engine */
+                        engine?: (google.cloud.dataplex.v1.Content.SqlScript.QueryEngine|keyof typeof google.cloud.dataplex.v1.Content.SqlScript.QueryEngine|null);
+                    }
 
-                    /** Schema partitionFields */
-                    partitionFields?: (google.cloud.dataplex.v1.Schema.IPartitionField[]|null);
+                    /** Represents a SqlScript. */
+                    class SqlScript implements ISqlScript {
 
-                    /** Schema partitionStyle */
-                    partitionStyle?: (google.cloud.dataplex.v1.Schema.PartitionStyle|keyof typeof google.cloud.dataplex.v1.Schema.PartitionStyle|null);
+                        /**
+                         * Constructs a new SqlScript.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.Content.ISqlScript);
+
+                        /** SqlScript engine. */
+                        public engine: (google.cloud.dataplex.v1.Content.SqlScript.QueryEngine|keyof typeof google.cloud.dataplex.v1.Content.SqlScript.QueryEngine);
+
+                        /**
+                         * Creates a new SqlScript instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SqlScript instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.Content.ISqlScript): google.cloud.dataplex.v1.Content.SqlScript;
+
+                        /**
+                         * Encodes the specified SqlScript message. Does not implicitly {@link google.cloud.dataplex.v1.Content.SqlScript.verify|verify} messages.
+                         * @param message SqlScript message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.Content.ISqlScript, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SqlScript message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Content.SqlScript.verify|verify} messages.
+                         * @param message SqlScript message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.Content.ISqlScript, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SqlScript message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SqlScript
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Content.SqlScript;
+
+                        /**
+                         * Decodes a SqlScript message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SqlScript
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Content.SqlScript;
+
+                        /**
+                         * Verifies a SqlScript message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SqlScript message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SqlScript
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Content.SqlScript;
+
+                        /**
+                         * Creates a plain object from a SqlScript message. Also converts values to other types if specified.
+                         * @param message SqlScript
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.Content.SqlScript, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SqlScript to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace SqlScript {
+
+                        /** QueryEngine enum. */
+                        enum QueryEngine {
+                            QUERY_ENGINE_UNSPECIFIED = 0,
+                            SPARK = 2
+                        }
+                    }
+
+                    /** Properties of a Notebook. */
+                    interface INotebook {
+
+                        /** Notebook kernelType */
+                        kernelType?: (google.cloud.dataplex.v1.Content.Notebook.KernelType|keyof typeof google.cloud.dataplex.v1.Content.Notebook.KernelType|null);
+                    }
+
+                    /** Represents a Notebook. */
+                    class Notebook implements INotebook {
+
+                        /**
+                         * Constructs a new Notebook.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.Content.INotebook);
+
+                        /** Notebook kernelType. */
+                        public kernelType: (google.cloud.dataplex.v1.Content.Notebook.KernelType|keyof typeof google.cloud.dataplex.v1.Content.Notebook.KernelType);
+
+                        /**
+                         * Creates a new Notebook instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Notebook instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.Content.INotebook): google.cloud.dataplex.v1.Content.Notebook;
+
+                        /**
+                         * Encodes the specified Notebook message. Does not implicitly {@link google.cloud.dataplex.v1.Content.Notebook.verify|verify} messages.
+                         * @param message Notebook message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.Content.INotebook, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Notebook message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Content.Notebook.verify|verify} messages.
+                         * @param message Notebook message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.Content.INotebook, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Notebook message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Notebook
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Content.Notebook;
+
+                        /**
+                         * Decodes a Notebook message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Notebook
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Content.Notebook;
+
+                        /**
+                         * Verifies a Notebook message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Notebook message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Notebook
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Content.Notebook;
+
+                        /**
+                         * Creates a plain object from a Notebook message. Also converts values to other types if specified.
+                         * @param message Notebook
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.Content.Notebook, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Notebook to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Notebook {
+
+                        /** KernelType enum. */
+                        enum KernelType {
+                            KERNEL_TYPE_UNSPECIFIED = 0,
+                            PYTHON3 = 1
+                        }
+                    }
                 }
 
-                /** Represents a Schema. */
-                class Schema implements ISchema {
+                /** Properties of a Session. */
+                interface ISession {
+
+                    /** Session name */
+                    name?: (string|null);
+
+                    /** Session userId */
+                    userId?: (string|null);
+
+                    /** Session createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session state */
+                    state?: (google.cloud.dataplex.v1.State|keyof typeof google.cloud.dataplex.v1.State|null);
+                }
+
+                /** Represents a Session. */
+                class Session implements ISession {
 
                     /**
-                     * Constructs a new Schema.
+                     * Constructs a new Session.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.dataplex.v1.ISchema);
+                    constructor(properties?: google.cloud.dataplex.v1.ISession);
 
-                    /** Schema userManaged. */
-                    public userManaged: boolean;
+                    /** Session name. */
+                    public name: string;
 
-                    /** Schema fields. */
-                    public fields: google.cloud.dataplex.v1.Schema.ISchemaField[];
+                    /** Session userId. */
+                    public userId: string;
 
-                    /** Schema partitionFields. */
-                    public partitionFields: google.cloud.dataplex.v1.Schema.IPartitionField[];
+                    /** Session createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
 
-                    /** Schema partitionStyle. */
-                    public partitionStyle: (google.cloud.dataplex.v1.Schema.PartitionStyle|keyof typeof google.cloud.dataplex.v1.Schema.PartitionStyle);
+                    /** Session state. */
+                    public state: (google.cloud.dataplex.v1.State|keyof typeof google.cloud.dataplex.v1.State);
 
                     /**
-                     * Creates a new Schema instance using the specified properties.
+                     * Creates a new Session instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns Schema instance
+                     * @returns Session instance
                      */
-                    public static create(properties?: google.cloud.dataplex.v1.ISchema): google.cloud.dataplex.v1.Schema;
+                    public static create(properties?: google.cloud.dataplex.v1.ISession): google.cloud.dataplex.v1.Session;
 
                     /**
-                     * Encodes the specified Schema message. Does not implicitly {@link google.cloud.dataplex.v1.Schema.verify|verify} messages.
-                     * @param message Schema message or plain object to encode
+                     * Encodes the specified Session message. Does not implicitly {@link google.cloud.dataplex.v1.Session.verify|verify} messages.
+                     * @param message Session message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.dataplex.v1.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.dataplex.v1.ISession, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Schema message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Schema.verify|verify} messages.
-                     * @param message Schema message or plain object to encode
+                     * Encodes the specified Session message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Session.verify|verify} messages.
+                     * @param message Session message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.ISession, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a Schema message from the specified reader or buffer.
+                     * Decodes a Session message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns Schema
+                     * @returns Session
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Schema;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Session;
 
                     /**
-                     * Decodes a Schema message from the specified reader or buffer, length delimited.
+                     * Decodes a Session message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns Schema
+                     * @returns Session
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Schema;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Session;
 
                     /**
-                     * Verifies a Schema message.
+                     * Verifies a Session message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a Schema message from a plain object. Also converts values to their respective internal types.
+                     * Creates a Session message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns Schema
+                     * @returns Session
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Schema;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Session;
 
                     /**
-                     * Creates a plain object from a Schema message. Also converts values to other types if specified.
-                     * @param message Schema
+                     * Creates a plain object from a Session message. Also converts values to other types if specified.
+                     * @param message Session
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.dataplex.v1.Schema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.dataplex.v1.Session, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this Schema to JSON.
+                     * Converts this Session to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                namespace Schema {
-
-                    /** Type enum. */
-                    enum Type {
-                        TYPE_UNSPECIFIED = 0,
-                        BOOLEAN = 1,
-                        BYTE = 2,
-                        INT16 = 3,
-                        INT32 = 4,
-                        INT64 = 5,
-                        FLOAT = 6,
-                        DOUBLE = 7,
-                        DECIMAL = 8,
-                        STRING = 9,
-                        BINARY = 10,
-                        TIMESTAMP = 11,
-                        DATE = 12,
-                        TIME = 13,
-                        RECORD = 14,
-                        NULL = 100
-                    }
-
-                    /** Mode enum. */
-                    enum Mode {
-                        MODE_UNSPECIFIED = 0,
-                        REQUIRED = 1,
-                        NULLABLE = 2,
-                        REPEATED = 3
-                    }
-
-                    /** Properties of a SchemaField. */
-                    interface ISchemaField {
-
-                        /** SchemaField name */
-                        name?: (string|null);
-
-                        /** SchemaField description */
-                        description?: (string|null);
-
-                        /** SchemaField type */
-                        type?: (google.cloud.dataplex.v1.Schema.Type|keyof typeof google.cloud.dataplex.v1.Schema.Type|null);
-
-                        /** SchemaField mode */
-                        mode?: (google.cloud.dataplex.v1.Schema.Mode|keyof typeof google.cloud.dataplex.v1.Schema.Mode|null);
-
-                        /** SchemaField fields */
-                        fields?: (google.cloud.dataplex.v1.Schema.ISchemaField[]|null);
-                    }
-
-                    /** Represents a SchemaField. */
-                    class SchemaField implements ISchemaField {
-
-                        /**
-                         * Constructs a new SchemaField.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dataplex.v1.Schema.ISchemaField);
-
-                        /** SchemaField name. */
-                        public name: string;
-
-                        /** SchemaField description. */
-                        public description: string;
-
-                        /** SchemaField type. */
-                        public type: (google.cloud.dataplex.v1.Schema.Type|keyof typeof google.cloud.dataplex.v1.Schema.Type);
-
-                        /** SchemaField mode. */
-                        public mode: (google.cloud.dataplex.v1.Schema.Mode|keyof typeof google.cloud.dataplex.v1.Schema.Mode);
-
-                        /** SchemaField fields. */
-                        public fields: google.cloud.dataplex.v1.Schema.ISchemaField[];
-
-                        /**
-                         * Creates a new SchemaField instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns SchemaField instance
-                         */
-                        public static create(properties?: google.cloud.dataplex.v1.Schema.ISchemaField): google.cloud.dataplex.v1.Schema.SchemaField;
-
-                        /**
-                         * Encodes the specified SchemaField message. Does not implicitly {@link google.cloud.dataplex.v1.Schema.SchemaField.verify|verify} messages.
-                         * @param message SchemaField message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dataplex.v1.Schema.ISchemaField, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified SchemaField message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Schema.SchemaField.verify|verify} messages.
-                         * @param message SchemaField message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dataplex.v1.Schema.ISchemaField, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a SchemaField message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns SchemaField
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Schema.SchemaField;
-
-                        /**
-                         * Decodes a SchemaField message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns SchemaField
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Schema.SchemaField;
-
-                        /**
-                         * Verifies a SchemaField message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a SchemaField message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns SchemaField
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Schema.SchemaField;
-
-                        /**
-                         * Creates a plain object from a SchemaField message. Also converts values to other types if specified.
-                         * @param message SchemaField
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dataplex.v1.Schema.SchemaField, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this SchemaField to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a PartitionField. */
-                    interface IPartitionField {
-
-                        /** PartitionField name */
-                        name?: (string|null);
-
-                        /** PartitionField type */
-                        type?: (google.cloud.dataplex.v1.Schema.Type|keyof typeof google.cloud.dataplex.v1.Schema.Type|null);
-                    }
-
-                    /** Represents a PartitionField. */
-                    class PartitionField implements IPartitionField {
-
-                        /**
-                         * Constructs a new PartitionField.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dataplex.v1.Schema.IPartitionField);
-
-                        /** PartitionField name. */
-                        public name: string;
-
-                        /** PartitionField type. */
-                        public type: (google.cloud.dataplex.v1.Schema.Type|keyof typeof google.cloud.dataplex.v1.Schema.Type);
-
-                        /**
-                         * Creates a new PartitionField instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns PartitionField instance
-                         */
-                        public static create(properties?: google.cloud.dataplex.v1.Schema.IPartitionField): google.cloud.dataplex.v1.Schema.PartitionField;
-
-                        /**
-                         * Encodes the specified PartitionField message. Does not implicitly {@link google.cloud.dataplex.v1.Schema.PartitionField.verify|verify} messages.
-                         * @param message PartitionField message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dataplex.v1.Schema.IPartitionField, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified PartitionField message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Schema.PartitionField.verify|verify} messages.
-                         * @param message PartitionField message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dataplex.v1.Schema.IPartitionField, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a PartitionField message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns PartitionField
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Schema.PartitionField;
-
-                        /**
-                         * Decodes a PartitionField message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns PartitionField
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Schema.PartitionField;
-
-                        /**
-                         * Verifies a PartitionField message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a PartitionField message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns PartitionField
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Schema.PartitionField;
-
-                        /**
-                         * Creates a plain object from a PartitionField message. Also converts values to other types if specified.
-                         * @param message PartitionField
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dataplex.v1.Schema.PartitionField, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this PartitionField to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** PartitionStyle enum. */
-                    enum PartitionStyle {
-                        PARTITION_STYLE_UNSPECIFIED = 0,
-                        HIVE_COMPATIBLE = 1
-                    }
-                }
-
-                /** Properties of a StorageFormat. */
-                interface IStorageFormat {
-
-                    /** StorageFormat format */
-                    format?: (google.cloud.dataplex.v1.StorageFormat.Format|keyof typeof google.cloud.dataplex.v1.StorageFormat.Format|null);
-
-                    /** StorageFormat compressionFormat */
-                    compressionFormat?: (google.cloud.dataplex.v1.StorageFormat.CompressionFormat|keyof typeof google.cloud.dataplex.v1.StorageFormat.CompressionFormat|null);
-
-                    /** StorageFormat mimeType */
-                    mimeType?: (string|null);
-
-                    /** StorageFormat csv */
-                    csv?: (google.cloud.dataplex.v1.StorageFormat.ICsvOptions|null);
-
-                    /** StorageFormat json */
-                    json?: (google.cloud.dataplex.v1.StorageFormat.IJsonOptions|null);
-                }
-
-                /** Represents a StorageFormat. */
-                class StorageFormat implements IStorageFormat {
-
-                    /**
-                     * Constructs a new StorageFormat.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataplex.v1.IStorageFormat);
-
-                    /** StorageFormat format. */
-                    public format: (google.cloud.dataplex.v1.StorageFormat.Format|keyof typeof google.cloud.dataplex.v1.StorageFormat.Format);
-
-                    /** StorageFormat compressionFormat. */
-                    public compressionFormat: (google.cloud.dataplex.v1.StorageFormat.CompressionFormat|keyof typeof google.cloud.dataplex.v1.StorageFormat.CompressionFormat);
-
-                    /** StorageFormat mimeType. */
-                    public mimeType: string;
-
-                    /** StorageFormat csv. */
-                    public csv?: (google.cloud.dataplex.v1.StorageFormat.ICsvOptions|null);
-
-                    /** StorageFormat json. */
-                    public json?: (google.cloud.dataplex.v1.StorageFormat.IJsonOptions|null);
-
-                    /** StorageFormat options. */
-                    public options?: ("csv"|"json");
-
-                    /**
-                     * Creates a new StorageFormat instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StorageFormat instance
-                     */
-                    public static create(properties?: google.cloud.dataplex.v1.IStorageFormat): google.cloud.dataplex.v1.StorageFormat;
-
-                    /**
-                     * Encodes the specified StorageFormat message. Does not implicitly {@link google.cloud.dataplex.v1.StorageFormat.verify|verify} messages.
-                     * @param message StorageFormat message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataplex.v1.IStorageFormat, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StorageFormat message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.StorageFormat.verify|verify} messages.
-                     * @param message StorageFormat message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.IStorageFormat, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StorageFormat message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StorageFormat
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.StorageFormat;
-
-                    /**
-                     * Decodes a StorageFormat message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StorageFormat
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.StorageFormat;
-
-                    /**
-                     * Verifies a StorageFormat message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StorageFormat message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StorageFormat
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.StorageFormat;
-
-                    /**
-                     * Creates a plain object from a StorageFormat message. Also converts values to other types if specified.
-                     * @param message StorageFormat
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataplex.v1.StorageFormat, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StorageFormat to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace StorageFormat {
-
-                    /** Properties of a CsvOptions. */
-                    interface ICsvOptions {
-
-                        /** CsvOptions encoding */
-                        encoding?: (string|null);
-
-                        /** CsvOptions headerRows */
-                        headerRows?: (number|null);
-
-                        /** CsvOptions delimiter */
-                        delimiter?: (string|null);
-
-                        /** CsvOptions quote */
-                        quote?: (string|null);
-                    }
-
-                    /** Represents a CsvOptions. */
-                    class CsvOptions implements ICsvOptions {
-
-                        /**
-                         * Constructs a new CsvOptions.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dataplex.v1.StorageFormat.ICsvOptions);
-
-                        /** CsvOptions encoding. */
-                        public encoding: string;
-
-                        /** CsvOptions headerRows. */
-                        public headerRows: number;
-
-                        /** CsvOptions delimiter. */
-                        public delimiter: string;
-
-                        /** CsvOptions quote. */
-                        public quote: string;
-
-                        /**
-                         * Creates a new CsvOptions instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns CsvOptions instance
-                         */
-                        public static create(properties?: google.cloud.dataplex.v1.StorageFormat.ICsvOptions): google.cloud.dataplex.v1.StorageFormat.CsvOptions;
-
-                        /**
-                         * Encodes the specified CsvOptions message. Does not implicitly {@link google.cloud.dataplex.v1.StorageFormat.CsvOptions.verify|verify} messages.
-                         * @param message CsvOptions message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dataplex.v1.StorageFormat.ICsvOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified CsvOptions message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.StorageFormat.CsvOptions.verify|verify} messages.
-                         * @param message CsvOptions message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dataplex.v1.StorageFormat.ICsvOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a CsvOptions message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns CsvOptions
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.StorageFormat.CsvOptions;
-
-                        /**
-                         * Decodes a CsvOptions message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns CsvOptions
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.StorageFormat.CsvOptions;
-
-                        /**
-                         * Verifies a CsvOptions message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a CsvOptions message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns CsvOptions
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.StorageFormat.CsvOptions;
-
-                        /**
-                         * Creates a plain object from a CsvOptions message. Also converts values to other types if specified.
-                         * @param message CsvOptions
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dataplex.v1.StorageFormat.CsvOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this CsvOptions to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a JsonOptions. */
-                    interface IJsonOptions {
-
-                        /** JsonOptions encoding */
-                        encoding?: (string|null);
-                    }
-
-                    /** Represents a JsonOptions. */
-                    class JsonOptions implements IJsonOptions {
-
-                        /**
-                         * Constructs a new JsonOptions.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dataplex.v1.StorageFormat.IJsonOptions);
-
-                        /** JsonOptions encoding. */
-                        public encoding: string;
-
-                        /**
-                         * Creates a new JsonOptions instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns JsonOptions instance
-                         */
-                        public static create(properties?: google.cloud.dataplex.v1.StorageFormat.IJsonOptions): google.cloud.dataplex.v1.StorageFormat.JsonOptions;
-
-                        /**
-                         * Encodes the specified JsonOptions message. Does not implicitly {@link google.cloud.dataplex.v1.StorageFormat.JsonOptions.verify|verify} messages.
-                         * @param message JsonOptions message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dataplex.v1.StorageFormat.IJsonOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified JsonOptions message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.StorageFormat.JsonOptions.verify|verify} messages.
-                         * @param message JsonOptions message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dataplex.v1.StorageFormat.IJsonOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a JsonOptions message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns JsonOptions
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.StorageFormat.JsonOptions;
-
-                        /**
-                         * Decodes a JsonOptions message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns JsonOptions
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.StorageFormat.JsonOptions;
-
-                        /**
-                         * Verifies a JsonOptions message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a JsonOptions message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns JsonOptions
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.StorageFormat.JsonOptions;
-
-                        /**
-                         * Creates a plain object from a JsonOptions message. Also converts values to other types if specified.
-                         * @param message JsonOptions
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dataplex.v1.StorageFormat.JsonOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this JsonOptions to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Format enum. */
-                    enum Format {
-                        FORMAT_UNSPECIFIED = 0,
-                        PARQUET = 1,
-                        AVRO = 2,
-                        ORC = 3,
-                        CSV = 100,
-                        JSON = 101,
-                        IMAGE = 200,
-                        AUDIO = 201,
-                        VIDEO = 202,
-                        TEXT = 203,
-                        TFRECORD = 204,
-                        OTHER = 1000,
-                        UNKNOWN = 1001
-                    }
-
-                    /** CompressionFormat enum. */
-                    enum CompressionFormat {
-                        COMPRESSION_FORMAT_UNSPECIFIED = 0,
-                        GZIP = 2,
-                        BZIP2 = 3
-                    }
-                }
-
-                /** StorageSystem enum. */
-                enum StorageSystem {
-                    STORAGE_SYSTEM_UNSPECIFIED = 0,
-                    CLOUD_STORAGE = 1,
-                    BIGQUERY = 2
                 }
 
                 /** Properties of a Lake. */
@@ -6008,6 +4329,4230 @@ export namespace google {
                     ACTION_REQUIRED = 4
                 }
 
+                /** Represents a ContentService */
+                class ContentService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ContentService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ContentService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ContentService;
+
+                    /**
+                     * Calls CreateContent.
+                     * @param request CreateContentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Content
+                     */
+                    public createContent(request: google.cloud.dataplex.v1.ICreateContentRequest, callback: google.cloud.dataplex.v1.ContentService.CreateContentCallback): void;
+
+                    /**
+                     * Calls CreateContent.
+                     * @param request CreateContentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createContent(request: google.cloud.dataplex.v1.ICreateContentRequest): Promise<google.cloud.dataplex.v1.Content>;
+
+                    /**
+                     * Calls UpdateContent.
+                     * @param request UpdateContentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Content
+                     */
+                    public updateContent(request: google.cloud.dataplex.v1.IUpdateContentRequest, callback: google.cloud.dataplex.v1.ContentService.UpdateContentCallback): void;
+
+                    /**
+                     * Calls UpdateContent.
+                     * @param request UpdateContentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateContent(request: google.cloud.dataplex.v1.IUpdateContentRequest): Promise<google.cloud.dataplex.v1.Content>;
+
+                    /**
+                     * Calls DeleteContent.
+                     * @param request DeleteContentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteContent(request: google.cloud.dataplex.v1.IDeleteContentRequest, callback: google.cloud.dataplex.v1.ContentService.DeleteContentCallback): void;
+
+                    /**
+                     * Calls DeleteContent.
+                     * @param request DeleteContentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteContent(request: google.cloud.dataplex.v1.IDeleteContentRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetContent.
+                     * @param request GetContentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Content
+                     */
+                    public getContent(request: google.cloud.dataplex.v1.IGetContentRequest, callback: google.cloud.dataplex.v1.ContentService.GetContentCallback): void;
+
+                    /**
+                     * Calls GetContent.
+                     * @param request GetContentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getContent(request: google.cloud.dataplex.v1.IGetContentRequest): Promise<google.cloud.dataplex.v1.Content>;
+
+                    /**
+                     * Calls ListContent.
+                     * @param request ListContentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListContentResponse
+                     */
+                    public listContent(request: google.cloud.dataplex.v1.IListContentRequest, callback: google.cloud.dataplex.v1.ContentService.ListContentCallback): void;
+
+                    /**
+                     * Calls ListContent.
+                     * @param request ListContentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listContent(request: google.cloud.dataplex.v1.IListContentRequest): Promise<google.cloud.dataplex.v1.ListContentResponse>;
+                }
+
+                namespace ContentService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.ContentService#createContent}.
+                     * @param error Error, if any
+                     * @param [response] Content
+                     */
+                    type CreateContentCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Content) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.ContentService#updateContent}.
+                     * @param error Error, if any
+                     * @param [response] Content
+                     */
+                    type UpdateContentCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Content) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.ContentService#deleteContent}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteContentCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.ContentService#getContent}.
+                     * @param error Error, if any
+                     * @param [response] Content
+                     */
+                    type GetContentCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Content) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.ContentService#listContent}.
+                     * @param error Error, if any
+                     * @param [response] ListContentResponse
+                     */
+                    type ListContentCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.ListContentResponse) => void;
+                }
+
+                /** Properties of a CreateContentRequest. */
+                interface ICreateContentRequest {
+
+                    /** CreateContentRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateContentRequest content */
+                    content?: (google.cloud.dataplex.v1.IContent|null);
+
+                    /** CreateContentRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateContentRequest. */
+                class CreateContentRequest implements ICreateContentRequest {
+
+                    /**
+                     * Constructs a new CreateContentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.ICreateContentRequest);
+
+                    /** CreateContentRequest parent. */
+                    public parent: string;
+
+                    /** CreateContentRequest content. */
+                    public content?: (google.cloud.dataplex.v1.IContent|null);
+
+                    /** CreateContentRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateContentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateContentRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.ICreateContentRequest): google.cloud.dataplex.v1.CreateContentRequest;
+
+                    /**
+                     * Encodes the specified CreateContentRequest message. Does not implicitly {@link google.cloud.dataplex.v1.CreateContentRequest.verify|verify} messages.
+                     * @param message CreateContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.ICreateContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateContentRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.CreateContentRequest.verify|verify} messages.
+                     * @param message CreateContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.ICreateContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateContentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.CreateContentRequest;
+
+                    /**
+                     * Decodes a CreateContentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.CreateContentRequest;
+
+                    /**
+                     * Verifies a CreateContentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateContentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateContentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.CreateContentRequest;
+
+                    /**
+                     * Creates a plain object from a CreateContentRequest message. Also converts values to other types if specified.
+                     * @param message CreateContentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.CreateContentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateContentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateContentRequest. */
+                interface IUpdateContentRequest {
+
+                    /** UpdateContentRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateContentRequest content */
+                    content?: (google.cloud.dataplex.v1.IContent|null);
+
+                    /** UpdateContentRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateContentRequest. */
+                class UpdateContentRequest implements IUpdateContentRequest {
+
+                    /**
+                     * Constructs a new UpdateContentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IUpdateContentRequest);
+
+                    /** UpdateContentRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateContentRequest content. */
+                    public content?: (google.cloud.dataplex.v1.IContent|null);
+
+                    /** UpdateContentRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateContentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateContentRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IUpdateContentRequest): google.cloud.dataplex.v1.UpdateContentRequest;
+
+                    /**
+                     * Encodes the specified UpdateContentRequest message. Does not implicitly {@link google.cloud.dataplex.v1.UpdateContentRequest.verify|verify} messages.
+                     * @param message UpdateContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IUpdateContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateContentRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.UpdateContentRequest.verify|verify} messages.
+                     * @param message UpdateContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IUpdateContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateContentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.UpdateContentRequest;
+
+                    /**
+                     * Decodes an UpdateContentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.UpdateContentRequest;
+
+                    /**
+                     * Verifies an UpdateContentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateContentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateContentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.UpdateContentRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateContentRequest message. Also converts values to other types if specified.
+                     * @param message UpdateContentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.UpdateContentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateContentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteContentRequest. */
+                interface IDeleteContentRequest {
+
+                    /** DeleteContentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteContentRequest. */
+                class DeleteContentRequest implements IDeleteContentRequest {
+
+                    /**
+                     * Constructs a new DeleteContentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IDeleteContentRequest);
+
+                    /** DeleteContentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteContentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteContentRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IDeleteContentRequest): google.cloud.dataplex.v1.DeleteContentRequest;
+
+                    /**
+                     * Encodes the specified DeleteContentRequest message. Does not implicitly {@link google.cloud.dataplex.v1.DeleteContentRequest.verify|verify} messages.
+                     * @param message DeleteContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IDeleteContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteContentRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DeleteContentRequest.verify|verify} messages.
+                     * @param message DeleteContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDeleteContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteContentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DeleteContentRequest;
+
+                    /**
+                     * Decodes a DeleteContentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DeleteContentRequest;
+
+                    /**
+                     * Verifies a DeleteContentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteContentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteContentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DeleteContentRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteContentRequest message. Also converts values to other types if specified.
+                     * @param message DeleteContentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.DeleteContentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteContentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListContentRequest. */
+                interface IListContentRequest {
+
+                    /** ListContentRequest parent */
+                    parent?: (string|null);
+
+                    /** ListContentRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListContentRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListContentRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListContentRequest. */
+                class ListContentRequest implements IListContentRequest {
+
+                    /**
+                     * Constructs a new ListContentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IListContentRequest);
+
+                    /** ListContentRequest parent. */
+                    public parent: string;
+
+                    /** ListContentRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListContentRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListContentRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListContentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListContentRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IListContentRequest): google.cloud.dataplex.v1.ListContentRequest;
+
+                    /**
+                     * Encodes the specified ListContentRequest message. Does not implicitly {@link google.cloud.dataplex.v1.ListContentRequest.verify|verify} messages.
+                     * @param message ListContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IListContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListContentRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListContentRequest.verify|verify} messages.
+                     * @param message ListContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListContentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListContentRequest;
+
+                    /**
+                     * Decodes a ListContentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListContentRequest;
+
+                    /**
+                     * Verifies a ListContentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListContentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListContentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListContentRequest;
+
+                    /**
+                     * Creates a plain object from a ListContentRequest message. Also converts values to other types if specified.
+                     * @param message ListContentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ListContentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListContentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListContentResponse. */
+                interface IListContentResponse {
+
+                    /** ListContentResponse content */
+                    content?: (google.cloud.dataplex.v1.IContent[]|null);
+
+                    /** ListContentResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListContentResponse. */
+                class ListContentResponse implements IListContentResponse {
+
+                    /**
+                     * Constructs a new ListContentResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IListContentResponse);
+
+                    /** ListContentResponse content. */
+                    public content: google.cloud.dataplex.v1.IContent[];
+
+                    /** ListContentResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListContentResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListContentResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IListContentResponse): google.cloud.dataplex.v1.ListContentResponse;
+
+                    /**
+                     * Encodes the specified ListContentResponse message. Does not implicitly {@link google.cloud.dataplex.v1.ListContentResponse.verify|verify} messages.
+                     * @param message ListContentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IListContentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListContentResponse message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListContentResponse.verify|verify} messages.
+                     * @param message ListContentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListContentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListContentResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListContentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListContentResponse;
+
+                    /**
+                     * Decodes a ListContentResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListContentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListContentResponse;
+
+                    /**
+                     * Verifies a ListContentResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListContentResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListContentResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListContentResponse;
+
+                    /**
+                     * Creates a plain object from a ListContentResponse message. Also converts values to other types if specified.
+                     * @param message ListContentResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ListContentResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListContentResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetContentRequest. */
+                interface IGetContentRequest {
+
+                    /** GetContentRequest name */
+                    name?: (string|null);
+
+                    /** GetContentRequest view */
+                    view?: (google.cloud.dataplex.v1.GetContentRequest.ContentView|keyof typeof google.cloud.dataplex.v1.GetContentRequest.ContentView|null);
+                }
+
+                /** Represents a GetContentRequest. */
+                class GetContentRequest implements IGetContentRequest {
+
+                    /**
+                     * Constructs a new GetContentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IGetContentRequest);
+
+                    /** GetContentRequest name. */
+                    public name: string;
+
+                    /** GetContentRequest view. */
+                    public view: (google.cloud.dataplex.v1.GetContentRequest.ContentView|keyof typeof google.cloud.dataplex.v1.GetContentRequest.ContentView);
+
+                    /**
+                     * Creates a new GetContentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetContentRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IGetContentRequest): google.cloud.dataplex.v1.GetContentRequest;
+
+                    /**
+                     * Encodes the specified GetContentRequest message. Does not implicitly {@link google.cloud.dataplex.v1.GetContentRequest.verify|verify} messages.
+                     * @param message GetContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IGetContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetContentRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.GetContentRequest.verify|verify} messages.
+                     * @param message GetContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IGetContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetContentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.GetContentRequest;
+
+                    /**
+                     * Decodes a GetContentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.GetContentRequest;
+
+                    /**
+                     * Verifies a GetContentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetContentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetContentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.GetContentRequest;
+
+                    /**
+                     * Creates a plain object from a GetContentRequest message. Also converts values to other types if specified.
+                     * @param message GetContentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.GetContentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetContentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace GetContentRequest {
+
+                    /** ContentView enum. */
+                    enum ContentView {
+                        CONTENT_VIEW_UNSPECIFIED = 0,
+                        BASIC = 1,
+                        FULL = 2
+                    }
+                }
+
+                /** Properties of a DiscoveryEvent. */
+                interface IDiscoveryEvent {
+
+                    /** DiscoveryEvent message */
+                    message?: (string|null);
+
+                    /** DiscoveryEvent lakeId */
+                    lakeId?: (string|null);
+
+                    /** DiscoveryEvent zoneId */
+                    zoneId?: (string|null);
+
+                    /** DiscoveryEvent assetId */
+                    assetId?: (string|null);
+
+                    /** DiscoveryEvent dataLocation */
+                    dataLocation?: (string|null);
+
+                    /** DiscoveryEvent type */
+                    type?: (google.cloud.dataplex.v1.DiscoveryEvent.EventType|keyof typeof google.cloud.dataplex.v1.DiscoveryEvent.EventType|null);
+
+                    /** DiscoveryEvent config */
+                    config?: (google.cloud.dataplex.v1.DiscoveryEvent.IConfigDetails|null);
+
+                    /** DiscoveryEvent entity */
+                    entity?: (google.cloud.dataplex.v1.DiscoveryEvent.IEntityDetails|null);
+
+                    /** DiscoveryEvent partition */
+                    partition?: (google.cloud.dataplex.v1.DiscoveryEvent.IPartitionDetails|null);
+
+                    /** DiscoveryEvent action */
+                    action?: (google.cloud.dataplex.v1.DiscoveryEvent.IActionDetails|null);
+                }
+
+                /** Represents a DiscoveryEvent. */
+                class DiscoveryEvent implements IDiscoveryEvent {
+
+                    /**
+                     * Constructs a new DiscoveryEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IDiscoveryEvent);
+
+                    /** DiscoveryEvent message. */
+                    public message: string;
+
+                    /** DiscoveryEvent lakeId. */
+                    public lakeId: string;
+
+                    /** DiscoveryEvent zoneId. */
+                    public zoneId: string;
+
+                    /** DiscoveryEvent assetId. */
+                    public assetId: string;
+
+                    /** DiscoveryEvent dataLocation. */
+                    public dataLocation: string;
+
+                    /** DiscoveryEvent type. */
+                    public type: (google.cloud.dataplex.v1.DiscoveryEvent.EventType|keyof typeof google.cloud.dataplex.v1.DiscoveryEvent.EventType);
+
+                    /** DiscoveryEvent config. */
+                    public config?: (google.cloud.dataplex.v1.DiscoveryEvent.IConfigDetails|null);
+
+                    /** DiscoveryEvent entity. */
+                    public entity?: (google.cloud.dataplex.v1.DiscoveryEvent.IEntityDetails|null);
+
+                    /** DiscoveryEvent partition. */
+                    public partition?: (google.cloud.dataplex.v1.DiscoveryEvent.IPartitionDetails|null);
+
+                    /** DiscoveryEvent action. */
+                    public action?: (google.cloud.dataplex.v1.DiscoveryEvent.IActionDetails|null);
+
+                    /** DiscoveryEvent details. */
+                    public details?: ("config"|"entity"|"partition"|"action");
+
+                    /**
+                     * Creates a new DiscoveryEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryEvent instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IDiscoveryEvent): google.cloud.dataplex.v1.DiscoveryEvent;
+
+                    /**
+                     * Encodes the specified DiscoveryEvent message. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.verify|verify} messages.
+                     * @param message DiscoveryEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IDiscoveryEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryEvent message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.verify|verify} messages.
+                     * @param message DiscoveryEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDiscoveryEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DiscoveryEvent;
+
+                    /**
+                     * Decodes a DiscoveryEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DiscoveryEvent;
+
+                    /**
+                     * Verifies a DiscoveryEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DiscoveryEvent;
+
+                    /**
+                     * Creates a plain object from a DiscoveryEvent message. Also converts values to other types if specified.
+                     * @param message DiscoveryEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.DiscoveryEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace DiscoveryEvent {
+
+                    /** EventType enum. */
+                    enum EventType {
+                        EVENT_TYPE_UNSPECIFIED = 0,
+                        CONFIG = 1,
+                        ENTITY_CREATED = 2,
+                        ENTITY_UPDATED = 3,
+                        ENTITY_DELETED = 4,
+                        PARTITION_CREATED = 5,
+                        PARTITION_UPDATED = 6,
+                        PARTITION_DELETED = 7
+                    }
+
+                    /** EntityType enum. */
+                    enum EntityType {
+                        ENTITY_TYPE_UNSPECIFIED = 0,
+                        TABLE = 1,
+                        FILESET = 2
+                    }
+
+                    /** Properties of a ConfigDetails. */
+                    interface IConfigDetails {
+
+                        /** ConfigDetails parameters */
+                        parameters?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a ConfigDetails. */
+                    class ConfigDetails implements IConfigDetails {
+
+                        /**
+                         * Constructs a new ConfigDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IConfigDetails);
+
+                        /** ConfigDetails parameters. */
+                        public parameters: { [k: string]: string };
+
+                        /**
+                         * Creates a new ConfigDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConfigDetails instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IConfigDetails): google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails;
+
+                        /**
+                         * Encodes the specified ConfigDetails message. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails.verify|verify} messages.
+                         * @param message ConfigDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DiscoveryEvent.IConfigDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConfigDetails message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails.verify|verify} messages.
+                         * @param message ConfigDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DiscoveryEvent.IConfigDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConfigDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConfigDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails;
+
+                        /**
+                         * Decodes a ConfigDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConfigDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails;
+
+                        /**
+                         * Verifies a ConfigDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConfigDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConfigDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails;
+
+                        /**
+                         * Creates a plain object from a ConfigDetails message. Also converts values to other types if specified.
+                         * @param message ConfigDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConfigDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an EntityDetails. */
+                    interface IEntityDetails {
+
+                        /** EntityDetails entity */
+                        entity?: (string|null);
+
+                        /** EntityDetails type */
+                        type?: (google.cloud.dataplex.v1.DiscoveryEvent.EntityType|keyof typeof google.cloud.dataplex.v1.DiscoveryEvent.EntityType|null);
+                    }
+
+                    /** Represents an EntityDetails. */
+                    class EntityDetails implements IEntityDetails {
+
+                        /**
+                         * Constructs a new EntityDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IEntityDetails);
+
+                        /** EntityDetails entity. */
+                        public entity: string;
+
+                        /** EntityDetails type. */
+                        public type: (google.cloud.dataplex.v1.DiscoveryEvent.EntityType|keyof typeof google.cloud.dataplex.v1.DiscoveryEvent.EntityType);
+
+                        /**
+                         * Creates a new EntityDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EntityDetails instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IEntityDetails): google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails;
+
+                        /**
+                         * Encodes the specified EntityDetails message. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails.verify|verify} messages.
+                         * @param message EntityDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DiscoveryEvent.IEntityDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EntityDetails message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails.verify|verify} messages.
+                         * @param message EntityDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DiscoveryEvent.IEntityDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EntityDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EntityDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails;
+
+                        /**
+                         * Decodes an EntityDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EntityDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails;
+
+                        /**
+                         * Verifies an EntityDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EntityDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EntityDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails;
+
+                        /**
+                         * Creates a plain object from an EntityDetails message. Also converts values to other types if specified.
+                         * @param message EntityDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DiscoveryEvent.EntityDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EntityDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a PartitionDetails. */
+                    interface IPartitionDetails {
+
+                        /** PartitionDetails partition */
+                        partition?: (string|null);
+
+                        /** PartitionDetails entity */
+                        entity?: (string|null);
+
+                        /** PartitionDetails type */
+                        type?: (google.cloud.dataplex.v1.DiscoveryEvent.EntityType|keyof typeof google.cloud.dataplex.v1.DiscoveryEvent.EntityType|null);
+                    }
+
+                    /** Represents a PartitionDetails. */
+                    class PartitionDetails implements IPartitionDetails {
+
+                        /**
+                         * Constructs a new PartitionDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IPartitionDetails);
+
+                        /** PartitionDetails partition. */
+                        public partition: string;
+
+                        /** PartitionDetails entity. */
+                        public entity: string;
+
+                        /** PartitionDetails type. */
+                        public type: (google.cloud.dataplex.v1.DiscoveryEvent.EntityType|keyof typeof google.cloud.dataplex.v1.DiscoveryEvent.EntityType);
+
+                        /**
+                         * Creates a new PartitionDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PartitionDetails instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IPartitionDetails): google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails;
+
+                        /**
+                         * Encodes the specified PartitionDetails message. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails.verify|verify} messages.
+                         * @param message PartitionDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DiscoveryEvent.IPartitionDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PartitionDetails message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails.verify|verify} messages.
+                         * @param message PartitionDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DiscoveryEvent.IPartitionDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PartitionDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PartitionDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails;
+
+                        /**
+                         * Decodes a PartitionDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PartitionDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails;
+
+                        /**
+                         * Verifies a PartitionDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PartitionDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PartitionDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails;
+
+                        /**
+                         * Creates a plain object from a PartitionDetails message. Also converts values to other types if specified.
+                         * @param message PartitionDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DiscoveryEvent.PartitionDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PartitionDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an ActionDetails. */
+                    interface IActionDetails {
+
+                        /** ActionDetails type */
+                        type?: (string|null);
+                    }
+
+                    /** Represents an ActionDetails. */
+                    class ActionDetails implements IActionDetails {
+
+                        /**
+                         * Constructs a new ActionDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IActionDetails);
+
+                        /** ActionDetails type. */
+                        public type: string;
+
+                        /**
+                         * Creates a new ActionDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ActionDetails instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DiscoveryEvent.IActionDetails): google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails;
+
+                        /**
+                         * Encodes the specified ActionDetails message. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails.verify|verify} messages.
+                         * @param message ActionDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DiscoveryEvent.IActionDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ActionDetails message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails.verify|verify} messages.
+                         * @param message ActionDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DiscoveryEvent.IActionDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ActionDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ActionDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails;
+
+                        /**
+                         * Decodes an ActionDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ActionDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails;
+
+                        /**
+                         * Verifies an ActionDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ActionDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ActionDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails;
+
+                        /**
+                         * Creates a plain object from an ActionDetails message. Also converts values to other types if specified.
+                         * @param message ActionDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ActionDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a JobEvent. */
+                interface IJobEvent {
+
+                    /** JobEvent message */
+                    message?: (string|null);
+
+                    /** JobEvent jobId */
+                    jobId?: (string|null);
+
+                    /** JobEvent startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** JobEvent endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** JobEvent state */
+                    state?: (google.cloud.dataplex.v1.JobEvent.State|keyof typeof google.cloud.dataplex.v1.JobEvent.State|null);
+
+                    /** JobEvent retries */
+                    retries?: (number|null);
+
+                    /** JobEvent type */
+                    type?: (google.cloud.dataplex.v1.JobEvent.Type|keyof typeof google.cloud.dataplex.v1.JobEvent.Type|null);
+
+                    /** JobEvent service */
+                    service?: (google.cloud.dataplex.v1.JobEvent.Service|keyof typeof google.cloud.dataplex.v1.JobEvent.Service|null);
+
+                    /** JobEvent serviceJob */
+                    serviceJob?: (string|null);
+                }
+
+                /** Represents a JobEvent. */
+                class JobEvent implements IJobEvent {
+
+                    /**
+                     * Constructs a new JobEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IJobEvent);
+
+                    /** JobEvent message. */
+                    public message: string;
+
+                    /** JobEvent jobId. */
+                    public jobId: string;
+
+                    /** JobEvent startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** JobEvent endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** JobEvent state. */
+                    public state: (google.cloud.dataplex.v1.JobEvent.State|keyof typeof google.cloud.dataplex.v1.JobEvent.State);
+
+                    /** JobEvent retries. */
+                    public retries: number;
+
+                    /** JobEvent type. */
+                    public type: (google.cloud.dataplex.v1.JobEvent.Type|keyof typeof google.cloud.dataplex.v1.JobEvent.Type);
+
+                    /** JobEvent service. */
+                    public service: (google.cloud.dataplex.v1.JobEvent.Service|keyof typeof google.cloud.dataplex.v1.JobEvent.Service);
+
+                    /** JobEvent serviceJob. */
+                    public serviceJob: string;
+
+                    /**
+                     * Creates a new JobEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns JobEvent instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IJobEvent): google.cloud.dataplex.v1.JobEvent;
+
+                    /**
+                     * Encodes the specified JobEvent message. Does not implicitly {@link google.cloud.dataplex.v1.JobEvent.verify|verify} messages.
+                     * @param message JobEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IJobEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified JobEvent message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.JobEvent.verify|verify} messages.
+                     * @param message JobEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IJobEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a JobEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns JobEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.JobEvent;
+
+                    /**
+                     * Decodes a JobEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns JobEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.JobEvent;
+
+                    /**
+                     * Verifies a JobEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a JobEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns JobEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.JobEvent;
+
+                    /**
+                     * Creates a plain object from a JobEvent message. Also converts values to other types if specified.
+                     * @param message JobEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.JobEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this JobEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace JobEvent {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        SPARK = 1,
+                        NOTEBOOK = 2
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        SUCCEEDED = 1,
+                        FAILED = 2,
+                        CANCELLED = 3,
+                        ABORTED = 4
+                    }
+
+                    /** Service enum. */
+                    enum Service {
+                        SERVICE_UNSPECIFIED = 0,
+                        DATAPROC = 1
+                    }
+                }
+
+                /** Properties of a SessionEvent. */
+                interface ISessionEvent {
+
+                    /** SessionEvent message */
+                    message?: (string|null);
+
+                    /** SessionEvent userId */
+                    userId?: (string|null);
+
+                    /** SessionEvent sessionId */
+                    sessionId?: (string|null);
+
+                    /** SessionEvent type */
+                    type?: (google.cloud.dataplex.v1.SessionEvent.EventType|keyof typeof google.cloud.dataplex.v1.SessionEvent.EventType|null);
+
+                    /** SessionEvent query */
+                    query?: (google.cloud.dataplex.v1.SessionEvent.IQueryDetail|null);
+                }
+
+                /** Represents a SessionEvent. */
+                class SessionEvent implements ISessionEvent {
+
+                    /**
+                     * Constructs a new SessionEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.ISessionEvent);
+
+                    /** SessionEvent message. */
+                    public message: string;
+
+                    /** SessionEvent userId. */
+                    public userId: string;
+
+                    /** SessionEvent sessionId. */
+                    public sessionId: string;
+
+                    /** SessionEvent type. */
+                    public type: (google.cloud.dataplex.v1.SessionEvent.EventType|keyof typeof google.cloud.dataplex.v1.SessionEvent.EventType);
+
+                    /** SessionEvent query. */
+                    public query?: (google.cloud.dataplex.v1.SessionEvent.IQueryDetail|null);
+
+                    /** SessionEvent detail. */
+                    public detail?: "query";
+
+                    /**
+                     * Creates a new SessionEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SessionEvent instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.ISessionEvent): google.cloud.dataplex.v1.SessionEvent;
+
+                    /**
+                     * Encodes the specified SessionEvent message. Does not implicitly {@link google.cloud.dataplex.v1.SessionEvent.verify|verify} messages.
+                     * @param message SessionEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.ISessionEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SessionEvent message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.SessionEvent.verify|verify} messages.
+                     * @param message SessionEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.ISessionEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SessionEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SessionEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.SessionEvent;
+
+                    /**
+                     * Decodes a SessionEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SessionEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.SessionEvent;
+
+                    /**
+                     * Verifies a SessionEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SessionEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SessionEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.SessionEvent;
+
+                    /**
+                     * Creates a plain object from a SessionEvent message. Also converts values to other types if specified.
+                     * @param message SessionEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.SessionEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SessionEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace SessionEvent {
+
+                    /** EventType enum. */
+                    enum EventType {
+                        EVENT_TYPE_UNSPECIFIED = 0,
+                        START = 1,
+                        STOP = 2,
+                        QUERY = 3
+                    }
+
+                    /** Properties of a QueryDetail. */
+                    interface IQueryDetail {
+
+                        /** QueryDetail queryId */
+                        queryId?: (string|null);
+
+                        /** QueryDetail queryText */
+                        queryText?: (string|null);
+
+                        /** QueryDetail engine */
+                        engine?: (google.cloud.dataplex.v1.SessionEvent.QueryDetail.Engine|keyof typeof google.cloud.dataplex.v1.SessionEvent.QueryDetail.Engine|null);
+
+                        /** QueryDetail duration */
+                        duration?: (google.protobuf.IDuration|null);
+
+                        /** QueryDetail resultSizeBytes */
+                        resultSizeBytes?: (number|Long|string|null);
+
+                        /** QueryDetail dataProcessedBytes */
+                        dataProcessedBytes?: (number|Long|string|null);
+                    }
+
+                    /** Represents a QueryDetail. */
+                    class QueryDetail implements IQueryDetail {
+
+                        /**
+                         * Constructs a new QueryDetail.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.SessionEvent.IQueryDetail);
+
+                        /** QueryDetail queryId. */
+                        public queryId: string;
+
+                        /** QueryDetail queryText. */
+                        public queryText: string;
+
+                        /** QueryDetail engine. */
+                        public engine: (google.cloud.dataplex.v1.SessionEvent.QueryDetail.Engine|keyof typeof google.cloud.dataplex.v1.SessionEvent.QueryDetail.Engine);
+
+                        /** QueryDetail duration. */
+                        public duration?: (google.protobuf.IDuration|null);
+
+                        /** QueryDetail resultSizeBytes. */
+                        public resultSizeBytes: (number|Long|string);
+
+                        /** QueryDetail dataProcessedBytes. */
+                        public dataProcessedBytes: (number|Long|string);
+
+                        /**
+                         * Creates a new QueryDetail instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueryDetail instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.SessionEvent.IQueryDetail): google.cloud.dataplex.v1.SessionEvent.QueryDetail;
+
+                        /**
+                         * Encodes the specified QueryDetail message. Does not implicitly {@link google.cloud.dataplex.v1.SessionEvent.QueryDetail.verify|verify} messages.
+                         * @param message QueryDetail message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.SessionEvent.IQueryDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueryDetail message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.SessionEvent.QueryDetail.verify|verify} messages.
+                         * @param message QueryDetail message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.SessionEvent.IQueryDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueryDetail message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueryDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.SessionEvent.QueryDetail;
+
+                        /**
+                         * Decodes a QueryDetail message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueryDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.SessionEvent.QueryDetail;
+
+                        /**
+                         * Verifies a QueryDetail message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueryDetail message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueryDetail
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.SessionEvent.QueryDetail;
+
+                        /**
+                         * Creates a plain object from a QueryDetail message. Also converts values to other types if specified.
+                         * @param message QueryDetail
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.SessionEvent.QueryDetail, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueryDetail to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace QueryDetail {
+
+                        /** Engine enum. */
+                        enum Engine {
+                            ENGINE_UNSPECIFIED = 0,
+                            SPARK_SQL = 1,
+                            BIGQUERY = 2
+                        }
+                    }
+                }
+
+                /** Represents a MetadataService */
+                class MetadataService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new MetadataService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new MetadataService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): MetadataService;
+
+                    /**
+                     * Calls CreateEntity.
+                     * @param request CreateEntityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Entity
+                     */
+                    public createEntity(request: google.cloud.dataplex.v1.ICreateEntityRequest, callback: google.cloud.dataplex.v1.MetadataService.CreateEntityCallback): void;
+
+                    /**
+                     * Calls CreateEntity.
+                     * @param request CreateEntityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createEntity(request: google.cloud.dataplex.v1.ICreateEntityRequest): Promise<google.cloud.dataplex.v1.Entity>;
+
+                    /**
+                     * Calls UpdateEntity.
+                     * @param request UpdateEntityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Entity
+                     */
+                    public updateEntity(request: google.cloud.dataplex.v1.IUpdateEntityRequest, callback: google.cloud.dataplex.v1.MetadataService.UpdateEntityCallback): void;
+
+                    /**
+                     * Calls UpdateEntity.
+                     * @param request UpdateEntityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateEntity(request: google.cloud.dataplex.v1.IUpdateEntityRequest): Promise<google.cloud.dataplex.v1.Entity>;
+
+                    /**
+                     * Calls DeleteEntity.
+                     * @param request DeleteEntityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteEntity(request: google.cloud.dataplex.v1.IDeleteEntityRequest, callback: google.cloud.dataplex.v1.MetadataService.DeleteEntityCallback): void;
+
+                    /**
+                     * Calls DeleteEntity.
+                     * @param request DeleteEntityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteEntity(request: google.cloud.dataplex.v1.IDeleteEntityRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetEntity.
+                     * @param request GetEntityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Entity
+                     */
+                    public getEntity(request: google.cloud.dataplex.v1.IGetEntityRequest, callback: google.cloud.dataplex.v1.MetadataService.GetEntityCallback): void;
+
+                    /**
+                     * Calls GetEntity.
+                     * @param request GetEntityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEntity(request: google.cloud.dataplex.v1.IGetEntityRequest): Promise<google.cloud.dataplex.v1.Entity>;
+
+                    /**
+                     * Calls ListEntities.
+                     * @param request ListEntitiesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListEntitiesResponse
+                     */
+                    public listEntities(request: google.cloud.dataplex.v1.IListEntitiesRequest, callback: google.cloud.dataplex.v1.MetadataService.ListEntitiesCallback): void;
+
+                    /**
+                     * Calls ListEntities.
+                     * @param request ListEntitiesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listEntities(request: google.cloud.dataplex.v1.IListEntitiesRequest): Promise<google.cloud.dataplex.v1.ListEntitiesResponse>;
+
+                    /**
+                     * Calls CreatePartition.
+                     * @param request CreatePartitionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Partition
+                     */
+                    public createPartition(request: google.cloud.dataplex.v1.ICreatePartitionRequest, callback: google.cloud.dataplex.v1.MetadataService.CreatePartitionCallback): void;
+
+                    /**
+                     * Calls CreatePartition.
+                     * @param request CreatePartitionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createPartition(request: google.cloud.dataplex.v1.ICreatePartitionRequest): Promise<google.cloud.dataplex.v1.Partition>;
+
+                    /**
+                     * Calls DeletePartition.
+                     * @param request DeletePartitionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deletePartition(request: google.cloud.dataplex.v1.IDeletePartitionRequest, callback: google.cloud.dataplex.v1.MetadataService.DeletePartitionCallback): void;
+
+                    /**
+                     * Calls DeletePartition.
+                     * @param request DeletePartitionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deletePartition(request: google.cloud.dataplex.v1.IDeletePartitionRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetPartition.
+                     * @param request GetPartitionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Partition
+                     */
+                    public getPartition(request: google.cloud.dataplex.v1.IGetPartitionRequest, callback: google.cloud.dataplex.v1.MetadataService.GetPartitionCallback): void;
+
+                    /**
+                     * Calls GetPartition.
+                     * @param request GetPartitionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPartition(request: google.cloud.dataplex.v1.IGetPartitionRequest): Promise<google.cloud.dataplex.v1.Partition>;
+
+                    /**
+                     * Calls ListPartitions.
+                     * @param request ListPartitionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPartitionsResponse
+                     */
+                    public listPartitions(request: google.cloud.dataplex.v1.IListPartitionsRequest, callback: google.cloud.dataplex.v1.MetadataService.ListPartitionsCallback): void;
+
+                    /**
+                     * Calls ListPartitions.
+                     * @param request ListPartitionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPartitions(request: google.cloud.dataplex.v1.IListPartitionsRequest): Promise<google.cloud.dataplex.v1.ListPartitionsResponse>;
+                }
+
+                namespace MetadataService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#createEntity}.
+                     * @param error Error, if any
+                     * @param [response] Entity
+                     */
+                    type CreateEntityCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Entity) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#updateEntity}.
+                     * @param error Error, if any
+                     * @param [response] Entity
+                     */
+                    type UpdateEntityCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Entity) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#deleteEntity}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteEntityCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#getEntity}.
+                     * @param error Error, if any
+                     * @param [response] Entity
+                     */
+                    type GetEntityCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Entity) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#listEntities}.
+                     * @param error Error, if any
+                     * @param [response] ListEntitiesResponse
+                     */
+                    type ListEntitiesCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.ListEntitiesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#createPartition}.
+                     * @param error Error, if any
+                     * @param [response] Partition
+                     */
+                    type CreatePartitionCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Partition) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#deletePartition}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeletePartitionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#getPartition}.
+                     * @param error Error, if any
+                     * @param [response] Partition
+                     */
+                    type GetPartitionCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Partition) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.MetadataService#listPartitions}.
+                     * @param error Error, if any
+                     * @param [response] ListPartitionsResponse
+                     */
+                    type ListPartitionsCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.ListPartitionsResponse) => void;
+                }
+
+                /** Properties of a CreateEntityRequest. */
+                interface ICreateEntityRequest {
+
+                    /** CreateEntityRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateEntityRequest entity */
+                    entity?: (google.cloud.dataplex.v1.IEntity|null);
+
+                    /** CreateEntityRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateEntityRequest. */
+                class CreateEntityRequest implements ICreateEntityRequest {
+
+                    /**
+                     * Constructs a new CreateEntityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.ICreateEntityRequest);
+
+                    /** CreateEntityRequest parent. */
+                    public parent: string;
+
+                    /** CreateEntityRequest entity. */
+                    public entity?: (google.cloud.dataplex.v1.IEntity|null);
+
+                    /** CreateEntityRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateEntityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateEntityRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.ICreateEntityRequest): google.cloud.dataplex.v1.CreateEntityRequest;
+
+                    /**
+                     * Encodes the specified CreateEntityRequest message. Does not implicitly {@link google.cloud.dataplex.v1.CreateEntityRequest.verify|verify} messages.
+                     * @param message CreateEntityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.ICreateEntityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateEntityRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.CreateEntityRequest.verify|verify} messages.
+                     * @param message CreateEntityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.ICreateEntityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateEntityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateEntityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.CreateEntityRequest;
+
+                    /**
+                     * Decodes a CreateEntityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateEntityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.CreateEntityRequest;
+
+                    /**
+                     * Verifies a CreateEntityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateEntityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateEntityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.CreateEntityRequest;
+
+                    /**
+                     * Creates a plain object from a CreateEntityRequest message. Also converts values to other types if specified.
+                     * @param message CreateEntityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.CreateEntityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateEntityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateEntityRequest. */
+                interface IUpdateEntityRequest {
+
+                    /** UpdateEntityRequest entity */
+                    entity?: (google.cloud.dataplex.v1.IEntity|null);
+
+                    /** UpdateEntityRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateEntityRequest. */
+                class UpdateEntityRequest implements IUpdateEntityRequest {
+
+                    /**
+                     * Constructs a new UpdateEntityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IUpdateEntityRequest);
+
+                    /** UpdateEntityRequest entity. */
+                    public entity?: (google.cloud.dataplex.v1.IEntity|null);
+
+                    /** UpdateEntityRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateEntityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateEntityRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IUpdateEntityRequest): google.cloud.dataplex.v1.UpdateEntityRequest;
+
+                    /**
+                     * Encodes the specified UpdateEntityRequest message. Does not implicitly {@link google.cloud.dataplex.v1.UpdateEntityRequest.verify|verify} messages.
+                     * @param message UpdateEntityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IUpdateEntityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateEntityRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.UpdateEntityRequest.verify|verify} messages.
+                     * @param message UpdateEntityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IUpdateEntityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateEntityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateEntityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.UpdateEntityRequest;
+
+                    /**
+                     * Decodes an UpdateEntityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateEntityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.UpdateEntityRequest;
+
+                    /**
+                     * Verifies an UpdateEntityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateEntityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateEntityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.UpdateEntityRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateEntityRequest message. Also converts values to other types if specified.
+                     * @param message UpdateEntityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.UpdateEntityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateEntityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteEntityRequest. */
+                interface IDeleteEntityRequest {
+
+                    /** DeleteEntityRequest name */
+                    name?: (string|null);
+
+                    /** DeleteEntityRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteEntityRequest. */
+                class DeleteEntityRequest implements IDeleteEntityRequest {
+
+                    /**
+                     * Constructs a new DeleteEntityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IDeleteEntityRequest);
+
+                    /** DeleteEntityRequest name. */
+                    public name: string;
+
+                    /** DeleteEntityRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteEntityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteEntityRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IDeleteEntityRequest): google.cloud.dataplex.v1.DeleteEntityRequest;
+
+                    /**
+                     * Encodes the specified DeleteEntityRequest message. Does not implicitly {@link google.cloud.dataplex.v1.DeleteEntityRequest.verify|verify} messages.
+                     * @param message DeleteEntityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IDeleteEntityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteEntityRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DeleteEntityRequest.verify|verify} messages.
+                     * @param message DeleteEntityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDeleteEntityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteEntityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteEntityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DeleteEntityRequest;
+
+                    /**
+                     * Decodes a DeleteEntityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteEntityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DeleteEntityRequest;
+
+                    /**
+                     * Verifies a DeleteEntityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteEntityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteEntityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DeleteEntityRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteEntityRequest message. Also converts values to other types if specified.
+                     * @param message DeleteEntityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.DeleteEntityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteEntityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListEntitiesRequest. */
+                interface IListEntitiesRequest {
+
+                    /** ListEntitiesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListEntitiesRequest view */
+                    view?: (google.cloud.dataplex.v1.ListEntitiesRequest.EntityView|keyof typeof google.cloud.dataplex.v1.ListEntitiesRequest.EntityView|null);
+
+                    /** ListEntitiesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListEntitiesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListEntitiesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListEntitiesRequest. */
+                class ListEntitiesRequest implements IListEntitiesRequest {
+
+                    /**
+                     * Constructs a new ListEntitiesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IListEntitiesRequest);
+
+                    /** ListEntitiesRequest parent. */
+                    public parent: string;
+
+                    /** ListEntitiesRequest view. */
+                    public view: (google.cloud.dataplex.v1.ListEntitiesRequest.EntityView|keyof typeof google.cloud.dataplex.v1.ListEntitiesRequest.EntityView);
+
+                    /** ListEntitiesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListEntitiesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListEntitiesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListEntitiesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEntitiesRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IListEntitiesRequest): google.cloud.dataplex.v1.ListEntitiesRequest;
+
+                    /**
+                     * Encodes the specified ListEntitiesRequest message. Does not implicitly {@link google.cloud.dataplex.v1.ListEntitiesRequest.verify|verify} messages.
+                     * @param message ListEntitiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IListEntitiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEntitiesRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListEntitiesRequest.verify|verify} messages.
+                     * @param message ListEntitiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListEntitiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEntitiesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEntitiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListEntitiesRequest;
+
+                    /**
+                     * Decodes a ListEntitiesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEntitiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListEntitiesRequest;
+
+                    /**
+                     * Verifies a ListEntitiesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEntitiesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEntitiesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListEntitiesRequest;
+
+                    /**
+                     * Creates a plain object from a ListEntitiesRequest message. Also converts values to other types if specified.
+                     * @param message ListEntitiesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ListEntitiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEntitiesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ListEntitiesRequest {
+
+                    /** EntityView enum. */
+                    enum EntityView {
+                        ENTITY_VIEW_UNSPECIFIED = 0,
+                        TABLES = 1,
+                        FILESETS = 2
+                    }
+                }
+
+                /** Properties of a ListEntitiesResponse. */
+                interface IListEntitiesResponse {
+
+                    /** ListEntitiesResponse entities */
+                    entities?: (google.cloud.dataplex.v1.IEntity[]|null);
+
+                    /** ListEntitiesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListEntitiesResponse. */
+                class ListEntitiesResponse implements IListEntitiesResponse {
+
+                    /**
+                     * Constructs a new ListEntitiesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IListEntitiesResponse);
+
+                    /** ListEntitiesResponse entities. */
+                    public entities: google.cloud.dataplex.v1.IEntity[];
+
+                    /** ListEntitiesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListEntitiesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEntitiesResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IListEntitiesResponse): google.cloud.dataplex.v1.ListEntitiesResponse;
+
+                    /**
+                     * Encodes the specified ListEntitiesResponse message. Does not implicitly {@link google.cloud.dataplex.v1.ListEntitiesResponse.verify|verify} messages.
+                     * @param message ListEntitiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IListEntitiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEntitiesResponse message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListEntitiesResponse.verify|verify} messages.
+                     * @param message ListEntitiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListEntitiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEntitiesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEntitiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListEntitiesResponse;
+
+                    /**
+                     * Decodes a ListEntitiesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEntitiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListEntitiesResponse;
+
+                    /**
+                     * Verifies a ListEntitiesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEntitiesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEntitiesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListEntitiesResponse;
+
+                    /**
+                     * Creates a plain object from a ListEntitiesResponse message. Also converts values to other types if specified.
+                     * @param message ListEntitiesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ListEntitiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEntitiesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetEntityRequest. */
+                interface IGetEntityRequest {
+
+                    /** GetEntityRequest name */
+                    name?: (string|null);
+
+                    /** GetEntityRequest view */
+                    view?: (google.cloud.dataplex.v1.GetEntityRequest.EntityView|keyof typeof google.cloud.dataplex.v1.GetEntityRequest.EntityView|null);
+                }
+
+                /** Represents a GetEntityRequest. */
+                class GetEntityRequest implements IGetEntityRequest {
+
+                    /**
+                     * Constructs a new GetEntityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IGetEntityRequest);
+
+                    /** GetEntityRequest name. */
+                    public name: string;
+
+                    /** GetEntityRequest view. */
+                    public view: (google.cloud.dataplex.v1.GetEntityRequest.EntityView|keyof typeof google.cloud.dataplex.v1.GetEntityRequest.EntityView);
+
+                    /**
+                     * Creates a new GetEntityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEntityRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IGetEntityRequest): google.cloud.dataplex.v1.GetEntityRequest;
+
+                    /**
+                     * Encodes the specified GetEntityRequest message. Does not implicitly {@link google.cloud.dataplex.v1.GetEntityRequest.verify|verify} messages.
+                     * @param message GetEntityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IGetEntityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEntityRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.GetEntityRequest.verify|verify} messages.
+                     * @param message GetEntityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IGetEntityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEntityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEntityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.GetEntityRequest;
+
+                    /**
+                     * Decodes a GetEntityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEntityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.GetEntityRequest;
+
+                    /**
+                     * Verifies a GetEntityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEntityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEntityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.GetEntityRequest;
+
+                    /**
+                     * Creates a plain object from a GetEntityRequest message. Also converts values to other types if specified.
+                     * @param message GetEntityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.GetEntityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEntityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace GetEntityRequest {
+
+                    /** EntityView enum. */
+                    enum EntityView {
+                        ENTITY_VIEW_UNSPECIFIED = 0,
+                        BASIC = 1,
+                        SCHEMA = 2,
+                        FULL = 4
+                    }
+                }
+
+                /** Properties of a ListPartitionsRequest. */
+                interface IListPartitionsRequest {
+
+                    /** ListPartitionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPartitionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPartitionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListPartitionsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListPartitionsRequest. */
+                class ListPartitionsRequest implements IListPartitionsRequest {
+
+                    /**
+                     * Constructs a new ListPartitionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IListPartitionsRequest);
+
+                    /** ListPartitionsRequest parent. */
+                    public parent: string;
+
+                    /** ListPartitionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPartitionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListPartitionsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListPartitionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPartitionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IListPartitionsRequest): google.cloud.dataplex.v1.ListPartitionsRequest;
+
+                    /**
+                     * Encodes the specified ListPartitionsRequest message. Does not implicitly {@link google.cloud.dataplex.v1.ListPartitionsRequest.verify|verify} messages.
+                     * @param message ListPartitionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IListPartitionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPartitionsRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListPartitionsRequest.verify|verify} messages.
+                     * @param message ListPartitionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListPartitionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPartitionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPartitionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListPartitionsRequest;
+
+                    /**
+                     * Decodes a ListPartitionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPartitionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListPartitionsRequest;
+
+                    /**
+                     * Verifies a ListPartitionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPartitionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPartitionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListPartitionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListPartitionsRequest message. Also converts values to other types if specified.
+                     * @param message ListPartitionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ListPartitionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPartitionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreatePartitionRequest. */
+                interface ICreatePartitionRequest {
+
+                    /** CreatePartitionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreatePartitionRequest partition */
+                    partition?: (google.cloud.dataplex.v1.IPartition|null);
+
+                    /** CreatePartitionRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreatePartitionRequest. */
+                class CreatePartitionRequest implements ICreatePartitionRequest {
+
+                    /**
+                     * Constructs a new CreatePartitionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.ICreatePartitionRequest);
+
+                    /** CreatePartitionRequest parent. */
+                    public parent: string;
+
+                    /** CreatePartitionRequest partition. */
+                    public partition?: (google.cloud.dataplex.v1.IPartition|null);
+
+                    /** CreatePartitionRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreatePartitionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatePartitionRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.ICreatePartitionRequest): google.cloud.dataplex.v1.CreatePartitionRequest;
+
+                    /**
+                     * Encodes the specified CreatePartitionRequest message. Does not implicitly {@link google.cloud.dataplex.v1.CreatePartitionRequest.verify|verify} messages.
+                     * @param message CreatePartitionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.ICreatePartitionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatePartitionRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.CreatePartitionRequest.verify|verify} messages.
+                     * @param message CreatePartitionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.ICreatePartitionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatePartitionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatePartitionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.CreatePartitionRequest;
+
+                    /**
+                     * Decodes a CreatePartitionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatePartitionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.CreatePartitionRequest;
+
+                    /**
+                     * Verifies a CreatePartitionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatePartitionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatePartitionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.CreatePartitionRequest;
+
+                    /**
+                     * Creates a plain object from a CreatePartitionRequest message. Also converts values to other types if specified.
+                     * @param message CreatePartitionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.CreatePartitionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatePartitionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeletePartitionRequest. */
+                interface IDeletePartitionRequest {
+
+                    /** DeletePartitionRequest name */
+                    name?: (string|null);
+
+                    /** DeletePartitionRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeletePartitionRequest. */
+                class DeletePartitionRequest implements IDeletePartitionRequest {
+
+                    /**
+                     * Constructs a new DeletePartitionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IDeletePartitionRequest);
+
+                    /** DeletePartitionRequest name. */
+                    public name: string;
+
+                    /** DeletePartitionRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeletePartitionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeletePartitionRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IDeletePartitionRequest): google.cloud.dataplex.v1.DeletePartitionRequest;
+
+                    /**
+                     * Encodes the specified DeletePartitionRequest message. Does not implicitly {@link google.cloud.dataplex.v1.DeletePartitionRequest.verify|verify} messages.
+                     * @param message DeletePartitionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IDeletePartitionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeletePartitionRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DeletePartitionRequest.verify|verify} messages.
+                     * @param message DeletePartitionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDeletePartitionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeletePartitionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeletePartitionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DeletePartitionRequest;
+
+                    /**
+                     * Decodes a DeletePartitionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeletePartitionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DeletePartitionRequest;
+
+                    /**
+                     * Verifies a DeletePartitionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeletePartitionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeletePartitionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DeletePartitionRequest;
+
+                    /**
+                     * Creates a plain object from a DeletePartitionRequest message. Also converts values to other types if specified.
+                     * @param message DeletePartitionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.DeletePartitionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeletePartitionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListPartitionsResponse. */
+                interface IListPartitionsResponse {
+
+                    /** ListPartitionsResponse partitions */
+                    partitions?: (google.cloud.dataplex.v1.IPartition[]|null);
+
+                    /** ListPartitionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListPartitionsResponse. */
+                class ListPartitionsResponse implements IListPartitionsResponse {
+
+                    /**
+                     * Constructs a new ListPartitionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IListPartitionsResponse);
+
+                    /** ListPartitionsResponse partitions. */
+                    public partitions: google.cloud.dataplex.v1.IPartition[];
+
+                    /** ListPartitionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListPartitionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPartitionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IListPartitionsResponse): google.cloud.dataplex.v1.ListPartitionsResponse;
+
+                    /**
+                     * Encodes the specified ListPartitionsResponse message. Does not implicitly {@link google.cloud.dataplex.v1.ListPartitionsResponse.verify|verify} messages.
+                     * @param message ListPartitionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IListPartitionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPartitionsResponse message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListPartitionsResponse.verify|verify} messages.
+                     * @param message ListPartitionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListPartitionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPartitionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPartitionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListPartitionsResponse;
+
+                    /**
+                     * Decodes a ListPartitionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPartitionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListPartitionsResponse;
+
+                    /**
+                     * Verifies a ListPartitionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPartitionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPartitionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListPartitionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListPartitionsResponse message. Also converts values to other types if specified.
+                     * @param message ListPartitionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ListPartitionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPartitionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetPartitionRequest. */
+                interface IGetPartitionRequest {
+
+                    /** GetPartitionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPartitionRequest. */
+                class GetPartitionRequest implements IGetPartitionRequest {
+
+                    /**
+                     * Constructs a new GetPartitionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IGetPartitionRequest);
+
+                    /** GetPartitionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPartitionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPartitionRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IGetPartitionRequest): google.cloud.dataplex.v1.GetPartitionRequest;
+
+                    /**
+                     * Encodes the specified GetPartitionRequest message. Does not implicitly {@link google.cloud.dataplex.v1.GetPartitionRequest.verify|verify} messages.
+                     * @param message GetPartitionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IGetPartitionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPartitionRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.GetPartitionRequest.verify|verify} messages.
+                     * @param message GetPartitionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IGetPartitionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPartitionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPartitionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.GetPartitionRequest;
+
+                    /**
+                     * Decodes a GetPartitionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPartitionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.GetPartitionRequest;
+
+                    /**
+                     * Verifies a GetPartitionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPartitionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPartitionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.GetPartitionRequest;
+
+                    /**
+                     * Creates a plain object from a GetPartitionRequest message. Also converts values to other types if specified.
+                     * @param message GetPartitionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.GetPartitionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPartitionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an Entity. */
+                interface IEntity {
+
+                    /** Entity name */
+                    name?: (string|null);
+
+                    /** Entity displayName */
+                    displayName?: (string|null);
+
+                    /** Entity description */
+                    description?: (string|null);
+
+                    /** Entity createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Entity updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Entity id */
+                    id?: (string|null);
+
+                    /** Entity etag */
+                    etag?: (string|null);
+
+                    /** Entity type */
+                    type?: (google.cloud.dataplex.v1.Entity.Type|keyof typeof google.cloud.dataplex.v1.Entity.Type|null);
+
+                    /** Entity asset */
+                    asset?: (string|null);
+
+                    /** Entity dataPath */
+                    dataPath?: (string|null);
+
+                    /** Entity dataPathPattern */
+                    dataPathPattern?: (string|null);
+
+                    /** Entity catalogEntry */
+                    catalogEntry?: (string|null);
+
+                    /** Entity system */
+                    system?: (google.cloud.dataplex.v1.StorageSystem|keyof typeof google.cloud.dataplex.v1.StorageSystem|null);
+
+                    /** Entity format */
+                    format?: (google.cloud.dataplex.v1.IStorageFormat|null);
+
+                    /** Entity compatibility */
+                    compatibility?: (google.cloud.dataplex.v1.Entity.ICompatibilityStatus|null);
+
+                    /** Entity schema */
+                    schema?: (google.cloud.dataplex.v1.ISchema|null);
+                }
+
+                /** Represents an Entity. */
+                class Entity implements IEntity {
+
+                    /**
+                     * Constructs a new Entity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IEntity);
+
+                    /** Entity name. */
+                    public name: string;
+
+                    /** Entity displayName. */
+                    public displayName: string;
+
+                    /** Entity description. */
+                    public description: string;
+
+                    /** Entity createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Entity updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Entity id. */
+                    public id: string;
+
+                    /** Entity etag. */
+                    public etag: string;
+
+                    /** Entity type. */
+                    public type: (google.cloud.dataplex.v1.Entity.Type|keyof typeof google.cloud.dataplex.v1.Entity.Type);
+
+                    /** Entity asset. */
+                    public asset: string;
+
+                    /** Entity dataPath. */
+                    public dataPath: string;
+
+                    /** Entity dataPathPattern. */
+                    public dataPathPattern: string;
+
+                    /** Entity catalogEntry. */
+                    public catalogEntry: string;
+
+                    /** Entity system. */
+                    public system: (google.cloud.dataplex.v1.StorageSystem|keyof typeof google.cloud.dataplex.v1.StorageSystem);
+
+                    /** Entity format. */
+                    public format?: (google.cloud.dataplex.v1.IStorageFormat|null);
+
+                    /** Entity compatibility. */
+                    public compatibility?: (google.cloud.dataplex.v1.Entity.ICompatibilityStatus|null);
+
+                    /** Entity schema. */
+                    public schema?: (google.cloud.dataplex.v1.ISchema|null);
+
+                    /**
+                     * Creates a new Entity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Entity instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IEntity): google.cloud.dataplex.v1.Entity;
+
+                    /**
+                     * Encodes the specified Entity message. Does not implicitly {@link google.cloud.dataplex.v1.Entity.verify|verify} messages.
+                     * @param message Entity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Entity message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Entity.verify|verify} messages.
+                     * @param message Entity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Entity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Entity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Entity;
+
+                    /**
+                     * Decodes an Entity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Entity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Entity;
+
+                    /**
+                     * Verifies an Entity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Entity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Entity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Entity;
+
+                    /**
+                     * Creates a plain object from an Entity message. Also converts values to other types if specified.
+                     * @param message Entity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.Entity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Entity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Entity {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        TABLE = 1,
+                        FILESET = 2
+                    }
+
+                    /** Properties of a CompatibilityStatus. */
+                    interface ICompatibilityStatus {
+
+                        /** CompatibilityStatus hiveMetastore */
+                        hiveMetastore?: (google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility|null);
+
+                        /** CompatibilityStatus bigquery */
+                        bigquery?: (google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility|null);
+                    }
+
+                    /** Represents a CompatibilityStatus. */
+                    class CompatibilityStatus implements ICompatibilityStatus {
+
+                        /**
+                         * Constructs a new CompatibilityStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.Entity.ICompatibilityStatus);
+
+                        /** CompatibilityStatus hiveMetastore. */
+                        public hiveMetastore?: (google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility|null);
+
+                        /** CompatibilityStatus bigquery. */
+                        public bigquery?: (google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility|null);
+
+                        /**
+                         * Creates a new CompatibilityStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CompatibilityStatus instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.Entity.ICompatibilityStatus): google.cloud.dataplex.v1.Entity.CompatibilityStatus;
+
+                        /**
+                         * Encodes the specified CompatibilityStatus message. Does not implicitly {@link google.cloud.dataplex.v1.Entity.CompatibilityStatus.verify|verify} messages.
+                         * @param message CompatibilityStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.Entity.ICompatibilityStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CompatibilityStatus message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Entity.CompatibilityStatus.verify|verify} messages.
+                         * @param message CompatibilityStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.Entity.ICompatibilityStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CompatibilityStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CompatibilityStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Entity.CompatibilityStatus;
+
+                        /**
+                         * Decodes a CompatibilityStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CompatibilityStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Entity.CompatibilityStatus;
+
+                        /**
+                         * Verifies a CompatibilityStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CompatibilityStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CompatibilityStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Entity.CompatibilityStatus;
+
+                        /**
+                         * Creates a plain object from a CompatibilityStatus message. Also converts values to other types if specified.
+                         * @param message CompatibilityStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.Entity.CompatibilityStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CompatibilityStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace CompatibilityStatus {
+
+                        /** Properties of a Compatibility. */
+                        interface ICompatibility {
+
+                            /** Compatibility compatible */
+                            compatible?: (boolean|null);
+
+                            /** Compatibility reason */
+                            reason?: (string|null);
+                        }
+
+                        /** Represents a Compatibility. */
+                        class Compatibility implements ICompatibility {
+
+                            /**
+                             * Constructs a new Compatibility.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility);
+
+                            /** Compatibility compatible. */
+                            public compatible: boolean;
+
+                            /** Compatibility reason. */
+                            public reason: string;
+
+                            /**
+                             * Creates a new Compatibility instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Compatibility instance
+                             */
+                            public static create(properties?: google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility): google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility;
+
+                            /**
+                             * Encodes the specified Compatibility message. Does not implicitly {@link google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility.verify|verify} messages.
+                             * @param message Compatibility message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Compatibility message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility.verify|verify} messages.
+                             * @param message Compatibility message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dataplex.v1.Entity.CompatibilityStatus.ICompatibility, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Compatibility message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Compatibility
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility;
+
+                            /**
+                             * Decodes a Compatibility message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Compatibility
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility;
+
+                            /**
+                             * Verifies a Compatibility message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Compatibility message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Compatibility
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility;
+
+                            /**
+                             * Creates a plain object from a Compatibility message. Also converts values to other types if specified.
+                             * @param message Compatibility
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Compatibility to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+                }
+
+                /** Properties of a Partition. */
+                interface IPartition {
+
+                    /** Partition name */
+                    name?: (string|null);
+
+                    /** Partition values */
+                    values?: (string[]|null);
+
+                    /** Partition location */
+                    location?: (string|null);
+
+                    /** Partition etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a Partition. */
+                class Partition implements IPartition {
+
+                    /**
+                     * Constructs a new Partition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IPartition);
+
+                    /** Partition name. */
+                    public name: string;
+
+                    /** Partition values. */
+                    public values: string[];
+
+                    /** Partition location. */
+                    public location: string;
+
+                    /** Partition etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new Partition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Partition instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IPartition): google.cloud.dataplex.v1.Partition;
+
+                    /**
+                     * Encodes the specified Partition message. Does not implicitly {@link google.cloud.dataplex.v1.Partition.verify|verify} messages.
+                     * @param message Partition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IPartition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Partition message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Partition.verify|verify} messages.
+                     * @param message Partition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IPartition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Partition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Partition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Partition;
+
+                    /**
+                     * Decodes a Partition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Partition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Partition;
+
+                    /**
+                     * Verifies a Partition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Partition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Partition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Partition;
+
+                    /**
+                     * Creates a plain object from a Partition message. Also converts values to other types if specified.
+                     * @param message Partition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.Partition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Partition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Schema. */
+                interface ISchema {
+
+                    /** Schema userManaged */
+                    userManaged?: (boolean|null);
+
+                    /** Schema fields */
+                    fields?: (google.cloud.dataplex.v1.Schema.ISchemaField[]|null);
+
+                    /** Schema partitionFields */
+                    partitionFields?: (google.cloud.dataplex.v1.Schema.IPartitionField[]|null);
+
+                    /** Schema partitionStyle */
+                    partitionStyle?: (google.cloud.dataplex.v1.Schema.PartitionStyle|keyof typeof google.cloud.dataplex.v1.Schema.PartitionStyle|null);
+                }
+
+                /** Represents a Schema. */
+                class Schema implements ISchema {
+
+                    /**
+                     * Constructs a new Schema.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.ISchema);
+
+                    /** Schema userManaged. */
+                    public userManaged: boolean;
+
+                    /** Schema fields. */
+                    public fields: google.cloud.dataplex.v1.Schema.ISchemaField[];
+
+                    /** Schema partitionFields. */
+                    public partitionFields: google.cloud.dataplex.v1.Schema.IPartitionField[];
+
+                    /** Schema partitionStyle. */
+                    public partitionStyle: (google.cloud.dataplex.v1.Schema.PartitionStyle|keyof typeof google.cloud.dataplex.v1.Schema.PartitionStyle);
+
+                    /**
+                     * Creates a new Schema instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Schema instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.ISchema): google.cloud.dataplex.v1.Schema;
+
+                    /**
+                     * Encodes the specified Schema message. Does not implicitly {@link google.cloud.dataplex.v1.Schema.verify|verify} messages.
+                     * @param message Schema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Schema message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Schema.verify|verify} messages.
+                     * @param message Schema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Schema message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Schema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Schema;
+
+                    /**
+                     * Decodes a Schema message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Schema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Schema;
+
+                    /**
+                     * Verifies a Schema message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Schema message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Schema
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Schema;
+
+                    /**
+                     * Creates a plain object from a Schema message. Also converts values to other types if specified.
+                     * @param message Schema
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.Schema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Schema to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Schema {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        BOOLEAN = 1,
+                        BYTE = 2,
+                        INT16 = 3,
+                        INT32 = 4,
+                        INT64 = 5,
+                        FLOAT = 6,
+                        DOUBLE = 7,
+                        DECIMAL = 8,
+                        STRING = 9,
+                        BINARY = 10,
+                        TIMESTAMP = 11,
+                        DATE = 12,
+                        TIME = 13,
+                        RECORD = 14,
+                        NULL = 100
+                    }
+
+                    /** Mode enum. */
+                    enum Mode {
+                        MODE_UNSPECIFIED = 0,
+                        REQUIRED = 1,
+                        NULLABLE = 2,
+                        REPEATED = 3
+                    }
+
+                    /** Properties of a SchemaField. */
+                    interface ISchemaField {
+
+                        /** SchemaField name */
+                        name?: (string|null);
+
+                        /** SchemaField description */
+                        description?: (string|null);
+
+                        /** SchemaField type */
+                        type?: (google.cloud.dataplex.v1.Schema.Type|keyof typeof google.cloud.dataplex.v1.Schema.Type|null);
+
+                        /** SchemaField mode */
+                        mode?: (google.cloud.dataplex.v1.Schema.Mode|keyof typeof google.cloud.dataplex.v1.Schema.Mode|null);
+
+                        /** SchemaField fields */
+                        fields?: (google.cloud.dataplex.v1.Schema.ISchemaField[]|null);
+                    }
+
+                    /** Represents a SchemaField. */
+                    class SchemaField implements ISchemaField {
+
+                        /**
+                         * Constructs a new SchemaField.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.Schema.ISchemaField);
+
+                        /** SchemaField name. */
+                        public name: string;
+
+                        /** SchemaField description. */
+                        public description: string;
+
+                        /** SchemaField type. */
+                        public type: (google.cloud.dataplex.v1.Schema.Type|keyof typeof google.cloud.dataplex.v1.Schema.Type);
+
+                        /** SchemaField mode. */
+                        public mode: (google.cloud.dataplex.v1.Schema.Mode|keyof typeof google.cloud.dataplex.v1.Schema.Mode);
+
+                        /** SchemaField fields. */
+                        public fields: google.cloud.dataplex.v1.Schema.ISchemaField[];
+
+                        /**
+                         * Creates a new SchemaField instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SchemaField instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.Schema.ISchemaField): google.cloud.dataplex.v1.Schema.SchemaField;
+
+                        /**
+                         * Encodes the specified SchemaField message. Does not implicitly {@link google.cloud.dataplex.v1.Schema.SchemaField.verify|verify} messages.
+                         * @param message SchemaField message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.Schema.ISchemaField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SchemaField message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Schema.SchemaField.verify|verify} messages.
+                         * @param message SchemaField message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.Schema.ISchemaField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SchemaField message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SchemaField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Schema.SchemaField;
+
+                        /**
+                         * Decodes a SchemaField message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SchemaField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Schema.SchemaField;
+
+                        /**
+                         * Verifies a SchemaField message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SchemaField message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SchemaField
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Schema.SchemaField;
+
+                        /**
+                         * Creates a plain object from a SchemaField message. Also converts values to other types if specified.
+                         * @param message SchemaField
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.Schema.SchemaField, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SchemaField to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a PartitionField. */
+                    interface IPartitionField {
+
+                        /** PartitionField name */
+                        name?: (string|null);
+
+                        /** PartitionField type */
+                        type?: (google.cloud.dataplex.v1.Schema.Type|keyof typeof google.cloud.dataplex.v1.Schema.Type|null);
+                    }
+
+                    /** Represents a PartitionField. */
+                    class PartitionField implements IPartitionField {
+
+                        /**
+                         * Constructs a new PartitionField.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.Schema.IPartitionField);
+
+                        /** PartitionField name. */
+                        public name: string;
+
+                        /** PartitionField type. */
+                        public type: (google.cloud.dataplex.v1.Schema.Type|keyof typeof google.cloud.dataplex.v1.Schema.Type);
+
+                        /**
+                         * Creates a new PartitionField instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PartitionField instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.Schema.IPartitionField): google.cloud.dataplex.v1.Schema.PartitionField;
+
+                        /**
+                         * Encodes the specified PartitionField message. Does not implicitly {@link google.cloud.dataplex.v1.Schema.PartitionField.verify|verify} messages.
+                         * @param message PartitionField message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.Schema.IPartitionField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PartitionField message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Schema.PartitionField.verify|verify} messages.
+                         * @param message PartitionField message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.Schema.IPartitionField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PartitionField message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PartitionField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Schema.PartitionField;
+
+                        /**
+                         * Decodes a PartitionField message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PartitionField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Schema.PartitionField;
+
+                        /**
+                         * Verifies a PartitionField message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PartitionField message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PartitionField
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Schema.PartitionField;
+
+                        /**
+                         * Creates a plain object from a PartitionField message. Also converts values to other types if specified.
+                         * @param message PartitionField
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.Schema.PartitionField, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PartitionField to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** PartitionStyle enum. */
+                    enum PartitionStyle {
+                        PARTITION_STYLE_UNSPECIFIED = 0,
+                        HIVE_COMPATIBLE = 1
+                    }
+                }
+
+                /** Properties of a StorageFormat. */
+                interface IStorageFormat {
+
+                    /** StorageFormat format */
+                    format?: (google.cloud.dataplex.v1.StorageFormat.Format|keyof typeof google.cloud.dataplex.v1.StorageFormat.Format|null);
+
+                    /** StorageFormat compressionFormat */
+                    compressionFormat?: (google.cloud.dataplex.v1.StorageFormat.CompressionFormat|keyof typeof google.cloud.dataplex.v1.StorageFormat.CompressionFormat|null);
+
+                    /** StorageFormat mimeType */
+                    mimeType?: (string|null);
+
+                    /** StorageFormat csv */
+                    csv?: (google.cloud.dataplex.v1.StorageFormat.ICsvOptions|null);
+
+                    /** StorageFormat json */
+                    json?: (google.cloud.dataplex.v1.StorageFormat.IJsonOptions|null);
+                }
+
+                /** Represents a StorageFormat. */
+                class StorageFormat implements IStorageFormat {
+
+                    /**
+                     * Constructs a new StorageFormat.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IStorageFormat);
+
+                    /** StorageFormat format. */
+                    public format: (google.cloud.dataplex.v1.StorageFormat.Format|keyof typeof google.cloud.dataplex.v1.StorageFormat.Format);
+
+                    /** StorageFormat compressionFormat. */
+                    public compressionFormat: (google.cloud.dataplex.v1.StorageFormat.CompressionFormat|keyof typeof google.cloud.dataplex.v1.StorageFormat.CompressionFormat);
+
+                    /** StorageFormat mimeType. */
+                    public mimeType: string;
+
+                    /** StorageFormat csv. */
+                    public csv?: (google.cloud.dataplex.v1.StorageFormat.ICsvOptions|null);
+
+                    /** StorageFormat json. */
+                    public json?: (google.cloud.dataplex.v1.StorageFormat.IJsonOptions|null);
+
+                    /** StorageFormat options. */
+                    public options?: ("csv"|"json");
+
+                    /**
+                     * Creates a new StorageFormat instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StorageFormat instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IStorageFormat): google.cloud.dataplex.v1.StorageFormat;
+
+                    /**
+                     * Encodes the specified StorageFormat message. Does not implicitly {@link google.cloud.dataplex.v1.StorageFormat.verify|verify} messages.
+                     * @param message StorageFormat message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IStorageFormat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StorageFormat message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.StorageFormat.verify|verify} messages.
+                     * @param message StorageFormat message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IStorageFormat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StorageFormat message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StorageFormat
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.StorageFormat;
+
+                    /**
+                     * Decodes a StorageFormat message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StorageFormat
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.StorageFormat;
+
+                    /**
+                     * Verifies a StorageFormat message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StorageFormat message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StorageFormat
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.StorageFormat;
+
+                    /**
+                     * Creates a plain object from a StorageFormat message. Also converts values to other types if specified.
+                     * @param message StorageFormat
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.StorageFormat, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StorageFormat to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace StorageFormat {
+
+                    /** Properties of a CsvOptions. */
+                    interface ICsvOptions {
+
+                        /** CsvOptions encoding */
+                        encoding?: (string|null);
+
+                        /** CsvOptions headerRows */
+                        headerRows?: (number|null);
+
+                        /** CsvOptions delimiter */
+                        delimiter?: (string|null);
+
+                        /** CsvOptions quote */
+                        quote?: (string|null);
+                    }
+
+                    /** Represents a CsvOptions. */
+                    class CsvOptions implements ICsvOptions {
+
+                        /**
+                         * Constructs a new CsvOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.StorageFormat.ICsvOptions);
+
+                        /** CsvOptions encoding. */
+                        public encoding: string;
+
+                        /** CsvOptions headerRows. */
+                        public headerRows: number;
+
+                        /** CsvOptions delimiter. */
+                        public delimiter: string;
+
+                        /** CsvOptions quote. */
+                        public quote: string;
+
+                        /**
+                         * Creates a new CsvOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CsvOptions instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.StorageFormat.ICsvOptions): google.cloud.dataplex.v1.StorageFormat.CsvOptions;
+
+                        /**
+                         * Encodes the specified CsvOptions message. Does not implicitly {@link google.cloud.dataplex.v1.StorageFormat.CsvOptions.verify|verify} messages.
+                         * @param message CsvOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.StorageFormat.ICsvOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CsvOptions message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.StorageFormat.CsvOptions.verify|verify} messages.
+                         * @param message CsvOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.StorageFormat.ICsvOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CsvOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CsvOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.StorageFormat.CsvOptions;
+
+                        /**
+                         * Decodes a CsvOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CsvOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.StorageFormat.CsvOptions;
+
+                        /**
+                         * Verifies a CsvOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CsvOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CsvOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.StorageFormat.CsvOptions;
+
+                        /**
+                         * Creates a plain object from a CsvOptions message. Also converts values to other types if specified.
+                         * @param message CsvOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.StorageFormat.CsvOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CsvOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a JsonOptions. */
+                    interface IJsonOptions {
+
+                        /** JsonOptions encoding */
+                        encoding?: (string|null);
+                    }
+
+                    /** Represents a JsonOptions. */
+                    class JsonOptions implements IJsonOptions {
+
+                        /**
+                         * Constructs a new JsonOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.StorageFormat.IJsonOptions);
+
+                        /** JsonOptions encoding. */
+                        public encoding: string;
+
+                        /**
+                         * Creates a new JsonOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns JsonOptions instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.StorageFormat.IJsonOptions): google.cloud.dataplex.v1.StorageFormat.JsonOptions;
+
+                        /**
+                         * Encodes the specified JsonOptions message. Does not implicitly {@link google.cloud.dataplex.v1.StorageFormat.JsonOptions.verify|verify} messages.
+                         * @param message JsonOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.StorageFormat.IJsonOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified JsonOptions message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.StorageFormat.JsonOptions.verify|verify} messages.
+                         * @param message JsonOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.StorageFormat.IJsonOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a JsonOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns JsonOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.StorageFormat.JsonOptions;
+
+                        /**
+                         * Decodes a JsonOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns JsonOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.StorageFormat.JsonOptions;
+
+                        /**
+                         * Verifies a JsonOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a JsonOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns JsonOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.StorageFormat.JsonOptions;
+
+                        /**
+                         * Creates a plain object from a JsonOptions message. Also converts values to other types if specified.
+                         * @param message JsonOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.StorageFormat.JsonOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this JsonOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Format enum. */
+                    enum Format {
+                        FORMAT_UNSPECIFIED = 0,
+                        PARQUET = 1,
+                        AVRO = 2,
+                        ORC = 3,
+                        CSV = 100,
+                        JSON = 101,
+                        IMAGE = 200,
+                        AUDIO = 201,
+                        VIDEO = 202,
+                        TEXT = 203,
+                        TFRECORD = 204,
+                        OTHER = 1000,
+                        UNKNOWN = 1001
+                    }
+
+                    /** CompressionFormat enum. */
+                    enum CompressionFormat {
+                        COMPRESSION_FORMAT_UNSPECIFIED = 0,
+                        GZIP = 2,
+                        BZIP2 = 3
+                    }
+                }
+
+                /** StorageSystem enum. */
+                enum StorageSystem {
+                    STORAGE_SYSTEM_UNSPECIFIED = 0,
+                    CLOUD_STORAGE = 1,
+                    BIGQUERY = 2
+                }
+
                 /** Represents a DataplexService */
                 class DataplexService extends $protobuf.rpc.Service {
 
@@ -6391,6 +8936,90 @@ export namespace google {
                      * @returns Promise
                      */
                     public cancelJob(request: google.cloud.dataplex.v1.ICancelJobRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateEnvironment.
+                     * @param request CreateEnvironmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createEnvironment(request: google.cloud.dataplex.v1.ICreateEnvironmentRequest, callback: google.cloud.dataplex.v1.DataplexService.CreateEnvironmentCallback): void;
+
+                    /**
+                     * Calls CreateEnvironment.
+                     * @param request CreateEnvironmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createEnvironment(request: google.cloud.dataplex.v1.ICreateEnvironmentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateEnvironment.
+                     * @param request UpdateEnvironmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateEnvironment(request: google.cloud.dataplex.v1.IUpdateEnvironmentRequest, callback: google.cloud.dataplex.v1.DataplexService.UpdateEnvironmentCallback): void;
+
+                    /**
+                     * Calls UpdateEnvironment.
+                     * @param request UpdateEnvironmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateEnvironment(request: google.cloud.dataplex.v1.IUpdateEnvironmentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteEnvironment.
+                     * @param request DeleteEnvironmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteEnvironment(request: google.cloud.dataplex.v1.IDeleteEnvironmentRequest, callback: google.cloud.dataplex.v1.DataplexService.DeleteEnvironmentCallback): void;
+
+                    /**
+                     * Calls DeleteEnvironment.
+                     * @param request DeleteEnvironmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteEnvironment(request: google.cloud.dataplex.v1.IDeleteEnvironmentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListEnvironments.
+                     * @param request ListEnvironmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListEnvironmentsResponse
+                     */
+                    public listEnvironments(request: google.cloud.dataplex.v1.IListEnvironmentsRequest, callback: google.cloud.dataplex.v1.DataplexService.ListEnvironmentsCallback): void;
+
+                    /**
+                     * Calls ListEnvironments.
+                     * @param request ListEnvironmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listEnvironments(request: google.cloud.dataplex.v1.IListEnvironmentsRequest): Promise<google.cloud.dataplex.v1.ListEnvironmentsResponse>;
+
+                    /**
+                     * Calls GetEnvironment.
+                     * @param request GetEnvironmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Environment
+                     */
+                    public getEnvironment(request: google.cloud.dataplex.v1.IGetEnvironmentRequest, callback: google.cloud.dataplex.v1.DataplexService.GetEnvironmentCallback): void;
+
+                    /**
+                     * Calls GetEnvironment.
+                     * @param request GetEnvironmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEnvironment(request: google.cloud.dataplex.v1.IGetEnvironmentRequest): Promise<google.cloud.dataplex.v1.Environment>;
+
+                    /**
+                     * Calls ListSessions.
+                     * @param request ListSessionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSessionsResponse
+                     */
+                    public listSessions(request: google.cloud.dataplex.v1.IListSessionsRequest, callback: google.cloud.dataplex.v1.DataplexService.ListSessionsCallback): void;
+
+                    /**
+                     * Calls ListSessions.
+                     * @param request ListSessionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSessions(request: google.cloud.dataplex.v1.IListSessionsRequest): Promise<google.cloud.dataplex.v1.ListSessionsResponse>;
                 }
 
                 namespace DataplexService {
@@ -6576,6 +9205,48 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type CancelJobCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.DataplexService#createEnvironment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateEnvironmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.DataplexService#updateEnvironment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateEnvironmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.DataplexService#deleteEnvironment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteEnvironmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.DataplexService#listEnvironments}.
+                     * @param error Error, if any
+                     * @param [response] ListEnvironmentsResponse
+                     */
+                    type ListEnvironmentsCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.ListEnvironmentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.DataplexService#getEnvironment}.
+                     * @param error Error, if any
+                     * @param [response] Environment
+                     */
+                    type GetEnvironmentCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Environment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.DataplexService#listSessions}.
+                     * @param error Error, if any
+                     * @param [response] ListSessionsResponse
+                     */
+                    type ListSessionsCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.ListSessionsResponse) => void;
                 }
 
                 /** Properties of a CreateLakeRequest. */
@@ -9891,6 +12562,804 @@ export namespace google {
 
                     /**
                      * Converts this CancelJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateEnvironmentRequest. */
+                interface ICreateEnvironmentRequest {
+
+                    /** CreateEnvironmentRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateEnvironmentRequest environmentId */
+                    environmentId?: (string|null);
+
+                    /** CreateEnvironmentRequest environment */
+                    environment?: (google.cloud.dataplex.v1.IEnvironment|null);
+
+                    /** CreateEnvironmentRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateEnvironmentRequest. */
+                class CreateEnvironmentRequest implements ICreateEnvironmentRequest {
+
+                    /**
+                     * Constructs a new CreateEnvironmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.ICreateEnvironmentRequest);
+
+                    /** CreateEnvironmentRequest parent. */
+                    public parent: string;
+
+                    /** CreateEnvironmentRequest environmentId. */
+                    public environmentId: string;
+
+                    /** CreateEnvironmentRequest environment. */
+                    public environment?: (google.cloud.dataplex.v1.IEnvironment|null);
+
+                    /** CreateEnvironmentRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateEnvironmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateEnvironmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.ICreateEnvironmentRequest): google.cloud.dataplex.v1.CreateEnvironmentRequest;
+
+                    /**
+                     * Encodes the specified CreateEnvironmentRequest message. Does not implicitly {@link google.cloud.dataplex.v1.CreateEnvironmentRequest.verify|verify} messages.
+                     * @param message CreateEnvironmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.ICreateEnvironmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateEnvironmentRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.CreateEnvironmentRequest.verify|verify} messages.
+                     * @param message CreateEnvironmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.ICreateEnvironmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateEnvironmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateEnvironmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.CreateEnvironmentRequest;
+
+                    /**
+                     * Decodes a CreateEnvironmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateEnvironmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.CreateEnvironmentRequest;
+
+                    /**
+                     * Verifies a CreateEnvironmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateEnvironmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateEnvironmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.CreateEnvironmentRequest;
+
+                    /**
+                     * Creates a plain object from a CreateEnvironmentRequest message. Also converts values to other types if specified.
+                     * @param message CreateEnvironmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.CreateEnvironmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateEnvironmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateEnvironmentRequest. */
+                interface IUpdateEnvironmentRequest {
+
+                    /** UpdateEnvironmentRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateEnvironmentRequest environment */
+                    environment?: (google.cloud.dataplex.v1.IEnvironment|null);
+
+                    /** UpdateEnvironmentRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateEnvironmentRequest. */
+                class UpdateEnvironmentRequest implements IUpdateEnvironmentRequest {
+
+                    /**
+                     * Constructs a new UpdateEnvironmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IUpdateEnvironmentRequest);
+
+                    /** UpdateEnvironmentRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateEnvironmentRequest environment. */
+                    public environment?: (google.cloud.dataplex.v1.IEnvironment|null);
+
+                    /** UpdateEnvironmentRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateEnvironmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateEnvironmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IUpdateEnvironmentRequest): google.cloud.dataplex.v1.UpdateEnvironmentRequest;
+
+                    /**
+                     * Encodes the specified UpdateEnvironmentRequest message. Does not implicitly {@link google.cloud.dataplex.v1.UpdateEnvironmentRequest.verify|verify} messages.
+                     * @param message UpdateEnvironmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IUpdateEnvironmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateEnvironmentRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.UpdateEnvironmentRequest.verify|verify} messages.
+                     * @param message UpdateEnvironmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IUpdateEnvironmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateEnvironmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateEnvironmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.UpdateEnvironmentRequest;
+
+                    /**
+                     * Decodes an UpdateEnvironmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateEnvironmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.UpdateEnvironmentRequest;
+
+                    /**
+                     * Verifies an UpdateEnvironmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateEnvironmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateEnvironmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.UpdateEnvironmentRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateEnvironmentRequest message. Also converts values to other types if specified.
+                     * @param message UpdateEnvironmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.UpdateEnvironmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateEnvironmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteEnvironmentRequest. */
+                interface IDeleteEnvironmentRequest {
+
+                    /** DeleteEnvironmentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteEnvironmentRequest. */
+                class DeleteEnvironmentRequest implements IDeleteEnvironmentRequest {
+
+                    /**
+                     * Constructs a new DeleteEnvironmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IDeleteEnvironmentRequest);
+
+                    /** DeleteEnvironmentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteEnvironmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteEnvironmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IDeleteEnvironmentRequest): google.cloud.dataplex.v1.DeleteEnvironmentRequest;
+
+                    /**
+                     * Encodes the specified DeleteEnvironmentRequest message. Does not implicitly {@link google.cloud.dataplex.v1.DeleteEnvironmentRequest.verify|verify} messages.
+                     * @param message DeleteEnvironmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IDeleteEnvironmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteEnvironmentRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DeleteEnvironmentRequest.verify|verify} messages.
+                     * @param message DeleteEnvironmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDeleteEnvironmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteEnvironmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteEnvironmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DeleteEnvironmentRequest;
+
+                    /**
+                     * Decodes a DeleteEnvironmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteEnvironmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DeleteEnvironmentRequest;
+
+                    /**
+                     * Verifies a DeleteEnvironmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteEnvironmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteEnvironmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DeleteEnvironmentRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteEnvironmentRequest message. Also converts values to other types if specified.
+                     * @param message DeleteEnvironmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.DeleteEnvironmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteEnvironmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListEnvironmentsRequest. */
+                interface IListEnvironmentsRequest {
+
+                    /** ListEnvironmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListEnvironmentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListEnvironmentsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListEnvironmentsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListEnvironmentsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListEnvironmentsRequest. */
+                class ListEnvironmentsRequest implements IListEnvironmentsRequest {
+
+                    /**
+                     * Constructs a new ListEnvironmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IListEnvironmentsRequest);
+
+                    /** ListEnvironmentsRequest parent. */
+                    public parent: string;
+
+                    /** ListEnvironmentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListEnvironmentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListEnvironmentsRequest filter. */
+                    public filter: string;
+
+                    /** ListEnvironmentsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListEnvironmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEnvironmentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IListEnvironmentsRequest): google.cloud.dataplex.v1.ListEnvironmentsRequest;
+
+                    /**
+                     * Encodes the specified ListEnvironmentsRequest message. Does not implicitly {@link google.cloud.dataplex.v1.ListEnvironmentsRequest.verify|verify} messages.
+                     * @param message ListEnvironmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IListEnvironmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEnvironmentsRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListEnvironmentsRequest.verify|verify} messages.
+                     * @param message ListEnvironmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListEnvironmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEnvironmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEnvironmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListEnvironmentsRequest;
+
+                    /**
+                     * Decodes a ListEnvironmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEnvironmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListEnvironmentsRequest;
+
+                    /**
+                     * Verifies a ListEnvironmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEnvironmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEnvironmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListEnvironmentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListEnvironmentsRequest message. Also converts values to other types if specified.
+                     * @param message ListEnvironmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ListEnvironmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEnvironmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListEnvironmentsResponse. */
+                interface IListEnvironmentsResponse {
+
+                    /** ListEnvironmentsResponse environments */
+                    environments?: (google.cloud.dataplex.v1.IEnvironment[]|null);
+
+                    /** ListEnvironmentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListEnvironmentsResponse. */
+                class ListEnvironmentsResponse implements IListEnvironmentsResponse {
+
+                    /**
+                     * Constructs a new ListEnvironmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IListEnvironmentsResponse);
+
+                    /** ListEnvironmentsResponse environments. */
+                    public environments: google.cloud.dataplex.v1.IEnvironment[];
+
+                    /** ListEnvironmentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListEnvironmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEnvironmentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IListEnvironmentsResponse): google.cloud.dataplex.v1.ListEnvironmentsResponse;
+
+                    /**
+                     * Encodes the specified ListEnvironmentsResponse message. Does not implicitly {@link google.cloud.dataplex.v1.ListEnvironmentsResponse.verify|verify} messages.
+                     * @param message ListEnvironmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IListEnvironmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEnvironmentsResponse message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListEnvironmentsResponse.verify|verify} messages.
+                     * @param message ListEnvironmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListEnvironmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEnvironmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEnvironmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListEnvironmentsResponse;
+
+                    /**
+                     * Decodes a ListEnvironmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEnvironmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListEnvironmentsResponse;
+
+                    /**
+                     * Verifies a ListEnvironmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEnvironmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEnvironmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListEnvironmentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListEnvironmentsResponse message. Also converts values to other types if specified.
+                     * @param message ListEnvironmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ListEnvironmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEnvironmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetEnvironmentRequest. */
+                interface IGetEnvironmentRequest {
+
+                    /** GetEnvironmentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetEnvironmentRequest. */
+                class GetEnvironmentRequest implements IGetEnvironmentRequest {
+
+                    /**
+                     * Constructs a new GetEnvironmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IGetEnvironmentRequest);
+
+                    /** GetEnvironmentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetEnvironmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEnvironmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IGetEnvironmentRequest): google.cloud.dataplex.v1.GetEnvironmentRequest;
+
+                    /**
+                     * Encodes the specified GetEnvironmentRequest message. Does not implicitly {@link google.cloud.dataplex.v1.GetEnvironmentRequest.verify|verify} messages.
+                     * @param message GetEnvironmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IGetEnvironmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEnvironmentRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.GetEnvironmentRequest.verify|verify} messages.
+                     * @param message GetEnvironmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IGetEnvironmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEnvironmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEnvironmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.GetEnvironmentRequest;
+
+                    /**
+                     * Decodes a GetEnvironmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEnvironmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.GetEnvironmentRequest;
+
+                    /**
+                     * Verifies a GetEnvironmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEnvironmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEnvironmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.GetEnvironmentRequest;
+
+                    /**
+                     * Creates a plain object from a GetEnvironmentRequest message. Also converts values to other types if specified.
+                     * @param message GetEnvironmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.GetEnvironmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEnvironmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListSessionsRequest. */
+                interface IListSessionsRequest {
+
+                    /** ListSessionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSessionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSessionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSessionsRequest. */
+                class ListSessionsRequest implements IListSessionsRequest {
+
+                    /**
+                     * Constructs a new ListSessionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IListSessionsRequest);
+
+                    /** ListSessionsRequest parent. */
+                    public parent: string;
+
+                    /** ListSessionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSessionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSessionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSessionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IListSessionsRequest): google.cloud.dataplex.v1.ListSessionsRequest;
+
+                    /**
+                     * Encodes the specified ListSessionsRequest message. Does not implicitly {@link google.cloud.dataplex.v1.ListSessionsRequest.verify|verify} messages.
+                     * @param message ListSessionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IListSessionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSessionsRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListSessionsRequest.verify|verify} messages.
+                     * @param message ListSessionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListSessionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSessionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSessionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListSessionsRequest;
+
+                    /**
+                     * Decodes a ListSessionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSessionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListSessionsRequest;
+
+                    /**
+                     * Verifies a ListSessionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSessionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSessionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListSessionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSessionsRequest message. Also converts values to other types if specified.
+                     * @param message ListSessionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ListSessionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSessionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListSessionsResponse. */
+                interface IListSessionsResponse {
+
+                    /** ListSessionsResponse sessions */
+                    sessions?: (google.cloud.dataplex.v1.ISession[]|null);
+
+                    /** ListSessionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSessionsResponse. */
+                class ListSessionsResponse implements IListSessionsResponse {
+
+                    /**
+                     * Constructs a new ListSessionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IListSessionsResponse);
+
+                    /** ListSessionsResponse sessions. */
+                    public sessions: google.cloud.dataplex.v1.ISession[];
+
+                    /** ListSessionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSessionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSessionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IListSessionsResponse): google.cloud.dataplex.v1.ListSessionsResponse;
+
+                    /**
+                     * Encodes the specified ListSessionsResponse message. Does not implicitly {@link google.cloud.dataplex.v1.ListSessionsResponse.verify|verify} messages.
+                     * @param message ListSessionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IListSessionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSessionsResponse message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListSessionsResponse.verify|verify} messages.
+                     * @param message ListSessionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListSessionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSessionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSessionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListSessionsResponse;
+
+                    /**
+                     * Decodes a ListSessionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSessionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListSessionsResponse;
+
+                    /**
+                     * Verifies a ListSessionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSessionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSessionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListSessionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSessionsResponse message. Also converts values to other types if specified.
+                     * @param message ListSessionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ListSessionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSessionsResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

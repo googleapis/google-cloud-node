@@ -16,37 +16,39 @@
 'use strict';
 
 function main(name) {
-  // [START dataplex_v1_generated_MetadataService_GetPartition_async]
+  // [START dataplex_v1_generated_ContentService_GetContent_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the partition:
-   *  `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}`.
-   *  The {partition_value_path} segment consists of an ordered sequence of
-   *  partition values separated by "/". All values must be provided.
+   *  Required. The resource name of the content:
+   *  projects/{project_id}/locations/{location_id}/lakes/{lake_id}/content/{content_id}
    */
   // const name = 'abc123'
+  /**
+   *  Optional. Specify content view to make a partial request.
+   */
+  // const view = {}
 
   // Imports the Dataplex library
-  const {MetadataServiceClient} = require('@google-cloud/dataplex').v1;
+  const {ContentServiceClient} = require('@google-cloud/dataplex').v1;
 
   // Instantiates a client
-  const dataplexClient = new MetadataServiceClient();
+  const dataplexClient = new ContentServiceClient();
 
-  async function callGetPartition() {
+  async function callGetContent() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await dataplexClient.getPartition(request);
+    const response = await dataplexClient.getContent(request);
     console.log(response);
   }
 
-  callGetPartition();
-  // [END dataplex_v1_generated_MetadataService_GetPartition_async]
+  callGetContent();
+  // [END dataplex_v1_generated_ContentService_GetContent_async]
 }
 
 process.on('unhandledRejection', err => {

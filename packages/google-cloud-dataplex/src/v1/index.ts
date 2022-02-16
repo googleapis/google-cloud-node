@@ -16,5 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {ContentServiceClient} from './content_service_client';
 export {DataplexServiceClient} from './dataplex_service_client';
 export {MetadataServiceClient} from './metadata_service_client';

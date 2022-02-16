@@ -15,32 +15,20 @@
 
 'use strict';
 
-function main(parent, lakeId, lake) {
-  // [START dataplex_v1_generated_DataplexService_CreateLake_async]
+function main(parent, content) {
+  // [START dataplex_v1_generated_ContentService_CreateContent_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the lake location, of the form:
-   *  projects/{project_number}/locations/{location_id}
-   *  where `location_id` refers to a GCP region.
+   *  Required. The resource name of the parent lake:
+   *  projects/{project_id}/locations/{location_id}/lakes/{lake_id}
    */
   // const parent = 'abc123'
   /**
-   *  Required. Lake identifier.
-   *  This ID will be used to generate names such as database and dataset names
-   *  when publishing metadata to Hive Metastore and BigQuery.
-   *  * Must contain only lowercase letters, numbers and hyphens.
-   *  * Must start with a letter.
-   *  * Must end with a number or a letter.
-   *  * Must be between 1-63 characters.
-   *  * Must be unique within the customer project / location.
+   *  Required. Content resource.
    */
-  // const lakeId = 'abc123'
-  /**
-   *  Required. Lake resource
-   */
-  // const lake = {}
+  // const content = {}
   /**
    *  Optional. Only validate the request, but do not perform mutations.
    *  The default is false.
@@ -48,27 +36,25 @@ function main(parent, lakeId, lake) {
   // const validateOnly = true
 
   // Imports the Dataplex library
-  const {DataplexServiceClient} = require('@google-cloud/dataplex').v1;
+  const {ContentServiceClient} = require('@google-cloud/dataplex').v1;
 
   // Instantiates a client
-  const dataplexClient = new DataplexServiceClient();
+  const dataplexClient = new ContentServiceClient();
 
-  async function callCreateLake() {
+  async function callCreateContent() {
     // Construct request
     const request = {
       parent,
-      lakeId,
-      lake,
+      content,
     };
 
     // Run request
-    const [operation] = await dataplexClient.createLake(request);
-    const [response] = await operation.promise();
+    const response = await dataplexClient.createContent(request);
     console.log(response);
   }
 
-  callCreateLake();
-  // [END dataplex_v1_generated_DataplexService_CreateLake_async]
+  callCreateContent();
+  // [END dataplex_v1_generated_ContentService_CreateContent_async]
 }
 
 process.on('unhandledRejection', err => {

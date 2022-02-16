@@ -18,12 +18,19 @@
 
 import * as v1 from './v1';
 
+const ContentServiceClient = v1.ContentServiceClient;
+type ContentServiceClient = v1.ContentServiceClient;
 const DataplexServiceClient = v1.DataplexServiceClient;
 type DataplexServiceClient = v1.DataplexServiceClient;
 const MetadataServiceClient = v1.MetadataServiceClient;
 type MetadataServiceClient = v1.MetadataServiceClient;
 
-export {v1, DataplexServiceClient, MetadataServiceClient};
-export default {v1, DataplexServiceClient, MetadataServiceClient};
+export {v1, ContentServiceClient, DataplexServiceClient, MetadataServiceClient};
+export default {
+  v1,
+  ContentServiceClient,
+  DataplexServiceClient,
+  MetadataServiceClient,
+};
 import * as protos from '../protos/protos';
 export {protos};

@@ -32,6 +32,21 @@
         }
       },
       "methods": {
+        "CreateEntity": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateEntity": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteEntity": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetEntity": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
@@ -41,6 +56,16 @@
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreatePartition": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeletePartition": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         },
         "GetPartition": {
           "timeout_millis": 60000,
