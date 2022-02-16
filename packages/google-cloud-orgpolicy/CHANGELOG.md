@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://github.com/googleapis/nodejs-org-policy/compare/v1.1.1...v1.1.2) (2022-02-16)
+
+
+### Bug Fixes
+
+* deprecate AlternativePolicySpec ([#90](https://github.com/googleapis/nodejs-org-policy/issues/90)) ([f25e613](https://github.com/googleapis/nodejs-org-policy/commit/f25e61305d09c3b5215e203bb36753568bb53d0a))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.1.0...v1.1.1) (2021-09-09)
 
 
