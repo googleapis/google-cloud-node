@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [3.1.2](https://github.com/googleapis/nodejs-compute/compare/v3.1.1...v3.1.2) (2022-02-16)
+
+
+### Bug Fixes
+
+* **docs:** Add note in README mentioning tech discontinuity with previous version ([#690](https://github.com/googleapis/nodejs-compute/issues/690)) ([4f0842e](https://github.com/googleapis/nodejs-compute/commit/4f0842ecaa5db30a9650fa9cec7eeb6489bfe8c6))
+
 ### [3.1.1](https://github.com/googleapis/nodejs-compute/compare/v3.1.0...v3.1.1) (2022-01-18)
 
 
