@@ -177,6 +177,29 @@ Make sure to add logs to your [uncaught exception][uncaught] and [unhandled reje
 
 You may also want to see the [@google-cloud/error-reporting](https://github.com/googleapis/nodejs-error-reporting) module which provides direct access to the Error Reporting API.
 
+### Error handling with a default callback
+
+The `LoggingWinston` class creates an instance of `LoggingCommon` which uses the `Log` class from `@google-cloud/logging` package to write log entries. 
+The `Log` class writes logs asynchronously and there are cases when log entries cannot be written and an error is 
+thrown - if error is not handled properly, it could crash the application. One possible way to handle the error is to provide a default callback
+to the `LoggingWinston` constructor which will be used to initialize `Log` object with that callback like in example below:
+
+```js
+// Imports the Google Cloud client library for Winston
+const {LoggingWinston} = require('@google-cloud/logging-winston');
+
+// Creates a client
+const loggingWinston = new LoggingWinston({
+projectId: 'your-project-id',
+keyFilename: '/path/to/key.json',
+defaultCallback: err => {
+    if (err) {
+    console.log('Error occured: ' + err);
+    }
+},
+});
+```
+
 ### Formatting Request Logs
 
 **NOTE: The express middleware provided by this library handles this automatically for you. These instructions are for there case where you may want to handle this manually.**

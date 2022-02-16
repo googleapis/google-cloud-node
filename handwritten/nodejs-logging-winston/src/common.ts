@@ -140,6 +140,7 @@ export class LoggingCommon {
       // 256,000 limit.
       maxEntrySize: options.maxEntrySize || 250000,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      defaultWriteDeleteCallback: options.defaultCallback,
     });
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;

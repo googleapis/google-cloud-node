@@ -28,6 +28,7 @@ import {
   ServiceContext,
   LoggingOptions,
 } from '@google-cloud/logging';
+import {ApiResponseCallback} from '@google-cloud/logging/build/src/log';
 
 const LEVEL = Symbol.for('level');
 
@@ -85,6 +86,10 @@ export interface Options extends LoggingOptions {
 
   // An attempt will be made to truncate messages larger than maxEntrySize.
   maxEntrySize?: number;
+
+  // A default global callback to be used for {@link LoggingWinston#log} when callback is
+  // not supplied by caller in function parameters
+  defaultCallback?: ApiResponseCallback;
 }
 
 /**
