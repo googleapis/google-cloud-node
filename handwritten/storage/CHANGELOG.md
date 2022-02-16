@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.18.2](https://github.com/googleapis/nodejs-storage/compare/v5.18.1...v5.18.2) (2022-02-16)
+
+
+### Bug Fixes
+
+* resumable uploads should respect autoRetry & multipart uploads should correctly use preconditions ([#1779](https://github.com/googleapis/nodejs-storage/issues/1779)) ([1e72586](https://github.com/googleapis/nodejs-storage/commit/1e725867dce8f78070435b96b65f97f2253c0e80))
+
 ### [5.18.1](https://github.com/googleapis/nodejs-storage/compare/v5.18.0...v5.18.1) (2022-01-26)
 
 
