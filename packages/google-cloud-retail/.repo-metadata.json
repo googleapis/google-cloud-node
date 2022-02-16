@@ -12,5 +12,6 @@
   "name": "retail",
   "issue_tracker": "https://github.com/googleapis/nodejs-retail/issues",
   "api_shortname": "retail",
-  "library_type": "GAPIC_AUTO"
+  "library_type": "GAPIC_AUTO",
+  "codeowner_team": "@googleapis/cloud-retail-team"
 }
