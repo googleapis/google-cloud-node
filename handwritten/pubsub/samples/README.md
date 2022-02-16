@@ -132,7 +132,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node createPushSubscription.js <topic-name> <subscription-name>`
+`node createPushSubscription.js <topic-name-or-id> <subscription-name-or-id>`
 
 
 -----
@@ -151,7 +151,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node createSubscription.js <topic-name> <subscription-name>`
+`node createSubscription.js <topic-name-or-id> <subscription-name-or-id>`
 
 
 -----
@@ -170,7 +170,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node createSubscriptionWithDeadLetterPolicy.js <topic-name> <subscription-name> <dead-letter-topic-name>`
+`node createSubscriptionWithDeadLetterPolicy.js <topic-name-or-id> <subscription-name-or-id> <dead-letter-topic-name-or-id>`
 
 
 -----
@@ -189,7 +189,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node createSubscriptionWithOrdering.js <topic-name> <subscription-name>`
+`node createSubscriptionWithOrdering.js <topic-name-or-id> <subscription-name-or-id>`
 
 
 -----
@@ -208,7 +208,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node createTopic.js <topic-name>`
+`node createTopic.js <topic-name-or-id>`
 
 
 -----
@@ -246,7 +246,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node deleteSchema.js <schema-name>`
+`node deleteSchema.js <schema-name-or-id>`
 
 
 -----
@@ -265,7 +265,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node deleteSubscription.js <subscription-name>`
+`node deleteSubscription.js <subscription-name-or-id>`
 
 
 -----
@@ -284,7 +284,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node deleteTopic.js <topic-name>`
+`node deleteTopic.js <topic-name-or-id>`
 
 
 -----
@@ -303,7 +303,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node detachSubscription.js <existing-subscription-name>`
+`node detachSubscription.js <existing-subscription-name-or-id>`
 
 
 -----
@@ -341,7 +341,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node getSubscription.js <subscription-name>`
+`node getSubscription.js <subscription-name-or-id>`
 
 
 -----
@@ -360,7 +360,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node getSubscriptionPolicy.js <subscription-name>`
+`node getSubscriptionPolicy.js <subscription-name-or-id>`
 
 
 -----
@@ -379,7 +379,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node getTopicPolicy.js <topic-name>`
+`node getTopicPolicy.js <topic-name-or-id>`
 
 
 -----
@@ -455,7 +455,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node listTopicSubscriptions.js <topic-name>`
+`node listTopicSubscriptions.js <topic-name-or-id>`
 
 
 -----
@@ -474,7 +474,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node listenForAvroRecords.js <subscription-name> [timeout-in-seconds]`
+`node listenForAvroRecords.js <subscription-name-or-id> [timeout-in-seconds]`
 
 
 -----
@@ -493,7 +493,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node listenForErrors.js <subscription-name> [timeout-in-seconds]`
+`node listenForErrors.js <subscription-name-or-id> [timeout-in-seconds]`
 
 
 -----
@@ -512,7 +512,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node listenForMessages.js <subscription-name> [timeout-in-seconds]`
+`node listenForMessages.js <subscription-name-or-id> [timeout-in-seconds]`
 
 
 -----
@@ -550,7 +550,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node listenWithCustomAttributes.js <subscription-name> [timeout-in-seconds]`
+`node listenWithCustomAttributes.js <subscription-name-or-id> [timeout-in-seconds]`
 
 
 -----
@@ -569,7 +569,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node modifyPushConfig.js <topic-name> <subscription-name>`
+`node modifyPushConfig.js <topic-name-or-id> <subscription-name-or-id>`
 
 
 -----
@@ -588,7 +588,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node openTelemetryTracing.js <topic-name> <subscription-name>`
+`node openTelemetryTracing.js <topic-name-or-id> <subscription-name-or-id>`
 
 
 -----
@@ -626,7 +626,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node publishBatchedMessages.js <topic-name> <data> [max-messages [max-wait-in-seconds]]`
+`node publishBatchedMessages.js <topic-name-or-id> <data> [max-messages [max-wait-in-seconds]]`
 
 
 -----
@@ -645,7 +645,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node publishMessage.js <topic-name> <data>`
+`node publishMessage.js <topic-name-or-id> <data>`
 
 
 -----
@@ -664,7 +664,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node publishMessageWithCustomAttributes.js <topic-name> <data>`
+`node publishMessageWithCustomAttributes.js <topic-name-or-id> <data>`
 
 
 -----
@@ -683,7 +683,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node publishOrderedMessage.js <topic-name> <data>`
+`node publishOrderedMessage.js <topic-name-or-id> <data>`
 
 
 -----
@@ -702,7 +702,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node publishProtobufMessages.js <topic-name>`
+`node publishProtobufMessages.js <topic-name-or-id>`
 
 
 -----
@@ -721,7 +721,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node publishWithFlowControl.js <topic-name>`
+`node publishWithFlowControl.js <topic-name-or-id>`
 
 
 -----
@@ -740,7 +740,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node publishWithRetrySettings.js <project-id> <topic-name> <data>`
+`node publishWithRetrySettings.js <project-id> <topic-name-or-id> <data>`
 
 
 -----
@@ -759,7 +759,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node quickstart.js <project-id> <topic-name> <subscription-name>`
+`node quickstart.js <project-id> <topic-name-or-id> <subscription-name-or-id>`
 
 
 -----
@@ -778,7 +778,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node removeDeadLetterPolicy.js <topic-name> <subscription-name>`
+`node removeDeadLetterPolicy.js <topic-name-or-id> <subscription-name-or-id>`
 
 
 -----
@@ -797,7 +797,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node resumePublish.js <topic-name> <data>`
+`node resumePublish.js <topic-name-or-id> <data>`
 
 
 -----
@@ -816,7 +816,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node setSubscriptionPolicy.js <subscription-name>`
+`node setSubscriptionPolicy.js <subscription-name-or-id>`
 
 
 -----
@@ -835,7 +835,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node setTopicPolicy.js <topic-name>`
+`node setTopicPolicy.js <topic-name-or-id>`
 
 
 -----
@@ -854,7 +854,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node subscribeWithFlowControlSettings.js <subscription-name> [max-in-progress [timeout-in-seconds]]`
+`node subscribeWithFlowControlSettings.js <subscription-name-or-id> [max-in-progress [timeout-in-seconds]]`
 
 
 -----
@@ -873,7 +873,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node synchronousPull.js <project-id> <subscription-name>`
+`node synchronousPull.js <project-id> <subscription-name-or-id>`
 
 
 -----
@@ -892,7 +892,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node synchronousPullWithDeliveryAttempts.js <project-id> <subscription-name>`
+`node synchronousPullWithDeliveryAttempts.js <project-id> <subscription-name-or-id>`
 
 
 -----
@@ -911,7 +911,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node synchronousPullWithLeaseManagement.js <project-id> <subscription-name>`
+`node synchronousPullWithLeaseManagement.js <project-id> <subscription-name-or-id>`
 
 
 -----
@@ -930,7 +930,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node testSubscriptionPermissions.js <subscription-name>`
+`node testSubscriptionPermissions.js <subscription-name-or-id>`
 
 
 -----
@@ -949,7 +949,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node testTopicPermissions.js <topic-name>`
+`node testTopicPermissions.js <topic-name-or-id>`
 
 
 -----
@@ -968,7 +968,7 @@ View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/sam
 __Usage:__
 
 
-`node updateDeadLetterPolicy.js <topic-name> <subscription-name>`
+`node updateDeadLetterPolicy.js <topic-name-or-id> <subscription-name-or-id>`
 
 
 
