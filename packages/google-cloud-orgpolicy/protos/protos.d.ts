@@ -151,6 +151,13 @@ export namespace google {
 
                 namespace Constraint {
 
+                    /** ConstraintDefault enum. */
+                    enum ConstraintDefault {
+                        CONSTRAINT_DEFAULT_UNSPECIFIED = 0,
+                        ALLOW = 1,
+                        DENY = 2
+                    }
+
                     /** Properties of a ListConstraint. */
                     interface IListConstraint {
 
@@ -329,13 +336,6 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
-                    }
-
-                    /** ConstraintDefault enum. */
-                    enum ConstraintDefault {
-                        CONSTRAINT_DEFAULT_UNSPECIFIED = 0,
-                        ALLOW = 1,
-                        DENY = 2
                     }
                 }
 

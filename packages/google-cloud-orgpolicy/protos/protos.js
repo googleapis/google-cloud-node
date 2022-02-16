@@ -416,6 +416,22 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * ConstraintDefault enum.
+                         * @name google.cloud.orgpolicy.v2.Constraint.ConstraintDefault
+                         * @enum {number}
+                         * @property {number} CONSTRAINT_DEFAULT_UNSPECIFIED=0 CONSTRAINT_DEFAULT_UNSPECIFIED value
+                         * @property {number} ALLOW=1 ALLOW value
+                         * @property {number} DENY=2 DENY value
+                         */
+                        Constraint.ConstraintDefault = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONSTRAINT_DEFAULT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ALLOW"] = 1;
+                            values[valuesById[2] = "DENY"] = 2;
+                            return values;
+                        })();
+    
                         Constraint.ListConstraint = (function() {
     
                             /**
@@ -784,22 +800,6 @@
                             };
     
                             return BooleanConstraint;
-                        })();
-    
-                        /**
-                         * ConstraintDefault enum.
-                         * @name google.cloud.orgpolicy.v2.Constraint.ConstraintDefault
-                         * @enum {number}
-                         * @property {number} CONSTRAINT_DEFAULT_UNSPECIFIED=0 CONSTRAINT_DEFAULT_UNSPECIFIED value
-                         * @property {number} ALLOW=1 ALLOW value
-                         * @property {number} DENY=2 DENY value
-                         */
-                        Constraint.ConstraintDefault = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "CONSTRAINT_DEFAULT_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "ALLOW"] = 1;
-                            values[valuesById[2] = "DENY"] = 2;
-                            return values;
                         })();
     
                         return Constraint;
