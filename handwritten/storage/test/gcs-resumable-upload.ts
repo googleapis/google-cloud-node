@@ -2243,7 +2243,8 @@ describe('gcs-resumable-upload', () => {
       up.retryOptions.totalTimeout = 1;
       const delayValue = up.getRetryDelay();
 
-      assert.strictEqual(delayValue, 1000);
+      // This is a timing-based test, there could be a few milliseconds of lag
+      assert(delayValue <= 1000 && delayValue >= 995);
     });
   });
 
