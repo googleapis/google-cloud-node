@@ -3982,7 +3982,7 @@ class File extends ServiceObject<File> {
       public: options.public,
       uri: options.uri,
       userProject: options.userProject || this.userProject,
-      retryOptions: retryOptions,
+      retryOptions: {...retryOptions},
       params: options?.preconditionOpts || this.instancePreconditionOpts,
       chunkSize: options?.chunkSize,
     });

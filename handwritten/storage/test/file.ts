@@ -4814,7 +4814,9 @@ describe('File', () => {
             assert.strictEqual(opts.public, options.public);
             assert.strictEqual(opts.uri, options.uri);
             assert.strictEqual(opts.userProject, options.userProject);
-            assert.strictEqual(opts.retryOptions, storage.retryOptions);
+            assert.deepStrictEqual(opts.retryOptions, {
+              ...storage.retryOptions,
+            });
             assert.strictEqual(opts.params, storage.preconditionOpts);
             assert.strictEqual(opts.chunkSize, options.chunkSize);
 

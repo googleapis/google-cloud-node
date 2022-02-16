@@ -179,6 +179,9 @@ export async function bucketSetStorageClass(bucket: Bucket) {
 }
 
 export async function bucketUploadResumable(bucket: Bucket) {
+  if (bucket.instancePreconditionOpts) {
+    bucket.instancePreconditionOpts.ifGenerationMatch = 0;
+  }
   await bucket.upload(
     path.join(
       __dirname,
@@ -189,14 +192,10 @@ export async function bucketUploadResumable(bucket: Bucket) {
 }
 
 export async function bucketUploadMultipart(bucket: Bucket) {
-  // If we are using a precondition we must make sure the file exists and the metageneration matches that provided as a query parameter
-  bucket = new Bucket(bucket.storage, bucket.name, {
-    preconditionOpts: {
-      ifMetagenerationMatch: 1,
-    },
-  });
-  const fileToSave = bucket.file('retryStrategyTestData.json');
-  await fileToSave.save('fileToSave contents');
+  if (bucket.instancePreconditionOpts) {
+    delete bucket.instancePreconditionOpts.ifMetagenerationMatch;
+    bucket.instancePreconditionOpts.ifGenerationMatch = 0;
+  }
   await bucket.upload(
     path.join(
       __dirname,

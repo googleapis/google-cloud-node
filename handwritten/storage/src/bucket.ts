@@ -637,7 +637,7 @@ class Bucket extends ServiceObject {
   signer?: URLSigner;
 
   private instanceRetryValue?: boolean;
-  private instancePreconditionOpts?: PreconditionOptions;
+  instancePreconditionOpts?: PreconditionOptions;
 
   constructor(storage: Storage, name: string, options?: BucketOptions) {
     options = options || {};
@@ -3991,11 +3991,12 @@ class Bucket extends ServiceObject {
       options
     );
 
-    // Do not retry if precondition option ifMetagenerationMatch is not set
+    // Do not retry if precondition option ifGenerationMatch is not set
+    // because this is a file operation
     let maxRetries = this.storage.retryOptions.maxRetries;
     if (
-      (options?.preconditionOpts?.ifMetagenerationMatch === undefined &&
-        this.instancePreconditionOpts?.ifMetagenerationMatch === undefined &&
+      (options?.preconditionOpts?.ifGenerationMatch === undefined &&
+        this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
         this.storage.retryOptions.idempotencyStrategy ===
           IdempotencyStrategy.RetryConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===

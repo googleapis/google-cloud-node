@@ -20,6 +20,14 @@ import * as nock from 'nock';
 import * as path from 'path';
 import * as sinon from 'sinon';
 import {Readable} from 'stream';
+import {
+  RETRY_DELAY_MULTIPLIER_DEFAULT,
+  TOTAL_TIMEOUT_DEFAULT,
+  MAX_RETRY_DELAY_DEFAULT,
+  AUTO_RETRY_DEFAULT,
+  MAX_RETRY_DEFAULT,
+  RETRYABLE_ERR_FN_DEFAULT,
+} from '../src/storage';
 
 import {
   ApiError,
@@ -88,6 +96,14 @@ describe('gcs-resumable-upload', () => {
   const USER_PROJECT = 'user-project-id';
   const API_ENDPOINT = 'https://fake.googleapis.com';
   const BASE_URI = `${API_ENDPOINT}/upload/storage/v1/b`;
+  const RETRY_OPTIONS = {
+    retryDelayMultiplier: RETRY_DELAY_MULTIPLIER_DEFAULT,
+    totalTimeout: TOTAL_TIMEOUT_DEFAULT,
+    maxRetryDelay: MAX_RETRY_DELAY_DEFAULT,
+    autoRetry: AUTO_RETRY_DEFAULT,
+    maxRetries: MAX_RETRY_DEFAULT,
+    retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
+  };
   let REQ_OPTS: GaxiosOptions;
   const keyFile = path.join(__dirname, '../../test/fixtures/keys.json');
 
@@ -113,6 +129,7 @@ describe('gcs-resumable-upload', () => {
       userProject: USER_PROJECT,
       authConfig: {keyFile},
       apiEndpoint: API_ENDPOINT,
+      retryOptions: RETRY_OPTIONS,
     });
   });
 
@@ -145,7 +162,11 @@ describe('gcs-resumable-upload', () => {
     });
 
     it('should default customRequestOptions to empty object', () => {
-      const up = upload({bucket: BUCKET, file: FILE});
+      const up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        retryOptions: RETRY_OPTIONS,
+      });
       assert.deepStrictEqual(up.customRequestOptions, {});
     });
 
@@ -160,6 +181,7 @@ describe('gcs-resumable-upload', () => {
         userProject: USER_PROJECT,
         authConfig: {keyFile},
         apiEndpoint: API_ENDPOINT,
+        retryOptions: RETRY_OPTIONS,
       });
       assert.strictEqual(
         upWithZeroGeneration.cacheKey,
@@ -171,6 +193,7 @@ describe('gcs-resumable-upload', () => {
       const up = upload({
         bucket: BUCKET,
         file: FILE,
+        retryOptions: RETRY_OPTIONS,
       });
 
       assert.strictEqual(up.cacheKey, [BUCKET, FILE].join('/'));
@@ -194,6 +217,7 @@ describe('gcs-resumable-upload', () => {
         bucket: BUCKET,
         file: FILE,
         apiEndpoint: 'fake.googleapis.com',
+        retryOptions: RETRY_OPTIONS,
       });
       assert.strictEqual(up.apiEndpoint, API_ENDPOINT);
       assert.strictEqual(up.baseURI, BASE_URI);
@@ -201,20 +225,34 @@ describe('gcs-resumable-upload', () => {
 
     it('should localize the KMS key name', () => {
       const kmsKeyName = 'kms-key-name';
-      const up = upload({bucket: 'BUCKET', file: FILE, kmsKeyName});
+      const up = upload({
+        bucket: 'BUCKET',
+        file: FILE,
+        kmsKeyName,
+        retryOptions: RETRY_OPTIONS,
+      });
       assert.strictEqual(up.kmsKeyName, kmsKeyName);
     });
 
     it('should localize metadata or default to empty object', () => {
       assert.strictEqual(up.metadata, METADATA);
 
-      const upWithoutMetadata = upload({bucket: BUCKET, file: FILE});
+      const upWithoutMetadata = upload({
+        bucket: BUCKET,
+        file: FILE,
+        retryOptions: RETRY_OPTIONS,
+      });
       assert.deepStrictEqual(upWithoutMetadata.metadata, {});
     });
 
     it('should set the offset if it is provided', () => {
       const offset = 10;
-      const up = upload({bucket: BUCKET, file: FILE, offset});
+      const up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        offset,
+        retryOptions: RETRY_OPTIONS,
+      });
 
       assert.strictEqual(up.offset, offset);
     });
@@ -233,7 +271,12 @@ describe('gcs-resumable-upload', () => {
 
     it('should localize an encryption object from a key', () => {
       const key = crypto.randomBytes(32);
-      const up = upload({bucket: BUCKET, file: FILE, key});
+      const up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        key,
+        retryOptions: RETRY_OPTIONS,
+      });
       const expectedKey = key.toString('base64');
       const expectedHash = crypto
         .createHash('sha256')
@@ -250,12 +293,22 @@ describe('gcs-resumable-upload', () => {
     });
 
     it('should set the predefinedAcl with public: true', () => {
-      const up = upload({bucket: BUCKET, file: FILE, public: true});
+      const up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        public: true,
+        retryOptions: RETRY_OPTIONS,
+      });
       assert.strictEqual(up.predefinedAcl, 'publicRead');
     });
 
     it('should set the predefinedAcl with private: true', () => {
-      const up = upload({bucket: BUCKET, file: FILE, private: true});
+      const up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        private: true,
+        retryOptions: RETRY_OPTIONS,
+      });
       assert.strictEqual(up.predefinedAcl, 'private');
     });
 
@@ -266,7 +319,12 @@ describe('gcs-resumable-upload', () => {
     it('should set the configPath', () => {
       const configPath = '/custom/config/path';
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const up = upload({bucket: BUCKET, file: FILE, configPath});
+      const up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        configPath,
+        retryOptions: RETRY_OPTIONS,
+      });
       assert.deepStrictEqual(configData.config, {configPath});
     });
 
@@ -283,39 +341,67 @@ describe('gcs-resumable-upload', () => {
         bucket: BUCKET,
         file: FILE,
         metadata: {contentLength: METADATA.contentLength},
+        retryOptions: RETRY_OPTIONS,
       });
       assert.strictEqual(up.contentLength, METADATA.contentLength);
     });
 
     it('should default the contentLength to *', () => {
-      const up = upload({bucket: BUCKET, file: FILE});
+      const up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        retryOptions: RETRY_OPTIONS,
+      });
       assert.strictEqual(up.contentLength, '*');
     });
 
     it('should localize the uri or get one from config', () => {
       const uri = 'http://www.blah.com/';
-      const upWithUri = upload({bucket: BUCKET, file: FILE, uri});
+      const upWithUri = upload({
+        bucket: BUCKET,
+        file: FILE,
+        uri,
+        retryOptions: RETRY_OPTIONS,
+      });
       assert.strictEqual(upWithUri.uriProvidedManually, true);
       assert.strictEqual(upWithUri.uri, uri);
 
       configData[`${BUCKET}/${FILE}`] = {uri: 'fake-uri'};
-      const up = upload({bucket: BUCKET, file: FILE});
+      const up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        retryOptions: RETRY_OPTIONS,
+      });
       assert.strictEqual(up.uriProvidedManually, false);
       assert.strictEqual(up.uri, 'fake-uri');
     });
 
     it('should not have `chunkSize` by default', () => {
-      const up = upload({bucket: BUCKET, file: FILE});
+      const up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        retryOptions: RETRY_OPTIONS,
+      });
       assert.strictEqual(up.chunkSize, undefined);
     });
 
     it('should accept and set `chunkSize`', () => {
-      const up = upload({bucket: BUCKET, file: FILE, chunkSize: 123});
+      const up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        chunkSize: 123,
+        retryOptions: RETRY_OPTIONS,
+      });
       assert.strictEqual(up.chunkSize, 123);
     });
 
     it('should set `upstreamEnded` to `true` on `prefinish`', () => {
-      const up = upload({bucket: BUCKET, file: FILE, chunkSize: 123});
+      const up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        chunkSize: 123,
+        retryOptions: RETRY_OPTIONS,
+      });
 
       assert.strictEqual(up.upstreamEnded, false);
 
@@ -802,7 +888,12 @@ describe('gcs-resumable-upload', () => {
 
     it('should pass through the KMS key name', done => {
       const kmsKeyName = 'kms-key-name';
-      const up = upload({bucket: BUCKET, file: FILE, kmsKeyName});
+      const up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        kmsKeyName,
+        retryOptions: RETRY_OPTIONS,
+      });
 
       up.makeRequest = async (reqOpts: GaxiosOptions) => {
         assert.strictEqual(reqOpts.params.kmsKeyName, kmsKeyName);
@@ -1431,6 +1522,7 @@ describe('gcs-resumable-upload', () => {
         file: FILE,
         key,
         authConfig: {keyFile},
+        retryOptions: RETRY_OPTIONS,
       });
       const scopes = [
         mockAuthorizeRequest(),
@@ -1502,6 +1594,7 @@ describe('gcs-resumable-upload', () => {
         userProject: USER_PROJECT,
         authConfig: {keyFile},
         apiEndpoint: 'https://fake.endpoint.com',
+        retryOptions: RETRY_OPTIONS,
       });
       const scopes = [
         nock(REQ_OPTS.url!).get(queryPath).reply(200, undefined, {}),
@@ -1516,6 +1609,7 @@ describe('gcs-resumable-upload', () => {
       const up = upload({
         bucket: BUCKET,
         file: FILE,
+        retryOptions: RETRY_OPTIONS,
         customRequestOptions: {
           headers: {
             'X-My-Header': 'My custom value',
@@ -1658,6 +1752,7 @@ describe('gcs-resumable-upload', () => {
       const up = upload({
         bucket: BUCKET,
         file: FILE,
+        retryOptions: RETRY_OPTIONS,
         customRequestOptions: {
           headers: {
             'X-My-Header': 'My custom value',
@@ -1839,38 +1934,6 @@ describe('gcs-resumable-upload', () => {
       up.continueUploading = () => {};
     });
 
-    describe('404', () => {
-      const RESP = {status: 404, data: 'error message from server'};
-
-      it('should increase the retry count if less than limit', () => {
-        assert.strictEqual(up.numRetries, 0);
-        assert.strictEqual(up.onResponse(RESP), false);
-        assert.strictEqual(up.numRetries, 1);
-      });
-
-      it('should destroy the stream if gte limit', done => {
-        up.destroy = (err: Error) => {
-          assert.strictEqual(
-            err.message,
-            `Retry limit exceeded - ${RESP.data}`
-          );
-          done();
-        };
-
-        up.onResponse(RESP);
-        up.onResponse(RESP);
-        up.onResponse(RESP);
-        up.onResponse(RESP);
-        up.onResponse(RESP);
-        up.onResponse(RESP);
-      });
-
-      it('should start an upload', done => {
-        up.startUploading = done;
-        up.onResponse(RESP);
-      });
-    });
-
     describe('500s', () => {
       const RESP = {status: 500, data: 'error message from server'};
 
@@ -1891,8 +1954,6 @@ describe('gcs-resumable-upload', () => {
           done();
         };
 
-        up.onResponse(RESP);
-        up.onResponse(RESP);
         up.onResponse(RESP);
         up.onResponse(RESP);
         up.onResponse(RESP);
@@ -1926,7 +1987,7 @@ describe('gcs-resumable-upload', () => {
           };
 
           up.on('error', (err: Error) => {
-            assert.strictEqual(up.numRetries, 5);
+            assert.strictEqual(up.numRetries, 3);
             assert.strictEqual(
               err.message,
               `Retry limit exceeded - ${RESP.data}`
@@ -1963,7 +2024,7 @@ describe('gcs-resumable-upload', () => {
         const customHandlerFunction = (err: ApiError) => {
           return err.code === 1000;
         };
-        up.retryableErrorFn = customHandlerFunction;
+        up.retryOptions.retryableErrorFn = customHandlerFunction;
 
         assert.strictEqual(up.onResponse(RESP), false);
       });
@@ -2168,7 +2229,7 @@ describe('gcs-resumable-upload', () => {
 
     it('allows overriding the number of retries', () => {
       [1, 2, 3].forEach(numRetry => {
-        up.numRetries = numRetry;
+        up.retryOptions.maxRetries = numRetry;
         const min = Math.pow(up.retryDelayMultiplier, up.numRetries) * 1000;
         const max =
           Math.pow(up.retryDelayMultiplier, up.numRetries) * 1000 + 1000;
@@ -2178,8 +2239,8 @@ describe('gcs-resumable-upload', () => {
       });
     });
 
-    it('returns the value of maxRetryDelay when calculated values are larger', () => {
-      up.maxRetryDelay = 1;
+    it('returns the value of totaltimeout when calculated values are larger', () => {
+      up.retryOptions.totalTimeout = 1;
       const delayValue = up.getRetryDelay();
 
       assert.strictEqual(delayValue, 1000);

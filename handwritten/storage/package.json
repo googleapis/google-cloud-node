@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@google-cloud/common": "^3.8.1",
-    "@google-cloud/paginator": "^3.0.0",
+    "@google-cloud/paginator": "^3.0.7",
     "@google-cloud/promisify": "^2.0.0",
     "abort-controller": "^3.0.0",
     "arrify": "^2.0.0",

@@ -205,42 +205,37 @@ export const PROTOCOL_REGEX = /^(\w*):\/\//;
  * Default behavior: Automatically retry retriable server errors.
  *
  * @const {boolean}
- * @private
  */
-const AUTO_RETRY_DEFAULT = true;
+export const AUTO_RETRY_DEFAULT = true;
 
 /**
  * Default behavior: Only attempt to retry retriable errors 3 times.
  *
  * @const {number}
- * @private
  */
-const MAX_RETRY_DEFAULT = 3;
+export const MAX_RETRY_DEFAULT = 3;
 
 /**
  * Default behavior: Wait twice as long as previous retry before retrying.
  *
  * @const {number}
- * @private
  */
-const RETRY_DELAY_MULTIPLIER_DEFAULT = 2;
+export const RETRY_DELAY_MULTIPLIER_DEFAULT = 2;
 
 /**
  * Default behavior: If the operation doesn't succeed after 600 seconds,
  *  stop retrying.
  *
  * @const {number}
- * @private
  */
-const TOTAL_TIMEOUT_DEFAULT = 600;
+export const TOTAL_TIMEOUT_DEFAULT = 600;
 
 /**
  * Default behavior: Wait no more than 64 seconds between retries.
  *
  * @const {number}
- * @private
  */
-const MAX_RETRY_DELAY_DEFAULT = 64;
+export const MAX_RETRY_DELAY_DEFAULT = 64;
 
 /**
  * Default behavior: Retry conditionally idempotent operations if correct preconditions are set.
@@ -254,11 +249,10 @@ const IDEMPOTENCY_STRATEGY_DEFAULT = IdempotencyStrategy.RetryConditional;
  * Returns true if the API request should be retried, given the error that was
  * given the first time the request was attempted.
  * @const
- * @private
  * @param {error} err - The API error to check if it is appropriate to retry.
  * @return {boolean} True if the API request should be retried, false otherwise.
  */
-const RETRYABLE_ERR_FN_DEFAULT = function (err?: ApiError) {
+export const RETRYABLE_ERR_FN_DEFAULT = function (err?: ApiError) {
   if (err) {
     if ([408, 429, 500, 502, 503, 504].indexOf(err.code!) !== -1) {
       return true;

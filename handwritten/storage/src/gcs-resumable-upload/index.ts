@@ -28,16 +28,12 @@ import * as Pumpify from 'pumpify';
 import {Duplex, PassThrough, Readable} from 'stream';
 import * as streamEvents from 'stream-events';
 import retry = require('async-retry');
+import {RetryOptions, PreconditionOptions} from '../storage';
 
 const NOT_FOUND_STATUS_CODE = 404;
 const TERMINATED_UPLOAD_STATUS_CODE = 410;
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
-const RETRY_LIMIT = 5;
 const DEFAULT_API_ENDPOINT_REGEX = /.*\.googleapis\.com/;
-const MAX_RETRY_DELAY = 64;
-const RETRY_DELAY_MULTIPLIER = 2;
-const MAX_TOTAL_RETRY_TIMEOUT = 600;
-const AUTO_RETRY_VALUE = true;
 
 export const PROTOCOL_REGEX = /^(\w*):\/\//;
 
@@ -60,12 +56,8 @@ export type PredefinedAcl =
   | 'projectPrivate'
   | 'publicRead';
 
-export interface QueryParameters {
+export interface QueryParameters extends PreconditionOptions {
   contentEncoding?: string;
-  ifGenerationMatch?: number;
-  ifGenerationNotMatch?: number;
-  ifMetagenerationMatch?: number;
-  ifMetagenerationNotMatch?: number;
   kmsKeyName?: string;
   predefinedAcl?: PredefinedAcl;
   projection?: 'full' | 'noAcl';
@@ -207,7 +199,7 @@ export interface UploadConfig {
   /**
    * Configuration options for retrying retryable errors.
    */
-  retryOptions?: RetryOptions;
+  retryOptions: RetryOptions;
 }
 
 export interface ConfigMetadata {
@@ -223,15 +215,6 @@ export interface ConfigMetadata {
    * Set the content type of the incoming data.
    */
   contentType?: string;
-}
-
-export interface RetryOptions {
-  retryDelayMultiplier?: number;
-  totalTimeout?: number;
-  maxRetryDelay?: number;
-  autoRetry?: boolean;
-  maxRetries?: number;
-  retryableErrorFn?: (err: ApiError) => boolean;
 }
 
 export interface GoogleInnerError {
@@ -279,12 +262,8 @@ export class Upload extends Pumpify {
   numBytesWritten = 0;
   numRetries = 0;
   contentLength: number | '*';
-  retryLimit: number = RETRY_LIMIT;
-  maxRetryDelay: number = MAX_RETRY_DELAY;
-  retryDelayMultiplier: number = RETRY_DELAY_MULTIPLIER;
-  maxRetryTotalTimeout: number = MAX_TOTAL_RETRY_TIMEOUT;
+  retryOptions: RetryOptions;
   timeOfFirstRequest: number;
-  retryableErrorFn?: (err: ApiError) => boolean;
   private upstreamChunkBuffer: Buffer = Buffer.alloc(0);
   private chunkBufferEncoding?: BufferEncoding = undefined;
   private numChunksReadInRequest = 0;
@@ -340,6 +319,7 @@ export class Upload extends Pumpify {
     this.params = cfg.params || {};
     this.userProject = cfg.userProject;
     this.chunkSize = cfg.chunkSize;
+    this.retryOptions = cfg.retryOptions;
 
     if (cfg.key) {
       /**
@@ -363,32 +343,16 @@ export class Upload extends Pumpify {
       configPath,
     });
 
-    const autoRetry = cfg?.retryOptions?.autoRetry || AUTO_RETRY_VALUE;
+    const autoRetry = cfg.retryOptions.autoRetry;
     this.uriProvidedManually = !!cfg.uri;
     this.uri = cfg.uri || this.get('uri');
     this.numBytesWritten = 0;
     this.numRetries = 0; //counter for number of retries currently executed
-
-    if (autoRetry && cfg?.retryOptions?.maxRetries !== undefined) {
-      this.retryLimit = cfg.retryOptions.maxRetries;
-    } else if (!autoRetry) {
-      this.retryLimit = 0;
-    }
-
-    if (cfg?.retryOptions?.maxRetryDelay !== undefined) {
-      this.maxRetryDelay = cfg.retryOptions.maxRetryDelay;
-    }
-
-    if (cfg?.retryOptions?.retryDelayMultiplier !== undefined) {
-      this.retryDelayMultiplier = cfg.retryOptions.retryDelayMultiplier;
-    }
-
-    if (cfg?.retryOptions?.totalTimeout !== undefined) {
-      this.maxRetryTotalTimeout = cfg.retryOptions.totalTimeout;
+    if (!autoRetry) {
+      cfg.retryOptions.maxRetries = 0;
     }
 
     this.timeOfFirstRequest = Date.now();
-    this.retryableErrorFn = cfg?.retryOptions?.retryableErrorFn;
 
     const contentLength = cfg.metadata
       ? Number(cfg.metadata.contentLength)
@@ -646,9 +610,8 @@ export class Upload extends Pumpify {
             ],
           };
           if (
-            this.retryLimit > 0 &&
-            this.retryableErrorFn &&
-            this.retryableErrorFn!(apiError as ApiError)
+            this.retryOptions.maxRetries! > 0 &&
+            this.retryOptions.retryableErrorFn!(apiError as ApiError)
           ) {
             throw e;
           } else {
@@ -657,10 +620,10 @@ export class Upload extends Pumpify {
         }
       },
       {
-        retries: this.retryLimit,
-        factor: this.retryDelayMultiplier,
-        maxTimeout: this.maxRetryDelay! * 1000, //convert to milliseconds
-        maxRetryTime: this.maxRetryTotalTimeout! * 1000, //convert to milliseconds
+        retries: this.retryOptions.maxRetries,
+        factor: this.retryOptions.retryDelayMultiplier,
+        maxTimeout: this.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
+        maxRetryTime: this.retryOptions.totalTimeout! * 1000, //convert to milliseconds
       }
     );
 
@@ -1055,14 +1018,11 @@ export class Upload extends Pumpify {
    */
   private onResponse(resp: GaxiosResponse) {
     if (
-      (this.retryableErrorFn &&
-        this.retryableErrorFn({
-          code: resp.status,
-          message: resp.statusText,
-          name: resp.statusText,
-        })) ||
-      resp.status === NOT_FOUND_STATUS_CODE ||
-      this.isServerErrorResponse(resp.status)
+      this.retryOptions.retryableErrorFn!({
+        code: resp.status,
+        message: resp.statusText,
+        name: resp.statusText,
+      })
     ) {
       this.attemptDelayedRetry(resp);
       return false;
@@ -1076,7 +1036,7 @@ export class Upload extends Pumpify {
    * @param resp GaxiosResponse object from previous attempt
    */
   private attemptDelayedRetry(resp: GaxiosResponse) {
-    if (this.numRetries < this.retryLimit) {
+    if (this.numRetries < this.retryOptions.maxRetries!) {
       if (
         resp.status === NOT_FOUND_STATUS_CODE &&
         this.numChunksReadInRequest === 0
@@ -1120,10 +1080,13 @@ export class Upload extends Pumpify {
   private getRetryDelay(): number {
     const randomMs = Math.round(Math.random() * 1000);
     const waitTime =
-      Math.pow(this.retryDelayMultiplier, this.numRetries) * 1000 + randomMs;
+      Math.pow(this.retryOptions.retryDelayMultiplier!, this.numRetries) *
+        1000 +
+      randomMs;
     const maxAllowableDelayMs =
-      this.maxRetryTotalTimeout * 1000 - (Date.now() - this.timeOfFirstRequest);
-    const maxRetryDelayMs = this.maxRetryDelay * 1000;
+      this.retryOptions.totalTimeout! * 1000 -
+      (Date.now() - this.timeOfFirstRequest);
+    const maxRetryDelayMs = this.retryOptions.maxRetryDelay! * 1000;
 
     return Math.min(waitTime, maxRetryDelayMs, maxAllowableDelayMs);
   }
@@ -1146,16 +1109,6 @@ export class Upload extends Pumpify {
    */
   public isSuccessfulResponse(status: number): boolean {
     return status >= 200 && status < 300;
-  }
-
-  /**
-   * Check if a given status code is 5xx
-   *
-   * @param status The status code to check
-   * @returns if the status is 5xx
-   */
-  public isServerErrorResponse(status: number): boolean {
-    return status >= 500 && status < 600;
   }
 }
 

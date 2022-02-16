@@ -21,12 +21,28 @@ import * as crypto from 'crypto';
 import * as os from 'os';
 import {Readable} from 'stream';
 import {createURI, ErrorWithCode, upload} from '../src/gcs-resumable-upload';
+import {
+  RETRY_DELAY_MULTIPLIER_DEFAULT,
+  TOTAL_TIMEOUT_DEFAULT,
+  MAX_RETRY_DELAY_DEFAULT,
+  AUTO_RETRY_DEFAULT,
+  MAX_RETRY_DEFAULT,
+  RETRYABLE_ERR_FN_DEFAULT,
+} from '../src/storage';
 
 const bucketName = process.env.BUCKET_NAME || 'gcs-resumable-upload-test';
 tmp.setGracefulCleanup();
 const tmpFileContents = crypto.randomBytes(1024 * 1024 * 20);
 const filePath = path.join(os.tmpdir(), '20MB.zip');
 const writeStream = fs.createWriteStream(filePath);
+const retryOptions = {
+  retryDelayMultiplier: RETRY_DELAY_MULTIPLIER_DEFAULT,
+  totalTimeout: TOTAL_TIMEOUT_DEFAULT,
+  maxRetryDelay: MAX_RETRY_DELAY_DEFAULT,
+  autoRetry: AUTO_RETRY_DEFAULT,
+  maxRetries: MAX_RETRY_DEFAULT,
+  retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
+};
 writeStream.write(tmpFileContents);
 writeStream.close();
 
@@ -40,7 +56,11 @@ async function delay(title: string, retries: number, done: Function) {
 
 describe('gcs-resumable-upload', () => {
   beforeEach(() => {
-    upload({bucket: bucketName, file: filePath}).deleteConfig();
+    upload({
+      bucket: bucketName,
+      file: filePath,
+      retryOptions: retryOptions,
+    }).deleteConfig();
   });
 
   it('should work', done => {
@@ -51,6 +71,7 @@ describe('gcs-resumable-upload', () => {
         upload({
           bucket: bucketName,
           file: filePath,
+          retryOptions: retryOptions,
           metadata: {contentType: 'image/jpg'},
         })
       )
@@ -88,6 +109,7 @@ describe('gcs-resumable-upload', () => {
             bucket: bucketName,
             file: filePath,
             metadata: {contentType: 'image/jpg'},
+            retryOptions: retryOptions,
           });
 
           fs.createReadStream(filePath)
@@ -130,6 +152,7 @@ describe('gcs-resumable-upload', () => {
         bucket: bucketName,
         file: filePath,
         metadata: {contentType: 'image/jpg'},
+        retryOptions: retryOptions,
       },
       done
     );
@@ -147,6 +170,7 @@ describe('gcs-resumable-upload', () => {
           bucket: bucketName,
           file: filePath,
           metadata,
+          retryOptions: retryOptions,
         })
       )
       .on('error', (err: ErrorWithCode) => {
@@ -160,6 +184,7 @@ describe('gcs-resumable-upload', () => {
       bucket: bucketName,
       file: filePath,
       metadata: {contentType: 'image/jpg'},
+      retryOptions: retryOptions,
       configPath: path.join(
         os.tmpdir(),
         `test-gcs-resumable-${Date.now()}.json`
