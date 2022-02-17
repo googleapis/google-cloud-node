@@ -15,6 +15,8 @@ building and managing container based applications, powered by the open source K
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Create_cluster](#create_cluster)
+  * [Delete_cluster](#delete_cluster)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -29,6 +31,40 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Create_cluster
+
+View the [source code](https://github.com/googleapis/nodejs-cloud-container/blob/main/samples/create_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-cloud-container&page=editor&open_in_editor=samples/create_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create_cluster.js`
+
+
+-----
+
+
+
+
+### Delete_cluster
+
+View the [source code](https://github.com/googleapis/nodejs-cloud-container/blob/main/samples/delete_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-cloud-container&page=editor&open_in_editor=samples/delete_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete_cluster.js`
+
+
+-----
+
 
 
 

@@ -14,6 +14,7 @@
 
 'use strict';
 
+// [START gke_list_cluster]
 async function main() {
   // [START container_quickstart]
   const container = require('@google-cloud/container');
@@ -30,11 +31,11 @@ async function main() {
     };
 
     const [response] = await client.listClusters(request);
-    console.log('Clusters:');
-    console.log(response);
+    console.log('Clusters: ', response);
   }
   quickstart();
   // [END container_quickstart]
 }
 
 main().catch(console.error);
+// [END gke_list_cluster]
