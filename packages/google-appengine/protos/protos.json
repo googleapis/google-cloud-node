@@ -25,6 +25,18 @@
                 }
               }
             },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "FileDescriptorSet": {
               "fields": {
                 "file": {
@@ -918,18 +930,6 @@
                       "id": 4
                     }
                   }
-                }
-              }
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
                 }
               }
             },
@@ -3498,24 +3498,6 @@
                     }
                   }
                 },
-                "NetworkSettings": {
-                  "fields": {
-                    "ingressTrafficAllowed": {
-                      "type": "IngressTrafficAllowed",
-                      "id": 1
-                    }
-                  },
-                  "nested": {
-                    "IngressTrafficAllowed": {
-                      "values": {
-                        "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED": 0,
-                        "INGRESS_TRAFFIC_ALLOWED_ALL": 1,
-                        "INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY": 2,
-                        "INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB": 3
-                      }
-                    }
-                  }
-                },
                 "Service": {
                   "fields": {
                     "name": {
@@ -3555,6 +3537,24 @@
                         "COOKIE": 1,
                         "IP": 2,
                         "RANDOM": 3
+                      }
+                    }
+                  }
+                },
+                "NetworkSettings": {
+                  "fields": {
+                    "ingressTrafficAllowed": {
+                      "type": "IngressTrafficAllowed",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "IngressTrafficAllowed": {
+                      "values": {
+                        "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED": 0,
+                        "INGRESS_TRAFFIC_ALLOWED_ALL": 1,
+                        "INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY": 2,
+                        "INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB": 3
                       }
                     }
                   }
@@ -3680,93 +3680,6 @@
             "cc_enable_arenas": true
           },
           "nested": {
-            "http": {
-              "type": "HttpRule",
-              "id": 72295728,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Http": {
-              "fields": {
-                "rules": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 1
-                },
-                "fullyDecodeReservedExpansion": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "HttpRule": {
-              "oneofs": {
-                "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
-                }
-              },
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "get": {
-                  "type": "string",
-                  "id": 2
-                },
-                "put": {
-                  "type": "string",
-                  "id": 3
-                },
-                "post": {
-                  "type": "string",
-                  "id": 4
-                },
-                "delete": {
-                  "type": "string",
-                  "id": 5
-                },
-                "patch": {
-                  "type": "string",
-                  "id": 6
-                },
-                "custom": {
-                  "type": "CustomHttpPattern",
-                  "id": 8
-                },
-                "body": {
-                  "type": "string",
-                  "id": 7
-                },
-                "responseBody": {
-                  "type": "string",
-                  "id": 12
-                },
-                "additionalBindings": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 11
-                }
-              }
-            },
-            "CustomHttpPattern": {
-              "fields": {
-                "kind": {
-                  "type": "string",
-                  "id": 1
-                },
-                "path": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "fieldBehavior": {
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
@@ -3857,6 +3770,93 @@
                   "id": 1
                 },
                 "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
                   "type": "string",
                   "id": 2
                 }
