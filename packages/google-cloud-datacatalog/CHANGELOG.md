@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [2.6.0](https://github.com/googleapis/nodejs-datacatalog/compare/v2.5.0...v2.6.0) (2022-02-08)
+
+
+### Features
+
+* Add methods and messages related to starring feature feat: Add methods and messages related to business context feature docs: Updates copyright message ([#328](https://github.com/googleapis/nodejs-datacatalog/issues/328)) ([585a7b2](https://github.com/googleapis/nodejs-datacatalog/commit/585a7b2e456ca5ddabb3752c0a56356e2564b80b))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.4.2...v2.5.0) (2021-08-23)
 
 
