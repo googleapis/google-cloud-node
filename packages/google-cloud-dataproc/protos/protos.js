@@ -7725,6 +7725,2081 @@
                         return RuntimeInfo;
                     })();
     
+                    v1.GkeClusterConfig = (function() {
+    
+                        /**
+                         * Properties of a GkeClusterConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IGkeClusterConfig
+                         * @property {string|null} [gkeClusterTarget] GkeClusterConfig gkeClusterTarget
+                         * @property {Array.<google.cloud.dataproc.v1.IGkeNodePoolTarget>|null} [nodePoolTarget] GkeClusterConfig nodePoolTarget
+                         */
+    
+                        /**
+                         * Constructs a new GkeClusterConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a GkeClusterConfig.
+                         * @implements IGkeClusterConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IGkeClusterConfig=} [properties] Properties to set
+                         */
+                        function GkeClusterConfig(properties) {
+                            this.nodePoolTarget = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeClusterConfig gkeClusterTarget.
+                         * @member {string} gkeClusterTarget
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @instance
+                         */
+                        GkeClusterConfig.prototype.gkeClusterTarget = "";
+    
+                        /**
+                         * GkeClusterConfig nodePoolTarget.
+                         * @member {Array.<google.cloud.dataproc.v1.IGkeNodePoolTarget>} nodePoolTarget
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @instance
+                         */
+                        GkeClusterConfig.prototype.nodePoolTarget = $util.emptyArray;
+    
+                        /**
+                         * Creates a new GkeClusterConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IGkeClusterConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.GkeClusterConfig} GkeClusterConfig instance
+                         */
+                        GkeClusterConfig.create = function create(properties) {
+                            return new GkeClusterConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeClusterConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IGkeClusterConfig} message GkeClusterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeClusterConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gkeClusterTarget != null && Object.hasOwnProperty.call(message, "gkeClusterTarget"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.gkeClusterTarget);
+                            if (message.nodePoolTarget != null && message.nodePoolTarget.length)
+                                for (var i = 0; i < message.nodePoolTarget.length; ++i)
+                                    $root.google.cloud.dataproc.v1.GkeNodePoolTarget.encode(message.nodePoolTarget[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeClusterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IGkeClusterConfig} message GkeClusterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeClusterConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeClusterConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.GkeClusterConfig} GkeClusterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeClusterConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.GkeClusterConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.gkeClusterTarget = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.nodePoolTarget && message.nodePoolTarget.length))
+                                        message.nodePoolTarget = [];
+                                    message.nodePoolTarget.push($root.google.cloud.dataproc.v1.GkeNodePoolTarget.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeClusterConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.GkeClusterConfig} GkeClusterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeClusterConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeClusterConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeClusterConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.gkeClusterTarget != null && message.hasOwnProperty("gkeClusterTarget"))
+                                if (!$util.isString(message.gkeClusterTarget))
+                                    return "gkeClusterTarget: string expected";
+                            if (message.nodePoolTarget != null && message.hasOwnProperty("nodePoolTarget")) {
+                                if (!Array.isArray(message.nodePoolTarget))
+                                    return "nodePoolTarget: array expected";
+                                for (var i = 0; i < message.nodePoolTarget.length; ++i) {
+                                    var error = $root.google.cloud.dataproc.v1.GkeNodePoolTarget.verify(message.nodePoolTarget[i]);
+                                    if (error)
+                                        return "nodePoolTarget." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeClusterConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.GkeClusterConfig} GkeClusterConfig
+                         */
+                        GkeClusterConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.GkeClusterConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.GkeClusterConfig();
+                            if (object.gkeClusterTarget != null)
+                                message.gkeClusterTarget = String(object.gkeClusterTarget);
+                            if (object.nodePoolTarget) {
+                                if (!Array.isArray(object.nodePoolTarget))
+                                    throw TypeError(".google.cloud.dataproc.v1.GkeClusterConfig.nodePoolTarget: array expected");
+                                message.nodePoolTarget = [];
+                                for (var i = 0; i < object.nodePoolTarget.length; ++i) {
+                                    if (typeof object.nodePoolTarget[i] !== "object")
+                                        throw TypeError(".google.cloud.dataproc.v1.GkeClusterConfig.nodePoolTarget: object expected");
+                                    message.nodePoolTarget[i] = $root.google.cloud.dataproc.v1.GkeNodePoolTarget.fromObject(object.nodePoolTarget[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeClusterConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.GkeClusterConfig} message GkeClusterConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeClusterConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.nodePoolTarget = [];
+                            if (options.defaults)
+                                object.gkeClusterTarget = "";
+                            if (message.gkeClusterTarget != null && message.hasOwnProperty("gkeClusterTarget"))
+                                object.gkeClusterTarget = message.gkeClusterTarget;
+                            if (message.nodePoolTarget && message.nodePoolTarget.length) {
+                                object.nodePoolTarget = [];
+                                for (var j = 0; j < message.nodePoolTarget.length; ++j)
+                                    object.nodePoolTarget[j] = $root.google.cloud.dataproc.v1.GkeNodePoolTarget.toObject(message.nodePoolTarget[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeClusterConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeClusterConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GkeClusterConfig;
+                    })();
+    
+                    v1.KubernetesClusterConfig = (function() {
+    
+                        /**
+                         * Properties of a KubernetesClusterConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IKubernetesClusterConfig
+                         * @property {string|null} [kubernetesNamespace] KubernetesClusterConfig kubernetesNamespace
+                         * @property {google.cloud.dataproc.v1.IGkeClusterConfig|null} [gkeClusterConfig] KubernetesClusterConfig gkeClusterConfig
+                         * @property {google.cloud.dataproc.v1.IKubernetesSoftwareConfig|null} [kubernetesSoftwareConfig] KubernetesClusterConfig kubernetesSoftwareConfig
+                         */
+    
+                        /**
+                         * Constructs a new KubernetesClusterConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a KubernetesClusterConfig.
+                         * @implements IKubernetesClusterConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IKubernetesClusterConfig=} [properties] Properties to set
+                         */
+                        function KubernetesClusterConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KubernetesClusterConfig kubernetesNamespace.
+                         * @member {string} kubernetesNamespace
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @instance
+                         */
+                        KubernetesClusterConfig.prototype.kubernetesNamespace = "";
+    
+                        /**
+                         * KubernetesClusterConfig gkeClusterConfig.
+                         * @member {google.cloud.dataproc.v1.IGkeClusterConfig|null|undefined} gkeClusterConfig
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @instance
+                         */
+                        KubernetesClusterConfig.prototype.gkeClusterConfig = null;
+    
+                        /**
+                         * KubernetesClusterConfig kubernetesSoftwareConfig.
+                         * @member {google.cloud.dataproc.v1.IKubernetesSoftwareConfig|null|undefined} kubernetesSoftwareConfig
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @instance
+                         */
+                        KubernetesClusterConfig.prototype.kubernetesSoftwareConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * KubernetesClusterConfig config.
+                         * @member {"gkeClusterConfig"|undefined} config
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @instance
+                         */
+                        Object.defineProperty(KubernetesClusterConfig.prototype, "config", {
+                            get: $util.oneOfGetter($oneOfFields = ["gkeClusterConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new KubernetesClusterConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IKubernetesClusterConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.KubernetesClusterConfig} KubernetesClusterConfig instance
+                         */
+                        KubernetesClusterConfig.create = function create(properties) {
+                            return new KubernetesClusterConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KubernetesClusterConfig message. Does not implicitly {@link google.cloud.dataproc.v1.KubernetesClusterConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IKubernetesClusterConfig} message KubernetesClusterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KubernetesClusterConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kubernetesNamespace != null && Object.hasOwnProperty.call(message, "kubernetesNamespace"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kubernetesNamespace);
+                            if (message.gkeClusterConfig != null && Object.hasOwnProperty.call(message, "gkeClusterConfig"))
+                                $root.google.cloud.dataproc.v1.GkeClusterConfig.encode(message.gkeClusterConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.kubernetesSoftwareConfig != null && Object.hasOwnProperty.call(message, "kubernetesSoftwareConfig"))
+                                $root.google.cloud.dataproc.v1.KubernetesSoftwareConfig.encode(message.kubernetesSoftwareConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KubernetesClusterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.KubernetesClusterConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IKubernetesClusterConfig} message KubernetesClusterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KubernetesClusterConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KubernetesClusterConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.KubernetesClusterConfig} KubernetesClusterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KubernetesClusterConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.KubernetesClusterConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.kubernetesNamespace = reader.string();
+                                    break;
+                                case 2:
+                                    message.gkeClusterConfig = $root.google.cloud.dataproc.v1.GkeClusterConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.kubernetesSoftwareConfig = $root.google.cloud.dataproc.v1.KubernetesSoftwareConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KubernetesClusterConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.KubernetesClusterConfig} KubernetesClusterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KubernetesClusterConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KubernetesClusterConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KubernetesClusterConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.kubernetesNamespace != null && message.hasOwnProperty("kubernetesNamespace"))
+                                if (!$util.isString(message.kubernetesNamespace))
+                                    return "kubernetesNamespace: string expected";
+                            if (message.gkeClusterConfig != null && message.hasOwnProperty("gkeClusterConfig")) {
+                                properties.config = 1;
+                                {
+                                    var error = $root.google.cloud.dataproc.v1.GkeClusterConfig.verify(message.gkeClusterConfig);
+                                    if (error)
+                                        return "gkeClusterConfig." + error;
+                                }
+                            }
+                            if (message.kubernetesSoftwareConfig != null && message.hasOwnProperty("kubernetesSoftwareConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.KubernetesSoftwareConfig.verify(message.kubernetesSoftwareConfig);
+                                if (error)
+                                    return "kubernetesSoftwareConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KubernetesClusterConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.KubernetesClusterConfig} KubernetesClusterConfig
+                         */
+                        KubernetesClusterConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.KubernetesClusterConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.KubernetesClusterConfig();
+                            if (object.kubernetesNamespace != null)
+                                message.kubernetesNamespace = String(object.kubernetesNamespace);
+                            if (object.gkeClusterConfig != null) {
+                                if (typeof object.gkeClusterConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.KubernetesClusterConfig.gkeClusterConfig: object expected");
+                                message.gkeClusterConfig = $root.google.cloud.dataproc.v1.GkeClusterConfig.fromObject(object.gkeClusterConfig);
+                            }
+                            if (object.kubernetesSoftwareConfig != null) {
+                                if (typeof object.kubernetesSoftwareConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.KubernetesClusterConfig.kubernetesSoftwareConfig: object expected");
+                                message.kubernetesSoftwareConfig = $root.google.cloud.dataproc.v1.KubernetesSoftwareConfig.fromObject(object.kubernetesSoftwareConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KubernetesClusterConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.KubernetesClusterConfig} message KubernetesClusterConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KubernetesClusterConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.kubernetesNamespace = "";
+                                object.kubernetesSoftwareConfig = null;
+                            }
+                            if (message.kubernetesNamespace != null && message.hasOwnProperty("kubernetesNamespace"))
+                                object.kubernetesNamespace = message.kubernetesNamespace;
+                            if (message.gkeClusterConfig != null && message.hasOwnProperty("gkeClusterConfig")) {
+                                object.gkeClusterConfig = $root.google.cloud.dataproc.v1.GkeClusterConfig.toObject(message.gkeClusterConfig, options);
+                                if (options.oneofs)
+                                    object.config = "gkeClusterConfig";
+                            }
+                            if (message.kubernetesSoftwareConfig != null && message.hasOwnProperty("kubernetesSoftwareConfig"))
+                                object.kubernetesSoftwareConfig = $root.google.cloud.dataproc.v1.KubernetesSoftwareConfig.toObject(message.kubernetesSoftwareConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KubernetesClusterConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.KubernetesClusterConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KubernetesClusterConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return KubernetesClusterConfig;
+                    })();
+    
+                    v1.KubernetesSoftwareConfig = (function() {
+    
+                        /**
+                         * Properties of a KubernetesSoftwareConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IKubernetesSoftwareConfig
+                         * @property {Object.<string,string>|null} [componentVersion] KubernetesSoftwareConfig componentVersion
+                         * @property {Object.<string,string>|null} [properties] KubernetesSoftwareConfig properties
+                         */
+    
+                        /**
+                         * Constructs a new KubernetesSoftwareConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a KubernetesSoftwareConfig.
+                         * @implements IKubernetesSoftwareConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IKubernetesSoftwareConfig=} [properties] Properties to set
+                         */
+                        function KubernetesSoftwareConfig(properties) {
+                            this.componentVersion = {};
+                            this.properties = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KubernetesSoftwareConfig componentVersion.
+                         * @member {Object.<string,string>} componentVersion
+                         * @memberof google.cloud.dataproc.v1.KubernetesSoftwareConfig
+                         * @instance
+                         */
+                        KubernetesSoftwareConfig.prototype.componentVersion = $util.emptyObject;
+    
+                        /**
+                         * KubernetesSoftwareConfig properties.
+                         * @member {Object.<string,string>} properties
+                         * @memberof google.cloud.dataproc.v1.KubernetesSoftwareConfig
+                         * @instance
+                         */
+                        KubernetesSoftwareConfig.prototype.properties = $util.emptyObject;
+    
+                        /**
+                         * Creates a new KubernetesSoftwareConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.KubernetesSoftwareConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IKubernetesSoftwareConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.KubernetesSoftwareConfig} KubernetesSoftwareConfig instance
+                         */
+                        KubernetesSoftwareConfig.create = function create(properties) {
+                            return new KubernetesSoftwareConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KubernetesSoftwareConfig message. Does not implicitly {@link google.cloud.dataproc.v1.KubernetesSoftwareConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.KubernetesSoftwareConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IKubernetesSoftwareConfig} message KubernetesSoftwareConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KubernetesSoftwareConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.componentVersion != null && Object.hasOwnProperty.call(message, "componentVersion"))
+                                for (var keys = Object.keys(message.componentVersion), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.componentVersion[keys[i]]).ldelim();
+                            if (message.properties != null && Object.hasOwnProperty.call(message, "properties"))
+                                for (var keys = Object.keys(message.properties), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.properties[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KubernetesSoftwareConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.KubernetesSoftwareConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.KubernetesSoftwareConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IKubernetesSoftwareConfig} message KubernetesSoftwareConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KubernetesSoftwareConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KubernetesSoftwareConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.KubernetesSoftwareConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.KubernetesSoftwareConfig} KubernetesSoftwareConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KubernetesSoftwareConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.KubernetesSoftwareConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (message.componentVersion === $util.emptyObject)
+                                        message.componentVersion = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.componentVersion[key] = value;
+                                    break;
+                                case 2:
+                                    if (message.properties === $util.emptyObject)
+                                        message.properties = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KubernetesSoftwareConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.KubernetesSoftwareConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.KubernetesSoftwareConfig} KubernetesSoftwareConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KubernetesSoftwareConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KubernetesSoftwareConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.KubernetesSoftwareConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KubernetesSoftwareConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.componentVersion != null && message.hasOwnProperty("componentVersion")) {
+                                if (!$util.isObject(message.componentVersion))
+                                    return "componentVersion: object expected";
+                                var key = Object.keys(message.componentVersion);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.componentVersion[key[i]]))
+                                        return "componentVersion: string{k:string} expected";
+                            }
+                            if (message.properties != null && message.hasOwnProperty("properties")) {
+                                if (!$util.isObject(message.properties))
+                                    return "properties: object expected";
+                                var key = Object.keys(message.properties);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.properties[key[i]]))
+                                        return "properties: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KubernetesSoftwareConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.KubernetesSoftwareConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.KubernetesSoftwareConfig} KubernetesSoftwareConfig
+                         */
+                        KubernetesSoftwareConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.KubernetesSoftwareConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.KubernetesSoftwareConfig();
+                            if (object.componentVersion) {
+                                if (typeof object.componentVersion !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.KubernetesSoftwareConfig.componentVersion: object expected");
+                                message.componentVersion = {};
+                                for (var keys = Object.keys(object.componentVersion), i = 0; i < keys.length; ++i)
+                                    message.componentVersion[keys[i]] = String(object.componentVersion[keys[i]]);
+                            }
+                            if (object.properties) {
+                                if (typeof object.properties !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.KubernetesSoftwareConfig.properties: object expected");
+                                message.properties = {};
+                                for (var keys = Object.keys(object.properties), i = 0; i < keys.length; ++i)
+                                    message.properties[keys[i]] = String(object.properties[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KubernetesSoftwareConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.KubernetesSoftwareConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.KubernetesSoftwareConfig} message KubernetesSoftwareConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KubernetesSoftwareConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults) {
+                                object.componentVersion = {};
+                                object.properties = {};
+                            }
+                            var keys2;
+                            if (message.componentVersion && (keys2 = Object.keys(message.componentVersion)).length) {
+                                object.componentVersion = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.componentVersion[keys2[j]] = message.componentVersion[keys2[j]];
+                            }
+                            if (message.properties && (keys2 = Object.keys(message.properties)).length) {
+                                object.properties = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.properties[keys2[j]] = message.properties[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KubernetesSoftwareConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.KubernetesSoftwareConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KubernetesSoftwareConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return KubernetesSoftwareConfig;
+                    })();
+    
+                    v1.GkeNodePoolTarget = (function() {
+    
+                        /**
+                         * Properties of a GkeNodePoolTarget.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IGkeNodePoolTarget
+                         * @property {string|null} [nodePool] GkeNodePoolTarget nodePool
+                         * @property {Array.<google.cloud.dataproc.v1.GkeNodePoolTarget.Role>|null} [roles] GkeNodePoolTarget roles
+                         * @property {google.cloud.dataproc.v1.IGkeNodePoolConfig|null} [nodePoolConfig] GkeNodePoolTarget nodePoolConfig
+                         */
+    
+                        /**
+                         * Constructs a new GkeNodePoolTarget.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a GkeNodePoolTarget.
+                         * @implements IGkeNodePoolTarget
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IGkeNodePoolTarget=} [properties] Properties to set
+                         */
+                        function GkeNodePoolTarget(properties) {
+                            this.roles = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeNodePoolTarget nodePool.
+                         * @member {string} nodePool
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolTarget
+                         * @instance
+                         */
+                        GkeNodePoolTarget.prototype.nodePool = "";
+    
+                        /**
+                         * GkeNodePoolTarget roles.
+                         * @member {Array.<google.cloud.dataproc.v1.GkeNodePoolTarget.Role>} roles
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolTarget
+                         * @instance
+                         */
+                        GkeNodePoolTarget.prototype.roles = $util.emptyArray;
+    
+                        /**
+                         * GkeNodePoolTarget nodePoolConfig.
+                         * @member {google.cloud.dataproc.v1.IGkeNodePoolConfig|null|undefined} nodePoolConfig
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolTarget
+                         * @instance
+                         */
+                        GkeNodePoolTarget.prototype.nodePoolConfig = null;
+    
+                        /**
+                         * Creates a new GkeNodePoolTarget instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolTarget
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IGkeNodePoolTarget=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.GkeNodePoolTarget} GkeNodePoolTarget instance
+                         */
+                        GkeNodePoolTarget.create = function create(properties) {
+                            return new GkeNodePoolTarget(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNodePoolTarget message. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolTarget.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolTarget
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IGkeNodePoolTarget} message GkeNodePoolTarget message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNodePoolTarget.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.nodePool != null && Object.hasOwnProperty.call(message, "nodePool"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.nodePool);
+                            if (message.roles != null && message.roles.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.roles.length; ++i)
+                                    writer.int32(message.roles[i]);
+                                writer.ldelim();
+                            }
+                            if (message.nodePoolConfig != null && Object.hasOwnProperty.call(message, "nodePoolConfig"))
+                                $root.google.cloud.dataproc.v1.GkeNodePoolConfig.encode(message.nodePoolConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNodePoolTarget message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolTarget.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolTarget
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IGkeNodePoolTarget} message GkeNodePoolTarget message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNodePoolTarget.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeNodePoolTarget message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolTarget
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.GkeNodePoolTarget} GkeNodePoolTarget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNodePoolTarget.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.GkeNodePoolTarget();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.nodePool = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.roles && message.roles.length))
+                                        message.roles = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.roles.push(reader.int32());
+                                    } else
+                                        message.roles.push(reader.int32());
+                                    break;
+                                case 3:
+                                    message.nodePoolConfig = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeNodePoolTarget message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolTarget
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.GkeNodePoolTarget} GkeNodePoolTarget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNodePoolTarget.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeNodePoolTarget message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolTarget
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeNodePoolTarget.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.nodePool != null && message.hasOwnProperty("nodePool"))
+                                if (!$util.isString(message.nodePool))
+                                    return "nodePool: string expected";
+                            if (message.roles != null && message.hasOwnProperty("roles")) {
+                                if (!Array.isArray(message.roles))
+                                    return "roles: array expected";
+                                for (var i = 0; i < message.roles.length; ++i)
+                                    switch (message.roles[i]) {
+                                    default:
+                                        return "roles: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                            }
+                            if (message.nodePoolConfig != null && message.hasOwnProperty("nodePoolConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.verify(message.nodePoolConfig);
+                                if (error)
+                                    return "nodePoolConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeNodePoolTarget message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolTarget
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.GkeNodePoolTarget} GkeNodePoolTarget
+                         */
+                        GkeNodePoolTarget.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.GkeNodePoolTarget)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.GkeNodePoolTarget();
+                            if (object.nodePool != null)
+                                message.nodePool = String(object.nodePool);
+                            if (object.roles) {
+                                if (!Array.isArray(object.roles))
+                                    throw TypeError(".google.cloud.dataproc.v1.GkeNodePoolTarget.roles: array expected");
+                                message.roles = [];
+                                for (var i = 0; i < object.roles.length; ++i)
+                                    switch (object.roles[i]) {
+                                    default:
+                                    case "ROLE_UNSPECIFIED":
+                                    case 0:
+                                        message.roles[i] = 0;
+                                        break;
+                                    case "DEFAULT":
+                                    case 1:
+                                        message.roles[i] = 1;
+                                        break;
+                                    case "CONTROLLER":
+                                    case 2:
+                                        message.roles[i] = 2;
+                                        break;
+                                    case "SPARK_DRIVER":
+                                    case 3:
+                                        message.roles[i] = 3;
+                                        break;
+                                    case "SPARK_EXECUTOR":
+                                    case 4:
+                                        message.roles[i] = 4;
+                                        break;
+                                    }
+                            }
+                            if (object.nodePoolConfig != null) {
+                                if (typeof object.nodePoolConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.GkeNodePoolTarget.nodePoolConfig: object expected");
+                                message.nodePoolConfig = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.fromObject(object.nodePoolConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeNodePoolTarget message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolTarget
+                         * @static
+                         * @param {google.cloud.dataproc.v1.GkeNodePoolTarget} message GkeNodePoolTarget
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeNodePoolTarget.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.roles = [];
+                            if (options.defaults) {
+                                object.nodePool = "";
+                                object.nodePoolConfig = null;
+                            }
+                            if (message.nodePool != null && message.hasOwnProperty("nodePool"))
+                                object.nodePool = message.nodePool;
+                            if (message.roles && message.roles.length) {
+                                object.roles = [];
+                                for (var j = 0; j < message.roles.length; ++j)
+                                    object.roles[j] = options.enums === String ? $root.google.cloud.dataproc.v1.GkeNodePoolTarget.Role[message.roles[j]] : message.roles[j];
+                            }
+                            if (message.nodePoolConfig != null && message.hasOwnProperty("nodePoolConfig"))
+                                object.nodePoolConfig = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.toObject(message.nodePoolConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeNodePoolTarget to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolTarget
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeNodePoolTarget.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Role enum.
+                         * @name google.cloud.dataproc.v1.GkeNodePoolTarget.Role
+                         * @enum {number}
+                         * @property {number} ROLE_UNSPECIFIED=0 ROLE_UNSPECIFIED value
+                         * @property {number} DEFAULT=1 DEFAULT value
+                         * @property {number} CONTROLLER=2 CONTROLLER value
+                         * @property {number} SPARK_DRIVER=3 SPARK_DRIVER value
+                         * @property {number} SPARK_EXECUTOR=4 SPARK_EXECUTOR value
+                         */
+                        GkeNodePoolTarget.Role = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ROLE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DEFAULT"] = 1;
+                            values[valuesById[2] = "CONTROLLER"] = 2;
+                            values[valuesById[3] = "SPARK_DRIVER"] = 3;
+                            values[valuesById[4] = "SPARK_EXECUTOR"] = 4;
+                            return values;
+                        })();
+    
+                        return GkeNodePoolTarget;
+                    })();
+    
+                    v1.GkeNodePoolConfig = (function() {
+    
+                        /**
+                         * Properties of a GkeNodePoolConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IGkeNodePoolConfig
+                         * @property {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodeConfig|null} [config] GkeNodePoolConfig config
+                         * @property {Array.<string>|null} [locations] GkeNodePoolConfig locations
+                         * @property {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAutoscalingConfig|null} [autoscaling] GkeNodePoolConfig autoscaling
+                         */
+    
+                        /**
+                         * Constructs a new GkeNodePoolConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a GkeNodePoolConfig.
+                         * @implements IGkeNodePoolConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IGkeNodePoolConfig=} [properties] Properties to set
+                         */
+                        function GkeNodePoolConfig(properties) {
+                            this.locations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeNodePoolConfig config.
+                         * @member {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodeConfig|null|undefined} config
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                         * @instance
+                         */
+                        GkeNodePoolConfig.prototype.config = null;
+    
+                        /**
+                         * GkeNodePoolConfig locations.
+                         * @member {Array.<string>} locations
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                         * @instance
+                         */
+                        GkeNodePoolConfig.prototype.locations = $util.emptyArray;
+    
+                        /**
+                         * GkeNodePoolConfig autoscaling.
+                         * @member {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAutoscalingConfig|null|undefined} autoscaling
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                         * @instance
+                         */
+                        GkeNodePoolConfig.prototype.autoscaling = null;
+    
+                        /**
+                         * Creates a new GkeNodePoolConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IGkeNodePoolConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig} GkeNodePoolConfig instance
+                         */
+                        GkeNodePoolConfig.create = function create(properties) {
+                            return new GkeNodePoolConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNodePoolConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IGkeNodePoolConfig} message GkeNodePoolConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNodePoolConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.config != null && Object.hasOwnProperty.call(message, "config"))
+                                $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.encode(message.config, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.autoscaling != null && Object.hasOwnProperty.call(message, "autoscaling"))
+                                $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig.encode(message.autoscaling, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.locations != null && message.locations.length)
+                                for (var i = 0; i < message.locations.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.locations[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeNodePoolConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IGkeNodePoolConfig} message GkeNodePoolConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeNodePoolConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeNodePoolConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig} GkeNodePoolConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNodePoolConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.GkeNodePoolConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.config = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    if (!(message.locations && message.locations.length))
+                                        message.locations = [];
+                                    message.locations.push(reader.string());
+                                    break;
+                                case 4:
+                                    message.autoscaling = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeNodePoolConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig} GkeNodePoolConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeNodePoolConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeNodePoolConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeNodePoolConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.config != null && message.hasOwnProperty("config")) {
+                                var error = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.verify(message.config);
+                                if (error)
+                                    return "config." + error;
+                            }
+                            if (message.locations != null && message.hasOwnProperty("locations")) {
+                                if (!Array.isArray(message.locations))
+                                    return "locations: array expected";
+                                for (var i = 0; i < message.locations.length; ++i)
+                                    if (!$util.isString(message.locations[i]))
+                                        return "locations: string[] expected";
+                            }
+                            if (message.autoscaling != null && message.hasOwnProperty("autoscaling")) {
+                                var error = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig.verify(message.autoscaling);
+                                if (error)
+                                    return "autoscaling." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeNodePoolConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig} GkeNodePoolConfig
+                         */
+                        GkeNodePoolConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.GkeNodePoolConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.GkeNodePoolConfig();
+                            if (object.config != null) {
+                                if (typeof object.config !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.GkeNodePoolConfig.config: object expected");
+                                message.config = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.fromObject(object.config);
+                            }
+                            if (object.locations) {
+                                if (!Array.isArray(object.locations))
+                                    throw TypeError(".google.cloud.dataproc.v1.GkeNodePoolConfig.locations: array expected");
+                                message.locations = [];
+                                for (var i = 0; i < object.locations.length; ++i)
+                                    message.locations[i] = String(object.locations[i]);
+                            }
+                            if (object.autoscaling != null) {
+                                if (typeof object.autoscaling !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.GkeNodePoolConfig.autoscaling: object expected");
+                                message.autoscaling = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig.fromObject(object.autoscaling);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeNodePoolConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.GkeNodePoolConfig} message GkeNodePoolConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeNodePoolConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.locations = [];
+                            if (options.defaults) {
+                                object.config = null;
+                                object.autoscaling = null;
+                            }
+                            if (message.config != null && message.hasOwnProperty("config"))
+                                object.config = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.toObject(message.config, options);
+                            if (message.autoscaling != null && message.hasOwnProperty("autoscaling"))
+                                object.autoscaling = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig.toObject(message.autoscaling, options);
+                            if (message.locations && message.locations.length) {
+                                object.locations = [];
+                                for (var j = 0; j < message.locations.length; ++j)
+                                    object.locations[j] = message.locations[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeNodePoolConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeNodePoolConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        GkeNodePoolConfig.GkeNodeConfig = (function() {
+    
+                            /**
+                             * Properties of a GkeNodeConfig.
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                             * @interface IGkeNodeConfig
+                             * @property {string|null} [machineType] GkeNodeConfig machineType
+                             * @property {boolean|null} [preemptible] GkeNodeConfig preemptible
+                             * @property {number|null} [localSsdCount] GkeNodeConfig localSsdCount
+                             * @property {Array.<google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig>|null} [accelerators] GkeNodeConfig accelerators
+                             * @property {string|null} [minCpuPlatform] GkeNodeConfig minCpuPlatform
+                             */
+    
+                            /**
+                             * Constructs a new GkeNodeConfig.
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                             * @classdesc Represents a GkeNodeConfig.
+                             * @implements IGkeNodeConfig
+                             * @constructor
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodeConfig=} [properties] Properties to set
+                             */
+                            function GkeNodeConfig(properties) {
+                                this.accelerators = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GkeNodeConfig machineType.
+                             * @member {string} machineType
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @instance
+                             */
+                            GkeNodeConfig.prototype.machineType = "";
+    
+                            /**
+                             * GkeNodeConfig preemptible.
+                             * @member {boolean} preemptible
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @instance
+                             */
+                            GkeNodeConfig.prototype.preemptible = false;
+    
+                            /**
+                             * GkeNodeConfig localSsdCount.
+                             * @member {number} localSsdCount
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @instance
+                             */
+                            GkeNodeConfig.prototype.localSsdCount = 0;
+    
+                            /**
+                             * GkeNodeConfig accelerators.
+                             * @member {Array.<google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig>} accelerators
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @instance
+                             */
+                            GkeNodeConfig.prototype.accelerators = $util.emptyArray;
+    
+                            /**
+                             * GkeNodeConfig minCpuPlatform.
+                             * @member {string} minCpuPlatform
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @instance
+                             */
+                            GkeNodeConfig.prototype.minCpuPlatform = "";
+    
+                            /**
+                             * Creates a new GkeNodeConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodeConfig=} [properties] Properties to set
+                             * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig} GkeNodeConfig instance
+                             */
+                            GkeNodeConfig.create = function create(properties) {
+                                return new GkeNodeConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GkeNodeConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodeConfig} message GkeNodeConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GkeNodeConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.machineType != null && Object.hasOwnProperty.call(message, "machineType"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.machineType);
+                                if (message.localSsdCount != null && Object.hasOwnProperty.call(message, "localSsdCount"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.localSsdCount);
+                                if (message.preemptible != null && Object.hasOwnProperty.call(message, "preemptible"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).bool(message.preemptible);
+                                if (message.accelerators != null && message.accelerators.length)
+                                    for (var i = 0; i < message.accelerators.length; ++i)
+                                        $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig.encode(message.accelerators[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.minCpuPlatform != null && Object.hasOwnProperty.call(message, "minCpuPlatform"))
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.minCpuPlatform);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GkeNodeConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodeConfig} message GkeNodeConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GkeNodeConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GkeNodeConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig} GkeNodeConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GkeNodeConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.machineType = reader.string();
+                                        break;
+                                    case 10:
+                                        message.preemptible = reader.bool();
+                                        break;
+                                    case 7:
+                                        message.localSsdCount = reader.int32();
+                                        break;
+                                    case 11:
+                                        if (!(message.accelerators && message.accelerators.length))
+                                            message.accelerators = [];
+                                        message.accelerators.push($root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    case 13:
+                                        message.minCpuPlatform = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GkeNodeConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig} GkeNodeConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GkeNodeConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GkeNodeConfig message.
+                             * @function verify
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GkeNodeConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.machineType != null && message.hasOwnProperty("machineType"))
+                                    if (!$util.isString(message.machineType))
+                                        return "machineType: string expected";
+                                if (message.preemptible != null && message.hasOwnProperty("preemptible"))
+                                    if (typeof message.preemptible !== "boolean")
+                                        return "preemptible: boolean expected";
+                                if (message.localSsdCount != null && message.hasOwnProperty("localSsdCount"))
+                                    if (!$util.isInteger(message.localSsdCount))
+                                        return "localSsdCount: integer expected";
+                                if (message.accelerators != null && message.hasOwnProperty("accelerators")) {
+                                    if (!Array.isArray(message.accelerators))
+                                        return "accelerators: array expected";
+                                    for (var i = 0; i < message.accelerators.length; ++i) {
+                                        var error = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig.verify(message.accelerators[i]);
+                                        if (error)
+                                            return "accelerators." + error;
+                                    }
+                                }
+                                if (message.minCpuPlatform != null && message.hasOwnProperty("minCpuPlatform"))
+                                    if (!$util.isString(message.minCpuPlatform))
+                                        return "minCpuPlatform: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GkeNodeConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig} GkeNodeConfig
+                             */
+                            GkeNodeConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig)
+                                    return object;
+                                var message = new $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig();
+                                if (object.machineType != null)
+                                    message.machineType = String(object.machineType);
+                                if (object.preemptible != null)
+                                    message.preemptible = Boolean(object.preemptible);
+                                if (object.localSsdCount != null)
+                                    message.localSsdCount = object.localSsdCount | 0;
+                                if (object.accelerators) {
+                                    if (!Array.isArray(object.accelerators))
+                                        throw TypeError(".google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.accelerators: array expected");
+                                    message.accelerators = [];
+                                    for (var i = 0; i < object.accelerators.length; ++i) {
+                                        if (typeof object.accelerators[i] !== "object")
+                                            throw TypeError(".google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.accelerators: object expected");
+                                        message.accelerators[i] = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig.fromObject(object.accelerators[i]);
+                                    }
+                                }
+                                if (object.minCpuPlatform != null)
+                                    message.minCpuPlatform = String(object.minCpuPlatform);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GkeNodeConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig} message GkeNodeConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GkeNodeConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.accelerators = [];
+                                if (options.defaults) {
+                                    object.machineType = "";
+                                    object.localSsdCount = 0;
+                                    object.preemptible = false;
+                                    object.minCpuPlatform = "";
+                                }
+                                if (message.machineType != null && message.hasOwnProperty("machineType"))
+                                    object.machineType = message.machineType;
+                                if (message.localSsdCount != null && message.hasOwnProperty("localSsdCount"))
+                                    object.localSsdCount = message.localSsdCount;
+                                if (message.preemptible != null && message.hasOwnProperty("preemptible"))
+                                    object.preemptible = message.preemptible;
+                                if (message.accelerators && message.accelerators.length) {
+                                    object.accelerators = [];
+                                    for (var j = 0; j < message.accelerators.length; ++j)
+                                        object.accelerators[j] = $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig.toObject(message.accelerators[j], options);
+                                }
+                                if (message.minCpuPlatform != null && message.hasOwnProperty("minCpuPlatform"))
+                                    object.minCpuPlatform = message.minCpuPlatform;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GkeNodeConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GkeNodeConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return GkeNodeConfig;
+                        })();
+    
+                        GkeNodePoolConfig.GkeNodePoolAcceleratorConfig = (function() {
+    
+                            /**
+                             * Properties of a GkeNodePoolAcceleratorConfig.
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                             * @interface IGkeNodePoolAcceleratorConfig
+                             * @property {number|Long|null} [acceleratorCount] GkeNodePoolAcceleratorConfig acceleratorCount
+                             * @property {string|null} [acceleratorType] GkeNodePoolAcceleratorConfig acceleratorType
+                             */
+    
+                            /**
+                             * Constructs a new GkeNodePoolAcceleratorConfig.
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                             * @classdesc Represents a GkeNodePoolAcceleratorConfig.
+                             * @implements IGkeNodePoolAcceleratorConfig
+                             * @constructor
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig=} [properties] Properties to set
+                             */
+                            function GkeNodePoolAcceleratorConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GkeNodePoolAcceleratorConfig acceleratorCount.
+                             * @member {number|Long} acceleratorCount
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
+                             * @instance
+                             */
+                            GkeNodePoolAcceleratorConfig.prototype.acceleratorCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * GkeNodePoolAcceleratorConfig acceleratorType.
+                             * @member {string} acceleratorType
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
+                             * @instance
+                             */
+                            GkeNodePoolAcceleratorConfig.prototype.acceleratorType = "";
+    
+                            /**
+                             * Creates a new GkeNodePoolAcceleratorConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig=} [properties] Properties to set
+                             * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig} GkeNodePoolAcceleratorConfig instance
+                             */
+                            GkeNodePoolAcceleratorConfig.create = function create(properties) {
+                                return new GkeNodePoolAcceleratorConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GkeNodePoolAcceleratorConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig} message GkeNodePoolAcceleratorConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GkeNodePoolAcceleratorConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.acceleratorCount != null && Object.hasOwnProperty.call(message, "acceleratorCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.acceleratorCount);
+                                if (message.acceleratorType != null && Object.hasOwnProperty.call(message, "acceleratorType"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.acceleratorType);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GkeNodePoolAcceleratorConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig} message GkeNodePoolAcceleratorConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GkeNodePoolAcceleratorConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GkeNodePoolAcceleratorConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig} GkeNodePoolAcceleratorConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GkeNodePoolAcceleratorConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.acceleratorCount = reader.int64();
+                                        break;
+                                    case 2:
+                                        message.acceleratorType = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GkeNodePoolAcceleratorConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig} GkeNodePoolAcceleratorConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GkeNodePoolAcceleratorConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GkeNodePoolAcceleratorConfig message.
+                             * @function verify
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GkeNodePoolAcceleratorConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.acceleratorCount != null && message.hasOwnProperty("acceleratorCount"))
+                                    if (!$util.isInteger(message.acceleratorCount) && !(message.acceleratorCount && $util.isInteger(message.acceleratorCount.low) && $util.isInteger(message.acceleratorCount.high)))
+                                        return "acceleratorCount: integer|Long expected";
+                                if (message.acceleratorType != null && message.hasOwnProperty("acceleratorType"))
+                                    if (!$util.isString(message.acceleratorType))
+                                        return "acceleratorType: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GkeNodePoolAcceleratorConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig} GkeNodePoolAcceleratorConfig
+                             */
+                            GkeNodePoolAcceleratorConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig)
+                                    return object;
+                                var message = new $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig();
+                                if (object.acceleratorCount != null)
+                                    if ($util.Long)
+                                        (message.acceleratorCount = $util.Long.fromValue(object.acceleratorCount)).unsigned = false;
+                                    else if (typeof object.acceleratorCount === "string")
+                                        message.acceleratorCount = parseInt(object.acceleratorCount, 10);
+                                    else if (typeof object.acceleratorCount === "number")
+                                        message.acceleratorCount = object.acceleratorCount;
+                                    else if (typeof object.acceleratorCount === "object")
+                                        message.acceleratorCount = new $util.LongBits(object.acceleratorCount.low >>> 0, object.acceleratorCount.high >>> 0).toNumber();
+                                if (object.acceleratorType != null)
+                                    message.acceleratorType = String(object.acceleratorType);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GkeNodePoolAcceleratorConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig} message GkeNodePoolAcceleratorConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GkeNodePoolAcceleratorConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.acceleratorCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.acceleratorCount = options.longs === String ? "0" : 0;
+                                    object.acceleratorType = "";
+                                }
+                                if (message.acceleratorCount != null && message.hasOwnProperty("acceleratorCount"))
+                                    if (typeof message.acceleratorCount === "number")
+                                        object.acceleratorCount = options.longs === String ? String(message.acceleratorCount) : message.acceleratorCount;
+                                    else
+                                        object.acceleratorCount = options.longs === String ? $util.Long.prototype.toString.call(message.acceleratorCount) : options.longs === Number ? new $util.LongBits(message.acceleratorCount.low >>> 0, message.acceleratorCount.high >>> 0).toNumber() : message.acceleratorCount;
+                                if (message.acceleratorType != null && message.hasOwnProperty("acceleratorType"))
+                                    object.acceleratorType = message.acceleratorType;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GkeNodePoolAcceleratorConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GkeNodePoolAcceleratorConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return GkeNodePoolAcceleratorConfig;
+                        })();
+    
+                        GkeNodePoolConfig.GkeNodePoolAutoscalingConfig = (function() {
+    
+                            /**
+                             * Properties of a GkeNodePoolAutoscalingConfig.
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                             * @interface IGkeNodePoolAutoscalingConfig
+                             * @property {number|null} [minNodeCount] GkeNodePoolAutoscalingConfig minNodeCount
+                             * @property {number|null} [maxNodeCount] GkeNodePoolAutoscalingConfig maxNodeCount
+                             */
+    
+                            /**
+                             * Constructs a new GkeNodePoolAutoscalingConfig.
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
+                             * @classdesc Represents a GkeNodePoolAutoscalingConfig.
+                             * @implements IGkeNodePoolAutoscalingConfig
+                             * @constructor
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAutoscalingConfig=} [properties] Properties to set
+                             */
+                            function GkeNodePoolAutoscalingConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GkeNodePoolAutoscalingConfig minNodeCount.
+                             * @member {number} minNodeCount
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig
+                             * @instance
+                             */
+                            GkeNodePoolAutoscalingConfig.prototype.minNodeCount = 0;
+    
+                            /**
+                             * GkeNodePoolAutoscalingConfig maxNodeCount.
+                             * @member {number} maxNodeCount
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig
+                             * @instance
+                             */
+                            GkeNodePoolAutoscalingConfig.prototype.maxNodeCount = 0;
+    
+                            /**
+                             * Creates a new GkeNodePoolAutoscalingConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAutoscalingConfig=} [properties] Properties to set
+                             * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig} GkeNodePoolAutoscalingConfig instance
+                             */
+                            GkeNodePoolAutoscalingConfig.create = function create(properties) {
+                                return new GkeNodePoolAutoscalingConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GkeNodePoolAutoscalingConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAutoscalingConfig} message GkeNodePoolAutoscalingConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GkeNodePoolAutoscalingConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.minNodeCount != null && Object.hasOwnProperty.call(message, "minNodeCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minNodeCount);
+                                if (message.maxNodeCount != null && Object.hasOwnProperty.call(message, "maxNodeCount"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxNodeCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GkeNodePoolAutoscalingConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAutoscalingConfig} message GkeNodePoolAutoscalingConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GkeNodePoolAutoscalingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GkeNodePoolAutoscalingConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig} GkeNodePoolAutoscalingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GkeNodePoolAutoscalingConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2:
+                                        message.minNodeCount = reader.int32();
+                                        break;
+                                    case 3:
+                                        message.maxNodeCount = reader.int32();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GkeNodePoolAutoscalingConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig} GkeNodePoolAutoscalingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GkeNodePoolAutoscalingConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GkeNodePoolAutoscalingConfig message.
+                             * @function verify
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GkeNodePoolAutoscalingConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.minNodeCount != null && message.hasOwnProperty("minNodeCount"))
+                                    if (!$util.isInteger(message.minNodeCount))
+                                        return "minNodeCount: integer expected";
+                                if (message.maxNodeCount != null && message.hasOwnProperty("maxNodeCount"))
+                                    if (!$util.isInteger(message.maxNodeCount))
+                                        return "maxNodeCount: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GkeNodePoolAutoscalingConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig} GkeNodePoolAutoscalingConfig
+                             */
+                            GkeNodePoolAutoscalingConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig)
+                                    return object;
+                                var message = new $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig();
+                                if (object.minNodeCount != null)
+                                    message.minNodeCount = object.minNodeCount | 0;
+                                if (object.maxNodeCount != null)
+                                    message.maxNodeCount = object.maxNodeCount | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GkeNodePoolAutoscalingConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig} message GkeNodePoolAutoscalingConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GkeNodePoolAutoscalingConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.minNodeCount = 0;
+                                    object.maxNodeCount = 0;
+                                }
+                                if (message.minNodeCount != null && message.hasOwnProperty("minNodeCount"))
+                                    object.minNodeCount = message.minNodeCount;
+                                if (message.maxNodeCount != null && message.hasOwnProperty("maxNodeCount"))
+                                    object.maxNodeCount = message.maxNodeCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GkeNodePoolAutoscalingConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GkeNodePoolAutoscalingConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return GkeNodePoolAutoscalingConfig;
+                        })();
+    
+                        return GkeNodePoolConfig;
+                    })();
+    
                     /**
                      * Component enum.
                      * @name google.cloud.dataproc.v1.Component
@@ -8085,6 +10160,7 @@
                          * @property {string|null} [projectId] Cluster projectId
                          * @property {string|null} [clusterName] Cluster clusterName
                          * @property {google.cloud.dataproc.v1.IClusterConfig|null} [config] Cluster config
+                         * @property {google.cloud.dataproc.v1.IVirtualClusterConfig|null} [virtualClusterConfig] Cluster virtualClusterConfig
                          * @property {Object.<string,string>|null} [labels] Cluster labels
                          * @property {google.cloud.dataproc.v1.IClusterStatus|null} [status] Cluster status
                          * @property {Array.<google.cloud.dataproc.v1.IClusterStatus>|null} [statusHistory] Cluster statusHistory
@@ -8132,6 +10208,14 @@
                          * @instance
                          */
                         Cluster.prototype.config = null;
+    
+                        /**
+                         * Cluster virtualClusterConfig.
+                         * @member {google.cloud.dataproc.v1.IVirtualClusterConfig|null|undefined} virtualClusterConfig
+                         * @memberof google.cloud.dataproc.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.virtualClusterConfig = null;
     
                         /**
                          * Cluster labels.
@@ -8215,6 +10299,8 @@
                                     writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             if (message.metrics != null && Object.hasOwnProperty.call(message, "metrics"))
                                 $root.google.cloud.dataproc.v1.ClusterMetrics.encode(message.metrics, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.virtualClusterConfig != null && Object.hasOwnProperty.call(message, "virtualClusterConfig"))
+                                $root.google.cloud.dataproc.v1.VirtualClusterConfig.encode(message.virtualClusterConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -8257,6 +10343,9 @@
                                     break;
                                 case 3:
                                     message.config = $root.google.cloud.dataproc.v1.ClusterConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.virtualClusterConfig = $root.google.cloud.dataproc.v1.VirtualClusterConfig.decode(reader, reader.uint32());
                                     break;
                                 case 8:
                                     if (message.labels === $util.emptyObject)
@@ -8340,6 +10429,11 @@
                                 if (error)
                                     return "config." + error;
                             }
+                            if (message.virtualClusterConfig != null && message.hasOwnProperty("virtualClusterConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.VirtualClusterConfig.verify(message.virtualClusterConfig);
+                                if (error)
+                                    return "virtualClusterConfig." + error;
+                            }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
                                 if (!$util.isObject(message.labels))
                                     return "labels: object expected";
@@ -8393,6 +10487,11 @@
                                 if (typeof object.config !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1.Cluster.config: object expected");
                                 message.config = $root.google.cloud.dataproc.v1.ClusterConfig.fromObject(object.config);
+                            }
+                            if (object.virtualClusterConfig != null) {
+                                if (typeof object.virtualClusterConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.Cluster.virtualClusterConfig: object expected");
+                                message.virtualClusterConfig = $root.google.cloud.dataproc.v1.VirtualClusterConfig.fromObject(object.virtualClusterConfig);
                             }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
@@ -8450,6 +10549,7 @@
                                 object.status = null;
                                 object.clusterUuid = "";
                                 object.metrics = null;
+                                object.virtualClusterConfig = null;
                             }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
@@ -8474,6 +10574,8 @@
                             }
                             if (message.metrics != null && message.hasOwnProperty("metrics"))
                                 object.metrics = $root.google.cloud.dataproc.v1.ClusterMetrics.toObject(message.metrics, options);
+                            if (message.virtualClusterConfig != null && message.hasOwnProperty("virtualClusterConfig"))
+                                object.virtualClusterConfig = $root.google.cloud.dataproc.v1.VirtualClusterConfig.toObject(message.virtualClusterConfig, options);
                             return object;
                         };
     
@@ -8511,7 +10613,6 @@
                          * @property {google.cloud.dataproc.v1.ILifecycleConfig|null} [lifecycleConfig] ClusterConfig lifecycleConfig
                          * @property {google.cloud.dataproc.v1.IEndpointConfig|null} [endpointConfig] ClusterConfig endpointConfig
                          * @property {google.cloud.dataproc.v1.IMetastoreConfig|null} [metastoreConfig] ClusterConfig metastoreConfig
-                         * @property {google.cloud.dataproc.v1.IGkeClusterConfig|null} [gkeClusterConfig] ClusterConfig gkeClusterConfig
                          */
     
                         /**
@@ -8643,14 +10744,6 @@
                         ClusterConfig.prototype.metastoreConfig = null;
     
                         /**
-                         * ClusterConfig gkeClusterConfig.
-                         * @member {google.cloud.dataproc.v1.IGkeClusterConfig|null|undefined} gkeClusterConfig
-                         * @memberof google.cloud.dataproc.v1.ClusterConfig
-                         * @instance
-                         */
-                        ClusterConfig.prototype.gkeClusterConfig = null;
-    
-                        /**
                          * Creates a new ClusterConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.ClusterConfig
@@ -8703,8 +10796,6 @@
                                 $root.google.cloud.dataproc.v1.EndpointConfig.encode(message.endpointConfig, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             if (message.metastoreConfig != null && Object.hasOwnProperty.call(message, "metastoreConfig"))
                                 $root.google.cloud.dataproc.v1.MetastoreConfig.encode(message.metastoreConfig, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
-                            if (message.gkeClusterConfig != null && Object.hasOwnProperty.call(message, "gkeClusterConfig"))
-                                $root.google.cloud.dataproc.v1.GkeClusterConfig.encode(message.gkeClusterConfig, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             return writer;
                         };
     
@@ -8782,9 +10873,6 @@
                                     break;
                                 case 20:
                                     message.metastoreConfig = $root.google.cloud.dataproc.v1.MetastoreConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 21:
-                                    message.gkeClusterConfig = $root.google.cloud.dataproc.v1.GkeClusterConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8891,11 +10979,6 @@
                                 if (error)
                                     return "metastoreConfig." + error;
                             }
-                            if (message.gkeClusterConfig != null && message.hasOwnProperty("gkeClusterConfig")) {
-                                var error = $root.google.cloud.dataproc.v1.GkeClusterConfig.verify(message.gkeClusterConfig);
-                                if (error)
-                                    return "gkeClusterConfig." + error;
-                            }
                             return null;
                         };
     
@@ -8980,11 +11063,6 @@
                                     throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.metastoreConfig: object expected");
                                 message.metastoreConfig = $root.google.cloud.dataproc.v1.MetastoreConfig.fromObject(object.metastoreConfig);
                             }
-                            if (object.gkeClusterConfig != null) {
-                                if (typeof object.gkeClusterConfig !== "object")
-                                    throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.gkeClusterConfig: object expected");
-                                message.gkeClusterConfig = $root.google.cloud.dataproc.v1.GkeClusterConfig.fromObject(object.gkeClusterConfig);
-                            }
                             return message;
                         };
     
@@ -9017,7 +11095,6 @@
                                 object.autoscalingConfig = null;
                                 object.endpointConfig = null;
                                 object.metastoreConfig = null;
-                                object.gkeClusterConfig = null;
                             }
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 object.configBucket = message.configBucket;
@@ -9050,8 +11127,6 @@
                                 object.endpointConfig = $root.google.cloud.dataproc.v1.EndpointConfig.toObject(message.endpointConfig, options);
                             if (message.metastoreConfig != null && message.hasOwnProperty("metastoreConfig"))
                                 object.metastoreConfig = $root.google.cloud.dataproc.v1.MetastoreConfig.toObject(message.metastoreConfig, options);
-                            if (message.gkeClusterConfig != null && message.hasOwnProperty("gkeClusterConfig"))
-                                object.gkeClusterConfig = $root.google.cloud.dataproc.v1.GkeClusterConfig.toObject(message.gkeClusterConfig, options);
                             return object;
                         };
     
@@ -9069,24 +11144,27 @@
                         return ClusterConfig;
                     })();
     
-                    v1.GkeClusterConfig = (function() {
+                    v1.VirtualClusterConfig = (function() {
     
                         /**
-                         * Properties of a GkeClusterConfig.
+                         * Properties of a VirtualClusterConfig.
                          * @memberof google.cloud.dataproc.v1
-                         * @interface IGkeClusterConfig
-                         * @property {google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget|null} [namespacedGkeDeploymentTarget] GkeClusterConfig namespacedGkeDeploymentTarget
+                         * @interface IVirtualClusterConfig
+                         * @property {string|null} [stagingBucket] VirtualClusterConfig stagingBucket
+                         * @property {string|null} [tempBucket] VirtualClusterConfig tempBucket
+                         * @property {google.cloud.dataproc.v1.IKubernetesClusterConfig|null} [kubernetesClusterConfig] VirtualClusterConfig kubernetesClusterConfig
+                         * @property {google.cloud.dataproc.v1.IAuxiliaryServicesConfig|null} [auxiliaryServicesConfig] VirtualClusterConfig auxiliaryServicesConfig
                          */
     
                         /**
-                         * Constructs a new GkeClusterConfig.
+                         * Constructs a new VirtualClusterConfig.
                          * @memberof google.cloud.dataproc.v1
-                         * @classdesc Represents a GkeClusterConfig.
-                         * @implements IGkeClusterConfig
+                         * @classdesc Represents a VirtualClusterConfig.
+                         * @implements IVirtualClusterConfig
                          * @constructor
-                         * @param {google.cloud.dataproc.v1.IGkeClusterConfig=} [properties] Properties to set
+                         * @param {google.cloud.dataproc.v1.IVirtualClusterConfig=} [properties] Properties to set
                          */
-                        function GkeClusterConfig(properties) {
+                        function VirtualClusterConfig(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -9094,75 +11172,128 @@
                         }
     
                         /**
-                         * GkeClusterConfig namespacedGkeDeploymentTarget.
-                         * @member {google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget|null|undefined} namespacedGkeDeploymentTarget
-                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * VirtualClusterConfig stagingBucket.
+                         * @member {string} stagingBucket
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
                          * @instance
                          */
-                        GkeClusterConfig.prototype.namespacedGkeDeploymentTarget = null;
+                        VirtualClusterConfig.prototype.stagingBucket = "";
     
                         /**
-                         * Creates a new GkeClusterConfig instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
-                         * @static
-                         * @param {google.cloud.dataproc.v1.IGkeClusterConfig=} [properties] Properties to set
-                         * @returns {google.cloud.dataproc.v1.GkeClusterConfig} GkeClusterConfig instance
+                         * VirtualClusterConfig tempBucket.
+                         * @member {string} tempBucket
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
+                         * @instance
                          */
-                        GkeClusterConfig.create = function create(properties) {
-                            return new GkeClusterConfig(properties);
+                        VirtualClusterConfig.prototype.tempBucket = "";
+    
+                        /**
+                         * VirtualClusterConfig kubernetesClusterConfig.
+                         * @member {google.cloud.dataproc.v1.IKubernetesClusterConfig|null|undefined} kubernetesClusterConfig
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
+                         * @instance
+                         */
+                        VirtualClusterConfig.prototype.kubernetesClusterConfig = null;
+    
+                        /**
+                         * VirtualClusterConfig auxiliaryServicesConfig.
+                         * @member {google.cloud.dataproc.v1.IAuxiliaryServicesConfig|null|undefined} auxiliaryServicesConfig
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
+                         * @instance
+                         */
+                        VirtualClusterConfig.prototype.auxiliaryServicesConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * VirtualClusterConfig infrastructureConfig.
+                         * @member {"kubernetesClusterConfig"|undefined} infrastructureConfig
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
+                         * @instance
+                         */
+                        Object.defineProperty(VirtualClusterConfig.prototype, "infrastructureConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["kubernetesClusterConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new VirtualClusterConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IVirtualClusterConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.VirtualClusterConfig} VirtualClusterConfig instance
+                         */
+                        VirtualClusterConfig.create = function create(properties) {
+                            return new VirtualClusterConfig(properties);
                         };
     
                         /**
-                         * Encodes the specified GkeClusterConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.verify|verify} messages.
+                         * Encodes the specified VirtualClusterConfig message. Does not implicitly {@link google.cloud.dataproc.v1.VirtualClusterConfig.verify|verify} messages.
                          * @function encode
-                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
                          * @static
-                         * @param {google.cloud.dataproc.v1.IGkeClusterConfig} message GkeClusterConfig message or plain object to encode
+                         * @param {google.cloud.dataproc.v1.IVirtualClusterConfig} message VirtualClusterConfig message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        GkeClusterConfig.encode = function encode(message, writer) {
+                        VirtualClusterConfig.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.namespacedGkeDeploymentTarget != null && Object.hasOwnProperty.call(message, "namespacedGkeDeploymentTarget"))
-                                $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.encode(message.namespacedGkeDeploymentTarget, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.stagingBucket != null && Object.hasOwnProperty.call(message, "stagingBucket"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.stagingBucket);
+                            if (message.tempBucket != null && Object.hasOwnProperty.call(message, "tempBucket"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tempBucket);
+                            if (message.kubernetesClusterConfig != null && Object.hasOwnProperty.call(message, "kubernetesClusterConfig"))
+                                $root.google.cloud.dataproc.v1.KubernetesClusterConfig.encode(message.kubernetesClusterConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.auxiliaryServicesConfig != null && Object.hasOwnProperty.call(message, "auxiliaryServicesConfig"))
+                                $root.google.cloud.dataproc.v1.AuxiliaryServicesConfig.encode(message.auxiliaryServicesConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
                         /**
-                         * Encodes the specified GkeClusterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.verify|verify} messages.
+                         * Encodes the specified VirtualClusterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.VirtualClusterConfig.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
                          * @static
-                         * @param {google.cloud.dataproc.v1.IGkeClusterConfig} message GkeClusterConfig message or plain object to encode
+                         * @param {google.cloud.dataproc.v1.IVirtualClusterConfig} message VirtualClusterConfig message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        GkeClusterConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        VirtualClusterConfig.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes a GkeClusterConfig message from the specified reader or buffer.
+                         * Decodes a VirtualClusterConfig message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.dataproc.v1.GkeClusterConfig} GkeClusterConfig
+                         * @returns {google.cloud.dataproc.v1.VirtualClusterConfig} VirtualClusterConfig
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GkeClusterConfig.decode = function decode(reader, length) {
+                        VirtualClusterConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.GkeClusterConfig();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.VirtualClusterConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    message.namespacedGkeDeploymentTarget = $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.decode(reader, reader.uint32());
+                                    message.stagingBucket = reader.string();
+                                    break;
+                                case 2:
+                                    message.tempBucket = reader.string();
+                                    break;
+                                case 6:
+                                    message.kubernetesClusterConfig = $root.google.cloud.dataproc.v1.KubernetesClusterConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.auxiliaryServicesConfig = $root.google.cloud.dataproc.v1.AuxiliaryServicesConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -9173,302 +11304,348 @@
                         };
     
                         /**
-                         * Decodes a GkeClusterConfig message from the specified reader or buffer, length delimited.
+                         * Decodes a VirtualClusterConfig message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.dataproc.v1.GkeClusterConfig} GkeClusterConfig
+                         * @returns {google.cloud.dataproc.v1.VirtualClusterConfig} VirtualClusterConfig
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GkeClusterConfig.decodeDelimited = function decodeDelimited(reader) {
+                        VirtualClusterConfig.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies a GkeClusterConfig message.
+                         * Verifies a VirtualClusterConfig message.
                          * @function verify
-                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GkeClusterConfig.verify = function verify(message) {
+                        VirtualClusterConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.namespacedGkeDeploymentTarget != null && message.hasOwnProperty("namespacedGkeDeploymentTarget")) {
-                                var error = $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify(message.namespacedGkeDeploymentTarget);
+                            var properties = {};
+                            if (message.stagingBucket != null && message.hasOwnProperty("stagingBucket"))
+                                if (!$util.isString(message.stagingBucket))
+                                    return "stagingBucket: string expected";
+                            if (message.tempBucket != null && message.hasOwnProperty("tempBucket"))
+                                if (!$util.isString(message.tempBucket))
+                                    return "tempBucket: string expected";
+                            if (message.kubernetesClusterConfig != null && message.hasOwnProperty("kubernetesClusterConfig")) {
+                                properties.infrastructureConfig = 1;
+                                {
+                                    var error = $root.google.cloud.dataproc.v1.KubernetesClusterConfig.verify(message.kubernetesClusterConfig);
+                                    if (error)
+                                        return "kubernetesClusterConfig." + error;
+                                }
+                            }
+                            if (message.auxiliaryServicesConfig != null && message.hasOwnProperty("auxiliaryServicesConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.AuxiliaryServicesConfig.verify(message.auxiliaryServicesConfig);
                                 if (error)
-                                    return "namespacedGkeDeploymentTarget." + error;
+                                    return "auxiliaryServicesConfig." + error;
                             }
                             return null;
                         };
     
                         /**
-                         * Creates a GkeClusterConfig message from a plain object. Also converts values to their respective internal types.
+                         * Creates a VirtualClusterConfig message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.dataproc.v1.GkeClusterConfig} GkeClusterConfig
+                         * @returns {google.cloud.dataproc.v1.VirtualClusterConfig} VirtualClusterConfig
                          */
-                        GkeClusterConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.dataproc.v1.GkeClusterConfig)
+                        VirtualClusterConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.VirtualClusterConfig)
                                 return object;
-                            var message = new $root.google.cloud.dataproc.v1.GkeClusterConfig();
-                            if (object.namespacedGkeDeploymentTarget != null) {
-                                if (typeof object.namespacedGkeDeploymentTarget !== "object")
-                                    throw TypeError(".google.cloud.dataproc.v1.GkeClusterConfig.namespacedGkeDeploymentTarget: object expected");
-                                message.namespacedGkeDeploymentTarget = $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.fromObject(object.namespacedGkeDeploymentTarget);
+                            var message = new $root.google.cloud.dataproc.v1.VirtualClusterConfig();
+                            if (object.stagingBucket != null)
+                                message.stagingBucket = String(object.stagingBucket);
+                            if (object.tempBucket != null)
+                                message.tempBucket = String(object.tempBucket);
+                            if (object.kubernetesClusterConfig != null) {
+                                if (typeof object.kubernetesClusterConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.VirtualClusterConfig.kubernetesClusterConfig: object expected");
+                                message.kubernetesClusterConfig = $root.google.cloud.dataproc.v1.KubernetesClusterConfig.fromObject(object.kubernetesClusterConfig);
+                            }
+                            if (object.auxiliaryServicesConfig != null) {
+                                if (typeof object.auxiliaryServicesConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.VirtualClusterConfig.auxiliaryServicesConfig: object expected");
+                                message.auxiliaryServicesConfig = $root.google.cloud.dataproc.v1.AuxiliaryServicesConfig.fromObject(object.auxiliaryServicesConfig);
                             }
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from a GkeClusterConfig message. Also converts values to other types if specified.
+                         * Creates a plain object from a VirtualClusterConfig message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
                          * @static
-                         * @param {google.cloud.dataproc.v1.GkeClusterConfig} message GkeClusterConfig
+                         * @param {google.cloud.dataproc.v1.VirtualClusterConfig} message VirtualClusterConfig
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        GkeClusterConfig.toObject = function toObject(message, options) {
+                        VirtualClusterConfig.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
-                                object.namespacedGkeDeploymentTarget = null;
-                            if (message.namespacedGkeDeploymentTarget != null && message.hasOwnProperty("namespacedGkeDeploymentTarget"))
-                                object.namespacedGkeDeploymentTarget = $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.toObject(message.namespacedGkeDeploymentTarget, options);
+                            if (options.defaults) {
+                                object.stagingBucket = "";
+                                object.tempBucket = "";
+                                object.auxiliaryServicesConfig = null;
+                            }
+                            if (message.stagingBucket != null && message.hasOwnProperty("stagingBucket"))
+                                object.stagingBucket = message.stagingBucket;
+                            if (message.tempBucket != null && message.hasOwnProperty("tempBucket"))
+                                object.tempBucket = message.tempBucket;
+                            if (message.kubernetesClusterConfig != null && message.hasOwnProperty("kubernetesClusterConfig")) {
+                                object.kubernetesClusterConfig = $root.google.cloud.dataproc.v1.KubernetesClusterConfig.toObject(message.kubernetesClusterConfig, options);
+                                if (options.oneofs)
+                                    object.infrastructureConfig = "kubernetesClusterConfig";
+                            }
+                            if (message.auxiliaryServicesConfig != null && message.hasOwnProperty("auxiliaryServicesConfig"))
+                                object.auxiliaryServicesConfig = $root.google.cloud.dataproc.v1.AuxiliaryServicesConfig.toObject(message.auxiliaryServicesConfig, options);
                             return object;
                         };
     
                         /**
-                         * Converts this GkeClusterConfig to JSON.
+                         * Converts this VirtualClusterConfig to JSON.
                          * @function toJSON
-                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @memberof google.cloud.dataproc.v1.VirtualClusterConfig
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        GkeClusterConfig.prototype.toJSON = function toJSON() {
+                        VirtualClusterConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
-                        GkeClusterConfig.NamespacedGkeDeploymentTarget = (function() {
+                        return VirtualClusterConfig;
+                    })();
     
-                            /**
-                             * Properties of a NamespacedGkeDeploymentTarget.
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig
-                             * @interface INamespacedGkeDeploymentTarget
-                             * @property {string|null} [targetGkeCluster] NamespacedGkeDeploymentTarget targetGkeCluster
-                             * @property {string|null} [clusterNamespace] NamespacedGkeDeploymentTarget clusterNamespace
-                             */
+                    v1.AuxiliaryServicesConfig = (function() {
     
-                            /**
-                             * Constructs a new NamespacedGkeDeploymentTarget.
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig
-                             * @classdesc Represents a NamespacedGkeDeploymentTarget.
-                             * @implements INamespacedGkeDeploymentTarget
-                             * @constructor
-                             * @param {google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget=} [properties] Properties to set
-                             */
-                            function NamespacedGkeDeploymentTarget(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
+                        /**
+                         * Properties of an AuxiliaryServicesConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IAuxiliaryServicesConfig
+                         * @property {google.cloud.dataproc.v1.IMetastoreConfig|null} [metastoreConfig] AuxiliaryServicesConfig metastoreConfig
+                         * @property {google.cloud.dataproc.v1.ISparkHistoryServerConfig|null} [sparkHistoryServerConfig] AuxiliaryServicesConfig sparkHistoryServerConfig
+                         */
+    
+                        /**
+                         * Constructs a new AuxiliaryServicesConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents an AuxiliaryServicesConfig.
+                         * @implements IAuxiliaryServicesConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IAuxiliaryServicesConfig=} [properties] Properties to set
+                         */
+                        function AuxiliaryServicesConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AuxiliaryServicesConfig metastoreConfig.
+                         * @member {google.cloud.dataproc.v1.IMetastoreConfig|null|undefined} metastoreConfig
+                         * @memberof google.cloud.dataproc.v1.AuxiliaryServicesConfig
+                         * @instance
+                         */
+                        AuxiliaryServicesConfig.prototype.metastoreConfig = null;
+    
+                        /**
+                         * AuxiliaryServicesConfig sparkHistoryServerConfig.
+                         * @member {google.cloud.dataproc.v1.ISparkHistoryServerConfig|null|undefined} sparkHistoryServerConfig
+                         * @memberof google.cloud.dataproc.v1.AuxiliaryServicesConfig
+                         * @instance
+                         */
+                        AuxiliaryServicesConfig.prototype.sparkHistoryServerConfig = null;
+    
+                        /**
+                         * Creates a new AuxiliaryServicesConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.AuxiliaryServicesConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IAuxiliaryServicesConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.AuxiliaryServicesConfig} AuxiliaryServicesConfig instance
+                         */
+                        AuxiliaryServicesConfig.create = function create(properties) {
+                            return new AuxiliaryServicesConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AuxiliaryServicesConfig message. Does not implicitly {@link google.cloud.dataproc.v1.AuxiliaryServicesConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.AuxiliaryServicesConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IAuxiliaryServicesConfig} message AuxiliaryServicesConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AuxiliaryServicesConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.metastoreConfig != null && Object.hasOwnProperty.call(message, "metastoreConfig"))
+                                $root.google.cloud.dataproc.v1.MetastoreConfig.encode(message.metastoreConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.sparkHistoryServerConfig != null && Object.hasOwnProperty.call(message, "sparkHistoryServerConfig"))
+                                $root.google.cloud.dataproc.v1.SparkHistoryServerConfig.encode(message.sparkHistoryServerConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AuxiliaryServicesConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.AuxiliaryServicesConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.AuxiliaryServicesConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IAuxiliaryServicesConfig} message AuxiliaryServicesConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AuxiliaryServicesConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AuxiliaryServicesConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.AuxiliaryServicesConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.AuxiliaryServicesConfig} AuxiliaryServicesConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AuxiliaryServicesConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.AuxiliaryServicesConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.metastoreConfig = $root.google.cloud.dataproc.v1.MetastoreConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.sparkHistoryServerConfig = $root.google.cloud.dataproc.v1.SparkHistoryServerConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
                             }
+                            return message;
+                        };
     
-                            /**
-                             * NamespacedGkeDeploymentTarget targetGkeCluster.
-                             * @member {string} targetGkeCluster
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
-                             * @instance
-                             */
-                            NamespacedGkeDeploymentTarget.prototype.targetGkeCluster = "";
+                        /**
+                         * Decodes an AuxiliaryServicesConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.AuxiliaryServicesConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.AuxiliaryServicesConfig} AuxiliaryServicesConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AuxiliaryServicesConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
     
-                            /**
-                             * NamespacedGkeDeploymentTarget clusterNamespace.
-                             * @member {string} clusterNamespace
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
-                             * @instance
-                             */
-                            NamespacedGkeDeploymentTarget.prototype.clusterNamespace = "";
+                        /**
+                         * Verifies an AuxiliaryServicesConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.AuxiliaryServicesConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AuxiliaryServicesConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.metastoreConfig != null && message.hasOwnProperty("metastoreConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.MetastoreConfig.verify(message.metastoreConfig);
+                                if (error)
+                                    return "metastoreConfig." + error;
+                            }
+                            if (message.sparkHistoryServerConfig != null && message.hasOwnProperty("sparkHistoryServerConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.SparkHistoryServerConfig.verify(message.sparkHistoryServerConfig);
+                                if (error)
+                                    return "sparkHistoryServerConfig." + error;
+                            }
+                            return null;
+                        };
     
-                            /**
-                             * Creates a new NamespacedGkeDeploymentTarget instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
-                             * @static
-                             * @param {google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget=} [properties] Properties to set
-                             * @returns {google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget} NamespacedGkeDeploymentTarget instance
-                             */
-                            NamespacedGkeDeploymentTarget.create = function create(properties) {
-                                return new NamespacedGkeDeploymentTarget(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified NamespacedGkeDeploymentTarget message. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
-                             * @static
-                             * @param {google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget} message NamespacedGkeDeploymentTarget message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            NamespacedGkeDeploymentTarget.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.targetGkeCluster != null && Object.hasOwnProperty.call(message, "targetGkeCluster"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.targetGkeCluster);
-                                if (message.clusterNamespace != null && Object.hasOwnProperty.call(message, "clusterNamespace"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.clusterNamespace);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified NamespacedGkeDeploymentTarget message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
-                             * @static
-                             * @param {google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget} message NamespacedGkeDeploymentTarget message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            NamespacedGkeDeploymentTarget.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a NamespacedGkeDeploymentTarget message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget} NamespacedGkeDeploymentTarget
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            NamespacedGkeDeploymentTarget.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1:
-                                        message.targetGkeCluster = reader.string();
-                                        break;
-                                    case 2:
-                                        message.clusterNamespace = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a NamespacedGkeDeploymentTarget message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget} NamespacedGkeDeploymentTarget
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            NamespacedGkeDeploymentTarget.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a NamespacedGkeDeploymentTarget message.
-                             * @function verify
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            NamespacedGkeDeploymentTarget.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.targetGkeCluster != null && message.hasOwnProperty("targetGkeCluster"))
-                                    if (!$util.isString(message.targetGkeCluster))
-                                        return "targetGkeCluster: string expected";
-                                if (message.clusterNamespace != null && message.hasOwnProperty("clusterNamespace"))
-                                    if (!$util.isString(message.clusterNamespace))
-                                        return "clusterNamespace: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a NamespacedGkeDeploymentTarget message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget} NamespacedGkeDeploymentTarget
-                             */
-                            NamespacedGkeDeploymentTarget.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget)
-                                    return object;
-                                var message = new $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget();
-                                if (object.targetGkeCluster != null)
-                                    message.targetGkeCluster = String(object.targetGkeCluster);
-                                if (object.clusterNamespace != null)
-                                    message.clusterNamespace = String(object.clusterNamespace);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a NamespacedGkeDeploymentTarget message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
-                             * @static
-                             * @param {google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget} message NamespacedGkeDeploymentTarget
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            NamespacedGkeDeploymentTarget.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.targetGkeCluster = "";
-                                    object.clusterNamespace = "";
-                                }
-                                if (message.targetGkeCluster != null && message.hasOwnProperty("targetGkeCluster"))
-                                    object.targetGkeCluster = message.targetGkeCluster;
-                                if (message.clusterNamespace != null && message.hasOwnProperty("clusterNamespace"))
-                                    object.clusterNamespace = message.clusterNamespace;
+                        /**
+                         * Creates an AuxiliaryServicesConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.AuxiliaryServicesConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.AuxiliaryServicesConfig} AuxiliaryServicesConfig
+                         */
+                        AuxiliaryServicesConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.AuxiliaryServicesConfig)
                                 return object;
-                            };
+                            var message = new $root.google.cloud.dataproc.v1.AuxiliaryServicesConfig();
+                            if (object.metastoreConfig != null) {
+                                if (typeof object.metastoreConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.AuxiliaryServicesConfig.metastoreConfig: object expected");
+                                message.metastoreConfig = $root.google.cloud.dataproc.v1.MetastoreConfig.fromObject(object.metastoreConfig);
+                            }
+                            if (object.sparkHistoryServerConfig != null) {
+                                if (typeof object.sparkHistoryServerConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.AuxiliaryServicesConfig.sparkHistoryServerConfig: object expected");
+                                message.sparkHistoryServerConfig = $root.google.cloud.dataproc.v1.SparkHistoryServerConfig.fromObject(object.sparkHistoryServerConfig);
+                            }
+                            return message;
+                        };
     
-                            /**
-                             * Converts this NamespacedGkeDeploymentTarget to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            NamespacedGkeDeploymentTarget.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
+                        /**
+                         * Creates a plain object from an AuxiliaryServicesConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.AuxiliaryServicesConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.AuxiliaryServicesConfig} message AuxiliaryServicesConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AuxiliaryServicesConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.metastoreConfig = null;
+                                object.sparkHistoryServerConfig = null;
+                            }
+                            if (message.metastoreConfig != null && message.hasOwnProperty("metastoreConfig"))
+                                object.metastoreConfig = $root.google.cloud.dataproc.v1.MetastoreConfig.toObject(message.metastoreConfig, options);
+                            if (message.sparkHistoryServerConfig != null && message.hasOwnProperty("sparkHistoryServerConfig"))
+                                object.sparkHistoryServerConfig = $root.google.cloud.dataproc.v1.SparkHistoryServerConfig.toObject(message.sparkHistoryServerConfig, options);
+                            return object;
+                        };
     
-                            return NamespacedGkeDeploymentTarget;
-                        })();
+                        /**
+                         * Converts this AuxiliaryServicesConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.AuxiliaryServicesConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AuxiliaryServicesConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
     
-                        return GkeClusterConfig;
+                        return AuxiliaryServicesConfig;
                     })();
     
                     v1.EndpointConfig = (function() {

@@ -3109,6 +3109,828 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a GkeClusterConfig. */
+                interface IGkeClusterConfig {
+
+                    /** GkeClusterConfig gkeClusterTarget */
+                    gkeClusterTarget?: (string|null);
+
+                    /** GkeClusterConfig nodePoolTarget */
+                    nodePoolTarget?: (google.cloud.dataproc.v1.IGkeNodePoolTarget[]|null);
+                }
+
+                /** Represents a GkeClusterConfig. */
+                class GkeClusterConfig implements IGkeClusterConfig {
+
+                    /**
+                     * Constructs a new GkeClusterConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IGkeClusterConfig);
+
+                    /** GkeClusterConfig gkeClusterTarget. */
+                    public gkeClusterTarget: string;
+
+                    /** GkeClusterConfig nodePoolTarget. */
+                    public nodePoolTarget: google.cloud.dataproc.v1.IGkeNodePoolTarget[];
+
+                    /**
+                     * Creates a new GkeClusterConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeClusterConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IGkeClusterConfig): google.cloud.dataproc.v1.GkeClusterConfig;
+
+                    /**
+                     * Encodes the specified GkeClusterConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.verify|verify} messages.
+                     * @param message GkeClusterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IGkeClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeClusterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.verify|verify} messages.
+                     * @param message GkeClusterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IGkeClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeClusterConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeClusterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GkeClusterConfig;
+
+                    /**
+                     * Decodes a GkeClusterConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeClusterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GkeClusterConfig;
+
+                    /**
+                     * Verifies a GkeClusterConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeClusterConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeClusterConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GkeClusterConfig;
+
+                    /**
+                     * Creates a plain object from a GkeClusterConfig message. Also converts values to other types if specified.
+                     * @param message GkeClusterConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.GkeClusterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeClusterConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a KubernetesClusterConfig. */
+                interface IKubernetesClusterConfig {
+
+                    /** KubernetesClusterConfig kubernetesNamespace */
+                    kubernetesNamespace?: (string|null);
+
+                    /** KubernetesClusterConfig gkeClusterConfig */
+                    gkeClusterConfig?: (google.cloud.dataproc.v1.IGkeClusterConfig|null);
+
+                    /** KubernetesClusterConfig kubernetesSoftwareConfig */
+                    kubernetesSoftwareConfig?: (google.cloud.dataproc.v1.IKubernetesSoftwareConfig|null);
+                }
+
+                /** Represents a KubernetesClusterConfig. */
+                class KubernetesClusterConfig implements IKubernetesClusterConfig {
+
+                    /**
+                     * Constructs a new KubernetesClusterConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IKubernetesClusterConfig);
+
+                    /** KubernetesClusterConfig kubernetesNamespace. */
+                    public kubernetesNamespace: string;
+
+                    /** KubernetesClusterConfig gkeClusterConfig. */
+                    public gkeClusterConfig?: (google.cloud.dataproc.v1.IGkeClusterConfig|null);
+
+                    /** KubernetesClusterConfig kubernetesSoftwareConfig. */
+                    public kubernetesSoftwareConfig?: (google.cloud.dataproc.v1.IKubernetesSoftwareConfig|null);
+
+                    /** KubernetesClusterConfig config. */
+                    public config?: "gkeClusterConfig";
+
+                    /**
+                     * Creates a new KubernetesClusterConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns KubernetesClusterConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IKubernetesClusterConfig): google.cloud.dataproc.v1.KubernetesClusterConfig;
+
+                    /**
+                     * Encodes the specified KubernetesClusterConfig message. Does not implicitly {@link google.cloud.dataproc.v1.KubernetesClusterConfig.verify|verify} messages.
+                     * @param message KubernetesClusterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IKubernetesClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified KubernetesClusterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.KubernetesClusterConfig.verify|verify} messages.
+                     * @param message KubernetesClusterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IKubernetesClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a KubernetesClusterConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns KubernetesClusterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.KubernetesClusterConfig;
+
+                    /**
+                     * Decodes a KubernetesClusterConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns KubernetesClusterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.KubernetesClusterConfig;
+
+                    /**
+                     * Verifies a KubernetesClusterConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a KubernetesClusterConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns KubernetesClusterConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.KubernetesClusterConfig;
+
+                    /**
+                     * Creates a plain object from a KubernetesClusterConfig message. Also converts values to other types if specified.
+                     * @param message KubernetesClusterConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.KubernetesClusterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this KubernetesClusterConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a KubernetesSoftwareConfig. */
+                interface IKubernetesSoftwareConfig {
+
+                    /** KubernetesSoftwareConfig componentVersion */
+                    componentVersion?: ({ [k: string]: string }|null);
+
+                    /** KubernetesSoftwareConfig properties */
+                    properties?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a KubernetesSoftwareConfig. */
+                class KubernetesSoftwareConfig implements IKubernetesSoftwareConfig {
+
+                    /**
+                     * Constructs a new KubernetesSoftwareConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IKubernetesSoftwareConfig);
+
+                    /** KubernetesSoftwareConfig componentVersion. */
+                    public componentVersion: { [k: string]: string };
+
+                    /** KubernetesSoftwareConfig properties. */
+                    public properties: { [k: string]: string };
+
+                    /**
+                     * Creates a new KubernetesSoftwareConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns KubernetesSoftwareConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IKubernetesSoftwareConfig): google.cloud.dataproc.v1.KubernetesSoftwareConfig;
+
+                    /**
+                     * Encodes the specified KubernetesSoftwareConfig message. Does not implicitly {@link google.cloud.dataproc.v1.KubernetesSoftwareConfig.verify|verify} messages.
+                     * @param message KubernetesSoftwareConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IKubernetesSoftwareConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified KubernetesSoftwareConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.KubernetesSoftwareConfig.verify|verify} messages.
+                     * @param message KubernetesSoftwareConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IKubernetesSoftwareConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a KubernetesSoftwareConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns KubernetesSoftwareConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.KubernetesSoftwareConfig;
+
+                    /**
+                     * Decodes a KubernetesSoftwareConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns KubernetesSoftwareConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.KubernetesSoftwareConfig;
+
+                    /**
+                     * Verifies a KubernetesSoftwareConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a KubernetesSoftwareConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns KubernetesSoftwareConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.KubernetesSoftwareConfig;
+
+                    /**
+                     * Creates a plain object from a KubernetesSoftwareConfig message. Also converts values to other types if specified.
+                     * @param message KubernetesSoftwareConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.KubernetesSoftwareConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this KubernetesSoftwareConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GkeNodePoolTarget. */
+                interface IGkeNodePoolTarget {
+
+                    /** GkeNodePoolTarget nodePool */
+                    nodePool?: (string|null);
+
+                    /** GkeNodePoolTarget roles */
+                    roles?: (google.cloud.dataproc.v1.GkeNodePoolTarget.Role[]|null);
+
+                    /** GkeNodePoolTarget nodePoolConfig */
+                    nodePoolConfig?: (google.cloud.dataproc.v1.IGkeNodePoolConfig|null);
+                }
+
+                /** Represents a GkeNodePoolTarget. */
+                class GkeNodePoolTarget implements IGkeNodePoolTarget {
+
+                    /**
+                     * Constructs a new GkeNodePoolTarget.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IGkeNodePoolTarget);
+
+                    /** GkeNodePoolTarget nodePool. */
+                    public nodePool: string;
+
+                    /** GkeNodePoolTarget roles. */
+                    public roles: google.cloud.dataproc.v1.GkeNodePoolTarget.Role[];
+
+                    /** GkeNodePoolTarget nodePoolConfig. */
+                    public nodePoolConfig?: (google.cloud.dataproc.v1.IGkeNodePoolConfig|null);
+
+                    /**
+                     * Creates a new GkeNodePoolTarget instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeNodePoolTarget instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IGkeNodePoolTarget): google.cloud.dataproc.v1.GkeNodePoolTarget;
+
+                    /**
+                     * Encodes the specified GkeNodePoolTarget message. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolTarget.verify|verify} messages.
+                     * @param message GkeNodePoolTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IGkeNodePoolTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeNodePoolTarget message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolTarget.verify|verify} messages.
+                     * @param message GkeNodePoolTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IGkeNodePoolTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeNodePoolTarget message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeNodePoolTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GkeNodePoolTarget;
+
+                    /**
+                     * Decodes a GkeNodePoolTarget message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeNodePoolTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GkeNodePoolTarget;
+
+                    /**
+                     * Verifies a GkeNodePoolTarget message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeNodePoolTarget message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeNodePoolTarget
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GkeNodePoolTarget;
+
+                    /**
+                     * Creates a plain object from a GkeNodePoolTarget message. Also converts values to other types if specified.
+                     * @param message GkeNodePoolTarget
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.GkeNodePoolTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeNodePoolTarget to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace GkeNodePoolTarget {
+
+                    /** Role enum. */
+                    enum Role {
+                        ROLE_UNSPECIFIED = 0,
+                        DEFAULT = 1,
+                        CONTROLLER = 2,
+                        SPARK_DRIVER = 3,
+                        SPARK_EXECUTOR = 4
+                    }
+                }
+
+                /** Properties of a GkeNodePoolConfig. */
+                interface IGkeNodePoolConfig {
+
+                    /** GkeNodePoolConfig config */
+                    config?: (google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodeConfig|null);
+
+                    /** GkeNodePoolConfig locations */
+                    locations?: (string[]|null);
+
+                    /** GkeNodePoolConfig autoscaling */
+                    autoscaling?: (google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAutoscalingConfig|null);
+                }
+
+                /** Represents a GkeNodePoolConfig. */
+                class GkeNodePoolConfig implements IGkeNodePoolConfig {
+
+                    /**
+                     * Constructs a new GkeNodePoolConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IGkeNodePoolConfig);
+
+                    /** GkeNodePoolConfig config. */
+                    public config?: (google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodeConfig|null);
+
+                    /** GkeNodePoolConfig locations. */
+                    public locations: string[];
+
+                    /** GkeNodePoolConfig autoscaling. */
+                    public autoscaling?: (google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAutoscalingConfig|null);
+
+                    /**
+                     * Creates a new GkeNodePoolConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeNodePoolConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IGkeNodePoolConfig): google.cloud.dataproc.v1.GkeNodePoolConfig;
+
+                    /**
+                     * Encodes the specified GkeNodePoolConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.verify|verify} messages.
+                     * @param message GkeNodePoolConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IGkeNodePoolConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeNodePoolConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.verify|verify} messages.
+                     * @param message GkeNodePoolConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IGkeNodePoolConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeNodePoolConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeNodePoolConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GkeNodePoolConfig;
+
+                    /**
+                     * Decodes a GkeNodePoolConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeNodePoolConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GkeNodePoolConfig;
+
+                    /**
+                     * Verifies a GkeNodePoolConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeNodePoolConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeNodePoolConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GkeNodePoolConfig;
+
+                    /**
+                     * Creates a plain object from a GkeNodePoolConfig message. Also converts values to other types if specified.
+                     * @param message GkeNodePoolConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.GkeNodePoolConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeNodePoolConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace GkeNodePoolConfig {
+
+                    /** Properties of a GkeNodeConfig. */
+                    interface IGkeNodeConfig {
+
+                        /** GkeNodeConfig machineType */
+                        machineType?: (string|null);
+
+                        /** GkeNodeConfig preemptible */
+                        preemptible?: (boolean|null);
+
+                        /** GkeNodeConfig localSsdCount */
+                        localSsdCount?: (number|null);
+
+                        /** GkeNodeConfig accelerators */
+                        accelerators?: (google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig[]|null);
+
+                        /** GkeNodeConfig minCpuPlatform */
+                        minCpuPlatform?: (string|null);
+                    }
+
+                    /** Represents a GkeNodeConfig. */
+                    class GkeNodeConfig implements IGkeNodeConfig {
+
+                        /**
+                         * Constructs a new GkeNodeConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodeConfig);
+
+                        /** GkeNodeConfig machineType. */
+                        public machineType: string;
+
+                        /** GkeNodeConfig preemptible. */
+                        public preemptible: boolean;
+
+                        /** GkeNodeConfig localSsdCount. */
+                        public localSsdCount: number;
+
+                        /** GkeNodeConfig accelerators. */
+                        public accelerators: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig[];
+
+                        /** GkeNodeConfig minCpuPlatform. */
+                        public minCpuPlatform: string;
+
+                        /**
+                         * Creates a new GkeNodeConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GkeNodeConfig instance
+                         */
+                        public static create(properties?: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodeConfig): google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig;
+
+                        /**
+                         * Encodes the specified GkeNodeConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.verify|verify} messages.
+                         * @param message GkeNodeConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GkeNodeConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.verify|verify} messages.
+                         * @param message GkeNodeConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GkeNodeConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GkeNodeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig;
+
+                        /**
+                         * Decodes a GkeNodeConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GkeNodeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig;
+
+                        /**
+                         * Verifies a GkeNodeConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GkeNodeConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GkeNodeConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig;
+
+                        /**
+                         * Creates a plain object from a GkeNodeConfig message. Also converts values to other types if specified.
+                         * @param message GkeNodeConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GkeNodeConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a GkeNodePoolAcceleratorConfig. */
+                    interface IGkeNodePoolAcceleratorConfig {
+
+                        /** GkeNodePoolAcceleratorConfig acceleratorCount */
+                        acceleratorCount?: (number|Long|string|null);
+
+                        /** GkeNodePoolAcceleratorConfig acceleratorType */
+                        acceleratorType?: (string|null);
+                    }
+
+                    /** Represents a GkeNodePoolAcceleratorConfig. */
+                    class GkeNodePoolAcceleratorConfig implements IGkeNodePoolAcceleratorConfig {
+
+                        /**
+                         * Constructs a new GkeNodePoolAcceleratorConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig);
+
+                        /** GkeNodePoolAcceleratorConfig acceleratorCount. */
+                        public acceleratorCount: (number|Long|string);
+
+                        /** GkeNodePoolAcceleratorConfig acceleratorType. */
+                        public acceleratorType: string;
+
+                        /**
+                         * Creates a new GkeNodePoolAcceleratorConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GkeNodePoolAcceleratorConfig instance
+                         */
+                        public static create(properties?: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig): google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig;
+
+                        /**
+                         * Encodes the specified GkeNodePoolAcceleratorConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig.verify|verify} messages.
+                         * @param message GkeNodePoolAcceleratorConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GkeNodePoolAcceleratorConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig.verify|verify} messages.
+                         * @param message GkeNodePoolAcceleratorConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GkeNodePoolAcceleratorConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GkeNodePoolAcceleratorConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig;
+
+                        /**
+                         * Decodes a GkeNodePoolAcceleratorConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GkeNodePoolAcceleratorConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig;
+
+                        /**
+                         * Verifies a GkeNodePoolAcceleratorConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GkeNodePoolAcceleratorConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GkeNodePoolAcceleratorConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig;
+
+                        /**
+                         * Creates a plain object from a GkeNodePoolAcceleratorConfig message. Also converts values to other types if specified.
+                         * @param message GkeNodePoolAcceleratorConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GkeNodePoolAcceleratorConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a GkeNodePoolAutoscalingConfig. */
+                    interface IGkeNodePoolAutoscalingConfig {
+
+                        /** GkeNodePoolAutoscalingConfig minNodeCount */
+                        minNodeCount?: (number|null);
+
+                        /** GkeNodePoolAutoscalingConfig maxNodeCount */
+                        maxNodeCount?: (number|null);
+                    }
+
+                    /** Represents a GkeNodePoolAutoscalingConfig. */
+                    class GkeNodePoolAutoscalingConfig implements IGkeNodePoolAutoscalingConfig {
+
+                        /**
+                         * Constructs a new GkeNodePoolAutoscalingConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAutoscalingConfig);
+
+                        /** GkeNodePoolAutoscalingConfig minNodeCount. */
+                        public minNodeCount: number;
+
+                        /** GkeNodePoolAutoscalingConfig maxNodeCount. */
+                        public maxNodeCount: number;
+
+                        /**
+                         * Creates a new GkeNodePoolAutoscalingConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GkeNodePoolAutoscalingConfig instance
+                         */
+                        public static create(properties?: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAutoscalingConfig): google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig;
+
+                        /**
+                         * Encodes the specified GkeNodePoolAutoscalingConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig.verify|verify} messages.
+                         * @param message GkeNodePoolAutoscalingConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAutoscalingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GkeNodePoolAutoscalingConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig.verify|verify} messages.
+                         * @param message GkeNodePoolAutoscalingConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAutoscalingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GkeNodePoolAutoscalingConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GkeNodePoolAutoscalingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig;
+
+                        /**
+                         * Decodes a GkeNodePoolAutoscalingConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GkeNodePoolAutoscalingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig;
+
+                        /**
+                         * Verifies a GkeNodePoolAutoscalingConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GkeNodePoolAutoscalingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GkeNodePoolAutoscalingConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig;
+
+                        /**
+                         * Creates a plain object from a GkeNodePoolAutoscalingConfig message. Also converts values to other types if specified.
+                         * @param message GkeNodePoolAutoscalingConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GkeNodePoolAutoscalingConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
                 /** Component enum. */
                 enum Component {
                     COMPONENT_UNSPECIFIED = 0,
@@ -3337,6 +4159,9 @@ export namespace google {
                     /** Cluster config */
                     config?: (google.cloud.dataproc.v1.IClusterConfig|null);
 
+                    /** Cluster virtualClusterConfig */
+                    virtualClusterConfig?: (google.cloud.dataproc.v1.IVirtualClusterConfig|null);
+
                     /** Cluster labels */
                     labels?: ({ [k: string]: string }|null);
 
@@ -3370,6 +4195,9 @@ export namespace google {
 
                     /** Cluster config. */
                     public config?: (google.cloud.dataproc.v1.IClusterConfig|null);
+
+                    /** Cluster virtualClusterConfig. */
+                    public virtualClusterConfig?: (google.cloud.dataproc.v1.IVirtualClusterConfig|null);
 
                     /** Cluster labels. */
                     public labels: { [k: string]: string };
@@ -3501,9 +4329,6 @@ export namespace google {
 
                     /** ClusterConfig metastoreConfig */
                     metastoreConfig?: (google.cloud.dataproc.v1.IMetastoreConfig|null);
-
-                    /** ClusterConfig gkeClusterConfig */
-                    gkeClusterConfig?: (google.cloud.dataproc.v1.IGkeClusterConfig|null);
                 }
 
                 /** Represents a ClusterConfig. */
@@ -3556,9 +4381,6 @@ export namespace google {
 
                     /** ClusterConfig metastoreConfig. */
                     public metastoreConfig?: (google.cloud.dataproc.v1.IMetastoreConfig|null);
-
-                    /** ClusterConfig gkeClusterConfig. */
-                    public gkeClusterConfig?: (google.cloud.dataproc.v1.IGkeClusterConfig|null);
 
                     /**
                      * Creates a new ClusterConfig instance using the specified properties.
@@ -3631,193 +4453,211 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a GkeClusterConfig. */
-                interface IGkeClusterConfig {
+                /** Properties of a VirtualClusterConfig. */
+                interface IVirtualClusterConfig {
 
-                    /** GkeClusterConfig namespacedGkeDeploymentTarget */
-                    namespacedGkeDeploymentTarget?: (google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget|null);
+                    /** VirtualClusterConfig stagingBucket */
+                    stagingBucket?: (string|null);
+
+                    /** VirtualClusterConfig tempBucket */
+                    tempBucket?: (string|null);
+
+                    /** VirtualClusterConfig kubernetesClusterConfig */
+                    kubernetesClusterConfig?: (google.cloud.dataproc.v1.IKubernetesClusterConfig|null);
+
+                    /** VirtualClusterConfig auxiliaryServicesConfig */
+                    auxiliaryServicesConfig?: (google.cloud.dataproc.v1.IAuxiliaryServicesConfig|null);
                 }
 
-                /** Represents a GkeClusterConfig. */
-                class GkeClusterConfig implements IGkeClusterConfig {
+                /** Represents a VirtualClusterConfig. */
+                class VirtualClusterConfig implements IVirtualClusterConfig {
 
                     /**
-                     * Constructs a new GkeClusterConfig.
+                     * Constructs a new VirtualClusterConfig.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.dataproc.v1.IGkeClusterConfig);
+                    constructor(properties?: google.cloud.dataproc.v1.IVirtualClusterConfig);
 
-                    /** GkeClusterConfig namespacedGkeDeploymentTarget. */
-                    public namespacedGkeDeploymentTarget?: (google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget|null);
+                    /** VirtualClusterConfig stagingBucket. */
+                    public stagingBucket: string;
+
+                    /** VirtualClusterConfig tempBucket. */
+                    public tempBucket: string;
+
+                    /** VirtualClusterConfig kubernetesClusterConfig. */
+                    public kubernetesClusterConfig?: (google.cloud.dataproc.v1.IKubernetesClusterConfig|null);
+
+                    /** VirtualClusterConfig auxiliaryServicesConfig. */
+                    public auxiliaryServicesConfig?: (google.cloud.dataproc.v1.IAuxiliaryServicesConfig|null);
+
+                    /** VirtualClusterConfig infrastructureConfig. */
+                    public infrastructureConfig?: "kubernetesClusterConfig";
 
                     /**
-                     * Creates a new GkeClusterConfig instance using the specified properties.
+                     * Creates a new VirtualClusterConfig instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns GkeClusterConfig instance
+                     * @returns VirtualClusterConfig instance
                      */
-                    public static create(properties?: google.cloud.dataproc.v1.IGkeClusterConfig): google.cloud.dataproc.v1.GkeClusterConfig;
+                    public static create(properties?: google.cloud.dataproc.v1.IVirtualClusterConfig): google.cloud.dataproc.v1.VirtualClusterConfig;
 
                     /**
-                     * Encodes the specified GkeClusterConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.verify|verify} messages.
-                     * @param message GkeClusterConfig message or plain object to encode
+                     * Encodes the specified VirtualClusterConfig message. Does not implicitly {@link google.cloud.dataproc.v1.VirtualClusterConfig.verify|verify} messages.
+                     * @param message VirtualClusterConfig message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.dataproc.v1.IGkeClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.dataproc.v1.IVirtualClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified GkeClusterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.verify|verify} messages.
-                     * @param message GkeClusterConfig message or plain object to encode
+                     * Encodes the specified VirtualClusterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.VirtualClusterConfig.verify|verify} messages.
+                     * @param message VirtualClusterConfig message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.dataproc.v1.IGkeClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IVirtualClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a GkeClusterConfig message from the specified reader or buffer.
+                     * Decodes a VirtualClusterConfig message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns GkeClusterConfig
+                     * @returns VirtualClusterConfig
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GkeClusterConfig;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.VirtualClusterConfig;
 
                     /**
-                     * Decodes a GkeClusterConfig message from the specified reader or buffer, length delimited.
+                     * Decodes a VirtualClusterConfig message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns GkeClusterConfig
+                     * @returns VirtualClusterConfig
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GkeClusterConfig;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.VirtualClusterConfig;
 
                     /**
-                     * Verifies a GkeClusterConfig message.
+                     * Verifies a VirtualClusterConfig message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a GkeClusterConfig message from a plain object. Also converts values to their respective internal types.
+                     * Creates a VirtualClusterConfig message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns GkeClusterConfig
+                     * @returns VirtualClusterConfig
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GkeClusterConfig;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.VirtualClusterConfig;
 
                     /**
-                     * Creates a plain object from a GkeClusterConfig message. Also converts values to other types if specified.
-                     * @param message GkeClusterConfig
+                     * Creates a plain object from a VirtualClusterConfig message. Also converts values to other types if specified.
+                     * @param message VirtualClusterConfig
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.dataproc.v1.GkeClusterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.dataproc.v1.VirtualClusterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this GkeClusterConfig to JSON.
+                     * Converts this VirtualClusterConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                namespace GkeClusterConfig {
+                /** Properties of an AuxiliaryServicesConfig. */
+                interface IAuxiliaryServicesConfig {
 
-                    /** Properties of a NamespacedGkeDeploymentTarget. */
-                    interface INamespacedGkeDeploymentTarget {
+                    /** AuxiliaryServicesConfig metastoreConfig */
+                    metastoreConfig?: (google.cloud.dataproc.v1.IMetastoreConfig|null);
 
-                        /** NamespacedGkeDeploymentTarget targetGkeCluster */
-                        targetGkeCluster?: (string|null);
+                    /** AuxiliaryServicesConfig sparkHistoryServerConfig */
+                    sparkHistoryServerConfig?: (google.cloud.dataproc.v1.ISparkHistoryServerConfig|null);
+                }
 
-                        /** NamespacedGkeDeploymentTarget clusterNamespace */
-                        clusterNamespace?: (string|null);
-                    }
+                /** Represents an AuxiliaryServicesConfig. */
+                class AuxiliaryServicesConfig implements IAuxiliaryServicesConfig {
 
-                    /** Represents a NamespacedGkeDeploymentTarget. */
-                    class NamespacedGkeDeploymentTarget implements INamespacedGkeDeploymentTarget {
+                    /**
+                     * Constructs a new AuxiliaryServicesConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IAuxiliaryServicesConfig);
 
-                        /**
-                         * Constructs a new NamespacedGkeDeploymentTarget.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget);
+                    /** AuxiliaryServicesConfig metastoreConfig. */
+                    public metastoreConfig?: (google.cloud.dataproc.v1.IMetastoreConfig|null);
 
-                        /** NamespacedGkeDeploymentTarget targetGkeCluster. */
-                        public targetGkeCluster: string;
+                    /** AuxiliaryServicesConfig sparkHistoryServerConfig. */
+                    public sparkHistoryServerConfig?: (google.cloud.dataproc.v1.ISparkHistoryServerConfig|null);
 
-                        /** NamespacedGkeDeploymentTarget clusterNamespace. */
-                        public clusterNamespace: string;
+                    /**
+                     * Creates a new AuxiliaryServicesConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AuxiliaryServicesConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IAuxiliaryServicesConfig): google.cloud.dataproc.v1.AuxiliaryServicesConfig;
 
-                        /**
-                         * Creates a new NamespacedGkeDeploymentTarget instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns NamespacedGkeDeploymentTarget instance
-                         */
-                        public static create(properties?: google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget): google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget;
+                    /**
+                     * Encodes the specified AuxiliaryServicesConfig message. Does not implicitly {@link google.cloud.dataproc.v1.AuxiliaryServicesConfig.verify|verify} messages.
+                     * @param message AuxiliaryServicesConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IAuxiliaryServicesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
 
-                        /**
-                         * Encodes the specified NamespacedGkeDeploymentTarget message. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify|verify} messages.
-                         * @param message NamespacedGkeDeploymentTarget message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+                    /**
+                     * Encodes the specified AuxiliaryServicesConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.AuxiliaryServicesConfig.verify|verify} messages.
+                     * @param message AuxiliaryServicesConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IAuxiliaryServicesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
 
-                        /**
-                         * Encodes the specified NamespacedGkeDeploymentTarget message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify|verify} messages.
-                         * @param message NamespacedGkeDeploymentTarget message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+                    /**
+                     * Decodes an AuxiliaryServicesConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AuxiliaryServicesConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.AuxiliaryServicesConfig;
 
-                        /**
-                         * Decodes a NamespacedGkeDeploymentTarget message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns NamespacedGkeDeploymentTarget
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget;
+                    /**
+                     * Decodes an AuxiliaryServicesConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AuxiliaryServicesConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.AuxiliaryServicesConfig;
 
-                        /**
-                         * Decodes a NamespacedGkeDeploymentTarget message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns NamespacedGkeDeploymentTarget
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget;
+                    /**
+                     * Verifies an AuxiliaryServicesConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
 
-                        /**
-                         * Verifies a NamespacedGkeDeploymentTarget message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
+                    /**
+                     * Creates an AuxiliaryServicesConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AuxiliaryServicesConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.AuxiliaryServicesConfig;
 
-                        /**
-                         * Creates a NamespacedGkeDeploymentTarget message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns NamespacedGkeDeploymentTarget
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget;
+                    /**
+                     * Creates a plain object from an AuxiliaryServicesConfig message. Also converts values to other types if specified.
+                     * @param message AuxiliaryServicesConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.AuxiliaryServicesConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
-                        /**
-                         * Creates a plain object from a NamespacedGkeDeploymentTarget message. Also converts values to other types if specified.
-                         * @param message NamespacedGkeDeploymentTarget
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this NamespacedGkeDeploymentTarget to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
+                    /**
+                     * Converts this AuxiliaryServicesConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of an EndpointConfig. */

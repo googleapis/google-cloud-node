@@ -1059,6 +1059,200 @@
                         }
                       }
                     },
+                    "GkeClusterConfig": {
+                      "fields": {
+                        "gkeClusterTarget": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "nodePoolTarget": {
+                          "rule": "repeated",
+                          "type": "GkeNodePoolTarget",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "KubernetesClusterConfig": {
+                      "oneofs": {
+                        "config": {
+                          "oneof": [
+                            "gkeClusterConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "kubernetesNamespace": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gkeClusterConfig": {
+                          "type": "GkeClusterConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "kubernetesSoftwareConfig": {
+                          "type": "KubernetesSoftwareConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "KubernetesSoftwareConfig": {
+                      "fields": {
+                        "componentVersion": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "properties": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GkeNodePoolTarget": {
+                      "fields": {
+                        "nodePool": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "roles": {
+                          "rule": "repeated",
+                          "type": "Role",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nodePoolConfig": {
+                          "type": "GkeNodePoolConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Role": {
+                          "values": {
+                            "ROLE_UNSPECIFIED": 0,
+                            "DEFAULT": 1,
+                            "CONTROLLER": 2,
+                            "SPARK_DRIVER": 3,
+                            "SPARK_EXECUTOR": 4
+                          }
+                        }
+                      }
+                    },
+                    "GkeNodePoolConfig": {
+                      "fields": {
+                        "config": {
+                          "type": "GkeNodeConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "locations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoscaling": {
+                          "type": "GkeNodePoolAutoscalingConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GkeNodeConfig": {
+                          "fields": {
+                            "machineType": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "preemptible": {
+                              "type": "bool",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "localSsdCount": {
+                              "type": "int32",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "accelerators": {
+                              "rule": "repeated",
+                              "type": "GkeNodePoolAcceleratorConfig",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "minCpuPlatform": {
+                              "type": "string",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "GkeNodePoolAcceleratorConfig": {
+                          "fields": {
+                            "acceleratorCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "acceleratorType": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "GkeNodePoolAutoscalingConfig": {
+                          "fields": {
+                            "minNodeCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "maxNodeCount": {
+                              "type": "int32",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
                     "Component": {
                       "values": {
                         "COMPONENT_UNSPECIFIED": 0,
@@ -1311,6 +1505,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "virtualClusterConfig": {
+                          "type": "VirtualClusterConfig",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "labels": {
                           "keyType": "string",
                           "type": "string",
@@ -1450,44 +1651,62 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        }
+                      }
+                    },
+                    "VirtualClusterConfig": {
+                      "oneofs": {
+                        "infrastructureConfig": {
+                          "oneof": [
+                            "kubernetesClusterConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "stagingBucket": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
-                        "gkeClusterConfig": {
-                          "type": "GkeClusterConfig",
-                          "id": 21,
+                        "tempBucket": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "kubernetesClusterConfig": {
+                          "type": "KubernetesClusterConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "auxiliaryServicesConfig": {
+                          "type": "AuxiliaryServicesConfig",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
                     },
-                    "GkeClusterConfig": {
+                    "AuxiliaryServicesConfig": {
                       "fields": {
-                        "namespacedGkeDeploymentTarget": {
-                          "type": "NamespacedGkeDeploymentTarget",
+                        "metastoreConfig": {
+                          "type": "MetastoreConfig",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
-                        }
-                      },
-                      "nested": {
-                        "NamespacedGkeDeploymentTarget": {
-                          "fields": {
-                            "targetGkeCluster": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL",
-                                "(google.api.resource_reference).type": "container.googleapis.com/Cluster"
-                              }
-                            },
-                            "clusterNamespace": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
+                        },
+                        "sparkHistoryServerConfig": {
+                          "type": "SparkHistoryServerConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
