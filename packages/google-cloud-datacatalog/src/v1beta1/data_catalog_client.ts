@@ -4246,9 +4246,8 @@ export class DataCatalogClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.dataCatalogStub!.then(stub => {
+    if (this.dataCatalogStub && !this._terminated) {
+      return this.dataCatalogStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

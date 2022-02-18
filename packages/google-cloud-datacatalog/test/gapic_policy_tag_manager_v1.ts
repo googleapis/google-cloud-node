@@ -153,12 +153,27 @@ describe('v1.PolicyTagManagerClient', () => {
     assert(client.policyTagManagerStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.policyTagManagerStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.policyTagManagerStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -304,6 +319,22 @@ describe('v1.PolicyTagManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createTaxonomy with closed client', async () => {
+      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createTaxonomy(request), expectedError);
+    });
   });
 
   describe('deleteTaxonomy', () => {
@@ -414,6 +445,22 @@ describe('v1.PolicyTagManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteTaxonomy with closed client', async () => {
+      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteTaxonomy(request), expectedError);
     });
   });
 
@@ -529,6 +576,23 @@ describe('v1.PolicyTagManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTaxonomy with closed client', async () => {
+      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
+      );
+      request.taxonomy = {};
+      request.taxonomy.name = '';
+      const expectedHeaderRequestParams = 'taxonomy.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateTaxonomy(request), expectedError);
+    });
   });
 
   describe('getTaxonomy', () => {
@@ -639,6 +703,22 @@ describe('v1.PolicyTagManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getTaxonomy with closed client', async () => {
+      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTaxonomy(request), expectedError);
     });
   });
 
@@ -751,6 +831,22 @@ describe('v1.PolicyTagManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createPolicyTag with closed client', async () => {
+      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createPolicyTag(request), expectedError);
+    });
   });
 
   describe('deletePolicyTag', () => {
@@ -861,6 +957,22 @@ describe('v1.PolicyTagManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deletePolicyTag with closed client', async () => {
+      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deletePolicyTag(request), expectedError);
     });
   });
 
@@ -976,6 +1088,23 @@ describe('v1.PolicyTagManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updatePolicyTag with closed client', async () => {
+      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
+      );
+      request.policyTag = {};
+      request.policyTag.name = '';
+      const expectedHeaderRequestParams = 'policy_tag.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updatePolicyTag(request), expectedError);
+    });
   });
 
   describe('getPolicyTag', () => {
@@ -1086,6 +1215,22 @@ describe('v1.PolicyTagManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getPolicyTag with closed client', async () => {
+      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPolicyTag(request), expectedError);
     });
   });
 
@@ -1198,6 +1343,22 @@ describe('v1.PolicyTagManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
+    });
   });
 
   describe('setIamPolicy', () => {
@@ -1308,6 +1469,22 @@ describe('v1.PolicyTagManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
 
@@ -1420,6 +1597,22 @@ describe('v1.PolicyTagManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client = new policytagmanagerModule.v1.PolicyTagManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
 

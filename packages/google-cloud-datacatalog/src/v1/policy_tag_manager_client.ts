@@ -2305,9 +2305,8 @@ export class PolicyTagManagerClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.policyTagManagerStub!.then(stub => {
+    if (this.policyTagManagerStub && !this._terminated) {
+      return this.policyTagManagerStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -101,7 +101,7 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
     assert(client.policyTagManagerSerializationStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new policytagmanagerserializationModule.v1beta1.PolicyTagManagerSerializationClient(
         {
@@ -109,7 +109,25 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
           projectId: 'bogus',
         }
       );
-    client.close();
+    client.initialize();
+    assert(client.policyTagManagerSerializationStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new policytagmanagerserializationModule.v1beta1.PolicyTagManagerSerializationClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+    assert.strictEqual(client.policyTagManagerSerializationStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -270,6 +288,25 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes importTaxonomies with closed client', async () => {
+      const client =
+        new policytagmanagerserializationModule.v1beta1.PolicyTagManagerSerializationClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.importTaxonomies(request), expectedError);
+    });
   });
 
   describe('exportTaxonomies', () => {
@@ -389,6 +426,25 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes exportTaxonomies with closed client', async () => {
+      const client =
+        new policytagmanagerserializationModule.v1beta1.PolicyTagManagerSerializationClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.exportTaxonomies(request), expectedError);
     });
   });
 

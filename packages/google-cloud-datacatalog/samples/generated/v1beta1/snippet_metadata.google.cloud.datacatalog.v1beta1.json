@@ -1,0 +1,1891 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-datacatalog",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.datacatalog.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_SearchCatalog_async",
+      "title": "DataCatalog searchCatalog Sample",
+      "origin": "API_DEFINITION",
+      "description": " Searches Data Catalog for multiple resources like entries, tags that match a query. This is a custom method (https://cloud.google.com/apis/design/custom_methods) and does not return the complete resource, only the resource identifier and high level fields. Clients can subsequentally call `Get` methods. Note that Data Catalog search queries do not guarantee full recall. Query results that match your query may not be returned, even in subsequent result pages. Also note that results returned (and not returned) can vary across repeated search queries. See [Data Catalog Search Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference) for more information.",
+      "canonical": true,
+      "file": "data_catalog.search_catalog.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 91,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchCatalog",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog",
+        "async": true,
+        "parameters": [
+          {
+            "name": "scope",
+            "type": ".google.cloud.datacatalog.v1beta1.SearchCatalogRequest.Scope"
+          },
+          {
+            "name": "query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.SearchCatalogResponse",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "SearchCatalog",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_CreateEntryGroup_async",
+      "title": "DataCatalog createEntryGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " A maximum of 10,000 entry groups may be created per organization across all locations. Users should enable the Data Catalog API in the project identified by the `parent` parameter (see [Data Catalog Resource Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).",
+      "canonical": true,
+      "file": "data_catalog.create_entry_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEntryGroup",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntryGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entry_group_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entry_group",
+            "type": ".google.cloud.datacatalog.v1beta1.EntryGroup"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.EntryGroup",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "CreateEntryGroup",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntryGroup",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_UpdateEntryGroup_async",
+      "title": "DataCatalog updateEntryGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an EntryGroup. The user should enable the Data Catalog API in the project identified by the `entry_group.name` parameter (see [Data Catalog Resource Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).",
+      "canonical": true,
+      "file": "data_catalog.update_entry_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEntryGroup",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.UpdateEntryGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "entry_group",
+            "type": ".google.cloud.datacatalog.v1beta1.EntryGroup"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.EntryGroup",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "UpdateEntryGroup",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.UpdateEntryGroup",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_GetEntryGroup_async",
+      "title": "DataCatalog getEntryGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an EntryGroup.",
+      "canonical": true,
+      "file": "data_catalog.get_entry_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEntryGroup",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.GetEntryGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "read_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.EntryGroup",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "GetEntryGroup",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.GetEntryGroup",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_DeleteEntryGroup_async",
+      "title": "DataCatalog deleteEntryGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an EntryGroup. Only entry groups that do not contain entries can be deleted. Users should enable the Data Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).",
+      "canonical": true,
+      "file": "data_catalog.delete_entry_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteEntryGroup",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.DeleteEntryGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "DeleteEntryGroup",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.DeleteEntryGroup",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_ListEntryGroups_async",
+      "title": "DataCatalog listEntryGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists entry groups.",
+      "canonical": true,
+      "file": "data_catalog.list_entry_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEntryGroups",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.ListEntryGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.ListEntryGroupsResponse",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "ListEntryGroups",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.ListEntryGroups",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_CreateEntry_async",
+      "title": "DataCatalog createEntry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an entry. Only entries of 'FILESET' type or user-specified type can be created. Users should enable the Data Catalog API in the project identified by the `parent` parameter (see [Data Catalog Resource Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information). A maximum of 100,000 entries may be created per entry group.",
+      "canonical": true,
+      "file": "data_catalog.create_entry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEntry",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entry_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entry",
+            "type": ".google.cloud.datacatalog.v1beta1.Entry"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.Entry",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "CreateEntry",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntry",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_UpdateEntry_async",
+      "title": "DataCatalog updateEntry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an existing entry. Users should enable the Data Catalog API in the project identified by the `entry.name` parameter (see [Data Catalog Resource Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).",
+      "canonical": true,
+      "file": "data_catalog.update_entry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEntry",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.UpdateEntry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "entry",
+            "type": ".google.cloud.datacatalog.v1beta1.Entry"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.Entry",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "UpdateEntry",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.UpdateEntry",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_DeleteEntry_async",
+      "title": "DataCatalog deleteEntry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an existing entry. Only entries created through [CreateEntry][google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntry] method can be deleted. Users should enable the Data Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).",
+      "canonical": true,
+      "file": "data_catalog.delete_entry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteEntry",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.DeleteEntry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "DeleteEntry",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.DeleteEntry",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_GetEntry_async",
+      "title": "DataCatalog getEntry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an entry.",
+      "canonical": true,
+      "file": "data_catalog.get_entry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEntry",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.GetEntry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.Entry",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "GetEntry",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.GetEntry",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_LookupEntry_async",
+      "title": "DataCatalog lookupEntry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get an entry by target resource name. This method allows clients to use the resource name from the source Google Cloud Platform service to get the Data Catalog Entry.",
+      "canonical": true,
+      "file": "data_catalog.lookup_entry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LookupEntry",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.LookupEntry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "linked_resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "sql_resource",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.Entry",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "LookupEntry",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.LookupEntry",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_ListEntries_async",
+      "title": "DataCatalog listEntries Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists entries.",
+      "canonical": true,
+      "file": "data_catalog.list_entries.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEntries",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.ListEntries",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "read_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.ListEntriesResponse",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "ListEntries",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.ListEntries",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_CreateTagTemplate_async",
+      "title": "DataCatalog createTagTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a tag template. The user should enable the Data Catalog API in the project identified by the `parent` parameter (see [Data Catalog Resource Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).",
+      "canonical": true,
+      "file": "data_catalog.create_tag_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTagTemplate",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.CreateTagTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tag_template_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tag_template",
+            "type": ".google.cloud.datacatalog.v1beta1.TagTemplate"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.TagTemplate",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "CreateTagTemplate",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.CreateTagTemplate",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_GetTagTemplate_async",
+      "title": "DataCatalog getTagTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a tag template.",
+      "canonical": true,
+      "file": "data_catalog.get_tag_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTagTemplate",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.GetTagTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.TagTemplate",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "GetTagTemplate",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.GetTagTemplate",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_UpdateTagTemplate_async",
+      "title": "DataCatalog updateTagTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a tag template. This method cannot be used to update the fields of a template. The tag template fields are represented as separate resources and should be updated using their own create/update/delete methods. Users should enable the Data Catalog API in the project identified by the `tag_template.name` parameter (see [Data Catalog Resource Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).",
+      "canonical": true,
+      "file": "data_catalog.update_tag_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTagTemplate",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.UpdateTagTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "tag_template",
+            "type": ".google.cloud.datacatalog.v1beta1.TagTemplate"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.TagTemplate",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "UpdateTagTemplate",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.UpdateTagTemplate",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_DeleteTagTemplate_async",
+      "title": "DataCatalog deleteTagTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a tag template and all tags using the template. Users should enable the Data Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).",
+      "canonical": true,
+      "file": "data_catalog.delete_tag_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTagTemplate",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.DeleteTagTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "DeleteTagTemplate",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.DeleteTagTemplate",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_CreateTagTemplateField_async",
+      "title": "DataCatalog createTagTemplateField Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a field in a tag template. The user should enable the Data Catalog API in the project identified by the `parent` parameter (see [Data Catalog Resource Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).",
+      "canonical": true,
+      "file": "data_catalog.create_tag_template_field.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTagTemplateField",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.CreateTagTemplateField",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tag_template_field_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tag_template_field",
+            "type": ".google.cloud.datacatalog.v1beta1.TagTemplateField"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.TagTemplateField",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "CreateTagTemplateField",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.CreateTagTemplateField",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_UpdateTagTemplateField_async",
+      "title": "DataCatalog updateTagTemplateField Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a field in a tag template. This method cannot be used to update the field type. Users should enable the Data Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).",
+      "canonical": true,
+      "file": "data_catalog.update_tag_template_field.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTagTemplateField",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.UpdateTagTemplateField",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tag_template_field",
+            "type": ".google.cloud.datacatalog.v1beta1.TagTemplateField"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.TagTemplateField",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "UpdateTagTemplateField",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.UpdateTagTemplateField",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_RenameTagTemplateField_async",
+      "title": "DataCatalog renameTagTemplateField Sample",
+      "origin": "API_DEFINITION",
+      "description": " Renames a field in a tag template. The user should enable the Data Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).",
+      "canonical": true,
+      "file": "data_catalog.rename_tag_template_field.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RenameTagTemplateField",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.RenameTagTemplateField",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "new_tag_template_field_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.TagTemplateField",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "RenameTagTemplateField",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.RenameTagTemplateField",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_DeleteTagTemplateField_async",
+      "title": "DataCatalog deleteTagTemplateField Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a field in a tag template and all uses of that field. Users should enable the Data Catalog API in the project identified by the `name` parameter (see [Data Catalog Resource Project] (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more information).",
+      "canonical": true,
+      "file": "data_catalog.delete_tag_template_field.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTagTemplateField",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.DeleteTagTemplateField",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "DeleteTagTemplateField",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.DeleteTagTemplateField",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_CreateTag_async",
+      "title": "DataCatalog createTag Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a tag on an [Entry][google.cloud.datacatalog.v1beta1.Entry]. Note: The project identified by the `parent` parameter for the [tag](https://cloud.google.com/data-catalog/docs/reference/rest/v1beta1/projects.locations.entryGroups.entries.tags/create#path-parameters) and the [tag template](https://cloud.google.com/data-catalog/docs/reference/rest/v1beta1/projects.locations.tagTemplates/create#path-parameters) used to create the tag must be from the same organization.",
+      "canonical": true,
+      "file": "data_catalog.create_tag.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTag",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.CreateTag",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tag",
+            "type": ".google.cloud.datacatalog.v1beta1.Tag"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.Tag",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "CreateTag",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.CreateTag",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_UpdateTag_async",
+      "title": "DataCatalog updateTag Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an existing tag.",
+      "canonical": true,
+      "file": "data_catalog.update_tag.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTag",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.UpdateTag",
+        "async": true,
+        "parameters": [
+          {
+            "name": "tag",
+            "type": ".google.cloud.datacatalog.v1beta1.Tag"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.Tag",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "UpdateTag",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.UpdateTag",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_DeleteTag_async",
+      "title": "DataCatalog deleteTag Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a tag.",
+      "canonical": true,
+      "file": "data_catalog.delete_tag.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTag",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.DeleteTag",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "DeleteTag",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.DeleteTag",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_ListTags_async",
+      "title": "DataCatalog listTags Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the tags on an [Entry][google.cloud.datacatalog.v1beta1.Entry].",
+      "canonical": true,
+      "file": "data_catalog.list_tags.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTags",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.ListTags",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.ListTagsResponse",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "ListTags",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.ListTags",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_SetIamPolicy_async",
+      "title": "DataCatalog setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy for a resource. Replaces any existing policy. Supported resources are:   - Tag templates.   - Entries.   - Entry groups. Note, this method cannot be used to manage policies for BigQuery, Pub/Sub and any external Google Cloud Platform resources synced to Data Catalog. Callers must have following Google IAM permission   - `datacatalog.tagTemplates.setIamPolicy` to set policies on tag     templates.   - `datacatalog.entries.setIamPolicy` to set policies on entries.   - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.",
+      "canonical": true,
+      "file": "data_catalog.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy",
+            "type": ".google.iam.v1.Policy"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.SetIamPolicy",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_GetIamPolicy_async",
+      "title": "DataCatalog getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for a resource. A `NOT_FOUND` error is returned if the resource does not exist. An empty policy is returned if the resource exists but does not have a policy set on it. Supported resources are:   - Tag templates.   - Entries.   - Entry groups. Note, this method cannot be used to manage policies for BigQuery, Pub/Sub and any external Google Cloud Platform resources synced to Data Catalog. Callers must have following Google IAM permission   - `datacatalog.tagTemplates.getIamPolicy` to get policies on tag     templates.   - `datacatalog.entries.getIamPolicy` to get policies on entries.   - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.",
+      "canonical": true,
+      "file": "data_catalog.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.iam.v1.GetPolicyOptions"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.GetIamPolicy",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_DataCatalog_TestIamPermissions_async",
+      "title": "DataCatalog testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the caller's permissions on a resource. If the resource does not exist, an empty set of permissions is returned (We don't return a `NOT_FOUND` error). Supported resources are:   - Tag templates.   - Entries.   - Entry groups. Note, this method cannot be used to manage policies for BigQuery, Pub/Sub and any external Google Cloud Platform resources synced to Data Catalog. A caller is not required to have Google IAM permission to make this request.",
+      "canonical": true,
+      "file": "data_catalog.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permissions",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.iam.v1.TestIamPermissionsResponse",
+        "client": {
+          "shortName": "DataCatalogClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalogClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog.TestIamPermissions",
+          "service": {
+            "shortName": "DataCatalog",
+            "fullName": "google.cloud.datacatalog.v1beta1.DataCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_CreateTaxonomy_async",
+      "title": "DataCatalog createTaxonomy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a taxonomy in the specified project.",
+      "canonical": true,
+      "file": "policy_tag_manager.create_taxonomy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTaxonomy",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.CreateTaxonomy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "taxonomy",
+            "type": ".google.cloud.datacatalog.v1beta1.Taxonomy"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.Taxonomy",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "CreateTaxonomy",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.CreateTaxonomy",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_DeleteTaxonomy_async",
+      "title": "DataCatalog deleteTaxonomy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a taxonomy. This operation will also delete all policy tags in this taxonomy along with their associated policies.",
+      "canonical": true,
+      "file": "policy_tag_manager.delete_taxonomy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTaxonomy",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.DeleteTaxonomy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteTaxonomy",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.DeleteTaxonomy",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_UpdateTaxonomy_async",
+      "title": "DataCatalog updateTaxonomy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a taxonomy.",
+      "canonical": true,
+      "file": "policy_tag_manager.update_taxonomy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTaxonomy",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.UpdateTaxonomy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "taxonomy",
+            "type": ".google.cloud.datacatalog.v1beta1.Taxonomy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.Taxonomy",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateTaxonomy",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.UpdateTaxonomy",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_ListTaxonomies_async",
+      "title": "DataCatalog listTaxonomies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all taxonomies in a project in a particular location that the caller has permission to view.",
+      "canonical": true,
+      "file": "policy_tag_manager.list_taxonomies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTaxonomies",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.ListTaxonomies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "ListTaxonomies",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.ListTaxonomies",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_GetTaxonomy_async",
+      "title": "DataCatalog getTaxonomy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a taxonomy.",
+      "canonical": true,
+      "file": "policy_tag_manager.get_taxonomy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 50,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTaxonomy",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.GetTaxonomy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.Taxonomy",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "GetTaxonomy",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.GetTaxonomy",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_CreatePolicyTag_async",
+      "title": "DataCatalog createPolicyTag Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a policy tag in the specified taxonomy.",
+      "canonical": true,
+      "file": "policy_tag_manager.create_policy_tag.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePolicyTag",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.CreatePolicyTag",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy_tag",
+            "type": ".google.cloud.datacatalog.v1beta1.PolicyTag"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.PolicyTag",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "CreatePolicyTag",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.CreatePolicyTag",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_DeletePolicyTag_async",
+      "title": "DataCatalog deletePolicyTag Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a policy tag. Also deletes all of its descendant policy tags.",
+      "canonical": true,
+      "file": "policy_tag_manager.delete_policy_tag.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePolicyTag",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.DeletePolicyTag",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "DeletePolicyTag",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.DeletePolicyTag",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_UpdatePolicyTag_async",
+      "title": "DataCatalog updatePolicyTag Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a policy tag.",
+      "canonical": true,
+      "file": "policy_tag_manager.update_policy_tag.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdatePolicyTag",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.UpdatePolicyTag",
+        "async": true,
+        "parameters": [
+          {
+            "name": "policy_tag",
+            "type": ".google.cloud.datacatalog.v1beta1.PolicyTag"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.PolicyTag",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "UpdatePolicyTag",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.UpdatePolicyTag",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_ListPolicyTags_async",
+      "title": "DataCatalog listPolicyTags Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all policy tags in a taxonomy.",
+      "canonical": true,
+      "file": "policy_tag_manager.list_policy_tags.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPolicyTags",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.ListPolicyTags",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "ListPolicyTags",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.ListPolicyTags",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_GetPolicyTag_async",
+      "title": "DataCatalog getPolicyTag Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a policy tag.",
+      "canonical": true,
+      "file": "policy_tag_manager.get_policy_tag.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 50,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPolicyTag",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.GetPolicyTag",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.PolicyTag",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "GetPolicyTag",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.GetPolicyTag",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_GetIamPolicy_async",
+      "title": "DataCatalog getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the IAM policy for a taxonomy or a policy tag.",
+      "canonical": true,
+      "file": "policy_tag_manager.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.iam.v1.GetPolicyOptions"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.GetIamPolicy",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_SetIamPolicy_async",
+      "title": "DataCatalog setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the IAM policy for a taxonomy or a policy tag.",
+      "canonical": true,
+      "file": "policy_tag_manager.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy",
+            "type": ".google.iam.v1.Policy"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.SetIamPolicy",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManager_TestIamPermissions_async",
+      "title": "DataCatalog testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the permissions that a caller has on the specified taxonomy or policy tag.",
+      "canonical": true,
+      "file": "policy_tag_manager.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permissions",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.iam.v1.TestIamPermissionsResponse",
+        "client": {
+          "shortName": "PolicyTagManagerClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager.TestIamPermissions",
+          "service": {
+            "shortName": "PolicyTagManager",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManagerSerialization_ImportTaxonomies_async",
+      "title": "DataCatalog importTaxonomies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Imports all taxonomies and their policy tags to a project as new taxonomies. This method provides a bulk taxonomy / policy tag creation using nested proto structure.",
+      "canonical": true,
+      "file": "policy_tag_manager_serialization.import_taxonomies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportTaxonomies",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ImportTaxonomies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "inline_source",
+            "type": ".google.cloud.datacatalog.v1beta1.InlineSource"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse",
+        "client": {
+          "shortName": "PolicyTagManagerSerializationClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerSerializationClient"
+        },
+        "method": {
+          "shortName": "ImportTaxonomies",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ImportTaxonomies",
+          "service": {
+            "shortName": "PolicyTagManagerSerialization",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datacatalog_v1beta1_generated_PolicyTagManagerSerialization_ExportTaxonomies_async",
+      "title": "DataCatalog exportTaxonomies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports all taxonomies and their policy tags in a project. This method generates SerializedTaxonomy protos with nested policy tags that can be used as an input for future ImportTaxonomies calls.",
+      "canonical": true,
+      "file": "policy_tag_manager_serialization.export_taxonomies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportTaxonomies",
+        "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ExportTaxonomies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "taxonomies",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "serialized_taxonomies",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse",
+        "client": {
+          "shortName": "PolicyTagManagerSerializationClient",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerSerializationClient"
+        },
+        "method": {
+          "shortName": "ExportTaxonomies",
+          "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ExportTaxonomies",
+          "service": {
+            "shortName": "PolicyTagManagerSerialization",
+            "fullName": "google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization"
+          }
+        }
+      }
+    }
+  ]
+}

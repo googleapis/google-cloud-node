@@ -151,12 +151,27 @@ describe('v1beta1.DataCatalogClient', () => {
     assert(client.dataCatalogStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new datacatalogModule.v1beta1.DataCatalogClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.dataCatalogStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new datacatalogModule.v1beta1.DataCatalogClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.dataCatalogStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -302,6 +317,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createEntryGroup with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createEntryGroup(request), expectedError);
+    });
   });
 
   describe('updateEntryGroup', () => {
@@ -416,6 +447,23 @@ describe('v1beta1.DataCatalogClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateEntryGroup with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
+      );
+      request.entryGroup = {};
+      request.entryGroup.name = '';
+      const expectedHeaderRequestParams = 'entry_group.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateEntryGroup(request), expectedError);
+    });
   });
 
   describe('getEntryGroup', () => {
@@ -526,6 +574,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getEntryGroup with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEntryGroup(request), expectedError);
     });
   });
 
@@ -638,6 +702,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteEntryGroup with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteEntryGroup(request), expectedError);
+    });
   });
 
   describe('createEntry', () => {
@@ -748,6 +828,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createEntry with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createEntry(request), expectedError);
     });
   });
 
@@ -863,6 +959,23 @@ describe('v1beta1.DataCatalogClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateEntry with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
+      );
+      request.entry = {};
+      request.entry.name = '';
+      const expectedHeaderRequestParams = 'entry.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateEntry(request), expectedError);
+    });
   });
 
   describe('deleteEntry', () => {
@@ -974,6 +1087,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteEntry with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteEntry(request), expectedError);
+    });
   });
 
   describe('getEntry', () => {
@@ -1082,6 +1211,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getEntry with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEntry(request), expectedError);
+    });
   });
 
   describe('lookupEntry', () => {
@@ -1168,6 +1313,20 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes lookupEntry with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.lookupEntry(request), expectedError);
     });
   });
 
@@ -1280,6 +1439,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createTagTemplate with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createTagTemplate(request), expectedError);
+    });
   });
 
   describe('getTagTemplate', () => {
@@ -1390,6 +1565,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getTagTemplate with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTagTemplate(request), expectedError);
     });
   });
 
@@ -1505,6 +1696,23 @@ describe('v1beta1.DataCatalogClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTagTemplate with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
+      );
+      request.tagTemplate = {};
+      request.tagTemplate.name = '';
+      const expectedHeaderRequestParams = 'tag_template.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateTagTemplate(request), expectedError);
+    });
   });
 
   describe('deleteTagTemplate', () => {
@@ -1615,6 +1823,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteTagTemplate with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteTagTemplate(request), expectedError);
     });
   });
 
@@ -1729,6 +1953,25 @@ describe('v1beta1.DataCatalogClient', () => {
         (client.innerApiCalls.createTagTemplateField as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createTagTemplateField with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createTagTemplateField(request),
+        expectedError
       );
     });
   });
@@ -1846,6 +2089,25 @@ describe('v1beta1.DataCatalogClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTagTemplateField with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateTagTemplateField(request),
+        expectedError
+      );
+    });
   });
 
   describe('renameTagTemplateField', () => {
@@ -1959,6 +2221,25 @@ describe('v1beta1.DataCatalogClient', () => {
         (client.innerApiCalls.renameTagTemplateField as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes renameTagTemplateField with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.renameTagTemplateField(request),
+        expectedError
       );
     });
   });
@@ -2076,6 +2357,25 @@ describe('v1beta1.DataCatalogClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteTagTemplateField with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteTagTemplateField(request),
+        expectedError
+      );
+    });
   });
 
   describe('createTag', () => {
@@ -2183,6 +2483,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createTag with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createTag(request), expectedError);
     });
   });
 
@@ -2295,6 +2611,23 @@ describe('v1beta1.DataCatalogClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTag with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
+      );
+      request.tag = {};
+      request.tag.name = '';
+      const expectedHeaderRequestParams = 'tag.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateTag(request), expectedError);
+    });
   });
 
   describe('deleteTag', () => {
@@ -2402,6 +2735,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteTag with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteTag(request), expectedError);
     });
   });
 
@@ -2514,6 +2863,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
+    });
   });
 
   describe('getIamPolicy', () => {
@@ -2624,6 +2989,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
 
@@ -2736,6 +3117,22 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
 
