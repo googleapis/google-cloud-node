@@ -405,9 +405,8 @@ export class QuotaControllerClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.quotaControllerStub!.then(stub => {
+    if (this.quotaControllerStub && !this._terminated) {
+      return this.quotaControllerStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

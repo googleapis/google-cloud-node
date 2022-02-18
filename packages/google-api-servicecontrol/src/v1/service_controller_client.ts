@@ -527,9 +527,8 @@ export class ServiceControllerClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.serviceControllerStub!.then(stub => {
+    if (this.serviceControllerStub && !this._terminated) {
+      return this.serviceControllerStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

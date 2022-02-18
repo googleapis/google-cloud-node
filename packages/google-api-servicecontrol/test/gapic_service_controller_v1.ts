@@ -90,12 +90,27 @@ describe('v1.ServiceControllerClient', () => {
     assert(client.serviceControllerStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new servicecontrollerModule.v1.ServiceControllerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.serviceControllerStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new servicecontrollerModule.v1.ServiceControllerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.serviceControllerStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -237,6 +252,22 @@ describe('v1.ServiceControllerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes check with closed client', async () => {
+      const client = new servicecontrollerModule.v1.ServiceControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.api.servicecontrol.v1.CheckRequest()
+      );
+      request.serviceName = '';
+      const expectedHeaderRequestParams = 'service_name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.check(request), expectedError);
+    });
   });
 
   describe('report', () => {
@@ -344,6 +375,22 @@ describe('v1.ServiceControllerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes report with closed client', async () => {
+      const client = new servicecontrollerModule.v1.ServiceControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.api.servicecontrol.v1.ReportRequest()
+      );
+      request.serviceName = '';
+      const expectedHeaderRequestParams = 'service_name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.report(request), expectedError);
     });
   });
 });
