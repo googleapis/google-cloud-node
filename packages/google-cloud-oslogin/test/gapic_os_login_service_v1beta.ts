@@ -90,12 +90,27 @@ describe('v1beta.OsLoginServiceClient', () => {
     assert(client.osLoginServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.osLoginServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.osLoginServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -242,6 +257,22 @@ describe('v1beta.OsLoginServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deletePosixAccount with closed client', async () => {
+      const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oslogin.v1beta.DeletePosixAccountRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deletePosixAccount(request), expectedError);
+    });
   });
 
   describe('deleteSshPublicKey', () => {
@@ -354,6 +385,22 @@ describe('v1beta.OsLoginServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteSshPublicKey with closed client', async () => {
+      const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteSshPublicKey(request), expectedError);
+    });
   });
 
   describe('getLoginProfile', () => {
@@ -465,6 +512,22 @@ describe('v1beta.OsLoginServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getLoginProfile with closed client', async () => {
+      const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oslogin.v1beta.GetLoginProfileRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getLoginProfile(request), expectedError);
+    });
   });
 
   describe('getSshPublicKey', () => {
@@ -575,6 +638,22 @@ describe('v1beta.OsLoginServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getSshPublicKey with closed client', async () => {
+      const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSshPublicKey(request), expectedError);
     });
   });
 
@@ -688,6 +767,22 @@ describe('v1beta.OsLoginServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes importSshPublicKey with closed client', async () => {
+      const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.importSshPublicKey(request), expectedError);
+    });
   });
 
   describe('updateSshPublicKey', () => {
@@ -799,6 +894,22 @@ describe('v1beta.OsLoginServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateSshPublicKey with closed client', async () => {
+      const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateSshPublicKey(request), expectedError);
     });
   });
 
