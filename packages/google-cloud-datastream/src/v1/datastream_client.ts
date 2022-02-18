@@ -4714,9 +4714,8 @@ export class DatastreamClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.datastreamStub!.then(stub => {
+    if (this.datastreamStub && !this._terminated) {
+      return this.datastreamStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

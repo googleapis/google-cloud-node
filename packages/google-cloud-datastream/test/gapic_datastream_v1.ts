@@ -188,12 +188,27 @@ describe('v1.DatastreamClient', () => {
     assert(client.datastreamStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new datastreamModule.v1.DatastreamClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.datastreamStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new datastreamModule.v1.DatastreamClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.datastreamStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -340,6 +355,22 @@ describe('v1.DatastreamClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getConnectionProfile with closed client', async () => {
+      const client = new datastreamModule.v1.DatastreamClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datastream.v1.GetConnectionProfileRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getConnectionProfile(request), expectedError);
+    });
   });
 
   describe('discoverConnectionProfile', () => {
@@ -455,6 +486,25 @@ describe('v1.DatastreamClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes discoverConnectionProfile with closed client', async () => {
+      const client = new datastreamModule.v1.DatastreamClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datastream.v1.DiscoverConnectionProfileRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.discoverConnectionProfile(request),
+        expectedError
+      );
+    });
   });
 
   describe('getStream', () => {
@@ -562,6 +612,22 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getStream with closed client', async () => {
+      const client = new datastreamModule.v1.DatastreamClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datastream.v1.GetStreamRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getStream(request), expectedError);
     });
   });
 
@@ -673,6 +739,22 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getStreamObject with closed client', async () => {
+      const client = new datastreamModule.v1.DatastreamClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datastream.v1.GetStreamObjectRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getStreamObject(request), expectedError);
     });
   });
 
@@ -786,6 +868,22 @@ describe('v1.DatastreamClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes lookupStreamObject with closed client', async () => {
+      const client = new datastreamModule.v1.DatastreamClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datastream.v1.LookupStreamObjectRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.lookupStreamObject(request), expectedError);
+    });
   });
 
   describe('startBackfillJob', () => {
@@ -897,6 +995,22 @@ describe('v1.DatastreamClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes startBackfillJob with closed client', async () => {
+      const client = new datastreamModule.v1.DatastreamClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datastream.v1.StartBackfillJobRequest()
+      );
+      request.object = '';
+      const expectedHeaderRequestParams = 'object=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.startBackfillJob(request), expectedError);
+    });
   });
 
   describe('stopBackfillJob', () => {
@@ -1007,6 +1121,22 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes stopBackfillJob with closed client', async () => {
+      const client = new datastreamModule.v1.DatastreamClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datastream.v1.StopBackfillJobRequest()
+      );
+      request.object = '';
+      const expectedHeaderRequestParams = 'object=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.stopBackfillJob(request), expectedError);
     });
   });
 
@@ -1120,6 +1250,22 @@ describe('v1.DatastreamClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getPrivateConnection with closed client', async () => {
+      const client = new datastreamModule.v1.DatastreamClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datastream.v1.GetPrivateConnectionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPrivateConnection(request), expectedError);
+    });
   });
 
   describe('getRoute', () => {
@@ -1227,6 +1373,22 @@ describe('v1.DatastreamClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getRoute with closed client', async () => {
+      const client = new datastreamModule.v1.DatastreamClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datastream.v1.GetRouteRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getRoute(request), expectedError);
     });
   });
 
