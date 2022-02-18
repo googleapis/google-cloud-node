@@ -1,0 +1,151 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-resourcesettings",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.resourcesettings.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "resourcesettings_v1_generated_ResourceSettingsService_ListSettings_async",
+      "title": "ResourceSettingsService listSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the settings that are available on the Cloud resource `parent`.",
+      "canonical": true,
+      "file": "resource_settings_service.list_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSettings",
+        "fullName": "google.cloud.resourcesettings.v1.ResourceSettingsService.ListSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.resourcesettings.v1.SettingView"
+          }
+        ],
+        "resultType": ".google.cloud.resourcesettings.v1.ListSettingsResponse",
+        "client": {
+          "shortName": "ResourceSettingsServiceClient",
+          "fullName": "google.cloud.resourcesettings.v1.ResourceSettingsServiceClient"
+        },
+        "method": {
+          "shortName": "ListSettings",
+          "fullName": "google.cloud.resourcesettings.v1.ResourceSettingsService.ListSettings",
+          "service": {
+            "shortName": "ResourceSettingsService",
+            "fullName": "google.cloud.resourcesettings.v1.ResourceSettingsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "resourcesettings_v1_generated_ResourceSettingsService_GetSetting_async",
+      "title": "ResourceSettingsService getSetting Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a setting. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the setting does not exist.",
+      "canonical": true,
+      "file": "resource_settings_service.get_setting.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSetting",
+        "fullName": "google.cloud.resourcesettings.v1.ResourceSettingsService.GetSetting",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.resourcesettings.v1.SettingView"
+          }
+        ],
+        "resultType": ".google.cloud.resourcesettings.v1.Setting",
+        "client": {
+          "shortName": "ResourceSettingsServiceClient",
+          "fullName": "google.cloud.resourcesettings.v1.ResourceSettingsServiceClient"
+        },
+        "method": {
+          "shortName": "GetSetting",
+          "fullName": "google.cloud.resourcesettings.v1.ResourceSettingsService.GetSetting",
+          "service": {
+            "shortName": "ResourceSettingsService",
+            "fullName": "google.cloud.resourcesettings.v1.ResourceSettingsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "resourcesettings_v1_generated_ResourceSettingsService_UpdateSetting_async",
+      "title": "ResourceSettingsService updateSetting Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a setting. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the setting does not exist. Returns a `google.rpc.Status` with `google.rpc.Code.FAILED_PRECONDITION` if the setting is flagged as read only. Returns a `google.rpc.Status` with `google.rpc.Code.ABORTED` if the etag supplied in the request does not match the persisted etag of the setting value. On success, the response will contain only `name`, `local_value` and `etag`.  The `metadata` and `effective_value` cannot be updated through this API. Note: the supplied setting will perform a full overwrite of the `local_value` field.",
+      "canonical": true,
+      "file": "resource_settings_service.update_setting.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 50,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSetting",
+        "fullName": "google.cloud.resourcesettings.v1.ResourceSettingsService.UpdateSetting",
+        "async": true,
+        "parameters": [
+          {
+            "name": "setting",
+            "type": ".google.cloud.resourcesettings.v1.Setting"
+          }
+        ],
+        "resultType": ".google.cloud.resourcesettings.v1.Setting",
+        "client": {
+          "shortName": "ResourceSettingsServiceClient",
+          "fullName": "google.cloud.resourcesettings.v1.ResourceSettingsServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateSetting",
+          "fullName": "google.cloud.resourcesettings.v1.ResourceSettingsService.UpdateSetting",
+          "service": {
+            "shortName": "ResourceSettingsService",
+            "fullName": "google.cloud.resourcesettings.v1.ResourceSettingsService"
+          }
+        }
+      }
+    }
+  ]
+}

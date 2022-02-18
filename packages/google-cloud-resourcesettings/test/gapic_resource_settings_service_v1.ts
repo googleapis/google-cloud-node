@@ -159,13 +159,29 @@ describe('v1.ResourceSettingsServiceClient', () => {
     assert(client.resourceSettingsServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.resourceSettingsServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.resourceSettingsServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -316,6 +332,23 @@ describe('v1.ResourceSettingsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getSetting with closed client', async () => {
+      const client =
+        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSetting(request), expectedError);
+    });
   });
 
   describe('updateSetting', () => {
@@ -432,6 +465,24 @@ describe('v1.ResourceSettingsServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateSetting with closed client', async () => {
+      const client =
+        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
+      );
+      request.setting = {};
+      request.setting.name = '';
+      const expectedHeaderRequestParams = 'setting.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateSetting(request), expectedError);
     });
   });
 

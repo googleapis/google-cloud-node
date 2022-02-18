@@ -890,9 +890,8 @@ export class ResourceSettingsServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.resourceSettingsServiceStub!.then(stub => {
+    if (this.resourceSettingsServiceStub && !this._terminated) {
+      return this.resourceSettingsServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
