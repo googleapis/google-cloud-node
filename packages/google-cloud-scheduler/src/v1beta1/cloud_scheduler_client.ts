@@ -1330,9 +1330,8 @@ export class CloudSchedulerClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.cloudSchedulerStub!.then(stub => {
+    if (this.cloudSchedulerStub && !this._terminated) {
+      return this.cloudSchedulerStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

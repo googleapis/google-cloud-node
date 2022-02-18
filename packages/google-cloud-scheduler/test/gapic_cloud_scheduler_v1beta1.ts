@@ -153,12 +153,27 @@ describe('v1beta1.CloudSchedulerClient', () => {
     assert(client.cloudSchedulerStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new cloudschedulerModule.v1beta1.CloudSchedulerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.cloudSchedulerStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new cloudschedulerModule.v1beta1.CloudSchedulerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.cloudSchedulerStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -301,6 +316,22 @@ describe('v1beta1.CloudSchedulerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getJob with closed client', async () => {
+      const client = new cloudschedulerModule.v1beta1.CloudSchedulerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.scheduler.v1beta1.GetJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getJob(request), expectedError);
+    });
   });
 
   describe('createJob', () => {
@@ -408,6 +439,22 @@ describe('v1beta1.CloudSchedulerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createJob with closed client', async () => {
+      const client = new cloudschedulerModule.v1beta1.CloudSchedulerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.scheduler.v1beta1.CreateJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createJob(request), expectedError);
     });
   });
 
@@ -520,6 +567,23 @@ describe('v1beta1.CloudSchedulerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateJob with closed client', async () => {
+      const client = new cloudschedulerModule.v1beta1.CloudSchedulerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.scheduler.v1beta1.UpdateJobRequest()
+      );
+      request.job = {};
+      request.job.name = '';
+      const expectedHeaderRequestParams = 'job.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateJob(request), expectedError);
+    });
   });
 
   describe('deleteJob', () => {
@@ -627,6 +691,22 @@ describe('v1beta1.CloudSchedulerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteJob with closed client', async () => {
+      const client = new cloudschedulerModule.v1beta1.CloudSchedulerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.scheduler.v1beta1.DeleteJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteJob(request), expectedError);
     });
   });
 
@@ -736,6 +816,22 @@ describe('v1beta1.CloudSchedulerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes pauseJob with closed client', async () => {
+      const client = new cloudschedulerModule.v1beta1.CloudSchedulerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.scheduler.v1beta1.PauseJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.pauseJob(request), expectedError);
+    });
   });
 
   describe('resumeJob', () => {
@@ -844,6 +940,22 @@ describe('v1beta1.CloudSchedulerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes resumeJob with closed client', async () => {
+      const client = new cloudschedulerModule.v1beta1.CloudSchedulerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.scheduler.v1beta1.ResumeJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.resumeJob(request), expectedError);
+    });
   });
 
   describe('runJob', () => {
@@ -951,6 +1063,22 @@ describe('v1beta1.CloudSchedulerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes runJob with closed client', async () => {
+      const client = new cloudschedulerModule.v1beta1.CloudSchedulerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.scheduler.v1beta1.RunJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.runJob(request), expectedError);
     });
   });
 
