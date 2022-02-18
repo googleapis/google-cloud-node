@@ -565,9 +565,8 @@ export class MessagesV1Beta3Client {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.messagesV1Beta3Stub!.then(stub => {
+    if (this.messagesV1Beta3Stub && !this._terminated) {
+      return this.messagesV1Beta3Stub.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -153,12 +153,27 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
     assert(client.messagesV1Beta3Stub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new messagesv1beta3Module.v1beta3.MessagesV1Beta3Client({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.messagesV1Beta3Stub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new messagesv1beta3Module.v1beta3.MessagesV1Beta3Client({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.messagesV1Beta3Stub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {

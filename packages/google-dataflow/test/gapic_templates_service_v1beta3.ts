@@ -90,12 +90,27 @@ describe('v1beta3.TemplatesServiceClient', () => {
     assert(client.templatesServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.templatesServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.templatesServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -245,6 +260,25 @@ describe('v1beta3.TemplatesServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createJobFromTemplate with closed client', async () => {
+      const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createJobFromTemplate(request),
+        expectedError
+      );
+    });
   });
 
   describe('launchTemplate', () => {
@@ -356,6 +390,22 @@ describe('v1beta3.TemplatesServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes launchTemplate with closed client', async () => {
+      const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.launchTemplate(request), expectedError);
+    });
   });
 
   describe('getTemplate', () => {
@@ -466,6 +516,22 @@ describe('v1beta3.TemplatesServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getTemplate with closed client', async () => {
+      const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.dataflow.v1beta3.GetTemplateRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTemplate(request), expectedError);
     });
   });
 });

@@ -153,12 +153,27 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
     assert(client.metricsV1Beta3Stub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.metricsV1Beta3Stub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.metricsV1Beta3Stub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -303,6 +318,22 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getJobMetrics with closed client', async () => {
+      const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getJobMetrics(request), expectedError);
     });
   });
 

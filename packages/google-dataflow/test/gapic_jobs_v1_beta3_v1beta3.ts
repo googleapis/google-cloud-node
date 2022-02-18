@@ -151,12 +151,27 @@ describe('v1beta3.JobsV1Beta3Client', () => {
     assert(client.jobsV1Beta3Stub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new jobsv1beta3Module.v1beta3.JobsV1Beta3Client({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.jobsV1Beta3Stub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new jobsv1beta3Module.v1beta3.JobsV1Beta3Client({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.jobsV1Beta3Stub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -299,6 +314,22 @@ describe('v1beta3.JobsV1Beta3Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createJob with closed client', async () => {
+      const client = new jobsv1beta3Module.v1beta3.JobsV1Beta3Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.dataflow.v1beta3.CreateJobRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createJob(request), expectedError);
+    });
   });
 
   describe('getJob', () => {
@@ -406,6 +437,22 @@ describe('v1beta3.JobsV1Beta3Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getJob with closed client', async () => {
+      const client = new jobsv1beta3Module.v1beta3.JobsV1Beta3Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.dataflow.v1beta3.GetJobRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getJob(request), expectedError);
     });
   });
 
@@ -515,6 +562,22 @@ describe('v1beta3.JobsV1Beta3Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateJob with closed client', async () => {
+      const client = new jobsv1beta3Module.v1beta3.JobsV1Beta3Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.dataflow.v1beta3.UpdateJobRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateJob(request), expectedError);
+    });
   });
 
   describe('checkActiveJobs', () => {
@@ -601,6 +664,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkActiveJobs with closed client', async () => {
+      const client = new jobsv1beta3Module.v1beta3.JobsV1Beta3Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.dataflow.v1beta3.CheckActiveJobsRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.checkActiveJobs(request), expectedError);
     });
   });
 
@@ -712,6 +789,22 @@ describe('v1beta3.JobsV1Beta3Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes snapshotJob with closed client', async () => {
+      const client = new jobsv1beta3Module.v1beta3.JobsV1Beta3Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.dataflow.v1beta3.SnapshotJobRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.snapshotJob(request), expectedError);
     });
   });
 
