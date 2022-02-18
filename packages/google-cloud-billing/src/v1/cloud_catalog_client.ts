@@ -807,9 +807,8 @@ export class CloudCatalogClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.cloudCatalogStub!.then(stub => {
+    if (this.cloudCatalogStub && !this._terminated) {
+      return this.cloudCatalogStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
