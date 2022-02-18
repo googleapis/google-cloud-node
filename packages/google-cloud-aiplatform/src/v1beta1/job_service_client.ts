@@ -4181,7 +4181,7 @@ export class JobServiceClient {
    * @param {string} request.modelDeploymentMonitoringJob
    *   Required. ModelDeploymentMonitoring Job resource name.
    *   Format:
-   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
    * @param {string} request.deployedModelId
    *   Required. The DeployedModel ID of the
    *   [ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
@@ -4304,7 +4304,7 @@ export class JobServiceClient {
    * @param {string} request.modelDeploymentMonitoringJob
    *   Required. ModelDeploymentMonitoring Job resource name.
    *   Format:
-   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
    * @param {string} request.deployedModelId
    *   Required. The DeployedModel ID of the
    *   [ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
@@ -4373,7 +4373,7 @@ export class JobServiceClient {
    * @param {string} request.modelDeploymentMonitoringJob
    *   Required. ModelDeploymentMonitoring Job resource name.
    *   Format:
-   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
    * @param {string} request.deployedModelId
    *   Required. The DeployedModel ID of the
    *   [ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].

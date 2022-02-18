@@ -23,7 +23,7 @@ function main(modelDeploymentMonitoringJob, deployedModelId, objectives) {
   /**
    *  Required. ModelDeploymentMonitoring Job resource name.
    *  Format:
-   *  `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}
+   *  `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
    */
   // const modelDeploymentMonitoringJob = 'abc123'
   /**
