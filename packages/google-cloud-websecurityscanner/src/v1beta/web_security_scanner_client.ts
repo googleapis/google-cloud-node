@@ -2274,9 +2274,8 @@ export class WebSecurityScannerClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.webSecurityScannerStub!.then(stub => {
+    if (this.webSecurityScannerStub && !this._terminated) {
+      return this.webSecurityScannerStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

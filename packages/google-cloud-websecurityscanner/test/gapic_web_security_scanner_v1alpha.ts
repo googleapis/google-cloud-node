@@ -156,13 +156,29 @@ describe('v1alpha.WebSecurityScannerClient', () => {
     assert(client.webSecurityScannerStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new websecurityscannerModule.v1alpha.WebSecurityScannerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.webSecurityScannerStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new websecurityscannerModule.v1alpha.WebSecurityScannerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.webSecurityScannerStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -313,6 +329,23 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createScanConfig with closed client', async () => {
+      const client =
+        new websecurityscannerModule.v1alpha.WebSecurityScannerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createScanConfig(request), expectedError);
+    });
   });
 
   describe('deleteScanConfig', () => {
@@ -427,6 +460,23 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteScanConfig with closed client', async () => {
+      const client =
+        new websecurityscannerModule.v1alpha.WebSecurityScannerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteScanConfig(request), expectedError);
+    });
   });
 
   describe('getScanConfig', () => {
@@ -540,6 +590,23 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getScanConfig with closed client', async () => {
+      const client =
+        new websecurityscannerModule.v1alpha.WebSecurityScannerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getScanConfig(request), expectedError);
     });
   });
 
@@ -658,6 +725,24 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateScanConfig with closed client', async () => {
+      const client =
+        new websecurityscannerModule.v1alpha.WebSecurityScannerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
+      );
+      request.scanConfig = {};
+      request.scanConfig.name = '';
+      const expectedHeaderRequestParams = 'scan_config.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateScanConfig(request), expectedError);
+    });
   });
 
   describe('startScanRun', () => {
@@ -771,6 +856,23 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes startScanRun with closed client', async () => {
+      const client =
+        new websecurityscannerModule.v1alpha.WebSecurityScannerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.startScanRun(request), expectedError);
     });
   });
 
@@ -886,6 +988,23 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getScanRun with closed client', async () => {
+      const client =
+        new websecurityscannerModule.v1alpha.WebSecurityScannerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getScanRun(request), expectedError);
+    });
   });
 
   describe('stopScanRun', () => {
@@ -999,6 +1118,23 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes stopScanRun with closed client', async () => {
+      const client =
+        new websecurityscannerModule.v1alpha.WebSecurityScannerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.stopScanRun(request), expectedError);
     });
   });
 
@@ -1114,6 +1250,23 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getFinding with closed client', async () => {
+      const client =
+        new websecurityscannerModule.v1alpha.WebSecurityScannerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getFinding(request), expectedError);
+    });
   });
 
   describe('listFindingTypeStats', () => {
@@ -1228,6 +1381,23 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes listFindingTypeStats with closed client', async () => {
+      const client =
+        new websecurityscannerModule.v1alpha.WebSecurityScannerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listFindingTypeStats(request), expectedError);
     });
   });
 
