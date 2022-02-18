@@ -153,12 +153,27 @@ describe('v1.RegistrationServiceClient', () => {
     assert(client.registrationServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new registrationserviceModule.v1.RegistrationServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.registrationServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new registrationserviceModule.v1.RegistrationServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.registrationServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -310,6 +325,24 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createNamespace with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.servicedirectory.v1.CreateNamespaceRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createNamespace(request), expectedError);
+    });
   });
 
   describe('getNamespace', () => {
@@ -426,6 +459,24 @@ describe('v1.RegistrationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getNamespace with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.servicedirectory.v1.GetNamespaceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getNamespace(request), expectedError);
     });
   });
 
@@ -547,6 +598,25 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateNamespace with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.servicedirectory.v1.UpdateNamespaceRequest()
+      );
+      request.namespace = {};
+      request.namespace.name = '';
+      const expectedHeaderRequestParams = 'namespace.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateNamespace(request), expectedError);
+    });
   });
 
   describe('deleteNamespace', () => {
@@ -663,6 +733,24 @@ describe('v1.RegistrationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteNamespace with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.servicedirectory.v1.DeleteNamespaceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteNamespace(request), expectedError);
     });
   });
 
@@ -781,6 +869,24 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createService with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.servicedirectory.v1.CreateServiceRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createService(request), expectedError);
+    });
   });
 
   describe('getService', () => {
@@ -897,6 +1003,24 @@ describe('v1.RegistrationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getService with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.servicedirectory.v1.GetServiceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getService(request), expectedError);
     });
   });
 
@@ -1018,6 +1142,25 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateService with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.servicedirectory.v1.UpdateServiceRequest()
+      );
+      request.service = {};
+      request.service.name = '';
+      const expectedHeaderRequestParams = 'service.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateService(request), expectedError);
+    });
   });
 
   describe('deleteService', () => {
@@ -1134,6 +1277,24 @@ describe('v1.RegistrationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteService with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.servicedirectory.v1.DeleteServiceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteService(request), expectedError);
     });
   });
 
@@ -1252,6 +1413,24 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createEndpoint with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.servicedirectory.v1.CreateEndpointRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createEndpoint(request), expectedError);
+    });
   });
 
   describe('getEndpoint', () => {
@@ -1368,6 +1547,24 @@ describe('v1.RegistrationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getEndpoint with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.servicedirectory.v1.GetEndpointRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEndpoint(request), expectedError);
     });
   });
 
@@ -1489,6 +1686,25 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateEndpoint with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.servicedirectory.v1.UpdateEndpointRequest()
+      );
+      request.endpoint = {};
+      request.endpoint.name = '';
+      const expectedHeaderRequestParams = 'endpoint.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateEndpoint(request), expectedError);
+    });
   });
 
   describe('deleteEndpoint', () => {
@@ -1605,6 +1821,24 @@ describe('v1.RegistrationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteEndpoint with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.servicedirectory.v1.DeleteEndpointRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteEndpoint(request), expectedError);
     });
   });
 
@@ -1723,6 +1957,24 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
+    });
   });
 
   describe('setIamPolicy', () => {
@@ -1839,6 +2091,24 @@ describe('v1.RegistrationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
 
@@ -1957,6 +2227,24 @@ describe('v1.RegistrationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client = new registrationserviceModule.v1.RegistrationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
 

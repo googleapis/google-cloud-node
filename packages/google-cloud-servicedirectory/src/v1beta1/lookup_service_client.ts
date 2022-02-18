@@ -648,9 +648,8 @@ export class LookupServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.lookupServiceStub!.then(stub => {
+    if (this.lookupServiceStub && !this._terminated) {
+      return this.lookupServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
