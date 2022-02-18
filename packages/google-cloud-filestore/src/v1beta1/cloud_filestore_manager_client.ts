@@ -2301,9 +2301,8 @@ export class CloudFilestoreManagerClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.cloudFilestoreManagerStub!.then(stub => {
+    if (this.cloudFilestoreManagerStub && !this._terminated) {
+      return this.cloudFilestoreManagerStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

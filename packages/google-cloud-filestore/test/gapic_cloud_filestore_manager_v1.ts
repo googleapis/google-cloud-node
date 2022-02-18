@@ -189,13 +189,29 @@ describe('v1.CloudFilestoreManagerClient', () => {
     assert(client.cloudFilestoreManagerStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.cloudFilestoreManagerStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.cloudFilestoreManagerStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -346,6 +362,23 @@ describe('v1.CloudFilestoreManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getInstance with closed client', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.GetInstanceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getInstance(request), expectedError);
+    });
   });
 
   describe('getBackup', () => {
@@ -456,6 +489,23 @@ describe('v1.CloudFilestoreManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getBackup with closed client', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.GetBackupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBackup(request), expectedError);
     });
   });
 
