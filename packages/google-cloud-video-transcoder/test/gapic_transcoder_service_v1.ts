@@ -153,12 +153,27 @@ describe('v1.TranscoderServiceClient', () => {
     assert(client.transcoderServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new transcoderserviceModule.v1.TranscoderServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.transcoderServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.transcoderServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -301,6 +316,22 @@ describe('v1.TranscoderServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createJob with closed client', async () => {
+      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createJob(request), expectedError);
+    });
   });
 
   describe('getJob', () => {
@@ -409,6 +440,22 @@ describe('v1.TranscoderServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getJob with closed client', async () => {
+      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.transcoder.v1.GetJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getJob(request), expectedError);
+    });
   });
 
   describe('deleteJob', () => {
@@ -516,6 +563,22 @@ describe('v1.TranscoderServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteJob with closed client', async () => {
+      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteJob(request), expectedError);
     });
   });
 
@@ -628,6 +691,22 @@ describe('v1.TranscoderServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createJobTemplate with closed client', async () => {
+      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createJobTemplate(request), expectedError);
+    });
   });
 
   describe('getJobTemplate', () => {
@@ -739,6 +818,22 @@ describe('v1.TranscoderServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getJobTemplate with closed client', async () => {
+      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getJobTemplate(request), expectedError);
+    });
   });
 
   describe('deleteJobTemplate', () => {
@@ -849,6 +944,22 @@ describe('v1.TranscoderServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteJobTemplate with closed client', async () => {
+      const client = new transcoderserviceModule.v1.TranscoderServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteJobTemplate(request), expectedError);
     });
   });
 
