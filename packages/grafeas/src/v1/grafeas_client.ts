@@ -1989,9 +1989,8 @@ export class GrafeasClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.grafeasStub!.then(stub => {
+    if (this.grafeasStub && !this._terminated) {
+      return this.grafeasStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
