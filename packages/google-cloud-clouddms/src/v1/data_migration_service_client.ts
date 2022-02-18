@@ -3207,9 +3207,8 @@ export class DataMigrationServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.dataMigrationServiceStub!.then(stub => {
+    if (this.dataMigrationServiceStub && !this._terminated) {
+      return this.dataMigrationServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

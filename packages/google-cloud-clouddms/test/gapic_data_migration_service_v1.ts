@@ -190,14 +190,31 @@ describe('v1.DataMigrationServiceClient', () => {
     assert(client.dataMigrationServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new datamigrationserviceModule.v1.DataMigrationServiceClient(
       {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       }
     );
-    client.close();
+    client.initialize();
+    assert(client.dataMigrationServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new datamigrationserviceModule.v1.DataMigrationServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.dataMigrationServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -350,6 +367,23 @@ describe('v1.DataMigrationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getMigrationJob with closed client', async () => {
+      const client =
+        new datamigrationserviceModule.v1.DataMigrationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.clouddms.v1.GetMigrationJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getMigrationJob(request), expectedError);
+    });
   });
 
   describe('generateSshScript', () => {
@@ -463,6 +497,23 @@ describe('v1.DataMigrationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes generateSshScript with closed client', async () => {
+      const client =
+        new datamigrationserviceModule.v1.DataMigrationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.clouddms.v1.GenerateSshScriptRequest()
+      );
+      request.migrationJob = '';
+      const expectedHeaderRequestParams = 'migration_job=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.generateSshScript(request), expectedError);
     });
   });
 
@@ -578,6 +629,23 @@ describe('v1.DataMigrationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getConnectionProfile with closed client', async () => {
+      const client =
+        new datamigrationserviceModule.v1.DataMigrationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.clouddms.v1.GetConnectionProfileRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getConnectionProfile(request), expectedError);
     });
   });
 
