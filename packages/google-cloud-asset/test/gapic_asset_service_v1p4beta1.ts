@@ -122,12 +122,27 @@ describe('v1p4beta1.AssetServiceClient', () => {
     assert(client.assetServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new assetserviceModule.v1p4beta1.AssetServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.assetServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new assetserviceModule.v1p4beta1.AssetServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.assetServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -275,6 +290,23 @@ describe('v1p4beta1.AssetServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes analyzeIamPolicy with closed client', async () => {
+      const client = new assetserviceModule.v1p4beta1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest()
+      );
+      request.analysisQuery = {};
+      request.analysisQuery.parent = '';
+      const expectedHeaderRequestParams = 'analysis_query.parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.analyzeIamPolicy(request), expectedError);
     });
   });
 
