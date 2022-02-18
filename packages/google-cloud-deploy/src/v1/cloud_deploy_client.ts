@@ -3707,9 +3707,8 @@ export class CloudDeployClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.cloudDeployStub!.then(stub => {
+    if (this.cloudDeployStub && !this._terminated) {
+      return this.cloudDeployStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

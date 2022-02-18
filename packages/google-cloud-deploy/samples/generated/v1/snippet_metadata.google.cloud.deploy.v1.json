@@ -1,0 +1,935 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-deploy",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.deploy.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_ListDeliveryPipelines_async",
+      "title": "CloudDeploy listDeliveryPipelines Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists DeliveryPipelines in a given project and location.",
+      "canonical": true,
+      "file": "cloud_deploy.list_delivery_pipelines.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDeliveryPipelines",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.ListDeliveryPipelines",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.deploy.v1.ListDeliveryPipelinesResponse",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "ListDeliveryPipelines",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.ListDeliveryPipelines",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_GetDeliveryPipeline_async",
+      "title": "CloudDeploy getDeliveryPipeline Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single DeliveryPipeline.",
+      "canonical": true,
+      "file": "cloud_deploy.get_delivery_pipeline.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDeliveryPipeline",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.GetDeliveryPipeline",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.deploy.v1.DeliveryPipeline",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "GetDeliveryPipeline",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.GetDeliveryPipeline",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_CreateDeliveryPipeline_async",
+      "title": "CloudDeploy createDeliveryPipeline Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new DeliveryPipeline in a given project and location.",
+      "canonical": true,
+      "file": "cloud_deploy.create_delivery_pipeline.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDeliveryPipeline",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.CreateDeliveryPipeline",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "delivery_pipeline_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "delivery_pipeline",
+            "type": ".google.cloud.deploy.v1.DeliveryPipeline"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "CreateDeliveryPipeline",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.CreateDeliveryPipeline",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_UpdateDeliveryPipeline_async",
+      "title": "CloudDeploy updateDeliveryPipeline Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single DeliveryPipeline.",
+      "canonical": true,
+      "file": "cloud_deploy.update_delivery_pipeline.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDeliveryPipeline",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.UpdateDeliveryPipeline",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "delivery_pipeline",
+            "type": ".google.cloud.deploy.v1.DeliveryPipeline"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "UpdateDeliveryPipeline",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.UpdateDeliveryPipeline",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_DeleteDeliveryPipeline_async",
+      "title": "CloudDeploy deleteDeliveryPipeline Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single DeliveryPipeline.",
+      "canonical": true,
+      "file": "cloud_deploy.delete_delivery_pipeline.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 88,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDeliveryPipeline",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.DeleteDeliveryPipeline",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "DeleteDeliveryPipeline",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.DeleteDeliveryPipeline",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_ListTargets_async",
+      "title": "CloudDeploy listTargets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Targets in a given project and location.",
+      "canonical": true,
+      "file": "cloud_deploy.list_targets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTargets",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.ListTargets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.deploy.v1.ListTargetsResponse",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "ListTargets",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.ListTargets",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_GetTarget_async",
+      "title": "CloudDeploy getTarget Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Target.",
+      "canonical": true,
+      "file": "cloud_deploy.get_target.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTarget",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.GetTarget",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.deploy.v1.Target",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "GetTarget",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.GetTarget",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_CreateTarget_async",
+      "title": "CloudDeploy createTarget Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Target in a given project and location.",
+      "canonical": true,
+      "file": "cloud_deploy.create_target.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTarget",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.CreateTarget",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "target_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "target",
+            "type": ".google.cloud.deploy.v1.Target"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "CreateTarget",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.CreateTarget",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_UpdateTarget_async",
+      "title": "CloudDeploy updateTarget Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Target.",
+      "canonical": true,
+      "file": "cloud_deploy.update_target.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTarget",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.UpdateTarget",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "target",
+            "type": ".google.cloud.deploy.v1.Target"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "UpdateTarget",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.UpdateTarget",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_DeleteTarget_async",
+      "title": "CloudDeploy deleteTarget Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Target.",
+      "canonical": true,
+      "file": "cloud_deploy.delete_target.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTarget",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.DeleteTarget",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "DeleteTarget",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.DeleteTarget",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_ListReleases_async",
+      "title": "CloudDeploy listReleases Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Releases in a given project and location.",
+      "canonical": true,
+      "file": "cloud_deploy.list_releases.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListReleases",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.ListReleases",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.deploy.v1.ListReleasesResponse",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "ListReleases",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.ListReleases",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_GetRelease_async",
+      "title": "CloudDeploy getRelease Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Release.",
+      "canonical": true,
+      "file": "cloud_deploy.get_release.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRelease",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.GetRelease",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.deploy.v1.Release",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "GetRelease",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.GetRelease",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_CreateRelease_async",
+      "title": "CloudDeploy createRelease Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Release in a given project and location.",
+      "canonical": true,
+      "file": "cloud_deploy.create_release.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateRelease",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.CreateRelease",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "release_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "release",
+            "type": ".google.cloud.deploy.v1.Release"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "CreateRelease",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.CreateRelease",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_ApproveRollout_async",
+      "title": "CloudDeploy approveRollout Sample",
+      "origin": "API_DEFINITION",
+      "description": " Approves a Rollout.",
+      "canonical": true,
+      "file": "cloud_deploy.approve_rollout.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ApproveRollout",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.ApproveRollout",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "approved",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.deploy.v1.ApproveRolloutResponse",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "ApproveRollout",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.ApproveRollout",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_ListRollouts_async",
+      "title": "CloudDeploy listRollouts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Rollouts in a given project and location.",
+      "canonical": true,
+      "file": "cloud_deploy.list_rollouts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRollouts",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.ListRollouts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.deploy.v1.ListRolloutsResponse",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "ListRollouts",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.ListRollouts",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_GetRollout_async",
+      "title": "CloudDeploy getRollout Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Rollout.",
+      "canonical": true,
+      "file": "cloud_deploy.get_rollout.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRollout",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.GetRollout",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.deploy.v1.Rollout",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "GetRollout",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.GetRollout",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_CreateRollout_async",
+      "title": "CloudDeploy createRollout Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Rollout in a given project and location.",
+      "canonical": true,
+      "file": "cloud_deploy.create_rollout.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateRollout",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.CreateRollout",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout",
+            "type": ".google.cloud.deploy.v1.Rollout"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "CreateRollout",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.CreateRollout",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "clouddeploy_v1_generated_CloudDeploy_GetConfig_async",
+      "title": "CloudDeploy getConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the configuration for a location.",
+      "canonical": true,
+      "file": "cloud_deploy.get_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 50,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConfig",
+        "fullName": "google.cloud.deploy.v1.CloudDeploy.GetConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.deploy.v1.Config",
+        "client": {
+          "shortName": "CloudDeployClient",
+          "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+        },
+        "method": {
+          "shortName": "GetConfig",
+          "fullName": "google.cloud.deploy.v1.CloudDeploy.GetConfig",
+          "service": {
+            "shortName": "CloudDeploy",
+            "fullName": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      }
+    }
+  ]
+}
