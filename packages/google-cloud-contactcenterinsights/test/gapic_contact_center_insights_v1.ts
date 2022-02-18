@@ -189,13 +189,29 @@ describe('v1.ContactCenterInsightsClient', () => {
     assert(client.contactCenterInsightsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.contactCenterInsightsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.contactCenterInsightsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -347,6 +363,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createConversation with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createConversation(request), expectedError);
+    });
   });
 
   describe('updateConversation', () => {
@@ -465,6 +498,24 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateConversation with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
+      );
+      request.conversation = {};
+      request.conversation.name = '';
+      const expectedHeaderRequestParams = 'conversation.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateConversation(request), expectedError);
+    });
   });
 
   describe('getConversation', () => {
@@ -578,6 +629,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getConversation with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getConversation(request), expectedError);
     });
   });
 
@@ -694,6 +762,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteConversation with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteConversation(request), expectedError);
+    });
   });
 
   describe('getAnalysis', () => {
@@ -808,6 +893,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getAnalysis with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAnalysis(request), expectedError);
+    });
   });
 
   describe('deleteAnalysis', () => {
@@ -921,6 +1023,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteAnalysis with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteAnalysis(request), expectedError);
     });
   });
 
@@ -1039,6 +1158,24 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateIssueModel with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
+      );
+      request.issueModel = {};
+      request.issueModel.name = '';
+      const expectedHeaderRequestParams = 'issue_model.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateIssueModel(request), expectedError);
+    });
   });
 
   describe('getIssueModel', () => {
@@ -1152,6 +1289,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getIssueModel with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIssueModel(request), expectedError);
     });
   });
 
@@ -1267,6 +1421,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes listIssueModels with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listIssueModels(request), expectedError);
+    });
   });
 
   describe('getIssue', () => {
@@ -1377,6 +1548,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getIssue with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIssue(request), expectedError);
     });
   });
 
@@ -1491,6 +1679,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes listIssues with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listIssues(request), expectedError);
     });
   });
 
@@ -1608,6 +1813,24 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateIssue with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
+      );
+      request.issue = {};
+      request.issue.name = '';
+      const expectedHeaderRequestParams = 'issue.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateIssue(request), expectedError);
     });
   });
 
@@ -1727,6 +1950,26 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes calculateIssueModelStats with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
+      );
+      request.issueModel = '';
+      const expectedHeaderRequestParams = 'issue_model=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.calculateIssueModelStats(request),
+        expectedError
+      );
+    });
   });
 
   describe('createPhraseMatcher', () => {
@@ -1842,6 +2085,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createPhraseMatcher with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createPhraseMatcher(request), expectedError);
+    });
   });
 
   describe('getPhraseMatcher', () => {
@@ -1955,6 +2215,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getPhraseMatcher with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPhraseMatcher(request), expectedError);
     });
   });
 
@@ -2070,6 +2347,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deletePhraseMatcher with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deletePhraseMatcher(request), expectedError);
     });
   });
 
@@ -2189,6 +2483,24 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updatePhraseMatcher with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
+      );
+      request.phraseMatcher = {};
+      request.phraseMatcher.name = '';
+      const expectedHeaderRequestParams = 'phrase_matcher.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updatePhraseMatcher(request), expectedError);
+    });
   });
 
   describe('calculateStats', () => {
@@ -2303,6 +2615,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes calculateStats with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
+      );
+      request.location = '';
+      const expectedHeaderRequestParams = 'location=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.calculateStats(request), expectedError);
+    });
   });
 
   describe('getSettings', () => {
@@ -2416,6 +2745,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getSettings with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSettings(request), expectedError);
     });
   });
 
@@ -2534,6 +2880,24 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateSettings with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
+      );
+      request.settings = {};
+      request.settings.name = '';
+      const expectedHeaderRequestParams = 'settings.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateSettings(request), expectedError);
+    });
   });
 
   describe('createView', () => {
@@ -2648,6 +3012,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createView with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createView(request), expectedError);
+    });
   });
 
   describe('getView', () => {
@@ -2758,6 +3139,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getView with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getView(request), expectedError);
     });
   });
 
@@ -2876,6 +3274,24 @@ describe('v1.ContactCenterInsightsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateView with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
+      );
+      request.view = {};
+      request.view.name = '';
+      const expectedHeaderRequestParams = 'view.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateView(request), expectedError);
+    });
   });
 
   describe('deleteView', () => {
@@ -2989,6 +3405,23 @@ describe('v1.ContactCenterInsightsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteView with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteView(request), expectedError);
     });
   });
 
