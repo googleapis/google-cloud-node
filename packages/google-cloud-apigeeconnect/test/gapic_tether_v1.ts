@@ -89,12 +89,27 @@ describe('v1.TetherClient', () => {
     assert(client.tetherStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new tetherModule.v1.TetherClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.tetherStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new tetherModule.v1.TetherClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.tetherStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
