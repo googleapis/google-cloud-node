@@ -1548,9 +1548,8 @@ export class GkeHubClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.gkeHubStub!.then(stub => {
+    if (this.gkeHubStub && !this._terminated) {
+      return this.gkeHubStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

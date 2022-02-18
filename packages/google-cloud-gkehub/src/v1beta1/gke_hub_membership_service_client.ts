@@ -1646,9 +1646,8 @@ export class GkeHubMembershipServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.gkeHubMembershipServiceStub!.then(stub => {
+    if (this.gkeHubMembershipServiceStub && !this._terminated) {
+      return this.gkeHubMembershipServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

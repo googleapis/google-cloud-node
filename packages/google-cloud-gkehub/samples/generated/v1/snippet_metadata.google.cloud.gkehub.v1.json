@@ -1,0 +1,571 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-gkehub",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.gkehub.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "gkehub_v1_generated_GkeHub_ListMemberships_async",
+      "title": "GkeHub listMemberships Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Memberships in a given project and location.",
+      "canonical": true,
+      "file": "gke_hub.list_memberships.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMemberships",
+        "fullName": "google.cloud.gkehub.v1.GkeHub.ListMemberships",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gkehub.v1.ListMembershipsResponse",
+        "client": {
+          "shortName": "GkeHubClient",
+          "fullName": "google.cloud.gkehub.v1.GkeHubClient"
+        },
+        "method": {
+          "shortName": "ListMemberships",
+          "fullName": "google.cloud.gkehub.v1.GkeHub.ListMemberships",
+          "service": {
+            "shortName": "GkeHub",
+            "fullName": "google.cloud.gkehub.v1.GkeHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkehub_v1_generated_GkeHub_ListFeatures_async",
+      "title": "GkeHub listFeatures Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Features in a given project and location.",
+      "canonical": true,
+      "file": "gke_hub.list_features.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListFeatures",
+        "fullName": "google.cloud.gkehub.v1.GkeHub.ListFeatures",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gkehub.v1.ListFeaturesResponse",
+        "client": {
+          "shortName": "GkeHubClient",
+          "fullName": "google.cloud.gkehub.v1.GkeHubClient"
+        },
+        "method": {
+          "shortName": "ListFeatures",
+          "fullName": "google.cloud.gkehub.v1.GkeHub.ListFeatures",
+          "service": {
+            "shortName": "GkeHub",
+            "fullName": "google.cloud.gkehub.v1.GkeHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkehub_v1_generated_GkeHub_GetMembership_async",
+      "title": "GkeHub getMembership Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a Membership.",
+      "canonical": true,
+      "file": "gke_hub.get_membership.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMembership",
+        "fullName": "google.cloud.gkehub.v1.GkeHub.GetMembership",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gkehub.v1.Membership",
+        "client": {
+          "shortName": "GkeHubClient",
+          "fullName": "google.cloud.gkehub.v1.GkeHubClient"
+        },
+        "method": {
+          "shortName": "GetMembership",
+          "fullName": "google.cloud.gkehub.v1.GkeHub.GetMembership",
+          "service": {
+            "shortName": "GkeHub",
+            "fullName": "google.cloud.gkehub.v1.GkeHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkehub_v1_generated_GkeHub_GetFeature_async",
+      "title": "GkeHub getFeature Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Feature.",
+      "canonical": true,
+      "file": "gke_hub.get_feature.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 50,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetFeature",
+        "fullName": "google.cloud.gkehub.v1.GkeHub.GetFeature",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gkehub.v1.Feature",
+        "client": {
+          "shortName": "GkeHubClient",
+          "fullName": "google.cloud.gkehub.v1.GkeHubClient"
+        },
+        "method": {
+          "shortName": "GetFeature",
+          "fullName": "google.cloud.gkehub.v1.GkeHub.GetFeature",
+          "service": {
+            "shortName": "GkeHub",
+            "fullName": "google.cloud.gkehub.v1.GkeHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkehub_v1_generated_GkeHub_CreateMembership_async",
+      "title": "GkeHub createMembership Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Membership. **This is currently only supported for GKE clusters on Google Cloud**. To register other clusters, follow the instructions at https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster.",
+      "canonical": true,
+      "file": "gke_hub.create_membership.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateMembership",
+        "fullName": "google.cloud.gkehub.v1.GkeHub.CreateMembership",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "membership_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": ".google.cloud.gkehub.v1.Membership"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GkeHubClient",
+          "fullName": "google.cloud.gkehub.v1.GkeHubClient"
+        },
+        "method": {
+          "shortName": "CreateMembership",
+          "fullName": "google.cloud.gkehub.v1.GkeHub.CreateMembership",
+          "service": {
+            "shortName": "GkeHub",
+            "fullName": "google.cloud.gkehub.v1.GkeHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkehub_v1_generated_GkeHub_CreateFeature_async",
+      "title": "GkeHub createFeature Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds a new Feature.",
+      "canonical": true,
+      "file": "gke_hub.create_feature.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateFeature",
+        "fullName": "google.cloud.gkehub.v1.GkeHub.CreateFeature",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "feature_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": ".google.cloud.gkehub.v1.Feature"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GkeHubClient",
+          "fullName": "google.cloud.gkehub.v1.GkeHubClient"
+        },
+        "method": {
+          "shortName": "CreateFeature",
+          "fullName": "google.cloud.gkehub.v1.GkeHub.CreateFeature",
+          "service": {
+            "shortName": "GkeHub",
+            "fullName": "google.cloud.gkehub.v1.GkeHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkehub_v1_generated_GkeHub_DeleteMembership_async",
+      "title": "GkeHub deleteMembership Sample",
+      "origin": "API_DEFINITION",
+      "description": " Removes a Membership. **This is currently only supported for GKE clusters on Google Cloud**. To unregister other clusters, follow the instructions at https://cloud.google.com/anthos/multicluster-management/connect/unregistering-a-cluster.",
+      "canonical": true,
+      "file": "gke_hub.delete_membership.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteMembership",
+        "fullName": "google.cloud.gkehub.v1.GkeHub.DeleteMembership",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GkeHubClient",
+          "fullName": "google.cloud.gkehub.v1.GkeHubClient"
+        },
+        "method": {
+          "shortName": "DeleteMembership",
+          "fullName": "google.cloud.gkehub.v1.GkeHub.DeleteMembership",
+          "service": {
+            "shortName": "GkeHub",
+            "fullName": "google.cloud.gkehub.v1.GkeHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkehub_v1_generated_GkeHub_DeleteFeature_async",
+      "title": "GkeHub deleteFeature Sample",
+      "origin": "API_DEFINITION",
+      "description": " Removes a Feature.",
+      "canonical": true,
+      "file": "gke_hub.delete_feature.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteFeature",
+        "fullName": "google.cloud.gkehub.v1.GkeHub.DeleteFeature",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GkeHubClient",
+          "fullName": "google.cloud.gkehub.v1.GkeHubClient"
+        },
+        "method": {
+          "shortName": "DeleteFeature",
+          "fullName": "google.cloud.gkehub.v1.GkeHub.DeleteFeature",
+          "service": {
+            "shortName": "GkeHub",
+            "fullName": "google.cloud.gkehub.v1.GkeHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkehub_v1_generated_GkeHub_UpdateMembership_async",
+      "title": "GkeHub updateMembership Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an existing Membership.",
+      "canonical": true,
+      "file": "gke_hub.update_membership.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateMembership",
+        "fullName": "google.cloud.gkehub.v1.GkeHub.UpdateMembership",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "resource",
+            "type": ".google.cloud.gkehub.v1.Membership"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GkeHubClient",
+          "fullName": "google.cloud.gkehub.v1.GkeHubClient"
+        },
+        "method": {
+          "shortName": "UpdateMembership",
+          "fullName": "google.cloud.gkehub.v1.GkeHub.UpdateMembership",
+          "service": {
+            "shortName": "GkeHub",
+            "fullName": "google.cloud.gkehub.v1.GkeHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkehub_v1_generated_GkeHub_UpdateFeature_async",
+      "title": "GkeHub updateFeature Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an existing Feature.",
+      "canonical": true,
+      "file": "gke_hub.update_feature.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateFeature",
+        "fullName": "google.cloud.gkehub.v1.GkeHub.UpdateFeature",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "resource",
+            "type": ".google.cloud.gkehub.v1.Feature"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GkeHubClient",
+          "fullName": "google.cloud.gkehub.v1.GkeHubClient"
+        },
+        "method": {
+          "shortName": "UpdateFeature",
+          "fullName": "google.cloud.gkehub.v1.GkeHub.UpdateFeature",
+          "service": {
+            "shortName": "GkeHub",
+            "fullName": "google.cloud.gkehub.v1.GkeHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gkehub_v1_generated_GkeHub_GenerateConnectManifest_async",
+      "title": "GkeHub generateConnectManifest Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generates the manifest for deployment of the GKE connect agent. **This method is used internally by Google-provided libraries.** Most clients should not need to call this method directly.",
+      "canonical": true,
+      "file": "gke_hub.generate_connect_manifest.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateConnectManifest",
+        "fullName": "google.cloud.gkehub.v1.GkeHub.GenerateConnectManifest",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "namespace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "proxy",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "version",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "is_upgrade",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "registry",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "image_pull_secret_content",
+            "type": "TYPE_BYTES"
+          }
+        ],
+        "resultType": ".google.cloud.gkehub.v1.GenerateConnectManifestResponse",
+        "client": {
+          "shortName": "GkeHubClient",
+          "fullName": "google.cloud.gkehub.v1.GkeHubClient"
+        },
+        "method": {
+          "shortName": "GenerateConnectManifest",
+          "fullName": "google.cloud.gkehub.v1.GkeHub.GenerateConnectManifest",
+          "service": {
+            "shortName": "GkeHub",
+            "fullName": "google.cloud.gkehub.v1.GkeHub"
+          }
+        }
+      }
+    }
+  ]
+}

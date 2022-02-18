@@ -191,13 +191,29 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     assert(client.gkeHubMembershipServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.gkeHubMembershipServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.gkeHubMembershipServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -354,6 +370,25 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getMembership with closed client', async () => {
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkehub.v1beta1.GetMembershipRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getMembership(request), expectedError);
+    });
   });
 
   describe('generateConnectManifest', () => {
@@ -478,6 +513,28 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes generateConnectManifest with closed client', async () => {
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkehub.v1beta1.GenerateConnectManifestRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.generateConnectManifest(request),
+        expectedError
+      );
+    });
   });
 
   describe('validateExclusivity', () => {
@@ -598,6 +655,25 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes validateExclusivity with closed client', async () => {
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkehub.v1beta1.ValidateExclusivityRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.validateExclusivity(request), expectedError);
     });
   });
 
@@ -721,6 +797,28 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
         (client.innerApiCalls.generateExclusivityManifest as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes generateExclusivityManifest with closed client', async () => {
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkehub.v1beta1.GenerateExclusivityManifestRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.generateExclusivityManifest(request),
+        expectedError
       );
     });
   });
