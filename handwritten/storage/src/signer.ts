@@ -16,6 +16,7 @@ import * as crypto from 'crypto';
 import * as dateFormat from 'date-and-time';
 import * as http from 'http';
 import * as url from 'url';
+import {ExceptionMessages} from './storage';
 import {encodeURI, qsStringify, objectEntries} from './util';
 
 interface GetCredentialsResponse {
@@ -87,12 +88,18 @@ export interface GetSignedUrlCallback {
 type ValueOf<T> = T[keyof T];
 type HeaderValue = ValueOf<http.OutgoingHttpHeaders>;
 
+export enum SignerExceptionMessages {
+  ACCESSIBLE_DATE_INVALID = 'The accessible at date provided was invalid.',
+  EXPIRATION_BEFORE_ACCESSIBLE_DATE = 'An expiration date cannot be before accessible date.',
+  X_GOOG_CONTENT_SHA256 = 'The header X-Goog-Content-SHA256 must be a hexadecimal string.',
+}
+
 /*
  * Default signing version for getSignedUrl is 'v2'.
  */
 const DEFAULT_SIGNING_VERSION = 'v2';
 
-const SEVEN_DAYS = 604800;
+const SEVEN_DAYS = 7 * 24 * 60 * 60;
 
 /**
  * @const {string}
@@ -119,7 +126,9 @@ export class URLSigner {
     const accessibleAtInSeconds = this.parseAccessibleAt(cfg.accessibleAt);
 
     if (expiresInSeconds < accessibleAtInSeconds) {
-      throw new Error('An expiration date cannot be before accessible date.');
+      throw new Error(
+        SignerExceptionMessages.EXPIRATION_BEFORE_ACCESSIBLE_DATE
+      );
     }
 
     let customHost: string | undefined;
@@ -247,9 +256,7 @@ export class URLSigner {
         typeof sha256Header !== 'string' ||
         !/[A-Fa-f0-9]{40}/.test(sha256Header)
       ) {
-        throw new Error(
-          'The header X-Goog-Content-SHA256 must be a hexadecimal string.'
-        );
+        throw new Error(SignerExceptionMessages.X_GOOG_CONTENT_SHA256);
       }
       contentSha256 = sha256Header;
     }
@@ -402,11 +409,11 @@ export class URLSigner {
     const expiresInMSeconds = new Date(expires).valueOf();
 
     if (isNaN(expiresInMSeconds)) {
-      throw new Error('The expiration date provided was invalid.');
+      throw new Error(ExceptionMessages.EXPIRATION_DATE_INVALID);
     }
 
     if (expiresInMSeconds < current.valueOf()) {
-      throw new Error('An expiration date cannot be in the past.');
+      throw new Error(ExceptionMessages.EXPIRATION_DATE_PAST);
     }
 
     return Math.round(expiresInMSeconds / 1000); // The API expects seconds.
@@ -418,7 +425,7 @@ export class URLSigner {
     ).valueOf();
 
     if (isNaN(accessibleAtInMSeconds)) {
-      throw new Error('The accessible at date provided was invalid.');
+      throw new Error(SignerExceptionMessages.ACCESSIBLE_DATE_INVALID);
     }
 
     return Math.floor(accessibleAtInMSeconds / 1000); // The API expects seconds.

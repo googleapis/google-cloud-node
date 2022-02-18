@@ -27,8 +27,10 @@ import {
   PATH_STYLED_HOST,
   GetSignedUrlConfigInternal,
   Query,
+  SignerExceptionMessages,
 } from '../src/signer';
 import {encodeURI, qsStringify} from '../src/util';
+import {ExceptionMessages} from '../src/storage';
 
 describe('signer', () => {
   const BUCKET_NAME = 'bucket-name';
@@ -202,8 +204,9 @@ describe('signer', () => {
               method: 'GET',
               accessibleAt,
               expires,
-            });
-          }, /An expiration date cannot be before accessible date\./);
+            }),
+              SignerExceptionMessages.EXPIRATION_BEFORE_ACCESSIBLE_DATE;
+          });
         });
 
         describe('checkInputTypes', () => {
@@ -257,8 +260,9 @@ describe('signer', () => {
                 method: 'GET',
                 accessibleAt,
                 expires: expiresNumber,
-              });
-            }, /The accessible at date provided was invalid\./);
+              }),
+                SignerExceptionMessages.ACCESSIBLE_DATE_INVALID;
+            });
           });
         });
       });
@@ -657,10 +661,10 @@ describe('signer', () => {
             ...CONFIG,
           };
 
-          assert.throws(
-            () => signer['getSignedUrlV4'](CONFIG),
-            /The header X-Goog-Content-SHA256 must be a hexadecimal string./
-          );
+          assert.throws(() => {
+            signer['getSignedUrlV4'](CONFIG),
+              SignerExceptionMessages.X_GOOG_CONTENT_SHA256;
+          });
         });
       });
 
@@ -967,13 +971,13 @@ describe('signer', () => {
 
       it('throws invalid date', () => {
         assert.throws(() => signer.parseExpires('2019-31-12T25:60:60Z'), {
-          message: 'The expiration date provided was invalid.',
+          message: ExceptionMessages.EXPIRATION_DATE_INVALID,
         });
       });
 
       it('throws if expiration is in the past', () => {
         assert.throws(() => signer.parseExpires(NOW.valueOf() - 1, NOW), {
-          message: 'An expiration date cannot be in the past.',
+          message: ExceptionMessages.EXPIRATION_DATE_PAST,
         });
       });
 

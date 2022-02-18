@@ -54,8 +54,9 @@ import {
   GenerateSignedPostPolicyV4Options,
   STORAGE_POST_POLICY_BASE_URL,
   MoveOptions,
+  FileExceptionMessages,
 } from '../src/file';
-import {IdempotencyStrategy} from '../src/storage';
+import {ExceptionMessages, IdempotencyStrategy} from '../src/storage';
 
 class HTTPError extends Error {
   code: number;
@@ -2830,7 +2831,7 @@ describe('File', () => {
         (err: Error, expirationDate: {}, apiResponse_: {}) => {
           assert.strictEqual(
             err.message,
-            'An expiration time is not available.'
+            FileExceptionMessages.EXPIRATION_TIME_NA
           );
           assert.strictEqual(expirationDate, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -3075,8 +3076,9 @@ describe('File', () => {
               expires,
             },
             () => {}
-          );
-        }, /The expiration date provided was invalid\./);
+          ),
+            ExceptionMessages.EXPIRATION_DATE_INVALID;
+        });
       });
 
       it('should throw if a date from the past is given', () => {
@@ -3088,8 +3090,9 @@ describe('File', () => {
               expires,
             },
             () => {}
-          );
-        }, /An expiration date cannot be in the past\./);
+          ),
+            ExceptionMessages.EXPIRATION_DATE_PAST;
+        });
       });
     });
 
@@ -3132,8 +3135,9 @@ describe('File', () => {
               equals: [{}],
             },
             () => {}
-          );
-        }, /Equals condition must be an array of 2 elements\./);
+          ),
+            FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS;
+        });
       });
 
       it('should throw if equal condition length is not 2', () => {
@@ -3144,8 +3148,9 @@ describe('File', () => {
               equals: [['1', '2', '3']],
             },
             () => {}
-          );
-        }, /Equals condition must be an array of 2 elements\./);
+          ),
+            FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS;
+        });
       });
     });
 
@@ -3188,8 +3193,9 @@ describe('File', () => {
               startsWith: [{}],
             },
             () => {}
-          );
-        }, /StartsWith condition must be an array of 2 elements\./);
+          ),
+            FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS;
+        });
       });
 
       it('should throw if prefix condition length is not 2', () => {
@@ -3200,8 +3206,9 @@ describe('File', () => {
               startsWith: [['1', '2', '3']],
             },
             () => {}
-          );
-        }, /StartsWith condition must be an array of 2 elements\./);
+          ),
+            FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS;
+        });
       });
     });
 
@@ -3229,8 +3236,9 @@ describe('File', () => {
               contentLengthRange: [{max: 1}],
             },
             () => {}
-          );
-        }, /ContentLengthRange must have numeric min & max fields\./);
+          ),
+            FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX;
+        });
       });
 
       it('should throw if content length has no max', () => {
@@ -3241,8 +3249,9 @@ describe('File', () => {
               contentLengthRange: [{min: 0}],
             },
             () => {}
-          );
-        }, /ContentLengthRange must have numeric min & max fields\./);
+          ),
+            FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX;
+        });
       });
     });
   });
@@ -3590,8 +3599,9 @@ describe('File', () => {
               expires,
             },
             () => {}
-          );
-        }, /The expiration date provided was invalid\./);
+          ),
+            ExceptionMessages.EXPIRATION_DATE_INVALID;
+        });
       });
 
       it('should throw if a date from the past is given', () => {
@@ -3603,24 +3613,23 @@ describe('File', () => {
               expires,
             },
             () => {}
-          );
-        }, /An expiration date cannot be in the past\./);
+          ),
+            ExceptionMessages.EXPIRATION_DATE_PAST;
+        });
       });
 
       it('should throw if a date beyond 7 days is given', () => {
         const expires = Date.now() + 7.1 * 24 * 60 * 60 * 1000;
 
-        assert.throws(
-          () => {
-            file.generateSignedPostPolicyV4(
-              {
-                expires,
-              },
-              () => {}
-            );
-          },
-          {message: 'Max allowed expiration is seven days (604800 seconds).'}
-        );
+        assert.throws(() => {
+          file.generateSignedPostPolicyV4(
+            {
+              expires,
+            },
+            () => {}
+          ),
+            {message: 'Max allowed expiration is seven days (604800 seconds).'};
+        });
       });
     });
   });
@@ -3702,15 +3711,17 @@ describe('File', () => {
       SIGNED_URL_CONFIG.action = null as any;
 
       assert.throws(() => {
-        file.getSignedUrl(SIGNED_URL_CONFIG, () => {});
-      }, /The action is not provided or invalid./);
+        file.getSignedUrl(SIGNED_URL_CONFIG, () => {}),
+          ExceptionMessages.INVALID_ACTION;
+      });
     });
 
     it('should error if action is undefined', () => {
       delete SIGNED_URL_CONFIG.action;
       assert.throws(() => {
-        file.getSignedUrl(SIGNED_URL_CONFIG, () => {});
-      }, /The action is not provided or invalid./);
+        file.getSignedUrl(SIGNED_URL_CONFIG, () => {}),
+          ExceptionMessages.INVALID_ACTION;
+      });
     });
 
     it('should error for an invalid action', () => {
@@ -3718,8 +3729,9 @@ describe('File', () => {
       SIGNED_URL_CONFIG.action = 'watch' as any;
 
       assert.throws(() => {
-        file.getSignedUrl(SIGNED_URL_CONFIG, () => {});
-      }, /The action is not provided or invalid./);
+        file.getSignedUrl(SIGNED_URL_CONFIG, () => {}),
+          ExceptionMessages.INVALID_ACTION;
+      });
     });
 
     it('should add "x-goog-resumable: start" header if action is resumable', done => {

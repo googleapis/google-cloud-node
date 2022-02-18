@@ -119,6 +119,11 @@ interface GetPolicyRequest {
   optionsRequestedPolicyVersion?: number;
 }
 
+export enum IAMExceptionMessages {
+  POLICY_OBJECT_REQUIRED = 'A policy object is required.',
+  PERMISSIONS_REQUIRED = 'Permissions are required.',
+}
+
 /**
  * Get and set IAM policies for your Cloud Storage bucket.
  *
@@ -331,7 +336,7 @@ class Iam {
     callback?: SetPolicyCallback
   ): Promise<SetPolicyResponse> | void {
     if (policy === null || typeof policy !== 'object') {
-      throw new Error('A policy object is required.');
+      throw new Error(IAMExceptionMessages.POLICY_OBJECT_REQUIRED);
     }
 
     const {options, callback: cb} = normalize<
@@ -429,7 +434,7 @@ class Iam {
     callback?: TestIamPermissionsCallback
   ): Promise<TestIamPermissionsResponse> | void {
     if (!Array.isArray(permissions) && typeof permissions !== 'string') {
-      throw new Error('Permissions are required.');
+      throw new Error(IAMExceptionMessages.PERMISSIONS_REQUIRED);
     }
 
     const {options, callback: cb} = normalize<

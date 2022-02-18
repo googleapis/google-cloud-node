@@ -55,6 +55,7 @@ import {
   PreconditionOptions,
   IdempotencyStrategy,
   BucketOptions,
+  ExceptionMessages,
 } from './storage';
 import {
   GetSignedUrlResponse,
@@ -384,6 +385,18 @@ interface MakeAllFilesPublicPrivateCallback {
 }
 
 type MakeAllFilesPublicPrivateResponse = [File[]];
+
+export enum BucketExceptionMessages {
+  PROVIDE_SOURCE_FILE = 'You must provide at least one source file.',
+  DESTINATION_FILE_NOT_SPECIFIED = 'A destination file must be specified.',
+  CHANNEL_ID_REQUIRED = 'An ID is required to create a channel.',
+  CHANNEL_ADDRESS_REQUIRED = 'An address is required to create a channel.',
+  TOPIC_NAME_REQUIRED = 'A valid topic name is required.',
+  CONFIGURATION_OBJECT_PREFIX_REQUIRED = 'A configuration object with a prefix is required.',
+  SPECIFY_FILE_NAME = 'A file name must be specified.',
+  METAGENERATION_NOT_PROVIDED = 'A metageneration must be provided.',
+  SUPPLY_NOTIFICATION_ID = 'You must supply a notification ID.',
+}
 
 /**
  * The size of a file (in bytes) must be greater than this number to
@@ -1401,11 +1414,11 @@ class Bucket extends ServiceObject {
     callback?: CombineCallback
   ): Promise<CombineResponse> | void {
     if (!Array.isArray(sources) || sources.length === 0) {
-      throw new Error('You must provide at least one source file.');
+      throw new Error(BucketExceptionMessages.PROVIDE_SOURCE_FILE);
     }
 
     if (!destination) {
-      throw new Error('A destination file must be specified.');
+      throw new Error(BucketExceptionMessages.DESTINATION_FILE_NOT_SPECIFIED);
     }
 
     let options: CombineOptions = {};
@@ -1604,11 +1617,11 @@ class Bucket extends ServiceObject {
     callback?: CreateChannelCallback
   ): Promise<CreateChannelResponse> | void {
     if (typeof id !== 'string') {
-      throw new Error('An ID is required to create a channel.');
+      throw new Error(BucketExceptionMessages.CHANNEL_ID_REQUIRED);
     }
 
     if (typeof config.address !== 'string') {
-      throw new Error('An address is required to create a channel.');
+      throw new Error(BucketExceptionMessages.CHANNEL_ADDRESS_REQUIRED);
     }
 
     let options: CreateChannelOptions = {};
@@ -1780,7 +1793,7 @@ class Bucket extends ServiceObject {
     }
 
     if (typeof topic !== 'string') {
-      throw new Error('A valid topic name is required.');
+      throw new Error(BucketExceptionMessages.TOPIC_NAME_REQUIRED);
     }
 
     const body = Object.assign({topic}, options);
@@ -2162,7 +2175,9 @@ class Bucket extends ServiceObject {
       typeof config === 'function' ||
       typeof config.prefix === 'undefined'
     ) {
-      throw new Error('A configuration object with a prefix is required.');
+      throw new Error(
+        BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED
+      );
     }
 
     const logBucket = config.bucket
@@ -2296,7 +2311,7 @@ class Bucket extends ServiceObject {
    */
   file(name: string, options?: FileOptions): File {
     if (!name) {
-      throw Error('A file name must be specified.');
+      throw Error(BucketExceptionMessages.SPECIFY_FILE_NAME);
     }
 
     return new File(this, name, options);
@@ -2860,7 +2875,7 @@ class Bucket extends ServiceObject {
   ): void | Promise<GetSignedUrlResponse> {
     const method = BucketActionToHTTPMethod[cfg.action];
     if (!method) {
-      throw new Error('The action is not provided or invalid.');
+      throw new Error(ExceptionMessages.INVALID_ACTION);
     }
 
     const signConfig = {
@@ -2922,7 +2937,7 @@ class Bucket extends ServiceObject {
   ): Promise<BucketLockResponse> | void {
     const metatype = typeof metageneration;
     if (metatype !== 'number' && metatype !== 'string') {
-      throw new Error('A metageneration must be provided.');
+      throw new Error(BucketExceptionMessages.METAGENERATION_NOT_PROVIDED);
     }
 
     this.request(
@@ -3240,7 +3255,7 @@ class Bucket extends ServiceObject {
    */
   notification(id: string): Notification {
     if (!id) {
-      throw new Error('You must supply a notification ID.');
+      throw new Error(BucketExceptionMessages.SUPPLY_NOTIFICATION_ID);
     }
 
     return new Notification(this, id);

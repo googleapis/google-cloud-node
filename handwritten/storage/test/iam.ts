@@ -16,6 +16,7 @@ import {DecorateRequestOptions, util} from '@google-cloud/common';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
+import {IAMExceptionMessages} from '../src/iam';
 
 describe('storage/iam', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -121,8 +122,8 @@ describe('storage/iam', () => {
   describe('setPolicy', () => {
     it('should throw an error if a policy is not supplied', () => {
       assert.throws(() => {
-        iam.setPolicy(util.noop);
-      }, /A policy object is required\./);
+        iam.setPolicy(util.noop), IAMExceptionMessages.POLICY_OBJECT_REQUIRED;
+      });
     });
 
     it('should make the correct API request', done => {
@@ -170,8 +171,9 @@ describe('storage/iam', () => {
   describe('testPermissions', () => {
     it('should throw an error if permissions are missing', () => {
       assert.throws(() => {
-        iam.testPermissions(util.noop);
-      }, /Permissions are required\./);
+        iam.testPermissions(util.noop),
+          IAMExceptionMessages.PERMISSIONS_REQUIRED;
+      });
     });
 
     it('should make the correct API request', done => {

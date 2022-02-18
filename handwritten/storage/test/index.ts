@@ -30,7 +30,11 @@ import {Bucket} from '../src';
 import {GetFilesOptions} from '../src/bucket';
 import sinon = require('sinon');
 import {HmacKey} from '../src/hmacKey';
-import {HmacKeyResourceResponse, PROTOCOL_REGEX} from '../src/storage';
+import {
+  HmacKeyResourceResponse,
+  PROTOCOL_REGEX,
+  StorageExceptionMessages,
+} from '../src/storage';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const hmacKeyModule = require('../src/hmacKey');
@@ -211,8 +215,9 @@ describe('Storage', () => {
           projectId: PROJECT_ID,
           retryOptions: {autoRetry},
           autoRetry,
-        });
-      }, /autoRetry is deprecated. Use retryOptions.autoRetry instead\./);
+        }),
+          StorageExceptionMessages.AUTO_RETRY_DEPRECATED;
+      });
     });
 
     it('should propagate retryDelayMultiplier', () => {
@@ -301,8 +306,9 @@ describe('Storage', () => {
           projectId: PROJECT_ID,
           retryOptions: {maxRetries},
           maxRetries,
-        });
-      }, /maxRetries is deprecated. Use retryOptions.maxRetries instead\./);
+        }),
+          StorageExceptionMessages.MAX_RETRIES_DEPRECATED;
+      });
     });
 
     it('should set retryFunction', () => {
@@ -501,8 +507,8 @@ describe('Storage', () => {
   describe('bucket', () => {
     it('should throw if no name was provided', () => {
       assert.throws(() => {
-        storage.bucket();
-      }, /A bucket name is needed to use Cloud Storage\./);
+        storage.bucket(), StorageExceptionMessages.BUCKET_NAME_REQUIRED;
+      });
     });
 
     it('should accept a string for a name', () => {
@@ -549,8 +555,8 @@ describe('Storage', () => {
 
     it('should throw if accessId is not provided', () => {
       assert.throws(() => {
-        storage.hmacKey();
-      }, /An access ID is needed to create an HmacKey object./);
+        storage.hmacKey(), StorageExceptionMessages.HMAC_ACCESS_ID;
+      });
     });
 
     it('should pass options object to HmacKey constructor', () => {
@@ -616,20 +622,18 @@ describe('Storage', () => {
     });
 
     it('should throw without a serviceAccountEmail', () => {
-      assert.throws(
-        () => storage.createHmacKey(),
-        /The first argument must be a service account email to create an HMAC key\./
-      );
+      assert.throws(() => {
+        storage.createHmacKey(), StorageExceptionMessages.HMAC_SERVICE_ACCOUNT;
+      });
     });
 
     it('should throw when first argument is not a string', () => {
-      assert.throws(
-        () =>
-          storage.createHmacKey({
-            userProject: 'my-project',
-          }),
-        /The first argument must be a service account email to create an HMAC key\./
-      );
+      assert.throws(() => {
+        storage.createHmacKey({
+          userProject: 'my-project',
+        }),
+          StorageExceptionMessages.HMAC_SERVICE_ACCOUNT;
+      });
     });
 
     it('should make request with method options as query parameter', async () => {
@@ -771,8 +775,9 @@ describe('Storage', () => {
 
     it('should throw if no name is provided', () => {
       assert.throws(() => {
-        storage.createBucket();
-      }, /A name is required to create a bucket\./);
+        storage.createBucket(),
+          StorageExceptionMessages.BUCKET_NAME_REQUIRED_CREATE;
+      });
     });
 
     it('should honor the userProject option', done => {

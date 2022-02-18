@@ -42,7 +42,12 @@ import * as xdgBasedir from 'xdg-basedir';
 import * as zlib from 'zlib';
 import * as http from 'http';
 
-import {IdempotencyStrategy, PreconditionOptions, Storage} from './storage';
+import {
+  ExceptionMessages,
+  IdempotencyStrategy,
+  PreconditionOptions,
+  Storage,
+} from './storage';
 import {AvailableServiceObjectMethods, Bucket} from './bucket';
 import {Acl} from './acl';
 import {
@@ -402,6 +407,25 @@ class RequestError extends Error {
 }
 
 const SEVEN_DAYS = 7 * 24 * 60 * 60;
+
+export enum FileExceptionMessages {
+  EXPIRATION_TIME_NA = 'An expiration time is not available.',
+  DESTINATION_NO_NAME = 'Destination file should have a name.',
+  INVALID_VALIDATION_FILE_RANGE = 'Cannot use validation with file ranges (start/end).',
+  MD5_NOT_AVAILABLE = 'MD5 verification was specified, but is not available for the requested object. MD5 is not available for composite objects.',
+  EQUALS_CONDITION_TWO_ELEMENTS = 'Equals condition must be an array of 2 elements.',
+  STARTS_WITH_TWO_ELEMENTS = 'StartsWith condition must be an array of 2 elements.',
+  CONTENT_LENGTH_RANGE_MIN_MAX = 'ContentLengthRange must have numeric min & max fields.',
+  DOWNLOAD_MISMATCH = 'The downloaded data did not match the data from the server. To be sure the content is the same, you should download the file again.',
+  UPLOAD_MISMATCH_DELETE_FAIL = `The uploaded data did not match the data from the server. 
+    As a precaution, we attempted to delete the file, but it was not successful. 
+    To be sure the content is the same, you should try removing the file manually, 
+    then uploading the file again. 
+    \n\nThe delete attempt failed with this message:\n\n  `,
+  UPLOAD_MISMATCH = `The uploaded data did not match the data from the server. 
+    As a precaution, the file has been deleted. 
+    To be sure the content is the same, you should try uploading the file again.`,
+}
 
 /**
  * A File object is created from your {@link Bucket} object using
@@ -1040,7 +1064,7 @@ class File extends ServiceObject<File> {
     callback?: CopyCallback
   ): Promise<CopyResponse> | void {
     const noDestinationError = new Error(
-      'Destination file should have a name.'
+      FileExceptionMessages.DESTINATION_NO_NAME
     );
 
     if (!destination) {
@@ -1295,7 +1319,7 @@ class File extends ServiceObject<File> {
         typeof options.validation === 'string' ||
         options.validation === true
       ) {
-        throw new Error('Cannot use validation with file ranges (start/end).');
+        throw new Error(FileExceptionMessages.INVALID_VALIDATION_FILE_RANGE);
       }
       // Range requests can't receive data integrity checks.
       crc32c = false;
@@ -1478,21 +1502,14 @@ class File extends ServiceObject<File> {
 
         if (md5 && !hashes.md5) {
           const hashError = new RequestError(
-            [
-              'MD5 verification was specified, but is not available for the',
-              'requested object. MD5 is not available for composite objects.',
-            ].join(' ')
+            FileExceptionMessages.MD5_NOT_AVAILABLE
           );
           hashError.code = 'MD5_NOT_AVAILABLE';
 
           throughStream.destroy(hashError);
         } else if (failed) {
           const mismatchError = new RequestError(
-            [
-              'The downloaded data did not match the data from the server.',
-              'To be sure the content is the same, you should download the',
-              'file again.',
-            ].join(' ')
+            FileExceptionMessages.DOWNLOAD_MISMATCH
           );
           mismatchError.code = 'CONTENT_DOWNLOAD_MISMATCH';
 
@@ -1984,27 +2001,13 @@ class File extends ServiceObject<File> {
 
           if (err) {
             code = 'FILE_NO_UPLOAD_DELETE';
-            message = [
-              'The uploaded data did not match the data from the server. As a',
-              'precaution, we attempted to delete the file, but it was not',
-              'successful. To be sure the content is the same, you should try',
-              'removing the file manually, then uploading the file again.',
-              '\n\nThe delete attempt failed with this message:',
-              '\n\n  ' + err.message,
-            ].join(' ');
+            message = `${FileExceptionMessages.UPLOAD_MISMATCH_DELETE_FAIL}${err.message}`;
           } else if (md5 && !metadata.md5Hash) {
             code = 'MD5_NOT_AVAILABLE';
-            message = [
-              'MD5 verification was specified, but is not available for the',
-              'requested object. MD5 is not available for composite objects.',
-            ].join(' ');
+            message = FileExceptionMessages.MD5_NOT_AVAILABLE;
           } else {
             code = 'FILE_NO_UPLOAD';
-            message = [
-              'The uploaded data did not match the data from the server. As a',
-              'precaution, the file has been deleted. To be sure the content',
-              'is the same, you should try uploading the file again.',
-            ].join(' ');
+            message = FileExceptionMessages.UPLOAD_MISMATCH;
           }
 
           const error = new RequestError(message);
@@ -2287,7 +2290,7 @@ class File extends ServiceObject<File> {
         }
 
         if (!metadata.retentionExpirationTime) {
-          const error = new Error('An expiration time is not available.');
+          const error = new Error(FileExceptionMessages.EXPIRATION_TIME_NA);
           callback!(error, null, apiResponse);
           return;
         }
@@ -2534,11 +2537,11 @@ class File extends ServiceObject<File> {
     );
 
     if (isNaN(expires.getTime())) {
-      throw new Error('The expiration date provided was invalid.');
+      throw new Error(ExceptionMessages.EXPIRATION_DATE_INVALID);
     }
 
     if (expires.valueOf() < Date.now()) {
-      throw new Error('An expiration date cannot be in the past.');
+      throw new Error(ExceptionMessages.EXPIRATION_DATE_PAST);
     }
 
     options = Object.assign({}, options);
@@ -2556,7 +2559,7 @@ class File extends ServiceObject<File> {
       }
       (options.equals as string[][]).forEach(condition => {
         if (!Array.isArray(condition) || condition.length !== 2) {
-          throw new Error('Equals condition must be an array of 2 elements.');
+          throw new Error(FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS);
         }
         conditions.push(['eq', condition[0], condition[1]]);
       });
@@ -2568,9 +2571,7 @@ class File extends ServiceObject<File> {
       }
       (options.startsWith as string[][]).forEach(condition => {
         if (!Array.isArray(condition) || condition.length !== 2) {
-          throw new Error(
-            'StartsWith condition must be an array of 2 elements.'
-          );
+          throw new Error(FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS);
         }
         conditions.push(['starts-with', condition[0], condition[1]]);
       });
@@ -2598,9 +2599,7 @@ class File extends ServiceObject<File> {
       const min = options.contentLengthRange.min;
       const max = options.contentLengthRange.max;
       if (typeof min !== 'number' || typeof max !== 'number') {
-        throw new Error(
-          'ContentLengthRange must have numeric min & max fields.'
-        );
+        throw new Error(FileExceptionMessages.CONTENT_LENGTH_RANGE_MIN_MAX);
       }
       conditions.push(['content-length-range', min, max]);
     }
@@ -2742,11 +2741,11 @@ class File extends ServiceObject<File> {
     );
 
     if (isNaN(expires.getTime())) {
-      throw new Error('The expiration date provided was invalid.');
+      throw new Error(ExceptionMessages.EXPIRATION_DATE_INVALID);
     }
 
     if (expires.valueOf() < Date.now()) {
-      throw new Error('An expiration date cannot be in the past.');
+      throw new Error(ExceptionMessages.EXPIRATION_DATE_PAST);
     }
 
     if (expires.valueOf() - Date.now() > SEVEN_DAYS * 1000) {
@@ -3007,7 +3006,7 @@ class File extends ServiceObject<File> {
   ): void | Promise<GetSignedUrlResponse> {
     const method = ActionToHTTPMethod[cfg.action];
     if (!method) {
-      throw new Error('The action is not provided or invalid.');
+      throw new Error(ExceptionMessages.INVALID_ACTION);
     }
     const extensionHeaders = objectKeyToLowercase(cfg.extensionHeaders || {});
     if (cfg.action === 'resumable') {

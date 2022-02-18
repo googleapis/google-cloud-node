@@ -48,12 +48,13 @@ import {
   SetBucketMetadataResponse,
   GetBucketSignedUrlConfig,
   AvailableServiceObjectMethods,
+  BucketExceptionMessages,
 } from '../src/bucket';
 import {AddAclOptions} from '../src/acl';
 import {Policy} from '../src/iam';
 import sinon = require('sinon');
 import {Transform} from 'stream';
-import {IdempotencyStrategy} from '../src/storage';
+import {ExceptionMessages, IdempotencyStrategy} from '../src/storage';
 
 class FakeFile {
   calledWith_: IArguments;
@@ -661,18 +662,19 @@ describe('Bucket', () => {
   describe('combine', () => {
     it('should throw if invalid sources are provided', () => {
       assert.throws(() => {
-        bucket.combine();
-      }, /You must provide at least one source file\./);
+        bucket.combine(), BucketExceptionMessages.PROVIDE_SOURCE_FILE;
+      });
 
       assert.throws(() => {
-        bucket.combine([]);
-      }, /You must provide at least one source file\./);
+        bucket.combine([]), BucketExceptionMessages.PROVIDE_SOURCE_FILE;
+      });
     });
 
     it('should throw if a destination is not provided', () => {
       assert.throws(() => {
-        bucket.combine(['1', '2']);
-      }, /A destination file must be specified\./);
+        bucket.combine(['1', '2']),
+          BucketExceptionMessages.DESTINATION_FILE_NOT_SPECIFIED;
+      });
     });
 
     it('should accept string or file input for sources', done => {
@@ -964,8 +966,8 @@ describe('Bucket', () => {
 
     it('should throw if an ID is not provided', () => {
       assert.throws(() => {
-        bucket.createChannel();
-      }, /An ID is required to create a channel\./);
+        bucket.createChannel(), BucketExceptionMessages.CHANNEL_ID_REQUIRED;
+      });
     });
 
     it('should throw if an address is not provided', () => {
@@ -1096,8 +1098,9 @@ describe('Bucket', () => {
 
     it('should throw an error if a valid topic is not provided', () => {
       assert.throws(() => {
-        bucket.createNotification();
-      }, /A valid topic name is required\./);
+        bucket.createNotification(),
+          BucketExceptionMessages.TOPIC_NAME_REQUIRED;
+      });
     });
 
     it('should make the correct request', done => {
@@ -1465,14 +1468,16 @@ describe('Bucket', () => {
 
     it('should throw if a config object is not provided', () => {
       assert.throws(() => {
-        bucket.enableLogging();
-      }, /A configuration object with a prefix is required\./);
+        bucket.enableLogging(),
+          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED;
+      });
     });
 
     it('should throw if config is a function', () => {
       assert.throws(() => {
-        bucket.enableLogging(assert.ifError);
-      }, /A configuration object with a prefix is required\./);
+        bucket.enableLogging(assert.ifError),
+          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED;
+      });
     });
 
     it('should throw if a prefix is not provided', () => {
@@ -1482,8 +1487,9 @@ describe('Bucket', () => {
             bucket: 'bucket-name',
           },
           assert.ifError
-        );
-      }, /A configuration object with a prefix is required\./);
+        ),
+          BucketExceptionMessages.CONFIGURATION_OBJECT_PREFIX_REQUIRED;
+      });
     });
 
     it('should add IAM permissions', done => {
@@ -1667,8 +1673,8 @@ describe('Bucket', () => {
 
     it('should throw if no name is provided', () => {
       assert.throws(() => {
-        bucket.file();
-      }, /A file name must be specified\./);
+        bucket.file(), BucketExceptionMessages.SPECIFY_FILE_NAME;
+      });
     });
 
     it('should return a File object', () => {
@@ -2089,15 +2095,17 @@ describe('Bucket', () => {
       SIGNED_URL_CONFIG.action = null as any;
 
       assert.throws(() => {
-        bucket.getSignedUrl(SIGNED_URL_CONFIG, () => {});
-      }, /The action is not provided or invalid./);
+        bucket.getSignedUrl(SIGNED_URL_CONFIG, () => {}),
+          ExceptionMessages.INVALID_ACTION;
+      });
     });
 
     it('should error if action is undefined', () => {
       delete SIGNED_URL_CONFIG.action;
       assert.throws(() => {
-        bucket.getSignedUrl(SIGNED_URL_CONFIG, () => {});
-      }, /The action is not provided or invalid./);
+        bucket.getSignedUrl(SIGNED_URL_CONFIG, () => {}),
+          ExceptionMessages.INVALID_ACTION;
+      });
     });
 
     it('should error for an invalid action', () => {
@@ -2105,18 +2113,18 @@ describe('Bucket', () => {
       SIGNED_URL_CONFIG.action = 'watch' as any;
 
       assert.throws(() => {
-        bucket.getSignedUrl(SIGNED_URL_CONFIG, () => {});
-      }, /The action is not provided or invalid./);
+        bucket.getSignedUrl(SIGNED_URL_CONFIG, () => {}),
+          ExceptionMessages.INVALID_ACTION;
+      });
     });
   });
 
   describe('lock', () => {
     it('should throw if a metageneration is not provided', () => {
-      const expectedError = new RegExp('A metageneration must be provided.');
-
       assert.throws(() => {
-        bucket.lock(assert.ifError);
-      }, expectedError);
+        bucket.lock(assert.ifError),
+          BucketExceptionMessages.METAGENERATION_NOT_PROVIDED;
+      });
     });
 
     it('should make the correct request', done => {
@@ -2315,8 +2323,8 @@ describe('Bucket', () => {
   describe('notification', () => {
     it('should throw an error if an id is not provided', () => {
       assert.throws(() => {
-        bucket.notification();
-      }, /You must supply a notification ID\./);
+        bucket.notification(), BucketExceptionMessages.SUPPLY_NOTIFICATION_ID;
+      });
     });
 
     it('should return a Notification object', () => {
