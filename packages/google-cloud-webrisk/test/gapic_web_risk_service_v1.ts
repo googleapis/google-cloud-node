@@ -90,12 +90,27 @@ describe('v1.WebRiskServiceClient', () => {
     assert(client.webRiskServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new webriskserviceModule.v1.WebRiskServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.webRiskServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new webriskserviceModule.v1.WebRiskServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.webRiskServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -221,6 +236,23 @@ describe('v1.WebRiskServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes computeThreatListDiff with closed client', async () => {
+      const client = new webriskserviceModule.v1.WebRiskServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.webrisk.v1.ComputeThreatListDiffRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.computeThreatListDiff(request),
+        expectedError
+      );
+    });
   });
 
   describe('searchUris', () => {
@@ -308,6 +340,20 @@ describe('v1.WebRiskServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes searchUris with closed client', async () => {
+      const client = new webriskserviceModule.v1.WebRiskServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.webrisk.v1.SearchUrisRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.searchUris(request), expectedError);
+    });
   });
 
   describe('searchHashes', () => {
@@ -394,6 +440,20 @@ describe('v1.WebRiskServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes searchHashes with closed client', async () => {
+      const client = new webriskserviceModule.v1.WebRiskServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.webrisk.v1.SearchHashesRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.searchHashes(request), expectedError);
     });
   });
 
@@ -505,6 +565,22 @@ describe('v1.WebRiskServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createSubmission with closed client', async () => {
+      const client = new webriskserviceModule.v1.WebRiskServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.webrisk.v1.CreateSubmissionRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createSubmission(request), expectedError);
     });
   });
 

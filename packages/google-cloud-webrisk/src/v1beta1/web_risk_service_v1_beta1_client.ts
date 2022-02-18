@@ -571,9 +571,8 @@ export class WebRiskServiceV1Beta1Client {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.webRiskServiceV1Beta1Stub!.then(stub => {
+    if (this.webRiskServiceV1Beta1Stub && !this._terminated) {
+      return this.webRiskServiceV1Beta1Stub.then(stub => {
         this._terminated = true;
         stub.close();
       });

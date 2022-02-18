@@ -96,13 +96,29 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     assert(client.webRiskServiceV1Beta1Stub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.webRiskServiceV1Beta1Stub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.webRiskServiceV1Beta1Stub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -233,6 +249,24 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes computeThreatListDiff with closed client', async () => {
+      const client =
+        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.computeThreatListDiff(request),
+        expectedError
+      );
+    });
   });
 
   describe('searchUris', () => {
@@ -323,6 +357,21 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes searchUris with closed client', async () => {
+      const client =
+        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.searchUris(request), expectedError);
+    });
   });
 
   describe('searchHashes', () => {
@@ -412,6 +461,21 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes searchHashes with closed client', async () => {
+      const client =
+        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.searchHashes(request), expectedError);
     });
   });
 });

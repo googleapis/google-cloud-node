@@ -1,0 +1,151 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-webrisk",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.webrisk.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "webrisk_v1beta1_generated_WebRiskServiceV1Beta1_ComputeThreatListDiff_async",
+      "title": "WebRiskServiceV1Beta1 computeThreatListDiff Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the most recent threat list diffs.",
+      "canonical": true,
+      "file": "web_risk_service_v1_beta1.compute_threat_list_diff.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ComputeThreatListDiff",
+        "fullName": "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1.ComputeThreatListDiff",
+        "async": true,
+        "parameters": [
+          {
+            "name": "threat_type",
+            "type": ".google.cloud.webrisk.v1beta1.ThreatType"
+          },
+          {
+            "name": "version_token",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "constraints",
+            "type": ".google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints"
+          }
+        ],
+        "resultType": ".google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse",
+        "client": {
+          "shortName": "WebRiskServiceV1Beta1Client",
+          "fullName": "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1Client"
+        },
+        "method": {
+          "shortName": "ComputeThreatListDiff",
+          "fullName": "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1.ComputeThreatListDiff",
+          "service": {
+            "shortName": "WebRiskServiceV1Beta1",
+            "fullName": "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "webrisk_v1beta1_generated_WebRiskServiceV1Beta1_SearchUris_async",
+      "title": "WebRiskServiceV1Beta1 searchUris Sample",
+      "origin": "API_DEFINITION",
+      "description": " This method is used to check whether a URI is on a given threatList.",
+      "canonical": true,
+      "file": "web_risk_service_v1_beta1.search_uris.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchUris",
+        "fullName": "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1.SearchUris",
+        "async": true,
+        "parameters": [
+          {
+            "name": "uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "threat_types",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.cloud.webrisk.v1beta1.SearchUrisResponse",
+        "client": {
+          "shortName": "WebRiskServiceV1Beta1Client",
+          "fullName": "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1Client"
+        },
+        "method": {
+          "shortName": "SearchUris",
+          "fullName": "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1.SearchUris",
+          "service": {
+            "shortName": "WebRiskServiceV1Beta1",
+            "fullName": "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "webrisk_v1beta1_generated_WebRiskServiceV1Beta1_SearchHashes_async",
+      "title": "WebRiskServiceV1Beta1 searchHashes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the full hashes that match the requested hash prefix. This is used after a hash prefix is looked up in a threatList and there is a match. The client side threatList only holds partial hashes so the client must query this method to determine if there is a full hash match of a threat.",
+      "canonical": true,
+      "file": "web_risk_service_v1_beta1.search_hashes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchHashes",
+        "fullName": "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1.SearchHashes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "hash_prefix",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "threat_types",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.cloud.webrisk.v1beta1.SearchHashesResponse",
+        "client": {
+          "shortName": "WebRiskServiceV1Beta1Client",
+          "fullName": "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1Client"
+        },
+        "method": {
+          "shortName": "SearchHashes",
+          "fullName": "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1.SearchHashes",
+          "service": {
+            "shortName": "WebRiskServiceV1Beta1",
+            "fullName": "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1"
+          }
+        }
+      }
+    }
+  ]
+}
