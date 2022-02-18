@@ -3591,9 +3591,8 @@ export class ServiceUsageClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.serviceUsageStub!.then(stub => {
+    if (this.serviceUsageStub && !this._terminated) {
+      return this.serviceUsageStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
