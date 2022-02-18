@@ -185,12 +185,27 @@ describe('v1beta1.SecurityCenterClient', () => {
     assert(client.securityCenterStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new securitycenterModule.v1beta1.SecurityCenterClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.securityCenterStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.securityCenterStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -336,6 +351,22 @@ describe('v1beta1.SecurityCenterClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createSource with closed client', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1beta1.CreateSourceRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createSource(request), expectedError);
+    });
   });
 
   describe('createFinding', () => {
@@ -447,6 +478,22 @@ describe('v1beta1.SecurityCenterClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createFinding with closed client', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1beta1.CreateFindingRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createFinding(request), expectedError);
+    });
   });
 
   describe('getIamPolicy', () => {
@@ -557,6 +604,22 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
 
@@ -673,6 +736,25 @@ describe('v1beta1.SecurityCenterClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getOrganizationSettings with closed client', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getOrganizationSettings(request),
+        expectedError
+      );
+    });
   });
 
   describe('getSource', () => {
@@ -780,6 +862,22 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getSource with closed client', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1beta1.GetSourceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSource(request), expectedError);
     });
   });
 
@@ -892,6 +990,22 @@ describe('v1beta1.SecurityCenterClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setFindingState with closed client', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1beta1.SetFindingStateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setFindingState(request), expectedError);
+    });
   });
 
   describe('setIamPolicy', () => {
@@ -1002,6 +1116,22 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
 
@@ -1114,6 +1244,22 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
 
@@ -1228,6 +1374,23 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateFinding with closed client', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1beta1.UpdateFindingRequest()
+      );
+      request.finding = {};
+      request.finding.name = '';
+      const expectedHeaderRequestParams = 'finding.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateFinding(request), expectedError);
     });
   });
 
@@ -1347,6 +1510,26 @@ describe('v1beta1.SecurityCenterClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateOrganizationSettings with closed client', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1beta1.UpdateOrganizationSettingsRequest()
+      );
+      request.organizationSettings = {};
+      request.organizationSettings.name = '';
+      const expectedHeaderRequestParams = 'organization_settings.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateOrganizationSettings(request),
+        expectedError
+      );
+    });
   });
 
   describe('updateSource', () => {
@@ -1460,6 +1643,23 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateSource with closed client', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1beta1.UpdateSourceRequest()
+      );
+      request.source = {};
+      request.source.name = '';
+      const expectedHeaderRequestParams = 'source.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateSource(request), expectedError);
     });
   });
 
@@ -1575,6 +1775,23 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateSecurityMarks with closed client', async () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest()
+      );
+      request.securityMarks = {};
+      request.securityMarks.name = '';
+      const expectedHeaderRequestParams = 'security_marks.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateSecurityMarks(request), expectedError);
     });
   });
 
