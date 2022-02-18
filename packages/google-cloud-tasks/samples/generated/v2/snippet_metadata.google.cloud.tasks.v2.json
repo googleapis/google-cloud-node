@@ -1,0 +1,715 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-tasks",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.tasks.v2",
+        "version": "v2"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_ListQueues_async",
+      "title": "tasks listQueues Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists queues. Queues are returned in lexicographical order.",
+      "canonical": true,
+      "file": "cloud_tasks.list_queues.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListQueues",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.ListQueues",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.tasks.v2.ListQueuesResponse",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "ListQueues",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.ListQueues",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_GetQueue_async",
+      "title": "tasks getQueue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a queue.",
+      "canonical": true,
+      "file": "cloud_tasks.get_queue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetQueue",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.GetQueue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.tasks.v2.Queue",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "GetQueue",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.GetQueue",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_CreateQueue_async",
+      "title": "tasks createQueue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a queue. Queues created with this method allow tasks to live for a maximum of 31 days. After a task is 31 days old, the task will be deleted regardless of whether it was dispatched or not. WARNING: Using this method may have unintended side effects if you are using an App Engine `queue.yaml` or `queue.xml` file to manage your queues. Read [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using this method.",
+      "canonical": true,
+      "file": "cloud_tasks.create_queue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateQueue",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.CreateQueue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "queue",
+            "type": ".google.cloud.tasks.v2.Queue"
+          }
+        ],
+        "resultType": ".google.cloud.tasks.v2.Queue",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "CreateQueue",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.CreateQueue",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_UpdateQueue_async",
+      "title": "tasks updateQueue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a queue. This method creates the queue if it does not exist and updates the queue if it does exist. Queues created with this method allow tasks to live for a maximum of 31 days. After a task is 31 days old, the task will be deleted regardless of whether it was dispatched or not. WARNING: Using this method may have unintended side effects if you are using an App Engine `queue.yaml` or `queue.xml` file to manage your queues. Read [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using this method.",
+      "canonical": true,
+      "file": "cloud_tasks.update_queue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateQueue",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.UpdateQueue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "queue",
+            "type": ".google.cloud.tasks.v2.Queue"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.tasks.v2.Queue",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "UpdateQueue",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.UpdateQueue",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_DeleteQueue_async",
+      "title": "tasks deleteQueue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a queue. This command will delete the queue even if it has tasks in it. Note: If you delete a queue, a queue with the same name can't be created for 7 days. WARNING: Using this method may have unintended side effects if you are using an App Engine `queue.yaml` or `queue.xml` file to manage your queues. Read [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using this method.",
+      "canonical": true,
+      "file": "cloud_tasks.delete_queue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteQueue",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.DeleteQueue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "DeleteQueue",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.DeleteQueue",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_PurgeQueue_async",
+      "title": "tasks purgeQueue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Purges a queue by deleting all of its tasks. All tasks created before this method is called are permanently deleted. Purge operations can take up to one minute to take effect. Tasks might be dispatched before the purge takes effect. A purge is irreversible.",
+      "canonical": true,
+      "file": "cloud_tasks.purge_queue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PurgeQueue",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.PurgeQueue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.tasks.v2.Queue",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "PurgeQueue",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.PurgeQueue",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_PauseQueue_async",
+      "title": "tasks pauseQueue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Pauses the queue. If a queue is paused then the system will stop dispatching tasks until the queue is resumed via [ResumeQueue][google.cloud.tasks.v2.CloudTasks.ResumeQueue]. Tasks can still be added when the queue is paused. A queue is paused if its [state][google.cloud.tasks.v2.Queue.state] is [PAUSED][google.cloud.tasks.v2.Queue.State.PAUSED].",
+      "canonical": true,
+      "file": "cloud_tasks.pause_queue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PauseQueue",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.PauseQueue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.tasks.v2.Queue",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "PauseQueue",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.PauseQueue",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_ResumeQueue_async",
+      "title": "tasks resumeQueue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Resume a queue. This method resumes a queue after it has been [PAUSED][google.cloud.tasks.v2.Queue.State.PAUSED] or [DISABLED][google.cloud.tasks.v2.Queue.State.DISABLED]. The state of a queue is stored in the queue's [state][google.cloud.tasks.v2.Queue.state]; after calling this method it will be set to [RUNNING][google.cloud.tasks.v2.Queue.State.RUNNING]. WARNING: Resuming many high-QPS queues at the same time can lead to target overloading. If you are resuming high-QPS queues, follow the 500/50/5 pattern described in [Managing Cloud Tasks Scaling Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).",
+      "canonical": true,
+      "file": "cloud_tasks.resume_queue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResumeQueue",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.ResumeQueue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.tasks.v2.Queue",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "ResumeQueue",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.ResumeQueue",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_GetIamPolicy_async",
+      "title": "tasks getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for a [Queue][google.cloud.tasks.v2.Queue]. Returns an empty policy if the resource exists and does not have a policy set. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission on the specified resource parent: * `cloudtasks.queues.getIamPolicy`",
+      "canonical": true,
+      "file": "cloud_tasks.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.iam.v1.GetPolicyOptions"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.GetIamPolicy",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_SetIamPolicy_async",
+      "title": "tasks setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy for a [Queue][google.cloud.tasks.v2.Queue]. Replaces any existing policy. Note: The Cloud Console does not check queue-level IAM permissions yet. Project-level permissions are required to use the Cloud Console. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission on the specified resource parent: * `cloudtasks.queues.setIamPolicy`",
+      "canonical": true,
+      "file": "cloud_tasks.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy",
+            "type": ".google.iam.v1.Policy"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.SetIamPolicy",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_TestIamPermissions_async",
+      "title": "tasks testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on a [Queue][google.cloud.tasks.v2.Queue]. If the resource does not exist, this will return an empty set of permissions, not a [NOT_FOUND][google.rpc.Code.NOT_FOUND] error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
+      "canonical": true,
+      "file": "cloud_tasks.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permissions",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.iam.v1.TestIamPermissionsResponse",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.TestIamPermissions",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_ListTasks_async",
+      "title": "tasks listTasks Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the tasks in a queue. By default, only the [BASIC][google.cloud.tasks.v2.Task.View.BASIC] view is retrieved due to performance considerations; [response_view][google.cloud.tasks.v2.ListTasksRequest.response_view] controls the subset of information which is returned. The tasks may be returned in any order. The ordering may change at any time.",
+      "canonical": true,
+      "file": "cloud_tasks.list_tasks.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 85,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTasks",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.ListTasks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "response_view",
+            "type": ".google.cloud.tasks.v2.Task.View"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.tasks.v2.ListTasksResponse",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "ListTasks",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.ListTasks",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_GetTask_async",
+      "title": "tasks getTask Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a task.",
+      "canonical": true,
+      "file": "cloud_tasks.get_task.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTask",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.GetTask",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "response_view",
+            "type": ".google.cloud.tasks.v2.Task.View"
+          }
+        ],
+        "resultType": ".google.cloud.tasks.v2.Task",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "GetTask",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.GetTask",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_CreateTask_async",
+      "title": "tasks createTask Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a task and adds it to a queue. Tasks cannot be updated after creation; there is no UpdateTask command. * The maximum task size is 100KB.",
+      "canonical": true,
+      "file": "cloud_tasks.create_task.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 97,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTask",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.CreateTask",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "task",
+            "type": ".google.cloud.tasks.v2.Task"
+          },
+          {
+            "name": "response_view",
+            "type": ".google.cloud.tasks.v2.Task.View"
+          }
+        ],
+        "resultType": ".google.cloud.tasks.v2.Task",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "CreateTask",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.CreateTask",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_DeleteTask_async",
+      "title": "tasks deleteTask Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a task. A task can be deleted if it is scheduled or dispatched. A task cannot be deleted if it has executed successfully or permanently failed.",
+      "canonical": true,
+      "file": "cloud_tasks.delete_task.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTask",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.DeleteTask",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "DeleteTask",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.DeleteTask",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudtasks_v2_generated_CloudTasks_RunTask_async",
+      "title": "tasks runTask Sample",
+      "origin": "API_DEFINITION",
+      "description": " Forces a task to run now. When this method is called, Cloud Tasks will dispatch the task, even if the task is already running, the queue has reached its [RateLimits][google.cloud.tasks.v2.RateLimits] or is [PAUSED][google.cloud.tasks.v2.Queue.State.PAUSED]. This command is meant to be used for manual debugging. For example, [RunTask][google.cloud.tasks.v2.CloudTasks.RunTask] can be used to retry a failed task after a fix has been made or to manually force a task to be dispatched now. The dispatched task is returned. That is, the task that is returned contains the [status][Task.status] after the task is dispatched but before the task is received by its target. If Cloud Tasks receives a successful response from the task's target, then the task will be deleted; otherwise the task's [schedule_time][google.cloud.tasks.v2.Task.schedule_time] will be reset to the time that [RunTask][google.cloud.tasks.v2.CloudTasks.RunTask] was called plus the retry delay specified in the queue's [RetryConfig][google.cloud.tasks.v2.RetryConfig]. [RunTask][google.cloud.tasks.v2.CloudTasks.RunTask] returns [NOT_FOUND][google.rpc.Code.NOT_FOUND] when it is called on a task that has already succeeded or permanently failed.",
+      "canonical": true,
+      "file": "cloud_tasks.run_task.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunTask",
+        "fullName": "google.cloud.tasks.v2.CloudTasks.RunTask",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "response_view",
+            "type": ".google.cloud.tasks.v2.Task.View"
+          }
+        ],
+        "resultType": ".google.cloud.tasks.v2.Task",
+        "client": {
+          "shortName": "CloudTasksClient",
+          "fullName": "google.cloud.tasks.v2.CloudTasksClient"
+        },
+        "method": {
+          "shortName": "RunTask",
+          "fullName": "google.cloud.tasks.v2.CloudTasks.RunTask",
+          "service": {
+            "shortName": "CloudTasks",
+            "fullName": "google.cloud.tasks.v2.CloudTasks"
+          }
+        }
+      }
+    }
+  ]
+}

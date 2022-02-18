@@ -2458,9 +2458,8 @@ export class CloudTasksClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.cloudTasksStub!.then(stub => {
+    if (this.cloudTasksStub && !this._terminated) {
+      return this.cloudTasksStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

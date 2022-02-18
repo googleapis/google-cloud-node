@@ -151,12 +151,27 @@ describe('v2beta2.CloudTasksClient', () => {
     assert(client.cloudTasksStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new cloudtasksModule.v2beta2.CloudTasksClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.cloudTasksStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.cloudTasksStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -299,6 +314,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getQueue with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.GetQueueRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getQueue(request), expectedError);
+    });
   });
 
   describe('createQueue', () => {
@@ -409,6 +440,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createQueue with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.CreateQueueRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createQueue(request), expectedError);
     });
   });
 
@@ -524,6 +571,23 @@ describe('v2beta2.CloudTasksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateQueue with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.UpdateQueueRequest()
+      );
+      request.queue = {};
+      request.queue.name = '';
+      const expectedHeaderRequestParams = 'queue.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateQueue(request), expectedError);
+    });
   });
 
   describe('deleteQueue', () => {
@@ -634,6 +698,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteQueue with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.DeleteQueueRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteQueue(request), expectedError);
     });
   });
 
@@ -746,6 +826,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes purgeQueue with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.PurgeQueueRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.purgeQueue(request), expectedError);
+    });
   });
 
   describe('pauseQueue', () => {
@@ -856,6 +952,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes pauseQueue with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.PauseQueueRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.pauseQueue(request), expectedError);
     });
   });
 
@@ -968,6 +1080,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes resumeQueue with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.ResumeQueueRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.resumeQueue(request), expectedError);
+    });
   });
 
   describe('getIamPolicy', () => {
@@ -1079,6 +1207,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
+    });
   });
 
   describe('setIamPolicy', () => {
@@ -1189,6 +1333,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
 
@@ -1302,6 +1462,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
+    });
   });
 
   describe('getTask', () => {
@@ -1409,6 +1585,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getTask with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.GetTaskRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTask(request), expectedError);
     });
   });
 
@@ -1521,6 +1713,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createTask with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.CreateTaskRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createTask(request), expectedError);
+    });
   });
 
   describe('deleteTask', () => {
@@ -1631,6 +1839,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteTask with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.DeleteTaskRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteTask(request), expectedError);
     });
   });
 
@@ -1743,6 +1967,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes leaseTasks with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.LeaseTasksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.leaseTasks(request), expectedError);
+    });
   });
 
   describe('acknowledgeTask', () => {
@@ -1853,6 +2093,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes acknowledgeTask with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.AcknowledgeTaskRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.acknowledgeTask(request), expectedError);
     });
   });
 
@@ -1965,6 +2221,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes renewLease with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.RenewLeaseRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.renewLease(request), expectedError);
+    });
   });
 
   describe('cancelLease', () => {
@@ -2076,6 +2348,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes cancelLease with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.CancelLeaseRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.cancelLease(request), expectedError);
+    });
   });
 
   describe('runTask', () => {
@@ -2183,6 +2471,22 @@ describe('v2beta2.CloudTasksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes runTask with closed client', async () => {
+      const client = new cloudtasksModule.v2beta2.CloudTasksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tasks.v2beta2.RunTaskRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.runTask(request), expectedError);
     });
   });
 
