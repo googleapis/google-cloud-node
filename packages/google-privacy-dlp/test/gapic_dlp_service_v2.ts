@@ -151,12 +151,27 @@ describe('v2.DlpServiceClient', () => {
     assert(client.dlpServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new dlpserviceModule.v2.DlpServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.dlpServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new dlpserviceModule.v2.DlpServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.dlpServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -302,6 +317,22 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes inspectContent with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.InspectContentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.inspectContent(request), expectedError);
+    });
   });
 
   describe('redactImage', () => {
@@ -412,6 +443,22 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes redactImage with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.RedactImageRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.redactImage(request), expectedError);
     });
   });
 
@@ -524,6 +571,22 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deidentifyContent with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeidentifyContentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deidentifyContent(request), expectedError);
+    });
   });
 
   describe('reidentifyContent', () => {
@@ -635,6 +698,22 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes reidentifyContent with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ReidentifyContentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.reidentifyContent(request), expectedError);
+    });
   });
 
   describe('listInfoTypes', () => {
@@ -745,6 +824,22 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes listInfoTypes with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listInfoTypes(request), expectedError);
     });
   });
 
@@ -859,6 +954,25 @@ describe('v2.DlpServiceClient', () => {
         (client.innerApiCalls.createInspectTemplate as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createInspectTemplate with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateInspectTemplateRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createInspectTemplate(request),
+        expectedError
       );
     });
   });
@@ -976,6 +1090,25 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateInspectTemplate with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateInspectTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateInspectTemplate(request),
+        expectedError
+      );
+    });
   });
 
   describe('getInspectTemplate', () => {
@@ -1087,6 +1220,22 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getInspectTemplate with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetInspectTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getInspectTemplate(request), expectedError);
     });
   });
 
@@ -1201,6 +1350,25 @@ describe('v2.DlpServiceClient', () => {
         (client.innerApiCalls.deleteInspectTemplate as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteInspectTemplate with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteInspectTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteInspectTemplate(request),
+        expectedError
       );
     });
   });
@@ -1318,6 +1486,25 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createDeidentifyTemplate with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createDeidentifyTemplate(request),
+        expectedError
+      );
+    });
   });
 
   describe('updateDeidentifyTemplate', () => {
@@ -1431,6 +1618,25 @@ describe('v2.DlpServiceClient', () => {
         (client.innerApiCalls.updateDeidentifyTemplate as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateDeidentifyTemplate with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateDeidentifyTemplate(request),
+        expectedError
       );
     });
   });
@@ -1548,6 +1754,25 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getDeidentifyTemplate with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetDeidentifyTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getDeidentifyTemplate(request),
+        expectedError
+      );
+    });
   });
 
   describe('deleteDeidentifyTemplate', () => {
@@ -1663,6 +1888,25 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteDeidentifyTemplate with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteDeidentifyTemplate(request),
+        expectedError
+      );
+    });
   });
 
   describe('createJobTrigger', () => {
@@ -1774,6 +2018,22 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createJobTrigger with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateJobTriggerRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createJobTrigger(request), expectedError);
+    });
   });
 
   describe('updateJobTrigger', () => {
@@ -1884,6 +2144,22 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateJobTrigger with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateJobTriggerRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateJobTrigger(request), expectedError);
     });
   });
 
@@ -2000,6 +2276,25 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes hybridInspectJobTrigger with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.HybridInspectJobTriggerRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.hybridInspectJobTrigger(request),
+        expectedError
+      );
+    });
   });
 
   describe('getJobTrigger', () => {
@@ -2111,6 +2406,22 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getJobTrigger with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetJobTriggerRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getJobTrigger(request), expectedError);
+    });
   });
 
   describe('deleteJobTrigger', () => {
@@ -2221,6 +2532,22 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteJobTrigger with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteJobTriggerRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteJobTrigger(request), expectedError);
     });
   });
 
@@ -2334,6 +2661,22 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes activateJobTrigger with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ActivateJobTriggerRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.activateJobTrigger(request), expectedError);
+    });
   });
 
   describe('createDlpJob', () => {
@@ -2445,6 +2788,22 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createDlpJob with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateDlpJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createDlpJob(request), expectedError);
+    });
   });
 
   describe('getDlpJob', () => {
@@ -2552,6 +2911,22 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getDlpJob with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetDlpJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDlpJob(request), expectedError);
     });
   });
 
@@ -2664,6 +3039,22 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteDlpJob with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteDlpJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteDlpJob(request), expectedError);
+    });
   });
 
   describe('cancelDlpJob', () => {
@@ -2774,6 +3165,22 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes cancelDlpJob with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CancelDlpJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.cancelDlpJob(request), expectedError);
     });
   });
 
@@ -2887,6 +3294,22 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createStoredInfoType with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateStoredInfoTypeRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createStoredInfoType(request), expectedError);
+    });
   });
 
   describe('updateStoredInfoType', () => {
@@ -2999,6 +3422,22 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateStoredInfoType with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateStoredInfoType(request), expectedError);
+    });
   });
 
   describe('getStoredInfoType', () => {
@@ -3109,6 +3548,22 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getStoredInfoType with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetStoredInfoTypeRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getStoredInfoType(request), expectedError);
     });
   });
 
@@ -3222,6 +3677,22 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteStoredInfoType with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteStoredInfoType(request), expectedError);
+    });
   });
 
   describe('hybridInspectDlpJob', () => {
@@ -3334,6 +3805,22 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes hybridInspectDlpJob with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.HybridInspectDlpJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.hybridInspectDlpJob(request), expectedError);
+    });
   });
 
   describe('finishDlpJob', () => {
@@ -3444,6 +3931,22 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes finishDlpJob with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.FinishDlpJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.finishDlpJob(request), expectedError);
     });
   });
 

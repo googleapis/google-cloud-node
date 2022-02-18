@@ -6051,9 +6051,8 @@ export class DlpServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.dlpServiceStub!.then(stub => {
+    if (this.dlpServiceStub && !this._terminated) {
+      return this.dlpServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
