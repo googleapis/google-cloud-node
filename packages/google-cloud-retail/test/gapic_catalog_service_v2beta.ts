@@ -153,12 +153,27 @@ describe('v2beta.CatalogServiceClient', () => {
     assert(client.catalogServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new catalogserviceModule.v2beta.CatalogServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.catalogServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.catalogServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -307,6 +322,23 @@ describe('v2beta.CatalogServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateCatalog with closed client', async () => {
+      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2beta.UpdateCatalogRequest()
+      );
+      request.catalog = {};
+      request.catalog.name = '';
+      const expectedHeaderRequestParams = 'catalog.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateCatalog(request), expectedError);
+    });
   });
 
   describe('setDefaultBranch', () => {
@@ -418,6 +450,22 @@ describe('v2beta.CatalogServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setDefaultBranch with closed client', async () => {
+      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2beta.SetDefaultBranchRequest()
+      );
+      request.catalog = '';
+      const expectedHeaderRequestParams = 'catalog=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setDefaultBranch(request), expectedError);
+    });
   });
 
   describe('getDefaultBranch', () => {
@@ -528,6 +576,22 @@ describe('v2beta.CatalogServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getDefaultBranch with closed client', async () => {
+      const client = new catalogserviceModule.v2beta.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2beta.GetDefaultBranchRequest()
+      );
+      request.catalog = '';
+      const expectedHeaderRequestParams = 'catalog=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDefaultBranch(request), expectedError);
     });
   });
 

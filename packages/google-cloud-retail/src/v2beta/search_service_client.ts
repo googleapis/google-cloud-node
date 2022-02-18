@@ -350,6 +350,9 @@ export class SearchServiceClient {
    *   identify a visitor on a single device. This unique identifier should not
    *   change if the visitor logs in or out of the website.
    *
+   *   This should be the same identifier as
+   *   {@link google.cloud.retail.v2beta.UserEvent.visitor_id|UserEvent.visitor_id}.
+   *
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
    * @param {google.cloud.retail.v2beta.UserInfo} request.userInfo
@@ -419,11 +422,12 @@ export class SearchServiceClient {
    *   Boost specification to boost certain products. See more details at this
    *   [user guide](https://cloud.google.com/retail/docs/boosting).
    *
-   *   Notice that if both {@link |ServingConfig.boost_control_ids} and
-   *   [SearchRequest.boost_spec] are set, the boost conditions from both places
-   *   are evaluated. If a search request matches multiple boost conditions,
-   *   the final boost score is equal to the sum of the boost scores from all
-   *   matched boost conditions.
+   *   Notice that if both
+   *   {@link google.cloud.retail.v2beta.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
+   *   and [SearchRequest.boost_spec] are set, the boost conditions from both
+   *   places are evaluated. If a search request matches multiple boost
+   *   conditions, the final boost score is equal to the sum of the boost scores
+   *   from all matched boost conditions.
    * @param {google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
    *   query expansion will occur. See more details at this [user
@@ -431,14 +435,13 @@ export class SearchServiceClient {
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link google.cloud.retail.v2beta.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2beta.Product|Product}s attributes. The attributes
-   *   from all the matching
+   *   {@link google.cloud.retail.v2beta.Product|Product}s attributes,
+   *   {@link google.cloud.retail.v2beta.FulfillmentInfo|FulfillmentInfo} or
+   *   {@link |LocalInventory}s attributes. The attributes from all the matching
    *   {@link google.cloud.retail.v2beta.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2beta.Product|Product}s are merged and
-   *   de-duplicated. Notice that rollup
-   *   {@link google.cloud.retail.v2beta.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2beta.Product|Product}s attributes will lead to
-   *   extra query latency. Maximum number of keys is 10.
+   *   {@link google.cloud.retail.v2beta.Product|Product}s or {@link |LocalInventory}s are
+   *   merged and de-duplicated. Notice that rollup attributes will lead to extra
+   *   query latency. Maximum number of keys is 30.
    *
    *   For {@link google.cloud.retail.v2beta.FulfillmentInfo|FulfillmentInfo}, a
    *   fulfillment type and a fulfillment ID must be provided in the format of
@@ -453,6 +456,7 @@ export class SearchServiceClient {
    *   * discount
    *   * variantId
    *   * inventory(place_id,price)
+   *   * inventory(place_id,original_price)
    *   * inventory(place_id,attributes.key), where key is any key in the
    *     {@link |Product.inventories.attributes} map.
    *   * attributes.key, where key is any key in the
@@ -615,6 +619,9 @@ export class SearchServiceClient {
    *   identify a visitor on a single device. This unique identifier should not
    *   change if the visitor logs in or out of the website.
    *
+   *   This should be the same identifier as
+   *   {@link google.cloud.retail.v2beta.UserEvent.visitor_id|UserEvent.visitor_id}.
+   *
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
    * @param {google.cloud.retail.v2beta.UserInfo} request.userInfo
@@ -684,11 +691,12 @@ export class SearchServiceClient {
    *   Boost specification to boost certain products. See more details at this
    *   [user guide](https://cloud.google.com/retail/docs/boosting).
    *
-   *   Notice that if both {@link |ServingConfig.boost_control_ids} and
-   *   [SearchRequest.boost_spec] are set, the boost conditions from both places
-   *   are evaluated. If a search request matches multiple boost conditions,
-   *   the final boost score is equal to the sum of the boost scores from all
-   *   matched boost conditions.
+   *   Notice that if both
+   *   {@link google.cloud.retail.v2beta.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
+   *   and [SearchRequest.boost_spec] are set, the boost conditions from both
+   *   places are evaluated. If a search request matches multiple boost
+   *   conditions, the final boost score is equal to the sum of the boost scores
+   *   from all matched boost conditions.
    * @param {google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
    *   query expansion will occur. See more details at this [user
@@ -696,14 +704,13 @@ export class SearchServiceClient {
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link google.cloud.retail.v2beta.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2beta.Product|Product}s attributes. The attributes
-   *   from all the matching
+   *   {@link google.cloud.retail.v2beta.Product|Product}s attributes,
+   *   {@link google.cloud.retail.v2beta.FulfillmentInfo|FulfillmentInfo} or
+   *   {@link |LocalInventory}s attributes. The attributes from all the matching
    *   {@link google.cloud.retail.v2beta.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2beta.Product|Product}s are merged and
-   *   de-duplicated. Notice that rollup
-   *   {@link google.cloud.retail.v2beta.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2beta.Product|Product}s attributes will lead to
-   *   extra query latency. Maximum number of keys is 10.
+   *   {@link google.cloud.retail.v2beta.Product|Product}s or {@link |LocalInventory}s are
+   *   merged and de-duplicated. Notice that rollup attributes will lead to extra
+   *   query latency. Maximum number of keys is 30.
    *
    *   For {@link google.cloud.retail.v2beta.FulfillmentInfo|FulfillmentInfo}, a
    *   fulfillment type and a fulfillment ID must be provided in the format of
@@ -718,6 +725,7 @@ export class SearchServiceClient {
    *   * discount
    *   * variantId
    *   * inventory(place_id,price)
+   *   * inventory(place_id,original_price)
    *   * inventory(place_id,attributes.key), where key is any key in the
    *     {@link |Product.inventories.attributes} map.
    *   * attributes.key, where key is any key in the
@@ -836,6 +844,9 @@ export class SearchServiceClient {
    *   identify a visitor on a single device. This unique identifier should not
    *   change if the visitor logs in or out of the website.
    *
+   *   This should be the same identifier as
+   *   {@link google.cloud.retail.v2beta.UserEvent.visitor_id|UserEvent.visitor_id}.
+   *
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
    * @param {google.cloud.retail.v2beta.UserInfo} request.userInfo
@@ -905,11 +916,12 @@ export class SearchServiceClient {
    *   Boost specification to boost certain products. See more details at this
    *   [user guide](https://cloud.google.com/retail/docs/boosting).
    *
-   *   Notice that if both {@link |ServingConfig.boost_control_ids} and
-   *   [SearchRequest.boost_spec] are set, the boost conditions from both places
-   *   are evaluated. If a search request matches multiple boost conditions,
-   *   the final boost score is equal to the sum of the boost scores from all
-   *   matched boost conditions.
+   *   Notice that if both
+   *   {@link google.cloud.retail.v2beta.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
+   *   and [SearchRequest.boost_spec] are set, the boost conditions from both
+   *   places are evaluated. If a search request matches multiple boost
+   *   conditions, the final boost score is equal to the sum of the boost scores
+   *   from all matched boost conditions.
    * @param {google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
    *   query expansion will occur. See more details at this [user
@@ -917,14 +929,13 @@ export class SearchServiceClient {
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link google.cloud.retail.v2beta.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2beta.Product|Product}s attributes. The attributes
-   *   from all the matching
+   *   {@link google.cloud.retail.v2beta.Product|Product}s attributes,
+   *   {@link google.cloud.retail.v2beta.FulfillmentInfo|FulfillmentInfo} or
+   *   {@link |LocalInventory}s attributes. The attributes from all the matching
    *   {@link google.cloud.retail.v2beta.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2beta.Product|Product}s are merged and
-   *   de-duplicated. Notice that rollup
-   *   {@link google.cloud.retail.v2beta.Product.Type.VARIANT|variant}
-   *   {@link google.cloud.retail.v2beta.Product|Product}s attributes will lead to
-   *   extra query latency. Maximum number of keys is 10.
+   *   {@link google.cloud.retail.v2beta.Product|Product}s or {@link |LocalInventory}s are
+   *   merged and de-duplicated. Notice that rollup attributes will lead to extra
+   *   query latency. Maximum number of keys is 30.
    *
    *   For {@link google.cloud.retail.v2beta.FulfillmentInfo|FulfillmentInfo}, a
    *   fulfillment type and a fulfillment ID must be provided in the format of
@@ -939,6 +950,7 @@ export class SearchServiceClient {
    *   * discount
    *   * variantId
    *   * inventory(place_id,price)
+   *   * inventory(place_id,original_price)
    *   * inventory(place_id,attributes.key), where key is any key in the
    *     {@link |Product.inventories.attributes} map.
    *   * attributes.key, where key is any key in the
@@ -1240,9 +1252,8 @@ export class SearchServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.searchServiceStub!.then(stub => {
+    if (this.searchServiceStub && !this._terminated) {
+      return this.searchServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

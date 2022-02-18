@@ -1087,8 +1087,9 @@ export class ProductServiceClient {
    *   needed, {@link |UpdateProduct} should be invoked instead.
    * @param {google.protobuf.FieldMask} request.setMask
    *   Indicates which inventory fields in the provided
-   *   {@link google.cloud.retail.v2beta.Product|Product} to update. If not set or set
-   *   with empty paths, all inventory fields will be updated.
+   *   {@link google.cloud.retail.v2beta.Product|Product} to update.
+   *
+   *   At least one field must be provided.
    *
    *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
    *   is returned and the entire update will be ignored.
@@ -2244,9 +2245,8 @@ export class ProductServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.productServiceStub!.then(stub => {
+    if (this.productServiceStub && !this._terminated) {
+      return this.productServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

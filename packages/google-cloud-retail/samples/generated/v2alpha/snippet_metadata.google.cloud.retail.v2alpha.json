@@ -1,0 +1,1295 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-retail",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.retail.v2alpha",
+        "version": "v2alpha"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "retail_v2alpha_generated_CatalogService_ListCatalogs_async",
+      "title": "CatalogService listCatalogs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the [Catalog][google.cloud.retail.v2alpha.Catalog]s associated with the project.",
+      "canonical": true,
+      "file": "catalog_service.list_catalogs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCatalogs",
+        "fullName": "google.cloud.retail.v2alpha.CatalogService.ListCatalogs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.retail.v2alpha.ListCatalogsResponse",
+        "client": {
+          "shortName": "CatalogServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.CatalogServiceClient"
+        },
+        "method": {
+          "shortName": "ListCatalogs",
+          "fullName": "google.cloud.retail.v2alpha.CatalogService.ListCatalogs",
+          "service": {
+            "shortName": "CatalogService",
+            "fullName": "google.cloud.retail.v2alpha.CatalogService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_CatalogService_UpdateCatalog_async",
+      "title": "CatalogService updateCatalog Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the [Catalog][google.cloud.retail.v2alpha.Catalog]s.",
+      "canonical": true,
+      "file": "catalog_service.update_catalog.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCatalog",
+        "fullName": "google.cloud.retail.v2alpha.CatalogService.UpdateCatalog",
+        "async": true,
+        "parameters": [
+          {
+            "name": "catalog",
+            "type": ".google.cloud.retail.v2alpha.Catalog"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.retail.v2alpha.Catalog",
+        "client": {
+          "shortName": "CatalogServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.CatalogServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateCatalog",
+          "fullName": "google.cloud.retail.v2alpha.CatalogService.UpdateCatalog",
+          "service": {
+            "shortName": "CatalogService",
+            "fullName": "google.cloud.retail.v2alpha.CatalogService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_CatalogService_SetDefaultBranch_async",
+      "title": "CatalogService setDefaultBranch Sample",
+      "origin": "API_DEFINITION",
+      "description": " Set a specified branch id as default branch. API methods such as [SearchService.Search][google.cloud.retail.v2alpha.SearchService.Search], [ProductService.GetProduct][google.cloud.retail.v2alpha.ProductService.GetProduct], [ProductService.ListProducts][google.cloud.retail.v2alpha.ProductService.ListProducts] will treat requests using \"default_branch\" to the actual branch id set as default. For example, if `projects/*/locations/*/catalogs/*/branches/1` is set as default, setting [SearchRequest.branch][google.cloud.retail.v2alpha.SearchRequest.branch] to `projects/*/locations/*/catalogs/*/branches/default_branch` is equivalent to setting [SearchRequest.branch][google.cloud.retail.v2alpha.SearchRequest.branch] to `projects/*/locations/*/catalogs/*/branches/1`. Using multiple branches can be useful when developers would like to have a staging branch to test and verify for future usage. When it becomes ready, developers switch on the staging branch using this API while keeping using `projects/*/locations/*/catalogs/*/branches/default_branch` as [SearchRequest.branch][google.cloud.retail.v2alpha.SearchRequest.branch] to route the traffic to this staging branch. CAUTION: If you have live predict/search traffic, switching the default branch could potentially cause outages if the ID space of the new branch is very different from the old one. More specifically: * PredictionService will only return product IDs from branch {newBranch}. * SearchService will only return product IDs from branch {newBranch}   (if branch is not explicitly set). * UserEventService will only join events with products from branch   {newBranch}. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact cloud sales if you are interested in using Retail Search.",
+      "canonical": true,
+      "file": "catalog_service.set_default_branch.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetDefaultBranch",
+        "fullName": "google.cloud.retail.v2alpha.CatalogService.SetDefaultBranch",
+        "async": true,
+        "parameters": [
+          {
+            "name": "catalog",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "branch_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "note",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "CatalogServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.CatalogServiceClient"
+        },
+        "method": {
+          "shortName": "SetDefaultBranch",
+          "fullName": "google.cloud.retail.v2alpha.CatalogService.SetDefaultBranch",
+          "service": {
+            "shortName": "CatalogService",
+            "fullName": "google.cloud.retail.v2alpha.CatalogService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_CatalogService_GetDefaultBranch_async",
+      "title": "CatalogService getDefaultBranch Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get which branch is currently default branch set by [CatalogService.SetDefaultBranch][google.cloud.retail.v2alpha.CatalogService.SetDefaultBranch] method under a specified parent catalog. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact cloud sales if you are interested in using Retail Search.",
+      "canonical": true,
+      "file": "catalog_service.get_default_branch.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 50,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDefaultBranch",
+        "fullName": "google.cloud.retail.v2alpha.CatalogService.GetDefaultBranch",
+        "async": true,
+        "parameters": [
+          {
+            "name": "catalog",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.retail.v2alpha.GetDefaultBranchResponse",
+        "client": {
+          "shortName": "CatalogServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.CatalogServiceClient"
+        },
+        "method": {
+          "shortName": "GetDefaultBranch",
+          "fullName": "google.cloud.retail.v2alpha.CatalogService.GetDefaultBranch",
+          "service": {
+            "shortName": "CatalogService",
+            "fullName": "google.cloud.retail.v2alpha.CatalogService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_CompletionService_CompleteQuery_async",
+      "title": "CatalogService completeQuery Sample",
+      "origin": "API_DEFINITION",
+      "description": " Completes the specified prefix with keyword suggestions. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact cloud sales if you are interested in using Retail Search.",
+      "canonical": true,
+      "file": "completion_service.complete_query.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 109,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CompleteQuery",
+        "fullName": "google.cloud.retail.v2alpha.CompletionService.CompleteQuery",
+        "async": true,
+        "parameters": [
+          {
+            "name": "catalog",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "visitor_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_codes",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "device_type",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_suggestions",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.retail.v2alpha.CompleteQueryResponse",
+        "client": {
+          "shortName": "CompletionServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.CompletionServiceClient"
+        },
+        "method": {
+          "shortName": "CompleteQuery",
+          "fullName": "google.cloud.retail.v2alpha.CompletionService.CompleteQuery",
+          "service": {
+            "shortName": "CompletionService",
+            "fullName": "google.cloud.retail.v2alpha.CompletionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_CompletionService_ImportCompletionData_async",
+      "title": "CatalogService importCompletionData Sample",
+      "origin": "API_DEFINITION",
+      "description": " Bulk import of processed completion dataset. Request processing may be synchronous. Partial updating is not supported. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact cloud sales if you are interested in using Retail Search.",
+      "canonical": true,
+      "file": "completion_service.import_completion_data.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportCompletionData",
+        "fullName": "google.cloud.retail.v2alpha.CompletionService.ImportCompletionData",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_config",
+            "type": ".google.cloud.retail.v2alpha.CompletionDataInputConfig"
+          },
+          {
+            "name": "notification_pubsub_topic",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CompletionServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.CompletionServiceClient"
+        },
+        "method": {
+          "shortName": "ImportCompletionData",
+          "fullName": "google.cloud.retail.v2alpha.CompletionService.ImportCompletionData",
+          "service": {
+            "shortName": "CompletionService",
+            "fullName": "google.cloud.retail.v2alpha.CompletionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_PredictionService_Predict_async",
+      "title": "CatalogService predict Sample",
+      "origin": "API_DEFINITION",
+      "description": " Makes a recommendation prediction.",
+      "canonical": true,
+      "file": "prediction_service.predict.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 150,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Predict",
+        "fullName": "google.cloud.retail.v2alpha.PredictionService.Predict",
+        "async": true,
+        "parameters": [
+          {
+            "name": "placement",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "user_event",
+            "type": ".google.cloud.retail.v2alpha.UserEvent"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "params",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "labels",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.retail.v2alpha.PredictResponse",
+        "client": {
+          "shortName": "PredictionServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.PredictionServiceClient"
+        },
+        "method": {
+          "shortName": "Predict",
+          "fullName": "google.cloud.retail.v2alpha.PredictionService.Predict",
+          "service": {
+            "shortName": "PredictionService",
+            "fullName": "google.cloud.retail.v2alpha.PredictionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_ProductService_CreateProduct_async",
+      "title": "CatalogService createProduct Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a [Product][google.cloud.retail.v2alpha.Product].",
+      "canonical": true,
+      "file": "product_service.create_product.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateProduct",
+        "fullName": "google.cloud.retail.v2alpha.ProductService.CreateProduct",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "product",
+            "type": ".google.cloud.retail.v2alpha.Product"
+          },
+          {
+            "name": "product_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.retail.v2alpha.Product",
+        "client": {
+          "shortName": "ProductServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.ProductServiceClient"
+        },
+        "method": {
+          "shortName": "CreateProduct",
+          "fullName": "google.cloud.retail.v2alpha.ProductService.CreateProduct",
+          "service": {
+            "shortName": "ProductService",
+            "fullName": "google.cloud.retail.v2alpha.ProductService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_ProductService_GetProduct_async",
+      "title": "CatalogService getProduct Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a [Product][google.cloud.retail.v2alpha.Product].",
+      "canonical": true,
+      "file": "product_service.get_product.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetProduct",
+        "fullName": "google.cloud.retail.v2alpha.ProductService.GetProduct",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.retail.v2alpha.Product",
+        "client": {
+          "shortName": "ProductServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.ProductServiceClient"
+        },
+        "method": {
+          "shortName": "GetProduct",
+          "fullName": "google.cloud.retail.v2alpha.ProductService.GetProduct",
+          "service": {
+            "shortName": "ProductService",
+            "fullName": "google.cloud.retail.v2alpha.ProductService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_ProductService_ListProducts_async",
+      "title": "CatalogService listProducts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a list of [Product][google.cloud.retail.v2alpha.Product]s.",
+      "canonical": true,
+      "file": "product_service.list_products.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 133,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListProducts",
+        "fullName": "google.cloud.retail.v2alpha.ProductService.ListProducts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "read_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "require_total_size",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.retail.v2alpha.ListProductsResponse",
+        "client": {
+          "shortName": "ProductServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.ProductServiceClient"
+        },
+        "method": {
+          "shortName": "ListProducts",
+          "fullName": "google.cloud.retail.v2alpha.ProductService.ListProducts",
+          "service": {
+            "shortName": "ProductService",
+            "fullName": "google.cloud.retail.v2alpha.ProductService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_ProductService_UpdateProduct_async",
+      "title": "CatalogService updateProduct Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a [Product][google.cloud.retail.v2alpha.Product].",
+      "canonical": true,
+      "file": "product_service.update_product.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateProduct",
+        "fullName": "google.cloud.retail.v2alpha.ProductService.UpdateProduct",
+        "async": true,
+        "parameters": [
+          {
+            "name": "product",
+            "type": ".google.cloud.retail.v2alpha.Product"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.retail.v2alpha.Product",
+        "client": {
+          "shortName": "ProductServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.ProductServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateProduct",
+          "fullName": "google.cloud.retail.v2alpha.ProductService.UpdateProduct",
+          "service": {
+            "shortName": "ProductService",
+            "fullName": "google.cloud.retail.v2alpha.ProductService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_ProductService_DeleteProduct_async",
+      "title": "CatalogService deleteProduct Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a [Product][google.cloud.retail.v2alpha.Product].",
+      "canonical": true,
+      "file": "product_service.delete_product.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteProduct",
+        "fullName": "google.cloud.retail.v2alpha.ProductService.DeleteProduct",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ProductServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.ProductServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteProduct",
+          "fullName": "google.cloud.retail.v2alpha.ProductService.DeleteProduct",
+          "service": {
+            "shortName": "ProductService",
+            "fullName": "google.cloud.retail.v2alpha.ProductService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_ProductService_ImportProducts_async",
+      "title": "CatalogService importProducts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Bulk import of multiple [Product][google.cloud.retail.v2alpha.Product]s. Request processing may be synchronous. No partial updating is supported. Non-existing items are created. Note that it is possible for a subset of the [Product][google.cloud.retail.v2alpha.Product]s to be successfully updated.",
+      "canonical": true,
+      "file": "product_service.import_products.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 96,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportProducts",
+        "fullName": "google.cloud.retail.v2alpha.ProductService.ImportProducts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_config",
+            "type": ".google.cloud.retail.v2alpha.ProductInputConfig"
+          },
+          {
+            "name": "errors_config",
+            "type": ".google.cloud.retail.v2alpha.ImportErrorsConfig"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "reconciliation_mode",
+            "type": ".google.cloud.retail.v2alpha.ImportProductsRequest.ReconciliationMode"
+          },
+          {
+            "name": "notification_pubsub_topic",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ProductServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.ProductServiceClient"
+        },
+        "method": {
+          "shortName": "ImportProducts",
+          "fullName": "google.cloud.retail.v2alpha.ProductService.ImportProducts",
+          "service": {
+            "shortName": "ProductService",
+            "fullName": "google.cloud.retail.v2alpha.ProductService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_ProductService_SetInventory_async",
+      "title": "CatalogService setInventory Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates inventory information for a [Product][google.cloud.retail.v2alpha.Product] while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the [Product][google.cloud.retail.v2alpha.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the [Product][google.cloud.retail.v2alpha.Product] queried by [GetProduct][google.cloud.retail.v2alpha.ProductService.GetProduct] or [ListProducts][google.cloud.retail.v2alpha.ProductService.ListProducts]. When inventory is updated with [CreateProduct][google.cloud.retail.v2alpha.ProductService.CreateProduct] and [UpdateProduct][google.cloud.retail.v2alpha.ProductService.UpdateProduct], the specified inventory field value(s) will overwrite any existing value(s) while ignoring the last update time for this field. Furthermore, the last update time for the specified inventory fields will be overwritten to the time of the [CreateProduct][google.cloud.retail.v2alpha.ProductService.CreateProduct] or [UpdateProduct][google.cloud.retail.v2alpha.ProductService.UpdateProduct] request. If no inventory fields are set in [CreateProductRequest.product][google.cloud.retail.v2alpha.CreateProductRequest.product], then any pre-existing inventory information for this product will be used. If no inventory fields are set in [UpdateProductRequest.set_mask][], then any existing inventory information will be preserved. Pre-existing inventory information can only be updated with [SetInventory][google.cloud.retail.v2alpha.ProductService.SetInventory], [AddFulfillmentPlaces][google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces], and [RemoveFulfillmentPlaces][google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces]. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact cloud sales if you are interested in using Retail Search.",
+      "canonical": true,
+      "file": "product_service.set_inventory.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 102,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetInventory",
+        "fullName": "google.cloud.retail.v2alpha.ProductService.SetInventory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "inventory",
+            "type": ".google.cloud.retail.v2alpha.Product"
+          },
+          {
+            "name": "set_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "set_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ProductServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.ProductServiceClient"
+        },
+        "method": {
+          "shortName": "SetInventory",
+          "fullName": "google.cloud.retail.v2alpha.ProductService.SetInventory",
+          "service": {
+            "shortName": "ProductService",
+            "fullName": "google.cloud.retail.v2alpha.ProductService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_ProductService_AddFulfillmentPlaces_async",
+      "title": "CatalogService addFulfillmentPlaces Sample",
+      "origin": "API_DEFINITION",
+      "description": " Incrementally adds place IDs to [Product.fulfillment_info.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2alpha.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the added place IDs are not immediately manifested in the [Product][google.cloud.retail.v2alpha.Product] queried by [GetProduct][google.cloud.retail.v2alpha.ProductService.GetProduct] or [ListProducts][google.cloud.retail.v2alpha.ProductService.ListProducts]. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact cloud sales if you are interested in using Retail Search.",
+      "canonical": true,
+      "file": "product_service.add_fulfillment_places.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 107,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AddFulfillmentPlaces",
+        "fullName": "google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces",
+        "async": true,
+        "parameters": [
+          {
+            "name": "product",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "type",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "place_ids",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "add_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ProductServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.ProductServiceClient"
+        },
+        "method": {
+          "shortName": "AddFulfillmentPlaces",
+          "fullName": "google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces",
+          "service": {
+            "shortName": "ProductService",
+            "fullName": "google.cloud.retail.v2alpha.ProductService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_ProductService_RemoveFulfillmentPlaces_async",
+      "title": "CatalogService removeFulfillmentPlaces Sample",
+      "origin": "API_DEFINITION",
+      "description": " Incrementally removes place IDs from a [Product.fulfillment_info.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2alpha.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the removed place IDs are not immediately manifested in the [Product][google.cloud.retail.v2alpha.Product] queried by [GetProduct][google.cloud.retail.v2alpha.ProductService.GetProduct] or [ListProducts][google.cloud.retail.v2alpha.ProductService.ListProducts]. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact cloud sales if you are interested in using Retail Search.",
+      "canonical": true,
+      "file": "product_service.remove_fulfillment_places.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 103,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemoveFulfillmentPlaces",
+        "fullName": "google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces",
+        "async": true,
+        "parameters": [
+          {
+            "name": "product",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "type",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "place_ids",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "remove_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ProductServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.ProductServiceClient"
+        },
+        "method": {
+          "shortName": "RemoveFulfillmentPlaces",
+          "fullName": "google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces",
+          "service": {
+            "shortName": "ProductService",
+            "fullName": "google.cloud.retail.v2alpha.ProductService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_ProductService_AddLocalInventories_async",
+      "title": "CatalogService addLocalInventories Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates local inventory information for a [Product][google.cloud.retail.v2alpha.Product] at a list of places, while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the [Product][google.cloud.retail.v2alpha.Product] to exist before updating inventory information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the [Product][google.cloud.retail.v2alpha.Product] queried by [GetProduct][google.cloud.retail.v2alpha.ProductService.GetProduct] or [ListProducts][google.cloud.retail.v2alpha.ProductService.ListProducts]. Local inventory information can only be modified using this method. [CreateProduct][google.cloud.retail.v2alpha.ProductService.CreateProduct] and [UpdateProduct][google.cloud.retail.v2alpha.ProductService.UpdateProduct] has no effect on local inventories. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact Cloud sales if you are interested in using Retail Search.",
+      "canonical": true,
+      "file": "product_service.add_local_inventories.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 92,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AddLocalInventories",
+        "fullName": "google.cloud.retail.v2alpha.ProductService.AddLocalInventories",
+        "async": true,
+        "parameters": [
+          {
+            "name": "product",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "local_inventories",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "add_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "add_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ProductServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.ProductServiceClient"
+        },
+        "method": {
+          "shortName": "AddLocalInventories",
+          "fullName": "google.cloud.retail.v2alpha.ProductService.AddLocalInventories",
+          "service": {
+            "shortName": "ProductService",
+            "fullName": "google.cloud.retail.v2alpha.ProductService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_ProductService_RemoveLocalInventories_async",
+      "title": "CatalogService removeLocalInventories Sample",
+      "origin": "API_DEFINITION",
+      "description": " Remove local inventory information for a [Product][google.cloud.retail.v2alpha.Product] at a list of places at a removal timestamp. This process is asynchronous. If the request is valid, the removal will be enqueued and processed downstream. As a consequence, when a response is returned, removals are not immediately manifested in the [Product][google.cloud.retail.v2alpha.Product] queried by [GetProduct][google.cloud.retail.v2alpha.ProductService.GetProduct] or [ListProducts][google.cloud.retail.v2alpha.ProductService.ListProducts]. Local inventory information can only be removed using this method. [CreateProduct][google.cloud.retail.v2alpha.ProductService.CreateProduct] and [UpdateProduct][google.cloud.retail.v2alpha.ProductService.UpdateProduct] has no effect on local inventories. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact Cloud sales if you are interested in using Retail Search.",
+      "canonical": true,
+      "file": "product_service.remove_local_inventories.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemoveLocalInventories",
+        "fullName": "google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories",
+        "async": true,
+        "parameters": [
+          {
+            "name": "product",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "place_ids",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "remove_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ProductServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.ProductServiceClient"
+        },
+        "method": {
+          "shortName": "RemoveLocalInventories",
+          "fullName": "google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories",
+          "service": {
+            "shortName": "ProductService",
+            "fullName": "google.cloud.retail.v2alpha.ProductService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_SearchService_Search_async",
+      "title": "CatalogService search Sample",
+      "origin": "API_DEFINITION",
+      "description": " Performs a search. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact cloud sales if you are interested in using Retail Search.",
+      "canonical": true,
+      "file": "search_service.search.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 274,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Search",
+        "fullName": "google.cloud.retail.v2alpha.SearchService.Search",
+        "async": true,
+        "parameters": [
+          {
+            "name": "placement",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "branch",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "visitor_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "user_info",
+            "type": ".google.cloud.retail.v2alpha.UserInfo"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "offset",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "canonical_filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "facet_specs",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "dynamic_facet_spec",
+            "type": ".google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec"
+          },
+          {
+            "name": "boost_spec",
+            "type": ".google.cloud.retail.v2alpha.SearchRequest.BoostSpec"
+          },
+          {
+            "name": "query_expansion_spec",
+            "type": ".google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec"
+          },
+          {
+            "name": "relevance_threshold",
+            "type": ".google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold"
+          },
+          {
+            "name": "variant_rollup_keys",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "page_categories",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "search_mode",
+            "type": ".google.cloud.retail.v2alpha.SearchRequest.SearchMode"
+          }
+        ],
+        "resultType": ".google.cloud.retail.v2alpha.SearchResponse",
+        "client": {
+          "shortName": "SearchServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.SearchServiceClient"
+        },
+        "method": {
+          "shortName": "Search",
+          "fullName": "google.cloud.retail.v2alpha.SearchService.Search",
+          "service": {
+            "shortName": "SearchService",
+            "fullName": "google.cloud.retail.v2alpha.SearchService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_UserEventService_WriteUserEvent_async",
+      "title": "CatalogService writeUserEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Writes a single user event.",
+      "canonical": true,
+      "file": "user_event_service.write_user_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "WriteUserEvent",
+        "fullName": "google.cloud.retail.v2alpha.UserEventService.WriteUserEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "user_event",
+            "type": ".google.cloud.retail.v2alpha.UserEvent"
+          }
+        ],
+        "resultType": ".google.cloud.retail.v2alpha.UserEvent",
+        "client": {
+          "shortName": "UserEventServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.UserEventServiceClient"
+        },
+        "method": {
+          "shortName": "WriteUserEvent",
+          "fullName": "google.cloud.retail.v2alpha.UserEventService.WriteUserEvent",
+          "service": {
+            "shortName": "UserEventService",
+            "fullName": "google.cloud.retail.v2alpha.UserEventService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_UserEventService_CollectUserEvent_async",
+      "title": "CatalogService collectUserEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a 3rd party domain. This method is used only by the Retail API JavaScript pixel and Google Tag Manager. Users should not call this method directly.",
+      "canonical": true,
+      "file": "user_event_service.collect_user_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CollectUserEvent",
+        "fullName": "google.cloud.retail.v2alpha.UserEventService.CollectUserEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "user_event",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ets",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "UserEventServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.UserEventServiceClient"
+        },
+        "method": {
+          "shortName": "CollectUserEvent",
+          "fullName": "google.cloud.retail.v2alpha.UserEventService.CollectUserEvent",
+          "service": {
+            "shortName": "UserEventService",
+            "fullName": "google.cloud.retail.v2alpha.UserEventService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_UserEventService_PurgeUserEvents_async",
+      "title": "CatalogService purgeUserEvents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes permanently all user events specified by the filter provided. Depending on the number of events specified by the filter, this operation could take hours or days to complete. To test a filter, use the list command first.",
+      "canonical": true,
+      "file": "user_event_service.purge_user_events.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PurgeUserEvents",
+        "fullName": "google.cloud.retail.v2alpha.UserEventService.PurgeUserEvents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "UserEventServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.UserEventServiceClient"
+        },
+        "method": {
+          "shortName": "PurgeUserEvents",
+          "fullName": "google.cloud.retail.v2alpha.UserEventService.PurgeUserEvents",
+          "service": {
+            "shortName": "UserEventService",
+            "fullName": "google.cloud.retail.v2alpha.UserEventService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_UserEventService_ImportUserEvents_async",
+      "title": "CatalogService importUserEvents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Bulk import of User events. Request processing might be synchronous. Events that already exist are skipped. Use this method for backfilling historical user events. Operation.response is of type ImportResponse. Note that it is possible for a subset of the items to be successfully inserted. Operation.metadata is of type ImportMetadata.",
+      "canonical": true,
+      "file": "user_event_service.import_user_events.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportUserEvents",
+        "fullName": "google.cloud.retail.v2alpha.UserEventService.ImportUserEvents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_config",
+            "type": ".google.cloud.retail.v2alpha.UserEventInputConfig"
+          },
+          {
+            "name": "errors_config",
+            "type": ".google.cloud.retail.v2alpha.ImportErrorsConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "UserEventServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.UserEventServiceClient"
+        },
+        "method": {
+          "shortName": "ImportUserEvents",
+          "fullName": "google.cloud.retail.v2alpha.UserEventService.ImportUserEvents",
+          "service": {
+            "shortName": "UserEventService",
+            "fullName": "google.cloud.retail.v2alpha.UserEventService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "retail_v2alpha_generated_UserEventService_RejoinUserEvents_async",
+      "title": "CatalogService rejoinUserEvents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Triggers a user event rejoin operation with latest product catalog. Events will not be annotated with detailed product information if product is missing from the catalog at the time the user event is ingested, and these events are stored as unjoined events with a limited usage on training and serving. This API can be used to trigger a 'join' operation on specified events with latest version of product catalog. It can also be used to correct events joined with wrong product catalog.",
+      "canonical": true,
+      "file": "user_event_service.rejoin_user_events.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RejoinUserEvents",
+        "fullName": "google.cloud.retail.v2alpha.UserEventService.RejoinUserEvents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "user_event_rejoin_scope",
+            "type": ".google.cloud.retail.v2alpha.RejoinUserEventsRequest.UserEventRejoinScope"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "UserEventServiceClient",
+          "fullName": "google.cloud.retail.v2alpha.UserEventServiceClient"
+        },
+        "method": {
+          "shortName": "RejoinUserEvents",
+          "fullName": "google.cloud.retail.v2alpha.UserEventService.RejoinUserEvents",
+          "service": {
+            "shortName": "UserEventService",
+            "fullName": "google.cloud.retail.v2alpha.UserEventService"
+          }
+        }
+      }
+    }
+  ]
+}

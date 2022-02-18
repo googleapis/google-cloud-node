@@ -777,9 +777,8 @@ export class CompletionServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.completionServiceStub!.then(stub => {
+    if (this.completionServiceStub && !this._terminated) {
+      return this.completionServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

@@ -1315,9 +1315,8 @@ export class SearchServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.searchServiceStub!.then(stub => {
+    if (this.searchServiceStub && !this._terminated) {
+      return this.searchServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

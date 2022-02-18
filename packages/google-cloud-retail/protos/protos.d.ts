@@ -21430,6 +21430,1210 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** SolutionType enum. */
+                enum SolutionType {
+                    SOLUTION_TYPE_UNSPECIFIED = 0,
+                    SOLUTION_TYPE_RECOMMENDATION = 1,
+                    SOLUTION_TYPE_SEARCH = 2
+                }
+
+                /** Properties of a Condition. */
+                interface ICondition {
+
+                    /** Condition queryTerms */
+                    queryTerms?: (google.cloud.retail.v2beta.Condition.IQueryTerm[]|null);
+
+                    /** Condition activeTimeRange */
+                    activeTimeRange?: (google.cloud.retail.v2beta.Condition.ITimeRange[]|null);
+                }
+
+                /** Represents a Condition. */
+                class Condition implements ICondition {
+
+                    /**
+                     * Constructs a new Condition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.ICondition);
+
+                    /** Condition queryTerms. */
+                    public queryTerms: google.cloud.retail.v2beta.Condition.IQueryTerm[];
+
+                    /** Condition activeTimeRange. */
+                    public activeTimeRange: google.cloud.retail.v2beta.Condition.ITimeRange[];
+
+                    /**
+                     * Creates a new Condition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Condition instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.ICondition): google.cloud.retail.v2beta.Condition;
+
+                    /**
+                     * Encodes the specified Condition message. Does not implicitly {@link google.cloud.retail.v2beta.Condition.verify|verify} messages.
+                     * @param message Condition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.ICondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Condition message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.Condition.verify|verify} messages.
+                     * @param message Condition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.ICondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Condition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Condition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.Condition;
+
+                    /**
+                     * Decodes a Condition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Condition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.Condition;
+
+                    /**
+                     * Verifies a Condition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Condition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Condition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.Condition;
+
+                    /**
+                     * Creates a plain object from a Condition message. Also converts values to other types if specified.
+                     * @param message Condition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.Condition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Condition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Condition {
+
+                    /** Properties of a QueryTerm. */
+                    interface IQueryTerm {
+
+                        /** QueryTerm value */
+                        value?: (string|null);
+
+                        /** QueryTerm fullMatch */
+                        fullMatch?: (boolean|null);
+                    }
+
+                    /** Represents a QueryTerm. */
+                    class QueryTerm implements IQueryTerm {
+
+                        /**
+                         * Constructs a new QueryTerm.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.Condition.IQueryTerm);
+
+                        /** QueryTerm value. */
+                        public value: string;
+
+                        /** QueryTerm fullMatch. */
+                        public fullMatch: boolean;
+
+                        /**
+                         * Creates a new QueryTerm instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueryTerm instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.Condition.IQueryTerm): google.cloud.retail.v2beta.Condition.QueryTerm;
+
+                        /**
+                         * Encodes the specified QueryTerm message. Does not implicitly {@link google.cloud.retail.v2beta.Condition.QueryTerm.verify|verify} messages.
+                         * @param message QueryTerm message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.Condition.IQueryTerm, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueryTerm message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.Condition.QueryTerm.verify|verify} messages.
+                         * @param message QueryTerm message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.Condition.IQueryTerm, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueryTerm message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueryTerm
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.Condition.QueryTerm;
+
+                        /**
+                         * Decodes a QueryTerm message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueryTerm
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.Condition.QueryTerm;
+
+                        /**
+                         * Verifies a QueryTerm message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueryTerm message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueryTerm
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.Condition.QueryTerm;
+
+                        /**
+                         * Creates a plain object from a QueryTerm message. Also converts values to other types if specified.
+                         * @param message QueryTerm
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.Condition.QueryTerm, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueryTerm to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a TimeRange. */
+                    interface ITimeRange {
+
+                        /** TimeRange startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** TimeRange endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a TimeRange. */
+                    class TimeRange implements ITimeRange {
+
+                        /**
+                         * Constructs a new TimeRange.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.Condition.ITimeRange);
+
+                        /** TimeRange startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** TimeRange endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new TimeRange instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TimeRange instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.Condition.ITimeRange): google.cloud.retail.v2beta.Condition.TimeRange;
+
+                        /**
+                         * Encodes the specified TimeRange message. Does not implicitly {@link google.cloud.retail.v2beta.Condition.TimeRange.verify|verify} messages.
+                         * @param message TimeRange message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.Condition.ITimeRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TimeRange message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.Condition.TimeRange.verify|verify} messages.
+                         * @param message TimeRange message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.Condition.ITimeRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TimeRange message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TimeRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.Condition.TimeRange;
+
+                        /**
+                         * Decodes a TimeRange message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TimeRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.Condition.TimeRange;
+
+                        /**
+                         * Verifies a TimeRange message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TimeRange message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TimeRange
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.Condition.TimeRange;
+
+                        /**
+                         * Creates a plain object from a TimeRange message. Also converts values to other types if specified.
+                         * @param message TimeRange
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.Condition.TimeRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TimeRange to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a Rule. */
+                interface IRule {
+
+                    /** Rule boostAction */
+                    boostAction?: (google.cloud.retail.v2beta.Rule.IBoostAction|null);
+
+                    /** Rule redirectAction */
+                    redirectAction?: (google.cloud.retail.v2beta.Rule.IRedirectAction|null);
+
+                    /** Rule onewaySynonymsAction */
+                    onewaySynonymsAction?: (google.cloud.retail.v2beta.Rule.IOnewaySynonymsAction|null);
+
+                    /** Rule doNotAssociateAction */
+                    doNotAssociateAction?: (google.cloud.retail.v2beta.Rule.IDoNotAssociateAction|null);
+
+                    /** Rule replacementAction */
+                    replacementAction?: (google.cloud.retail.v2beta.Rule.IReplacementAction|null);
+
+                    /** Rule ignoreAction */
+                    ignoreAction?: (google.cloud.retail.v2beta.Rule.IIgnoreAction|null);
+
+                    /** Rule filterAction */
+                    filterAction?: (google.cloud.retail.v2beta.Rule.IFilterAction|null);
+
+                    /** Rule twowaySynonymsAction */
+                    twowaySynonymsAction?: (google.cloud.retail.v2beta.Rule.ITwowaySynonymsAction|null);
+
+                    /** Rule condition */
+                    condition?: (google.cloud.retail.v2beta.ICondition|null);
+                }
+
+                /** Represents a Rule. */
+                class Rule implements IRule {
+
+                    /**
+                     * Constructs a new Rule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IRule);
+
+                    /** Rule boostAction. */
+                    public boostAction?: (google.cloud.retail.v2beta.Rule.IBoostAction|null);
+
+                    /** Rule redirectAction. */
+                    public redirectAction?: (google.cloud.retail.v2beta.Rule.IRedirectAction|null);
+
+                    /** Rule onewaySynonymsAction. */
+                    public onewaySynonymsAction?: (google.cloud.retail.v2beta.Rule.IOnewaySynonymsAction|null);
+
+                    /** Rule doNotAssociateAction. */
+                    public doNotAssociateAction?: (google.cloud.retail.v2beta.Rule.IDoNotAssociateAction|null);
+
+                    /** Rule replacementAction. */
+                    public replacementAction?: (google.cloud.retail.v2beta.Rule.IReplacementAction|null);
+
+                    /** Rule ignoreAction. */
+                    public ignoreAction?: (google.cloud.retail.v2beta.Rule.IIgnoreAction|null);
+
+                    /** Rule filterAction. */
+                    public filterAction?: (google.cloud.retail.v2beta.Rule.IFilterAction|null);
+
+                    /** Rule twowaySynonymsAction. */
+                    public twowaySynonymsAction?: (google.cloud.retail.v2beta.Rule.ITwowaySynonymsAction|null);
+
+                    /** Rule condition. */
+                    public condition?: (google.cloud.retail.v2beta.ICondition|null);
+
+                    /** Rule action. */
+                    public action?: ("boostAction"|"redirectAction"|"onewaySynonymsAction"|"doNotAssociateAction"|"replacementAction"|"ignoreAction"|"filterAction"|"twowaySynonymsAction");
+
+                    /**
+                     * Creates a new Rule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Rule instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IRule): google.cloud.retail.v2beta.Rule;
+
+                    /**
+                     * Encodes the specified Rule message. Does not implicitly {@link google.cloud.retail.v2beta.Rule.verify|verify} messages.
+                     * @param message Rule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Rule message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.Rule.verify|verify} messages.
+                     * @param message Rule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Rule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Rule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.Rule;
+
+                    /**
+                     * Decodes a Rule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Rule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.Rule;
+
+                    /**
+                     * Verifies a Rule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Rule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Rule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.Rule;
+
+                    /**
+                     * Creates a plain object from a Rule message. Also converts values to other types if specified.
+                     * @param message Rule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.Rule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Rule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Rule {
+
+                    /** Properties of a BoostAction. */
+                    interface IBoostAction {
+
+                        /** BoostAction boost */
+                        boost?: (number|null);
+
+                        /** BoostAction productsFilter */
+                        productsFilter?: (string|null);
+                    }
+
+                    /** Represents a BoostAction. */
+                    class BoostAction implements IBoostAction {
+
+                        /**
+                         * Constructs a new BoostAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.Rule.IBoostAction);
+
+                        /** BoostAction boost. */
+                        public boost: number;
+
+                        /** BoostAction productsFilter. */
+                        public productsFilter: string;
+
+                        /**
+                         * Creates a new BoostAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BoostAction instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.Rule.IBoostAction): google.cloud.retail.v2beta.Rule.BoostAction;
+
+                        /**
+                         * Encodes the specified BoostAction message. Does not implicitly {@link google.cloud.retail.v2beta.Rule.BoostAction.verify|verify} messages.
+                         * @param message BoostAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.Rule.IBoostAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BoostAction message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.Rule.BoostAction.verify|verify} messages.
+                         * @param message BoostAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.Rule.IBoostAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BoostAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BoostAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.Rule.BoostAction;
+
+                        /**
+                         * Decodes a BoostAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BoostAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.Rule.BoostAction;
+
+                        /**
+                         * Verifies a BoostAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BoostAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BoostAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.Rule.BoostAction;
+
+                        /**
+                         * Creates a plain object from a BoostAction message. Also converts values to other types if specified.
+                         * @param message BoostAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.Rule.BoostAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BoostAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a FilterAction. */
+                    interface IFilterAction {
+
+                        /** FilterAction filter */
+                        filter?: (string|null);
+                    }
+
+                    /** Represents a FilterAction. */
+                    class FilterAction implements IFilterAction {
+
+                        /**
+                         * Constructs a new FilterAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.Rule.IFilterAction);
+
+                        /** FilterAction filter. */
+                        public filter: string;
+
+                        /**
+                         * Creates a new FilterAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FilterAction instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.Rule.IFilterAction): google.cloud.retail.v2beta.Rule.FilterAction;
+
+                        /**
+                         * Encodes the specified FilterAction message. Does not implicitly {@link google.cloud.retail.v2beta.Rule.FilterAction.verify|verify} messages.
+                         * @param message FilterAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.Rule.IFilterAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FilterAction message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.Rule.FilterAction.verify|verify} messages.
+                         * @param message FilterAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.Rule.IFilterAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FilterAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FilterAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.Rule.FilterAction;
+
+                        /**
+                         * Decodes a FilterAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FilterAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.Rule.FilterAction;
+
+                        /**
+                         * Verifies a FilterAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FilterAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FilterAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.Rule.FilterAction;
+
+                        /**
+                         * Creates a plain object from a FilterAction message. Also converts values to other types if specified.
+                         * @param message FilterAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.Rule.FilterAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FilterAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a RedirectAction. */
+                    interface IRedirectAction {
+
+                        /** RedirectAction redirectUri */
+                        redirectUri?: (string|null);
+                    }
+
+                    /** Represents a RedirectAction. */
+                    class RedirectAction implements IRedirectAction {
+
+                        /**
+                         * Constructs a new RedirectAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.Rule.IRedirectAction);
+
+                        /** RedirectAction redirectUri. */
+                        public redirectUri: string;
+
+                        /**
+                         * Creates a new RedirectAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RedirectAction instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.Rule.IRedirectAction): google.cloud.retail.v2beta.Rule.RedirectAction;
+
+                        /**
+                         * Encodes the specified RedirectAction message. Does not implicitly {@link google.cloud.retail.v2beta.Rule.RedirectAction.verify|verify} messages.
+                         * @param message RedirectAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.Rule.IRedirectAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RedirectAction message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.Rule.RedirectAction.verify|verify} messages.
+                         * @param message RedirectAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.Rule.IRedirectAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RedirectAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RedirectAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.Rule.RedirectAction;
+
+                        /**
+                         * Decodes a RedirectAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RedirectAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.Rule.RedirectAction;
+
+                        /**
+                         * Verifies a RedirectAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RedirectAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RedirectAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.Rule.RedirectAction;
+
+                        /**
+                         * Creates a plain object from a RedirectAction message. Also converts values to other types if specified.
+                         * @param message RedirectAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.Rule.RedirectAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RedirectAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a TwowaySynonymsAction. */
+                    interface ITwowaySynonymsAction {
+
+                        /** TwowaySynonymsAction synonyms */
+                        synonyms?: (string[]|null);
+                    }
+
+                    /** Represents a TwowaySynonymsAction. */
+                    class TwowaySynonymsAction implements ITwowaySynonymsAction {
+
+                        /**
+                         * Constructs a new TwowaySynonymsAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.Rule.ITwowaySynonymsAction);
+
+                        /** TwowaySynonymsAction synonyms. */
+                        public synonyms: string[];
+
+                        /**
+                         * Creates a new TwowaySynonymsAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TwowaySynonymsAction instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.Rule.ITwowaySynonymsAction): google.cloud.retail.v2beta.Rule.TwowaySynonymsAction;
+
+                        /**
+                         * Encodes the specified TwowaySynonymsAction message. Does not implicitly {@link google.cloud.retail.v2beta.Rule.TwowaySynonymsAction.verify|verify} messages.
+                         * @param message TwowaySynonymsAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.Rule.ITwowaySynonymsAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TwowaySynonymsAction message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.Rule.TwowaySynonymsAction.verify|verify} messages.
+                         * @param message TwowaySynonymsAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.Rule.ITwowaySynonymsAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TwowaySynonymsAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TwowaySynonymsAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.Rule.TwowaySynonymsAction;
+
+                        /**
+                         * Decodes a TwowaySynonymsAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TwowaySynonymsAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.Rule.TwowaySynonymsAction;
+
+                        /**
+                         * Verifies a TwowaySynonymsAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TwowaySynonymsAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TwowaySynonymsAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.Rule.TwowaySynonymsAction;
+
+                        /**
+                         * Creates a plain object from a TwowaySynonymsAction message. Also converts values to other types if specified.
+                         * @param message TwowaySynonymsAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.Rule.TwowaySynonymsAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TwowaySynonymsAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an OnewaySynonymsAction. */
+                    interface IOnewaySynonymsAction {
+
+                        /** OnewaySynonymsAction queryTerms */
+                        queryTerms?: (string[]|null);
+
+                        /** OnewaySynonymsAction synonyms */
+                        synonyms?: (string[]|null);
+
+                        /** OnewaySynonymsAction onewayTerms */
+                        onewayTerms?: (string[]|null);
+                    }
+
+                    /** Represents an OnewaySynonymsAction. */
+                    class OnewaySynonymsAction implements IOnewaySynonymsAction {
+
+                        /**
+                         * Constructs a new OnewaySynonymsAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.Rule.IOnewaySynonymsAction);
+
+                        /** OnewaySynonymsAction queryTerms. */
+                        public queryTerms: string[];
+
+                        /** OnewaySynonymsAction synonyms. */
+                        public synonyms: string[];
+
+                        /** OnewaySynonymsAction onewayTerms. */
+                        public onewayTerms: string[];
+
+                        /**
+                         * Creates a new OnewaySynonymsAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OnewaySynonymsAction instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.Rule.IOnewaySynonymsAction): google.cloud.retail.v2beta.Rule.OnewaySynonymsAction;
+
+                        /**
+                         * Encodes the specified OnewaySynonymsAction message. Does not implicitly {@link google.cloud.retail.v2beta.Rule.OnewaySynonymsAction.verify|verify} messages.
+                         * @param message OnewaySynonymsAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.Rule.IOnewaySynonymsAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OnewaySynonymsAction message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.Rule.OnewaySynonymsAction.verify|verify} messages.
+                         * @param message OnewaySynonymsAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.Rule.IOnewaySynonymsAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OnewaySynonymsAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OnewaySynonymsAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.Rule.OnewaySynonymsAction;
+
+                        /**
+                         * Decodes an OnewaySynonymsAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OnewaySynonymsAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.Rule.OnewaySynonymsAction;
+
+                        /**
+                         * Verifies an OnewaySynonymsAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OnewaySynonymsAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OnewaySynonymsAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.Rule.OnewaySynonymsAction;
+
+                        /**
+                         * Creates a plain object from an OnewaySynonymsAction message. Also converts values to other types if specified.
+                         * @param message OnewaySynonymsAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.Rule.OnewaySynonymsAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OnewaySynonymsAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a DoNotAssociateAction. */
+                    interface IDoNotAssociateAction {
+
+                        /** DoNotAssociateAction queryTerms */
+                        queryTerms?: (string[]|null);
+
+                        /** DoNotAssociateAction doNotAssociateTerms */
+                        doNotAssociateTerms?: (string[]|null);
+
+                        /** DoNotAssociateAction terms */
+                        terms?: (string[]|null);
+                    }
+
+                    /** Represents a DoNotAssociateAction. */
+                    class DoNotAssociateAction implements IDoNotAssociateAction {
+
+                        /**
+                         * Constructs a new DoNotAssociateAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.Rule.IDoNotAssociateAction);
+
+                        /** DoNotAssociateAction queryTerms. */
+                        public queryTerms: string[];
+
+                        /** DoNotAssociateAction doNotAssociateTerms. */
+                        public doNotAssociateTerms: string[];
+
+                        /** DoNotAssociateAction terms. */
+                        public terms: string[];
+
+                        /**
+                         * Creates a new DoNotAssociateAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DoNotAssociateAction instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.Rule.IDoNotAssociateAction): google.cloud.retail.v2beta.Rule.DoNotAssociateAction;
+
+                        /**
+                         * Encodes the specified DoNotAssociateAction message. Does not implicitly {@link google.cloud.retail.v2beta.Rule.DoNotAssociateAction.verify|verify} messages.
+                         * @param message DoNotAssociateAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.Rule.IDoNotAssociateAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DoNotAssociateAction message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.Rule.DoNotAssociateAction.verify|verify} messages.
+                         * @param message DoNotAssociateAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.Rule.IDoNotAssociateAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DoNotAssociateAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DoNotAssociateAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.Rule.DoNotAssociateAction;
+
+                        /**
+                         * Decodes a DoNotAssociateAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DoNotAssociateAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.Rule.DoNotAssociateAction;
+
+                        /**
+                         * Verifies a DoNotAssociateAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DoNotAssociateAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DoNotAssociateAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.Rule.DoNotAssociateAction;
+
+                        /**
+                         * Creates a plain object from a DoNotAssociateAction message. Also converts values to other types if specified.
+                         * @param message DoNotAssociateAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.Rule.DoNotAssociateAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DoNotAssociateAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ReplacementAction. */
+                    interface IReplacementAction {
+
+                        /** ReplacementAction queryTerms */
+                        queryTerms?: (string[]|null);
+
+                        /** ReplacementAction replacementTerm */
+                        replacementTerm?: (string|null);
+
+                        /** ReplacementAction term */
+                        term?: (string|null);
+                    }
+
+                    /** Represents a ReplacementAction. */
+                    class ReplacementAction implements IReplacementAction {
+
+                        /**
+                         * Constructs a new ReplacementAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.Rule.IReplacementAction);
+
+                        /** ReplacementAction queryTerms. */
+                        public queryTerms: string[];
+
+                        /** ReplacementAction replacementTerm. */
+                        public replacementTerm: string;
+
+                        /** ReplacementAction term. */
+                        public term: string;
+
+                        /**
+                         * Creates a new ReplacementAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ReplacementAction instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.Rule.IReplacementAction): google.cloud.retail.v2beta.Rule.ReplacementAction;
+
+                        /**
+                         * Encodes the specified ReplacementAction message. Does not implicitly {@link google.cloud.retail.v2beta.Rule.ReplacementAction.verify|verify} messages.
+                         * @param message ReplacementAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.Rule.IReplacementAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ReplacementAction message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.Rule.ReplacementAction.verify|verify} messages.
+                         * @param message ReplacementAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.Rule.IReplacementAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ReplacementAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ReplacementAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.Rule.ReplacementAction;
+
+                        /**
+                         * Decodes a ReplacementAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ReplacementAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.Rule.ReplacementAction;
+
+                        /**
+                         * Verifies a ReplacementAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ReplacementAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ReplacementAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.Rule.ReplacementAction;
+
+                        /**
+                         * Creates a plain object from a ReplacementAction message. Also converts values to other types if specified.
+                         * @param message ReplacementAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.Rule.ReplacementAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ReplacementAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an IgnoreAction. */
+                    interface IIgnoreAction {
+
+                        /** IgnoreAction ignoreTerms */
+                        ignoreTerms?: (string[]|null);
+                    }
+
+                    /** Represents an IgnoreAction. */
+                    class IgnoreAction implements IIgnoreAction {
+
+                        /**
+                         * Constructs a new IgnoreAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.Rule.IIgnoreAction);
+
+                        /** IgnoreAction ignoreTerms. */
+                        public ignoreTerms: string[];
+
+                        /**
+                         * Creates a new IgnoreAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IgnoreAction instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.Rule.IIgnoreAction): google.cloud.retail.v2beta.Rule.IgnoreAction;
+
+                        /**
+                         * Encodes the specified IgnoreAction message. Does not implicitly {@link google.cloud.retail.v2beta.Rule.IgnoreAction.verify|verify} messages.
+                         * @param message IgnoreAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.Rule.IIgnoreAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IgnoreAction message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.Rule.IgnoreAction.verify|verify} messages.
+                         * @param message IgnoreAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.Rule.IIgnoreAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IgnoreAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IgnoreAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.Rule.IgnoreAction;
+
+                        /**
+                         * Decodes an IgnoreAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IgnoreAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.Rule.IgnoreAction;
+
+                        /**
+                         * Verifies an IgnoreAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IgnoreAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IgnoreAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.Rule.IgnoreAction;
+
+                        /**
+                         * Creates a plain object from an IgnoreAction message. Also converts values to other types if specified.
+                         * @param message IgnoreAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.Rule.IgnoreAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IgnoreAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
                 /** Properties of an Audience. */
                 interface IAudience {
 
@@ -29805,6 +31009,9 @@ export namespace google {
 
                     /** SearchResponse redirectUri */
                     redirectUri?: (string|null);
+
+                    /** SearchResponse appliedControls */
+                    appliedControls?: (string[]|null);
                 }
 
                 /** Represents a SearchResponse. */
@@ -29839,6 +31046,9 @@ export namespace google {
 
                     /** SearchResponse redirectUri. */
                     public redirectUri: string;
+
+                    /** SearchResponse appliedControls. */
+                    public appliedControls: string[];
 
                     /**
                      * Creates a new SearchResponse instance using the specified properties.
