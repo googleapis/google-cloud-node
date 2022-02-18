@@ -2355,9 +2355,8 @@ export class ChangelogsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.changelogsStub!.then(stub => {
+    if (this.changelogsStub && !this._terminated) {
+      return this.changelogsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -159,13 +159,29 @@ describe('v3.SecuritySettingsServiceClient', () => {
     assert(client.securitySettingsServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.securitySettingsServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.securitySettingsServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -320,6 +336,26 @@ describe('v3.SecuritySettingsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createSecuritySettings with closed client', async () => {
+      const client =
+        new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.CreateSecuritySettingsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createSecuritySettings(request),
+        expectedError
+      );
+    });
   });
 
   describe('getSecuritySettings', () => {
@@ -434,6 +470,23 @@ describe('v3.SecuritySettingsServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getSecuritySettings with closed client', async () => {
+      const client =
+        new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.GetSecuritySettingsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSecuritySettings(request), expectedError);
     });
   });
 
@@ -556,6 +609,27 @@ describe('v3.SecuritySettingsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateSecuritySettings with closed client', async () => {
+      const client =
+        new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.UpdateSecuritySettingsRequest()
+      );
+      request.securitySettings = {};
+      request.securitySettings.name = '';
+      const expectedHeaderRequestParams = 'security_settings.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateSecuritySettings(request),
+        expectedError
+      );
+    });
   });
 
   describe('deleteSecuritySettings', () => {
@@ -672,6 +746,26 @@ describe('v3.SecuritySettingsServiceClient', () => {
         (client.innerApiCalls.deleteSecuritySettings as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteSecuritySettings with closed client', async () => {
+      const client =
+        new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.DeleteSecuritySettingsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteSecuritySettings(request),
+        expectedError
       );
     });
   });

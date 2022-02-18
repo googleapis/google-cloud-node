@@ -3407,9 +3407,8 @@ export class FlowsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.flowsStub!.then(stub => {
+    if (this.flowsStub && !this._terminated) {
+      return this.flowsStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

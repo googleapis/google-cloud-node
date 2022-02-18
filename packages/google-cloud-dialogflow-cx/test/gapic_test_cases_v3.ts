@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -183,12 +183,27 @@ describe('v3.TestCasesClient', () => {
     assert(client.testCasesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new testcasesModule.v3.TestCasesClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.testCasesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new testcasesModule.v3.TestCasesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.testCasesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -335,6 +350,22 @@ describe('v3.TestCasesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes batchDeleteTestCases with closed client', async () => {
+      const client = new testcasesModule.v3.TestCasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.batchDeleteTestCases(request), expectedError);
+    });
   });
 
   describe('getTestCase', () => {
@@ -446,6 +477,22 @@ describe('v3.TestCasesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getTestCase with closed client', async () => {
+      const client = new testcasesModule.v3.TestCasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.GetTestCaseRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTestCase(request), expectedError);
+    });
   });
 
   describe('createTestCase', () => {
@@ -556,6 +603,22 @@ describe('v3.TestCasesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createTestCase with closed client', async () => {
+      const client = new testcasesModule.v3.TestCasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createTestCase(request), expectedError);
     });
   });
 
@@ -671,6 +734,23 @@ describe('v3.TestCasesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTestCase with closed client', async () => {
+      const client = new testcasesModule.v3.TestCasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest()
+      );
+      request.testCase = {};
+      request.testCase.name = '';
+      const expectedHeaderRequestParams = 'test_case.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateTestCase(request), expectedError);
+    });
   });
 
   describe('calculateCoverage', () => {
@@ -782,6 +862,22 @@ describe('v3.TestCasesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes calculateCoverage with closed client', async () => {
+      const client = new testcasesModule.v3.TestCasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest()
+      );
+      request.agent = '';
+      const expectedHeaderRequestParams = 'agent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.calculateCoverage(request), expectedError);
+    });
   });
 
   describe('getTestCaseResult', () => {
@@ -892,6 +988,22 @@ describe('v3.TestCasesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getTestCaseResult with closed client', async () => {
+      const client = new testcasesModule.v3.TestCasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTestCaseResult(request), expectedError);
     });
   });
 

@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -151,12 +151,27 @@ describe('v3.ExperimentsClient', () => {
     assert(client.experimentsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new experimentsModule.v3.ExperimentsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.experimentsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new experimentsModule.v3.ExperimentsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.experimentsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -302,6 +317,22 @@ describe('v3.ExperimentsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getExperiment with closed client', async () => {
+      const client = new experimentsModule.v3.ExperimentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.GetExperimentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getExperiment(request), expectedError);
+    });
   });
 
   describe('createExperiment', () => {
@@ -412,6 +443,22 @@ describe('v3.ExperimentsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createExperiment with closed client', async () => {
+      const client = new experimentsModule.v3.ExperimentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.CreateExperimentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createExperiment(request), expectedError);
     });
   });
 
@@ -527,6 +574,23 @@ describe('v3.ExperimentsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateExperiment with closed client', async () => {
+      const client = new experimentsModule.v3.ExperimentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.UpdateExperimentRequest()
+      );
+      request.experiment = {};
+      request.experiment.name = '';
+      const expectedHeaderRequestParams = 'experiment.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateExperiment(request), expectedError);
+    });
   });
 
   describe('deleteExperiment', () => {
@@ -637,6 +701,22 @@ describe('v3.ExperimentsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteExperiment with closed client', async () => {
+      const client = new experimentsModule.v3.ExperimentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.DeleteExperimentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteExperiment(request), expectedError);
     });
   });
 
@@ -749,6 +829,22 @@ describe('v3.ExperimentsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes startExperiment with closed client', async () => {
+      const client = new experimentsModule.v3.ExperimentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.StartExperimentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.startExperiment(request), expectedError);
+    });
   });
 
   describe('stopExperiment', () => {
@@ -859,6 +955,22 @@ describe('v3.ExperimentsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes stopExperiment with closed client', async () => {
+      const client = new experimentsModule.v3.ExperimentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.StopExperimentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.stopExperiment(request), expectedError);
     });
   });
 

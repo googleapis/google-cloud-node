@@ -2718,9 +2718,8 @@ export class PagesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.pagesStub!.then(stub => {
+    if (this.pagesStub && !this._terminated) {
+      return this.pagesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

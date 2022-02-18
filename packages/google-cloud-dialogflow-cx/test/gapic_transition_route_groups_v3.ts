@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -157,13 +157,29 @@ describe('v3.TransitionRouteGroupsClient', () => {
     assert(client.transitionRouteGroupsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.transitionRouteGroupsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.transitionRouteGroupsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -318,6 +334,26 @@ describe('v3.TransitionRouteGroupsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getTransitionRouteGroup with closed client', async () => {
+      const client =
+        new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.GetTransitionRouteGroupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getTransitionRouteGroup(request),
+        expectedError
+      );
+    });
   });
 
   describe('createTransitionRouteGroup', () => {
@@ -434,6 +470,26 @@ describe('v3.TransitionRouteGroupsClient', () => {
         (client.innerApiCalls.createTransitionRouteGroup as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createTransitionRouteGroup with closed client', async () => {
+      const client =
+        new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.CreateTransitionRouteGroupRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createTransitionRouteGroup(request),
+        expectedError
       );
     });
   });
@@ -557,6 +613,27 @@ describe('v3.TransitionRouteGroupsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTransitionRouteGroup with closed client', async () => {
+      const client =
+        new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.UpdateTransitionRouteGroupRequest()
+      );
+      request.transitionRouteGroup = {};
+      request.transitionRouteGroup.name = '';
+      const expectedHeaderRequestParams = 'transition_route_group.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateTransitionRouteGroup(request),
+        expectedError
+      );
+    });
   });
 
   describe('deleteTransitionRouteGroup', () => {
@@ -673,6 +750,26 @@ describe('v3.TransitionRouteGroupsClient', () => {
         (client.innerApiCalls.deleteTransitionRouteGroup as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteTransitionRouteGroup with closed client', async () => {
+      const client =
+        new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.DeleteTransitionRouteGroupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteTransitionRouteGroup(request),
+        expectedError
       );
     });
   });

@@ -3470,9 +3470,8 @@ export class EnvironmentsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.environmentsStub!.then(stub => {
+    if (this.environmentsStub && !this._terminated) {
+      return this.environmentsStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

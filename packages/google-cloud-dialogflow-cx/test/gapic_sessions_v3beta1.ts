@@ -104,12 +104,27 @@ describe('v3beta1.SessionsClient', () => {
     assert(client.sessionsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new sessionsModule.v3beta1.SessionsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.sessionsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new sessionsModule.v3beta1.SessionsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.sessionsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -255,6 +270,22 @@ describe('v3beta1.SessionsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes detectIntent with closed client', async () => {
+      const client = new sessionsModule.v3beta1.SessionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DetectIntentRequest()
+      );
+      request.session = '';
+      const expectedHeaderRequestParams = 'session=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.detectIntent(request), expectedError);
+    });
   });
 
   describe('matchIntent', () => {
@@ -365,6 +396,22 @@ describe('v3beta1.SessionsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes matchIntent with closed client', async () => {
+      const client = new sessionsModule.v3beta1.SessionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.MatchIntentRequest()
+      );
+      request.session = '';
+      const expectedHeaderRequestParams = 'session=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.matchIntent(request), expectedError);
     });
   });
 
@@ -480,6 +527,23 @@ describe('v3beta1.SessionsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes fulfillIntent with closed client', async () => {
+      const client = new sessionsModule.v3beta1.SessionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.FulfillIntentRequest()
+      );
+      request.matchIntentRequest = {};
+      request.matchIntentRequest.session = '';
+      const expectedHeaderRequestParams = 'match_intent_request.session=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.fulfillIntent(request), expectedError);
+    });
   });
 
   describe('streamingDetectIntent', () => {
@@ -518,7 +582,7 @@ describe('v3beta1.SessionsClient', () => {
       assert(
         (client.innerApiCalls.streamingDetectIntent as SinonStub)
           .getCall(0)
-          .calledWithExactly(undefined)
+          .calledWith(null)
       );
       assert.deepStrictEqual(
         ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
@@ -561,7 +625,7 @@ describe('v3beta1.SessionsClient', () => {
       assert(
         (client.innerApiCalls.streamingDetectIntent as SinonStub)
           .getCall(0)
-          .calledWithExactly(undefined)
+          .calledWith(null)
       );
       assert.deepStrictEqual(
         ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)

@@ -151,12 +151,27 @@ describe('v3beta1.PagesClient', () => {
     assert(client.pagesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new pagesModule.v3beta1.PagesClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.pagesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new pagesModule.v3beta1.PagesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.pagesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -299,6 +314,22 @@ describe('v3beta1.PagesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getPage with closed client', async () => {
+      const client = new pagesModule.v3beta1.PagesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetPageRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPage(request), expectedError);
+    });
   });
 
   describe('createPage', () => {
@@ -409,6 +440,22 @@ describe('v3beta1.PagesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createPage with closed client', async () => {
+      const client = new pagesModule.v3beta1.PagesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.CreatePageRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createPage(request), expectedError);
     });
   });
 
@@ -524,6 +571,23 @@ describe('v3beta1.PagesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updatePage with closed client', async () => {
+      const client = new pagesModule.v3beta1.PagesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.UpdatePageRequest()
+      );
+      request.page = {};
+      request.page.name = '';
+      const expectedHeaderRequestParams = 'page.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updatePage(request), expectedError);
+    });
   });
 
   describe('deletePage', () => {
@@ -634,6 +698,22 @@ describe('v3beta1.PagesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deletePage with closed client', async () => {
+      const client = new pagesModule.v3beta1.PagesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeletePageRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deletePage(request), expectedError);
     });
   });
 

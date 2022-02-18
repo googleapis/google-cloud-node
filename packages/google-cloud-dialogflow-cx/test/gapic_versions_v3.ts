@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -183,12 +183,27 @@ describe('v3.VersionsClient', () => {
     assert(client.versionsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new versionsModule.v3.VersionsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.versionsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new versionsModule.v3.VersionsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.versionsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -334,6 +349,22 @@ describe('v3.VersionsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getVersion with closed client', async () => {
+      const client = new versionsModule.v3.VersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.GetVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getVersion(request), expectedError);
+    });
   });
 
   describe('updateVersion', () => {
@@ -448,6 +479,23 @@ describe('v3.VersionsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateVersion with closed client', async () => {
+      const client = new versionsModule.v3.VersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.UpdateVersionRequest()
+      );
+      request.version = {};
+      request.version.name = '';
+      const expectedHeaderRequestParams = 'version.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateVersion(request), expectedError);
+    });
   });
 
   describe('deleteVersion', () => {
@@ -559,6 +607,22 @@ describe('v3.VersionsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteVersion with closed client', async () => {
+      const client = new versionsModule.v3.VersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.DeleteVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteVersion(request), expectedError);
+    });
   });
 
   describe('compareVersions', () => {
@@ -669,6 +733,22 @@ describe('v3.VersionsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes compareVersions with closed client', async () => {
+      const client = new versionsModule.v3.VersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3.CompareVersionsRequest()
+      );
+      request.baseVersion = '';
+      const expectedHeaderRequestParams = 'base_version=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.compareVersions(request), expectedError);
     });
   });
 

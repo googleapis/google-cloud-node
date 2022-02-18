@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,8 +18,15 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GoogleError,
+} from 'google-gax';
 
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -296,6 +303,16 @@ export class SessionsClient {
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough();
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new GoogleError('The client has already been closed.')
+                  );
+                });
+                return stream;
+              }
               return Promise.reject('The client has already been closed.');
             }
             const func = stub[methodName];
@@ -724,7 +741,7 @@ export class SessionsClient {
    */
   streamingDetectIntent(options?: CallOptions): gax.CancellableStream {
     this.initialize();
-    return this.innerApiCalls.streamingDetectIntent(options);
+    return this.innerApiCalls.streamingDetectIntent(null, options);
   }
 
   // --------------------
@@ -2472,9 +2489,8 @@ export class SessionsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.sessionsStub!.then(stub => {
+    if (this.sessionsStub && !this._terminated) {
+      return this.sessionsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

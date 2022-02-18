@@ -151,12 +151,27 @@ describe('v3beta1.WebhooksClient', () => {
     assert(client.webhooksStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new webhooksModule.v3beta1.WebhooksClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.webhooksStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new webhooksModule.v3beta1.WebhooksClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.webhooksStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -302,6 +317,22 @@ describe('v3beta1.WebhooksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getWebhook with closed client', async () => {
+      const client = new webhooksModule.v3beta1.WebhooksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetWebhookRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getWebhook(request), expectedError);
+    });
   });
 
   describe('createWebhook', () => {
@@ -412,6 +443,22 @@ describe('v3beta1.WebhooksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createWebhook with closed client', async () => {
+      const client = new webhooksModule.v3beta1.WebhooksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.CreateWebhookRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createWebhook(request), expectedError);
     });
   });
 
@@ -527,6 +574,23 @@ describe('v3beta1.WebhooksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateWebhook with closed client', async () => {
+      const client = new webhooksModule.v3beta1.WebhooksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.UpdateWebhookRequest()
+      );
+      request.webhook = {};
+      request.webhook.name = '';
+      const expectedHeaderRequestParams = 'webhook.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateWebhook(request), expectedError);
+    });
   });
 
   describe('deleteWebhook', () => {
@@ -637,6 +701,22 @@ describe('v3beta1.WebhooksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteWebhook with closed client', async () => {
+      const client = new webhooksModule.v3beta1.WebhooksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteWebhookRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteWebhook(request), expectedError);
     });
   });
 

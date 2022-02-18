@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2897,9 +2897,8 @@ export class SecuritySettingsServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.securitySettingsServiceStub!.then(stub => {
+    if (this.securitySettingsServiceStub && !this._terminated) {
+      return this.securitySettingsServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -2802,9 +2802,8 @@ export class ExperimentsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.experimentsStub!.then(stub => {
+    if (this.experimentsStub && !this._terminated) {
+      return this.experimentsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

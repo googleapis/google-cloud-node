@@ -2794,9 +2794,8 @@ export class WebhooksClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.webhooksStub!.then(stub => {
+    if (this.webhooksStub && !this._terminated) {
+      return this.webhooksStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
