@@ -1,0 +1,747 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-metastore",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.metastore.v1alpha",
+        "version": "v1alpha"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_ListServices_async",
+      "title": "DataprocMetastore listServices Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists services in a project and location.",
+      "canonical": true,
+      "file": "dataproc_metastore.list_services.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListServices",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.ListServices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.metastore.v1alpha.ListServicesResponse",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "ListServices",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.ListServices",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_GetService_async",
+      "title": "DataprocMetastore getService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a single service.",
+      "canonical": true,
+      "file": "dataproc_metastore.get_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetService",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.GetService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.metastore.v1alpha.Service",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "GetService",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.GetService",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_CreateService_async",
+      "title": "DataprocMetastore createService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a metastore service in a project and location.",
+      "canonical": true,
+      "file": "dataproc_metastore.create_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateService",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.CreateService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service",
+            "type": ".google.cloud.metastore.v1alpha.Service"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "CreateService",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.CreateService",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_UpdateService_async",
+      "title": "DataprocMetastore updateService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single service.",
+      "canonical": true,
+      "file": "dataproc_metastore.update_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateService",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.UpdateService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "service",
+            "type": ".google.cloud.metastore.v1alpha.Service"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "UpdateService",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.UpdateService",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_DeleteService_async",
+      "title": "DataprocMetastore deleteService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single service.",
+      "canonical": true,
+      "file": "dataproc_metastore.delete_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteService",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.DeleteService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "DeleteService",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.DeleteService",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_ListMetadataImports_async",
+      "title": "DataprocMetastore listMetadataImports Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists imports in a service.",
+      "canonical": true,
+      "file": "dataproc_metastore.list_metadata_imports.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMetadataImports",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.ListMetadataImports",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.metastore.v1alpha.ListMetadataImportsResponse",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "ListMetadataImports",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.ListMetadataImports",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_GetMetadataImport_async",
+      "title": "DataprocMetastore getMetadataImport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single import.",
+      "canonical": true,
+      "file": "dataproc_metastore.get_metadata_import.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMetadataImport",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.GetMetadataImport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.metastore.v1alpha.MetadataImport",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "GetMetadataImport",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.GetMetadataImport",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_CreateMetadataImport_async",
+      "title": "DataprocMetastore createMetadataImport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new MetadataImport in a given project and location.",
+      "canonical": true,
+      "file": "dataproc_metastore.create_metadata_import.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateMetadataImport",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.CreateMetadataImport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "metadata_import_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "metadata_import",
+            "type": ".google.cloud.metastore.v1alpha.MetadataImport"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "CreateMetadataImport",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.CreateMetadataImport",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_UpdateMetadataImport_async",
+      "title": "DataprocMetastore updateMetadataImport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a single import. Only the description field of MetadataImport is supported to be updated.",
+      "canonical": true,
+      "file": "dataproc_metastore.update_metadata_import.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateMetadataImport",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.UpdateMetadataImport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "metadata_import",
+            "type": ".google.cloud.metastore.v1alpha.MetadataImport"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "UpdateMetadataImport",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.UpdateMetadataImport",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_ExportMetadata_async",
+      "title": "DataprocMetastore exportMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports metadata from a service.",
+      "canonical": true,
+      "file": "dataproc_metastore.export_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportMetadata",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.ExportMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "destination_gcs_folder",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "database_dump_type",
+            "type": ".google.cloud.metastore.v1alpha.DatabaseDumpSpec.Type"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "ExportMetadata",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.ExportMetadata",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_RestoreService_async",
+      "title": "DataprocMetastore restoreService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Restores a service from a backup.",
+      "canonical": true,
+      "file": "dataproc_metastore.restore_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RestoreService",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.RestoreService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backup",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "restore_type",
+            "type": ".google.cloud.metastore.v1alpha.Restore.RestoreType"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "RestoreService",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.RestoreService",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_ListBackups_async",
+      "title": "DataprocMetastore listBackups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists backups in a service.",
+      "canonical": true,
+      "file": "dataproc_metastore.list_backups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBackups",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.ListBackups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.metastore.v1alpha.ListBackupsResponse",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "ListBackups",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.ListBackups",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_GetBackup_async",
+      "title": "DataprocMetastore getBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single backup.",
+      "canonical": true,
+      "file": "dataproc_metastore.get_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBackup",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.GetBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.metastore.v1alpha.Backup",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "GetBackup",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.GetBackup",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_CreateBackup_async",
+      "title": "DataprocMetastore createBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Backup in a given project and location.",
+      "canonical": true,
+      "file": "dataproc_metastore.create_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBackup",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.CreateBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backup_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backup",
+            "type": ".google.cloud.metastore.v1alpha.Backup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "CreateBackup",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.CreateBackup",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "metastore_v1alpha_generated_DataprocMetastore_DeleteBackup_async",
+      "title": "DataprocMetastore deleteBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single backup.",
+      "canonical": true,
+      "file": "dataproc_metastore.delete_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteBackup",
+        "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.DeleteBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataprocMetastoreClient",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastoreClient"
+        },
+        "method": {
+          "shortName": "DeleteBackup",
+          "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore.DeleteBackup",
+          "service": {
+            "shortName": "DataprocMetastore",
+            "fullName": "google.cloud.metastore.v1alpha.DataprocMetastore"
+          }
+        }
+      }
+    }
+  ]
+}

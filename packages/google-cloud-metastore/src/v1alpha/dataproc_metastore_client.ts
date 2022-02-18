@@ -3213,9 +3213,8 @@ export class DataprocMetastoreClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.dataprocMetastoreStub!.then(stub => {
+    if (this.dataprocMetastoreStub && !this._terminated) {
+      return this.dataprocMetastoreStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

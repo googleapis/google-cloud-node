@@ -185,12 +185,27 @@ describe('v1beta.DataprocMetastoreClient', () => {
     assert(client.dataprocMetastoreStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.dataprocMetastoreStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.dataprocMetastoreStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -342,6 +357,24 @@ describe('v1beta.DataprocMetastoreClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getService with closed client', async () => {
+      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1beta.GetServiceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getService(request), expectedError);
+    });
   });
 
   describe('getMetadataImport', () => {
@@ -459,6 +492,24 @@ describe('v1beta.DataprocMetastoreClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getMetadataImport with closed client', async () => {
+      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getMetadataImport(request), expectedError);
+    });
   });
 
   describe('getBackup', () => {
@@ -572,6 +623,24 @@ describe('v1beta.DataprocMetastoreClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getBackup with closed client', async () => {
+      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1beta.GetBackupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBackup(request), expectedError);
     });
   });
 
