@@ -1,0 +1,715 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-datatransfer",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.bigquery.datatransfer.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_GetDataSource_async",
+      "title": "DataTransferService getDataSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a supported data source and returns its settings.",
+      "canonical": true,
+      "file": "data_transfer_service.get_data_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataSource",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.GetDataSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.datatransfer.v1.DataSource",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "GetDataSource",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.GetDataSource",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_ListDataSources_async",
+      "title": "DataTransferService listDataSources Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists supported data sources and returns their settings.",
+      "canonical": true,
+      "file": "data_transfer_service.list_data_sources.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDataSources",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ListDataSources",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.datatransfer.v1.ListDataSourcesResponse",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "ListDataSources",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ListDataSources",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_CreateTransferConfig_async",
+      "title": "DataTransferService createTransferConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new data transfer configuration.",
+      "canonical": true,
+      "file": "data_transfer_service.create_transfer_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 92,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTransferConfig",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.CreateTransferConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "transfer_config",
+            "type": ".google.cloud.bigquery.datatransfer.v1.TransferConfig"
+          },
+          {
+            "name": "authorization_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "version_info",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_account_name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.datatransfer.v1.TransferConfig",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "CreateTransferConfig",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.CreateTransferConfig",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_UpdateTransferConfig_async",
+      "title": "DataTransferService updateTransferConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a data transfer configuration. All fields must be set, even if they are not updated.",
+      "canonical": true,
+      "file": "data_transfer_service.update_transfer_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 90,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTransferConfig",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.UpdateTransferConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "transfer_config",
+            "type": ".google.cloud.bigquery.datatransfer.v1.TransferConfig"
+          },
+          {
+            "name": "authorization_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "version_info",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_account_name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.datatransfer.v1.TransferConfig",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateTransferConfig",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.UpdateTransferConfig",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_DeleteTransferConfig_async",
+      "title": "DataTransferService deleteTransferConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a data transfer configuration, including any associated transfer runs and logs.",
+      "canonical": true,
+      "file": "data_transfer_service.delete_transfer_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTransferConfig",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteTransferConfig",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferConfig",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_GetTransferConfig_async",
+      "title": "DataTransferService getTransferConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns information about a data transfer config.",
+      "canonical": true,
+      "file": "data_transfer_service.get_transfer_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTransferConfig",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.datatransfer.v1.TransferConfig",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "GetTransferConfig",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferConfig",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_ListTransferConfigs_async",
+      "title": "DataTransferService listTransferConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns information about all transfer configs owned by a project in the specified location.",
+      "canonical": true,
+      "file": "data_transfer_service.list_transfer_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTransferConfigs",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data_source_ids",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.datatransfer.v1.ListTransferConfigsResponse",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "ListTransferConfigs",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferConfigs",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_ScheduleTransferRuns_async",
+      "title": "DataTransferService scheduleTransferRuns Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates transfer runs for a time range [start_time, end_time]. For each date - or whatever granularity the data source supports - in the range, one transfer run is created. Note that runs are created per UTC time in the time range. DEPRECATED: use StartManualTransferRuns instead.",
+      "canonical": true,
+      "file": "data_transfer_service.schedule_transfer_runs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ScheduleTransferRuns",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ScheduleTransferRuns",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "start_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "end_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsResponse",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "ScheduleTransferRuns",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ScheduleTransferRuns",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_StartManualTransferRuns_async",
+      "title": "DataTransferService startManualTransferRuns Sample",
+      "origin": "API_DEFINITION",
+      "description": " Start manual transfer runs to be executed now with schedule_time equal to current time. The transfer runs can be created for a time range where the run_time is between start_time (inclusive) and end_time (exclusive), or for a specific run_time.",
+      "canonical": true,
+      "file": "data_transfer_service.start_manual_transfer_runs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StartManualTransferRuns",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.StartManualTransferRuns",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requested_time_range",
+            "type": ".google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest.TimeRange"
+          },
+          {
+            "name": "requested_run_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "StartManualTransferRuns",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.StartManualTransferRuns",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_GetTransferRun_async",
+      "title": "DataTransferService getTransferRun Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns information about the particular transfer run.",
+      "canonical": true,
+      "file": "data_transfer_service.get_transfer_run.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTransferRun",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferRun",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.datatransfer.v1.TransferRun",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "GetTransferRun",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferRun",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_DeleteTransferRun_async",
+      "title": "DataTransferService deleteTransferRun Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified transfer run.",
+      "canonical": true,
+      "file": "data_transfer_service.delete_transfer_run.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTransferRun",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferRun",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteTransferRun",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferRun",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_ListTransferRuns_async",
+      "title": "DataTransferService listTransferRuns Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns information about running and completed transfer runs.",
+      "canonical": true,
+      "file": "data_transfer_service.list_transfer_runs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTransferRuns",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferRuns",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "states",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "run_attempt",
+            "type": ".google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest.RunAttempt"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.datatransfer.v1.ListTransferRunsResponse",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "ListTransferRuns",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferRuns",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_ListTransferLogs_async",
+      "title": "DataTransferService listTransferLogs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns log messages for the transfer run.",
+      "canonical": true,
+      "file": "data_transfer_service.list_transfer_logs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTransferLogs",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferLogs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "message_types",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.datatransfer.v1.ListTransferLogsResponse",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "ListTransferLogs",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferLogs",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_CheckValidCreds_async",
+      "title": "DataTransferService checkValidCreds Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns true if valid credentials exist for the given data source and requesting user.",
+      "canonical": true,
+      "file": "data_transfer_service.check_valid_creds.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CheckValidCreds",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.CheckValidCreds",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.datatransfer.v1.CheckValidCredsResponse",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "CheckValidCreds",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.CheckValidCreds",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_EnrollDataSources_async",
+      "title": "DataTransferService enrollDataSources Sample",
+      "origin": "API_DEFINITION",
+      "description": " Enroll data sources in a user project. This allows users to create transfer configurations for these data sources. They will also appear in the ListDataSources RPC and as such, will appear in the BigQuery UI 'https://bigquery.cloud.google.com' (and the documents can be found at https://cloud.google.com/bigquery/bigquery-web-ui and https://cloud.google.com/bigquery/docs/working-with-transfers).",
+      "canonical": true,
+      "file": "data_transfer_service.enroll_data_sources.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EnrollDataSources",
+        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.EnrollDataSources",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data_source_ids",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataTransferServiceClient",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+        },
+        "method": {
+          "shortName": "EnrollDataSources",
+          "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.EnrollDataSources",
+          "service": {
+            "shortName": "DataTransferService",
+            "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      }
+    }
+  ]
+}
