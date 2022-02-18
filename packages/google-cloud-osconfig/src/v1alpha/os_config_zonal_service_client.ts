@@ -3127,9 +3127,8 @@ export class OsConfigZonalServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.osConfigZonalServiceStub!.then(stub => {
+    if (this.osConfigZonalServiceStub && !this._terminated) {
+      return this.osConfigZonalServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

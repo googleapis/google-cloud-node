@@ -189,13 +189,29 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
     assert(client.osConfigZonalServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new osconfigzonalserviceModule.v1alpha.OsConfigZonalServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.osConfigZonalServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new osconfigzonalserviceModule.v1alpha.OsConfigZonalServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.osConfigZonalServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -350,6 +366,26 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getOSPolicyAssignment with closed client', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1alpha.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getOSPolicyAssignment(request),
+        expectedError
+      );
+    });
   });
 
   describe('getInstanceOSPoliciesCompliance', () => {
@@ -474,6 +510,28 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getInstanceOSPoliciesCompliance with closed client', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1alpha.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const stub = sinon.stub(client, 'warn');
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1alpha.GetInstanceOSPoliciesComplianceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getInstanceOSPoliciesCompliance(request),
+        expectedError
+      );
+      assert(stub.calledOnce);
+    });
   });
 
   describe('getOSPolicyAssignmentReport', () => {
@@ -592,6 +650,26 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getOSPolicyAssignmentReport with closed client', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1alpha.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentReportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getOSPolicyAssignmentReport(request),
+        expectedError
+      );
+    });
   });
 
   describe('getInventory', () => {
@@ -705,6 +783,23 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getInventory with closed client', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1alpha.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1alpha.GetInventoryRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getInventory(request), expectedError);
     });
   });
 
@@ -822,6 +917,26 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         (client.innerApiCalls.getVulnerabilityReport as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getVulnerabilityReport with closed client', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1alpha.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1alpha.GetVulnerabilityReportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getVulnerabilityReport(request),
+        expectedError
       );
     });
   });

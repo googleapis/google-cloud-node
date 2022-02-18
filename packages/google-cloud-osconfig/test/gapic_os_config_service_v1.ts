@@ -153,12 +153,27 @@ describe('v1.OsConfigServiceClient', () => {
     assert(client.osConfigServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new osconfigserviceModule.v1.OsConfigServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.osConfigServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.osConfigServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -304,6 +319,22 @@ describe('v1.OsConfigServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes executePatchJob with closed client', async () => {
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.executePatchJob(request), expectedError);
+    });
   });
 
   describe('getPatchJob', () => {
@@ -415,6 +446,22 @@ describe('v1.OsConfigServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getPatchJob with closed client', async () => {
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPatchJob(request), expectedError);
+    });
   });
 
   describe('cancelPatchJob', () => {
@@ -525,6 +572,22 @@ describe('v1.OsConfigServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes cancelPatchJob with closed client', async () => {
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.cancelPatchJob(request), expectedError);
     });
   });
 
@@ -641,6 +704,25 @@ describe('v1.OsConfigServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createPatchDeployment with closed client', async () => {
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createPatchDeployment(request),
+        expectedError
+      );
+    });
   });
 
   describe('getPatchDeployment', () => {
@@ -752,6 +834,22 @@ describe('v1.OsConfigServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getPatchDeployment with closed client', async () => {
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPatchDeployment(request), expectedError);
     });
   });
 
@@ -866,6 +964,25 @@ describe('v1.OsConfigServiceClient', () => {
         (client.innerApiCalls.deletePatchDeployment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deletePatchDeployment with closed client', async () => {
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deletePatchDeployment(request),
+        expectedError
       );
     });
   });
@@ -986,6 +1103,26 @@ describe('v1.OsConfigServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updatePatchDeployment with closed client', async () => {
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
+      );
+      request.patchDeployment = {};
+      request.patchDeployment.name = '';
+      const expectedHeaderRequestParams = 'patch_deployment.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updatePatchDeployment(request),
+        expectedError
+      );
+    });
   });
 
   describe('pausePatchDeployment', () => {
@@ -1097,6 +1234,22 @@ describe('v1.OsConfigServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes pausePatchDeployment with closed client', async () => {
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.pausePatchDeployment(request), expectedError);
     });
   });
 
@@ -1211,6 +1364,25 @@ describe('v1.OsConfigServiceClient', () => {
         (client.innerApiCalls.resumePatchDeployment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes resumePatchDeployment with closed client', async () => {
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.resumePatchDeployment(request),
+        expectedError
       );
     });
   });
