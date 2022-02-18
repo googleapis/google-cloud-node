@@ -90,12 +90,27 @@ describe('v1p2beta1.AssetServiceClient', () => {
     assert(client.assetServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new assetserviceModule.v1p2beta1.AssetServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.assetServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new assetserviceModule.v1p2beta1.AssetServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.assetServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -241,6 +256,22 @@ describe('v1p2beta1.AssetServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createFeed with closed client', async () => {
+      const client = new assetserviceModule.v1p2beta1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1p2beta1.CreateFeedRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createFeed(request), expectedError);
+    });
   });
 
   describe('getFeed', () => {
@@ -349,6 +380,22 @@ describe('v1p2beta1.AssetServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getFeed with closed client', async () => {
+      const client = new assetserviceModule.v1p2beta1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1p2beta1.GetFeedRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getFeed(request), expectedError);
+    });
   });
 
   describe('listFeeds', () => {
@@ -456,6 +503,22 @@ describe('v1p2beta1.AssetServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes listFeeds with closed client', async () => {
+      const client = new assetserviceModule.v1p2beta1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1p2beta1.ListFeedsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listFeeds(request), expectedError);
     });
   });
 
@@ -571,6 +634,23 @@ describe('v1p2beta1.AssetServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateFeed with closed client', async () => {
+      const client = new assetserviceModule.v1p2beta1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1p2beta1.UpdateFeedRequest()
+      );
+      request.feed = {};
+      request.feed.name = '';
+      const expectedHeaderRequestParams = 'feed.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateFeed(request), expectedError);
+    });
   });
 
   describe('deleteFeed', () => {
@@ -681,6 +761,22 @@ describe('v1p2beta1.AssetServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteFeed with closed client', async () => {
+      const client = new assetserviceModule.v1p2beta1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1p2beta1.DeleteFeedRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteFeed(request), expectedError);
     });
   });
 

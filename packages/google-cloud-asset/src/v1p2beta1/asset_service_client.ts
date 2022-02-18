@@ -885,9 +885,8 @@ export class AssetServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.assetServiceStub!.then(stub => {
+    if (this.assetServiceStub && !this._terminated) {
+      return this.assetServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

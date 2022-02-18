@@ -1,0 +1,107 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-asset",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.asset.v1p4beta1",
+        "version": "v1p4beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "cloudasset_v1p4beta1_generated_AssetService_AnalyzeIamPolicy_async",
+      "title": "AssetService analyzeIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Analyzes IAM policies based on the specified request. Returns a list of [IamPolicyAnalysisResult][google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult] matching the request.",
+      "canonical": true,
+      "file": "asset_service.analyze_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AnalyzeIamPolicy",
+        "fullName": "google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "analysis_query",
+            "type": ".google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery"
+          },
+          {
+            "name": "options",
+            "type": ".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options"
+          }
+        ],
+        "resultType": ".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse",
+        "client": {
+          "shortName": "AssetServiceClient",
+          "fullName": "google.cloud.asset.v1p4beta1.AssetServiceClient"
+        },
+        "method": {
+          "shortName": "AnalyzeIamPolicy",
+          "fullName": "google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy",
+          "service": {
+            "shortName": "AssetService",
+            "fullName": "google.cloud.asset.v1p4beta1.AssetService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudasset_v1p4beta1_generated_AssetService_ExportIamPolicyAnalysis_async",
+      "title": "AssetService exportIamPolicyAnalysis Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports IAM policy analysis based on the specified request. This API implements the [google.longrunning.Operation][google.longrunning.Operation] API allowing you to keep track of the export. The metadata contains the request to help callers to map responses to requests.",
+      "canonical": true,
+      "file": "asset_service.export_iam_policy_analysis.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportIamPolicyAnalysis",
+        "fullName": "google.cloud.asset.v1p4beta1.AssetService.ExportIamPolicyAnalysis",
+        "async": true,
+        "parameters": [
+          {
+            "name": "analysis_query",
+            "type": ".google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery"
+          },
+          {
+            "name": "options",
+            "type": ".google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options"
+          },
+          {
+            "name": "output_config",
+            "type": ".google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AssetServiceClient",
+          "fullName": "google.cloud.asset.v1p4beta1.AssetServiceClient"
+        },
+        "method": {
+          "shortName": "ExportIamPolicyAnalysis",
+          "fullName": "google.cloud.asset.v1p4beta1.AssetService.ExportIamPolicyAnalysis",
+          "service": {
+            "shortName": "AssetService",
+            "fullName": "google.cloud.asset.v1p4beta1.AssetService"
+          }
+        }
+      }
+    }
+  ]
+}
