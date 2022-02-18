@@ -183,12 +183,27 @@ describe('v1.VmMigrationClient', () => {
     assert(client.vmMigrationStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new vmmigrationModule.v1.VmMigrationClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.vmMigrationStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new vmmigrationModule.v1.VmMigrationClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.vmMigrationStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -331,6 +346,22 @@ describe('v1.VmMigrationClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getSource with closed client', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.GetSourceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSource(request), expectedError);
+    });
   });
 
   describe('fetchInventory', () => {
@@ -441,6 +472,22 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes fetchInventory with closed client', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
+      );
+      request.source = '';
+      const expectedHeaderRequestParams = 'source=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.fetchInventory(request), expectedError);
     });
   });
 
@@ -553,6 +600,22 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getUtilizationReport with closed client', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getUtilizationReport(request), expectedError);
     });
   });
 
@@ -669,6 +732,25 @@ describe('v1.VmMigrationClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getDatacenterConnector with closed client', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getDatacenterConnector(request),
+        expectedError
+      );
+    });
   });
 
   describe('getMigratingVm', () => {
@@ -779,6 +861,22 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getMigratingVm with closed client', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getMigratingVm(request), expectedError);
     });
   });
 
@@ -891,6 +989,22 @@ describe('v1.VmMigrationClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getCloneJob with closed client', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getCloneJob(request), expectedError);
+    });
   });
 
   describe('getCutoverJob', () => {
@@ -1002,6 +1116,22 @@ describe('v1.VmMigrationClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getCutoverJob with closed client', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getCutoverJob(request), expectedError);
+    });
   });
 
   describe('getGroup', () => {
@@ -1109,6 +1239,22 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getGroup with closed client', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.GetGroupRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getGroup(request), expectedError);
     });
   });
 
@@ -1220,6 +1366,22 @@ describe('v1.VmMigrationClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getTargetProject with closed client', async () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTargetProject(request), expectedError);
     });
   });
 
