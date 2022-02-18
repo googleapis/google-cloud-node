@@ -3102,9 +3102,8 @@ export class LivestreamServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.livestreamServiceStub!.then(stub => {
+    if (this.livestreamServiceStub && !this._terminated) {
+      return this.livestreamServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
