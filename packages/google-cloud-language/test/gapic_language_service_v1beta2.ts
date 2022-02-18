@@ -90,12 +90,27 @@ describe('v1beta2.LanguageServiceClient', () => {
     assert(client.languageServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new languageserviceModule.v1beta2.LanguageServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.languageServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.languageServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -217,6 +232,20 @@ describe('v1beta2.LanguageServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes analyzeSentiment with closed client', async () => {
+      const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.language.v1beta2.AnalyzeSentimentRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.analyzeSentiment(request), expectedError);
+    });
   });
 
   describe('analyzeEntities', () => {
@@ -303,6 +332,20 @@ describe('v1beta2.LanguageServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes analyzeEntities with closed client', async () => {
+      const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.language.v1beta2.AnalyzeEntitiesRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.analyzeEntities(request), expectedError);
     });
   });
 
@@ -395,6 +438,23 @@ describe('v1beta2.LanguageServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes analyzeEntitySentiment with closed client', async () => {
+      const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.language.v1beta2.AnalyzeEntitySentimentRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.analyzeEntitySentiment(request),
+        expectedError
+      );
+    });
   });
 
   describe('analyzeSyntax', () => {
@@ -481,6 +541,20 @@ describe('v1beta2.LanguageServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes analyzeSyntax with closed client', async () => {
+      const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.language.v1beta2.AnalyzeSyntaxRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.analyzeSyntax(request), expectedError);
     });
   });
 
@@ -569,6 +643,20 @@ describe('v1beta2.LanguageServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes classifyText with closed client', async () => {
+      const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.language.v1beta2.ClassifyTextRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.classifyText(request), expectedError);
+    });
   });
 
   describe('annotateText', () => {
@@ -655,6 +743,20 @@ describe('v1beta2.LanguageServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes annotateText with closed client', async () => {
+      const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.language.v1beta2.AnnotateTextRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.annotateText(request), expectedError);
     });
   });
 });

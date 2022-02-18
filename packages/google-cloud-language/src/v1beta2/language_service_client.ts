@@ -851,9 +851,8 @@ export class LanguageServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.languageServiceStub!.then(stub => {
+    if (this.languageServiceStub && !this._terminated) {
+      return this.languageServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
