@@ -151,12 +151,27 @@ describe('v2.OrgPolicyClient', () => {
     assert(client.orgPolicyStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new orgpolicyModule.v2.OrgPolicyClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.orgPolicyStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new orgpolicyModule.v2.OrgPolicyClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.orgPolicyStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -299,6 +314,22 @@ describe('v2.OrgPolicyClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getPolicy with closed client', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPolicy(request), expectedError);
+    });
   });
 
   describe('getEffectivePolicy', () => {
@@ -411,6 +442,22 @@ describe('v2.OrgPolicyClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getEffectivePolicy with closed client', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEffectivePolicy(request), expectedError);
+    });
   });
 
   describe('createPolicy', () => {
@@ -521,6 +568,22 @@ describe('v2.OrgPolicyClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createPolicy with closed client', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createPolicy(request), expectedError);
     });
   });
 
@@ -636,6 +699,23 @@ describe('v2.OrgPolicyClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updatePolicy with closed client', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
+      );
+      request.policy = {};
+      request.policy.name = '';
+      const expectedHeaderRequestParams = 'policy.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updatePolicy(request), expectedError);
+    });
   });
 
   describe('deletePolicy', () => {
@@ -746,6 +826,22 @@ describe('v2.OrgPolicyClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deletePolicy with closed client', async () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deletePolicy(request), expectedError);
     });
   });
 
