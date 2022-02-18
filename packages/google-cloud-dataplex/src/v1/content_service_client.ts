@@ -1991,9 +1991,8 @@ export class ContentServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.contentServiceStub!.then(stub => {
+    if (this.contentServiceStub && !this._terminated) {
+      return this.contentServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

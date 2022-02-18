@@ -6521,9 +6521,8 @@ export class DataplexServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.dataplexServiceStub!.then(stub => {
+    if (this.dataplexServiceStub && !this._terminated) {
+      return this.dataplexServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

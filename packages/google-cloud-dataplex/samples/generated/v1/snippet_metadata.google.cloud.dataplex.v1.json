@@ -1,0 +1,2167 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-dataplex",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.dataplex.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "dataplex_v1_generated_ContentService_CreateContent_async",
+      "title": "ContentService createContent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a content.",
+      "canonical": true,
+      "file": "content_service.create_content.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateContent",
+        "fullName": "google.cloud.dataplex.v1.ContentService.CreateContent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "content",
+            "type": ".google.cloud.dataplex.v1.Content"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Content",
+        "client": {
+          "shortName": "ContentServiceClient",
+          "fullName": "google.cloud.dataplex.v1.ContentServiceClient"
+        },
+        "method": {
+          "shortName": "CreateContent",
+          "fullName": "google.cloud.dataplex.v1.ContentService.CreateContent",
+          "service": {
+            "shortName": "ContentService",
+            "fullName": "google.cloud.dataplex.v1.ContentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_ContentService_UpdateContent_async",
+      "title": "ContentService updateContent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a content. Only supports full resource update.",
+      "canonical": true,
+      "file": "content_service.update_content.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateContent",
+        "fullName": "google.cloud.dataplex.v1.ContentService.UpdateContent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "content",
+            "type": ".google.cloud.dataplex.v1.Content"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Content",
+        "client": {
+          "shortName": "ContentServiceClient",
+          "fullName": "google.cloud.dataplex.v1.ContentServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateContent",
+          "fullName": "google.cloud.dataplex.v1.ContentService.UpdateContent",
+          "service": {
+            "shortName": "ContentService",
+            "fullName": "google.cloud.dataplex.v1.ContentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_ContentService_DeleteContent_async",
+      "title": "ContentService deleteContent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a content.",
+      "canonical": true,
+      "file": "content_service.delete_content.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteContent",
+        "fullName": "google.cloud.dataplex.v1.ContentService.DeleteContent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ContentServiceClient",
+          "fullName": "google.cloud.dataplex.v1.ContentServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteContent",
+          "fullName": "google.cloud.dataplex.v1.ContentService.DeleteContent",
+          "service": {
+            "shortName": "ContentService",
+            "fullName": "google.cloud.dataplex.v1.ContentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_ContentService_GetContent_async",
+      "title": "ContentService getContent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a content resource.",
+      "canonical": true,
+      "file": "content_service.get_content.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetContent",
+        "fullName": "google.cloud.dataplex.v1.ContentService.GetContent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.dataplex.v1.GetContentRequest.ContentView"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Content",
+        "client": {
+          "shortName": "ContentServiceClient",
+          "fullName": "google.cloud.dataplex.v1.ContentServiceClient"
+        },
+        "method": {
+          "shortName": "GetContent",
+          "fullName": "google.cloud.dataplex.v1.ContentService.GetContent",
+          "service": {
+            "shortName": "ContentService",
+            "fullName": "google.cloud.dataplex.v1.ContentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_ContentService_ListContent_async",
+      "title": "ContentService listContent Sample",
+      "origin": "API_DEFINITION",
+      "description": " List content.",
+      "canonical": true,
+      "file": "content_service.list_content.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListContent",
+        "fullName": "google.cloud.dataplex.v1.ContentService.ListContent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListContentResponse",
+        "client": {
+          "shortName": "ContentServiceClient",
+          "fullName": "google.cloud.dataplex.v1.ContentServiceClient"
+        },
+        "method": {
+          "shortName": "ListContent",
+          "fullName": "google.cloud.dataplex.v1.ContentService.ListContent",
+          "service": {
+            "shortName": "ContentService",
+            "fullName": "google.cloud.dataplex.v1.ContentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_CreateLake_async",
+      "title": "ContentService createLake Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a lake resource.",
+      "canonical": true,
+      "file": "dataplex_service.create_lake.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateLake",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.CreateLake",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "lake_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "lake",
+            "type": ".google.cloud.dataplex.v1.Lake"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "CreateLake",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.CreateLake",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_UpdateLake_async",
+      "title": "ContentService updateLake Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a lake resource.",
+      "canonical": true,
+      "file": "dataplex_service.update_lake.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateLake",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.UpdateLake",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "lake",
+            "type": ".google.cloud.dataplex.v1.Lake"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateLake",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.UpdateLake",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_DeleteLake_async",
+      "title": "ContentService deleteLake Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a lake resource. All zones within the lake must be deleted before the lake can be deleted.",
+      "canonical": true,
+      "file": "dataplex_service.delete_lake.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteLake",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.DeleteLake",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteLake",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.DeleteLake",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_ListLakes_async",
+      "title": "ContentService listLakes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists lake resources in a project and location.",
+      "canonical": true,
+      "file": "dataplex_service.list_lakes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListLakes",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.ListLakes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListLakesResponse",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "ListLakes",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.ListLakes",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_GetLake_async",
+      "title": "ContentService getLake Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a lake resource.",
+      "canonical": true,
+      "file": "dataplex_service.get_lake.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetLake",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.GetLake",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Lake",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "GetLake",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.GetLake",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_ListLakeActions_async",
+      "title": "ContentService listLakeActions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists action resources in a lake.",
+      "canonical": true,
+      "file": "dataplex_service.list_lake_actions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListLakeActions",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.ListLakeActions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListActionsResponse",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "ListLakeActions",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.ListLakeActions",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_CreateZone_async",
+      "title": "ContentService createZone Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a zone resource within a lake.",
+      "canonical": true,
+      "file": "dataplex_service.create_zone.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateZone",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.CreateZone",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": ".google.cloud.dataplex.v1.Zone"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "CreateZone",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.CreateZone",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_UpdateZone_async",
+      "title": "ContentService updateZone Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a zone resource.",
+      "canonical": true,
+      "file": "dataplex_service.update_zone.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateZone",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.UpdateZone",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "zone",
+            "type": ".google.cloud.dataplex.v1.Zone"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateZone",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.UpdateZone",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_DeleteZone_async",
+      "title": "ContentService deleteZone Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a zone resource. All assets within a zone must be deleted before the zone can be deleted.",
+      "canonical": true,
+      "file": "dataplex_service.delete_zone.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteZone",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.DeleteZone",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteZone",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.DeleteZone",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_ListZones_async",
+      "title": "ContentService listZones Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists zone resources in a lake.",
+      "canonical": true,
+      "file": "dataplex_service.list_zones.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListZones",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.ListZones",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListZonesResponse",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "ListZones",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.ListZones",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_GetZone_async",
+      "title": "ContentService getZone Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a zone resource.",
+      "canonical": true,
+      "file": "dataplex_service.get_zone.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetZone",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.GetZone",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Zone",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "GetZone",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.GetZone",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_ListZoneActions_async",
+      "title": "ContentService listZoneActions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists action resources in a zone.",
+      "canonical": true,
+      "file": "dataplex_service.list_zone_actions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListZoneActions",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.ListZoneActions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListActionsResponse",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "ListZoneActions",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.ListZoneActions",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_CreateAsset_async",
+      "title": "ContentService createAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an asset resource.",
+      "canonical": true,
+      "file": "dataplex_service.create_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAsset",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.CreateAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "asset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "asset",
+            "type": ".google.cloud.dataplex.v1.Asset"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "CreateAsset",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.CreateAsset",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_UpdateAsset_async",
+      "title": "ContentService updateAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an asset resource.",
+      "canonical": true,
+      "file": "dataplex_service.update_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAsset",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.UpdateAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "asset",
+            "type": ".google.cloud.dataplex.v1.Asset"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateAsset",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.UpdateAsset",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_DeleteAsset_async",
+      "title": "ContentService deleteAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an asset resource. The referenced storage resource is detached (default) or deleted based on the associated Lifecycle policy.",
+      "canonical": true,
+      "file": "dataplex_service.delete_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAsset",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.DeleteAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteAsset",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.DeleteAsset",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_ListAssets_async",
+      "title": "ContentService listAssets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists asset resources in a zone.",
+      "canonical": true,
+      "file": "dataplex_service.list_assets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAssets",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.ListAssets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListAssetsResponse",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "ListAssets",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.ListAssets",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_GetAsset_async",
+      "title": "ContentService getAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves an asset resource.",
+      "canonical": true,
+      "file": "dataplex_service.get_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAsset",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.GetAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Asset",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "GetAsset",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.GetAsset",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_ListAssetActions_async",
+      "title": "ContentService listAssetActions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists action resources in an asset.",
+      "canonical": true,
+      "file": "dataplex_service.list_asset_actions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAssetActions",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.ListAssetActions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListActionsResponse",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "ListAssetActions",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.ListAssetActions",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_CreateTask_async",
+      "title": "ContentService createTask Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a task resource within a lake.",
+      "canonical": true,
+      "file": "dataplex_service.create_task.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTask",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.CreateTask",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "task_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "task",
+            "type": ".google.cloud.dataplex.v1.Task"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "CreateTask",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.CreateTask",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_UpdateTask_async",
+      "title": "ContentService updateTask Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update the task resource.",
+      "canonical": true,
+      "file": "dataplex_service.update_task.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTask",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.UpdateTask",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "task",
+            "type": ".google.cloud.dataplex.v1.Task"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateTask",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.UpdateTask",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_DeleteTask_async",
+      "title": "ContentService deleteTask Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete the task resource.",
+      "canonical": true,
+      "file": "dataplex_service.delete_task.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTask",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.DeleteTask",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteTask",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.DeleteTask",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_ListTasks_async",
+      "title": "ContentService listTasks Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists tasks under the given lake.",
+      "canonical": true,
+      "file": "dataplex_service.list_tasks.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTasks",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.ListTasks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListTasksResponse",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "ListTasks",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.ListTasks",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_GetTask_async",
+      "title": "ContentService getTask Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get task resource.",
+      "canonical": true,
+      "file": "dataplex_service.get_task.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTask",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.GetTask",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Task",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "GetTask",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.GetTask",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_ListJobs_async",
+      "title": "ContentService listJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Jobs under the given task.",
+      "canonical": true,
+      "file": "dataplex_service.list_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListJobs",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.ListJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListJobsResponse",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "ListJobs",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.ListJobs",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_GetJob_async",
+      "title": "ContentService getJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get job resource.",
+      "canonical": true,
+      "file": "dataplex_service.get_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetJob",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.GetJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Job",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "GetJob",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.GetJob",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_CancelJob_async",
+      "title": "ContentService cancelJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Cancel jobs running for the task resource.",
+      "canonical": true,
+      "file": "dataplex_service.cancel_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CancelJob",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.CancelJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "CancelJob",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.CancelJob",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_CreateEnvironment_async",
+      "title": "ContentService createEnvironment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create an environment resource.",
+      "canonical": true,
+      "file": "dataplex_service.create_environment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEnvironment",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.CreateEnvironment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "environment_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "environment",
+            "type": ".google.cloud.dataplex.v1.Environment"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "CreateEnvironment",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.CreateEnvironment",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_UpdateEnvironment_async",
+      "title": "ContentService updateEnvironment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update the environment resource.",
+      "canonical": true,
+      "file": "dataplex_service.update_environment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEnvironment",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.UpdateEnvironment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "environment",
+            "type": ".google.cloud.dataplex.v1.Environment"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateEnvironment",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.UpdateEnvironment",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_DeleteEnvironment_async",
+      "title": "ContentService deleteEnvironment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete the environment resource. All the child resources must have been deleted before environment deletion can be initiated.",
+      "canonical": true,
+      "file": "dataplex_service.delete_environment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteEnvironment",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.DeleteEnvironment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteEnvironment",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.DeleteEnvironment",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_ListEnvironments_async",
+      "title": "ContentService listEnvironments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists environments under the given lake.",
+      "canonical": true,
+      "file": "dataplex_service.list_environments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEnvironments",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.ListEnvironments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListEnvironmentsResponse",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "ListEnvironments",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.ListEnvironments",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_GetEnvironment_async",
+      "title": "ContentService getEnvironment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get environment resource.",
+      "canonical": true,
+      "file": "dataplex_service.get_environment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEnvironment",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.GetEnvironment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Environment",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "GetEnvironment",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.GetEnvironment",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_DataplexService_ListSessions_async",
+      "title": "ContentService listSessions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists session resources in an environment.",
+      "canonical": true,
+      "file": "dataplex_service.list_sessions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSessions",
+        "fullName": "google.cloud.dataplex.v1.DataplexService.ListSessions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListSessionsResponse",
+        "client": {
+          "shortName": "DataplexServiceClient",
+          "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+        },
+        "method": {
+          "shortName": "ListSessions",
+          "fullName": "google.cloud.dataplex.v1.DataplexService.ListSessions",
+          "service": {
+            "shortName": "DataplexService",
+            "fullName": "google.cloud.dataplex.v1.DataplexService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_MetadataService_CreateEntity_async",
+      "title": "ContentService createEntity Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a metadata entity.",
+      "canonical": true,
+      "file": "metadata_service.create_entity.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEntity",
+        "fullName": "google.cloud.dataplex.v1.MetadataService.CreateEntity",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entity",
+            "type": ".google.cloud.dataplex.v1.Entity"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Entity",
+        "client": {
+          "shortName": "MetadataServiceClient",
+          "fullName": "google.cloud.dataplex.v1.MetadataServiceClient"
+        },
+        "method": {
+          "shortName": "CreateEntity",
+          "fullName": "google.cloud.dataplex.v1.MetadataService.CreateEntity",
+          "service": {
+            "shortName": "MetadataService",
+            "fullName": "google.cloud.dataplex.v1.MetadataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_MetadataService_UpdateEntity_async",
+      "title": "ContentService updateEntity Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a metadata entity. Only supports full resource update.",
+      "canonical": true,
+      "file": "metadata_service.update_entity.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEntity",
+        "fullName": "google.cloud.dataplex.v1.MetadataService.UpdateEntity",
+        "async": true,
+        "parameters": [
+          {
+            "name": "entity",
+            "type": ".google.cloud.dataplex.v1.Entity"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Entity",
+        "client": {
+          "shortName": "MetadataServiceClient",
+          "fullName": "google.cloud.dataplex.v1.MetadataServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateEntity",
+          "fullName": "google.cloud.dataplex.v1.MetadataService.UpdateEntity",
+          "service": {
+            "shortName": "MetadataService",
+            "fullName": "google.cloud.dataplex.v1.MetadataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_MetadataService_DeleteEntity_async",
+      "title": "ContentService deleteEntity Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a metadata entity.",
+      "canonical": true,
+      "file": "metadata_service.delete_entity.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteEntity",
+        "fullName": "google.cloud.dataplex.v1.MetadataService.DeleteEntity",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "MetadataServiceClient",
+          "fullName": "google.cloud.dataplex.v1.MetadataServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteEntity",
+          "fullName": "google.cloud.dataplex.v1.MetadataService.DeleteEntity",
+          "service": {
+            "shortName": "MetadataService",
+            "fullName": "google.cloud.dataplex.v1.MetadataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_MetadataService_GetEntity_async",
+      "title": "ContentService getEntity Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a metadata entity.",
+      "canonical": true,
+      "file": "metadata_service.get_entity.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEntity",
+        "fullName": "google.cloud.dataplex.v1.MetadataService.GetEntity",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.dataplex.v1.GetEntityRequest.EntityView"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Entity",
+        "client": {
+          "shortName": "MetadataServiceClient",
+          "fullName": "google.cloud.dataplex.v1.MetadataServiceClient"
+        },
+        "method": {
+          "shortName": "GetEntity",
+          "fullName": "google.cloud.dataplex.v1.MetadataService.GetEntity",
+          "service": {
+            "shortName": "MetadataService",
+            "fullName": "google.cloud.dataplex.v1.MetadataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_MetadataService_ListEntities_async",
+      "title": "ContentService listEntities Sample",
+      "origin": "API_DEFINITION",
+      "description": " List metadata entities in a zone.",
+      "canonical": true,
+      "file": "metadata_service.list_entities.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEntities",
+        "fullName": "google.cloud.dataplex.v1.MetadataService.ListEntities",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.dataplex.v1.ListEntitiesRequest.EntityView"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListEntitiesResponse",
+        "client": {
+          "shortName": "MetadataServiceClient",
+          "fullName": "google.cloud.dataplex.v1.MetadataServiceClient"
+        },
+        "method": {
+          "shortName": "ListEntities",
+          "fullName": "google.cloud.dataplex.v1.MetadataService.ListEntities",
+          "service": {
+            "shortName": "MetadataService",
+            "fullName": "google.cloud.dataplex.v1.MetadataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_MetadataService_CreatePartition_async",
+      "title": "ContentService createPartition Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a metadata partition.",
+      "canonical": true,
+      "file": "metadata_service.create_partition.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePartition",
+        "fullName": "google.cloud.dataplex.v1.MetadataService.CreatePartition",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "partition",
+            "type": ".google.cloud.dataplex.v1.Partition"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Partition",
+        "client": {
+          "shortName": "MetadataServiceClient",
+          "fullName": "google.cloud.dataplex.v1.MetadataServiceClient"
+        },
+        "method": {
+          "shortName": "CreatePartition",
+          "fullName": "google.cloud.dataplex.v1.MetadataService.CreatePartition",
+          "service": {
+            "shortName": "MetadataService",
+            "fullName": "google.cloud.dataplex.v1.MetadataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_MetadataService_DeletePartition_async",
+      "title": "ContentService deletePartition Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a metadata partition.",
+      "canonical": true,
+      "file": "metadata_service.delete_partition.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePartition",
+        "fullName": "google.cloud.dataplex.v1.MetadataService.DeletePartition",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "MetadataServiceClient",
+          "fullName": "google.cloud.dataplex.v1.MetadataServiceClient"
+        },
+        "method": {
+          "shortName": "DeletePartition",
+          "fullName": "google.cloud.dataplex.v1.MetadataService.DeletePartition",
+          "service": {
+            "shortName": "MetadataService",
+            "fullName": "google.cloud.dataplex.v1.MetadataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_MetadataService_GetPartition_async",
+      "title": "ContentService getPartition Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a metadata partition of an entity.",
+      "canonical": true,
+      "file": "metadata_service.get_partition.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPartition",
+        "fullName": "google.cloud.dataplex.v1.MetadataService.GetPartition",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.Partition",
+        "client": {
+          "shortName": "MetadataServiceClient",
+          "fullName": "google.cloud.dataplex.v1.MetadataServiceClient"
+        },
+        "method": {
+          "shortName": "GetPartition",
+          "fullName": "google.cloud.dataplex.v1.MetadataService.GetPartition",
+          "service": {
+            "shortName": "MetadataService",
+            "fullName": "google.cloud.dataplex.v1.MetadataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataplex_v1_generated_MetadataService_ListPartitions_async",
+      "title": "ContentService listPartitions Sample",
+      "origin": "API_DEFINITION",
+      "description": " List metadata partitions of an entity.",
+      "canonical": true,
+      "file": "metadata_service.list_partitions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPartitions",
+        "fullName": "google.cloud.dataplex.v1.MetadataService.ListPartitions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataplex.v1.ListPartitionsResponse",
+        "client": {
+          "shortName": "MetadataServiceClient",
+          "fullName": "google.cloud.dataplex.v1.MetadataServiceClient"
+        },
+        "method": {
+          "shortName": "ListPartitions",
+          "fullName": "google.cloud.dataplex.v1.MetadataService.ListPartitions",
+          "service": {
+            "shortName": "MetadataService",
+            "fullName": "google.cloud.dataplex.v1.MetadataService"
+          }
+        }
+      }
+    }
+  ]
+}
