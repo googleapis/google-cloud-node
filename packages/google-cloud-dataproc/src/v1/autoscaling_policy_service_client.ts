@@ -1381,9 +1381,8 @@ export class AutoscalingPolicyServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.autoscalingPolicyServiceStub!.then(stub => {
+    if (this.autoscalingPolicyServiceStub && !this._terminated) {
+      return this.autoscalingPolicyServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

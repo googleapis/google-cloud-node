@@ -185,12 +185,27 @@ describe('v1.ClusterControllerClient', () => {
     assert(client.clusterControllerStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new clustercontrollerModule.v1.ClusterControllerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.clusterControllerStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new clustercontrollerModule.v1.ClusterControllerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.clusterControllerStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -335,6 +350,22 @@ describe('v1.ClusterControllerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getCluster with closed client', async () => {
+      const client = new clustercontrollerModule.v1.ClusterControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.GetClusterRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getCluster(request), expectedError);
     });
   });
 

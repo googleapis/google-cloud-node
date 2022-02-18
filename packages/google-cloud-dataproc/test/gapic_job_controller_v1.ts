@@ -183,12 +183,27 @@ describe('v1.JobControllerClient', () => {
     assert(client.jobControllerStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new jobcontrollerModule.v1.JobControllerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.jobControllerStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new jobcontrollerModule.v1.JobControllerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.jobControllerStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -331,6 +346,22 @@ describe('v1.JobControllerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes submitJob with closed client', async () => {
+      const client = new jobcontrollerModule.v1.JobControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.SubmitJobRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.submitJob(request), expectedError);
+    });
   });
 
   describe('getJob', () => {
@@ -438,6 +469,22 @@ describe('v1.JobControllerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getJob with closed client', async () => {
+      const client = new jobcontrollerModule.v1.JobControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.GetJobRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getJob(request), expectedError);
     });
   });
 
@@ -547,6 +594,22 @@ describe('v1.JobControllerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateJob with closed client', async () => {
+      const client = new jobcontrollerModule.v1.JobControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.UpdateJobRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateJob(request), expectedError);
+    });
   });
 
   describe('cancelJob', () => {
@@ -655,6 +718,22 @@ describe('v1.JobControllerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes cancelJob with closed client', async () => {
+      const client = new jobcontrollerModule.v1.JobControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.CancelJobRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.cancelJob(request), expectedError);
+    });
   });
 
   describe('deleteJob', () => {
@@ -762,6 +841,22 @@ describe('v1.JobControllerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteJob with closed client', async () => {
+      const client = new jobcontrollerModule.v1.JobControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.DeleteJobRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteJob(request), expectedError);
     });
   });
 

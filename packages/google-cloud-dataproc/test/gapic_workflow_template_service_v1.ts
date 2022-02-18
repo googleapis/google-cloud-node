@@ -191,13 +191,29 @@ describe('v1.WorkflowTemplateServiceClient', () => {
     assert(client.workflowTemplateServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.workflowTemplateServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.workflowTemplateServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -352,6 +368,26 @@ describe('v1.WorkflowTemplateServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createWorkflowTemplate with closed client', async () => {
+      const client =
+        new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.CreateWorkflowTemplateRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createWorkflowTemplate(request),
+        expectedError
+      );
+    });
   });
 
   describe('getWorkflowTemplate', () => {
@@ -466,6 +502,23 @@ describe('v1.WorkflowTemplateServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getWorkflowTemplate with closed client', async () => {
+      const client =
+        new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.GetWorkflowTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getWorkflowTemplate(request), expectedError);
     });
   });
 
@@ -588,6 +641,27 @@ describe('v1.WorkflowTemplateServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateWorkflowTemplate with closed client', async () => {
+      const client =
+        new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.UpdateWorkflowTemplateRequest()
+      );
+      request.template = {};
+      request.template.name = '';
+      const expectedHeaderRequestParams = 'template.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateWorkflowTemplate(request),
+        expectedError
+      );
+    });
   });
 
   describe('deleteWorkflowTemplate', () => {
@@ -704,6 +778,26 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         (client.innerApiCalls.deleteWorkflowTemplate as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteWorkflowTemplate with closed client', async () => {
+      const client =
+        new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.DeleteWorkflowTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteWorkflowTemplate(request),
+        expectedError
       );
     });
   });

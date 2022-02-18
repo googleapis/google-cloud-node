@@ -1813,9 +1813,8 @@ export class WorkflowTemplateServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.workflowTemplateServiceStub!.then(stub => {
+    if (this.workflowTemplateServiceStub && !this._terminated) {
+      return this.workflowTemplateServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

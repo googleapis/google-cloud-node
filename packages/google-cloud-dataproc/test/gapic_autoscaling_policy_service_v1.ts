@@ -159,13 +159,29 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     assert(client.autoscalingPolicyServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.autoscalingPolicyServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.autoscalingPolicyServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -320,6 +336,26 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createAutoscalingPolicy with closed client', async () => {
+      const client =
+        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createAutoscalingPolicy(request),
+        expectedError
+      );
+    });
   });
 
   describe('updateAutoscalingPolicy', () => {
@@ -441,6 +477,27 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateAutoscalingPolicy with closed client', async () => {
+      const client =
+        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
+      );
+      request.policy = {};
+      request.policy.name = '';
+      const expectedHeaderRequestParams = 'policy.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateAutoscalingPolicy(request),
+        expectedError
+      );
+    });
   });
 
   describe('getAutoscalingPolicy', () => {
@@ -555,6 +612,23 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getAutoscalingPolicy with closed client', async () => {
+      const client =
+        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAutoscalingPolicy(request), expectedError);
     });
   });
 
@@ -672,6 +746,26 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         (client.innerApiCalls.deleteAutoscalingPolicy as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteAutoscalingPolicy with closed client', async () => {
+      const client =
+        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteAutoscalingPolicy(request),
+        expectedError
       );
     });
   });

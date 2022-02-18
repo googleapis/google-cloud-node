@@ -185,12 +185,27 @@ describe('v1.BatchControllerClient', () => {
     assert(client.batchControllerStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new batchcontrollerModule.v1.BatchControllerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.batchControllerStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new batchcontrollerModule.v1.BatchControllerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.batchControllerStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -333,6 +348,22 @@ describe('v1.BatchControllerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getBatch with closed client', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.GetBatchRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBatch(request), expectedError);
+    });
   });
 
   describe('deleteBatch', () => {
@@ -443,6 +474,22 @@ describe('v1.BatchControllerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteBatch with closed client', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.DeleteBatchRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteBatch(request), expectedError);
     });
   });
 

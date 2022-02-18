@@ -2148,9 +2148,8 @@ export class ClusterControllerClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.clusterControllerStub!.then(stub => {
+    if (this.clusterControllerStub && !this._terminated) {
+      return this.clusterControllerStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
