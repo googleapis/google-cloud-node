@@ -185,12 +185,27 @@ describe('v1beta2.CloudMemcacheClient', () => {
     assert(client.cloudMemcacheStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new cloudmemcacheModule.v1beta2.CloudMemcacheClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.cloudMemcacheStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new cloudmemcacheModule.v1beta2.CloudMemcacheClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.cloudMemcacheStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -335,6 +350,22 @@ describe('v1beta2.CloudMemcacheClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getInstance with closed client', async () => {
+      const client = new cloudmemcacheModule.v1beta2.CloudMemcacheClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memcache.v1beta2.GetInstanceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getInstance(request), expectedError);
     });
   });
 
