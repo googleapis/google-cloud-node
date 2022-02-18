@@ -1904,9 +1904,8 @@ export class CloudFunctionsServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.cloudFunctionsServiceStub!.then(stub => {
+    if (this.cloudFunctionsServiceStub && !this._terminated) {
+      return this.cloudFunctionsServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
