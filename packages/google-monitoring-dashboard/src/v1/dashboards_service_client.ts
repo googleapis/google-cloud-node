@@ -1044,9 +1044,8 @@ export class DashboardsServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.dashboardsServiceStub!.then(stub => {
+    if (this.dashboardsServiceStub && !this._terminated) {
+      return this.dashboardsServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

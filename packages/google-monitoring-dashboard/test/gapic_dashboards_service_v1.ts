@@ -153,12 +153,27 @@ describe('v1.DashboardsServiceClient', () => {
     assert(client.dashboardsServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.dashboardsServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.dashboardsServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -304,6 +319,22 @@ describe('v1.DashboardsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createDashboard with closed client', async () => {
+      const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createDashboard(request), expectedError);
+    });
   });
 
   describe('getDashboard', () => {
@@ -415,6 +446,22 @@ describe('v1.DashboardsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getDashboard with closed client', async () => {
+      const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDashboard(request), expectedError);
+    });
   });
 
   describe('deleteDashboard', () => {
@@ -525,6 +572,22 @@ describe('v1.DashboardsServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteDashboard with closed client', async () => {
+      const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteDashboard(request), expectedError);
     });
   });
 
@@ -639,6 +702,23 @@ describe('v1.DashboardsServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateDashboard with closed client', async () => {
+      const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
+      );
+      request.dashboard = {};
+      request.dashboard.name = '';
+      const expectedHeaderRequestParams = 'dashboard.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateDashboard(request), expectedError);
     });
   });
 
