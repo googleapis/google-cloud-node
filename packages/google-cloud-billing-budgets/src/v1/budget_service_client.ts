@@ -992,9 +992,8 @@ export class BudgetServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.budgetServiceStub!.then(stub => {
+    if (this.budgetServiceStub && !this._terminated) {
+      return this.budgetServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

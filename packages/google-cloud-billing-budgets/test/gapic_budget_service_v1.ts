@@ -151,12 +151,27 @@ describe('v1.BudgetServiceClient', () => {
     assert(client.budgetServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new budgetserviceModule.v1.BudgetServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.budgetServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new budgetserviceModule.v1.BudgetServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.budgetServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -302,6 +317,22 @@ describe('v1.BudgetServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createBudget with closed client', async () => {
+      const client = new budgetserviceModule.v1.BudgetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.budgets.v1.CreateBudgetRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createBudget(request), expectedError);
+    });
   });
 
   describe('updateBudget', () => {
@@ -416,6 +447,23 @@ describe('v1.BudgetServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateBudget with closed client', async () => {
+      const client = new budgetserviceModule.v1.BudgetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.budgets.v1.UpdateBudgetRequest()
+      );
+      request.budget = {};
+      request.budget.name = '';
+      const expectedHeaderRequestParams = 'budget.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateBudget(request), expectedError);
+    });
   });
 
   describe('getBudget', () => {
@@ -523,6 +571,22 @@ describe('v1.BudgetServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getBudget with closed client', async () => {
+      const client = new budgetserviceModule.v1.BudgetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.budgets.v1.GetBudgetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBudget(request), expectedError);
     });
   });
 
@@ -634,6 +698,22 @@ describe('v1.BudgetServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteBudget with closed client', async () => {
+      const client = new budgetserviceModule.v1.BudgetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.billing.budgets.v1.DeleteBudgetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteBudget(request), expectedError);
     });
   });
 
