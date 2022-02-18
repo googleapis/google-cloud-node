@@ -1231,9 +1231,8 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.recaptchaEnterpriseServiceV1Beta1Stub!.then(stub => {
+    if (this.recaptchaEnterpriseServiceV1Beta1Stub && !this._terminated) {
+      return this.recaptchaEnterpriseServiceV1Beta1Stub.then(stub => {
         this._terminated = true;
         stub.close();
       });

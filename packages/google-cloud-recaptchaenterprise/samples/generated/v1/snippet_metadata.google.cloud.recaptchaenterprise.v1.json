@@ -1,0 +1,555 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-recaptchaenterprise",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.recaptchaenterprise.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateAssessment_async",
+      "title": "RecaptchaEnterpriseService createAssessment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an Assessment of the likelihood an event is legitimate.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service.create_assessment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAssessment",
+        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.CreateAssessment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "assessment",
+            "type": ".google.cloud.recaptchaenterprise.v1.Assessment"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1.Assessment",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceClient",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+        },
+        "method": {
+          "shortName": "CreateAssessment",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.CreateAssessment",
+          "service": {
+            "shortName": "RecaptchaEnterpriseService",
+            "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AnnotateAssessment_async",
+      "title": "RecaptchaEnterpriseService annotateAssessment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Annotates a previously created Assessment to provide additional information on whether the event turned out to be authentic or fraudulent.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service.annotate_assessment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AnnotateAssessment",
+        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.AnnotateAssessment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "annotation",
+            "type": ".google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation"
+          },
+          {
+            "name": "reasons",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "hashed_account_id",
+            "type": "TYPE_BYTES"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceClient",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+        },
+        "method": {
+          "shortName": "AnnotateAssessment",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.AnnotateAssessment",
+          "service": {
+            "shortName": "RecaptchaEnterpriseService",
+            "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateKey_async",
+      "title": "RecaptchaEnterpriseService createKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new reCAPTCHA Enterprise key.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service.create_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateKey",
+        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.CreateKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "key",
+            "type": ".google.cloud.recaptchaenterprise.v1.Key"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1.Key",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceClient",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+        },
+        "method": {
+          "shortName": "CreateKey",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.CreateKey",
+          "service": {
+            "shortName": "RecaptchaEnterpriseService",
+            "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListKeys_async",
+      "title": "RecaptchaEnterpriseService listKeys Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all keys that belong to a project.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service.list_keys.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListKeys",
+        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListKeys",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1.ListKeysResponse",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceClient",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+        },
+        "method": {
+          "shortName": "ListKeys",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListKeys",
+          "service": {
+            "shortName": "RecaptchaEnterpriseService",
+            "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetKey_async",
+      "title": "RecaptchaEnterpriseService getKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the specified key.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service.get_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetKey",
+        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.GetKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1.Key",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceClient",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+        },
+        "method": {
+          "shortName": "GetKey",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.GetKey",
+          "service": {
+            "shortName": "RecaptchaEnterpriseService",
+            "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdateKey_async",
+      "title": "RecaptchaEnterpriseService updateKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified key.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service.update_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKey",
+        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.UpdateKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "key",
+            "type": ".google.cloud.recaptchaenterprise.v1.Key"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1.Key",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceClient",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateKey",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.UpdateKey",
+          "service": {
+            "shortName": "RecaptchaEnterpriseService",
+            "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_DeleteKey_async",
+      "title": "RecaptchaEnterpriseService deleteKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified key.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service.delete_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteKey",
+        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.DeleteKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceClient",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteKey",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.DeleteKey",
+          "service": {
+            "shortName": "RecaptchaEnterpriseService",
+            "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_MigrateKey_async",
+      "title": "RecaptchaEnterpriseService migrateKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Migrates an existing key from reCAPTCHA to reCAPTCHA Enterprise. Once a key is migrated, it can be used from either product. SiteVerify requests are billed as CreateAssessment calls. You must be authenticated as one of the current owners of the reCAPTCHA Site Key, and your user must have the reCAPTCHA Enterprise Admin IAM role in the destination project.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service.migrate_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MigrateKey",
+        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.MigrateKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1.Key",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceClient",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+        },
+        "method": {
+          "shortName": "MigrateKey",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.MigrateKey",
+          "service": {
+            "shortName": "RecaptchaEnterpriseService",
+            "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetMetrics_async",
+      "title": "RecaptchaEnterpriseService getMetrics Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get some aggregated metrics for a Key. This data can be used to build dashboards.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service.get_metrics.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMetrics",
+        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.GetMetrics",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1.Metrics",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceClient",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+        },
+        "method": {
+          "shortName": "GetMetrics",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.GetMetrics",
+          "service": {
+            "shortName": "RecaptchaEnterpriseService",
+            "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroups_async",
+      "title": "RecaptchaEnterpriseService listRelatedAccountGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " List groups of related accounts.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service.list_related_account_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRelatedAccountGroups",
+        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListRelatedAccountGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceClient",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+        },
+        "method": {
+          "shortName": "ListRelatedAccountGroups",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListRelatedAccountGroups",
+          "service": {
+            "shortName": "RecaptchaEnterpriseService",
+            "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroupMemberships_async",
+      "title": "RecaptchaEnterpriseService listRelatedAccountGroupMemberships Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the memberships in a group of related accounts.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service.list_related_account_group_memberships.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRelatedAccountGroupMemberships",
+        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListRelatedAccountGroupMemberships",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceClient",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+        },
+        "method": {
+          "shortName": "ListRelatedAccountGroupMemberships",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListRelatedAccountGroupMemberships",
+          "service": {
+            "shortName": "RecaptchaEnterpriseService",
+            "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_SearchRelatedAccountGroupMemberships_async",
+      "title": "RecaptchaEnterpriseService searchRelatedAccountGroupMemberships Sample",
+      "origin": "API_DEFINITION",
+      "description": " Search group memberships related to a given account.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service.search_related_account_group_memberships.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchRelatedAccountGroupMemberships",
+        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.SearchRelatedAccountGroupMemberships",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "hashed_account_id",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceClient",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+        },
+        "method": {
+          "shortName": "SearchRelatedAccountGroupMemberships",
+          "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.SearchRelatedAccountGroupMemberships",
+          "service": {
+            "shortName": "RecaptchaEnterpriseService",
+            "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      }
+    }
+  ]
+}

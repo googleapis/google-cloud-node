@@ -159,13 +159,29 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
     assert(client.recaptchaEnterpriseServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.recaptchaEnterpriseServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.recaptchaEnterpriseServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -322,6 +338,25 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createAssessment with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createAssessment(request), expectedError);
+    });
   });
 
   describe('annotateAssessment', () => {
@@ -443,6 +478,25 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes annotateAssessment with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.annotateAssessment(request), expectedError);
+    });
   });
 
   describe('createKey', () => {
@@ -560,6 +614,25 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createKey with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createKey(request), expectedError);
+    });
   });
 
   describe('getKey', () => {
@@ -676,6 +749,25 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getKey with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getKey(request), expectedError);
     });
   });
 
@@ -797,6 +889,26 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateKey with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
+      );
+      request.key = {};
+      request.key.name = '';
+      const expectedHeaderRequestParams = 'key.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateKey(request), expectedError);
+    });
   });
 
   describe('deleteKey', () => {
@@ -913,6 +1025,25 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteKey with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteKey(request), expectedError);
     });
   });
 
@@ -1034,6 +1165,25 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes migrateKey with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.migrateKey(request), expectedError);
+    });
   });
 
   describe('getMetrics', () => {
@@ -1153,6 +1303,25 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getMetrics with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getMetrics(request), expectedError);
     });
   });
 
