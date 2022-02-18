@@ -185,12 +185,27 @@ describe('v1.PipelineServiceClient', () => {
     assert(client.pipelineServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new pipelineserviceModule.v1.PipelineServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.pipelineServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.pipelineServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -340,6 +355,25 @@ describe('v1.PipelineServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createTrainingPipeline with closed client', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createTrainingPipeline(request),
+        expectedError
+      );
+    });
   });
 
   describe('getTrainingPipeline', () => {
@@ -451,6 +485,22 @@ describe('v1.PipelineServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getTrainingPipeline with closed client', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTrainingPipelineRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTrainingPipeline(request), expectedError);
     });
   });
 
@@ -567,6 +617,25 @@ describe('v1.PipelineServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes cancelTrainingPipeline with closed client', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.cancelTrainingPipeline(request),
+        expectedError
+      );
+    });
   });
 
   describe('createPipelineJob', () => {
@@ -677,6 +746,22 @@ describe('v1.PipelineServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createPipelineJob with closed client', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createPipelineJob(request), expectedError);
     });
   });
 
@@ -789,6 +874,22 @@ describe('v1.PipelineServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getPipelineJob with closed client', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPipelineJob(request), expectedError);
+    });
   });
 
   describe('cancelPipelineJob', () => {
@@ -899,6 +1000,22 @@ describe('v1.PipelineServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes cancelPipelineJob with closed client', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.cancelPipelineJob(request), expectedError);
     });
   });
 

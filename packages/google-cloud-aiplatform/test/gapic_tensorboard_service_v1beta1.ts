@@ -209,13 +209,29 @@ describe('v1beta1.TensorboardServiceClient', () => {
     assert(client.tensorboardServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.tensorboardServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.tensorboardServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -366,6 +382,23 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getTensorboard with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetTensorboardRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTensorboard(request), expectedError);
+    });
   });
 
   describe('createTensorboardExperiment', () => {
@@ -484,6 +517,26 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createTensorboardExperiment with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardExperimentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createTensorboardExperiment(request),
+        expectedError
+      );
+    });
   });
 
   describe('getTensorboardExperiment', () => {
@@ -600,6 +653,26 @@ describe('v1beta1.TensorboardServiceClient', () => {
         (client.innerApiCalls.getTensorboardExperiment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getTensorboardExperiment with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetTensorboardExperimentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getTensorboardExperiment(request),
+        expectedError
       );
     });
   });
@@ -723,6 +796,27 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTensorboardExperiment with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardExperimentRequest()
+      );
+      request.tensorboardExperiment = {};
+      request.tensorboardExperiment.name = '';
+      const expectedHeaderRequestParams = 'tensorboard_experiment.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateTensorboardExperiment(request),
+        expectedError
+      );
+    });
   });
 
   describe('createTensorboardRun', () => {
@@ -837,6 +931,23 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createTensorboardRun with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardRunRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createTensorboardRun(request), expectedError);
     });
   });
 
@@ -956,6 +1067,26 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes batchCreateTensorboardRuns with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.batchCreateTensorboardRuns(request),
+        expectedError
+      );
+    });
   });
 
   describe('getTensorboardRun', () => {
@@ -1069,6 +1200,23 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getTensorboardRun with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetTensorboardRunRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTensorboardRun(request), expectedError);
     });
   });
 
@@ -1188,6 +1336,24 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTensorboardRun with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardRunRequest()
+      );
+      request.tensorboardRun = {};
+      request.tensorboardRun.name = '';
+      const expectedHeaderRequestParams = 'tensorboard_run.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateTensorboardRun(request), expectedError);
+    });
   });
 
   describe('batchCreateTensorboardTimeSeries', () => {
@@ -1304,6 +1470,26 @@ describe('v1beta1.TensorboardServiceClient', () => {
         (client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes batchCreateTensorboardTimeSeries with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.batchCreateTensorboardTimeSeries(request),
+        expectedError
       );
     });
   });
@@ -1424,6 +1610,26 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createTensorboardTimeSeries with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardTimeSeriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createTensorboardTimeSeries(request),
+        expectedError
+      );
+    });
   });
 
   describe('getTensorboardTimeSeries', () => {
@@ -1540,6 +1746,26 @@ describe('v1beta1.TensorboardServiceClient', () => {
         (client.innerApiCalls.getTensorboardTimeSeries as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getTensorboardTimeSeries with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetTensorboardTimeSeriesRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getTensorboardTimeSeries(request),
+        expectedError
       );
     });
   });
@@ -1663,6 +1889,27 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTensorboardTimeSeries with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardTimeSeriesRequest()
+      );
+      request.tensorboardTimeSeries = {};
+      request.tensorboardTimeSeries.name = '';
+      const expectedHeaderRequestParams = 'tensorboard_time_series.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateTensorboardTimeSeries(request),
+        expectedError
+      );
+    });
   });
 
   describe('batchReadTensorboardTimeSeriesData', () => {
@@ -1783,6 +2030,26 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes batchReadTensorboardTimeSeriesData with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest()
+      );
+      request.tensorboard = '';
+      const expectedHeaderRequestParams = 'tensorboard=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.batchReadTensorboardTimeSeriesData(request),
+        expectedError
+      );
+    });
   });
 
   describe('readTensorboardTimeSeriesData', () => {
@@ -1899,6 +2166,26 @@ describe('v1beta1.TensorboardServiceClient', () => {
         (client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes readTensorboardTimeSeriesData with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataRequest()
+      );
+      request.tensorboardTimeSeries = '';
+      const expectedHeaderRequestParams = 'tensorboard_time_series=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.readTensorboardTimeSeriesData(request),
+        expectedError
       );
     });
   });
@@ -2019,6 +2306,26 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes writeTensorboardExperimentData with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataRequest()
+      );
+      request.tensorboardExperiment = '';
+      const expectedHeaderRequestParams = 'tensorboard_experiment=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.writeTensorboardExperimentData(request),
+        expectedError
+      );
+    });
   });
 
   describe('writeTensorboardRunData', () => {
@@ -2135,6 +2442,26 @@ describe('v1beta1.TensorboardServiceClient', () => {
         (client.innerApiCalls.writeTensorboardRunData as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes writeTensorboardRunData with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataRequest()
+      );
+      request.tensorboardRun = '';
+      const expectedHeaderRequestParams = 'tensorboard_run=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.writeTensorboardRunData(request),
+        expectedError
       );
     });
   });
@@ -3443,6 +3770,35 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions)
       );
+    });
+
+    it('invokes readTensorboardBlobData with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      const stream = client.readTensorboardBlobData(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
     });
   });
 

@@ -26,10 +26,12 @@ import {
   LROperation,
   PaginationCallback,
   GaxCall,
+  GoogleError,
 } from 'google-gax';
 
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -484,6 +486,16 @@ export class TensorboardServiceClient {
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough();
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new GoogleError('The client has already been closed.')
+                  );
+                });
+                return stream;
+              }
               return Promise.reject('The client has already been closed.');
             }
             const func = stub[methodName];
@@ -6559,9 +6571,8 @@ export class TensorboardServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.tensorboardServiceStub!.then(stub => {
+    if (this.tensorboardServiceStub && !this._terminated) {
+      return this.tensorboardServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

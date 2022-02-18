@@ -4303,9 +4303,8 @@ export class VizierServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.vizierServiceStub!.then(stub => {
+    if (this.vizierServiceStub && !this._terminated) {
+      return this.vizierServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

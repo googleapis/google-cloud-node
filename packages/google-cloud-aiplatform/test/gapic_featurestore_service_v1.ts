@@ -185,12 +185,27 @@ describe('v1.FeaturestoreServiceClient', () => {
     assert(client.featurestoreServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.featurestoreServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.featurestoreServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -342,6 +357,24 @@ describe('v1.FeaturestoreServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getFeaturestore with closed client', async () => {
+      const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetFeaturestoreRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getFeaturestore(request), expectedError);
+    });
   });
 
   describe('getEntityType', () => {
@@ -458,6 +491,24 @@ describe('v1.FeaturestoreServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getEntityType with closed client', async () => {
+      const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetEntityTypeRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEntityType(request), expectedError);
     });
   });
 
@@ -579,6 +630,25 @@ describe('v1.FeaturestoreServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateEntityType with closed client', async () => {
+      const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateEntityTypeRequest()
+      );
+      request.entityType = {};
+      request.entityType.name = '';
+      const expectedHeaderRequestParams = 'entity_type.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateEntityType(request), expectedError);
+    });
   });
 
   describe('getFeature', () => {
@@ -695,6 +765,24 @@ describe('v1.FeaturestoreServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getFeature with closed client', async () => {
+      const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetFeatureRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getFeature(request), expectedError);
     });
   });
 
@@ -815,6 +903,25 @@ describe('v1.FeaturestoreServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateFeature with closed client', async () => {
+      const client = new featurestoreserviceModule.v1.FeaturestoreServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateFeatureRequest()
+      );
+      request.feature = {};
+      request.feature.name = '';
+      const expectedHeaderRequestParams = 'feature.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateFeature(request), expectedError);
     });
   });
 

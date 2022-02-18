@@ -6335,9 +6335,8 @@ export class FeaturestoreServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.featurestoreServiceStub!.then(stub => {
+    if (this.featurestoreServiceStub && !this._terminated) {
+      return this.featurestoreServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

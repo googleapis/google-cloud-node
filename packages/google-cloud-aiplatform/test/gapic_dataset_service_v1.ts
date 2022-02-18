@@ -185,12 +185,27 @@ describe('v1.DatasetServiceClient', () => {
     assert(client.datasetServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new datasetserviceModule.v1.DatasetServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.datasetServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new datasetserviceModule.v1.DatasetServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.datasetServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -336,6 +351,22 @@ describe('v1.DatasetServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getDataset with closed client', async () => {
+      const client = new datasetserviceModule.v1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetDatasetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDataset(request), expectedError);
+    });
   });
 
   describe('updateDataset', () => {
@@ -450,6 +481,23 @@ describe('v1.DatasetServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateDataset with closed client', async () => {
+      const client = new datasetserviceModule.v1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest()
+      );
+      request.dataset = {};
+      request.dataset.name = '';
+      const expectedHeaderRequestParams = 'dataset.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateDataset(request), expectedError);
+    });
   });
 
   describe('getAnnotationSpec', () => {
@@ -560,6 +608,22 @@ describe('v1.DatasetServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getAnnotationSpec with closed client', async () => {
+      const client = new datasetserviceModule.v1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAnnotationSpec(request), expectedError);
     });
   });
 

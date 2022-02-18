@@ -185,12 +185,27 @@ describe('v1.MetadataServiceClient', () => {
     assert(client.metadataServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new metadataserviceModule.v1.MetadataServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.metadataServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new metadataserviceModule.v1.MetadataServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.metadataServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -336,6 +351,22 @@ describe('v1.MetadataServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getMetadataStore with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetMetadataStoreRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getMetadataStore(request), expectedError);
+    });
   });
 
   describe('createArtifact', () => {
@@ -447,6 +478,22 @@ describe('v1.MetadataServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createArtifact with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateArtifactRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createArtifact(request), expectedError);
+    });
   });
 
   describe('getArtifact', () => {
@@ -557,6 +604,22 @@ describe('v1.MetadataServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getArtifact with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetArtifactRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getArtifact(request), expectedError);
     });
   });
 
@@ -672,6 +735,23 @@ describe('v1.MetadataServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateArtifact with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateArtifactRequest()
+      );
+      request.artifact = {};
+      request.artifact.name = '';
+      const expectedHeaderRequestParams = 'artifact.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateArtifact(request), expectedError);
+    });
   });
 
   describe('createContext', () => {
@@ -783,6 +863,22 @@ describe('v1.MetadataServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createContext with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateContextRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createContext(request), expectedError);
+    });
   });
 
   describe('getContext', () => {
@@ -893,6 +989,22 @@ describe('v1.MetadataServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getContext with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetContextRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getContext(request), expectedError);
     });
   });
 
@@ -1007,6 +1119,23 @@ describe('v1.MetadataServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateContext with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateContextRequest()
+      );
+      request.context = {};
+      request.context.name = '';
+      const expectedHeaderRequestParams = 'context.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateContext(request), expectedError);
     });
   });
 
@@ -1123,6 +1252,25 @@ describe('v1.MetadataServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes addContextArtifactsAndExecutions with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.AddContextArtifactsAndExecutionsRequest()
+      );
+      request.context = '';
+      const expectedHeaderRequestParams = 'context=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.addContextArtifactsAndExecutions(request),
+        expectedError
+      );
+    });
   });
 
   describe('addContextChildren', () => {
@@ -1234,6 +1382,22 @@ describe('v1.MetadataServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes addContextChildren with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.AddContextChildrenRequest()
+      );
+      request.context = '';
+      const expectedHeaderRequestParams = 'context=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.addContextChildren(request), expectedError);
     });
   });
 
@@ -1350,6 +1514,25 @@ describe('v1.MetadataServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes queryContextLineageSubgraph with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.QueryContextLineageSubgraphRequest()
+      );
+      request.context = '';
+      const expectedHeaderRequestParams = 'context=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.queryContextLineageSubgraph(request),
+        expectedError
+      );
+    });
   });
 
   describe('createExecution', () => {
@@ -1461,6 +1644,22 @@ describe('v1.MetadataServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createExecution with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateExecutionRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createExecution(request), expectedError);
+    });
   });
 
   describe('getExecution', () => {
@@ -1571,6 +1770,22 @@ describe('v1.MetadataServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getExecution with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetExecutionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getExecution(request), expectedError);
     });
   });
 
@@ -1686,6 +1901,23 @@ describe('v1.MetadataServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateExecution with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateExecutionRequest()
+      );
+      request.execution = {};
+      request.execution.name = '';
+      const expectedHeaderRequestParams = 'execution.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateExecution(request), expectedError);
+    });
   });
 
   describe('addExecutionEvents', () => {
@@ -1797,6 +2029,22 @@ describe('v1.MetadataServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes addExecutionEvents with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.AddExecutionEventsRequest()
+      );
+      request.execution = '';
+      const expectedHeaderRequestParams = 'execution=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.addExecutionEvents(request), expectedError);
     });
   });
 
@@ -1913,6 +2161,25 @@ describe('v1.MetadataServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes queryExecutionInputsAndOutputs with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.QueryExecutionInputsAndOutputsRequest()
+      );
+      request.execution = '';
+      const expectedHeaderRequestParams = 'execution=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.queryExecutionInputsAndOutputs(request),
+        expectedError
+      );
+    });
   });
 
   describe('createMetadataSchema', () => {
@@ -2025,6 +2292,22 @@ describe('v1.MetadataServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createMetadataSchema with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateMetadataSchemaRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createMetadataSchema(request), expectedError);
+    });
   });
 
   describe('getMetadataSchema', () => {
@@ -2135,6 +2418,22 @@ describe('v1.MetadataServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getMetadataSchema with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetMetadataSchemaRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getMetadataSchema(request), expectedError);
     });
   });
 
@@ -2249,6 +2548,25 @@ describe('v1.MetadataServiceClient', () => {
         (client.innerApiCalls.queryArtifactLineageSubgraph as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes queryArtifactLineageSubgraph with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.QueryArtifactLineageSubgraphRequest()
+      );
+      request.artifact = '';
+      const expectedHeaderRequestParams = 'artifact=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.queryArtifactLineageSubgraph(request),
+        expectedError
       );
     });
   });
