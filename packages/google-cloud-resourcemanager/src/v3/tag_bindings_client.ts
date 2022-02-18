@@ -998,9 +998,8 @@ export class TagBindingsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.tagBindingsStub!.then(stub => {
+    if (this.tagBindingsStub && !this._terminated) {
+      return this.tagBindingsStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
