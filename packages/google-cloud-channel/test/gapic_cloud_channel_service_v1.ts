@@ -185,12 +185,27 @@ describe('v1.CloudChannelServiceClient', () => {
     assert(client.cloudChannelServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.cloudChannelServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.cloudChannelServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -342,6 +357,24 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getCustomer with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.GetCustomerRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getCustomer(request), expectedError);
+    });
   });
 
   describe('checkCloudIdentityAccountsExist', () => {
@@ -463,6 +496,27 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes checkCloudIdentityAccountsExist with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.checkCloudIdentityAccountsExist(request),
+        expectedError
+      );
+    });
   });
 
   describe('createCustomer', () => {
@@ -579,6 +633,24 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createCustomer with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CreateCustomerRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createCustomer(request), expectedError);
     });
   });
 
@@ -700,6 +772,25 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateCustomer with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UpdateCustomerRequest()
+      );
+      request.customer = {};
+      request.customer.name = '';
+      const expectedHeaderRequestParams = 'customer.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateCustomer(request), expectedError);
+    });
   });
 
   describe('deleteCustomer', () => {
@@ -816,6 +907,24 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteCustomer with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.DeleteCustomerRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteCustomer(request), expectedError);
     });
   });
 
@@ -934,6 +1043,24 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes importCustomer with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ImportCustomerRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.importCustomer(request), expectedError);
+    });
   });
 
   describe('getEntitlement', () => {
@@ -1050,6 +1177,24 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getEntitlement with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.GetEntitlementRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEntitlement(request), expectedError);
     });
   });
 
@@ -1170,6 +1315,27 @@ describe('v1.CloudChannelServiceClient', () => {
         (client.innerApiCalls.getChannelPartnerLink as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getChannelPartnerLink with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.GetChannelPartnerLinkRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getChannelPartnerLink(request),
+        expectedError
       );
     });
   });
@@ -1293,6 +1459,27 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createChannelPartnerLink with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.CreateChannelPartnerLinkRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createChannelPartnerLink(request),
+        expectedError
+      );
+    });
   });
 
   describe('updateChannelPartnerLink', () => {
@@ -1414,6 +1601,27 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateChannelPartnerLink with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateChannelPartnerLink(request),
+        expectedError
+      );
+    });
   });
 
   describe('lookupOffer', () => {
@@ -1530,6 +1738,24 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes lookupOffer with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.LookupOfferRequest()
+      );
+      request.entitlement = '';
+      const expectedHeaderRequestParams = 'entitlement=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.lookupOffer(request), expectedError);
     });
   });
 
@@ -1649,6 +1875,24 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes registerSubscriber with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.registerSubscriber(request), expectedError);
+    });
   });
 
   describe('unregisterSubscriber', () => {
@@ -1766,6 +2010,24 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes unregisterSubscriber with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.unregisterSubscriber(request), expectedError);
     });
   });
 

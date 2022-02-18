@@ -1,0 +1,1735 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-channel",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.channel.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListCustomers_async",
+      "title": "CloudChannelService listCustomers Sample",
+      "origin": "API_DEFINITION",
+      "description": " List [Customer][google.cloud.channel.v1.Customer]s. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: List of [Customer][google.cloud.channel.v1.Customer]s, or an empty list if there are no customers.",
+      "canonical": true,
+      "file": "cloud_channel_service.list_customers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCustomers",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ListCustomers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ListCustomersResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ListCustomers",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ListCustomers",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_GetCustomer_async",
+      "title": "CloudChannelService getCustomer Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the requested [Customer][google.cloud.channel.v1.Customer] resource. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: The customer resource doesn't exist. Usually the result of an invalid name parameter. Return value: The [Customer][google.cloud.channel.v1.Customer] resource.",
+      "canonical": true,
+      "file": "cloud_channel_service.get_customer.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCustomer",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.GetCustomer",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.Customer",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "GetCustomer",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.GetCustomer",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_CheckCloudIdentityAccountsExist_async",
+      "title": "CloudChannelService checkCloudIdentityAccountsExist Sample",
+      "origin": "API_DEFINITION",
+      "description": " Confirms the existence of Cloud Identity accounts based on the domain and if the Cloud Identity accounts are owned by the reseller. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * INVALID_VALUE: Invalid domain value in the request. Return value: A list of [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerAccount] resources for the domain (may be empty) Note: in the v1alpha1 version of the API, a NOT_FOUND error returns if no [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerAccount] resources match the domain.",
+      "canonical": true,
+      "file": "cloud_channel_service.check_cloud_identity_accounts_exist.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CheckCloudIdentityAccountsExist",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.CheckCloudIdentityAccountsExist",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "domain",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.CheckCloudIdentityAccountsExistResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "CheckCloudIdentityAccountsExist",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.CheckCloudIdentityAccountsExist",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_CreateCustomer_async",
+      "title": "CloudChannelService createCustomer Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new [Customer][google.cloud.channel.v1.Customer] resource under the reseller or distributor account. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT:     * Required request parameters are missing or invalid.     * Domain field value doesn't match the primary email domain. Return value: The newly created [Customer][google.cloud.channel.v1.Customer] resource.",
+      "canonical": true,
+      "file": "cloud_channel_service.create_customer.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCustomer",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.CreateCustomer",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "customer",
+            "type": ".google.cloud.channel.v1.Customer"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.Customer",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "CreateCustomer",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.CreateCustomer",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_UpdateCustomer_async",
+      "title": "CloudChannelService updateCustomer Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an existing [Customer][google.cloud.channel.v1.Customer] resource for the reseller or distributor. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name in the request. Return value: The updated [Customer][google.cloud.channel.v1.Customer] resource.",
+      "canonical": true,
+      "file": "cloud_channel_service.update_customer.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCustomer",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.UpdateCustomer",
+        "async": true,
+        "parameters": [
+          {
+            "name": "customer",
+            "type": ".google.cloud.channel.v1.Customer"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.Customer",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateCustomer",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.UpdateCustomer",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_DeleteCustomer_async",
+      "title": "CloudChannelService deleteCustomer Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the given [Customer][google.cloud.channel.v1.Customer] permanently. Possible error codes: * PERMISSION_DENIED: The account making the request does not own this customer. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * FAILED_PRECONDITION: The customer has existing entitlements. * NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name in the request.",
+      "canonical": true,
+      "file": "cloud_channel_service.delete_customer.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 50,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCustomer",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.DeleteCustomer",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteCustomer",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.DeleteCustomer",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ImportCustomer_async",
+      "title": "CloudChannelService importCustomer Sample",
+      "origin": "API_DEFINITION",
+      "description": " Imports a [Customer][google.cloud.channel.v1.Customer] from the Cloud Identity associated with the provided Cloud Identity ID or domain before a TransferEntitlements call. If a linked Customer already exists and overwrite_if_exists is true, it will update that Customer's data. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * NOT_FOUND: Cloud Identity doesn't exist or was deleted. * INVALID_ARGUMENT: Required parameters are missing, or the auth_token is expired or invalid. * ALREADY_EXISTS: A customer already exists and has conflicting critical fields. Requires an overwrite. Return value: The [Customer][google.cloud.channel.v1.Customer].",
+      "canonical": true,
+      "file": "cloud_channel_service.import_customer.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 88,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportCustomer",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ImportCustomer",
+        "async": true,
+        "parameters": [
+          {
+            "name": "domain",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cloud_identity_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "auth_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "overwrite_if_exists",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "channel_partner_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "customer",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.Customer",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ImportCustomer",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ImportCustomer",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ProvisionCloudIdentity_async",
+      "title": "CloudChannelService provisionCloudIdentity Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Cloud Identity for the given customer using the customer's information, or the information provided here. Possible error codes: *  PERMISSION_DENIED: The customer doesn't belong to the reseller. *  INVALID_ARGUMENT: Required request parameters are missing or invalid. *  NOT_FOUND: The customer was not found. *  ALREADY_EXISTS: The customer's primary email already exists. Retry    after changing the customer's primary contact email. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata contains an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+      "canonical": true,
+      "file": "cloud_channel_service.provision_cloud_identity.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ProvisionCloudIdentity",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ProvisionCloudIdentity",
+        "async": true,
+        "parameters": [
+          {
+            "name": "customer",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cloud_identity_info",
+            "type": ".google.cloud.channel.v1.CloudIdentityInfo"
+          },
+          {
+            "name": "user",
+            "type": ".google.cloud.channel.v1.AdminUser"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ProvisionCloudIdentity",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ProvisionCloudIdentity",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListEntitlements_async",
+      "title": "CloudChannelService listEntitlements Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists [Entitlement][google.cloud.channel.v1.Entitlement]s belonging to a customer. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: A list of the customer's [Entitlement][google.cloud.channel.v1.Entitlement]s.",
+      "canonical": true,
+      "file": "cloud_channel_service.list_entitlements.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEntitlements",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ListEntitlements",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ListEntitlementsResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ListEntitlements",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ListEntitlements",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListTransferableSkus_async",
+      "title": "CloudChannelService listTransferableSkus Sample",
+      "origin": "API_DEFINITION",
+      "description": " List [TransferableSku][google.cloud.channel.v1.TransferableSku]s of a customer based on the Cloud Identity ID or Customer Name in the request. Use this method to list the entitlements information of an unowned customer. You should provide the customer's Cloud Identity ID or Customer Name. Possible error codes: * PERMISSION_DENIED:     * The customer doesn't belong to the reseller and has no auth token.     * The supplied auth token is invalid.     * The reseller account making the request is different     from the reseller account in the query. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: A list of the customer's [TransferableSku][google.cloud.channel.v1.TransferableSku].",
+      "canonical": true,
+      "file": "cloud_channel_service.list_transferable_skus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 93,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTransferableSkus",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ListTransferableSkus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "cloud_identity_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "customer_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "auth_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ListTransferableSkusResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ListTransferableSkus",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ListTransferableSkus",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListTransferableOffers_async",
+      "title": "CloudChannelService listTransferableOffers Sample",
+      "origin": "API_DEFINITION",
+      "description": " List [TransferableOffer][google.cloud.channel.v1.TransferableOffer]s of a customer based on Cloud Identity ID or Customer Name in the request. Use this method when a reseller gets the entitlement information of an unowned customer. The reseller should provide the customer's Cloud Identity ID or Customer Name. Possible error codes: * PERMISSION_DENIED:     * The customer doesn't belong to the reseller and has no auth token.     * The supplied auth token is invalid.     * The reseller account making the request is different     from the reseller account in the query. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: List of [TransferableOffer][google.cloud.channel.v1.TransferableOffer] for the given customer and SKU.",
+      "canonical": true,
+      "file": "cloud_channel_service.list_transferable_offers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 85,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTransferableOffers",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ListTransferableOffers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "cloud_identity_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "customer_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "sku",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ListTransferableOffersResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ListTransferableOffers",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ListTransferableOffers",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_GetEntitlement_async",
+      "title": "CloudChannelService getEntitlement Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the requested [Entitlement][google.cloud.channel.v1.Entitlement] resource. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: The customer entitlement was not found. Return value: The requested [Entitlement][google.cloud.channel.v1.Entitlement] resource.",
+      "canonical": true,
+      "file": "cloud_channel_service.get_entitlement.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEntitlement",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.GetEntitlement",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.Entitlement",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "GetEntitlement",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.GetEntitlement",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_CreateEntitlement_async",
+      "title": "CloudChannelService createEntitlement Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an entitlement for a customer. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT:     * Required request parameters are missing or invalid.     * There is already a customer entitlement for a SKU from the same     product family. * INVALID_VALUE: Make sure the OfferId is valid. If it is, contact Google Channel support for further troubleshooting. * NOT_FOUND: The customer or offer resource was not found. * ALREADY_EXISTS:     * The SKU was already purchased for the customer.     * The customer's primary email already exists. Retry     after changing the customer's primary contact email. * CONDITION_NOT_MET or FAILED_PRECONDITION:     * The domain required for purchasing a SKU has not been verified.     * A pre-requisite SKU required to purchase an Add-On SKU is missing.     For example, Google Workspace Business Starter is required to purchase     Vault or Drive.     * (Developer accounts only) Reseller and resold domain must meet the     following naming requirements:         * Domain names must start with goog-test.         * Domain names must include the reseller domain. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+      "canonical": true,
+      "file": "cloud_channel_service.create_entitlement.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEntitlement",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.CreateEntitlement",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entitlement",
+            "type": ".google.cloud.channel.v1.Entitlement"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "CreateEntitlement",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.CreateEntitlement",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ChangeParameters_async",
+      "title": "CloudChannelService changeParameters Sample",
+      "origin": "API_DEFINITION",
+      "description": " Change parameters of the entitlement. An entitlement update is a long-running operation and it updates the entitlement as a result of fulfillment. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. For example, the number of seats being changed is greater than the allowed number of max seats, or decreasing seats for a commitment based plan. * NOT_FOUND: Entitlement resource not found. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+      "canonical": true,
+      "file": "cloud_channel_service.change_parameters.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ChangeParameters",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ChangeParameters",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "parameters",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "purchase_order_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ChangeParameters",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ChangeParameters",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ChangeRenewalSettings_async",
+      "title": "CloudChannelService changeRenewalSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the renewal settings for an existing customer entitlement. An entitlement update is a long-running operation and it updates the entitlement as a result of fulfillment. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: Entitlement resource not found. * NOT_COMMITMENT_PLAN: Renewal Settings are only applicable for a commitment plan. Can't enable or disable renewals for non-commitment plans. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend.   Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+      "canonical": true,
+      "file": "cloud_channel_service.change_renewal_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ChangeRenewalSettings",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ChangeRenewalSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "renewal_settings",
+            "type": ".google.cloud.channel.v1.RenewalSettings"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ChangeRenewalSettings",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ChangeRenewalSettings",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ChangeOffer_async",
+      "title": "CloudChannelService changeOffer Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the Offer for an existing customer entitlement. An entitlement update is a long-running operation and it updates the entitlement as a result of fulfillment. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: Offer or Entitlement resource not found. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+      "canonical": true,
+      "file": "cloud_channel_service.change_offer.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ChangeOffer",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ChangeOffer",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "offer",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "parameters",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "purchase_order_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ChangeOffer",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ChangeOffer",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_StartPaidService_async",
+      "title": "CloudChannelService startPaidService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts paid service for a trial entitlement. Starts paid service for a trial entitlement immediately. This method is only applicable if a plan is set up for a trial entitlement but has some trial days remaining. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: Entitlement resource not found. * FAILED_PRECONDITION/NOT_IN_TRIAL: This method only works for entitlement on trial plans. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+      "canonical": true,
+      "file": "cloud_channel_service.start_paid_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StartPaidService",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.StartPaidService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "StartPaidService",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.StartPaidService",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_SuspendEntitlement_async",
+      "title": "CloudChannelService suspendEntitlement Sample",
+      "origin": "API_DEFINITION",
+      "description": " Suspends a previously fulfilled entitlement. An entitlement suspension is a long-running operation. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: Entitlement resource not found. * NOT_ACTIVE: Entitlement is not active. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+      "canonical": true,
+      "file": "cloud_channel_service.suspend_entitlement.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SuspendEntitlement",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.SuspendEntitlement",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "SuspendEntitlement",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.SuspendEntitlement",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_CancelEntitlement_async",
+      "title": "CloudChannelService cancelEntitlement Sample",
+      "origin": "API_DEFINITION",
+      "description": " Cancels a previously fulfilled entitlement. An entitlement cancellation is a long-running operation. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * FAILED_PRECONDITION: There are Google Cloud projects linked to the Google Cloud entitlement's Cloud Billing subaccount. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: Entitlement resource not found. * DELETION_TYPE_NOT_ALLOWED: Cancel is only allowed for Google Workspace add-ons, or entitlements for Google Cloud's development platform. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The response will contain google.protobuf.Empty on success. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+      "canonical": true,
+      "file": "cloud_channel_service.cancel_entitlement.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CancelEntitlement",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.CancelEntitlement",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "CancelEntitlement",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.CancelEntitlement",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ActivateEntitlement_async",
+      "title": "CloudChannelService activateEntitlement Sample",
+      "origin": "API_DEFINITION",
+      "description": " Activates a previously suspended entitlement. Entitlements suspended for pending ToS acceptance can't be activated using this method. An entitlement activation is a long-running operation and it updates the state of the customer entitlement. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: Entitlement resource not found. * SUSPENSION_NOT_RESELLER_INITIATED: Can only activate reseller-initiated suspensions and entitlements that have accepted the TOS. * NOT_SUSPENDED: Can only activate suspended entitlements not in an ACTIVE state. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+      "canonical": true,
+      "file": "cloud_channel_service.activate_entitlement.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ActivateEntitlement",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ActivateEntitlement",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ActivateEntitlement",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ActivateEntitlement",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_TransferEntitlements_async",
+      "title": "CloudChannelService transferEntitlements Sample",
+      "origin": "API_DEFINITION",
+      "description": " Transfers customer entitlements to new reseller. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: The customer or offer resource was not found. * ALREADY_EXISTS: The SKU was already transferred for the customer. * CONDITION_NOT_MET or FAILED_PRECONDITION:     * The SKU requires domain verification to transfer, but the domain is     not verified.     * An Add-On SKU (example, Vault or Drive) is missing the     pre-requisite SKU (example, G Suite Basic).     * (Developer accounts only) Reseller and resold domain must meet the     following naming requirements:         * Domain names must start with goog-test.         * Domain names must include the reseller domain.     * Specify all transferring entitlements. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+      "canonical": true,
+      "file": "cloud_channel_service.transfer_entitlements.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TransferEntitlements",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.TransferEntitlements",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entitlements",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "auth_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "TransferEntitlements",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.TransferEntitlements",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_TransferEntitlementsToGoogle_async",
+      "title": "CloudChannelService transferEntitlementsToGoogle Sample",
+      "origin": "API_DEFINITION",
+      "description": " Transfers customer entitlements from their current reseller to Google. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: The customer or offer resource was not found. * ALREADY_EXISTS: The SKU was already transferred for the customer. * CONDITION_NOT_MET or FAILED_PRECONDITION:     * The SKU requires domain verification to transfer, but the domain is     not verified.     * An Add-On SKU (example, Vault or Drive) is missing the     pre-requisite SKU (example, G Suite Basic).     * (Developer accounts only) Reseller and resold domain must meet the     following naming requirements:         * Domain names must start with goog-test.         * Domain names must include the reseller domain. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The response will contain google.protobuf.Empty on success. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+      "canonical": true,
+      "file": "cloud_channel_service.transfer_entitlements_to_google.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TransferEntitlementsToGoogle",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.TransferEntitlementsToGoogle",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entitlements",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "TransferEntitlementsToGoogle",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.TransferEntitlementsToGoogle",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListChannelPartnerLinks_async",
+      "title": "CloudChannelService listChannelPartnerLinks Sample",
+      "origin": "API_DEFINITION",
+      "description": " List [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink]s belonging to a distributor. You must be a distributor to call this method. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: The list of the distributor account's [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resources.",
+      "canonical": true,
+      "file": "cloud_channel_service.list_channel_partner_links.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListChannelPartnerLinks",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.channel.v1.ChannelPartnerLinkView"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ListChannelPartnerLinksResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ListChannelPartnerLinks",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_GetChannelPartnerLink_async",
+      "title": "CloudChannelService getChannelPartnerLink Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the requested [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource. You must be a distributor to call this method. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: ChannelPartnerLink resource not found because of an invalid channel partner link name. Return value: The [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.",
+      "canonical": true,
+      "file": "cloud_channel_service.get_channel_partner_link.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetChannelPartnerLink",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.GetChannelPartnerLink",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.channel.v1.ChannelPartnerLinkView"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ChannelPartnerLink",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "GetChannelPartnerLink",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.GetChannelPartnerLink",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_CreateChannelPartnerLink_async",
+      "title": "CloudChannelService createChannelPartnerLink Sample",
+      "origin": "API_DEFINITION",
+      "description": " Initiates a channel partner link between a distributor and a reseller, or between resellers in an n-tier reseller channel. Invited partners need to follow the invite_link_uri provided in the response to accept. After accepting the invitation, a link is set up between the two parties. You must be a distributor to call this method. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * ALREADY_EXISTS: The ChannelPartnerLink sent in the request already exists. * NOT_FOUND: No Cloud Identity customer exists for provided domain. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The new [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.",
+      "canonical": true,
+      "file": "cloud_channel_service.create_channel_partner_link.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateChannelPartnerLink",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.CreateChannelPartnerLink",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "channel_partner_link",
+            "type": ".google.cloud.channel.v1.ChannelPartnerLink"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ChannelPartnerLink",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "CreateChannelPartnerLink",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.CreateChannelPartnerLink",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_UpdateChannelPartnerLink_async",
+      "title": "CloudChannelService updateChannelPartnerLink Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a channel partner link. Distributors call this method to change a link's status. For example, to suspend a partner link. You must be a distributor to call this method. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT:     * Required request parameters are missing or invalid.     * Link state cannot change from invited to active or suspended.     * Cannot send reseller_cloud_identity_id, invite_url, or name in update     mask. * NOT_FOUND: ChannelPartnerLink resource not found. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The updated [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.",
+      "canonical": true,
+      "file": "cloud_channel_service.update_channel_partner_link.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateChannelPartnerLink",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.UpdateChannelPartnerLink",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "channel_partner_link",
+            "type": ".google.cloud.channel.v1.ChannelPartnerLink"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ChannelPartnerLink",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateChannelPartnerLink",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.UpdateChannelPartnerLink",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_LookupOffer_async",
+      "title": "CloudChannelService lookupOffer Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the requested [Offer][google.cloud.channel.v1.Offer] resource. Possible error codes: * PERMISSION_DENIED: The entitlement doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: Entitlement or offer was not found. Return value: The [Offer][google.cloud.channel.v1.Offer] resource.",
+      "canonical": true,
+      "file": "cloud_channel_service.lookup_offer.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LookupOffer",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.LookupOffer",
+        "async": true,
+        "parameters": [
+          {
+            "name": "entitlement",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.Offer",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "LookupOffer",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.LookupOffer",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListProducts_async",
+      "title": "CloudChannelService listProducts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the Products the reseller is authorized to sell. Possible error codes: * INVALID_ARGUMENT: Required request parameters are missing or invalid.",
+      "canonical": true,
+      "file": "cloud_channel_service.list_products.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListProducts",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ListProducts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "account",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ListProductsResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ListProducts",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ListProducts",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListSkus_async",
+      "title": "CloudChannelService listSkus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the SKUs for a product the reseller is authorized to sell. Possible error codes: * INVALID_ARGUMENT: Required request parameters are missing or invalid.",
+      "canonical": true,
+      "file": "cloud_channel_service.list_skus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSkus",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ListSkus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "account",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ListSkusResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ListSkus",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ListSkus",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListOffers_async",
+      "title": "CloudChannelService listOffers Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the Offers the reseller can sell. Possible error codes: * INVALID_ARGUMENT: Required request parameters are missing or invalid.",
+      "canonical": true,
+      "file": "cloud_channel_service.list_offers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListOffers",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ListOffers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ListOffersResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ListOffers",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ListOffers",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListPurchasableSkus_async",
+      "title": "CloudChannelService listPurchasableSkus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the following: * SKUs that you can purchase for a customer * SKUs that you can upgrade or downgrade for an entitlement. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid.",
+      "canonical": true,
+      "file": "cloud_channel_service.list_purchasable_skus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPurchasableSkus",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ListPurchasableSkus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "create_entitlement_purchase",
+            "type": ".google.cloud.channel.v1.ListPurchasableSkusRequest.CreateEntitlementPurchase"
+          },
+          {
+            "name": "change_offer_purchase",
+            "type": ".google.cloud.channel.v1.ListPurchasableSkusRequest.ChangeOfferPurchase"
+          },
+          {
+            "name": "customer",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ListPurchasableSkusResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ListPurchasableSkus",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ListPurchasableSkus",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListPurchasableOffers_async",
+      "title": "CloudChannelService listPurchasableOffers Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the following: * Offers that you can purchase for a customer. * Offers that you can change for an entitlement. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller * INVALID_ARGUMENT: Required request parameters are missing or invalid.",
+      "canonical": true,
+      "file": "cloud_channel_service.list_purchasable_offers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPurchasableOffers",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ListPurchasableOffers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "create_entitlement_purchase",
+            "type": ".google.cloud.channel.v1.ListPurchasableOffersRequest.CreateEntitlementPurchase"
+          },
+          {
+            "name": "change_offer_purchase",
+            "type": ".google.cloud.channel.v1.ListPurchasableOffersRequest.ChangeOfferPurchase"
+          },
+          {
+            "name": "customer",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ListPurchasableOffersResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ListPurchasableOffers",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ListPurchasableOffers",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_RegisterSubscriber_async",
+      "title": "CloudChannelService registerSubscriber Sample",
+      "origin": "API_DEFINITION",
+      "description": " Registers a service account with subscriber privileges on the Cloud Pub/Sub topic for this Channel Services account. After you create a subscriber, you get the events through [SubscriberEvent][google.cloud.channel.v1.SubscriberEvent] Possible error codes: * PERMISSION_DENIED: The reseller account making the request and the provided reseller account are different, or the impersonated user is not a super admin. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The topic name with the registered service email address.",
+      "canonical": true,
+      "file": "cloud_channel_service.register_subscriber.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RegisterSubscriber",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.RegisterSubscriber",
+        "async": true,
+        "parameters": [
+          {
+            "name": "account",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_account",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.RegisterSubscriberResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "RegisterSubscriber",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.RegisterSubscriber",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_UnregisterSubscriber_async",
+      "title": "CloudChannelService unregisterSubscriber Sample",
+      "origin": "API_DEFINITION",
+      "description": " Unregisters a service account with subscriber privileges on the Cloud Pub/Sub topic created for this Channel Services account. If there are no service accounts left with subscriber privileges, this deletes the topic. You can call ListSubscribers to check for these accounts. Possible error codes: * PERMISSION_DENIED: The reseller account making the request and the provided reseller account are different, or the impersonated user is not a super admin. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: The topic resource doesn't exist. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The topic name that unregistered the service email address. Returns a success response if the service email address wasn't registered with the topic.",
+      "canonical": true,
+      "file": "cloud_channel_service.unregister_subscriber.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UnregisterSubscriber",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.UnregisterSubscriber",
+        "async": true,
+        "parameters": [
+          {
+            "name": "account",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_account",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.UnregisterSubscriberResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "UnregisterSubscriber",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.UnregisterSubscriber",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListSubscribers_async",
+      "title": "CloudChannelService listSubscribers Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists service accounts with subscriber privileges on the Cloud Pub/Sub topic created for this Channel Services account. Possible error codes: * PERMISSION_DENIED: The reseller account making the request and the provided reseller account are different, or the impersonated user is not a super admin. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: The topic resource doesn't exist. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: A list of service email addresses.",
+      "canonical": true,
+      "file": "cloud_channel_service.list_subscribers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSubscribers",
+        "fullName": "google.cloud.channel.v1.CloudChannelService.ListSubscribers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "account",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.channel.v1.ListSubscribersResponse",
+        "client": {
+          "shortName": "CloudChannelServiceClient",
+          "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+        },
+        "method": {
+          "shortName": "ListSubscribers",
+          "fullName": "google.cloud.channel.v1.CloudChannelService.ListSubscribers",
+          "service": {
+            "shortName": "CloudChannelService",
+            "fullName": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      }
+    }
+  ]
+}
