@@ -1439,9 +1439,8 @@ export class EssentialContactsServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.essentialContactsServiceStub!.then(stub => {
+    if (this.essentialContactsServiceStub && !this._terminated) {
+      return this.essentialContactsServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

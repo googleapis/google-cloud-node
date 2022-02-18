@@ -159,13 +159,29 @@ describe('v1.EssentialContactsServiceClient', () => {
     assert(client.essentialContactsServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.essentialContactsServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.essentialContactsServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -316,6 +332,23 @@ describe('v1.EssentialContactsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createContact with closed client', async () => {
+      const client =
+        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createContact(request), expectedError);
+    });
   });
 
   describe('updateContact', () => {
@@ -433,6 +466,24 @@ describe('v1.EssentialContactsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateContact with closed client', async () => {
+      const client =
+        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
+      );
+      request.contact = {};
+      request.contact.name = '';
+      const expectedHeaderRequestParams = 'contact.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateContact(request), expectedError);
+    });
   });
 
   describe('getContact', () => {
@@ -546,6 +597,23 @@ describe('v1.EssentialContactsServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getContact with closed client', async () => {
+      const client =
+        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getContact(request), expectedError);
     });
   });
 
@@ -661,6 +729,23 @@ describe('v1.EssentialContactsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteContact with closed client', async () => {
+      const client =
+        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteContact(request), expectedError);
+    });
   });
 
   describe('sendTestMessage', () => {
@@ -774,6 +859,23 @@ describe('v1.EssentialContactsServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes sendTestMessage with closed client', async () => {
+      const client =
+        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.sendTestMessage(request), expectedError);
     });
   });
 
