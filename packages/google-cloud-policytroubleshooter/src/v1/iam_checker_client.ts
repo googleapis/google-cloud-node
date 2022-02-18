@@ -386,9 +386,8 @@ export class IamCheckerClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.iamCheckerStub!.then(stub => {
+    if (this.iamCheckerStub && !this._terminated) {
+      return this.iamCheckerStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
