@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2029,9 +2029,8 @@ export class GrafeasV1Beta1Client {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.grafeasV1Beta1Stub!.then(stub => {
+    if (this.grafeasV1Beta1Stub && !this._terminated) {
+      return this.grafeasV1Beta1Stub.then(stub => {
         this._terminated = true;
         stub.close();
       });

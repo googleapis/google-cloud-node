@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -153,12 +153,27 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     assert(client.grafeasV1Beta1Stub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.grafeasV1Beta1Stub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.grafeasV1Beta1Stub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -304,6 +319,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getOccurrence with closed client', async () => {
+      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.grafeas.v1beta1.GetOccurrenceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getOccurrence(request), expectedError);
+    });
   });
 
   describe('deleteOccurrence', () => {
@@ -415,6 +446,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteOccurrence with closed client', async () => {
+      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.grafeas.v1beta1.DeleteOccurrenceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteOccurrence(request), expectedError);
+    });
   });
 
   describe('createOccurrence', () => {
@@ -525,6 +572,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createOccurrence with closed client', async () => {
+      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.grafeas.v1beta1.CreateOccurrenceRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createOccurrence(request), expectedError);
     });
   });
 
@@ -641,6 +704,25 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes batchCreateOccurrences with closed client', async () => {
+      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.grafeas.v1beta1.BatchCreateOccurrencesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.batchCreateOccurrences(request),
+        expectedError
+      );
+    });
   });
 
   describe('updateOccurrence', () => {
@@ -751,6 +833,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateOccurrence with closed client', async () => {
+      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.grafeas.v1beta1.UpdateOccurrenceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateOccurrence(request), expectedError);
     });
   });
 
@@ -863,6 +961,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getOccurrenceNote with closed client', async () => {
+      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.grafeas.v1beta1.GetOccurrenceNoteRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getOccurrenceNote(request), expectedError);
+    });
   });
 
   describe('getNote', () => {
@@ -970,6 +1084,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getNote with closed client', async () => {
+      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.grafeas.v1beta1.GetNoteRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getNote(request), expectedError);
     });
   });
 
@@ -1082,6 +1212,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteNote with closed client', async () => {
+      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.grafeas.v1beta1.DeleteNoteRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteNote(request), expectedError);
+    });
   });
 
   describe('createNote', () => {
@@ -1192,6 +1338,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createNote with closed client', async () => {
+      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.grafeas.v1beta1.CreateNoteRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createNote(request), expectedError);
     });
   });
 
@@ -1304,6 +1466,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes batchCreateNotes with closed client', async () => {
+      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.grafeas.v1beta1.BatchCreateNotesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.batchCreateNotes(request), expectedError);
+    });
   });
 
   describe('updateNote', () => {
@@ -1414,6 +1592,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateNote with closed client', async () => {
+      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.grafeas.v1beta1.UpdateNoteRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateNote(request), expectedError);
     });
   });
 
@@ -1530,6 +1724,25 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         (client.innerApiCalls.getVulnerabilityOccurrencesSummary as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getVulnerabilityOccurrencesSummary with closed client', async () => {
+      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getVulnerabilityOccurrencesSummary(request),
+        expectedError
       );
     });
   });

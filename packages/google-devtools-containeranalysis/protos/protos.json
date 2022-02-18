@@ -8,251 +8,11 @@
             "java_multiple_files": true,
             "java_package": "io.grafeas.v1",
             "objc_class_prefix": "GRA",
-            "java_outer_classname": "InTotoStatementProto",
             "(google.api.resource_definition).type": "grafeas.io/Project",
-            "(google.api.resource_definition).pattern": "projects/{project}"
+            "(google.api.resource_definition).pattern": "projects/{project}",
+            "java_outer_classname": "InTotoStatementProto"
           },
           "nested": {
-            "Severity": {
-              "values": {
-                "SEVERITY_UNSPECIFIED": 0,
-                "MINIMAL": 1,
-                "LOW": 2,
-                "MEDIUM": 3,
-                "HIGH": 4,
-                "CRITICAL": 5
-              }
-            },
-            "VulnerabilityNote": {
-              "fields": {
-                "cvssScore": {
-                  "type": "float",
-                  "id": 1
-                },
-                "severity": {
-                  "type": "Severity",
-                  "id": 2
-                },
-                "details": {
-                  "rule": "repeated",
-                  "type": "Detail",
-                  "id": 3
-                },
-                "cvssV3": {
-                  "type": "CVSSv3",
-                  "id": 4
-                },
-                "windowsDetails": {
-                  "rule": "repeated",
-                  "type": "WindowsDetail",
-                  "id": 5
-                },
-                "sourceUpdateTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 6
-                }
-              },
-              "nested": {
-                "Detail": {
-                  "fields": {
-                    "severityName": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "description": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "packageType": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "affectedCpeUri": {
-                      "type": "string",
-                      "id": 4
-                    },
-                    "affectedPackage": {
-                      "type": "string",
-                      "id": 5
-                    },
-                    "affectedVersionStart": {
-                      "type": "grafeas.v1.Version",
-                      "id": 6
-                    },
-                    "affectedVersionEnd": {
-                      "type": "grafeas.v1.Version",
-                      "id": 7
-                    },
-                    "fixedCpeUri": {
-                      "type": "string",
-                      "id": 8
-                    },
-                    "fixedPackage": {
-                      "type": "string",
-                      "id": 9
-                    },
-                    "fixedVersion": {
-                      "type": "grafeas.v1.Version",
-                      "id": 10
-                    },
-                    "isObsolete": {
-                      "type": "bool",
-                      "id": 11
-                    },
-                    "sourceUpdateTime": {
-                      "type": "google.protobuf.Timestamp",
-                      "id": 12
-                    },
-                    "source": {
-                      "type": "string",
-                      "id": 13
-                    },
-                    "vendor": {
-                      "type": "string",
-                      "id": 14
-                    }
-                  }
-                },
-                "WindowsDetail": {
-                  "fields": {
-                    "cpeUri": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "name": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "description": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "fixingKbs": {
-                      "rule": "repeated",
-                      "type": "KnowledgeBase",
-                      "id": 4
-                    }
-                  },
-                  "nested": {
-                    "KnowledgeBase": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "url": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "VulnerabilityOccurrence": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "severity": {
-                  "type": "Severity",
-                  "id": 2
-                },
-                "cvssScore": {
-                  "type": "float",
-                  "id": 3
-                },
-                "cvssv3": {
-                  "type": "CVSSV3",
-                  "id": 10
-                },
-                "packageIssue": {
-                  "rule": "repeated",
-                  "type": "PackageIssue",
-                  "id": 4
-                },
-                "shortDescription": {
-                  "type": "string",
-                  "id": 5
-                },
-                "longDescription": {
-                  "type": "string",
-                  "id": 6
-                },
-                "relatedUrls": {
-                  "rule": "repeated",
-                  "type": "grafeas.v1.RelatedUrl",
-                  "id": 7
-                },
-                "effectiveSeverity": {
-                  "type": "Severity",
-                  "id": 8
-                },
-                "fixAvailable": {
-                  "type": "bool",
-                  "id": 9
-                }
-              },
-              "nested": {
-                "CVSSV3": {
-                  "fields": {
-                    "baseScore": {
-                      "type": "float",
-                      "id": 1
-                    },
-                    "severity": {
-                      "type": "Severity",
-                      "id": 2
-                    }
-                  }
-                },
-                "PackageIssue": {
-                  "fields": {
-                    "affectedCpeUri": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "affectedPackage": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "affectedVersion": {
-                      "type": "grafeas.v1.Version",
-                      "id": 3
-                    },
-                    "fixedCpeUri": {
-                      "type": "string",
-                      "id": 4
-                    },
-                    "fixedPackage": {
-                      "type": "string",
-                      "id": 5
-                    },
-                    "fixedVersion": {
-                      "type": "grafeas.v1.Version",
-                      "id": 6
-                    },
-                    "fixAvailable": {
-                      "type": "bool",
-                      "id": 7
-                    },
-                    "packageType": {
-                      "type": "string",
-                      "id": 8
-                    },
-                    "effectiveSeverity": {
-                      "type": "Severity",
-                      "id": 9,
-                      "options": {
-                        "(google.api.field_behavior)": "OUTPUT_ONLY"
-                      }
-                    }
-                  }
-                }
-              }
-            },
             "NoteKind": {
               "values": {
                 "NOTE_KIND_UNSPECIFIED": 0,
@@ -317,1074 +77,6 @@
                 },
                 "keyid": {
                   "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "CVSSv3": {
-              "fields": {
-                "baseScore": {
-                  "type": "float",
-                  "id": 1
-                },
-                "exploitabilityScore": {
-                  "type": "float",
-                  "id": 2
-                },
-                "impactScore": {
-                  "type": "float",
-                  "id": 3
-                },
-                "attackVector": {
-                  "type": "AttackVector",
-                  "id": 5
-                },
-                "attackComplexity": {
-                  "type": "AttackComplexity",
-                  "id": 6
-                },
-                "privilegesRequired": {
-                  "type": "PrivilegesRequired",
-                  "id": 7
-                },
-                "userInteraction": {
-                  "type": "UserInteraction",
-                  "id": 8
-                },
-                "scope": {
-                  "type": "Scope",
-                  "id": 9
-                },
-                "confidentialityImpact": {
-                  "type": "Impact",
-                  "id": 10
-                },
-                "integrityImpact": {
-                  "type": "Impact",
-                  "id": 11
-                },
-                "availabilityImpact": {
-                  "type": "Impact",
-                  "id": 12
-                }
-              },
-              "nested": {
-                "AttackVector": {
-                  "values": {
-                    "ATTACK_VECTOR_UNSPECIFIED": 0,
-                    "ATTACK_VECTOR_NETWORK": 1,
-                    "ATTACK_VECTOR_ADJACENT": 2,
-                    "ATTACK_VECTOR_LOCAL": 3,
-                    "ATTACK_VECTOR_PHYSICAL": 4
-                  }
-                },
-                "AttackComplexity": {
-                  "values": {
-                    "ATTACK_COMPLEXITY_UNSPECIFIED": 0,
-                    "ATTACK_COMPLEXITY_LOW": 1,
-                    "ATTACK_COMPLEXITY_HIGH": 2
-                  }
-                },
-                "PrivilegesRequired": {
-                  "values": {
-                    "PRIVILEGES_REQUIRED_UNSPECIFIED": 0,
-                    "PRIVILEGES_REQUIRED_NONE": 1,
-                    "PRIVILEGES_REQUIRED_LOW": 2,
-                    "PRIVILEGES_REQUIRED_HIGH": 3
-                  }
-                },
-                "UserInteraction": {
-                  "values": {
-                    "USER_INTERACTION_UNSPECIFIED": 0,
-                    "USER_INTERACTION_NONE": 1,
-                    "USER_INTERACTION_REQUIRED": 2
-                  }
-                },
-                "Scope": {
-                  "values": {
-                    "SCOPE_UNSPECIFIED": 0,
-                    "SCOPE_UNCHANGED": 1,
-                    "SCOPE_CHANGED": 2
-                  }
-                },
-                "Impact": {
-                  "values": {
-                    "IMPACT_UNSPECIFIED": 0,
-                    "IMPACT_HIGH": 1,
-                    "IMPACT_LOW": 2,
-                    "IMPACT_NONE": 3
-                  }
-                }
-              }
-            },
-            "Architecture": {
-              "values": {
-                "ARCHITECTURE_UNSPECIFIED": 0,
-                "X86": 1,
-                "X64": 2
-              }
-            },
-            "Distribution": {
-              "fields": {
-                "cpeUri": {
-                  "type": "string",
-                  "id": 1
-                },
-                "architecture": {
-                  "type": "Architecture",
-                  "id": 2
-                },
-                "latestVersion": {
-                  "type": "Version",
-                  "id": 3
-                },
-                "maintainer": {
-                  "type": "string",
-                  "id": 4
-                },
-                "url": {
-                  "type": "string",
-                  "id": 5
-                },
-                "description": {
-                  "type": "string",
-                  "id": 6
-                }
-              }
-            },
-            "Location": {
-              "fields": {
-                "cpeUri": {
-                  "type": "string",
-                  "id": 1
-                },
-                "version": {
-                  "type": "Version",
-                  "id": 2
-                },
-                "path": {
-                  "type": "string",
-                  "id": 3
-                }
-              }
-            },
-            "PackageNote": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "distribution": {
-                  "rule": "repeated",
-                  "type": "Distribution",
-                  "id": 10
-                }
-              }
-            },
-            "PackageOccurrence": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "location": {
-                  "rule": "repeated",
-                  "type": "Location",
-                  "id": 2
-                }
-              }
-            },
-            "Version": {
-              "fields": {
-                "epoch": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "name": {
-                  "type": "string",
-                  "id": 2
-                },
-                "revision": {
-                  "type": "string",
-                  "id": 3
-                },
-                "inclusive": {
-                  "type": "bool",
-                  "id": 6
-                },
-                "kind": {
-                  "type": "VersionKind",
-                  "id": 4
-                },
-                "fullName": {
-                  "type": "string",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "VersionKind": {
-                  "values": {
-                    "VERSION_KIND_UNSPECIFIED": 0,
-                    "NORMAL": 1,
-                    "MINIMUM": 2,
-                    "MAXIMUM": 3
-                  }
-                }
-              }
-            },
-            "AttestationNote": {
-              "fields": {
-                "hint": {
-                  "type": "Hint",
-                  "id": 1
-                }
-              },
-              "nested": {
-                "Hint": {
-                  "fields": {
-                    "humanReadableName": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                }
-              }
-            },
-            "Jwt": {
-              "fields": {
-                "compactJwt": {
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
-            "AttestationOccurrence": {
-              "fields": {
-                "serializedPayload": {
-                  "type": "bytes",
-                  "id": 1
-                },
-                "signatures": {
-                  "rule": "repeated",
-                  "type": "Signature",
-                  "id": 2
-                },
-                "jwts": {
-                  "rule": "repeated",
-                  "type": "Jwt",
-                  "id": 3
-                }
-              }
-            },
-            "BuildNote": {
-              "fields": {
-                "builderVersion": {
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
-            "BuildOccurrence": {
-              "fields": {
-                "provenance": {
-                  "type": "grafeas.v1.BuildProvenance",
-                  "id": 1
-                },
-                "provenanceBytes": {
-                  "type": "string",
-                  "id": 2
-                },
-                "intotoProvenance": {
-                  "type": "InTotoProvenance",
-                  "id": 3
-                },
-                "intotoStatement": {
-                  "type": "InTotoStatement",
-                  "id": 4
-                }
-              }
-            },
-            "Recipe": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "definedInMaterial": {
-                  "type": "int64",
-                  "id": 2
-                },
-                "entryPoint": {
-                  "type": "string",
-                  "id": 3
-                },
-                "arguments": {
-                  "rule": "repeated",
-                  "type": "google.protobuf.Any",
-                  "id": 4
-                },
-                "environment": {
-                  "rule": "repeated",
-                  "type": "google.protobuf.Any",
-                  "id": 5
-                }
-              }
-            },
-            "Completeness": {
-              "fields": {
-                "arguments": {
-                  "type": "bool",
-                  "id": 1
-                },
-                "environment": {
-                  "type": "bool",
-                  "id": 2
-                },
-                "materials": {
-                  "type": "bool",
-                  "id": 3
-                }
-              }
-            },
-            "Metadata": {
-              "fields": {
-                "buildInvocationId": {
-                  "type": "string",
-                  "id": 1
-                },
-                "buildStartedOn": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 2
-                },
-                "buildFinishedOn": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 3
-                },
-                "completeness": {
-                  "type": "Completeness",
-                  "id": 4
-                },
-                "reproducible": {
-                  "type": "bool",
-                  "id": 5
-                }
-              }
-            },
-            "BuilderConfig": {
-              "fields": {
-                "id": {
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
-            "InTotoProvenance": {
-              "fields": {
-                "builderConfig": {
-                  "type": "BuilderConfig",
-                  "id": 1
-                },
-                "recipe": {
-                  "type": "Recipe",
-                  "id": 2
-                },
-                "metadata": {
-                  "type": "Metadata",
-                  "id": 3
-                },
-                "materials": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 4
-                }
-              }
-            },
-            "InTotoStatement": {
-              "oneofs": {
-                "predicate": {
-                  "oneof": [
-                    "provenance",
-                    "slsaProvenance"
-                  ]
-                }
-              },
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1,
-                  "options": {
-                    "json_name": "_type"
-                  }
-                },
-                "subject": {
-                  "rule": "repeated",
-                  "type": "Subject",
-                  "id": 2
-                },
-                "predicateType": {
-                  "type": "string",
-                  "id": 3
-                },
-                "provenance": {
-                  "type": "InTotoProvenance",
-                  "id": 4
-                },
-                "slsaProvenance": {
-                  "type": "SlsaProvenance",
-                  "id": 5
-                }
-              }
-            },
-            "Subject": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "digest": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "SlsaProvenance": {
-              "fields": {
-                "builder": {
-                  "type": "SlsaBuilder",
-                  "id": 1
-                },
-                "recipe": {
-                  "type": "SlsaRecipe",
-                  "id": 2
-                },
-                "metadata": {
-                  "type": "SlsaMetadata",
-                  "id": 3
-                },
-                "materials": {
-                  "rule": "repeated",
-                  "type": "Material",
-                  "id": 4
-                }
-              },
-              "nested": {
-                "SlsaRecipe": {
-                  "fields": {
-                    "type": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "definedInMaterial": {
-                      "type": "int64",
-                      "id": 2
-                    },
-                    "entryPoint": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "arguments": {
-                      "type": "google.protobuf.Any",
-                      "id": 4
-                    },
-                    "environment": {
-                      "type": "google.protobuf.Any",
-                      "id": 5
-                    }
-                  }
-                },
-                "SlsaCompleteness": {
-                  "fields": {
-                    "arguments": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "environment": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "materials": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
-                },
-                "SlsaMetadata": {
-                  "fields": {
-                    "buildInvocationId": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "buildStartedOn": {
-                      "type": "google.protobuf.Timestamp",
-                      "id": 2
-                    },
-                    "buildFinishedOn": {
-                      "type": "google.protobuf.Timestamp",
-                      "id": 3
-                    },
-                    "completeness": {
-                      "type": "SlsaCompleteness",
-                      "id": 4
-                    },
-                    "reproducible": {
-                      "type": "bool",
-                      "id": 5
-                    }
-                  }
-                },
-                "SlsaBuilder": {
-                  "fields": {
-                    "id": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                },
-                "Material": {
-                  "fields": {
-                    "uri": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "digest": {
-                      "keyType": "string",
-                      "type": "string",
-                      "id": 2
-                    }
-                  }
-                }
-              }
-            },
-            "BuildProvenance": {
-              "fields": {
-                "id": {
-                  "type": "string",
-                  "id": 1
-                },
-                "projectId": {
-                  "type": "string",
-                  "id": 2
-                },
-                "commands": {
-                  "rule": "repeated",
-                  "type": "Command",
-                  "id": 3
-                },
-                "builtArtifacts": {
-                  "rule": "repeated",
-                  "type": "Artifact",
-                  "id": 4
-                },
-                "createTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 5
-                },
-                "startTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 6
-                },
-                "endTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 7
-                },
-                "creator": {
-                  "type": "string",
-                  "id": 8
-                },
-                "logsUri": {
-                  "type": "string",
-                  "id": 9
-                },
-                "sourceProvenance": {
-                  "type": "Source",
-                  "id": 10
-                },
-                "triggerId": {
-                  "type": "string",
-                  "id": 11
-                },
-                "buildOptions": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 12
-                },
-                "builderVersion": {
-                  "type": "string",
-                  "id": 13
-                }
-              }
-            },
-            "Source": {
-              "fields": {
-                "artifactStorageSourceUri": {
-                  "type": "string",
-                  "id": 1
-                },
-                "fileHashes": {
-                  "keyType": "string",
-                  "type": "FileHashes",
-                  "id": 2
-                },
-                "context": {
-                  "type": "SourceContext",
-                  "id": 3
-                },
-                "additionalContexts": {
-                  "rule": "repeated",
-                  "type": "SourceContext",
-                  "id": 4
-                }
-              }
-            },
-            "FileHashes": {
-              "fields": {
-                "fileHash": {
-                  "rule": "repeated",
-                  "type": "Hash",
-                  "id": 1
-                }
-              }
-            },
-            "Hash": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
-            "Command": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "env": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "args": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 3
-                },
-                "dir": {
-                  "type": "string",
-                  "id": 4
-                },
-                "id": {
-                  "type": "string",
-                  "id": 5
-                },
-                "waitFor": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 6
-                }
-              }
-            },
-            "Artifact": {
-              "fields": {
-                "checksum": {
-                  "type": "string",
-                  "id": 1
-                },
-                "id": {
-                  "type": "string",
-                  "id": 2
-                },
-                "names": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 3
-                }
-              }
-            },
-            "SourceContext": {
-              "oneofs": {
-                "context": {
-                  "oneof": [
-                    "cloudRepo",
-                    "gerrit",
-                    "git"
-                  ]
-                }
-              },
-              "fields": {
-                "cloudRepo": {
-                  "type": "CloudRepoSourceContext",
-                  "id": 1
-                },
-                "gerrit": {
-                  "type": "GerritSourceContext",
-                  "id": 2
-                },
-                "git": {
-                  "type": "GitSourceContext",
-                  "id": 3
-                },
-                "labels": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 4
-                }
-              }
-            },
-            "AliasContext": {
-              "fields": {
-                "kind": {
-                  "type": "Kind",
-                  "id": 1
-                },
-                "name": {
-                  "type": "string",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "Kind": {
-                  "values": {
-                    "KIND_UNSPECIFIED": 0,
-                    "FIXED": 1,
-                    "MOVABLE": 2,
-                    "OTHER": 4
-                  }
-                }
-              }
-            },
-            "CloudRepoSourceContext": {
-              "oneofs": {
-                "revision": {
-                  "oneof": [
-                    "revisionId",
-                    "aliasContext"
-                  ]
-                }
-              },
-              "fields": {
-                "repoId": {
-                  "type": "RepoId",
-                  "id": 1
-                },
-                "revisionId": {
-                  "type": "string",
-                  "id": 2
-                },
-                "aliasContext": {
-                  "type": "AliasContext",
-                  "id": 3
-                }
-              }
-            },
-            "GerritSourceContext": {
-              "oneofs": {
-                "revision": {
-                  "oneof": [
-                    "revisionId",
-                    "aliasContext"
-                  ]
-                }
-              },
-              "fields": {
-                "hostUri": {
-                  "type": "string",
-                  "id": 1
-                },
-                "gerritProject": {
-                  "type": "string",
-                  "id": 2
-                },
-                "revisionId": {
-                  "type": "string",
-                  "id": 3
-                },
-                "aliasContext": {
-                  "type": "AliasContext",
-                  "id": 4
-                }
-              }
-            },
-            "GitSourceContext": {
-              "fields": {
-                "url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "revisionId": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "RepoId": {
-              "oneofs": {
-                "id": {
-                  "oneof": [
-                    "projectRepoId",
-                    "uid"
-                  ]
-                }
-              },
-              "fields": {
-                "projectRepoId": {
-                  "type": "ProjectRepoId",
-                  "id": 1
-                },
-                "uid": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "ProjectRepoId": {
-              "fields": {
-                "projectId": {
-                  "type": "string",
-                  "id": 1
-                },
-                "repoName": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "ComplianceNote": {
-              "oneofs": {
-                "complianceType": {
-                  "oneof": [
-                    "cisBenchmark"
-                  ]
-                }
-              },
-              "fields": {
-                "title": {
-                  "type": "string",
-                  "id": 1
-                },
-                "description": {
-                  "type": "string",
-                  "id": 2
-                },
-                "version": {
-                  "rule": "repeated",
-                  "type": "grafeas.v1.ComplianceVersion",
-                  "id": 3
-                },
-                "rationale": {
-                  "type": "string",
-                  "id": 4
-                },
-                "remediation": {
-                  "type": "string",
-                  "id": 5
-                },
-                "cisBenchmark": {
-                  "type": "CisBenchmark",
-                  "id": 6
-                },
-                "scanInstructions": {
-                  "type": "bytes",
-                  "id": 7
-                }
-              },
-              "nested": {
-                "CisBenchmark": {
-                  "fields": {
-                    "profileLevel": {
-                      "type": "int32",
-                      "id": 1
-                    },
-                    "severity": {
-                      "type": "grafeas.v1.Severity",
-                      "id": 2
-                    }
-                  }
-                }
-              }
-            },
-            "ComplianceVersion": {
-              "fields": {
-                "cpeUri": {
-                  "type": "string",
-                  "id": 1
-                },
-                "version": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "ComplianceOccurrence": {
-              "fields": {
-                "nonCompliantFiles": {
-                  "rule": "repeated",
-                  "type": "NonCompliantFile",
-                  "id": 2
-                },
-                "nonComplianceReason": {
-                  "type": "string",
-                  "id": 3
-                }
-              }
-            },
-            "NonCompliantFile": {
-              "fields": {
-                "path": {
-                  "type": "string",
-                  "id": 1
-                },
-                "displayCommand": {
-                  "type": "string",
-                  "id": 2
-                },
-                "reason": {
-                  "type": "string",
-                  "id": 3
-                }
-              }
-            },
-            "DeploymentNote": {
-              "fields": {
-                "resourceUri": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
-            "DeploymentOccurrence": {
-              "fields": {
-                "userEmail": {
-                  "type": "string",
-                  "id": 1
-                },
-                "deployTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 2
-                },
-                "undeployTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 3
-                },
-                "config": {
-                  "type": "string",
-                  "id": 4
-                },
-                "address": {
-                  "type": "string",
-                  "id": 5
-                },
-                "resourceUri": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 6
-                },
-                "platform": {
-                  "type": "Platform",
-                  "id": 7
-                }
-              },
-              "nested": {
-                "Platform": {
-                  "values": {
-                    "PLATFORM_UNSPECIFIED": 0,
-                    "GKE": 1,
-                    "FLEX": 2,
-                    "CUSTOM": 3
-                  }
-                }
-              }
-            },
-            "DiscoveryNote": {
-              "fields": {
-                "analysisKind": {
-                  "type": "grafeas.v1.NoteKind",
-                  "id": 1
-                }
-              }
-            },
-            "DiscoveryOccurrence": {
-              "fields": {
-                "continuousAnalysis": {
-                  "type": "ContinuousAnalysis",
-                  "id": 1
-                },
-                "analysisStatus": {
-                  "type": "AnalysisStatus",
-                  "id": 2
-                },
-                "analysisStatusError": {
-                  "type": "google.rpc.Status",
-                  "id": 3
-                },
-                "cpe": {
-                  "type": "string",
-                  "id": 4
-                },
-                "lastScanTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "ContinuousAnalysis": {
-                  "values": {
-                    "CONTINUOUS_ANALYSIS_UNSPECIFIED": 0,
-                    "ACTIVE": 1,
-                    "INACTIVE": 2
-                  }
-                },
-                "AnalysisStatus": {
-                  "values": {
-                    "ANALYSIS_STATUS_UNSPECIFIED": 0,
-                    "PENDING": 1,
-                    "SCANNING": 2,
-                    "FINISHED_SUCCESS": 3,
-                    "FINISHED_FAILED": 4,
-                    "FINISHED_UNSUPPORTED": 5
-                  }
-                }
-              }
-            },
-            "DSSEAttestationNote": {
-              "fields": {
-                "hint": {
-                  "type": "DSSEHint",
-                  "id": 1
-                }
-              },
-              "nested": {
-                "DSSEHint": {
-                  "fields": {
-                    "humanReadableName": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                }
-              }
-            },
-            "DSSEAttestationOccurrence": {
-              "oneofs": {
-                "decodedPayload": {
-                  "oneof": [
-                    "statement"
-                  ]
-                }
-              },
-              "fields": {
-                "envelope": {
-                  "type": "Envelope",
-                  "id": 1
-                },
-                "statement": {
-                  "type": "InTotoStatement",
                   "id": 2
                 }
               }
@@ -2178,6 +870,880 @@
                 }
               }
             },
+            "AttestationNote": {
+              "fields": {
+                "hint": {
+                  "type": "Hint",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Hint": {
+                  "fields": {
+                    "humanReadableName": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                }
+              }
+            },
+            "Jwt": {
+              "fields": {
+                "compactJwt": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "AttestationOccurrence": {
+              "fields": {
+                "serializedPayload": {
+                  "type": "bytes",
+                  "id": 1
+                },
+                "signatures": {
+                  "rule": "repeated",
+                  "type": "Signature",
+                  "id": 2
+                },
+                "jwts": {
+                  "rule": "repeated",
+                  "type": "Jwt",
+                  "id": 3
+                }
+              }
+            },
+            "BuildNote": {
+              "fields": {
+                "builderVersion": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "BuildOccurrence": {
+              "fields": {
+                "provenance": {
+                  "type": "grafeas.v1.BuildProvenance",
+                  "id": 1
+                },
+                "provenanceBytes": {
+                  "type": "string",
+                  "id": 2
+                },
+                "intotoProvenance": {
+                  "type": "InTotoProvenance",
+                  "id": 3
+                },
+                "intotoStatement": {
+                  "type": "InTotoStatement",
+                  "id": 4
+                }
+              }
+            },
+            "Recipe": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "definedInMaterial": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "entryPoint": {
+                  "type": "string",
+                  "id": 3
+                },
+                "arguments": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 4
+                },
+                "environment": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 5
+                }
+              }
+            },
+            "Completeness": {
+              "fields": {
+                "arguments": {
+                  "type": "bool",
+                  "id": 1
+                },
+                "environment": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "materials": {
+                  "type": "bool",
+                  "id": 3
+                }
+              }
+            },
+            "Metadata": {
+              "fields": {
+                "buildInvocationId": {
+                  "type": "string",
+                  "id": 1
+                },
+                "buildStartedOn": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 2
+                },
+                "buildFinishedOn": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 3
+                },
+                "completeness": {
+                  "type": "Completeness",
+                  "id": 4
+                },
+                "reproducible": {
+                  "type": "bool",
+                  "id": 5
+                }
+              }
+            },
+            "BuilderConfig": {
+              "fields": {
+                "id": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "InTotoProvenance": {
+              "fields": {
+                "builderConfig": {
+                  "type": "BuilderConfig",
+                  "id": 1
+                },
+                "recipe": {
+                  "type": "Recipe",
+                  "id": 2
+                },
+                "metadata": {
+                  "type": "Metadata",
+                  "id": 3
+                },
+                "materials": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 4
+                }
+              }
+            },
+            "InTotoStatement": {
+              "oneofs": {
+                "predicate": {
+                  "oneof": [
+                    "provenance",
+                    "slsaProvenance"
+                  ]
+                }
+              },
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1,
+                  "options": {
+                    "json_name": "_type"
+                  }
+                },
+                "subject": {
+                  "rule": "repeated",
+                  "type": "Subject",
+                  "id": 2
+                },
+                "predicateType": {
+                  "type": "string",
+                  "id": 3
+                },
+                "provenance": {
+                  "type": "InTotoProvenance",
+                  "id": 4
+                },
+                "slsaProvenance": {
+                  "type": "SlsaProvenance",
+                  "id": 5
+                }
+              }
+            },
+            "Subject": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "digest": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "SlsaProvenance": {
+              "fields": {
+                "builder": {
+                  "type": "SlsaBuilder",
+                  "id": 1
+                },
+                "recipe": {
+                  "type": "SlsaRecipe",
+                  "id": 2
+                },
+                "metadata": {
+                  "type": "SlsaMetadata",
+                  "id": 3
+                },
+                "materials": {
+                  "rule": "repeated",
+                  "type": "Material",
+                  "id": 4
+                }
+              },
+              "nested": {
+                "SlsaRecipe": {
+                  "fields": {
+                    "type": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "definedInMaterial": {
+                      "type": "int64",
+                      "id": 2
+                    },
+                    "entryPoint": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "arguments": {
+                      "type": "google.protobuf.Any",
+                      "id": 4
+                    },
+                    "environment": {
+                      "type": "google.protobuf.Any",
+                      "id": 5
+                    }
+                  }
+                },
+                "SlsaCompleteness": {
+                  "fields": {
+                    "arguments": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "environment": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "materials": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
+                },
+                "SlsaMetadata": {
+                  "fields": {
+                    "buildInvocationId": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "buildStartedOn": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    },
+                    "buildFinishedOn": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 3
+                    },
+                    "completeness": {
+                      "type": "SlsaCompleteness",
+                      "id": 4
+                    },
+                    "reproducible": {
+                      "type": "bool",
+                      "id": 5
+                    }
+                  }
+                },
+                "SlsaBuilder": {
+                  "fields": {
+                    "id": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "Material": {
+                  "fields": {
+                    "uri": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "digest": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "BuildProvenance": {
+              "fields": {
+                "id": {
+                  "type": "string",
+                  "id": 1
+                },
+                "projectId": {
+                  "type": "string",
+                  "id": 2
+                },
+                "commands": {
+                  "rule": "repeated",
+                  "type": "Command",
+                  "id": 3
+                },
+                "builtArtifacts": {
+                  "rule": "repeated",
+                  "type": "Artifact",
+                  "id": 4
+                },
+                "createTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 5
+                },
+                "startTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 6
+                },
+                "endTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 7
+                },
+                "creator": {
+                  "type": "string",
+                  "id": 8
+                },
+                "logsUri": {
+                  "type": "string",
+                  "id": 9
+                },
+                "sourceProvenance": {
+                  "type": "Source",
+                  "id": 10
+                },
+                "triggerId": {
+                  "type": "string",
+                  "id": 11
+                },
+                "buildOptions": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 12
+                },
+                "builderVersion": {
+                  "type": "string",
+                  "id": 13
+                }
+              }
+            },
+            "Source": {
+              "fields": {
+                "artifactStorageSourceUri": {
+                  "type": "string",
+                  "id": 1
+                },
+                "fileHashes": {
+                  "keyType": "string",
+                  "type": "FileHashes",
+                  "id": 2
+                },
+                "context": {
+                  "type": "SourceContext",
+                  "id": 3
+                },
+                "additionalContexts": {
+                  "rule": "repeated",
+                  "type": "SourceContext",
+                  "id": 4
+                }
+              }
+            },
+            "FileHashes": {
+              "fields": {
+                "fileHash": {
+                  "rule": "repeated",
+                  "type": "Hash",
+                  "id": 1
+                }
+              }
+            },
+            "Hash": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Command": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "env": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "args": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "dir": {
+                  "type": "string",
+                  "id": 4
+                },
+                "id": {
+                  "type": "string",
+                  "id": 5
+                },
+                "waitFor": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 6
+                }
+              }
+            },
+            "Artifact": {
+              "fields": {
+                "checksum": {
+                  "type": "string",
+                  "id": 1
+                },
+                "id": {
+                  "type": "string",
+                  "id": 2
+                },
+                "names": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "SourceContext": {
+              "oneofs": {
+                "context": {
+                  "oneof": [
+                    "cloudRepo",
+                    "gerrit",
+                    "git"
+                  ]
+                }
+              },
+              "fields": {
+                "cloudRepo": {
+                  "type": "CloudRepoSourceContext",
+                  "id": 1
+                },
+                "gerrit": {
+                  "type": "GerritSourceContext",
+                  "id": 2
+                },
+                "git": {
+                  "type": "GitSourceContext",
+                  "id": 3
+                },
+                "labels": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 4
+                }
+              }
+            },
+            "AliasContext": {
+              "fields": {
+                "kind": {
+                  "type": "Kind",
+                  "id": 1
+                },
+                "name": {
+                  "type": "string",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "Kind": {
+                  "values": {
+                    "KIND_UNSPECIFIED": 0,
+                    "FIXED": 1,
+                    "MOVABLE": 2,
+                    "OTHER": 4
+                  }
+                }
+              }
+            },
+            "CloudRepoSourceContext": {
+              "oneofs": {
+                "revision": {
+                  "oneof": [
+                    "revisionId",
+                    "aliasContext"
+                  ]
+                }
+              },
+              "fields": {
+                "repoId": {
+                  "type": "RepoId",
+                  "id": 1
+                },
+                "revisionId": {
+                  "type": "string",
+                  "id": 2
+                },
+                "aliasContext": {
+                  "type": "AliasContext",
+                  "id": 3
+                }
+              }
+            },
+            "GerritSourceContext": {
+              "oneofs": {
+                "revision": {
+                  "oneof": [
+                    "revisionId",
+                    "aliasContext"
+                  ]
+                }
+              },
+              "fields": {
+                "hostUri": {
+                  "type": "string",
+                  "id": 1
+                },
+                "gerritProject": {
+                  "type": "string",
+                  "id": 2
+                },
+                "revisionId": {
+                  "type": "string",
+                  "id": 3
+                },
+                "aliasContext": {
+                  "type": "AliasContext",
+                  "id": 4
+                }
+              }
+            },
+            "GitSourceContext": {
+              "fields": {
+                "url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "revisionId": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "RepoId": {
+              "oneofs": {
+                "id": {
+                  "oneof": [
+                    "projectRepoId",
+                    "uid"
+                  ]
+                }
+              },
+              "fields": {
+                "projectRepoId": {
+                  "type": "ProjectRepoId",
+                  "id": 1
+                },
+                "uid": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "ProjectRepoId": {
+              "fields": {
+                "projectId": {
+                  "type": "string",
+                  "id": 1
+                },
+                "repoName": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "ComplianceNote": {
+              "oneofs": {
+                "complianceType": {
+                  "oneof": [
+                    "cisBenchmark"
+                  ]
+                }
+              },
+              "fields": {
+                "title": {
+                  "type": "string",
+                  "id": 1
+                },
+                "description": {
+                  "type": "string",
+                  "id": 2
+                },
+                "version": {
+                  "rule": "repeated",
+                  "type": "grafeas.v1.ComplianceVersion",
+                  "id": 3
+                },
+                "rationale": {
+                  "type": "string",
+                  "id": 4
+                },
+                "remediation": {
+                  "type": "string",
+                  "id": 5
+                },
+                "cisBenchmark": {
+                  "type": "CisBenchmark",
+                  "id": 6
+                },
+                "scanInstructions": {
+                  "type": "bytes",
+                  "id": 7
+                }
+              },
+              "nested": {
+                "CisBenchmark": {
+                  "fields": {
+                    "profileLevel": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "severity": {
+                      "type": "grafeas.v1.Severity",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "ComplianceVersion": {
+              "fields": {
+                "cpeUri": {
+                  "type": "string",
+                  "id": 1
+                },
+                "version": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "ComplianceOccurrence": {
+              "fields": {
+                "nonCompliantFiles": {
+                  "rule": "repeated",
+                  "type": "NonCompliantFile",
+                  "id": 2
+                },
+                "nonComplianceReason": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "NonCompliantFile": {
+              "fields": {
+                "path": {
+                  "type": "string",
+                  "id": 1
+                },
+                "displayCommand": {
+                  "type": "string",
+                  "id": 2
+                },
+                "reason": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "Severity": {
+              "values": {
+                "SEVERITY_UNSPECIFIED": 0,
+                "MINIMAL": 1,
+                "LOW": 2,
+                "MEDIUM": 3,
+                "HIGH": 4,
+                "CRITICAL": 5
+              }
+            },
+            "DeploymentNote": {
+              "fields": {
+                "resourceUri": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "DeploymentOccurrence": {
+              "fields": {
+                "userEmail": {
+                  "type": "string",
+                  "id": 1
+                },
+                "deployTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 2
+                },
+                "undeployTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 3
+                },
+                "config": {
+                  "type": "string",
+                  "id": 4
+                },
+                "address": {
+                  "type": "string",
+                  "id": 5
+                },
+                "resourceUri": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 6
+                },
+                "platform": {
+                  "type": "Platform",
+                  "id": 7
+                }
+              },
+              "nested": {
+                "Platform": {
+                  "values": {
+                    "PLATFORM_UNSPECIFIED": 0,
+                    "GKE": 1,
+                    "FLEX": 2,
+                    "CUSTOM": 3
+                  }
+                }
+              }
+            },
+            "DiscoveryNote": {
+              "fields": {
+                "analysisKind": {
+                  "type": "grafeas.v1.NoteKind",
+                  "id": 1
+                }
+              }
+            },
+            "DiscoveryOccurrence": {
+              "fields": {
+                "continuousAnalysis": {
+                  "type": "ContinuousAnalysis",
+                  "id": 1
+                },
+                "analysisStatus": {
+                  "type": "AnalysisStatus",
+                  "id": 2
+                },
+                "analysisStatusError": {
+                  "type": "google.rpc.Status",
+                  "id": 3
+                },
+                "cpe": {
+                  "type": "string",
+                  "id": 4
+                },
+                "lastScanTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 5
+                },
+                "archiveTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 6,
+                  "options": {
+                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                  }
+                }
+              },
+              "nested": {
+                "ContinuousAnalysis": {
+                  "values": {
+                    "CONTINUOUS_ANALYSIS_UNSPECIFIED": 0,
+                    "ACTIVE": 1,
+                    "INACTIVE": 2
+                  }
+                },
+                "AnalysisStatus": {
+                  "values": {
+                    "ANALYSIS_STATUS_UNSPECIFIED": 0,
+                    "PENDING": 1,
+                    "SCANNING": 2,
+                    "FINISHED_SUCCESS": 3,
+                    "FINISHED_FAILED": 4,
+                    "FINISHED_UNSUPPORTED": 5
+                  }
+                }
+              }
+            },
+            "DSSEAttestationNote": {
+              "fields": {
+                "hint": {
+                  "type": "DSSEHint",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "DSSEHint": {
+                  "fields": {
+                    "humanReadableName": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                }
+              }
+            },
+            "DSSEAttestationOccurrence": {
+              "oneofs": {
+                "decodedPayload": {
+                  "oneof": [
+                    "statement"
+                  ]
+                }
+              },
+              "fields": {
+                "envelope": {
+                  "type": "Envelope",
+                  "id": 1
+                },
+                "statement": {
+                  "type": "InTotoStatement",
+                  "id": 2
+                }
+              }
+            },
             "Layer": {
               "fields": {
                 "directive": {
@@ -2237,6 +1803,121 @@
                 "baseResourceUrl": {
                   "type": "string",
                   "id": 4
+                }
+              }
+            },
+            "Architecture": {
+              "values": {
+                "ARCHITECTURE_UNSPECIFIED": 0,
+                "X86": 1,
+                "X64": 2
+              }
+            },
+            "Distribution": {
+              "fields": {
+                "cpeUri": {
+                  "type": "string",
+                  "id": 1
+                },
+                "architecture": {
+                  "type": "Architecture",
+                  "id": 2
+                },
+                "latestVersion": {
+                  "type": "Version",
+                  "id": 3
+                },
+                "maintainer": {
+                  "type": "string",
+                  "id": 4
+                },
+                "url": {
+                  "type": "string",
+                  "id": 5
+                },
+                "description": {
+                  "type": "string",
+                  "id": 6
+                }
+              }
+            },
+            "Location": {
+              "fields": {
+                "cpeUri": {
+                  "type": "string",
+                  "id": 1
+                },
+                "version": {
+                  "type": "Version",
+                  "id": 2
+                },
+                "path": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "PackageNote": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "distribution": {
+                  "rule": "repeated",
+                  "type": "Distribution",
+                  "id": 10
+                }
+              }
+            },
+            "PackageOccurrence": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 2
+                }
+              }
+            },
+            "Version": {
+              "fields": {
+                "epoch": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "name": {
+                  "type": "string",
+                  "id": 2
+                },
+                "revision": {
+                  "type": "string",
+                  "id": 3
+                },
+                "inclusive": {
+                  "type": "bool",
+                  "id": 6
+                },
+                "kind": {
+                  "type": "VersionKind",
+                  "id": 4
+                },
+                "fullName": {
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "VersionKind": {
+                  "values": {
+                    "VERSION_KIND_UNSPECIFIED": 0,
+                    "NORMAL": 1,
+                    "MINIMUM": 2,
+                    "MAXIMUM": 3
+                  }
                 }
               }
             },
@@ -2359,6 +2040,428 @@
                 "windowsUpdate": {
                   "type": "WindowsUpdate",
                   "id": 5
+                }
+              }
+            },
+            "VulnerabilityNote": {
+              "fields": {
+                "cvssScore": {
+                  "type": "float",
+                  "id": 1
+                },
+                "severity": {
+                  "type": "grafeas.v1.Severity",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "Detail",
+                  "id": 3
+                },
+                "cvssV3": {
+                  "type": "CVSSv3",
+                  "id": 4
+                },
+                "windowsDetails": {
+                  "rule": "repeated",
+                  "type": "WindowsDetail",
+                  "id": 5
+                },
+                "sourceUpdateTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "Detail": {
+                  "fields": {
+                    "severityName": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "packageType": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "affectedCpeUri": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "affectedPackage": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "affectedVersionStart": {
+                      "type": "grafeas.v1.Version",
+                      "id": 6
+                    },
+                    "affectedVersionEnd": {
+                      "type": "grafeas.v1.Version",
+                      "id": 7
+                    },
+                    "fixedCpeUri": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "fixedPackage": {
+                      "type": "string",
+                      "id": 9
+                    },
+                    "fixedVersion": {
+                      "type": "grafeas.v1.Version",
+                      "id": 10
+                    },
+                    "isObsolete": {
+                      "type": "bool",
+                      "id": 11
+                    },
+                    "sourceUpdateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 12
+                    },
+                    "source": {
+                      "type": "string",
+                      "id": 13
+                    },
+                    "vendor": {
+                      "type": "string",
+                      "id": 14
+                    }
+                  }
+                },
+                "WindowsDetail": {
+                  "fields": {
+                    "cpeUri": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "fixingKbs": {
+                      "rule": "repeated",
+                      "type": "KnowledgeBase",
+                      "id": 4
+                    }
+                  },
+                  "nested": {
+                    "KnowledgeBase": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "url": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "VulnerabilityOccurrence": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "severity": {
+                  "type": "grafeas.v1.Severity",
+                  "id": 2
+                },
+                "cvssScore": {
+                  "type": "float",
+                  "id": 3
+                },
+                "cvssv3": {
+                  "type": "CVSS",
+                  "id": 10
+                },
+                "packageIssue": {
+                  "rule": "repeated",
+                  "type": "PackageIssue",
+                  "id": 4
+                },
+                "shortDescription": {
+                  "type": "string",
+                  "id": 5
+                },
+                "longDescription": {
+                  "type": "string",
+                  "id": 6
+                },
+                "relatedUrls": {
+                  "rule": "repeated",
+                  "type": "grafeas.v1.RelatedUrl",
+                  "id": 7
+                },
+                "effectiveSeverity": {
+                  "type": "grafeas.v1.Severity",
+                  "id": 8
+                },
+                "fixAvailable": {
+                  "type": "bool",
+                  "id": 9
+                }
+              },
+              "nested": {
+                "PackageIssue": {
+                  "fields": {
+                    "affectedCpeUri": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "affectedPackage": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "affectedVersion": {
+                      "type": "grafeas.v1.Version",
+                      "id": 3
+                    },
+                    "fixedCpeUri": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "fixedPackage": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "fixedVersion": {
+                      "type": "grafeas.v1.Version",
+                      "id": 6
+                    },
+                    "fixAvailable": {
+                      "type": "bool",
+                      "id": 7
+                    },
+                    "packageType": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "effectiveSeverity": {
+                      "type": "grafeas.v1.Severity",
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "CVSSv3": {
+              "fields": {
+                "baseScore": {
+                  "type": "float",
+                  "id": 1
+                },
+                "exploitabilityScore": {
+                  "type": "float",
+                  "id": 2
+                },
+                "impactScore": {
+                  "type": "float",
+                  "id": 3
+                },
+                "attackVector": {
+                  "type": "AttackVector",
+                  "id": 5
+                },
+                "attackComplexity": {
+                  "type": "AttackComplexity",
+                  "id": 6
+                },
+                "privilegesRequired": {
+                  "type": "PrivilegesRequired",
+                  "id": 7
+                },
+                "userInteraction": {
+                  "type": "UserInteraction",
+                  "id": 8
+                },
+                "scope": {
+                  "type": "Scope",
+                  "id": 9
+                },
+                "confidentialityImpact": {
+                  "type": "Impact",
+                  "id": 10
+                },
+                "integrityImpact": {
+                  "type": "Impact",
+                  "id": 11
+                },
+                "availabilityImpact": {
+                  "type": "Impact",
+                  "id": 12
+                }
+              },
+              "nested": {
+                "AttackVector": {
+                  "values": {
+                    "ATTACK_VECTOR_UNSPECIFIED": 0,
+                    "ATTACK_VECTOR_NETWORK": 1,
+                    "ATTACK_VECTOR_ADJACENT": 2,
+                    "ATTACK_VECTOR_LOCAL": 3,
+                    "ATTACK_VECTOR_PHYSICAL": 4
+                  }
+                },
+                "AttackComplexity": {
+                  "values": {
+                    "ATTACK_COMPLEXITY_UNSPECIFIED": 0,
+                    "ATTACK_COMPLEXITY_LOW": 1,
+                    "ATTACK_COMPLEXITY_HIGH": 2
+                  }
+                },
+                "PrivilegesRequired": {
+                  "values": {
+                    "PRIVILEGES_REQUIRED_UNSPECIFIED": 0,
+                    "PRIVILEGES_REQUIRED_NONE": 1,
+                    "PRIVILEGES_REQUIRED_LOW": 2,
+                    "PRIVILEGES_REQUIRED_HIGH": 3
+                  }
+                },
+                "UserInteraction": {
+                  "values": {
+                    "USER_INTERACTION_UNSPECIFIED": 0,
+                    "USER_INTERACTION_NONE": 1,
+                    "USER_INTERACTION_REQUIRED": 2
+                  }
+                },
+                "Scope": {
+                  "values": {
+                    "SCOPE_UNSPECIFIED": 0,
+                    "SCOPE_UNCHANGED": 1,
+                    "SCOPE_CHANGED": 2
+                  }
+                },
+                "Impact": {
+                  "values": {
+                    "IMPACT_UNSPECIFIED": 0,
+                    "IMPACT_HIGH": 1,
+                    "IMPACT_LOW": 2,
+                    "IMPACT_NONE": 3
+                  }
+                }
+              }
+            },
+            "CVSS": {
+              "fields": {
+                "baseScore": {
+                  "type": "float",
+                  "id": 1
+                },
+                "exploitabilityScore": {
+                  "type": "float",
+                  "id": 2
+                },
+                "impactScore": {
+                  "type": "float",
+                  "id": 3
+                },
+                "attackVector": {
+                  "type": "AttackVector",
+                  "id": 4
+                },
+                "attackComplexity": {
+                  "type": "AttackComplexity",
+                  "id": 5
+                },
+                "authentication": {
+                  "type": "Authentication",
+                  "id": 6
+                },
+                "privilegesRequired": {
+                  "type": "PrivilegesRequired",
+                  "id": 7
+                },
+                "userInteraction": {
+                  "type": "UserInteraction",
+                  "id": 8
+                },
+                "scope": {
+                  "type": "Scope",
+                  "id": 9
+                },
+                "confidentialityImpact": {
+                  "type": "Impact",
+                  "id": 10
+                },
+                "integrityImpact": {
+                  "type": "Impact",
+                  "id": 11
+                },
+                "availabilityImpact": {
+                  "type": "Impact",
+                  "id": 12
+                }
+              },
+              "nested": {
+                "AttackVector": {
+                  "values": {
+                    "ATTACK_VECTOR_UNSPECIFIED": 0,
+                    "ATTACK_VECTOR_NETWORK": 1,
+                    "ATTACK_VECTOR_ADJACENT": 2,
+                    "ATTACK_VECTOR_LOCAL": 3,
+                    "ATTACK_VECTOR_PHYSICAL": 4
+                  }
+                },
+                "AttackComplexity": {
+                  "values": {
+                    "ATTACK_COMPLEXITY_UNSPECIFIED": 0,
+                    "ATTACK_COMPLEXITY_LOW": 1,
+                    "ATTACK_COMPLEXITY_HIGH": 2
+                  }
+                },
+                "Authentication": {
+                  "values": {
+                    "AUTHENTICATION_UNSPECIFIED": 0,
+                    "AUTHENTICATION_MULTIPLE": 1,
+                    "AUTHENTICATION_SINGLE": 2,
+                    "AUTHENTICATION_NONE": 3
+                  }
+                },
+                "PrivilegesRequired": {
+                  "values": {
+                    "PRIVILEGES_REQUIRED_UNSPECIFIED": 0,
+                    "PRIVILEGES_REQUIRED_NONE": 1,
+                    "PRIVILEGES_REQUIRED_LOW": 2,
+                    "PRIVILEGES_REQUIRED_HIGH": 3
+                  }
+                },
+                "UserInteraction": {
+                  "values": {
+                    "USER_INTERACTION_UNSPECIFIED": 0,
+                    "USER_INTERACTION_NONE": 1,
+                    "USER_INTERACTION_REQUIRED": 2
+                  }
+                },
+                "Scope": {
+                  "values": {
+                    "SCOPE_UNSPECIFIED": 0,
+                    "SCOPE_UNCHANGED": 1,
+                    "SCOPE_CHANGED": 2
+                  }
+                },
+                "Impact": {
+                  "values": {
+                    "IMPACT_UNSPECIFIED": 0,
+                    "IMPACT_HIGH": 1,
+                    "IMPACT_LOW": 2,
+                    "IMPACT_NONE": 3
+                  }
                 }
               }
             }
@@ -4389,8 +4492,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project",
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "filter": {
@@ -5816,18 +5919,6 @@
                 }
               }
             },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
             "Empty": {
               "fields": {}
             },
@@ -5837,6 +5928,18 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
                 }
               }
             }

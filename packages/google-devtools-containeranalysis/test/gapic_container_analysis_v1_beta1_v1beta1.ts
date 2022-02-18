@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -164,7 +164,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     assert(client.containerAnalysisV1Beta1Stub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
         {
@@ -172,7 +172,25 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
-    client.close();
+    client.initialize();
+    assert(client.containerAnalysisV1Beta1Stub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+    assert.strictEqual(client.containerAnalysisV1Beta1Stub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -333,6 +351,25 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
+    });
   });
 
   describe('getIamPolicy', () => {
@@ -452,6 +489,25 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
 
@@ -574,6 +630,25 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
+    });
   });
 
   describe('getScanConfig', () => {
@@ -694,6 +769,25 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getScanConfig with closed client', async () => {
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1beta1.GetScanConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getScanConfig(request), expectedError);
+    });
   });
 
   describe('updateScanConfig', () => {
@@ -813,6 +907,25 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateScanConfig with closed client', async () => {
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1beta1.UpdateScanConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateScanConfig(request), expectedError);
     });
   });
 
