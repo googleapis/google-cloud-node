@@ -4346,9 +4346,8 @@ export class AccessContextManagerClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.accessContextManagerStub!.then(stub => {
+    if (this.accessContextManagerStub && !this._terminated) {
+      return this.accessContextManagerStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

@@ -190,14 +190,31 @@ describe('v1.AccessContextManagerClient', () => {
     assert(client.accessContextManagerStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new accesscontextmanagerModule.v1.AccessContextManagerClient(
       {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       }
     );
-    client.close();
+    client.initialize();
+    assert(client.accessContextManagerStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new accesscontextmanagerModule.v1.AccessContextManagerClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.accessContextManagerStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -350,6 +367,23 @@ describe('v1.AccessContextManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getAccessPolicy with closed client', async () => {
+      const client =
+        new accesscontextmanagerModule.v1.AccessContextManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAccessPolicy(request), expectedError);
+    });
   });
 
   describe('getAccessLevel', () => {
@@ -463,6 +497,23 @@ describe('v1.AccessContextManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getAccessLevel with closed client', async () => {
+      const client =
+        new accesscontextmanagerModule.v1.AccessContextManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAccessLevel(request), expectedError);
     });
   });
 
@@ -578,6 +629,23 @@ describe('v1.AccessContextManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getServicePerimeter with closed client', async () => {
+      const client =
+        new accesscontextmanagerModule.v1.AccessContextManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getServicePerimeter(request), expectedError);
     });
   });
 
@@ -695,6 +763,26 @@ describe('v1.AccessContextManagerClient', () => {
         (client.innerApiCalls.getGcpUserAccessBinding as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getGcpUserAccessBinding with closed client', async () => {
+      const client =
+        new accesscontextmanagerModule.v1.AccessContextManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getGcpUserAccessBinding(request),
+        expectedError
       );
     });
   });
