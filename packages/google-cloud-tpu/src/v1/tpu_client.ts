@@ -2200,9 +2200,8 @@ export class TpuClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.tpuStub!.then(stub => {
+    if (this.tpuStub && !this._terminated) {
+      return this.tpuStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

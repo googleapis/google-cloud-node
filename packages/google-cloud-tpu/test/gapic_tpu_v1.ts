@@ -183,12 +183,27 @@ describe('v1.TpuClient', () => {
     assert(client.tpuStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new tpuModule.v1.TpuClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.tpuStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new tpuModule.v1.TpuClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.tpuStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -331,6 +346,22 @@ describe('v1.TpuClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getNode with closed client', async () => {
+      const client = new tpuModule.v1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v1.GetNodeRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getNode(request), expectedError);
+    });
   });
 
   describe('getTensorFlowVersion', () => {
@@ -443,6 +474,22 @@ describe('v1.TpuClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getTensorFlowVersion with closed client', async () => {
+      const client = new tpuModule.v1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v1.GetTensorFlowVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTensorFlowVersion(request), expectedError);
+    });
   });
 
   describe('getAcceleratorType', () => {
@@ -554,6 +601,22 @@ describe('v1.TpuClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getAcceleratorType with closed client', async () => {
+      const client = new tpuModule.v1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v1.GetAcceleratorTypeRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAcceleratorType(request), expectedError);
     });
   });
 
