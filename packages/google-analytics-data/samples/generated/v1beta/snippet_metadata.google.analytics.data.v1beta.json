@@ -1,0 +1,451 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-data",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.analytics.data.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_RunReport_async",
+      "title": "BetaAnalyticsData runReport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a customized report of your Google Analytics event data. Reports contain statistics derived from data collected by the Google Analytics tracking code. The data returned from the API is as a table with columns for the requested dimensions and metrics. Metrics are individual measurements of user activity on your property, such as active users or event count. Dimensions break down metrics across some common criteria, such as country or event name.",
+      "canonical": true,
+      "file": "beta_analytics_data.run_report.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 136,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunReport",
+        "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.RunReport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "property",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dimensions",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "metrics",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "date_ranges",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "dimension_filter",
+            "type": ".google.analytics.data.v1beta.FilterExpression"
+          },
+          {
+            "name": "metric_filter",
+            "type": ".google.analytics.data.v1beta.FilterExpression"
+          },
+          {
+            "name": "offset",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "limit",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "metric_aggregations",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "order_bys",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "currency_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cohort_spec",
+            "type": ".google.analytics.data.v1beta.CohortSpec"
+          },
+          {
+            "name": "keep_empty_rows",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "return_property_quota",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1beta.RunReportResponse",
+        "client": {
+          "shortName": "BetaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "RunReport",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.RunReport",
+          "service": {
+            "shortName": "BetaAnalyticsData",
+            "fullName": "google.analytics.data.v1beta.BetaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_RunPivotReport_async",
+      "title": "BetaAnalyticsData runPivotReport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a customized pivot report of your Google Analytics event data. Pivot reports are more advanced and expressive formats than regular reports. In a pivot report, dimensions are only visible if they are included in a pivot. Multiple pivots can be specified to further dissect your data.",
+      "canonical": true,
+      "file": "beta_analytics_data.run_pivot_report.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 113,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunPivotReport",
+        "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.RunPivotReport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "property",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dimensions",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "metrics",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "date_ranges",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "pivots",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "dimension_filter",
+            "type": ".google.analytics.data.v1beta.FilterExpression"
+          },
+          {
+            "name": "metric_filter",
+            "type": ".google.analytics.data.v1beta.FilterExpression"
+          },
+          {
+            "name": "currency_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cohort_spec",
+            "type": ".google.analytics.data.v1beta.CohortSpec"
+          },
+          {
+            "name": "keep_empty_rows",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "return_property_quota",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1beta.RunPivotReportResponse",
+        "client": {
+          "shortName": "BetaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "RunPivotReport",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.RunPivotReport",
+          "service": {
+            "shortName": "BetaAnalyticsData",
+            "fullName": "google.analytics.data.v1beta.BetaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunReports_async",
+      "title": "BetaAnalyticsData batchRunReports Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns multiple reports in a batch. All reports must be for the same GA4 Property.",
+      "canonical": true,
+      "file": "beta_analytics_data.batch_run_reports.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchRunReports",
+        "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.BatchRunReports",
+        "async": true,
+        "parameters": [
+          {
+            "name": "property",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1beta.BatchRunReportsResponse",
+        "client": {
+          "shortName": "BetaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "BatchRunReports",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.BatchRunReports",
+          "service": {
+            "shortName": "BetaAnalyticsData",
+            "fullName": "google.analytics.data.v1beta.BetaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunPivotReports_async",
+      "title": "BetaAnalyticsData batchRunPivotReports Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns multiple pivot reports in a batch. All reports must be for the same GA4 Property.",
+      "canonical": true,
+      "file": "beta_analytics_data.batch_run_pivot_reports.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchRunPivotReports",
+        "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.BatchRunPivotReports",
+        "async": true,
+        "parameters": [
+          {
+            "name": "property",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1beta.BatchRunPivotReportsResponse",
+        "client": {
+          "shortName": "BetaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "BatchRunPivotReports",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.BatchRunPivotReports",
+          "service": {
+            "shortName": "BetaAnalyticsData",
+            "fullName": "google.analytics.data.v1beta.BetaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_GetMetadata_async",
+      "title": "BetaAnalyticsData getMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns metadata for dimensions and metrics available in reporting methods. Used to explore the dimensions and metrics. In this method, a Google Analytics GA4 Property Identifier is specified in the request, and the metadata response includes Custom dimensions and metrics as well as Universal metadata. For example if a custom metric with parameter name `levels_unlocked` is registered to a property, the Metadata response will contain `customEvent:levels_unlocked`. Universal metadata are dimensions and metrics applicable to any property such as `country` and `totalUsers`.",
+      "canonical": true,
+      "file": "beta_analytics_data.get_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMetadata",
+        "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.GetMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1beta.Metadata",
+        "client": {
+          "shortName": "BetaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "GetMetadata",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.GetMetadata",
+          "service": {
+            "shortName": "BetaAnalyticsData",
+            "fullName": "google.analytics.data.v1beta.BetaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_RunRealtimeReport_async",
+      "title": "BetaAnalyticsData runRealtimeReport Sample",
+      "origin": "API_DEFINITION",
+      "description": " The Google Analytics Realtime API returns a customized report of realtime event data for your property. These reports show events and usage from the last 30 minutes.",
+      "canonical": true,
+      "file": "beta_analytics_data.run_realtime_report.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 105,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunRealtimeReport",
+        "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.RunRealtimeReport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "property",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dimensions",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "metrics",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "dimension_filter",
+            "type": ".google.analytics.data.v1beta.FilterExpression"
+          },
+          {
+            "name": "metric_filter",
+            "type": ".google.analytics.data.v1beta.FilterExpression"
+          },
+          {
+            "name": "limit",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "metric_aggregations",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "order_bys",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "return_property_quota",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "minute_ranges",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1beta.RunRealtimeReportResponse",
+        "client": {
+          "shortName": "BetaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "RunRealtimeReport",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.RunRealtimeReport",
+          "service": {
+            "shortName": "BetaAnalyticsData",
+            "fullName": "google.analytics.data.v1beta.BetaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_CheckCompatibility_async",
+      "title": "BetaAnalyticsData checkCompatibility Sample",
+      "origin": "API_DEFINITION",
+      "description": " This compatibility method lists dimensions and metrics that can be added to a report request and maintain compatibility. This method fails if the request's dimensions and metrics are incompatible. In Google Analytics, reports fail if they request incompatible dimensions and/or metrics; in that case, you will need to remove dimensions and/or metrics from the incompatible report until the report is compatible. The Realtime and Core reports have different compatibility rules. This method checks compatibility for Core reports.",
+      "canonical": true,
+      "file": "beta_analytics_data.check_compatibility.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CheckCompatibility",
+        "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.CheckCompatibility",
+        "async": true,
+        "parameters": [
+          {
+            "name": "property",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dimensions",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "metrics",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "dimension_filter",
+            "type": ".google.analytics.data.v1beta.FilterExpression"
+          },
+          {
+            "name": "metric_filter",
+            "type": ".google.analytics.data.v1beta.FilterExpression"
+          },
+          {
+            "name": "compatibility_filter",
+            "type": ".google.analytics.data.v1beta.Compatibility"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1beta.CheckCompatibilityResponse",
+        "client": {
+          "shortName": "BetaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "CheckCompatibility",
+          "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.CheckCompatibility",
+          "service": {
+            "shortName": "BetaAnalyticsData",
+            "fullName": "google.analytics.data.v1beta.BetaAnalyticsData"
+          }
+        }
+      }
+    }
+  ]
+}

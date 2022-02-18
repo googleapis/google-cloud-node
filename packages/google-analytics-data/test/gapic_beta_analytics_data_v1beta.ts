@@ -90,12 +90,27 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     assert(client.betaAnalyticsDataStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.betaAnalyticsDataStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.betaAnalyticsDataStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -244,6 +259,24 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes runReport with closed client', async () => {
+      const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1beta.RunReportRequest()
+      );
+      request.property = '';
+      const expectedHeaderRequestParams = 'property=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.runReport(request), expectedError);
+    });
   });
 
   describe('runPivotReport', () => {
@@ -361,6 +394,24 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes runPivotReport with closed client', async () => {
+      const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1beta.RunPivotReportRequest()
+      );
+      request.property = '';
+      const expectedHeaderRequestParams = 'property=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.runPivotReport(request), expectedError);
+    });
   });
 
   describe('batchRunReports', () => {
@@ -477,6 +528,24 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes batchRunReports with closed client', async () => {
+      const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1beta.BatchRunReportsRequest()
+      );
+      request.property = '';
+      const expectedHeaderRequestParams = 'property=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.batchRunReports(request), expectedError);
     });
   });
 
@@ -596,6 +665,24 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes batchRunPivotReports with closed client', async () => {
+      const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1beta.BatchRunPivotReportsRequest()
+      );
+      request.property = '';
+      const expectedHeaderRequestParams = 'property=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.batchRunPivotReports(request), expectedError);
+    });
   });
 
   describe('getMetadata', () => {
@@ -712,6 +799,24 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getMetadata with closed client', async () => {
+      const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1beta.GetMetadataRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getMetadata(request), expectedError);
     });
   });
 
@@ -830,6 +935,24 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes runRealtimeReport with closed client', async () => {
+      const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1beta.RunRealtimeReportRequest()
+      );
+      request.property = '';
+      const expectedHeaderRequestParams = 'property=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.runRealtimeReport(request), expectedError);
+    });
   });
 
   describe('checkCompatibility', () => {
@@ -947,6 +1070,24 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes checkCompatibility with closed client', async () => {
+      const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1beta.CheckCompatibilityRequest()
+      );
+      request.property = '';
+      const expectedHeaderRequestParams = 'property=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.checkCompatibility(request), expectedError);
     });
   });
 
