@@ -153,12 +153,27 @@ describe('v1alpha1.TablesServiceClient', () => {
     assert(client.tablesServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.tablesServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.tablesServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -301,6 +316,22 @@ describe('v1alpha1.TablesServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getTable with closed client', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.GetTableRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTable(request), expectedError);
+    });
   });
 
   describe('getWorkspace', () => {
@@ -412,6 +443,22 @@ describe('v1alpha1.TablesServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getWorkspace with closed client', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getWorkspace(request), expectedError);
+    });
   });
 
   describe('getRow', () => {
@@ -520,6 +567,22 @@ describe('v1alpha1.TablesServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getRow with closed client', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.GetRowRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getRow(request), expectedError);
+    });
   });
 
   describe('createRow', () => {
@@ -627,6 +690,22 @@ describe('v1alpha1.TablesServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createRow with closed client', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.CreateRowRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createRow(request), expectedError);
     });
   });
 
@@ -739,6 +818,22 @@ describe('v1alpha1.TablesServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes batchCreateRows with closed client', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.BatchCreateRowsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.batchCreateRows(request), expectedError);
+    });
   });
 
   describe('updateRow', () => {
@@ -849,6 +944,23 @@ describe('v1alpha1.TablesServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateRow with closed client', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.UpdateRowRequest()
+      );
+      request.row = {};
+      request.row.name = '';
+      const expectedHeaderRequestParams = 'row.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateRow(request), expectedError);
     });
   });
 
@@ -961,6 +1073,22 @@ describe('v1alpha1.TablesServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes batchUpdateRows with closed client', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.BatchUpdateRowsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.batchUpdateRows(request), expectedError);
+    });
   });
 
   describe('deleteRow', () => {
@@ -1068,6 +1196,22 @@ describe('v1alpha1.TablesServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteRow with closed client', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.DeleteRowRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteRow(request), expectedError);
     });
   });
 
@@ -1179,6 +1323,22 @@ describe('v1alpha1.TablesServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes batchDeleteRows with closed client', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.batchDeleteRows(request), expectedError);
     });
   });
 
