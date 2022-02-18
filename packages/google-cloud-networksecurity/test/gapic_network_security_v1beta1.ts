@@ -185,12 +185,27 @@ describe('v1beta1.NetworkSecurityClient', () => {
     assert(client.networkSecurityStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.networkSecurityStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.networkSecurityStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -340,6 +355,25 @@ describe('v1beta1.NetworkSecurityClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getAuthorizationPolicy with closed client', async () => {
+      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1beta1.GetAuthorizationPolicyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getAuthorizationPolicy(request),
+        expectedError
+      );
+    });
   });
 
   describe('getServerTlsPolicy', () => {
@@ -452,6 +486,22 @@ describe('v1beta1.NetworkSecurityClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getServerTlsPolicy with closed client', async () => {
+      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1beta1.GetServerTlsPolicyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getServerTlsPolicy(request), expectedError);
+    });
   });
 
   describe('getClientTlsPolicy', () => {
@@ -563,6 +613,22 @@ describe('v1beta1.NetworkSecurityClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getClientTlsPolicy with closed client', async () => {
+      const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networksecurity.v1beta1.GetClientTlsPolicyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getClientTlsPolicy(request), expectedError);
     });
   });
 

@@ -2879,9 +2879,8 @@ export class NetworkSecurityClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.networkSecurityStub!.then(stub => {
+    if (this.networkSecurityStub && !this._terminated) {
+      return this.networkSecurityStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

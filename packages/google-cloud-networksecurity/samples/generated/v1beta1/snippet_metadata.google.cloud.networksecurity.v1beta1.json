@@ -1,0 +1,675 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-networksecurity",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.networksecurity.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_ListAuthorizationPolicies_async",
+      "title": "NetworkSecurity listAuthorizationPolicies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists AuthorizationPolicies in a given project and location.",
+      "canonical": true,
+      "file": "network_security.list_authorization_policies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAuthorizationPolicies",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.ListAuthorizationPolicies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1beta1.ListAuthorizationPoliciesResponse",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "ListAuthorizationPolicies",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.ListAuthorizationPolicies",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_GetAuthorizationPolicy_async",
+      "title": "NetworkSecurity getAuthorizationPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single AuthorizationPolicy.",
+      "canonical": true,
+      "file": "network_security.get_authorization_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAuthorizationPolicy",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.GetAuthorizationPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1beta1.AuthorizationPolicy",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "GetAuthorizationPolicy",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.GetAuthorizationPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_CreateAuthorizationPolicy_async",
+      "title": "NetworkSecurity createAuthorizationPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new AuthorizationPolicy in a given project and location.",
+      "canonical": true,
+      "file": "network_security.create_authorization_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAuthorizationPolicy",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.CreateAuthorizationPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "authorization_policy_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "authorization_policy",
+            "type": ".google.cloud.networksecurity.v1beta1.AuthorizationPolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "CreateAuthorizationPolicy",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.CreateAuthorizationPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_UpdateAuthorizationPolicy_async",
+      "title": "NetworkSecurity updateAuthorizationPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single AuthorizationPolicy.",
+      "canonical": true,
+      "file": "network_security.update_authorization_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAuthorizationPolicy",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.UpdateAuthorizationPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "authorization_policy",
+            "type": ".google.cloud.networksecurity.v1beta1.AuthorizationPolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "UpdateAuthorizationPolicy",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.UpdateAuthorizationPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_async",
+      "title": "NetworkSecurity deleteAuthorizationPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single AuthorizationPolicy.",
+      "canonical": true,
+      "file": "network_security.delete_authorization_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAuthorizationPolicy",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.DeleteAuthorizationPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "DeleteAuthorizationPolicy",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.DeleteAuthorizationPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_ListServerTlsPolicies_async",
+      "title": "NetworkSecurity listServerTlsPolicies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists ServerTlsPolicies in a given project and location.",
+      "canonical": true,
+      "file": "network_security.list_server_tls_policies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListServerTlsPolicies",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.ListServerTlsPolicies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1beta1.ListServerTlsPoliciesResponse",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "ListServerTlsPolicies",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.ListServerTlsPolicies",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_GetServerTlsPolicy_async",
+      "title": "NetworkSecurity getServerTlsPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single ServerTlsPolicy.",
+      "canonical": true,
+      "file": "network_security.get_server_tls_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetServerTlsPolicy",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.GetServerTlsPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1beta1.ServerTlsPolicy",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "GetServerTlsPolicy",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.GetServerTlsPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_CreateServerTlsPolicy_async",
+      "title": "NetworkSecurity createServerTlsPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new ServerTlsPolicy in a given project and location.",
+      "canonical": true,
+      "file": "network_security.create_server_tls_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateServerTlsPolicy",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.CreateServerTlsPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "server_tls_policy_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "server_tls_policy",
+            "type": ".google.cloud.networksecurity.v1beta1.ServerTlsPolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "CreateServerTlsPolicy",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.CreateServerTlsPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_UpdateServerTlsPolicy_async",
+      "title": "NetworkSecurity updateServerTlsPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single ServerTlsPolicy.",
+      "canonical": true,
+      "file": "network_security.update_server_tls_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateServerTlsPolicy",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.UpdateServerTlsPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "server_tls_policy",
+            "type": ".google.cloud.networksecurity.v1beta1.ServerTlsPolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "UpdateServerTlsPolicy",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.UpdateServerTlsPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_DeleteServerTlsPolicy_async",
+      "title": "NetworkSecurity deleteServerTlsPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single ServerTlsPolicy.",
+      "canonical": true,
+      "file": "network_security.delete_server_tls_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteServerTlsPolicy",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.DeleteServerTlsPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "DeleteServerTlsPolicy",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.DeleteServerTlsPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_ListClientTlsPolicies_async",
+      "title": "NetworkSecurity listClientTlsPolicies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists ClientTlsPolicies in a given project and location.",
+      "canonical": true,
+      "file": "network_security.list_client_tls_policies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListClientTlsPolicies",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.ListClientTlsPolicies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1beta1.ListClientTlsPoliciesResponse",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "ListClientTlsPolicies",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.ListClientTlsPolicies",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_GetClientTlsPolicy_async",
+      "title": "NetworkSecurity getClientTlsPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single ClientTlsPolicy.",
+      "canonical": true,
+      "file": "network_security.get_client_tls_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetClientTlsPolicy",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.GetClientTlsPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.networksecurity.v1beta1.ClientTlsPolicy",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "GetClientTlsPolicy",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.GetClientTlsPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_CreateClientTlsPolicy_async",
+      "title": "NetworkSecurity createClientTlsPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new ClientTlsPolicy in a given project and location.",
+      "canonical": true,
+      "file": "network_security.create_client_tls_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateClientTlsPolicy",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.CreateClientTlsPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "client_tls_policy_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "client_tls_policy",
+            "type": ".google.cloud.networksecurity.v1beta1.ClientTlsPolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "CreateClientTlsPolicy",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.CreateClientTlsPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_UpdateClientTlsPolicy_async",
+      "title": "NetworkSecurity updateClientTlsPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single ClientTlsPolicy.",
+      "canonical": true,
+      "file": "network_security.update_client_tls_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateClientTlsPolicy",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.UpdateClientTlsPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "client_tls_policy",
+            "type": ".google.cloud.networksecurity.v1beta1.ClientTlsPolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "UpdateClientTlsPolicy",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.UpdateClientTlsPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "networksecurity_v1beta1_generated_NetworkSecurity_DeleteClientTlsPolicy_async",
+      "title": "NetworkSecurity deleteClientTlsPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single ClientTlsPolicy.",
+      "canonical": true,
+      "file": "network_security.delete_client_tls_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteClientTlsPolicy",
+        "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.DeleteClientTlsPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetworkSecurityClient",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurityClient"
+        },
+        "method": {
+          "shortName": "DeleteClientTlsPolicy",
+          "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity.DeleteClientTlsPolicy",
+          "service": {
+            "shortName": "NetworkSecurity",
+            "fullName": "google.cloud.networksecurity.v1beta1.NetworkSecurity"
+          }
+        }
+      }
+    }
+  ]
+}
