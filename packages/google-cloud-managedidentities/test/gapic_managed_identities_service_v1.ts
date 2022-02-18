@@ -191,13 +191,29 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
     assert(client.managedIdentitiesServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new managedidentitiesserviceModule.v1.ManagedIdentitiesServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.managedIdentitiesServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new managedidentitiesserviceModule.v1.ManagedIdentitiesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.managedIdentitiesServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -349,6 +365,23 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes resetAdminPassword with closed client', async () => {
+      const client =
+        new managedidentitiesserviceModule.v1.ManagedIdentitiesServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedidentities.v1.ResetAdminPasswordRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.resetAdminPassword(request), expectedError);
+    });
   });
 
   describe('getDomain', () => {
@@ -459,6 +492,23 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getDomain with closed client', async () => {
+      const client =
+        new managedidentitiesserviceModule.v1.ManagedIdentitiesServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.managedidentities.v1.GetDomainRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDomain(request), expectedError);
     });
   });
 

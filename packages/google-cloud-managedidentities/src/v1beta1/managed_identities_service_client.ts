@@ -1985,9 +1985,8 @@ export class ManagedIdentitiesServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.managedIdentitiesServiceStub!.then(stub => {
+    if (this.managedIdentitiesServiceStub && !this._terminated) {
+      return this.managedIdentitiesServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
