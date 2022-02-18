@@ -102,7 +102,7 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
     assert(client.speechTranslationServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
         {
@@ -110,7 +110,25 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
           projectId: 'bogus',
         }
       );
-    client.close();
+    client.initialize();
+    assert(client.speechTranslationServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+    assert.strictEqual(client.speechTranslationServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
