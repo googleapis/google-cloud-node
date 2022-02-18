@@ -1,0 +1,879 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-iot",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.iot.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_CreateDeviceRegistry_async",
+      "title": "iot createDeviceRegistry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a device registry that contains devices.",
+      "canonical": true,
+      "file": "device_manager.create_device_registry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDeviceRegistry",
+        "fullName": "google.cloud.iot.v1.DeviceManager.CreateDeviceRegistry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "device_registry",
+            "type": ".google.cloud.iot.v1.DeviceRegistry"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.DeviceRegistry",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "CreateDeviceRegistry",
+          "fullName": "google.cloud.iot.v1.DeviceManager.CreateDeviceRegistry",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_GetDeviceRegistry_async",
+      "title": "iot getDeviceRegistry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a device registry configuration.",
+      "canonical": true,
+      "file": "device_manager.get_device_registry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDeviceRegistry",
+        "fullName": "google.cloud.iot.v1.DeviceManager.GetDeviceRegistry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.DeviceRegistry",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "GetDeviceRegistry",
+          "fullName": "google.cloud.iot.v1.DeviceManager.GetDeviceRegistry",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_UpdateDeviceRegistry_async",
+      "title": "iot updateDeviceRegistry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a device registry configuration.",
+      "canonical": true,
+      "file": "device_manager.update_device_registry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDeviceRegistry",
+        "fullName": "google.cloud.iot.v1.DeviceManager.UpdateDeviceRegistry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "device_registry",
+            "type": ".google.cloud.iot.v1.DeviceRegistry"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.DeviceRegistry",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateDeviceRegistry",
+          "fullName": "google.cloud.iot.v1.DeviceManager.UpdateDeviceRegistry",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_DeleteDeviceRegistry_async",
+      "title": "iot deleteDeviceRegistry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a device registry configuration.",
+      "canonical": true,
+      "file": "device_manager.delete_device_registry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDeviceRegistry",
+        "fullName": "google.cloud.iot.v1.DeviceManager.DeleteDeviceRegistry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteDeviceRegistry",
+          "fullName": "google.cloud.iot.v1.DeviceManager.DeleteDeviceRegistry",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_ListDeviceRegistries_async",
+      "title": "iot listDeviceRegistries Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists device registries.",
+      "canonical": true,
+      "file": "device_manager.list_device_registries.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDeviceRegistries",
+        "fullName": "google.cloud.iot.v1.DeviceManager.ListDeviceRegistries",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.ListDeviceRegistriesResponse",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "ListDeviceRegistries",
+          "fullName": "google.cloud.iot.v1.DeviceManager.ListDeviceRegistries",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_CreateDevice_async",
+      "title": "iot createDevice Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a device in a device registry.",
+      "canonical": true,
+      "file": "device_manager.create_device.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDevice",
+        "fullName": "google.cloud.iot.v1.DeviceManager.CreateDevice",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "device",
+            "type": ".google.cloud.iot.v1.Device"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.Device",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "CreateDevice",
+          "fullName": "google.cloud.iot.v1.DeviceManager.CreateDevice",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_GetDevice_async",
+      "title": "iot getDevice Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details about a device.",
+      "canonical": true,
+      "file": "device_manager.get_device.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDevice",
+        "fullName": "google.cloud.iot.v1.DeviceManager.GetDevice",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "field_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.Device",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "GetDevice",
+          "fullName": "google.cloud.iot.v1.DeviceManager.GetDevice",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_UpdateDevice_async",
+      "title": "iot updateDevice Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a device.",
+      "canonical": true,
+      "file": "device_manager.update_device.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDevice",
+        "fullName": "google.cloud.iot.v1.DeviceManager.UpdateDevice",
+        "async": true,
+        "parameters": [
+          {
+            "name": "device",
+            "type": ".google.cloud.iot.v1.Device"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.Device",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateDevice",
+          "fullName": "google.cloud.iot.v1.DeviceManager.UpdateDevice",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_DeleteDevice_async",
+      "title": "iot deleteDevice Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a device.",
+      "canonical": true,
+      "file": "device_manager.delete_device.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDevice",
+        "fullName": "google.cloud.iot.v1.DeviceManager.DeleteDevice",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteDevice",
+          "fullName": "google.cloud.iot.v1.DeviceManager.DeleteDevice",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_ListDevices_async",
+      "title": "iot listDevices Sample",
+      "origin": "API_DEFINITION",
+      "description": " List devices in a device registry.",
+      "canonical": true,
+      "file": "device_manager.list_devices.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 87,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDevices",
+        "fullName": "google.cloud.iot.v1.DeviceManager.ListDevices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "device_num_ids",
+            "type": "TYPE_UINT64[]"
+          },
+          {
+            "name": "device_ids",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "field_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "gateway_list_options",
+            "type": ".google.cloud.iot.v1.GatewayListOptions"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.ListDevicesResponse",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "ListDevices",
+          "fullName": "google.cloud.iot.v1.DeviceManager.ListDevices",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_ModifyCloudToDeviceConfig_async",
+      "title": "iot modifyCloudToDeviceConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Modifies the configuration for the device, which is eventually sent from the Cloud IoT Core servers. Returns the modified configuration version and its metadata.",
+      "canonical": true,
+      "file": "device_manager.modify_cloud_to_device_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ModifyCloudToDeviceConfig",
+        "fullName": "google.cloud.iot.v1.DeviceManager.ModifyCloudToDeviceConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "version_to_update",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "binary_data",
+            "type": "TYPE_BYTES"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.DeviceConfig",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "ModifyCloudToDeviceConfig",
+          "fullName": "google.cloud.iot.v1.DeviceManager.ModifyCloudToDeviceConfig",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_ListDeviceConfigVersions_async",
+      "title": "iot listDeviceConfigVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the last few versions of the device configuration in descending order (i.e.: newest first).",
+      "canonical": true,
+      "file": "device_manager.list_device_config_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDeviceConfigVersions",
+        "fullName": "google.cloud.iot.v1.DeviceManager.ListDeviceConfigVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "num_versions",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.ListDeviceConfigVersionsResponse",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "ListDeviceConfigVersions",
+          "fullName": "google.cloud.iot.v1.DeviceManager.ListDeviceConfigVersions",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_ListDeviceStates_async",
+      "title": "iot listDeviceStates Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the last few versions of the device state in descending order (i.e.: newest first).",
+      "canonical": true,
+      "file": "device_manager.list_device_states.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDeviceStates",
+        "fullName": "google.cloud.iot.v1.DeviceManager.ListDeviceStates",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "num_states",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.ListDeviceStatesResponse",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "ListDeviceStates",
+          "fullName": "google.cloud.iot.v1.DeviceManager.ListDeviceStates",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_SetIamPolicy_async",
+      "title": "iot setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy on the specified resource. Replaces any existing policy.",
+      "canonical": true,
+      "file": "device_manager.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.iot.v1.DeviceManager.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy",
+            "type": ".google.iam.v1.Policy"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.iot.v1.DeviceManager.SetIamPolicy",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_GetIamPolicy_async",
+      "title": "iot getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.",
+      "canonical": true,
+      "file": "device_manager.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.iot.v1.DeviceManager.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.iam.v1.GetPolicyOptions"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.iot.v1.DeviceManager.GetIamPolicy",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_TestIamPermissions_async",
+      "title": "iot testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.",
+      "canonical": true,
+      "file": "device_manager.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.iot.v1.DeviceManager.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permissions",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.iam.v1.TestIamPermissionsResponse",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.iot.v1.DeviceManager.TestIamPermissions",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_SendCommandToDevice_async",
+      "title": "iot sendCommandToDevice Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sends a command to the specified device. In order for a device to be able to receive commands, it must: 1) be connected to Cloud IoT Core using the MQTT protocol, and 2) be subscribed to the group of MQTT topics specified by    /devices/{device-id}/commands/#. This subscription will receive commands    at the top-level topic /devices/{device-id}/commands as well as commands    for subfolders, like /devices/{device-id}/commands/subfolder.    Note that subscribing to specific subfolders is not supported. If the command could not be delivered to the device, this method will return an error; in particular, if the device is not subscribed, this method will return FAILED_PRECONDITION. Otherwise, this method will return OK. If the subscription is QoS 1, at least once delivery will be guaranteed; for QoS 0, no acknowledgment will be expected from the device.",
+      "canonical": true,
+      "file": "device_manager.send_command_to_device.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SendCommandToDevice",
+        "fullName": "google.cloud.iot.v1.DeviceManager.SendCommandToDevice",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "binary_data",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "subfolder",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.SendCommandToDeviceResponse",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "SendCommandToDevice",
+          "fullName": "google.cloud.iot.v1.DeviceManager.SendCommandToDevice",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_BindDeviceToGateway_async",
+      "title": "iot bindDeviceToGateway Sample",
+      "origin": "API_DEFINITION",
+      "description": " Associates the device with the gateway.",
+      "canonical": true,
+      "file": "device_manager.bind_device_to_gateway.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BindDeviceToGateway",
+        "fullName": "google.cloud.iot.v1.DeviceManager.BindDeviceToGateway",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "gateway_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "device_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.BindDeviceToGatewayResponse",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "BindDeviceToGateway",
+          "fullName": "google.cloud.iot.v1.DeviceManager.BindDeviceToGateway",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudiot_v1_generated_DeviceManager_UnbindDeviceFromGateway_async",
+      "title": "iot unbindDeviceFromGateway Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the association between the device and the gateway.",
+      "canonical": true,
+      "file": "device_manager.unbind_device_from_gateway.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UnbindDeviceFromGateway",
+        "fullName": "google.cloud.iot.v1.DeviceManager.UnbindDeviceFromGateway",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "gateway_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "device_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.iot.v1.UnbindDeviceFromGatewayResponse",
+        "client": {
+          "shortName": "DeviceManagerClient",
+          "fullName": "google.cloud.iot.v1.DeviceManagerClient"
+        },
+        "method": {
+          "shortName": "UnbindDeviceFromGateway",
+          "fullName": "google.cloud.iot.v1.DeviceManager.UnbindDeviceFromGateway",
+          "service": {
+            "shortName": "DeviceManager",
+            "fullName": "google.cloud.iot.v1.DeviceManager"
+          }
+        }
+      }
+    }
+  ]
+}

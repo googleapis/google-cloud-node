@@ -2555,9 +2555,8 @@ export class DeviceManagerClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.deviceManagerStub!.then(stub => {
+    if (this.deviceManagerStub && !this._terminated) {
+      return this.deviceManagerStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

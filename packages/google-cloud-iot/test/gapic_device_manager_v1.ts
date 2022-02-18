@@ -151,12 +151,27 @@ describe('v1.DeviceManagerClient', () => {
     assert(client.deviceManagerStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new devicemanagerModule.v1.DeviceManagerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.deviceManagerStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new devicemanagerModule.v1.DeviceManagerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.deviceManagerStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -303,6 +318,22 @@ describe('v1.DeviceManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createDeviceRegistry with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createDeviceRegistry(request), expectedError);
+    });
   });
 
   describe('getDeviceRegistry', () => {
@@ -413,6 +444,22 @@ describe('v1.DeviceManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getDeviceRegistry with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDeviceRegistry(request), expectedError);
     });
   });
 
@@ -529,6 +576,23 @@ describe('v1.DeviceManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateDeviceRegistry with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
+      );
+      request.deviceRegistry = {};
+      request.deviceRegistry.name = '';
+      const expectedHeaderRequestParams = 'device_registry.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateDeviceRegistry(request), expectedError);
+    });
   });
 
   describe('deleteDeviceRegistry', () => {
@@ -641,6 +705,22 @@ describe('v1.DeviceManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteDeviceRegistry with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteDeviceRegistry(request), expectedError);
+    });
   });
 
   describe('createDevice', () => {
@@ -752,6 +832,22 @@ describe('v1.DeviceManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createDevice with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.CreateDeviceRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createDevice(request), expectedError);
+    });
   });
 
   describe('getDevice', () => {
@@ -859,6 +955,22 @@ describe('v1.DeviceManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getDevice with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.GetDeviceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDevice(request), expectedError);
     });
   });
 
@@ -974,6 +1086,23 @@ describe('v1.DeviceManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateDevice with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.UpdateDeviceRequest()
+      );
+      request.device = {};
+      request.device.name = '';
+      const expectedHeaderRequestParams = 'device.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateDevice(request), expectedError);
+    });
   });
 
   describe('deleteDevice', () => {
@@ -1084,6 +1213,22 @@ describe('v1.DeviceManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteDevice with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.DeleteDeviceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteDevice(request), expectedError);
     });
   });
 
@@ -1198,6 +1343,25 @@ describe('v1.DeviceManagerClient', () => {
         (client.innerApiCalls.modifyCloudToDeviceConfig as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes modifyCloudToDeviceConfig with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.modifyCloudToDeviceConfig(request),
+        expectedError
       );
     });
   });
@@ -1315,6 +1479,25 @@ describe('v1.DeviceManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes listDeviceConfigVersions with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.listDeviceConfigVersions(request),
+        expectedError
+      );
+    });
   });
 
   describe('listDeviceStates', () => {
@@ -1425,6 +1608,22 @@ describe('v1.DeviceManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes listDeviceStates with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listDeviceStates(request), expectedError);
     });
   });
 
@@ -1537,6 +1736,22 @@ describe('v1.DeviceManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
+    });
   });
 
   describe('getIamPolicy', () => {
@@ -1647,6 +1862,22 @@ describe('v1.DeviceManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
 
@@ -1760,6 +1991,22 @@ describe('v1.DeviceManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
+    });
   });
 
   describe('sendCommandToDevice', () => {
@@ -1872,6 +2119,22 @@ describe('v1.DeviceManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes sendCommandToDevice with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.sendCommandToDevice(request), expectedError);
+    });
   });
 
   describe('bindDeviceToGateway', () => {
@@ -1983,6 +2246,22 @@ describe('v1.DeviceManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes bindDeviceToGateway with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.bindDeviceToGateway(request), expectedError);
     });
   });
 
@@ -2097,6 +2376,25 @@ describe('v1.DeviceManagerClient', () => {
         (client.innerApiCalls.unbindDeviceFromGateway as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes unbindDeviceFromGateway with closed client', async () => {
+      const client = new devicemanagerModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.unbindDeviceFromGateway(request),
+        expectedError
       );
     });
   });
