@@ -90,12 +90,27 @@ describe('v1beta1.GatewayServiceClient', () => {
     assert(client.gatewayServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new gatewayserviceModule.v1beta1.GatewayServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.gatewayServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new gatewayserviceModule.v1beta1.GatewayServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.gatewayServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -208,6 +223,18 @@ describe('v1beta1.GatewayServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getResource with closed client', async () => {
+      const client = new gatewayserviceModule.v1beta1.GatewayServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(new protos.google.api.HttpBody());
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getResource(request), expectedError);
+    });
   });
 
   describe('postResource', () => {
@@ -285,6 +312,18 @@ describe('v1beta1.GatewayServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes postResource with closed client', async () => {
+      const client = new gatewayserviceModule.v1beta1.GatewayServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(new protos.google.api.HttpBody());
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.postResource(request), expectedError);
     });
   });
 
@@ -364,6 +403,18 @@ describe('v1beta1.GatewayServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteResource with closed client', async () => {
+      const client = new gatewayserviceModule.v1beta1.GatewayServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(new protos.google.api.HttpBody());
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteResource(request), expectedError);
+    });
   });
 
   describe('putResource', () => {
@@ -442,6 +493,18 @@ describe('v1beta1.GatewayServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes putResource with closed client', async () => {
+      const client = new gatewayserviceModule.v1beta1.GatewayServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(new protos.google.api.HttpBody());
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.putResource(request), expectedError);
+    });
   });
 
   describe('patchResource', () => {
@@ -519,6 +582,18 @@ describe('v1beta1.GatewayServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes patchResource with closed client', async () => {
+      const client = new gatewayserviceModule.v1beta1.GatewayServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(new protos.google.api.HttpBody());
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patchResource(request), expectedError);
     });
   });
 });
