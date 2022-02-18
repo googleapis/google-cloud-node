@@ -469,9 +469,8 @@ export class TextToSpeechClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.textToSpeechStub!.then(stub => {
+    if (this.textToSpeechStub && !this._terminated) {
+      return this.textToSpeechStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

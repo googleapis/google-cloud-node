@@ -1,0 +1,103 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-texttospeech",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.texttospeech.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "texttospeech_v1_generated_TextToSpeech_ListVoices_async",
+      "title": "TextToSpeech listVoices Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a list of Voice supported for synthesis.",
+      "canonical": true,
+      "file": "text_to_speech.list_voices.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListVoices",
+        "fullName": "google.cloud.texttospeech.v1.TextToSpeech.ListVoices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.texttospeech.v1.ListVoicesResponse",
+        "client": {
+          "shortName": "TextToSpeechClient",
+          "fullName": "google.cloud.texttospeech.v1.TextToSpeechClient"
+        },
+        "method": {
+          "shortName": "ListVoices",
+          "fullName": "google.cloud.texttospeech.v1.TextToSpeech.ListVoices",
+          "service": {
+            "shortName": "TextToSpeech",
+            "fullName": "google.cloud.texttospeech.v1.TextToSpeech"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "texttospeech_v1_generated_TextToSpeech_SynthesizeSpeech_async",
+      "title": "TextToSpeech synthesizeSpeech Sample",
+      "origin": "API_DEFINITION",
+      "description": " Synthesizes speech synchronously: receive results after all text input has been processed.",
+      "canonical": true,
+      "file": "text_to_speech.synthesize_speech.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SynthesizeSpeech",
+        "fullName": "google.cloud.texttospeech.v1.TextToSpeech.SynthesizeSpeech",
+        "async": true,
+        "parameters": [
+          {
+            "name": "input",
+            "type": ".google.cloud.texttospeech.v1.SynthesisInput"
+          },
+          {
+            "name": "voice",
+            "type": ".google.cloud.texttospeech.v1.VoiceSelectionParams"
+          },
+          {
+            "name": "audio_config",
+            "type": ".google.cloud.texttospeech.v1.AudioConfig"
+          }
+        ],
+        "resultType": ".google.cloud.texttospeech.v1.SynthesizeSpeechResponse",
+        "client": {
+          "shortName": "TextToSpeechClient",
+          "fullName": "google.cloud.texttospeech.v1.TextToSpeechClient"
+        },
+        "method": {
+          "shortName": "SynthesizeSpeech",
+          "fullName": "google.cloud.texttospeech.v1.TextToSpeech.SynthesizeSpeech",
+          "service": {
+            "shortName": "TextToSpeech",
+            "fullName": "google.cloud.texttospeech.v1.TextToSpeech"
+          }
+        }
+      }
+    }
+  ]
+}

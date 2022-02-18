@@ -90,12 +90,27 @@ describe('v1beta1.TextToSpeechClient', () => {
     assert(client.textToSpeechStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new texttospeechModule.v1beta1.TextToSpeechClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.textToSpeechStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new texttospeechModule.v1beta1.TextToSpeechClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.textToSpeechStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -217,6 +232,20 @@ describe('v1beta1.TextToSpeechClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes listVoices with closed client', async () => {
+      const client = new texttospeechModule.v1beta1.TextToSpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.texttospeech.v1beta1.ListVoicesRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listVoices(request), expectedError);
+    });
   });
 
   describe('synthesizeSpeech', () => {
@@ -303,6 +332,20 @@ describe('v1beta1.TextToSpeechClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes synthesizeSpeech with closed client', async () => {
+      const client = new texttospeechModule.v1beta1.TextToSpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.synthesizeSpeech(request), expectedError);
     });
   });
 
