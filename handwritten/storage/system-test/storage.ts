@@ -1903,7 +1903,7 @@ describe('storage', () => {
 
         function doubleTest(testFunction: Function) {
           const failureMessage =
-            'Bucket is requester pays bucket but no user project provided.';
+            'Bucket is a requester pays bucket but no user project provided.';
 
           return (done: Function) => {
             testFunction({}, (err: Error) => {
