@@ -151,12 +151,27 @@ describe('v1beta.ExecutionsClient', () => {
     assert(client.executionsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', (done) => {
     const client = new executionsModule.v1beta.ExecutionsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.executionsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', (done) => {
+    const client = new executionsModule.v1beta.ExecutionsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.executionsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -302,6 +317,22 @@ describe('v1beta.ExecutionsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createExecution with closed client', async () => {
+      const client = new executionsModule.v1beta.ExecutionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.workflows.executions.v1beta.CreateExecutionRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createExecution(request), expectedError);
+    });
   });
 
   describe('getExecution', () => {
@@ -413,6 +444,22 @@ describe('v1beta.ExecutionsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getExecution with closed client', async () => {
+      const client = new executionsModule.v1beta.ExecutionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.workflows.executions.v1beta.GetExecutionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getExecution(request), expectedError);
+    });
   });
 
   describe('cancelExecution', () => {
@@ -523,6 +570,22 @@ describe('v1beta.ExecutionsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes cancelExecution with closed client', async () => {
+      const client = new executionsModule.v1beta.ExecutionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.workflows.executions.v1beta.CancelExecutionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.cancelExecution(request), expectedError);
     });
   });
 

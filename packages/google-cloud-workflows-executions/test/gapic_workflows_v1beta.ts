@@ -183,12 +183,27 @@ describe('v1beta.WorkflowsClient', () => {
     assert(client.workflowsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', (done) => {
     const client = new workflowsModule.v1beta.WorkflowsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.workflowsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', (done) => {
+    const client = new workflowsModule.v1beta.WorkflowsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.workflowsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -333,6 +348,22 @@ describe('v1beta.WorkflowsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getWorkflow with closed client', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.workflows.v1beta.GetWorkflowRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getWorkflow(request), expectedError);
     });
   });
 

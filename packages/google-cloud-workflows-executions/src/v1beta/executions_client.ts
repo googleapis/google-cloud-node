@@ -983,9 +983,8 @@ export class ExecutionsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.executionsStub!.then((stub) => {
+    if (this.executionsStub && !this._terminated) {
+      return this.executionsStub.then((stub) => {
         this._terminated = true;
         stub.close();
       });
