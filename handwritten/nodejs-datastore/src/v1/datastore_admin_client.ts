@@ -1351,9 +1351,8 @@ export class DatastoreAdminClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.datastoreAdminStub!.then(stub => {
+    if (this.datastoreAdminStub && !this._terminated) {
+      return this.datastoreAdminStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
