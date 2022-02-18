@@ -153,12 +153,27 @@ describe('v1.ClusterManagerClient', () => {
     assert(client.clusterManagerStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new clustermanagerModule.v1.ClusterManagerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.clusterManagerStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new clustermanagerModule.v1.ClusterManagerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.clusterManagerStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -307,6 +322,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes listClusters with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.ListClustersRequest()
+      );
+      request.parent = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listClusters(request), expectedError);
+    });
   });
 
   describe('getCluster', () => {
@@ -420,6 +452,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getCluster with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.GetClusterRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getCluster(request), expectedError);
     });
   });
 
@@ -535,6 +584,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createCluster with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.CreateClusterRequest()
+      );
+      request.parent = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createCluster(request), expectedError);
+    });
   });
 
   describe('updateCluster', () => {
@@ -649,6 +715,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateCluster with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.UpdateClusterRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateCluster(request), expectedError);
+    });
   });
 
   describe('updateNodePool', () => {
@@ -762,6 +845,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateNodePool with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.UpdateNodePoolRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateNodePool(request), expectedError);
     });
   });
 
@@ -881,6 +981,26 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setNodePoolAutoscaling with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.SetNodePoolAutoscalingRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.setNodePoolAutoscaling(request),
+        expectedError
+      );
+    });
   });
 
   describe('setLoggingService', () => {
@@ -994,6 +1114,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setLoggingService with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.SetLoggingServiceRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setLoggingService(request), expectedError);
     });
   });
 
@@ -1110,6 +1247,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setMonitoringService with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.SetMonitoringServiceRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setMonitoringService(request), expectedError);
+    });
   });
 
   describe('setAddonsConfig', () => {
@@ -1223,6 +1377,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setAddonsConfig with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.SetAddonsConfigRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setAddonsConfig(request), expectedError);
     });
   });
 
@@ -1344,6 +1515,25 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setLocations with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const stub = sinon.stub(client, 'warn');
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.SetLocationsRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setLocations(request), expectedError);
+      assert(stub.calledOnce);
+    });
   });
 
   describe('updateMaster', () => {
@@ -1457,6 +1647,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateMaster with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.UpdateMasterRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateMaster(request), expectedError);
     });
   });
 
@@ -1572,6 +1779,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setMasterAuth with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.SetMasterAuthRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setMasterAuth(request), expectedError);
+    });
   });
 
   describe('deleteCluster', () => {
@@ -1685,6 +1909,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteCluster with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.DeleteClusterRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteCluster(request), expectedError);
     });
   });
 
@@ -1800,6 +2041,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes listOperations with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.ListOperationsRequest()
+      );
+      request.parent = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listOperations(request), expectedError);
+    });
   });
 
   describe('getOperation', () => {
@@ -1913,6 +2171,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getOperation with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.GetOperationRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getOperation(request), expectedError);
     });
   });
 
@@ -2028,6 +2303,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes cancelOperation with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.CancelOperationRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.cancelOperation(request), expectedError);
+    });
   });
 
   describe('getServerConfig', () => {
@@ -2142,6 +2434,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getServerConfig with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.GetServerConfigRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getServerConfig(request), expectedError);
+    });
   });
 
   describe('getJSONWebKeys', () => {
@@ -2252,6 +2561,22 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getJSONWebKeys with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.GetJSONWebKeysRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getJSONWebKeys(request), expectedError);
     });
   });
 
@@ -2367,6 +2692,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes listNodePools with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.ListNodePoolsRequest()
+      );
+      request.parent = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listNodePools(request), expectedError);
+    });
   });
 
   describe('getNodePool', () => {
@@ -2480,6 +2822,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getNodePool with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.GetNodePoolRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getNodePool(request), expectedError);
     });
   });
 
@@ -2595,6 +2954,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createNodePool with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.CreateNodePoolRequest()
+      );
+      request.parent = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'parent=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createNodePool(request), expectedError);
+    });
   });
 
   describe('deleteNodePool', () => {
@@ -2708,6 +3084,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteNodePool with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.DeleteNodePoolRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteNodePool(request), expectedError);
     });
   });
 
@@ -2825,6 +3218,26 @@ describe('v1.ClusterManagerClient', () => {
         (client.innerApiCalls.rollbackNodePoolUpgrade as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes rollbackNodePoolUpgrade with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.rollbackNodePoolUpgrade(request),
+        expectedError
       );
     });
   });
@@ -2945,6 +3358,26 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setNodePoolManagement with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.SetNodePoolManagementRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.setNodePoolManagement(request),
+        expectedError
+      );
+    });
   });
 
   describe('setLabels', () => {
@@ -3055,6 +3488,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setLabels with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.SetLabelsRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setLabels(request), expectedError);
     });
   });
 
@@ -3170,6 +3620,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setLegacyAbac with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.SetLegacyAbacRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setLegacyAbac(request), expectedError);
+    });
   });
 
   describe('startIPRotation', () => {
@@ -3283,6 +3750,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes startIPRotation with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.StartIPRotationRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.startIPRotation(request), expectedError);
     });
   });
 
@@ -3399,6 +3883,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes completeIPRotation with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.CompleteIPRotationRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.completeIPRotation(request), expectedError);
+    });
   });
 
   describe('setNodePoolSize', () => {
@@ -3512,6 +4013,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setNodePoolSize with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.SetNodePoolSizeRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setNodePoolSize(request), expectedError);
     });
   });
 
@@ -3627,6 +4145,23 @@ describe('v1.ClusterManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setNetworkPolicy with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.SetNetworkPolicyRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setNetworkPolicy(request), expectedError);
+    });
   });
 
   describe('setMaintenancePolicy', () => {
@@ -3741,6 +4276,23 @@ describe('v1.ClusterManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setMaintenancePolicy with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.SetMaintenancePolicyRequest()
+      );
+      request.name = '';
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'name=&project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setMaintenancePolicy(request), expectedError);
     });
   });
 
