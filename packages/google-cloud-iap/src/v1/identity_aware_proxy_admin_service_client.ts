@@ -748,9 +748,8 @@ export class IdentityAwareProxyAdminServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.identityAwareProxyAdminServiceStub!.then(stub => {
+    if (this.identityAwareProxyAdminServiceStub && !this._terminated) {
+      return this.identityAwareProxyAdminServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -101,7 +101,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
     assert(client.identityAwareProxyAdminServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
         {
@@ -109,7 +109,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
           projectId: 'bogus',
         }
       );
-    client.close();
+    client.initialize();
+    assert(client.identityAwareProxyAdminServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+    assert.strictEqual(client.identityAwareProxyAdminServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -270,6 +288,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
+    });
   });
 
   describe('getIamPolicy', () => {
@@ -389,6 +426,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
 
@@ -511,6 +567,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
+    });
   });
 
   describe('getIapSettings', () => {
@@ -630,6 +705,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getIapSettings with closed client', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.GetIapSettingsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIapSettings(request), expectedError);
     });
   });
 
@@ -753,6 +847,26 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateIapSettings with closed client', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.UpdateIapSettingsRequest()
+      );
+      request.iapSettings = {};
+      request.iapSettings.name = '';
+      const expectedHeaderRequestParams = 'iap_settings.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateIapSettings(request), expectedError);
     });
   });
 });
