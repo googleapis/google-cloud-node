@@ -189,13 +189,29 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     assert(client.dataLabelingServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.dataLabelingServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.dataLabelingServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -346,6 +362,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createDataset with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createDataset(request), expectedError);
+    });
   });
 
   describe('getDataset', () => {
@@ -459,6 +492,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getDataset with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDataset(request), expectedError);
     });
   });
 
@@ -574,6 +624,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteDataset with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteDataset(request), expectedError);
+    });
   });
 
   describe('getDataItem', () => {
@@ -687,6 +754,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getDataItem with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDataItem(request), expectedError);
     });
   });
 
@@ -802,6 +886,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getAnnotatedDataset with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAnnotatedDataset(request), expectedError);
     });
   });
 
@@ -921,6 +1022,26 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteAnnotatedDataset with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteAnnotatedDataset(request),
+        expectedError
+      );
+    });
   });
 
   describe('getExample', () => {
@@ -1034,6 +1155,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getExample with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getExample(request), expectedError);
     });
   });
 
@@ -1153,6 +1291,26 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createAnnotationSpecSet with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createAnnotationSpecSet(request),
+        expectedError
+      );
+    });
   });
 
   describe('getAnnotationSpecSet', () => {
@@ -1267,6 +1425,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getAnnotationSpecSet with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAnnotationSpecSet(request), expectedError);
     });
   });
 
@@ -1386,6 +1561,26 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteAnnotationSpecSet with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteAnnotationSpecSet(request),
+        expectedError
+      );
+    });
   });
 
   describe('getInstruction', () => {
@@ -1499,6 +1694,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getInstruction with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getInstruction(request), expectedError);
     });
   });
 
@@ -1614,6 +1826,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteInstruction with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteInstruction(request), expectedError);
+    });
   });
 
   describe('getEvaluation', () => {
@@ -1727,6 +1956,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getEvaluation with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEvaluation(request), expectedError);
     });
   });
 
@@ -1842,6 +2088,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createEvaluationJob with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createEvaluationJob(request), expectedError);
     });
   });
 
@@ -1961,6 +2224,24 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateEvaluationJob with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
+      );
+      request.evaluationJob = {};
+      request.evaluationJob.name = '';
+      const expectedHeaderRequestParams = 'evaluation_job.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateEvaluationJob(request), expectedError);
+    });
   });
 
   describe('getEvaluationJob', () => {
@@ -2074,6 +2355,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getEvaluationJob with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEvaluationJob(request), expectedError);
     });
   });
 
@@ -2190,6 +2488,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes pauseEvaluationJob with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.pauseEvaluationJob(request), expectedError);
+    });
   });
 
   describe('resumeEvaluationJob', () => {
@@ -2305,6 +2620,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes resumeEvaluationJob with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.resumeEvaluationJob(request), expectedError);
+    });
   });
 
   describe('deleteEvaluationJob', () => {
@@ -2419,6 +2751,23 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteEvaluationJob with closed client', async () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteEvaluationJob(request), expectedError);
     });
   });
 
