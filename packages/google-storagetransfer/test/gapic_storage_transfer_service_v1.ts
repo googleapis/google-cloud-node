@@ -189,13 +189,29 @@ describe('v1.StorageTransferServiceClient', () => {
     assert(client.storageTransferServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new storagetransferserviceModule.v1.StorageTransferServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.storageTransferServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new storagetransferserviceModule.v1.StorageTransferServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.storageTransferServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -350,6 +366,26 @@ describe('v1.StorageTransferServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getGoogleServiceAccount with closed client', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.GetGoogleServiceAccountRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getGoogleServiceAccount(request),
+        expectedError
+      );
+    });
   });
 
   describe('createTransferJob', () => {
@@ -439,6 +475,21 @@ describe('v1.StorageTransferServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createTransferJob with closed client', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.CreateTransferJobRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createTransferJob(request), expectedError);
     });
   });
 
@@ -554,6 +605,23 @@ describe('v1.StorageTransferServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTransferJob with closed client', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.UpdateTransferJobRequest()
+      );
+      request.jobName = '';
+      const expectedHeaderRequestParams = 'job_name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateTransferJob(request), expectedError);
+    });
   });
 
   describe('getTransferJob', () => {
@@ -667,6 +735,23 @@ describe('v1.StorageTransferServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getTransferJob with closed client', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.GetTransferJobRequest()
+      );
+      request.jobName = '';
+      const expectedHeaderRequestParams = 'job_name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTransferJob(request), expectedError);
     });
   });
 
@@ -786,6 +871,26 @@ describe('v1.StorageTransferServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes pauseTransferOperation with closed client', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.PauseTransferOperationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.pauseTransferOperation(request),
+        expectedError
+      );
+    });
   });
 
   describe('resumeTransferOperation', () => {
@@ -902,6 +1007,26 @@ describe('v1.StorageTransferServiceClient', () => {
         (client.innerApiCalls.resumeTransferOperation as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes resumeTransferOperation with closed client', async () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storagetransfer.v1.ResumeTransferOperationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.resumeTransferOperation(request),
+        expectedError
       );
     });
   });

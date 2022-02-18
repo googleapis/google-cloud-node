@@ -1,0 +1,363 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-storagetransfer",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.storagetransfer.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "storagetransfer_v1_generated_StorageTransferService_GetGoogleServiceAccount_async",
+      "title": "StorageTransferService getGoogleServiceAccount Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the Google service account that is used by Storage Transfer Service to access buckets in the project where transfers run or in other projects. Each Google service account is associated with one Google Cloud Platform Console project. Users should add this service account to the Google Cloud Storage bucket ACLs to grant access to Storage Transfer Service. This service account is created and owned by Storage Transfer Service and can only be used by Storage Transfer Service.",
+      "canonical": true,
+      "file": "storage_transfer_service.get_google_service_account.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGoogleServiceAccount",
+        "fullName": "google.storagetransfer.v1.StorageTransferService.GetGoogleServiceAccount",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.storagetransfer.v1.GoogleServiceAccount",
+        "client": {
+          "shortName": "StorageTransferServiceClient",
+          "fullName": "google.storagetransfer.v1.StorageTransferServiceClient"
+        },
+        "method": {
+          "shortName": "GetGoogleServiceAccount",
+          "fullName": "google.storagetransfer.v1.StorageTransferService.GetGoogleServiceAccount",
+          "service": {
+            "shortName": "StorageTransferService",
+            "fullName": "google.storagetransfer.v1.StorageTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "storagetransfer_v1_generated_StorageTransferService_CreateTransferJob_async",
+      "title": "StorageTransferService createTransferJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a transfer job that runs periodically.",
+      "canonical": true,
+      "file": "storage_transfer_service.create_transfer_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 50,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTransferJob",
+        "fullName": "google.storagetransfer.v1.StorageTransferService.CreateTransferJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "transfer_job",
+            "type": ".google.storagetransfer.v1.TransferJob"
+          }
+        ],
+        "resultType": ".google.storagetransfer.v1.TransferJob",
+        "client": {
+          "shortName": "StorageTransferServiceClient",
+          "fullName": "google.storagetransfer.v1.StorageTransferServiceClient"
+        },
+        "method": {
+          "shortName": "CreateTransferJob",
+          "fullName": "google.storagetransfer.v1.StorageTransferService.CreateTransferJob",
+          "service": {
+            "shortName": "StorageTransferService",
+            "fullName": "google.storagetransfer.v1.StorageTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "storagetransfer_v1_generated_StorageTransferService_UpdateTransferJob_async",
+      "title": "StorageTransferService updateTransferJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a transfer job. Updating a job's transfer spec does not affect transfer operations that are running already. **Note:** The job's [status][google.storagetransfer.v1.TransferJob.status] field can be modified using this RPC (for example, to set a job's status to [DELETED][google.storagetransfer.v1.TransferJob.Status.DELETED], [DISABLED][google.storagetransfer.v1.TransferJob.Status.DISABLED], or [ENABLED][google.storagetransfer.v1.TransferJob.Status.ENABLED]).",
+      "canonical": true,
+      "file": "storage_transfer_service.update_transfer_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTransferJob",
+        "fullName": "google.storagetransfer.v1.StorageTransferService.UpdateTransferJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "job_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "transfer_job",
+            "type": ".google.storagetransfer.v1.TransferJob"
+          },
+          {
+            "name": "update_transfer_job_field_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.storagetransfer.v1.TransferJob",
+        "client": {
+          "shortName": "StorageTransferServiceClient",
+          "fullName": "google.storagetransfer.v1.StorageTransferServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateTransferJob",
+          "fullName": "google.storagetransfer.v1.StorageTransferService.UpdateTransferJob",
+          "service": {
+            "shortName": "StorageTransferService",
+            "fullName": "google.storagetransfer.v1.StorageTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "storagetransfer_v1_generated_StorageTransferService_GetTransferJob_async",
+      "title": "StorageTransferService getTransferJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a transfer job.",
+      "canonical": true,
+      "file": "storage_transfer_service.get_transfer_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTransferJob",
+        "fullName": "google.storagetransfer.v1.StorageTransferService.GetTransferJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "job_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.storagetransfer.v1.TransferJob",
+        "client": {
+          "shortName": "StorageTransferServiceClient",
+          "fullName": "google.storagetransfer.v1.StorageTransferServiceClient"
+        },
+        "method": {
+          "shortName": "GetTransferJob",
+          "fullName": "google.storagetransfer.v1.StorageTransferService.GetTransferJob",
+          "service": {
+            "shortName": "StorageTransferService",
+            "fullName": "google.storagetransfer.v1.StorageTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "storagetransfer_v1_generated_StorageTransferService_ListTransferJobs_async",
+      "title": "StorageTransferService listTransferJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists transfer jobs.",
+      "canonical": true,
+      "file": "storage_transfer_service.list_transfer_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTransferJobs",
+        "fullName": "google.storagetransfer.v1.StorageTransferService.ListTransferJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.storagetransfer.v1.ListTransferJobsResponse",
+        "client": {
+          "shortName": "StorageTransferServiceClient",
+          "fullName": "google.storagetransfer.v1.StorageTransferServiceClient"
+        },
+        "method": {
+          "shortName": "ListTransferJobs",
+          "fullName": "google.storagetransfer.v1.StorageTransferService.ListTransferJobs",
+          "service": {
+            "shortName": "StorageTransferService",
+            "fullName": "google.storagetransfer.v1.StorageTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "storagetransfer_v1_generated_StorageTransferService_PauseTransferOperation_async",
+      "title": "StorageTransferService pauseTransferOperation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Pauses a transfer operation.",
+      "canonical": true,
+      "file": "storage_transfer_service.pause_transfer_operation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 50,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PauseTransferOperation",
+        "fullName": "google.storagetransfer.v1.StorageTransferService.PauseTransferOperation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "StorageTransferServiceClient",
+          "fullName": "google.storagetransfer.v1.StorageTransferServiceClient"
+        },
+        "method": {
+          "shortName": "PauseTransferOperation",
+          "fullName": "google.storagetransfer.v1.StorageTransferService.PauseTransferOperation",
+          "service": {
+            "shortName": "StorageTransferService",
+            "fullName": "google.storagetransfer.v1.StorageTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "storagetransfer_v1_generated_StorageTransferService_ResumeTransferOperation_async",
+      "title": "StorageTransferService resumeTransferOperation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Resumes a transfer operation that is paused.",
+      "canonical": true,
+      "file": "storage_transfer_service.resume_transfer_operation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 50,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResumeTransferOperation",
+        "fullName": "google.storagetransfer.v1.StorageTransferService.ResumeTransferOperation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "StorageTransferServiceClient",
+          "fullName": "google.storagetransfer.v1.StorageTransferServiceClient"
+        },
+        "method": {
+          "shortName": "ResumeTransferOperation",
+          "fullName": "google.storagetransfer.v1.StorageTransferService.ResumeTransferOperation",
+          "service": {
+            "shortName": "StorageTransferService",
+            "fullName": "google.storagetransfer.v1.StorageTransferService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "storagetransfer_v1_generated_StorageTransferService_RunTransferJob_async",
+      "title": "StorageTransferService runTransferJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Attempts to start a new TransferOperation for the current TransferJob. A TransferJob has a maximum of one active TransferOperation. If this method is called while a TransferOperation is active, an error wil be returned.",
+      "canonical": true,
+      "file": "storage_transfer_service.run_transfer_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunTransferJob",
+        "fullName": "google.storagetransfer.v1.StorageTransferService.RunTransferJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "job_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StorageTransferServiceClient",
+          "fullName": "google.storagetransfer.v1.StorageTransferServiceClient"
+        },
+        "method": {
+          "shortName": "RunTransferJob",
+          "fullName": "google.storagetransfer.v1.StorageTransferService.RunTransferJob",
+          "service": {
+            "shortName": "StorageTransferService",
+            "fullName": "google.storagetransfer.v1.StorageTransferService"
+          }
+        }
+      }
+    }
+  ]
+}

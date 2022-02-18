@@ -1324,9 +1324,8 @@ export class StorageTransferServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.storageTransferServiceStub!.then(stub => {
+    if (this.storageTransferServiceStub && !this._terminated) {
+      return this.storageTransferServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
