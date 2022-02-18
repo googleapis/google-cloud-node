@@ -202,7 +202,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
     assert(client.certificateAuthorityServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new certificateauthorityserviceModule.v1.CertificateAuthorityServiceClient(
         {
@@ -210,7 +210,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           projectId: 'bogus',
         }
       );
-    client.close();
+    client.initialize();
+    assert(client.certificateAuthorityServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new certificateauthorityserviceModule.v1.CertificateAuthorityServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+    assert.strictEqual(client.certificateAuthorityServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -371,6 +389,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createCertificate with closed client', async () => {
+      const client =
+        new certificateauthorityserviceModule.v1.CertificateAuthorityServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.security.privateca.v1.CreateCertificateRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createCertificate(request), expectedError);
+    });
   });
 
   describe('getCertificate', () => {
@@ -491,6 +528,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getCertificate with closed client', async () => {
+      const client =
+        new certificateauthorityserviceModule.v1.CertificateAuthorityServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.security.privateca.v1.GetCertificateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getCertificate(request), expectedError);
+    });
   });
 
   describe('revokeCertificate', () => {
@@ -610,6 +666,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes revokeCertificate with closed client', async () => {
+      const client =
+        new certificateauthorityserviceModule.v1.CertificateAuthorityServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.security.privateca.v1.RevokeCertificateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.revokeCertificate(request), expectedError);
     });
   });
 
@@ -734,6 +809,26 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateCertificate with closed client', async () => {
+      const client =
+        new certificateauthorityserviceModule.v1.CertificateAuthorityServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.security.privateca.v1.UpdateCertificateRequest()
+      );
+      request.certificate = {};
+      request.certificate.name = '';
+      const expectedHeaderRequestParams = 'certificate.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateCertificate(request), expectedError);
+    });
   });
 
   describe('fetchCertificateAuthorityCsr', () => {
@@ -856,6 +951,28 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         (client.innerApiCalls.fetchCertificateAuthorityCsr as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes fetchCertificateAuthorityCsr with closed client', async () => {
+      const client =
+        new certificateauthorityserviceModule.v1.CertificateAuthorityServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.fetchCertificateAuthorityCsr(request),
+        expectedError
       );
     });
   });
@@ -982,6 +1099,28 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getCertificateAuthority with closed client', async () => {
+      const client =
+        new certificateauthorityserviceModule.v1.CertificateAuthorityServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getCertificateAuthority(request),
+        expectedError
+      );
+    });
   });
 
   describe('getCaPool', () => {
@@ -1098,6 +1237,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getCaPool with closed client', async () => {
+      const client =
+        new certificateauthorityserviceModule.v1.CertificateAuthorityServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.security.privateca.v1.GetCaPoolRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getCaPool(request), expectedError);
     });
   });
 
@@ -1218,6 +1376,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes fetchCaCerts with closed client', async () => {
+      const client =
+        new certificateauthorityserviceModule.v1.CertificateAuthorityServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.security.privateca.v1.FetchCaCertsRequest()
+      );
+      request.caPool = '';
+      const expectedHeaderRequestParams = 'ca_pool=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.fetchCaCerts(request), expectedError);
     });
   });
 
@@ -1343,6 +1520,28 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getCertificateRevocationList with closed client', async () => {
+      const client =
+        new certificateauthorityserviceModule.v1.CertificateAuthorityServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getCertificateRevocationList(request),
+        expectedError
+      );
+    });
   });
 
   describe('getCertificateTemplate', () => {
@@ -1465,6 +1664,28 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         (client.innerApiCalls.getCertificateTemplate as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getCertificateTemplate with closed client', async () => {
+      const client =
+        new certificateauthorityserviceModule.v1.CertificateAuthorityServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.security.privateca.v1.GetCertificateTemplateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getCertificateTemplate(request),
+        expectedError
       );
     });
   });
