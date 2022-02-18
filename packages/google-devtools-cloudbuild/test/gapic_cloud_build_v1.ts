@@ -183,12 +183,27 @@ describe('v1.CloudBuildClient', () => {
     assert(client.cloudBuildStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new cloudbuildModule.v1.CloudBuildClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.cloudBuildStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new cloudbuildModule.v1.CloudBuildClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.cloudBuildStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -334,6 +349,23 @@ describe('v1.CloudBuildClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getBuild with closed client', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
+      );
+      request.projectId = '';
+      request.name = '';
+      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBuild(request), expectedError);
+    });
   });
 
   describe('cancelBuild', () => {
@@ -447,6 +479,23 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes cancelBuild with closed client', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
+      );
+      request.projectId = '';
+      request.name = '';
+      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.cancelBuild(request), expectedError);
     });
   });
 
@@ -563,6 +612,23 @@ describe('v1.CloudBuildClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createBuildTrigger with closed client', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
+      );
+      request.projectId = '';
+      request.parent = '';
+      const expectedHeaderRequestParams = 'project_id=&parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createBuildTrigger(request), expectedError);
+    });
   });
 
   describe('getBuildTrigger', () => {
@@ -676,6 +742,23 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getBuildTrigger with closed client', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
+      );
+      request.projectId = '';
+      request.name = '';
+      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBuildTrigger(request), expectedError);
     });
   });
 
@@ -791,6 +874,23 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteBuildTrigger with closed client', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
+      );
+      request.projectId = '';
+      request.name = '';
+      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteBuildTrigger(request), expectedError);
     });
   });
 
@@ -910,6 +1010,24 @@ describe('v1.CloudBuildClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateBuildTrigger with closed client', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
+      );
+      request.projectId = '';
+      request.trigger = {};
+      request.trigger.resourceName = '';
+      const expectedHeaderRequestParams = 'project_id=&trigger.resource_name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateBuildTrigger(request), expectedError);
+    });
   });
 
   describe('receiveTriggerWebhook', () => {
@@ -1028,6 +1146,26 @@ describe('v1.CloudBuildClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes receiveTriggerWebhook with closed client', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
+      );
+      request.projectId = '';
+      request.name = '';
+      const expectedHeaderRequestParams = 'project_id=&name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.receiveTriggerWebhook(request),
+        expectedError
+      );
+    });
   });
 
   describe('getWorkerPool', () => {
@@ -1138,6 +1276,22 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getWorkerPool with closed client', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getWorkerPool(request), expectedError);
     });
   });
 

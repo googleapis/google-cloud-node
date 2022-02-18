@@ -3522,9 +3522,8 @@ export class CloudBuildClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.cloudBuildStub!.then(stub => {
+    if (this.cloudBuildStub && !this._terminated) {
+      return this.cloudBuildStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
