@@ -1,0 +1,1635 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-talent",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.talent.v4beta1",
+        "version": "v4beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "jobs_v4beta1_generated_ApplicationService_CreateApplication_async",
+      "title": "talent createApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new application entity.",
+      "canonical": true,
+      "file": "application_service.create_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateApplication",
+        "fullName": "google.cloud.talent.v4beta1.ApplicationService.CreateApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "application",
+            "type": ".google.cloud.talent.v4beta1.Application"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Application",
+        "client": {
+          "shortName": "ApplicationServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.ApplicationServiceClient"
+        },
+        "method": {
+          "shortName": "CreateApplication",
+          "fullName": "google.cloud.talent.v4beta1.ApplicationService.CreateApplication",
+          "service": {
+            "shortName": "ApplicationService",
+            "fullName": "google.cloud.talent.v4beta1.ApplicationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_ApplicationService_GetApplication_async",
+      "title": "talent getApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves specified application.",
+      "canonical": true,
+      "file": "application_service.get_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetApplication",
+        "fullName": "google.cloud.talent.v4beta1.ApplicationService.GetApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Application",
+        "client": {
+          "shortName": "ApplicationServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.ApplicationServiceClient"
+        },
+        "method": {
+          "shortName": "GetApplication",
+          "fullName": "google.cloud.talent.v4beta1.ApplicationService.GetApplication",
+          "service": {
+            "shortName": "ApplicationService",
+            "fullName": "google.cloud.talent.v4beta1.ApplicationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_ApplicationService_UpdateApplication_async",
+      "title": "talent updateApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates specified application.",
+      "canonical": true,
+      "file": "application_service.update_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateApplication",
+        "fullName": "google.cloud.talent.v4beta1.ApplicationService.UpdateApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "application",
+            "type": ".google.cloud.talent.v4beta1.Application"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Application",
+        "client": {
+          "shortName": "ApplicationServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.ApplicationServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateApplication",
+          "fullName": "google.cloud.talent.v4beta1.ApplicationService.UpdateApplication",
+          "service": {
+            "shortName": "ApplicationService",
+            "fullName": "google.cloud.talent.v4beta1.ApplicationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_ApplicationService_DeleteApplication_async",
+      "title": "talent deleteApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes specified application.",
+      "canonical": true,
+      "file": "application_service.delete_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteApplication",
+        "fullName": "google.cloud.talent.v4beta1.ApplicationService.DeleteApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ApplicationServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.ApplicationServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteApplication",
+          "fullName": "google.cloud.talent.v4beta1.ApplicationService.DeleteApplication",
+          "service": {
+            "shortName": "ApplicationService",
+            "fullName": "google.cloud.talent.v4beta1.ApplicationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_ApplicationService_ListApplications_async",
+      "title": "talent listApplications Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all applications associated with the profile.",
+      "canonical": true,
+      "file": "application_service.list_applications.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListApplications",
+        "fullName": "google.cloud.talent.v4beta1.ApplicationService.ListApplications",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.ListApplicationsResponse",
+        "client": {
+          "shortName": "ApplicationServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.ApplicationServiceClient"
+        },
+        "method": {
+          "shortName": "ListApplications",
+          "fullName": "google.cloud.talent.v4beta1.ApplicationService.ListApplications",
+          "service": {
+            "shortName": "ApplicationService",
+            "fullName": "google.cloud.talent.v4beta1.ApplicationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_CompanyService_CreateCompany_async",
+      "title": "talent createCompany Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new company entity.",
+      "canonical": true,
+      "file": "company_service.create_company.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCompany",
+        "fullName": "google.cloud.talent.v4beta1.CompanyService.CreateCompany",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "company",
+            "type": ".google.cloud.talent.v4beta1.Company"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Company",
+        "client": {
+          "shortName": "CompanyServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.CompanyServiceClient"
+        },
+        "method": {
+          "shortName": "CreateCompany",
+          "fullName": "google.cloud.talent.v4beta1.CompanyService.CreateCompany",
+          "service": {
+            "shortName": "CompanyService",
+            "fullName": "google.cloud.talent.v4beta1.CompanyService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_CompanyService_GetCompany_async",
+      "title": "talent getCompany Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves specified company.",
+      "canonical": true,
+      "file": "company_service.get_company.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCompany",
+        "fullName": "google.cloud.talent.v4beta1.CompanyService.GetCompany",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Company",
+        "client": {
+          "shortName": "CompanyServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.CompanyServiceClient"
+        },
+        "method": {
+          "shortName": "GetCompany",
+          "fullName": "google.cloud.talent.v4beta1.CompanyService.GetCompany",
+          "service": {
+            "shortName": "CompanyService",
+            "fullName": "google.cloud.talent.v4beta1.CompanyService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_CompanyService_UpdateCompany_async",
+      "title": "talent updateCompany Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates specified company.",
+      "canonical": true,
+      "file": "company_service.update_company.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCompany",
+        "fullName": "google.cloud.talent.v4beta1.CompanyService.UpdateCompany",
+        "async": true,
+        "parameters": [
+          {
+            "name": "company",
+            "type": ".google.cloud.talent.v4beta1.Company"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Company",
+        "client": {
+          "shortName": "CompanyServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.CompanyServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateCompany",
+          "fullName": "google.cloud.talent.v4beta1.CompanyService.UpdateCompany",
+          "service": {
+            "shortName": "CompanyService",
+            "fullName": "google.cloud.talent.v4beta1.CompanyService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_CompanyService_DeleteCompany_async",
+      "title": "talent deleteCompany Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes specified company. Prerequisite: The company has no jobs associated with it.",
+      "canonical": true,
+      "file": "company_service.delete_company.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCompany",
+        "fullName": "google.cloud.talent.v4beta1.CompanyService.DeleteCompany",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "CompanyServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.CompanyServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteCompany",
+          "fullName": "google.cloud.talent.v4beta1.CompanyService.DeleteCompany",
+          "service": {
+            "shortName": "CompanyService",
+            "fullName": "google.cloud.talent.v4beta1.CompanyService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_CompanyService_ListCompanies_async",
+      "title": "talent listCompanies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all companies associated with the project.",
+      "canonical": true,
+      "file": "company_service.list_companies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCompanies",
+        "fullName": "google.cloud.talent.v4beta1.CompanyService.ListCompanies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "require_open_jobs",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.ListCompaniesResponse",
+        "client": {
+          "shortName": "CompanyServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.CompanyServiceClient"
+        },
+        "method": {
+          "shortName": "ListCompanies",
+          "fullName": "google.cloud.talent.v4beta1.CompanyService.ListCompanies",
+          "service": {
+            "shortName": "CompanyService",
+            "fullName": "google.cloud.talent.v4beta1.CompanyService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_Completion_CompleteQuery_async",
+      "title": "talent completeQuery Sample",
+      "origin": "API_DEFINITION",
+      "description": " Completes the specified prefix with keyword suggestions. Intended for use by a job search auto-complete search box.",
+      "canonical": true,
+      "file": "completion.complete_query.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 91,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CompleteQuery",
+        "fullName": "google.cloud.talent.v4beta1.Completion.CompleteQuery",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_codes",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "company",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "scope",
+            "type": ".google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionScope"
+          },
+          {
+            "name": "type",
+            "type": ".google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionType"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.CompleteQueryResponse",
+        "client": {
+          "shortName": "CompletionClient",
+          "fullName": "google.cloud.talent.v4beta1.CompletionClient"
+        },
+        "method": {
+          "shortName": "CompleteQuery",
+          "fullName": "google.cloud.talent.v4beta1.Completion.CompleteQuery",
+          "service": {
+            "shortName": "Completion",
+            "fullName": "google.cloud.talent.v4beta1.Completion"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_EventService_CreateClientEvent_async",
+      "title": "talent createClientEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Report events issued when end user interacts with customer's application that uses Cloud Talent Solution. You may inspect the created events in [self service tools](https://console.cloud.google.com/talent-solution/overview). [Learn more](https://cloud.google.com/talent-solution/docs/management-tools) about self service tools.",
+      "canonical": true,
+      "file": "event_service.create_client_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateClientEvent",
+        "fullName": "google.cloud.talent.v4beta1.EventService.CreateClientEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "client_event",
+            "type": ".google.cloud.talent.v4beta1.ClientEvent"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.ClientEvent",
+        "client": {
+          "shortName": "EventServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.EventServiceClient"
+        },
+        "method": {
+          "shortName": "CreateClientEvent",
+          "fullName": "google.cloud.talent.v4beta1.EventService.CreateClientEvent",
+          "service": {
+            "shortName": "EventService",
+            "fullName": "google.cloud.talent.v4beta1.EventService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_JobService_CreateJob_async",
+      "title": "talent createJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new job. Typically, the job becomes searchable within 10 seconds, but it may take up to 5 minutes.",
+      "canonical": true,
+      "file": "job_service.create_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateJob",
+        "fullName": "google.cloud.talent.v4beta1.JobService.CreateJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job",
+            "type": ".google.cloud.talent.v4beta1.Job"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Job",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.JobServiceClient"
+        },
+        "method": {
+          "shortName": "CreateJob",
+          "fullName": "google.cloud.talent.v4beta1.JobService.CreateJob",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.talent.v4beta1.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_JobService_BatchCreateJobs_async",
+      "title": "talent batchCreateJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Begins executing a batch create jobs operation.",
+      "canonical": true,
+      "file": "job_service.batch_create_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchCreateJobs",
+        "fullName": "google.cloud.talent.v4beta1.JobService.BatchCreateJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "jobs",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.JobServiceClient"
+        },
+        "method": {
+          "shortName": "BatchCreateJobs",
+          "fullName": "google.cloud.talent.v4beta1.JobService.BatchCreateJobs",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.talent.v4beta1.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_JobService_GetJob_async",
+      "title": "talent getJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified job, whose status is OPEN or recently EXPIRED within the last 90 days.",
+      "canonical": true,
+      "file": "job_service.get_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetJob",
+        "fullName": "google.cloud.talent.v4beta1.JobService.GetJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Job",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.JobServiceClient"
+        },
+        "method": {
+          "shortName": "GetJob",
+          "fullName": "google.cloud.talent.v4beta1.JobService.GetJob",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.talent.v4beta1.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_JobService_UpdateJob_async",
+      "title": "talent updateJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates specified job. Typically, updated contents become visible in search results within 10 seconds, but it may take up to 5 minutes.",
+      "canonical": true,
+      "file": "job_service.update_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateJob",
+        "fullName": "google.cloud.talent.v4beta1.JobService.UpdateJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "job",
+            "type": ".google.cloud.talent.v4beta1.Job"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Job",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.JobServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateJob",
+          "fullName": "google.cloud.talent.v4beta1.JobService.UpdateJob",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.talent.v4beta1.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_JobService_BatchUpdateJobs_async",
+      "title": "talent batchUpdateJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Begins executing a batch update jobs operation.",
+      "canonical": true,
+      "file": "job_service.batch_update_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchUpdateJobs",
+        "fullName": "google.cloud.talent.v4beta1.JobService.BatchUpdateJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "jobs",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.JobServiceClient"
+        },
+        "method": {
+          "shortName": "BatchUpdateJobs",
+          "fullName": "google.cloud.talent.v4beta1.JobService.BatchUpdateJobs",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.talent.v4beta1.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_JobService_DeleteJob_async",
+      "title": "talent deleteJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified job. Typically, the job becomes unsearchable within 10 seconds, but it may take up to 5 minutes.",
+      "canonical": true,
+      "file": "job_service.delete_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteJob",
+        "fullName": "google.cloud.talent.v4beta1.JobService.DeleteJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.JobServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteJob",
+          "fullName": "google.cloud.talent.v4beta1.JobService.DeleteJob",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.talent.v4beta1.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_JobService_BatchDeleteJobs_async",
+      "title": "talent batchDeleteJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a list of [Job][google.cloud.talent.v4beta1.Job]s by filter.",
+      "canonical": true,
+      "file": "job_service.batch_delete_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchDeleteJobs",
+        "fullName": "google.cloud.talent.v4beta1.JobService.BatchDeleteJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.JobServiceClient"
+        },
+        "method": {
+          "shortName": "BatchDeleteJobs",
+          "fullName": "google.cloud.talent.v4beta1.JobService.BatchDeleteJobs",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.talent.v4beta1.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_JobService_ListJobs_async",
+      "title": "talent listJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists jobs by filter.",
+      "canonical": true,
+      "file": "job_service.list_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 89,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListJobs",
+        "fullName": "google.cloud.talent.v4beta1.JobService.ListJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "job_view",
+            "type": ".google.cloud.talent.v4beta1.JobView"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.ListJobsResponse",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.JobServiceClient"
+        },
+        "method": {
+          "shortName": "ListJobs",
+          "fullName": "google.cloud.talent.v4beta1.JobService.ListJobs",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.talent.v4beta1.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_JobService_SearchJobs_async",
+      "title": "talent searchJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Searches for jobs using the provided [SearchJobsRequest][google.cloud.talent.v4beta1.SearchJobsRequest]. This call constrains the [visibility][google.cloud.talent.v4beta1.Job.visibility] of jobs present in the database, and only returns jobs that the caller has permission to search against.",
+      "canonical": true,
+      "file": "job_service.search_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 282,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchJobs",
+        "fullName": "google.cloud.talent.v4beta1.JobService.SearchJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "search_mode",
+            "type": ".google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode"
+          },
+          {
+            "name": "request_metadata",
+            "type": ".google.cloud.talent.v4beta1.RequestMetadata"
+          },
+          {
+            "name": "job_query",
+            "type": ".google.cloud.talent.v4beta1.JobQuery"
+          },
+          {
+            "name": "enable_broadening",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "require_precise_result_size",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "histogram_queries",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "job_view",
+            "type": ".google.cloud.talent.v4beta1.JobView"
+          },
+          {
+            "name": "offset",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "diversification_level",
+            "type": ".google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel"
+          },
+          {
+            "name": "custom_ranking_info",
+            "type": ".google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo"
+          },
+          {
+            "name": "disable_keyword_match",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.SearchJobsResponse",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.JobServiceClient"
+        },
+        "method": {
+          "shortName": "SearchJobs",
+          "fullName": "google.cloud.talent.v4beta1.JobService.SearchJobs",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.talent.v4beta1.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_JobService_SearchJobsForAlert_async",
+      "title": "talent searchJobsForAlert Sample",
+      "origin": "API_DEFINITION",
+      "description": " Searches for jobs using the provided [SearchJobsRequest][google.cloud.talent.v4beta1.SearchJobsRequest]. This API call is intended for the use case of targeting passive job seekers (for example, job seekers who have signed up to receive email alerts about potential job opportunities), and has different algorithmic adjustments that are targeted to passive job seekers. This call constrains the [visibility][google.cloud.talent.v4beta1.Job.visibility] of jobs present in the database, and only returns jobs the caller has permission to search against.",
+      "canonical": true,
+      "file": "job_service.search_jobs_for_alert.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 282,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchJobsForAlert",
+        "fullName": "google.cloud.talent.v4beta1.JobService.SearchJobsForAlert",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "search_mode",
+            "type": ".google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode"
+          },
+          {
+            "name": "request_metadata",
+            "type": ".google.cloud.talent.v4beta1.RequestMetadata"
+          },
+          {
+            "name": "job_query",
+            "type": ".google.cloud.talent.v4beta1.JobQuery"
+          },
+          {
+            "name": "enable_broadening",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "require_precise_result_size",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "histogram_queries",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "job_view",
+            "type": ".google.cloud.talent.v4beta1.JobView"
+          },
+          {
+            "name": "offset",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "diversification_level",
+            "type": ".google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel"
+          },
+          {
+            "name": "custom_ranking_info",
+            "type": ".google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo"
+          },
+          {
+            "name": "disable_keyword_match",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.SearchJobsResponse",
+        "client": {
+          "shortName": "JobServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.JobServiceClient"
+        },
+        "method": {
+          "shortName": "SearchJobsForAlert",
+          "fullName": "google.cloud.talent.v4beta1.JobService.SearchJobsForAlert",
+          "service": {
+            "shortName": "JobService",
+            "fullName": "google.cloud.talent.v4beta1.JobService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_ProfileService_ListProfiles_async",
+      "title": "talent listProfiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists profiles by filter. The order is unspecified.",
+      "canonical": true,
+      "file": "profile_service.list_profiles.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 86,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListProfiles",
+        "fullName": "google.cloud.talent.v4beta1.ProfileService.ListProfiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "read_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.ListProfilesResponse",
+        "client": {
+          "shortName": "ProfileServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.ProfileServiceClient"
+        },
+        "method": {
+          "shortName": "ListProfiles",
+          "fullName": "google.cloud.talent.v4beta1.ProfileService.ListProfiles",
+          "service": {
+            "shortName": "ProfileService",
+            "fullName": "google.cloud.talent.v4beta1.ProfileService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_ProfileService_CreateProfile_async",
+      "title": "talent createProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates and returns a new profile.",
+      "canonical": true,
+      "file": "profile_service.create_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateProfile",
+        "fullName": "google.cloud.talent.v4beta1.ProfileService.CreateProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "profile",
+            "type": ".google.cloud.talent.v4beta1.Profile"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Profile",
+        "client": {
+          "shortName": "ProfileServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.ProfileServiceClient"
+        },
+        "method": {
+          "shortName": "CreateProfile",
+          "fullName": "google.cloud.talent.v4beta1.ProfileService.CreateProfile",
+          "service": {
+            "shortName": "ProfileService",
+            "fullName": "google.cloud.talent.v4beta1.ProfileService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_ProfileService_GetProfile_async",
+      "title": "talent getProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the specified profile.",
+      "canonical": true,
+      "file": "profile_service.get_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetProfile",
+        "fullName": "google.cloud.talent.v4beta1.ProfileService.GetProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Profile",
+        "client": {
+          "shortName": "ProfileServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.ProfileServiceClient"
+        },
+        "method": {
+          "shortName": "GetProfile",
+          "fullName": "google.cloud.talent.v4beta1.ProfileService.GetProfile",
+          "service": {
+            "shortName": "ProfileService",
+            "fullName": "google.cloud.talent.v4beta1.ProfileService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_ProfileService_UpdateProfile_async",
+      "title": "talent updateProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified profile and returns the updated result.",
+      "canonical": true,
+      "file": "profile_service.update_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateProfile",
+        "fullName": "google.cloud.talent.v4beta1.ProfileService.UpdateProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "profile",
+            "type": ".google.cloud.talent.v4beta1.Profile"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Profile",
+        "client": {
+          "shortName": "ProfileServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.ProfileServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateProfile",
+          "fullName": "google.cloud.talent.v4beta1.ProfileService.UpdateProfile",
+          "service": {
+            "shortName": "ProfileService",
+            "fullName": "google.cloud.talent.v4beta1.ProfileService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_ProfileService_DeleteProfile_async",
+      "title": "talent deleteProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified profile. Prerequisite: The profile has no associated applications or assignments associated.",
+      "canonical": true,
+      "file": "profile_service.delete_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteProfile",
+        "fullName": "google.cloud.talent.v4beta1.ProfileService.DeleteProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ProfileServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.ProfileServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteProfile",
+          "fullName": "google.cloud.talent.v4beta1.ProfileService.DeleteProfile",
+          "service": {
+            "shortName": "ProfileService",
+            "fullName": "google.cloud.talent.v4beta1.ProfileService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_ProfileService_SearchProfiles_async",
+      "title": "talent searchProfiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Searches for profiles within a tenant. For example, search by raw queries \"software engineer in Mountain View\" or search by structured filters (location filter, education filter, etc.). See [SearchProfilesRequest][google.cloud.talent.v4beta1.SearchProfilesRequest] for more information.",
+      "canonical": true,
+      "file": "profile_service.search_profiles.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 219,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchProfiles",
+        "fullName": "google.cloud.talent.v4beta1.ProfileService.SearchProfiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_metadata",
+            "type": ".google.cloud.talent.v4beta1.RequestMetadata"
+          },
+          {
+            "name": "profile_query",
+            "type": ".google.cloud.talent.v4beta1.ProfileQuery"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "offset",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "disable_spell_check",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "case_sensitive_sort",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "histogram_queries",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "result_set_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "strict_keywords_search",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.SearchProfilesResponse",
+        "client": {
+          "shortName": "ProfileServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.ProfileServiceClient"
+        },
+        "method": {
+          "shortName": "SearchProfiles",
+          "fullName": "google.cloud.talent.v4beta1.ProfileService.SearchProfiles",
+          "service": {
+            "shortName": "ProfileService",
+            "fullName": "google.cloud.talent.v4beta1.ProfileService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_TenantService_CreateTenant_async",
+      "title": "talent createTenant Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new tenant entity.",
+      "canonical": true,
+      "file": "tenant_service.create_tenant.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTenant",
+        "fullName": "google.cloud.talent.v4beta1.TenantService.CreateTenant",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tenant",
+            "type": ".google.cloud.talent.v4beta1.Tenant"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Tenant",
+        "client": {
+          "shortName": "TenantServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.TenantServiceClient"
+        },
+        "method": {
+          "shortName": "CreateTenant",
+          "fullName": "google.cloud.talent.v4beta1.TenantService.CreateTenant",
+          "service": {
+            "shortName": "TenantService",
+            "fullName": "google.cloud.talent.v4beta1.TenantService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_TenantService_GetTenant_async",
+      "title": "talent getTenant Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves specified tenant.",
+      "canonical": true,
+      "file": "tenant_service.get_tenant.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTenant",
+        "fullName": "google.cloud.talent.v4beta1.TenantService.GetTenant",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Tenant",
+        "client": {
+          "shortName": "TenantServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.TenantServiceClient"
+        },
+        "method": {
+          "shortName": "GetTenant",
+          "fullName": "google.cloud.talent.v4beta1.TenantService.GetTenant",
+          "service": {
+            "shortName": "TenantService",
+            "fullName": "google.cloud.talent.v4beta1.TenantService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_TenantService_UpdateTenant_async",
+      "title": "talent updateTenant Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates specified tenant.",
+      "canonical": true,
+      "file": "tenant_service.update_tenant.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTenant",
+        "fullName": "google.cloud.talent.v4beta1.TenantService.UpdateTenant",
+        "async": true,
+        "parameters": [
+          {
+            "name": "tenant",
+            "type": ".google.cloud.talent.v4beta1.Tenant"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.Tenant",
+        "client": {
+          "shortName": "TenantServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.TenantServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateTenant",
+          "fullName": "google.cloud.talent.v4beta1.TenantService.UpdateTenant",
+          "service": {
+            "shortName": "TenantService",
+            "fullName": "google.cloud.talent.v4beta1.TenantService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_TenantService_DeleteTenant_async",
+      "title": "talent deleteTenant Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes specified tenant.",
+      "canonical": true,
+      "file": "tenant_service.delete_tenant.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTenant",
+        "fullName": "google.cloud.talent.v4beta1.TenantService.DeleteTenant",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "TenantServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.TenantServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteTenant",
+          "fullName": "google.cloud.talent.v4beta1.TenantService.DeleteTenant",
+          "service": {
+            "shortName": "TenantService",
+            "fullName": "google.cloud.talent.v4beta1.TenantService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "jobs_v4beta1_generated_TenantService_ListTenants_async",
+      "title": "talent listTenants Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all tenants associated with the project.",
+      "canonical": true,
+      "file": "tenant_service.list_tenants.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTenants",
+        "fullName": "google.cloud.talent.v4beta1.TenantService.ListTenants",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.talent.v4beta1.ListTenantsResponse",
+        "client": {
+          "shortName": "TenantServiceClient",
+          "fullName": "google.cloud.talent.v4beta1.TenantServiceClient"
+        },
+        "method": {
+          "shortName": "ListTenants",
+          "fullName": "google.cloud.talent.v4beta1.TenantService.ListTenants",
+          "service": {
+            "shortName": "TenantService",
+            "fullName": "google.cloud.talent.v4beta1.TenantService"
+          }
+        }
+      }
+    }
+  ]
+}

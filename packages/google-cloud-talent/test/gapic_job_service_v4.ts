@@ -183,12 +183,27 @@ describe('v4.JobServiceClient', () => {
     assert(client.jobServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new jobserviceModule.v4.JobServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.jobServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new jobserviceModule.v4.JobServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.jobServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -331,6 +346,22 @@ describe('v4.JobServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createJob with closed client', async () => {
+      const client = new jobserviceModule.v4.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4.CreateJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createJob(request), expectedError);
+    });
   });
 
   describe('getJob', () => {
@@ -438,6 +469,22 @@ describe('v4.JobServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getJob with closed client', async () => {
+      const client = new jobserviceModule.v4.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4.GetJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getJob(request), expectedError);
     });
   });
 
@@ -550,6 +597,23 @@ describe('v4.JobServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateJob with closed client', async () => {
+      const client = new jobserviceModule.v4.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4.UpdateJobRequest()
+      );
+      request.job = {};
+      request.job.name = '';
+      const expectedHeaderRequestParams = 'job.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateJob(request), expectedError);
+    });
   });
 
   describe('deleteJob', () => {
@@ -657,6 +721,22 @@ describe('v4.JobServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteJob with closed client', async () => {
+      const client = new jobserviceModule.v4.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4.DeleteJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteJob(request), expectedError);
     });
   });
 
@@ -769,6 +849,22 @@ describe('v4.JobServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes searchJobs with closed client', async () => {
+      const client = new jobserviceModule.v4.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4.SearchJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.searchJobs(request), expectedError);
+    });
   });
 
   describe('searchJobsForAlert', () => {
@@ -880,6 +976,22 @@ describe('v4.JobServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes searchJobsForAlert with closed client', async () => {
+      const client = new jobserviceModule.v4.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4.SearchJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.searchJobsForAlert(request), expectedError);
     });
   });
 

@@ -153,12 +153,27 @@ describe('v4.CompanyServiceClient', () => {
     assert(client.companyServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new companyserviceModule.v4.CompanyServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.companyServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new companyserviceModule.v4.CompanyServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.companyServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -304,6 +319,22 @@ describe('v4.CompanyServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createCompany with closed client', async () => {
+      const client = new companyserviceModule.v4.CompanyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4.CreateCompanyRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createCompany(request), expectedError);
+    });
   });
 
   describe('getCompany', () => {
@@ -414,6 +445,22 @@ describe('v4.CompanyServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getCompany with closed client', async () => {
+      const client = new companyserviceModule.v4.CompanyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4.GetCompanyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getCompany(request), expectedError);
     });
   });
 
@@ -529,6 +576,23 @@ describe('v4.CompanyServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateCompany with closed client', async () => {
+      const client = new companyserviceModule.v4.CompanyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4.UpdateCompanyRequest()
+      );
+      request.company = {};
+      request.company.name = '';
+      const expectedHeaderRequestParams = 'company.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateCompany(request), expectedError);
+    });
   });
 
   describe('deleteCompany', () => {
@@ -639,6 +703,22 @@ describe('v4.CompanyServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteCompany with closed client', async () => {
+      const client = new companyserviceModule.v4.CompanyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4.DeleteCompanyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteCompany(request), expectedError);
     });
   });
 

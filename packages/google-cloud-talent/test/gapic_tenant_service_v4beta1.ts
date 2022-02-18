@@ -153,12 +153,27 @@ describe('v4beta1.TenantServiceClient', () => {
     assert(client.tenantServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new tenantserviceModule.v4beta1.TenantServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.tenantServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new tenantserviceModule.v4beta1.TenantServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.tenantServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -304,6 +319,22 @@ describe('v4beta1.TenantServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createTenant with closed client', async () => {
+      const client = new tenantserviceModule.v4beta1.TenantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.CreateTenantRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createTenant(request), expectedError);
+    });
   });
 
   describe('getTenant', () => {
@@ -411,6 +442,22 @@ describe('v4beta1.TenantServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getTenant with closed client', async () => {
+      const client = new tenantserviceModule.v4beta1.TenantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.GetTenantRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTenant(request), expectedError);
     });
   });
 
@@ -526,6 +573,23 @@ describe('v4beta1.TenantServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTenant with closed client', async () => {
+      const client = new tenantserviceModule.v4beta1.TenantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.UpdateTenantRequest()
+      );
+      request.tenant = {};
+      request.tenant.name = '';
+      const expectedHeaderRequestParams = 'tenant.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateTenant(request), expectedError);
+    });
   });
 
   describe('deleteTenant', () => {
@@ -636,6 +700,22 @@ describe('v4beta1.TenantServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteTenant with closed client', async () => {
+      const client = new tenantserviceModule.v4beta1.TenantServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.DeleteTenantRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteTenant(request), expectedError);
     });
   });
 

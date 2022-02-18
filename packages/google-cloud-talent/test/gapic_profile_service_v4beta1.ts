@@ -153,12 +153,27 @@ describe('v4beta1.ProfileServiceClient', () => {
     assert(client.profileServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new profileserviceModule.v4beta1.ProfileServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.profileServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new profileserviceModule.v4beta1.ProfileServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.profileServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -304,6 +319,22 @@ describe('v4beta1.ProfileServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createProfile with closed client', async () => {
+      const client = new profileserviceModule.v4beta1.ProfileServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.CreateProfileRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createProfile(request), expectedError);
+    });
   });
 
   describe('getProfile', () => {
@@ -414,6 +445,22 @@ describe('v4beta1.ProfileServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getProfile with closed client', async () => {
+      const client = new profileserviceModule.v4beta1.ProfileServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.GetProfileRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getProfile(request), expectedError);
     });
   });
 
@@ -529,6 +576,23 @@ describe('v4beta1.ProfileServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateProfile with closed client', async () => {
+      const client = new profileserviceModule.v4beta1.ProfileServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.UpdateProfileRequest()
+      );
+      request.profile = {};
+      request.profile.name = '';
+      const expectedHeaderRequestParams = 'profile.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateProfile(request), expectedError);
+    });
   });
 
   describe('deleteProfile', () => {
@@ -640,6 +704,22 @@ describe('v4beta1.ProfileServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteProfile with closed client', async () => {
+      const client = new profileserviceModule.v4beta1.ProfileServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.DeleteProfileRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteProfile(request), expectedError);
+    });
   });
 
   describe('searchProfiles', () => {
@@ -750,6 +830,22 @@ describe('v4beta1.ProfileServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes searchProfiles with closed client', async () => {
+      const client = new profileserviceModule.v4beta1.ProfileServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.SearchProfilesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.searchProfiles(request), expectedError);
     });
   });
 

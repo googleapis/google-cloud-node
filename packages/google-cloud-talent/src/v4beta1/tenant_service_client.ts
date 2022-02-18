@@ -1297,9 +1297,8 @@ export class TenantServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.tenantServiceStub!.then(stub => {
+    if (this.tenantServiceStub && !this._terminated) {
+      return this.tenantServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

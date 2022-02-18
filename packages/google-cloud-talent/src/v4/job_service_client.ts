@@ -2306,9 +2306,8 @@ export class JobServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.jobServiceStub!.then(stub => {
+    if (this.jobServiceStub && !this._terminated) {
+      return this.jobServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

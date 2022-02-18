@@ -88,12 +88,27 @@ describe('v4.CompletionClient', () => {
     assert(client.completionStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new completionModule.v4.CompletionClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.completionStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new completionModule.v4.CompletionClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.completionStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -238,6 +253,22 @@ describe('v4.CompletionClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes completeQuery with closed client', async () => {
+      const client = new completionModule.v4.CompletionClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4.CompleteQueryRequest()
+      );
+      request.tenant = '';
+      const expectedHeaderRequestParams = 'tenant=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.completeQuery(request), expectedError);
     });
   });
 

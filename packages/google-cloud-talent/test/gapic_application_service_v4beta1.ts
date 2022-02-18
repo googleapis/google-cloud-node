@@ -156,13 +156,29 @@ describe('v4beta1.ApplicationServiceClient', () => {
     assert(client.applicationServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new applicationserviceModule.v4beta1.ApplicationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.applicationServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new applicationserviceModule.v4beta1.ApplicationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.applicationServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -313,6 +329,23 @@ describe('v4beta1.ApplicationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createApplication with closed client', async () => {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.CreateApplicationRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createApplication(request), expectedError);
+    });
   });
 
   describe('getApplication', () => {
@@ -426,6 +459,23 @@ describe('v4beta1.ApplicationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getApplication with closed client', async () => {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.GetApplicationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getApplication(request), expectedError);
     });
   });
 
@@ -544,6 +594,24 @@ describe('v4beta1.ApplicationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateApplication with closed client', async () => {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.UpdateApplicationRequest()
+      );
+      request.application = {};
+      request.application.name = '';
+      const expectedHeaderRequestParams = 'application.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateApplication(request), expectedError);
+    });
   });
 
   describe('deleteApplication', () => {
@@ -657,6 +725,23 @@ describe('v4beta1.ApplicationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteApplication with closed client', async () => {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.talent.v4beta1.DeleteApplicationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteApplication(request), expectedError);
     });
   });
 
