@@ -1016,9 +1016,8 @@ export class AuthorizedCertificatesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.authorizedCertificatesStub!.then(stub => {
+    if (this.authorizedCertificatesStub && !this._terminated) {
+      return this.authorizedCertificatesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

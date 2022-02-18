@@ -948,9 +948,8 @@ export class ApplicationsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.applicationsStub!.then(stub => {
+    if (this.applicationsStub && !this._terminated) {
+      return this.applicationsStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

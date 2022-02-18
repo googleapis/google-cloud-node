@@ -585,9 +585,8 @@ export class AuthorizedDomainsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.authorizedDomainsStub!.then(stub => {
+    if (this.authorizedDomainsStub && !this._terminated) {
+      return this.authorizedDomainsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -157,13 +157,29 @@ describe('v1.AuthorizedCertificatesClient', () => {
     assert(client.authorizedCertificatesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.authorizedCertificatesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.authorizedCertificatesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -318,6 +334,26 @@ describe('v1.AuthorizedCertificatesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getAuthorizedCertificate with closed client', async () => {
+      const client =
+        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getAuthorizedCertificate(request),
+        expectedError
+      );
+    });
   });
 
   describe('createAuthorizedCertificate', () => {
@@ -434,6 +470,26 @@ describe('v1.AuthorizedCertificatesClient', () => {
         (client.innerApiCalls.createAuthorizedCertificate as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createAuthorizedCertificate with closed client', async () => {
+      const client =
+        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createAuthorizedCertificate(request),
+        expectedError
       );
     });
   });
@@ -554,6 +610,26 @@ describe('v1.AuthorizedCertificatesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateAuthorizedCertificate with closed client', async () => {
+      const client =
+        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateAuthorizedCertificate(request),
+        expectedError
+      );
+    });
   });
 
   describe('deleteAuthorizedCertificate', () => {
@@ -670,6 +746,26 @@ describe('v1.AuthorizedCertificatesClient', () => {
         (client.innerApiCalls.deleteAuthorizedCertificate as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteAuthorizedCertificate with closed client', async () => {
+      const client =
+        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteAuthorizedCertificate(request),
+        expectedError
       );
     });
   });
