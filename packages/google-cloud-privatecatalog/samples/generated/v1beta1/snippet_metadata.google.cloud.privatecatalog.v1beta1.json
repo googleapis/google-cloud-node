@@ -1,0 +1,171 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-privatecatalog",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.privatecatalog.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchCatalogs_async",
+      "title": "PrivateCatalog searchCatalogs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Search [Catalog][google.cloud.privatecatalog.v1beta1.Catalog] resources that consumers have access to, within the scope of the consumer cloud resource hierarchy context.",
+      "canonical": true,
+      "file": "private_catalog.search_catalogs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchCatalogs",
+        "fullName": "google.cloud.privatecatalog.v1beta1.PrivateCatalog.SearchCatalogs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.privatecatalog.v1beta1.SearchCatalogsResponse",
+        "client": {
+          "shortName": "PrivateCatalogClient",
+          "fullName": "google.cloud.privatecatalog.v1beta1.PrivateCatalogClient"
+        },
+        "method": {
+          "shortName": "SearchCatalogs",
+          "fullName": "google.cloud.privatecatalog.v1beta1.PrivateCatalog.SearchCatalogs",
+          "service": {
+            "shortName": "PrivateCatalog",
+            "fullName": "google.cloud.privatecatalog.v1beta1.PrivateCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchProducts_async",
+      "title": "PrivateCatalog searchProducts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Search [Product][google.cloud.privatecatalog.v1beta1.Product] resources that consumers have access to, within the scope of the consumer cloud resource hierarchy context.",
+      "canonical": true,
+      "file": "private_catalog.search_products.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchProducts",
+        "fullName": "google.cloud.privatecatalog.v1beta1.PrivateCatalog.SearchProducts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.privatecatalog.v1beta1.SearchProductsResponse",
+        "client": {
+          "shortName": "PrivateCatalogClient",
+          "fullName": "google.cloud.privatecatalog.v1beta1.PrivateCatalogClient"
+        },
+        "method": {
+          "shortName": "SearchProducts",
+          "fullName": "google.cloud.privatecatalog.v1beta1.PrivateCatalog.SearchProducts",
+          "service": {
+            "shortName": "PrivateCatalog",
+            "fullName": "google.cloud.privatecatalog.v1beta1.PrivateCatalog"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchVersions_async",
+      "title": "PrivateCatalog searchVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Search [Version][google.cloud.privatecatalog.v1beta1.Version] resources that consumers have access to, within the scope of the consumer cloud resource hierarchy context.",
+      "canonical": true,
+      "file": "private_catalog.search_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchVersions",
+        "fullName": "google.cloud.privatecatalog.v1beta1.PrivateCatalog.SearchVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.privatecatalog.v1beta1.SearchVersionsResponse",
+        "client": {
+          "shortName": "PrivateCatalogClient",
+          "fullName": "google.cloud.privatecatalog.v1beta1.PrivateCatalogClient"
+        },
+        "method": {
+          "shortName": "SearchVersions",
+          "fullName": "google.cloud.privatecatalog.v1beta1.PrivateCatalog.SearchVersions",
+          "service": {
+            "shortName": "PrivateCatalog",
+            "fullName": "google.cloud.privatecatalog.v1beta1.PrivateCatalog"
+          }
+        }
+      }
+    }
+  ]
+}

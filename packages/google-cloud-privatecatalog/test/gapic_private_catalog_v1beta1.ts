@@ -153,12 +153,27 @@ describe('v1beta1.PrivateCatalogClient', () => {
     assert(client.privateCatalogStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new privatecatalogModule.v1beta1.PrivateCatalogClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.privateCatalogStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new privatecatalogModule.v1beta1.PrivateCatalogClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.privateCatalogStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
