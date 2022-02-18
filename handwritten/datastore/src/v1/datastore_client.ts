@@ -940,9 +940,8 @@ export class DatastoreClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.datastoreStub!.then(stub => {
+    if (this.datastoreStub && !this._terminated) {
+      return this.datastoreStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
