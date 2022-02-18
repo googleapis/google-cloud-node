@@ -494,9 +494,8 @@ export class WorkflowsServiceV2BetaClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.workflowsServiceV2BetaStub!.then(stub => {
+    if (this.workflowsServiceV2BetaStub && !this._terminated) {
+      return this.workflowsServiceV2BetaStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

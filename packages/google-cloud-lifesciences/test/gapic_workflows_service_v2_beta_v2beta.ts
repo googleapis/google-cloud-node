@@ -119,13 +119,29 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     assert(client.workflowsServiceV2BetaStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.workflowsServiceV2BetaStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.workflowsServiceV2BetaStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
