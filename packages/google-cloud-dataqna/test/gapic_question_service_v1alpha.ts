@@ -90,12 +90,27 @@ describe('v1alpha.QuestionServiceClient', () => {
     assert(client.questionServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new questionserviceModule.v1alpha.QuestionServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.questionServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new questionserviceModule.v1alpha.QuestionServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.questionServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -241,6 +256,22 @@ describe('v1alpha.QuestionServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getQuestion with closed client', async () => {
+      const client = new questionserviceModule.v1alpha.QuestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getQuestion(request), expectedError);
+    });
   });
 
   describe('createQuestion', () => {
@@ -351,6 +382,22 @@ describe('v1alpha.QuestionServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createQuestion with closed client', async () => {
+      const client = new questionserviceModule.v1alpha.QuestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createQuestion(request), expectedError);
     });
   });
 
@@ -463,6 +510,22 @@ describe('v1alpha.QuestionServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes executeQuestion with closed client', async () => {
+      const client = new questionserviceModule.v1alpha.QuestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.executeQuestion(request), expectedError);
+    });
   });
 
   describe('getUserFeedback', () => {
@@ -573,6 +636,22 @@ describe('v1alpha.QuestionServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getUserFeedback with closed client', async () => {
+      const client = new questionserviceModule.v1alpha.QuestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getUserFeedback(request), expectedError);
     });
   });
 
@@ -688,6 +767,23 @@ describe('v1alpha.QuestionServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateUserFeedback with closed client', async () => {
+      const client = new questionserviceModule.v1alpha.QuestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
+      );
+      request.userFeedback = {};
+      request.userFeedback.name = '';
+      const expectedHeaderRequestParams = 'user_feedback.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateUserFeedback(request), expectedError);
     });
   });
 

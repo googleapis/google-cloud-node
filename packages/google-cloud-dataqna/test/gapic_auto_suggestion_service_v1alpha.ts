@@ -96,13 +96,29 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
     assert(client.autoSuggestionServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.autoSuggestionServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.autoSuggestionServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -252,6 +268,23 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes suggestQueries with closed client', async () => {
+      const client =
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.suggestQueries(request), expectedError);
     });
   });
 

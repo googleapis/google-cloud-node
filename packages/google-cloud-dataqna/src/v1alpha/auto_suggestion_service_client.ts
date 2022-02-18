@@ -621,9 +621,8 @@ export class AutoSuggestionServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.autoSuggestionServiceStub!.then(stub => {
+    if (this.autoSuggestionServiceStub && !this._terminated) {
+      return this.autoSuggestionServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
