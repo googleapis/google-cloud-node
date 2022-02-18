@@ -183,12 +183,27 @@ describe('v1beta1.DataFusionClient', () => {
     assert(client.dataFusionStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new datafusionModule.v1beta1.DataFusionClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.dataFusionStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new datafusionModule.v1beta1.DataFusionClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.dataFusionStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -334,6 +349,22 @@ describe('v1beta1.DataFusionClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getInstance with closed client', async () => {
+      const client = new datafusionModule.v1beta1.DataFusionClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getInstance(request), expectedError);
+    });
   });
 
   describe('removeIamPolicy', () => {
@@ -444,6 +475,22 @@ describe('v1beta1.DataFusionClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes removeIamPolicy with closed client', async () => {
+      const client = new datafusionModule.v1beta1.DataFusionClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.removeIamPolicy(request), expectedError);
     });
   });
 
@@ -556,6 +603,22 @@ describe('v1beta1.DataFusionClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes addDnsPeering with closed client', async () => {
+      const client = new datafusionModule.v1beta1.DataFusionClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.addDnsPeering(request), expectedError);
+    });
   });
 
   describe('removeDnsPeering', () => {
@@ -666,6 +729,22 @@ describe('v1beta1.DataFusionClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes removeDnsPeering with closed client', async () => {
+      const client = new datafusionModule.v1beta1.DataFusionClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.removeDnsPeering(request), expectedError);
     });
   });
 
