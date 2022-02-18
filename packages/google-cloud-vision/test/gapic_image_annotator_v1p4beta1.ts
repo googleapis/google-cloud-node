@@ -122,12 +122,27 @@ describe('v1p4beta1.ImageAnnotatorClient', () => {
     assert(client.imageAnnotatorStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new imageannotatorModule.v1p4beta1.ImageAnnotatorClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.imageAnnotatorStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new imageannotatorModule.v1p4beta1.ImageAnnotatorClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.imageAnnotatorStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -250,6 +265,20 @@ describe('v1p4beta1.ImageAnnotatorClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes batchAnnotateImages with closed client', async () => {
+      const client = new imageannotatorModule.v1p4beta1.ImageAnnotatorClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1p4beta1.BatchAnnotateImagesRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.batchAnnotateImages(request), expectedError);
+    });
   });
 
   describe('batchAnnotateFiles', () => {
@@ -337,6 +366,20 @@ describe('v1p4beta1.ImageAnnotatorClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes batchAnnotateFiles with closed client', async () => {
+      const client = new imageannotatorModule.v1p4beta1.ImageAnnotatorClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1p4beta1.BatchAnnotateFilesRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.batchAnnotateFiles(request), expectedError);
     });
   });
 

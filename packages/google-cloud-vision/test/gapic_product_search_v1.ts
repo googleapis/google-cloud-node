@@ -183,12 +183,27 @@ describe('v1.ProductSearchClient', () => {
     assert(client.productSearchStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new productsearchModule.v1.ProductSearchClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.productSearchStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new productsearchModule.v1.ProductSearchClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.productSearchStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -334,6 +349,22 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createProductSet with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.CreateProductSetRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createProductSet(request), expectedError);
+    });
   });
 
   describe('getProductSet', () => {
@@ -444,6 +475,22 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getProductSet with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.GetProductSetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getProductSet(request), expectedError);
     });
   });
 
@@ -559,6 +606,23 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateProductSet with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.UpdateProductSetRequest()
+      );
+      request.productSet = {};
+      request.productSet.name = '';
+      const expectedHeaderRequestParams = 'product_set.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateProductSet(request), expectedError);
+    });
   });
 
   describe('deleteProductSet', () => {
@@ -669,6 +733,22 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteProductSet with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.DeleteProductSetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteProductSet(request), expectedError);
     });
   });
 
@@ -781,6 +861,22 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createProduct with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.CreateProductRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createProduct(request), expectedError);
+    });
   });
 
   describe('getProduct', () => {
@@ -891,6 +987,22 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getProduct with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.GetProductRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getProduct(request), expectedError);
     });
   });
 
@@ -1006,6 +1118,23 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateProduct with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.UpdateProductRequest()
+      );
+      request.product = {};
+      request.product.name = '';
+      const expectedHeaderRequestParams = 'product.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateProduct(request), expectedError);
+    });
   });
 
   describe('deleteProduct', () => {
@@ -1116,6 +1245,22 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteProduct with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.DeleteProductRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteProduct(request), expectedError);
     });
   });
 
@@ -1229,6 +1374,22 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createReferenceImage with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.CreateReferenceImageRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createReferenceImage(request), expectedError);
+    });
   });
 
   describe('deleteReferenceImage', () => {
@@ -1341,6 +1502,22 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteReferenceImage with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.DeleteReferenceImageRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteReferenceImage(request), expectedError);
+    });
   });
 
   describe('getReferenceImage', () => {
@@ -1451,6 +1628,22 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getReferenceImage with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.GetReferenceImageRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getReferenceImage(request), expectedError);
     });
   });
 
@@ -1567,6 +1760,25 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes addProductToProductSet with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.AddProductToProductSetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.addProductToProductSet(request),
+        expectedError
+      );
+    });
   });
 
   describe('removeProductFromProductSet', () => {
@@ -1680,6 +1892,25 @@ describe('v1.ProductSearchClient', () => {
         (client.innerApiCalls.removeProductFromProductSet as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes removeProductFromProductSet with closed client', async () => {
+      const client = new productsearchModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vision.v1.RemoveProductFromProductSetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.removeProductFromProductSet(request),
+        expectedError
       );
     });
   });

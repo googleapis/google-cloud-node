@@ -1086,9 +1086,8 @@ export class ImageAnnotatorClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.imageAnnotatorStub!.then(stub => {
+    if (this.imageAnnotatorStub && !this._terminated) {
+      return this.imageAnnotatorStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
