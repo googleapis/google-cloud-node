@@ -153,12 +153,27 @@ describe('v1.DataTransferServiceClient', () => {
     assert(client.dataTransferServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new datatransferserviceModule.v1.DataTransferServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.dataTransferServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new datatransferserviceModule.v1.DataTransferServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.dataTransferServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -310,6 +325,24 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getDataSource with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDataSource(request), expectedError);
+    });
   });
 
   describe('createTransferConfig', () => {
@@ -427,6 +460,24 @@ describe('v1.DataTransferServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createTransferConfig with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createTransferConfig(request), expectedError);
     });
   });
 
@@ -549,6 +600,25 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateTransferConfig with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
+      );
+      request.transferConfig = {};
+      request.transferConfig.name = '';
+      const expectedHeaderRequestParams = 'transfer_config.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateTransferConfig(request), expectedError);
+    });
   });
 
   describe('deleteTransferConfig', () => {
@@ -667,6 +737,24 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteTransferConfig with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteTransferConfig(request), expectedError);
+    });
   });
 
   describe('getTransferConfig', () => {
@@ -783,6 +871,24 @@ describe('v1.DataTransferServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getTransferConfig with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTransferConfig(request), expectedError);
     });
   });
 
@@ -908,6 +1014,26 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes scheduleTransferRuns with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      const stub = sinon.stub(client, 'warn');
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.scheduleTransferRuns(request), expectedError);
+      assert(stub.calledOnce);
+    });
   });
 
   describe('startManualTransferRuns', () => {
@@ -1029,6 +1155,27 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes startManualTransferRuns with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.startManualTransferRuns(request),
+        expectedError
+      );
+    });
   });
 
   describe('getTransferRun', () => {
@@ -1145,6 +1292,24 @@ describe('v1.DataTransferServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getTransferRun with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTransferRun(request), expectedError);
     });
   });
 
@@ -1263,6 +1428,24 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteTransferRun with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteTransferRun(request), expectedError);
+    });
   });
 
   describe('checkValidCreds', () => {
@@ -1380,6 +1563,24 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes checkValidCreds with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.checkValidCreds(request), expectedError);
+    });
   });
 
   describe('enrollDataSources', () => {
@@ -1496,6 +1697,24 @@ describe('v1.DataTransferServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes enrollDataSources with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.enrollDataSources(request), expectedError);
     });
   });
 
