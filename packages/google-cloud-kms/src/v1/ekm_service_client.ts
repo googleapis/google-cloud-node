@@ -1462,9 +1462,8 @@ export class EkmServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.ekmServiceStub!.then(stub => {
+    if (this.ekmServiceStub && !this._terminated) {
+      return this.ekmServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.iamClient.close();

@@ -158,14 +158,31 @@ describe('v1.KeyManagementServiceClient', () => {
     assert(client.keyManagementServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new keymanagementserviceModule.v1.KeyManagementServiceClient(
       {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       }
     );
-    client.close();
+    client.initialize();
+    assert(client.keyManagementServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new keymanagementserviceModule.v1.KeyManagementServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.keyManagementServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -318,6 +335,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getKeyRing with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.GetKeyRingRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getKeyRing(request), expectedError);
+    });
   });
 
   describe('getCryptoKey', () => {
@@ -431,6 +465,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getCryptoKey with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getCryptoKey(request), expectedError);
     });
   });
 
@@ -547,6 +598,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getCryptoKeyVersion with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getCryptoKeyVersion(request), expectedError);
+    });
   });
 
   describe('getPublicKey', () => {
@@ -660,6 +728,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getPublicKey with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.GetPublicKeyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPublicKey(request), expectedError);
     });
   });
 
@@ -775,6 +860,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getImportJob with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.GetImportJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getImportJob(request), expectedError);
+    });
   });
 
   describe('createKeyRing', () => {
@@ -889,6 +991,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createKeyRing with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CreateKeyRingRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createKeyRing(request), expectedError);
+    });
   });
 
   describe('createCryptoKey', () => {
@@ -1002,6 +1121,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createCryptoKey with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createCryptoKey(request), expectedError);
     });
   });
 
@@ -1119,6 +1255,26 @@ describe('v1.KeyManagementServiceClient', () => {
         (client.innerApiCalls.createCryptoKeyVersion as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createCryptoKeyVersion with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createCryptoKeyVersion(request),
+        expectedError
       );
     });
   });
@@ -1239,6 +1395,26 @@ describe('v1.KeyManagementServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes importCryptoKeyVersion with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.importCryptoKeyVersion(request),
+        expectedError
+      );
+    });
   });
 
   describe('createImportJob', () => {
@@ -1352,6 +1528,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createImportJob with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CreateImportJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createImportJob(request), expectedError);
     });
   });
 
@@ -1469,6 +1662,24 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateCryptoKey with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
+      );
+      request.cryptoKey = {};
+      request.cryptoKey.name = '';
+      const expectedHeaderRequestParams = 'crypto_key.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateCryptoKey(request), expectedError);
     });
   });
 
@@ -1591,6 +1802,27 @@ describe('v1.KeyManagementServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateCryptoKeyVersion with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest()
+      );
+      request.cryptoKeyVersion = {};
+      request.cryptoKeyVersion.name = '';
+      const expectedHeaderRequestParams = 'crypto_key_version.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateCryptoKeyVersion(request),
+        expectedError
+      );
+    });
   });
 
   describe('updateCryptoKeyPrimaryVersion', () => {
@@ -1707,6 +1939,26 @@ describe('v1.KeyManagementServiceClient', () => {
         (client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateCryptoKeyPrimaryVersion with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateCryptoKeyPrimaryVersion(request),
+        expectedError
       );
     });
   });
@@ -1827,6 +2079,26 @@ describe('v1.KeyManagementServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes destroyCryptoKeyVersion with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.destroyCryptoKeyVersion(request),
+        expectedError
+      );
+    });
   });
 
   describe('restoreCryptoKeyVersion', () => {
@@ -1945,6 +2217,26 @@ describe('v1.KeyManagementServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes restoreCryptoKeyVersion with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.restoreCryptoKeyVersion(request),
+        expectedError
+      );
+    });
   });
 
   describe('encrypt', () => {
@@ -2056,6 +2348,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes encrypt with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.EncryptRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.encrypt(request), expectedError);
+    });
   });
 
   describe('decrypt', () => {
@@ -2166,6 +2475,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes decrypt with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.DecryptRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.decrypt(request), expectedError);
     });
   });
 
@@ -2281,6 +2607,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes asymmetricSign with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.AsymmetricSignRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.asymmetricSign(request), expectedError);
+    });
   });
 
   describe('asymmetricDecrypt', () => {
@@ -2395,6 +2738,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes asymmetricDecrypt with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.asymmetricDecrypt(request), expectedError);
+    });
   });
 
   describe('macSign', () => {
@@ -2506,6 +2866,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes macSign with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.MacSignRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.macSign(request), expectedError);
+    });
   });
 
   describe('macVerify', () => {
@@ -2616,6 +2993,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes macVerify with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.MacVerifyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.macVerify(request), expectedError);
     });
   });
 
@@ -2731,6 +3125,23 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes generateRandomBytes with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
+      );
+      request.location = '';
+      const expectedHeaderRequestParams = 'location=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.generateRandomBytes(request), expectedError);
     });
   });
 

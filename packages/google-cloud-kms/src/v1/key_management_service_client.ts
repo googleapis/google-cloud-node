@@ -4353,9 +4353,8 @@ export class KeyManagementServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.keyManagementServiceStub!.then(stub => {
+    if (this.keyManagementServiceStub && !this._terminated) {
+      return this.keyManagementServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.iamClient.close();

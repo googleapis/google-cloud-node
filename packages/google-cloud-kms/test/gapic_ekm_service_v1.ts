@@ -151,12 +151,27 @@ describe('v1.EkmServiceClient', () => {
     assert(client.ekmServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new ekmserviceModule.v1.EkmServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.ekmServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new ekmserviceModule.v1.EkmServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.ekmServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -302,6 +317,22 @@ describe('v1.EkmServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getEkmConnection with closed client', async () => {
+      const client = new ekmserviceModule.v1.EkmServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEkmConnection(request), expectedError);
+    });
   });
 
   describe('createEkmConnection', () => {
@@ -413,6 +444,22 @@ describe('v1.EkmServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createEkmConnection with closed client', async () => {
+      const client = new ekmserviceModule.v1.EkmServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createEkmConnection(request), expectedError);
     });
   });
 
@@ -528,6 +575,23 @@ describe('v1.EkmServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateEkmConnection with closed client', async () => {
+      const client = new ekmserviceModule.v1.EkmServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
+      );
+      request.ekmConnection = {};
+      request.ekmConnection.name = '';
+      const expectedHeaderRequestParams = 'ekm_connection.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateEkmConnection(request), expectedError);
     });
   });
 
