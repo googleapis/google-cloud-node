@@ -3273,9 +3273,8 @@ export class AutoMlClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.autoMlStub!.then(stub => {
+    if (this.autoMlStub && !this._terminated) {
+      return this.autoMlStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

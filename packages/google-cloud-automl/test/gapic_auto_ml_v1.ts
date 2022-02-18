@@ -183,12 +183,27 @@ describe('v1.AutoMlClient', () => {
     assert(client.autoMlStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new automlModule.v1.AutoMlClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.autoMlStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new automlModule.v1.AutoMlClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.autoMlStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -334,6 +349,22 @@ describe('v1.AutoMlClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getDataset with closed client', async () => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.automl.v1.GetDatasetRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDataset(request), expectedError);
+    });
   });
 
   describe('updateDataset', () => {
@@ -448,6 +479,23 @@ describe('v1.AutoMlClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateDataset with closed client', async () => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.automl.v1.UpdateDatasetRequest()
+      );
+      request.dataset = {};
+      request.dataset.name = '';
+      const expectedHeaderRequestParams = 'dataset.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateDataset(request), expectedError);
+    });
   });
 
   describe('getAnnotationSpec', () => {
@@ -559,6 +607,22 @@ describe('v1.AutoMlClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getAnnotationSpec with closed client', async () => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.automl.v1.GetAnnotationSpecRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAnnotationSpec(request), expectedError);
+    });
   });
 
   describe('getModel', () => {
@@ -666,6 +730,22 @@ describe('v1.AutoMlClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getModel with closed client', async () => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.automl.v1.GetModelRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getModel(request), expectedError);
     });
   });
 
@@ -781,6 +861,23 @@ describe('v1.AutoMlClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateModel with closed client', async () => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.automl.v1.UpdateModelRequest()
+      );
+      request.model = {};
+      request.model.name = '';
+      const expectedHeaderRequestParams = 'model.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateModel(request), expectedError);
+    });
   });
 
   describe('getModelEvaluation', () => {
@@ -892,6 +989,22 @@ describe('v1.AutoMlClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getModelEvaluation with closed client', async () => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.automl.v1.GetModelEvaluationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getModelEvaluation(request), expectedError);
     });
   });
 

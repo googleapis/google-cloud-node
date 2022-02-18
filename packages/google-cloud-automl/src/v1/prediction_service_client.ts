@@ -990,9 +990,8 @@ export class PredictionServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.predictionServiceStub!.then(stub => {
+    if (this.predictionServiceStub && !this._terminated) {
+      return this.predictionServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
