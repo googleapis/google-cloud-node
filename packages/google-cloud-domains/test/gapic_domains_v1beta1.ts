@@ -183,12 +183,27 @@ describe('v1beta1.DomainsClient', () => {
     assert(client.domainsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new domainsModule.v1beta1.DomainsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.domainsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new domainsModule.v1beta1.DomainsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.domainsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -334,6 +349,22 @@ describe('v1beta1.DomainsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes searchDomains with closed client', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.SearchDomainsRequest()
+      );
+      request.location = '';
+      const expectedHeaderRequestParams = 'location=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.searchDomains(request), expectedError);
+    });
   });
 
   describe('retrieveRegisterParameters', () => {
@@ -447,6 +478,25 @@ describe('v1beta1.DomainsClient', () => {
         (client.innerApiCalls.retrieveRegisterParameters as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes retrieveRegisterParameters with closed client', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.RetrieveRegisterParametersRequest()
+      );
+      request.location = '';
+      const expectedHeaderRequestParams = 'location=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.retrieveRegisterParameters(request),
+        expectedError
       );
     });
   });
@@ -564,6 +614,25 @@ describe('v1beta1.DomainsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes retrieveTransferParameters with closed client', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest()
+      );
+      request.location = '';
+      const expectedHeaderRequestParams = 'location=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.retrieveTransferParameters(request),
+        expectedError
+      );
+    });
   });
 
   describe('getRegistration', () => {
@@ -674,6 +743,22 @@ describe('v1beta1.DomainsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getRegistration with closed client', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.GetRegistrationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getRegistration(request), expectedError);
     });
   });
 
@@ -790,6 +875,25 @@ describe('v1beta1.DomainsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes retrieveAuthorizationCode with closed client', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.RetrieveAuthorizationCodeRequest()
+      );
+      request.registration = '';
+      const expectedHeaderRequestParams = 'registration=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.retrieveAuthorizationCode(request),
+        expectedError
+      );
+    });
   });
 
   describe('resetAuthorizationCode', () => {
@@ -903,6 +1007,25 @@ describe('v1beta1.DomainsClient', () => {
         (client.innerApiCalls.resetAuthorizationCode as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes resetAuthorizationCode with closed client', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.ResetAuthorizationCodeRequest()
+      );
+      request.registration = '';
+      const expectedHeaderRequestParams = 'registration=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.resetAuthorizationCode(request),
+        expectedError
       );
     });
   });
