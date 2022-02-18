@@ -2212,9 +2212,8 @@ export class SecretManagerServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.secretManagerServiceStub!.then(stub => {
+    if (this.secretManagerServiceStub && !this._terminated) {
+      return this.secretManagerServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
