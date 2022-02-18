@@ -2253,9 +2253,8 @@ export class HubServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.hubServiceStub!.then(stub => {
+    if (this.hubServiceStub && !this._terminated) {
+      return this.hubServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
