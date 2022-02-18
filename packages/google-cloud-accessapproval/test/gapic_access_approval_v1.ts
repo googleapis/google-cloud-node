@@ -153,12 +153,27 @@ describe('v1.AccessApprovalClient', () => {
     assert(client.accessApprovalStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new accessapprovalModule.v1.AccessApprovalClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.accessApprovalStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new accessapprovalModule.v1.AccessApprovalClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.accessApprovalStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -305,6 +320,22 @@ describe('v1.AccessApprovalClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getApprovalRequest with closed client', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.GetApprovalRequestMessage()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getApprovalRequest(request), expectedError);
+    });
   });
 
   describe('approveApprovalRequest', () => {
@@ -418,6 +449,25 @@ describe('v1.AccessApprovalClient', () => {
         (client.innerApiCalls.approveApprovalRequest as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes approveApprovalRequest with closed client', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.approveApprovalRequest(request),
+        expectedError
       );
     });
   });
@@ -535,6 +585,25 @@ describe('v1.AccessApprovalClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes dismissApprovalRequest with closed client', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.DismissApprovalRequestMessage()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.dismissApprovalRequest(request),
+        expectedError
+      );
+    });
   });
 
   describe('getAccessApprovalSettings', () => {
@@ -648,6 +717,25 @@ describe('v1.AccessApprovalClient', () => {
         (client.innerApiCalls.getAccessApprovalSettings as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getAccessApprovalSettings with closed client', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getAccessApprovalSettings(request),
+        expectedError
       );
     });
   });
@@ -768,6 +856,26 @@ describe('v1.AccessApprovalClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateAccessApprovalSettings with closed client', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.UpdateAccessApprovalSettingsMessage()
+      );
+      request.settings = {};
+      request.settings.name = '';
+      const expectedHeaderRequestParams = 'settings.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateAccessApprovalSettings(request),
+        expectedError
+      );
+    });
   });
 
   describe('deleteAccessApprovalSettings', () => {
@@ -881,6 +989,25 @@ describe('v1.AccessApprovalClient', () => {
         (client.innerApiCalls.deleteAccessApprovalSettings as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteAccessApprovalSettings with closed client', async () => {
+      const client = new accessapprovalModule.v1.AccessApprovalClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteAccessApprovalSettings(request),
+        expectedError
       );
     });
   });

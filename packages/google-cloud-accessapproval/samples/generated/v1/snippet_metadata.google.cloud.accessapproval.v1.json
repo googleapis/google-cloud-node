@@ -1,0 +1,315 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-accessapproval",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.accessapproval.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "accessapproval_v1_generated_AccessApproval_ListApprovalRequests_async",
+      "title": "AccessApproval listApprovalRequests Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists approval requests associated with a project, folder, or organization. Approval requests can be filtered by state (pending, active, dismissed). The order is reverse chronological.",
+      "canonical": true,
+      "file": "access_approval.list_approval_requests.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListApprovalRequests",
+        "fullName": "google.cloud.accessapproval.v1.AccessApproval.ListApprovalRequests",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.accessapproval.v1.ListApprovalRequestsResponse",
+        "client": {
+          "shortName": "AccessApprovalClient",
+          "fullName": "google.cloud.accessapproval.v1.AccessApprovalClient"
+        },
+        "method": {
+          "shortName": "ListApprovalRequests",
+          "fullName": "google.cloud.accessapproval.v1.AccessApproval.ListApprovalRequests",
+          "service": {
+            "shortName": "AccessApproval",
+            "fullName": "google.cloud.accessapproval.v1.AccessApproval"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "accessapproval_v1_generated_AccessApproval_GetApprovalRequest_async",
+      "title": "AccessApproval getApprovalRequest Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an approval request. Returns NOT_FOUND if the request does not exist.",
+      "canonical": true,
+      "file": "access_approval.get_approval_request.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetApprovalRequest",
+        "fullName": "google.cloud.accessapproval.v1.AccessApproval.GetApprovalRequest",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.accessapproval.v1.ApprovalRequest",
+        "client": {
+          "shortName": "AccessApprovalClient",
+          "fullName": "google.cloud.accessapproval.v1.AccessApprovalClient"
+        },
+        "method": {
+          "shortName": "GetApprovalRequest",
+          "fullName": "google.cloud.accessapproval.v1.AccessApproval.GetApprovalRequest",
+          "service": {
+            "shortName": "AccessApproval",
+            "fullName": "google.cloud.accessapproval.v1.AccessApproval"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "accessapproval_v1_generated_AccessApproval_ApproveApprovalRequest_async",
+      "title": "AccessApproval approveApprovalRequest Sample",
+      "origin": "API_DEFINITION",
+      "description": " Approves a request and returns the updated ApprovalRequest. Returns NOT_FOUND if the request does not exist. Returns FAILED_PRECONDITION if the request exists but is not in a pending state.",
+      "canonical": true,
+      "file": "access_approval.approve_approval_request.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ApproveApprovalRequest",
+        "fullName": "google.cloud.accessapproval.v1.AccessApproval.ApproveApprovalRequest",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "expire_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.cloud.accessapproval.v1.ApprovalRequest",
+        "client": {
+          "shortName": "AccessApprovalClient",
+          "fullName": "google.cloud.accessapproval.v1.AccessApprovalClient"
+        },
+        "method": {
+          "shortName": "ApproveApprovalRequest",
+          "fullName": "google.cloud.accessapproval.v1.AccessApproval.ApproveApprovalRequest",
+          "service": {
+            "shortName": "AccessApproval",
+            "fullName": "google.cloud.accessapproval.v1.AccessApproval"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "accessapproval_v1_generated_AccessApproval_DismissApprovalRequest_async",
+      "title": "AccessApproval dismissApprovalRequest Sample",
+      "origin": "API_DEFINITION",
+      "description": " Dismisses a request. Returns the updated ApprovalRequest. NOTE: This does not deny access to the resource if another request has been made and approved. It is equivalent in effect to ignoring the request altogether. Returns NOT_FOUND if the request does not exist. Returns FAILED_PRECONDITION if the request exists but is not in a pending state.",
+      "canonical": true,
+      "file": "access_approval.dismiss_approval_request.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 49,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DismissApprovalRequest",
+        "fullName": "google.cloud.accessapproval.v1.AccessApproval.DismissApprovalRequest",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.accessapproval.v1.ApprovalRequest",
+        "client": {
+          "shortName": "AccessApprovalClient",
+          "fullName": "google.cloud.accessapproval.v1.AccessApprovalClient"
+        },
+        "method": {
+          "shortName": "DismissApprovalRequest",
+          "fullName": "google.cloud.accessapproval.v1.AccessApproval.DismissApprovalRequest",
+          "service": {
+            "shortName": "AccessApproval",
+            "fullName": "google.cloud.accessapproval.v1.AccessApproval"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "accessapproval_v1_generated_AccessApproval_GetAccessApprovalSettings_async",
+      "title": "AccessApproval getAccessApprovalSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the settings associated with a project, folder, or organization.",
+      "canonical": true,
+      "file": "access_approval.get_access_approval_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 50,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAccessApprovalSettings",
+        "fullName": "google.cloud.accessapproval.v1.AccessApproval.GetAccessApprovalSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.accessapproval.v1.AccessApprovalSettings",
+        "client": {
+          "shortName": "AccessApprovalClient",
+          "fullName": "google.cloud.accessapproval.v1.AccessApprovalClient"
+        },
+        "method": {
+          "shortName": "GetAccessApprovalSettings",
+          "fullName": "google.cloud.accessapproval.v1.AccessApproval.GetAccessApprovalSettings",
+          "service": {
+            "shortName": "AccessApproval",
+            "fullName": "google.cloud.accessapproval.v1.AccessApproval"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "accessapproval_v1_generated_AccessApproval_UpdateAccessApprovalSettings_async",
+      "title": "AccessApproval updateAccessApprovalSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the settings associated with a project, folder, or organization. Settings to update are determined by the value of field_mask.",
+      "canonical": true,
+      "file": "access_approval.update_access_approval_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAccessApprovalSettings",
+        "fullName": "google.cloud.accessapproval.v1.AccessApproval.UpdateAccessApprovalSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "settings",
+            "type": ".google.cloud.accessapproval.v1.AccessApprovalSettings"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.accessapproval.v1.AccessApprovalSettings",
+        "client": {
+          "shortName": "AccessApprovalClient",
+          "fullName": "google.cloud.accessapproval.v1.AccessApprovalClient"
+        },
+        "method": {
+          "shortName": "UpdateAccessApprovalSettings",
+          "fullName": "google.cloud.accessapproval.v1.AccessApproval.UpdateAccessApprovalSettings",
+          "service": {
+            "shortName": "AccessApproval",
+            "fullName": "google.cloud.accessapproval.v1.AccessApproval"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "accessapproval_v1_generated_AccessApproval_DeleteAccessApprovalSettings_async",
+      "title": "AccessApproval deleteAccessApprovalSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the settings associated with a project, folder, or organization. This will have the effect of disabling Access Approval for the project, folder, or organization, but only if all ancestors also have Access Approval disabled. If Access Approval is enabled at a higher level of the hierarchy, then Access Approval will still be enabled at this level as the settings are inherited.",
+      "canonical": true,
+      "file": "access_approval.delete_access_approval_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 49,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAccessApprovalSettings",
+        "fullName": "google.cloud.accessapproval.v1.AccessApproval.DeleteAccessApprovalSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AccessApprovalClient",
+          "fullName": "google.cloud.accessapproval.v1.AccessApprovalClient"
+        },
+        "method": {
+          "shortName": "DeleteAccessApprovalSettings",
+          "fullName": "google.cloud.accessapproval.v1.AccessApproval.DeleteAccessApprovalSettings",
+          "service": {
+            "shortName": "AccessApproval",
+            "fullName": "google.cloud.accessapproval.v1.AccessApproval"
+          }
+        }
+      }
+    }
+  ]
+}
