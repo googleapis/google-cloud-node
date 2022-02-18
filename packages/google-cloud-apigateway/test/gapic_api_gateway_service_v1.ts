@@ -185,12 +185,27 @@ describe('v1.ApiGatewayServiceClient', () => {
     assert(client.apiGatewayServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.apiGatewayServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.apiGatewayServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -336,6 +351,22 @@ describe('v1.ApiGatewayServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getGateway with closed client', async () => {
+      const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apigateway.v1.GetGatewayRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getGateway(request), expectedError);
+    });
   });
 
   describe('getApi', () => {
@@ -443,6 +474,22 @@ describe('v1.ApiGatewayServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getApi with closed client', async () => {
+      const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apigateway.v1.GetApiRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getApi(request), expectedError);
     });
   });
 
@@ -554,6 +601,22 @@ describe('v1.ApiGatewayServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getApiConfig with closed client', async () => {
+      const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getApiConfig(request), expectedError);
     });
   });
 
