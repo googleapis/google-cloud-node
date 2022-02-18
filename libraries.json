@@ -1047,6 +1047,7 @@
     "issue_tracker": "https://github.com/googleapis/nodejs-retail/issues",
     "api_shortname": "retail",
     "library_type": "GAPIC_AUTO",
+    "codeowner_team": "@googleapis/cloud-retail-team",
     "support_documentation": "https://cloud.google.com/recommendations/"
   },
   {
