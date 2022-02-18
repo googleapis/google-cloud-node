@@ -153,12 +153,27 @@ describe('v2beta1.KnowledgeBasesClient', () => {
     assert(client.knowledgeBasesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new knowledgebasesModule.v2beta1.KnowledgeBasesClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.knowledgeBasesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new knowledgebasesModule.v2beta1.KnowledgeBasesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.knowledgeBasesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -304,6 +319,22 @@ describe('v2beta1.KnowledgeBasesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getKnowledgeBase with closed client', async () => {
+      const client = new knowledgebasesModule.v2beta1.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GetKnowledgeBaseRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getKnowledgeBase(request), expectedError);
+    });
   });
 
   describe('createKnowledgeBase', () => {
@@ -416,6 +447,22 @@ describe('v2beta1.KnowledgeBasesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createKnowledgeBase with closed client', async () => {
+      const client = new knowledgebasesModule.v2beta1.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.CreateKnowledgeBaseRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createKnowledgeBase(request), expectedError);
+    });
   });
 
   describe('deleteKnowledgeBase', () => {
@@ -527,6 +574,22 @@ describe('v2beta1.KnowledgeBasesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteKnowledgeBase with closed client', async () => {
+      const client = new knowledgebasesModule.v2beta1.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.DeleteKnowledgeBaseRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteKnowledgeBase(request), expectedError);
     });
   });
 
@@ -642,6 +705,23 @@ describe('v2beta1.KnowledgeBasesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateKnowledgeBase with closed client', async () => {
+      const client = new knowledgebasesModule.v2beta1.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.UpdateKnowledgeBaseRequest()
+      );
+      request.knowledgeBase = {};
+      request.knowledgeBase.name = '';
+      const expectedHeaderRequestParams = 'knowledge_base.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateKnowledgeBase(request), expectedError);
     });
   });
 

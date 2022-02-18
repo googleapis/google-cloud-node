@@ -153,12 +153,27 @@ describe('v2beta1.ParticipantsClient', () => {
     assert(client.participantsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new participantsModule.v2beta1.ParticipantsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.participantsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new participantsModule.v2beta1.ParticipantsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.participantsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -304,6 +319,22 @@ describe('v2beta1.ParticipantsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createParticipant with closed client', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.CreateParticipantRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createParticipant(request), expectedError);
+    });
   });
 
   describe('getParticipant', () => {
@@ -414,6 +445,22 @@ describe('v2beta1.ParticipantsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getParticipant with closed client', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GetParticipantRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getParticipant(request), expectedError);
     });
   });
 
@@ -529,6 +576,23 @@ describe('v2beta1.ParticipantsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateParticipant with closed client', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.UpdateParticipantRequest()
+      );
+      request.participant = {};
+      request.participant.name = '';
+      const expectedHeaderRequestParams = 'participant.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateParticipant(request), expectedError);
+    });
   });
 
   describe('analyzeContent', () => {
@@ -639,6 +703,22 @@ describe('v2beta1.ParticipantsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes analyzeContent with closed client', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.AnalyzeContentRequest()
+      );
+      request.participant = '';
+      const expectedHeaderRequestParams = 'participant=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.analyzeContent(request), expectedError);
     });
   });
 
@@ -751,6 +831,22 @@ describe('v2beta1.ParticipantsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes suggestArticles with closed client', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.SuggestArticlesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.suggestArticles(request), expectedError);
+    });
   });
 
   describe('suggestFaqAnswers', () => {
@@ -861,6 +957,22 @@ describe('v2beta1.ParticipantsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes suggestFaqAnswers with closed client', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.SuggestFaqAnswersRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.suggestFaqAnswers(request), expectedError);
     });
   });
 
@@ -973,6 +1085,22 @@ describe('v2beta1.ParticipantsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes suggestSmartReplies with closed client', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.SuggestSmartRepliesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.suggestSmartReplies(request), expectedError);
     });
   });
 
@@ -1090,6 +1218,24 @@ describe('v2beta1.ParticipantsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes compileSuggestion with closed client', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const stub = sinon.stub(client, 'warn');
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.CompileSuggestionRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.compileSuggestion(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 

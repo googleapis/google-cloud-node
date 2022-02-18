@@ -2817,9 +2817,8 @@ export class FulfillmentsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.fulfillmentsStub!.then(stub => {
+    if (this.fulfillmentsStub && !this._terminated) {
+      return this.fulfillmentsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

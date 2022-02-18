@@ -183,12 +183,27 @@ describe('v2beta1.EntityTypesClient', () => {
     assert(client.entityTypesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new entitytypesModule.v2beta1.EntityTypesClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.entityTypesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new entitytypesModule.v2beta1.EntityTypesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.entityTypesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -334,6 +349,22 @@ describe('v2beta1.EntityTypesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getEntityType with closed client', async () => {
+      const client = new entitytypesModule.v2beta1.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GetEntityTypeRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEntityType(request), expectedError);
+    });
   });
 
   describe('createEntityType', () => {
@@ -444,6 +475,22 @@ describe('v2beta1.EntityTypesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createEntityType with closed client', async () => {
+      const client = new entitytypesModule.v2beta1.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.CreateEntityTypeRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createEntityType(request), expectedError);
     });
   });
 
@@ -559,6 +606,23 @@ describe('v2beta1.EntityTypesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateEntityType with closed client', async () => {
+      const client = new entitytypesModule.v2beta1.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.UpdateEntityTypeRequest()
+      );
+      request.entityType = {};
+      request.entityType.name = '';
+      const expectedHeaderRequestParams = 'entity_type.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateEntityType(request), expectedError);
+    });
   });
 
   describe('deleteEntityType', () => {
@@ -669,6 +733,22 @@ describe('v2beta1.EntityTypesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteEntityType with closed client', async () => {
+      const client = new entitytypesModule.v2beta1.EntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.DeleteEntityTypeRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteEntityType(request), expectedError);
     });
   });
 

@@ -157,13 +157,29 @@ describe('v2beta1.ConversationProfilesClient', () => {
     assert(client.conversationProfilesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new conversationprofilesModule.v2beta1.ConversationProfilesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.conversationProfilesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new conversationprofilesModule.v2beta1.ConversationProfilesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.conversationProfilesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -318,6 +334,26 @@ describe('v2beta1.ConversationProfilesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getConversationProfile with closed client', async () => {
+      const client =
+        new conversationprofilesModule.v2beta1.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GetConversationProfileRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getConversationProfile(request),
+        expectedError
+      );
+    });
   });
 
   describe('createConversationProfile', () => {
@@ -434,6 +470,26 @@ describe('v2beta1.ConversationProfilesClient', () => {
         (client.innerApiCalls.createConversationProfile as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createConversationProfile with closed client', async () => {
+      const client =
+        new conversationprofilesModule.v2beta1.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.CreateConversationProfileRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createConversationProfile(request),
+        expectedError
       );
     });
   });
@@ -557,6 +613,27 @@ describe('v2beta1.ConversationProfilesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateConversationProfile with closed client', async () => {
+      const client =
+        new conversationprofilesModule.v2beta1.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.UpdateConversationProfileRequest()
+      );
+      request.conversationProfile = {};
+      request.conversationProfile.name = '';
+      const expectedHeaderRequestParams = 'conversation_profile.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateConversationProfile(request),
+        expectedError
+      );
+    });
   });
 
   describe('deleteConversationProfile', () => {
@@ -673,6 +750,26 @@ describe('v2beta1.ConversationProfilesClient', () => {
         (client.innerApiCalls.deleteConversationProfile as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteConversationProfile with closed client', async () => {
+      const client =
+        new conversationprofilesModule.v2beta1.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.DeleteConversationProfileRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteConversationProfile(request),
+        expectedError
       );
     });
   });

@@ -153,12 +153,27 @@ describe('v2beta1.AnswerRecordsClient', () => {
     assert(client.answerRecordsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.answerRecordsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.answerRecordsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -310,6 +325,24 @@ describe('v2beta1.AnswerRecordsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getAnswerRecord with closed client', async () => {
+      const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const stub = sinon.stub(client, 'warn');
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GetAnswerRecordRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAnswerRecord(request), expectedError);
+      assert(stub.calledOnce);
+    });
   });
 
   describe('updateAnswerRecord', () => {
@@ -424,6 +457,23 @@ describe('v2beta1.AnswerRecordsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateAnswerRecord with closed client', async () => {
+      const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.UpdateAnswerRecordRequest()
+      );
+      request.answerRecord = {};
+      request.answerRecord.name = '';
+      const expectedHeaderRequestParams = 'answer_record.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateAnswerRecord(request), expectedError);
     });
   });
 

@@ -1,0 +1,4083 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-dialogflow",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.dialogflow.v2beta1",
+        "version": "v2beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Agents_GetAgent_async",
+      "title": "dialogflow getAgent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified agent.",
+      "canonical": true,
+      "file": "agents.get_agent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAgent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Agents.GetAgent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Agent",
+        "client": {
+          "shortName": "AgentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.AgentsClient"
+        },
+        "method": {
+          "shortName": "GetAgent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Agents.GetAgent",
+          "service": {
+            "shortName": "Agents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Agents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Agents_SetAgent_async",
+      "title": "dialogflow setAgent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates/updates the specified agent. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "agents.set_agent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetAgent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Agents.SetAgent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "agent",
+            "type": ".google.cloud.dialogflow.v2beta1.Agent"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Agent",
+        "client": {
+          "shortName": "AgentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.AgentsClient"
+        },
+        "method": {
+          "shortName": "SetAgent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Agents.SetAgent",
+          "service": {
+            "shortName": "Agents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Agents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Agents_DeleteAgent_async",
+      "title": "dialogflow deleteAgent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified agent.",
+      "canonical": true,
+      "file": "agents.delete_agent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAgent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Agents.DeleteAgent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AgentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.AgentsClient"
+        },
+        "method": {
+          "shortName": "DeleteAgent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Agents.DeleteAgent",
+          "service": {
+            "shortName": "Agents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Agents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Agents_SearchAgents_async",
+      "title": "dialogflow searchAgents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of agents. Since there is at most one conversational agent per project, this method is useful primarily for listing all agents across projects the caller has access to. One can achieve that with a wildcard project collection id \"-\". Refer to [List Sub-Collections](https://cloud.google.com/apis/design/design_patterns#list_sub-collections).",
+      "canonical": true,
+      "file": "agents.search_agents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchAgents",
+        "fullName": "google.cloud.dialogflow.v2beta1.Agents.SearchAgents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.SearchAgentsResponse",
+        "client": {
+          "shortName": "AgentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.AgentsClient"
+        },
+        "method": {
+          "shortName": "SearchAgents",
+          "fullName": "google.cloud.dialogflow.v2beta1.Agents.SearchAgents",
+          "service": {
+            "shortName": "Agents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Agents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Agents_TrainAgent_async",
+      "title": "dialogflow trainAgent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Trains the specified agent. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "agents.train_agent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TrainAgent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Agents.TrainAgent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AgentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.AgentsClient"
+        },
+        "method": {
+          "shortName": "TrainAgent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Agents.TrainAgent",
+          "service": {
+            "shortName": "Agents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Agents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Agents_ExportAgent_async",
+      "title": "dialogflow exportAgent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports the specified agent to a ZIP file. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: [ExportAgentResponse][google.cloud.dialogflow.v2beta1.ExportAgentResponse]",
+      "canonical": true,
+      "file": "agents.export_agent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportAgent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Agents.ExportAgent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "agent_uri",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AgentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.AgentsClient"
+        },
+        "method": {
+          "shortName": "ExportAgent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Agents.ExportAgent",
+          "service": {
+            "shortName": "Agents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Agents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Agents_ImportAgent_async",
+      "title": "dialogflow importAgent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Imports the specified agent from a ZIP file. Uploads new intents and entity types without deleting the existing ones. Intents and entity types with the same name are replaced with the new versions from [ImportAgentRequest][google.cloud.dialogflow.v2beta1.ImportAgentRequest]. After the import, the imported draft agent will be trained automatically (unless disabled in agent settings). However, once the import is done, training may not be completed yet. Please call [TrainAgent][google.cloud.dialogflow.v2beta1.Agents.TrainAgent] and wait for the operation it returns in order to train explicitly. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) The operation only tracks when importing is complete, not when it is done training. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "agents.import_agent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportAgent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Agents.ImportAgent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "agent_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "agent_content",
+            "type": "TYPE_BYTES"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AgentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.AgentsClient"
+        },
+        "method": {
+          "shortName": "ImportAgent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Agents.ImportAgent",
+          "service": {
+            "shortName": "Agents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Agents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Agents_RestoreAgent_async",
+      "title": "dialogflow restoreAgent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Restores the specified agent from a ZIP file. Replaces the current agent version with a new one. All the intents and entity types in the older version are deleted. After the restore, the restored draft agent will be trained automatically (unless disabled in agent settings). However, once the restore is done, training may not be completed yet. Please call [TrainAgent][google.cloud.dialogflow.v2beta1.Agents.TrainAgent] and wait for the operation it returns in order to train explicitly. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) The operation only tracks when restoring is complete, not when it is done training. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "agents.restore_agent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RestoreAgent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Agents.RestoreAgent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "agent_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "agent_content",
+            "type": "TYPE_BYTES"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AgentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.AgentsClient"
+        },
+        "method": {
+          "shortName": "RestoreAgent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Agents.RestoreAgent",
+          "service": {
+            "shortName": "Agents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Agents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Agents_GetValidationResult_async",
+      "title": "dialogflow getValidationResult Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets agent validation result. Agent validation is performed during training time and is updated automatically when training is completed.",
+      "canonical": true,
+      "file": "agents.get_validation_result.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetValidationResult",
+        "fullName": "google.cloud.dialogflow.v2beta1.Agents.GetValidationResult",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ValidationResult",
+        "client": {
+          "shortName": "AgentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.AgentsClient"
+        },
+        "method": {
+          "shortName": "GetValidationResult",
+          "fullName": "google.cloud.dialogflow.v2beta1.Agents.GetValidationResult",
+          "service": {
+            "shortName": "Agents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Agents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_AnswerRecords_GetAnswerRecord_async",
+      "title": "dialogflow getAnswerRecord Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deprecated. Retrieves a specific answer record.",
+      "canonical": true,
+      "file": "answer_records.get_answer_record.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAnswerRecord",
+        "fullName": "google.cloud.dialogflow.v2beta1.AnswerRecords.GetAnswerRecord",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.AnswerRecord",
+        "client": {
+          "shortName": "AnswerRecordsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.AnswerRecordsClient"
+        },
+        "method": {
+          "shortName": "GetAnswerRecord",
+          "fullName": "google.cloud.dialogflow.v2beta1.AnswerRecords.GetAnswerRecord",
+          "service": {
+            "shortName": "AnswerRecords",
+            "fullName": "google.cloud.dialogflow.v2beta1.AnswerRecords"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_AnswerRecords_ListAnswerRecords_async",
+      "title": "dialogflow listAnswerRecords Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all answer records in the specified project in reverse chronological order.",
+      "canonical": true,
+      "file": "answer_records.list_answer_records.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAnswerRecords",
+        "fullName": "google.cloud.dialogflow.v2beta1.AnswerRecords.ListAnswerRecords",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListAnswerRecordsResponse",
+        "client": {
+          "shortName": "AnswerRecordsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.AnswerRecordsClient"
+        },
+        "method": {
+          "shortName": "ListAnswerRecords",
+          "fullName": "google.cloud.dialogflow.v2beta1.AnswerRecords.ListAnswerRecords",
+          "service": {
+            "shortName": "AnswerRecords",
+            "fullName": "google.cloud.dialogflow.v2beta1.AnswerRecords"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_AnswerRecords_UpdateAnswerRecord_async",
+      "title": "dialogflow updateAnswerRecord Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified answer record.",
+      "canonical": true,
+      "file": "answer_records.update_answer_record.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAnswerRecord",
+        "fullName": "google.cloud.dialogflow.v2beta1.AnswerRecords.UpdateAnswerRecord",
+        "async": true,
+        "parameters": [
+          {
+            "name": "answer_record",
+            "type": ".google.cloud.dialogflow.v2beta1.AnswerRecord"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.AnswerRecord",
+        "client": {
+          "shortName": "AnswerRecordsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.AnswerRecordsClient"
+        },
+        "method": {
+          "shortName": "UpdateAnswerRecord",
+          "fullName": "google.cloud.dialogflow.v2beta1.AnswerRecords.UpdateAnswerRecord",
+          "service": {
+            "shortName": "AnswerRecords",
+            "fullName": "google.cloud.dialogflow.v2beta1.AnswerRecords"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Contexts_ListContexts_async",
+      "title": "dialogflow listContexts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all contexts in the specified session.",
+      "canonical": true,
+      "file": "contexts.list_contexts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListContexts",
+        "fullName": "google.cloud.dialogflow.v2beta1.Contexts.ListContexts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListContextsResponse",
+        "client": {
+          "shortName": "ContextsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ContextsClient"
+        },
+        "method": {
+          "shortName": "ListContexts",
+          "fullName": "google.cloud.dialogflow.v2beta1.Contexts.ListContexts",
+          "service": {
+            "shortName": "Contexts",
+            "fullName": "google.cloud.dialogflow.v2beta1.Contexts"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Contexts_GetContext_async",
+      "title": "dialogflow getContext Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified context.",
+      "canonical": true,
+      "file": "contexts.get_context.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetContext",
+        "fullName": "google.cloud.dialogflow.v2beta1.Contexts.GetContext",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Context",
+        "client": {
+          "shortName": "ContextsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ContextsClient"
+        },
+        "method": {
+          "shortName": "GetContext",
+          "fullName": "google.cloud.dialogflow.v2beta1.Contexts.GetContext",
+          "service": {
+            "shortName": "Contexts",
+            "fullName": "google.cloud.dialogflow.v2beta1.Contexts"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Contexts_CreateContext_async",
+      "title": "dialogflow createContext Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a context. If the specified context already exists, overrides the context.",
+      "canonical": true,
+      "file": "contexts.create_context.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateContext",
+        "fullName": "google.cloud.dialogflow.v2beta1.Contexts.CreateContext",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "context",
+            "type": ".google.cloud.dialogflow.v2beta1.Context"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Context",
+        "client": {
+          "shortName": "ContextsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ContextsClient"
+        },
+        "method": {
+          "shortName": "CreateContext",
+          "fullName": "google.cloud.dialogflow.v2beta1.Contexts.CreateContext",
+          "service": {
+            "shortName": "Contexts",
+            "fullName": "google.cloud.dialogflow.v2beta1.Contexts"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Contexts_UpdateContext_async",
+      "title": "dialogflow updateContext Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified context.",
+      "canonical": true,
+      "file": "contexts.update_context.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateContext",
+        "fullName": "google.cloud.dialogflow.v2beta1.Contexts.UpdateContext",
+        "async": true,
+        "parameters": [
+          {
+            "name": "context",
+            "type": ".google.cloud.dialogflow.v2beta1.Context"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Context",
+        "client": {
+          "shortName": "ContextsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ContextsClient"
+        },
+        "method": {
+          "shortName": "UpdateContext",
+          "fullName": "google.cloud.dialogflow.v2beta1.Contexts.UpdateContext",
+          "service": {
+            "shortName": "Contexts",
+            "fullName": "google.cloud.dialogflow.v2beta1.Contexts"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Contexts_DeleteContext_async",
+      "title": "dialogflow deleteContext Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified context.",
+      "canonical": true,
+      "file": "contexts.delete_context.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteContext",
+        "fullName": "google.cloud.dialogflow.v2beta1.Contexts.DeleteContext",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ContextsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ContextsClient"
+        },
+        "method": {
+          "shortName": "DeleteContext",
+          "fullName": "google.cloud.dialogflow.v2beta1.Contexts.DeleteContext",
+          "service": {
+            "shortName": "Contexts",
+            "fullName": "google.cloud.dialogflow.v2beta1.Contexts"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Contexts_DeleteAllContexts_async",
+      "title": "dialogflow deleteAllContexts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes all active contexts in the specified session.",
+      "canonical": true,
+      "file": "contexts.delete_all_contexts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAllContexts",
+        "fullName": "google.cloud.dialogflow.v2beta1.Contexts.DeleteAllContexts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ContextsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ContextsClient"
+        },
+        "method": {
+          "shortName": "DeleteAllContexts",
+          "fullName": "google.cloud.dialogflow.v2beta1.Contexts.DeleteAllContexts",
+          "service": {
+            "shortName": "Contexts",
+            "fullName": "google.cloud.dialogflow.v2beta1.Contexts"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_ConversationProfiles_ListConversationProfiles_async",
+      "title": "dialogflow listConversationProfiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all conversation profiles in the specified project.",
+      "canonical": true,
+      "file": "conversation_profiles.list_conversation_profiles.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConversationProfiles",
+        "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.ListConversationProfiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListConversationProfilesResponse",
+        "client": {
+          "shortName": "ConversationProfilesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfilesClient"
+        },
+        "method": {
+          "shortName": "ListConversationProfiles",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.ListConversationProfiles",
+          "service": {
+            "shortName": "ConversationProfiles",
+            "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_ConversationProfiles_GetConversationProfile_async",
+      "title": "dialogflow getConversationProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified conversation profile.",
+      "canonical": true,
+      "file": "conversation_profiles.get_conversation_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConversationProfile",
+        "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.GetConversationProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ConversationProfile",
+        "client": {
+          "shortName": "ConversationProfilesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfilesClient"
+        },
+        "method": {
+          "shortName": "GetConversationProfile",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.GetConversationProfile",
+          "service": {
+            "shortName": "ConversationProfiles",
+            "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_ConversationProfiles_CreateConversationProfile_async",
+      "title": "dialogflow createConversationProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a conversation profile in the specified project. [ConversationProfile.CreateTime][] and [ConversationProfile.UpdateTime][] aren't populated in the response. You can retrieve them via [GetConversationProfile][google.cloud.dialogflow.v2beta1.ConversationProfiles.GetConversationProfile] API.",
+      "canonical": true,
+      "file": "conversation_profiles.create_conversation_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConversationProfile",
+        "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.CreateConversationProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "conversation_profile",
+            "type": ".google.cloud.dialogflow.v2beta1.ConversationProfile"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ConversationProfile",
+        "client": {
+          "shortName": "ConversationProfilesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfilesClient"
+        },
+        "method": {
+          "shortName": "CreateConversationProfile",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.CreateConversationProfile",
+          "service": {
+            "shortName": "ConversationProfiles",
+            "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_ConversationProfiles_UpdateConversationProfile_async",
+      "title": "dialogflow updateConversationProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified conversation profile. [ConversationProfile.CreateTime][] and [ConversationProfile.UpdateTime][] aren't populated in the response. You can retrieve them via [GetConversationProfile][google.cloud.dialogflow.v2beta1.ConversationProfiles.GetConversationProfile] API.",
+      "canonical": true,
+      "file": "conversation_profiles.update_conversation_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConversationProfile",
+        "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.UpdateConversationProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "conversation_profile",
+            "type": ".google.cloud.dialogflow.v2beta1.ConversationProfile"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ConversationProfile",
+        "client": {
+          "shortName": "ConversationProfilesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfilesClient"
+        },
+        "method": {
+          "shortName": "UpdateConversationProfile",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.UpdateConversationProfile",
+          "service": {
+            "shortName": "ConversationProfiles",
+            "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_ConversationProfiles_DeleteConversationProfile_async",
+      "title": "dialogflow deleteConversationProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified conversation profile.",
+      "canonical": true,
+      "file": "conversation_profiles.delete_conversation_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConversationProfile",
+        "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.DeleteConversationProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ConversationProfilesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfilesClient"
+        },
+        "method": {
+          "shortName": "DeleteConversationProfile",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles.DeleteConversationProfile",
+          "service": {
+            "shortName": "ConversationProfiles",
+            "fullName": "google.cloud.dialogflow.v2beta1.ConversationProfiles"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Conversations_CreateConversation_async",
+      "title": "dialogflow createConversation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new conversation. Conversations are auto-completed after 24 hours. Conversation Lifecycle: There are two stages during a conversation: Automated Agent Stage and Assist Stage. For Automated Agent Stage, there will be a dialogflow agent responding to user queries. For Assist Stage, there's no dialogflow agent responding to user queries. But we will provide suggestions which are generated from conversation. If [Conversation.conversation_profile][google.cloud.dialogflow.v2beta1.Conversation.conversation_profile] is configured for a dialogflow agent, conversation will start from `Automated Agent Stage`, otherwise, it will start from `Assist Stage`. And during `Automated Agent Stage`, once an [Intent][google.cloud.dialogflow.v2beta1.Intent] with [Intent.live_agent_handoff][google.cloud.dialogflow.v2beta1.Intent.live_agent_handoff] is triggered, conversation will transfer to Assist Stage.",
+      "canonical": true,
+      "file": "conversations.create_conversation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConversation",
+        "fullName": "google.cloud.dialogflow.v2beta1.Conversations.CreateConversation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "conversation",
+            "type": ".google.cloud.dialogflow.v2beta1.Conversation"
+          },
+          {
+            "name": "conversation_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Conversation",
+        "client": {
+          "shortName": "ConversationsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationsClient"
+        },
+        "method": {
+          "shortName": "CreateConversation",
+          "fullName": "google.cloud.dialogflow.v2beta1.Conversations.CreateConversation",
+          "service": {
+            "shortName": "Conversations",
+            "fullName": "google.cloud.dialogflow.v2beta1.Conversations"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Conversations_ListConversations_async",
+      "title": "dialogflow listConversations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all conversations in the specified project.",
+      "canonical": true,
+      "file": "conversations.list_conversations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConversations",
+        "fullName": "google.cloud.dialogflow.v2beta1.Conversations.ListConversations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListConversationsResponse",
+        "client": {
+          "shortName": "ConversationsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationsClient"
+        },
+        "method": {
+          "shortName": "ListConversations",
+          "fullName": "google.cloud.dialogflow.v2beta1.Conversations.ListConversations",
+          "service": {
+            "shortName": "Conversations",
+            "fullName": "google.cloud.dialogflow.v2beta1.Conversations"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Conversations_GetConversation_async",
+      "title": "dialogflow getConversation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specific conversation.",
+      "canonical": true,
+      "file": "conversations.get_conversation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConversation",
+        "fullName": "google.cloud.dialogflow.v2beta1.Conversations.GetConversation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Conversation",
+        "client": {
+          "shortName": "ConversationsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationsClient"
+        },
+        "method": {
+          "shortName": "GetConversation",
+          "fullName": "google.cloud.dialogflow.v2beta1.Conversations.GetConversation",
+          "service": {
+            "shortName": "Conversations",
+            "fullName": "google.cloud.dialogflow.v2beta1.Conversations"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Conversations_CompleteConversation_async",
+      "title": "dialogflow completeConversation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Completes the specified conversation. Finished conversations are purged from the database after 30 days.",
+      "canonical": true,
+      "file": "conversations.complete_conversation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CompleteConversation",
+        "fullName": "google.cloud.dialogflow.v2beta1.Conversations.CompleteConversation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Conversation",
+        "client": {
+          "shortName": "ConversationsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationsClient"
+        },
+        "method": {
+          "shortName": "CompleteConversation",
+          "fullName": "google.cloud.dialogflow.v2beta1.Conversations.CompleteConversation",
+          "service": {
+            "shortName": "Conversations",
+            "fullName": "google.cloud.dialogflow.v2beta1.Conversations"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Conversations_BatchCreateMessages_async",
+      "title": "dialogflow batchCreateMessages Sample",
+      "origin": "API_DEFINITION",
+      "description": " Batch ingests messages to conversation. Customers can use this RPC to ingest historical messages to conversation.",
+      "canonical": true,
+      "file": "conversations.batch_create_messages.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchCreateMessages",
+        "fullName": "google.cloud.dialogflow.v2beta1.Conversations.BatchCreateMessages",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.BatchCreateMessagesResponse",
+        "client": {
+          "shortName": "ConversationsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationsClient"
+        },
+        "method": {
+          "shortName": "BatchCreateMessages",
+          "fullName": "google.cloud.dialogflow.v2beta1.Conversations.BatchCreateMessages",
+          "service": {
+            "shortName": "Conversations",
+            "fullName": "google.cloud.dialogflow.v2beta1.Conversations"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Conversations_ListMessages_async",
+      "title": "dialogflow listMessages Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists messages that belong to a given conversation. `messages` are ordered by `create_time` in descending order. To fetch updates without duplication, send request with filter `create_time_epoch_microseconds > [first item's create_time of previous request]` and empty page_token.",
+      "canonical": true,
+      "file": "conversations.list_messages.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMessages",
+        "fullName": "google.cloud.dialogflow.v2beta1.Conversations.ListMessages",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListMessagesResponse",
+        "client": {
+          "shortName": "ConversationsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ConversationsClient"
+        },
+        "method": {
+          "shortName": "ListMessages",
+          "fullName": "google.cloud.dialogflow.v2beta1.Conversations.ListMessages",
+          "service": {
+            "shortName": "Conversations",
+            "fullName": "google.cloud.dialogflow.v2beta1.Conversations"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Documents_ListDocuments_async",
+      "title": "dialogflow listDocuments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all documents of the knowledge base. Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`.",
+      "canonical": true,
+      "file": "documents.list_documents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDocuments",
+        "fullName": "google.cloud.dialogflow.v2beta1.Documents.ListDocuments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListDocumentsResponse",
+        "client": {
+          "shortName": "DocumentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.DocumentsClient"
+        },
+        "method": {
+          "shortName": "ListDocuments",
+          "fullName": "google.cloud.dialogflow.v2beta1.Documents.ListDocuments",
+          "service": {
+            "shortName": "Documents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Documents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Documents_GetDocument_async",
+      "title": "dialogflow getDocument Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified document. Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`.",
+      "canonical": true,
+      "file": "documents.get_document.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDocument",
+        "fullName": "google.cloud.dialogflow.v2beta1.Documents.GetDocument",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Document",
+        "client": {
+          "shortName": "DocumentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.DocumentsClient"
+        },
+        "method": {
+          "shortName": "GetDocument",
+          "fullName": "google.cloud.dialogflow.v2beta1.Documents.GetDocument",
+          "service": {
+            "shortName": "Documents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Documents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Documents_CreateDocument_async",
+      "title": "dialogflow createDocument Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new document. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata] - `response`: [Document][google.cloud.dialogflow.v2beta1.Document] Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`.",
+      "canonical": true,
+      "file": "documents.create_document.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDocument",
+        "fullName": "google.cloud.dialogflow.v2beta1.Documents.CreateDocument",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "document",
+            "type": ".google.cloud.dialogflow.v2beta1.Document"
+          },
+          {
+            "name": "import_gcs_custom_metadata",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DocumentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.DocumentsClient"
+        },
+        "method": {
+          "shortName": "CreateDocument",
+          "fullName": "google.cloud.dialogflow.v2beta1.Documents.CreateDocument",
+          "service": {
+            "shortName": "Documents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Documents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Documents_ImportDocuments_async",
+      "title": "dialogflow importDocuments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create documents by importing data from external sources. Dialogflow supports up to 350 documents in each request. If you try to import more, Dialogflow will return an error. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata] - `response`: [ImportDocumentsResponse][google.cloud.dialogflow.v2beta1.ImportDocumentsResponse]",
+      "canonical": true,
+      "file": "documents.import_documents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportDocuments",
+        "fullName": "google.cloud.dialogflow.v2beta1.Documents.ImportDocuments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "gcs_source",
+            "type": ".google.cloud.dialogflow.v2beta1.GcsSources"
+          },
+          {
+            "name": "document_template",
+            "type": ".google.cloud.dialogflow.v2beta1.ImportDocumentTemplate"
+          },
+          {
+            "name": "import_gcs_custom_metadata",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DocumentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.DocumentsClient"
+        },
+        "method": {
+          "shortName": "ImportDocuments",
+          "fullName": "google.cloud.dialogflow.v2beta1.Documents.ImportDocuments",
+          "service": {
+            "shortName": "Documents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Documents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Documents_DeleteDocument_async",
+      "title": "dialogflow deleteDocument Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified document. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata] - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`.",
+      "canonical": true,
+      "file": "documents.delete_document.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDocument",
+        "fullName": "google.cloud.dialogflow.v2beta1.Documents.DeleteDocument",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DocumentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.DocumentsClient"
+        },
+        "method": {
+          "shortName": "DeleteDocument",
+          "fullName": "google.cloud.dialogflow.v2beta1.Documents.DeleteDocument",
+          "service": {
+            "shortName": "Documents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Documents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Documents_UpdateDocument_async",
+      "title": "dialogflow updateDocument Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified document. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata] - `response`: [Document][google.cloud.dialogflow.v2beta1.Document] Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`.",
+      "canonical": true,
+      "file": "documents.update_document.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDocument",
+        "fullName": "google.cloud.dialogflow.v2beta1.Documents.UpdateDocument",
+        "async": true,
+        "parameters": [
+          {
+            "name": "document",
+            "type": ".google.cloud.dialogflow.v2beta1.Document"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DocumentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.DocumentsClient"
+        },
+        "method": {
+          "shortName": "UpdateDocument",
+          "fullName": "google.cloud.dialogflow.v2beta1.Documents.UpdateDocument",
+          "service": {
+            "shortName": "Documents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Documents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Documents_ReloadDocument_async",
+      "title": "dialogflow reloadDocument Sample",
+      "origin": "API_DEFINITION",
+      "description": " Reloads the specified document from its specified source, content_uri or content. The previously loaded content of the document will be deleted. Note: Even when the content of the document has not changed, there still may be side effects because of internal implementation changes. Note: If the document source is Google Cloud Storage URI, its metadata will be replaced with the custom metadata from Google Cloud Storage if the `import_gcs_custom_metadata` field is set to true in the request. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata] - `response`: [Document][google.cloud.dialogflow.v2beta1.Document] Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`.",
+      "canonical": true,
+      "file": "documents.reload_document.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReloadDocument",
+        "fullName": "google.cloud.dialogflow.v2beta1.Documents.ReloadDocument",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "gcs_source",
+            "type": ".google.cloud.dialogflow.v2beta1.GcsSource"
+          },
+          {
+            "name": "import_gcs_custom_metadata",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DocumentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.DocumentsClient"
+        },
+        "method": {
+          "shortName": "ReloadDocument",
+          "fullName": "google.cloud.dialogflow.v2beta1.Documents.ReloadDocument",
+          "service": {
+            "shortName": "Documents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Documents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_EntityTypes_ListEntityTypes_async",
+      "title": "dialogflow listEntityTypes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all entity types in the specified agent.",
+      "canonical": true,
+      "file": "entity_types.list_entity_types.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEntityTypes",
+        "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.ListEntityTypes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListEntityTypesResponse",
+        "client": {
+          "shortName": "EntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypesClient"
+        },
+        "method": {
+          "shortName": "ListEntityTypes",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.ListEntityTypes",
+          "service": {
+            "shortName": "EntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_EntityTypes_GetEntityType_async",
+      "title": "dialogflow getEntityType Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified entity type.",
+      "canonical": true,
+      "file": "entity_types.get_entity_type.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEntityType",
+        "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.GetEntityType",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.EntityType",
+        "client": {
+          "shortName": "EntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypesClient"
+        },
+        "method": {
+          "shortName": "GetEntityType",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.GetEntityType",
+          "service": {
+            "shortName": "EntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_EntityTypes_CreateEntityType_async",
+      "title": "dialogflow createEntityType Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an entity type in the specified agent. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "entity_types.create_entity_type.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEntityType",
+        "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.CreateEntityType",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entity_type",
+            "type": ".google.cloud.dialogflow.v2beta1.EntityType"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.EntityType",
+        "client": {
+          "shortName": "EntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypesClient"
+        },
+        "method": {
+          "shortName": "CreateEntityType",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.CreateEntityType",
+          "service": {
+            "shortName": "EntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_EntityTypes_UpdateEntityType_async",
+      "title": "dialogflow updateEntityType Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified entity type. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "entity_types.update_entity_type.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEntityType",
+        "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.UpdateEntityType",
+        "async": true,
+        "parameters": [
+          {
+            "name": "entity_type",
+            "type": ".google.cloud.dialogflow.v2beta1.EntityType"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.EntityType",
+        "client": {
+          "shortName": "EntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypesClient"
+        },
+        "method": {
+          "shortName": "UpdateEntityType",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.UpdateEntityType",
+          "service": {
+            "shortName": "EntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_EntityTypes_DeleteEntityType_async",
+      "title": "dialogflow deleteEntityType Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified entity type. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "entity_types.delete_entity_type.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteEntityType",
+        "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.DeleteEntityType",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "EntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypesClient"
+        },
+        "method": {
+          "shortName": "DeleteEntityType",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.DeleteEntityType",
+          "service": {
+            "shortName": "EntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_EntityTypes_BatchUpdateEntityTypes_async",
+      "title": "dialogflow batchUpdateEntityTypes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates/Creates multiple entity types in the specified agent. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2beta1.BatchUpdateEntityTypesResponse] Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "entity_types.batch_update_entity_types.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchUpdateEntityTypes",
+        "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.BatchUpdateEntityTypes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entity_type_batch_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entity_type_batch_inline",
+            "type": ".google.cloud.dialogflow.v2beta1.EntityTypeBatch"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypesClient"
+        },
+        "method": {
+          "shortName": "BatchUpdateEntityTypes",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.BatchUpdateEntityTypes",
+          "service": {
+            "shortName": "EntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_EntityTypes_BatchDeleteEntityTypes_async",
+      "title": "dialogflow batchDeleteEntityTypes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes entity types in the specified agent. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "entity_types.batch_delete_entity_types.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchDeleteEntityTypes",
+        "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.BatchDeleteEntityTypes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entity_type_names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypesClient"
+        },
+        "method": {
+          "shortName": "BatchDeleteEntityTypes",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.BatchDeleteEntityTypes",
+          "service": {
+            "shortName": "EntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_EntityTypes_BatchCreateEntities_async",
+      "title": "dialogflow batchCreateEntities Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates multiple new entities in the specified entity type. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "entity_types.batch_create_entities.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchCreateEntities",
+        "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.BatchCreateEntities",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entities",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypesClient"
+        },
+        "method": {
+          "shortName": "BatchCreateEntities",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.BatchCreateEntities",
+          "service": {
+            "shortName": "EntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_EntityTypes_BatchUpdateEntities_async",
+      "title": "dialogflow batchUpdateEntities Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates or creates multiple entities in the specified entity type. This method does not affect entities in the entity type that aren't explicitly specified in the request. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training). This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)",
+      "canonical": true,
+      "file": "entity_types.batch_update_entities.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchUpdateEntities",
+        "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.BatchUpdateEntities",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entities",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypesClient"
+        },
+        "method": {
+          "shortName": "BatchUpdateEntities",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.BatchUpdateEntities",
+          "service": {
+            "shortName": "EntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_EntityTypes_BatchDeleteEntities_async",
+      "title": "dialogflow batchDeleteEntities Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes entities in the specified entity type. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "entity_types.batch_delete_entities.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchDeleteEntities",
+        "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.BatchDeleteEntities",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "entity_values",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypesClient"
+        },
+        "method": {
+          "shortName": "BatchDeleteEntities",
+          "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes.BatchDeleteEntities",
+          "service": {
+            "shortName": "EntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.EntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Environments_ListEnvironments_async",
+      "title": "dialogflow listEnvironments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all non-draft environments of the specified agent.",
+      "canonical": true,
+      "file": "environments.list_environments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEnvironments",
+        "fullName": "google.cloud.dialogflow.v2beta1.Environments.ListEnvironments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListEnvironmentsResponse",
+        "client": {
+          "shortName": "EnvironmentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EnvironmentsClient"
+        },
+        "method": {
+          "shortName": "ListEnvironments",
+          "fullName": "google.cloud.dialogflow.v2beta1.Environments.ListEnvironments",
+          "service": {
+            "shortName": "Environments",
+            "fullName": "google.cloud.dialogflow.v2beta1.Environments"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Environments_GetEnvironment_async",
+      "title": "dialogflow getEnvironment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified agent environment.",
+      "canonical": true,
+      "file": "environments.get_environment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEnvironment",
+        "fullName": "google.cloud.dialogflow.v2beta1.Environments.GetEnvironment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Environment",
+        "client": {
+          "shortName": "EnvironmentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EnvironmentsClient"
+        },
+        "method": {
+          "shortName": "GetEnvironment",
+          "fullName": "google.cloud.dialogflow.v2beta1.Environments.GetEnvironment",
+          "service": {
+            "shortName": "Environments",
+            "fullName": "google.cloud.dialogflow.v2beta1.Environments"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Environments_CreateEnvironment_async",
+      "title": "dialogflow createEnvironment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an agent environment.",
+      "canonical": true,
+      "file": "environments.create_environment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEnvironment",
+        "fullName": "google.cloud.dialogflow.v2beta1.Environments.CreateEnvironment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "environment",
+            "type": ".google.cloud.dialogflow.v2beta1.Environment"
+          },
+          {
+            "name": "environment_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Environment",
+        "client": {
+          "shortName": "EnvironmentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EnvironmentsClient"
+        },
+        "method": {
+          "shortName": "CreateEnvironment",
+          "fullName": "google.cloud.dialogflow.v2beta1.Environments.CreateEnvironment",
+          "service": {
+            "shortName": "Environments",
+            "fullName": "google.cloud.dialogflow.v2beta1.Environments"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Environments_UpdateEnvironment_async",
+      "title": "dialogflow updateEnvironment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified agent environment. This method allows you to deploy new agent versions into the environment. When an environment is pointed to a new agent version by setting `environment.agent_version`, the environment is temporarily set to the `LOADING` state. During that time, the environment keeps on serving the previous version of the agent. After the new agent version is done loading, the environment is set back to the `RUNNING` state. You can use \"-\" as Environment ID in environment name to update version in \"draft\" environment. WARNING: this will negate all recent changes to draft and can't be undone. You may want to save the draft to a version before calling this function.",
+      "canonical": true,
+      "file": "environments.update_environment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEnvironment",
+        "fullName": "google.cloud.dialogflow.v2beta1.Environments.UpdateEnvironment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "environment",
+            "type": ".google.cloud.dialogflow.v2beta1.Environment"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "allow_load_to_draft_and_discard_changes",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Environment",
+        "client": {
+          "shortName": "EnvironmentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EnvironmentsClient"
+        },
+        "method": {
+          "shortName": "UpdateEnvironment",
+          "fullName": "google.cloud.dialogflow.v2beta1.Environments.UpdateEnvironment",
+          "service": {
+            "shortName": "Environments",
+            "fullName": "google.cloud.dialogflow.v2beta1.Environments"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Environments_DeleteEnvironment_async",
+      "title": "dialogflow deleteEnvironment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified agent environment.",
+      "canonical": true,
+      "file": "environments.delete_environment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteEnvironment",
+        "fullName": "google.cloud.dialogflow.v2beta1.Environments.DeleteEnvironment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "EnvironmentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EnvironmentsClient"
+        },
+        "method": {
+          "shortName": "DeleteEnvironment",
+          "fullName": "google.cloud.dialogflow.v2beta1.Environments.DeleteEnvironment",
+          "service": {
+            "shortName": "Environments",
+            "fullName": "google.cloud.dialogflow.v2beta1.Environments"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Environments_GetEnvironmentHistory_async",
+      "title": "dialogflow getEnvironmentHistory Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the history of the specified environment.",
+      "canonical": true,
+      "file": "environments.get_environment_history.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEnvironmentHistory",
+        "fullName": "google.cloud.dialogflow.v2beta1.Environments.GetEnvironmentHistory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.EnvironmentHistory",
+        "client": {
+          "shortName": "EnvironmentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.EnvironmentsClient"
+        },
+        "method": {
+          "shortName": "GetEnvironmentHistory",
+          "fullName": "google.cloud.dialogflow.v2beta1.Environments.GetEnvironmentHistory",
+          "service": {
+            "shortName": "Environments",
+            "fullName": "google.cloud.dialogflow.v2beta1.Environments"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Fulfillments_GetFulfillment_async",
+      "title": "dialogflow getFulfillment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the fulfillment.",
+      "canonical": true,
+      "file": "fulfillments.get_fulfillment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetFulfillment",
+        "fullName": "google.cloud.dialogflow.v2beta1.Fulfillments.GetFulfillment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Fulfillment",
+        "client": {
+          "shortName": "FulfillmentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.FulfillmentsClient"
+        },
+        "method": {
+          "shortName": "GetFulfillment",
+          "fullName": "google.cloud.dialogflow.v2beta1.Fulfillments.GetFulfillment",
+          "service": {
+            "shortName": "Fulfillments",
+            "fullName": "google.cloud.dialogflow.v2beta1.Fulfillments"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Fulfillments_UpdateFulfillment_async",
+      "title": "dialogflow updateFulfillment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the fulfillment.",
+      "canonical": true,
+      "file": "fulfillments.update_fulfillment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateFulfillment",
+        "fullName": "google.cloud.dialogflow.v2beta1.Fulfillments.UpdateFulfillment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "fulfillment",
+            "type": ".google.cloud.dialogflow.v2beta1.Fulfillment"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Fulfillment",
+        "client": {
+          "shortName": "FulfillmentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.FulfillmentsClient"
+        },
+        "method": {
+          "shortName": "UpdateFulfillment",
+          "fullName": "google.cloud.dialogflow.v2beta1.Fulfillments.UpdateFulfillment",
+          "service": {
+            "shortName": "Fulfillments",
+            "fullName": "google.cloud.dialogflow.v2beta1.Fulfillments"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Intents_ListIntents_async",
+      "title": "dialogflow listIntents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all intents in the specified agent.",
+      "canonical": true,
+      "file": "intents.list_intents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListIntents",
+        "fullName": "google.cloud.dialogflow.v2beta1.Intents.ListIntents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intent_view",
+            "type": ".google.cloud.dialogflow.v2beta1.IntentView"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListIntentsResponse",
+        "client": {
+          "shortName": "IntentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.IntentsClient"
+        },
+        "method": {
+          "shortName": "ListIntents",
+          "fullName": "google.cloud.dialogflow.v2beta1.Intents.ListIntents",
+          "service": {
+            "shortName": "Intents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Intents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Intents_GetIntent_async",
+      "title": "dialogflow getIntent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified intent.",
+      "canonical": true,
+      "file": "intents.get_intent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIntent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Intents.GetIntent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intent_view",
+            "type": ".google.cloud.dialogflow.v2beta1.IntentView"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Intent",
+        "client": {
+          "shortName": "IntentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.IntentsClient"
+        },
+        "method": {
+          "shortName": "GetIntent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Intents.GetIntent",
+          "service": {
+            "shortName": "Intents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Intents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Intents_CreateIntent_async",
+      "title": "dialogflow createIntent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an intent in the specified agent. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "intents.create_intent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateIntent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Intents.CreateIntent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intent",
+            "type": ".google.cloud.dialogflow.v2beta1.Intent"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intent_view",
+            "type": ".google.cloud.dialogflow.v2beta1.IntentView"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Intent",
+        "client": {
+          "shortName": "IntentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.IntentsClient"
+        },
+        "method": {
+          "shortName": "CreateIntent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Intents.CreateIntent",
+          "service": {
+            "shortName": "Intents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Intents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Intents_UpdateIntent_async",
+      "title": "dialogflow updateIntent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified intent. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "intents.update_intent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateIntent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Intents.UpdateIntent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "intent",
+            "type": ".google.cloud.dialogflow.v2beta1.Intent"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "intent_view",
+            "type": ".google.cloud.dialogflow.v2beta1.IntentView"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Intent",
+        "client": {
+          "shortName": "IntentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.IntentsClient"
+        },
+        "method": {
+          "shortName": "UpdateIntent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Intents.UpdateIntent",
+          "service": {
+            "shortName": "Intents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Intents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Intents_DeleteIntent_async",
+      "title": "dialogflow deleteIntent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified intent and its direct or indirect followup intents. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "intents.delete_intent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteIntent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Intents.DeleteIntent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "IntentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.IntentsClient"
+        },
+        "method": {
+          "shortName": "DeleteIntent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Intents.DeleteIntent",
+          "service": {
+            "shortName": "Intents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Intents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Intents_BatchUpdateIntents_async",
+      "title": "dialogflow batchUpdateIntents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates/Creates multiple intents in the specified agent. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2beta1.BatchUpdateIntentsResponse] Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "intents.batch_update_intents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchUpdateIntents",
+        "fullName": "google.cloud.dialogflow.v2beta1.Intents.BatchUpdateIntents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intent_batch_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intent_batch_inline",
+            "type": ".google.cloud.dialogflow.v2beta1.IntentBatch"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "intent_view",
+            "type": ".google.cloud.dialogflow.v2beta1.IntentView"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "IntentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.IntentsClient"
+        },
+        "method": {
+          "shortName": "BatchUpdateIntents",
+          "fullName": "google.cloud.dialogflow.v2beta1.Intents.BatchUpdateIntents",
+          "service": {
+            "shortName": "Intents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Intents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Intents_BatchDeleteIntents_async",
+      "title": "dialogflow batchDeleteIntents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes intents in the specified agent. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training).",
+      "canonical": true,
+      "file": "intents.batch_delete_intents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchDeleteIntents",
+        "fullName": "google.cloud.dialogflow.v2beta1.Intents.BatchDeleteIntents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "intents",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "IntentsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.IntentsClient"
+        },
+        "method": {
+          "shortName": "BatchDeleteIntents",
+          "fullName": "google.cloud.dialogflow.v2beta1.Intents.BatchDeleteIntents",
+          "service": {
+            "shortName": "Intents",
+            "fullName": "google.cloud.dialogflow.v2beta1.Intents"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_KnowledgeBases_ListKnowledgeBases_async",
+      "title": "dialogflow listKnowledgeBases Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all knowledge bases of the specified agent. Note: The `projects.agent.knowledgeBases` resource is deprecated; only use `projects.knowledgeBases`.",
+      "canonical": true,
+      "file": "knowledge_bases.list_knowledge_bases.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListKnowledgeBases",
+        "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases.ListKnowledgeBases",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListKnowledgeBasesResponse",
+        "client": {
+          "shortName": "KnowledgeBasesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBasesClient"
+        },
+        "method": {
+          "shortName": "ListKnowledgeBases",
+          "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases.ListKnowledgeBases",
+          "service": {
+            "shortName": "KnowledgeBases",
+            "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_KnowledgeBases_GetKnowledgeBase_async",
+      "title": "dialogflow getKnowledgeBase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified knowledge base. Note: The `projects.agent.knowledgeBases` resource is deprecated; only use `projects.knowledgeBases`.",
+      "canonical": true,
+      "file": "knowledge_bases.get_knowledge_base.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetKnowledgeBase",
+        "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases.GetKnowledgeBase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.KnowledgeBase",
+        "client": {
+          "shortName": "KnowledgeBasesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBasesClient"
+        },
+        "method": {
+          "shortName": "GetKnowledgeBase",
+          "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases.GetKnowledgeBase",
+          "service": {
+            "shortName": "KnowledgeBases",
+            "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_KnowledgeBases_CreateKnowledgeBase_async",
+      "title": "dialogflow createKnowledgeBase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a knowledge base. Note: The `projects.agent.knowledgeBases` resource is deprecated; only use `projects.knowledgeBases`.",
+      "canonical": true,
+      "file": "knowledge_bases.create_knowledge_base.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateKnowledgeBase",
+        "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases.CreateKnowledgeBase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "knowledge_base",
+            "type": ".google.cloud.dialogflow.v2beta1.KnowledgeBase"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.KnowledgeBase",
+        "client": {
+          "shortName": "KnowledgeBasesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBasesClient"
+        },
+        "method": {
+          "shortName": "CreateKnowledgeBase",
+          "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases.CreateKnowledgeBase",
+          "service": {
+            "shortName": "KnowledgeBases",
+            "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_KnowledgeBases_DeleteKnowledgeBase_async",
+      "title": "dialogflow deleteKnowledgeBase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified knowledge base. Note: The `projects.agent.knowledgeBases` resource is deprecated; only use `projects.knowledgeBases`.",
+      "canonical": true,
+      "file": "knowledge_bases.delete_knowledge_base.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteKnowledgeBase",
+        "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases.DeleteKnowledgeBase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "KnowledgeBasesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBasesClient"
+        },
+        "method": {
+          "shortName": "DeleteKnowledgeBase",
+          "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases.DeleteKnowledgeBase",
+          "service": {
+            "shortName": "KnowledgeBases",
+            "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_KnowledgeBases_UpdateKnowledgeBase_async",
+      "title": "dialogflow updateKnowledgeBase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified knowledge base. Note: The `projects.agent.knowledgeBases` resource is deprecated; only use `projects.knowledgeBases`.",
+      "canonical": true,
+      "file": "knowledge_bases.update_knowledge_base.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKnowledgeBase",
+        "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases.UpdateKnowledgeBase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "knowledge_base",
+            "type": ".google.cloud.dialogflow.v2beta1.KnowledgeBase"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.KnowledgeBase",
+        "client": {
+          "shortName": "KnowledgeBasesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBasesClient"
+        },
+        "method": {
+          "shortName": "UpdateKnowledgeBase",
+          "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases.UpdateKnowledgeBase",
+          "service": {
+            "shortName": "KnowledgeBases",
+            "fullName": "google.cloud.dialogflow.v2beta1.KnowledgeBases"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Participants_CreateParticipant_async",
+      "title": "dialogflow createParticipant Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new participant in a conversation.",
+      "canonical": true,
+      "file": "participants.create_participant.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateParticipant",
+        "fullName": "google.cloud.dialogflow.v2beta1.Participants.CreateParticipant",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "participant",
+            "type": ".google.cloud.dialogflow.v2beta1.Participant"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Participant",
+        "client": {
+          "shortName": "ParticipantsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ParticipantsClient"
+        },
+        "method": {
+          "shortName": "CreateParticipant",
+          "fullName": "google.cloud.dialogflow.v2beta1.Participants.CreateParticipant",
+          "service": {
+            "shortName": "Participants",
+            "fullName": "google.cloud.dialogflow.v2beta1.Participants"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Participants_GetParticipant_async",
+      "title": "dialogflow getParticipant Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a conversation participant.",
+      "canonical": true,
+      "file": "participants.get_participant.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetParticipant",
+        "fullName": "google.cloud.dialogflow.v2beta1.Participants.GetParticipant",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Participant",
+        "client": {
+          "shortName": "ParticipantsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ParticipantsClient"
+        },
+        "method": {
+          "shortName": "GetParticipant",
+          "fullName": "google.cloud.dialogflow.v2beta1.Participants.GetParticipant",
+          "service": {
+            "shortName": "Participants",
+            "fullName": "google.cloud.dialogflow.v2beta1.Participants"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Participants_ListParticipants_async",
+      "title": "dialogflow listParticipants Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all participants in the specified conversation.",
+      "canonical": true,
+      "file": "participants.list_participants.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListParticipants",
+        "fullName": "google.cloud.dialogflow.v2beta1.Participants.ListParticipants",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListParticipantsResponse",
+        "client": {
+          "shortName": "ParticipantsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ParticipantsClient"
+        },
+        "method": {
+          "shortName": "ListParticipants",
+          "fullName": "google.cloud.dialogflow.v2beta1.Participants.ListParticipants",
+          "service": {
+            "shortName": "Participants",
+            "fullName": "google.cloud.dialogflow.v2beta1.Participants"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Participants_UpdateParticipant_async",
+      "title": "dialogflow updateParticipant Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified participant.",
+      "canonical": true,
+      "file": "participants.update_participant.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateParticipant",
+        "fullName": "google.cloud.dialogflow.v2beta1.Participants.UpdateParticipant",
+        "async": true,
+        "parameters": [
+          {
+            "name": "participant",
+            "type": ".google.cloud.dialogflow.v2beta1.Participant"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Participant",
+        "client": {
+          "shortName": "ParticipantsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ParticipantsClient"
+        },
+        "method": {
+          "shortName": "UpdateParticipant",
+          "fullName": "google.cloud.dialogflow.v2beta1.Participants.UpdateParticipant",
+          "service": {
+            "shortName": "Participants",
+            "fullName": "google.cloud.dialogflow.v2beta1.Participants"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Participants_AnalyzeContent_async",
+      "title": "dialogflow analyzeContent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds a text (chat, for example), or audio (phone recording, for example) message from a participant into the conversation. Note: Always use agent versions for production traffic sent to virtual agents. See [Versions and environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).",
+      "canonical": true,
+      "file": "participants.analyze_content.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 97,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AnalyzeContent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Participants.AnalyzeContent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "participant",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "text_input",
+            "type": ".google.cloud.dialogflow.v2beta1.TextInput"
+          },
+          {
+            "name": "event_input",
+            "type": ".google.cloud.dialogflow.v2beta1.EventInput"
+          },
+          {
+            "name": "reply_audio_config",
+            "type": ".google.cloud.dialogflow.v2beta1.OutputAudioConfig"
+          },
+          {
+            "name": "query_params",
+            "type": ".google.cloud.dialogflow.v2beta1.QueryParameters"
+          },
+          {
+            "name": "assist_query_params",
+            "type": ".google.cloud.dialogflow.v2beta1.AssistQueryParameters"
+          },
+          {
+            "name": "message_send_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.AnalyzeContentResponse",
+        "client": {
+          "shortName": "ParticipantsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ParticipantsClient"
+        },
+        "method": {
+          "shortName": "AnalyzeContent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Participants.AnalyzeContent",
+          "service": {
+            "shortName": "Participants",
+            "fullName": "google.cloud.dialogflow.v2beta1.Participants"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Participants_SuggestArticles_async",
+      "title": "dialogflow suggestArticles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets suggested articles for a participant based on specific historical messages. Note that [ListSuggestions][google.cloud.dialogflow.v2beta1.Participants.ListSuggestions] will only list the auto-generated suggestions, while [CompileSuggestion][google.cloud.dialogflow.v2beta1.Participants.CompileSuggestion] will try to compile suggestion based on the provided conversation context in the real time.",
+      "canonical": true,
+      "file": "participants.suggest_articles.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SuggestArticles",
+        "fullName": "google.cloud.dialogflow.v2beta1.Participants.SuggestArticles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "latest_message",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "context_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "assist_query_params",
+            "type": ".google.cloud.dialogflow.v2beta1.AssistQueryParameters"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.SuggestArticlesResponse",
+        "client": {
+          "shortName": "ParticipantsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ParticipantsClient"
+        },
+        "method": {
+          "shortName": "SuggestArticles",
+          "fullName": "google.cloud.dialogflow.v2beta1.Participants.SuggestArticles",
+          "service": {
+            "shortName": "Participants",
+            "fullName": "google.cloud.dialogflow.v2beta1.Participants"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Participants_SuggestFaqAnswers_async",
+      "title": "dialogflow suggestFaqAnswers Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets suggested faq answers for a participant based on specific historical messages.",
+      "canonical": true,
+      "file": "participants.suggest_faq_answers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SuggestFaqAnswers",
+        "fullName": "google.cloud.dialogflow.v2beta1.Participants.SuggestFaqAnswers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "latest_message",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "context_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "assist_query_params",
+            "type": ".google.cloud.dialogflow.v2beta1.AssistQueryParameters"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.SuggestFaqAnswersResponse",
+        "client": {
+          "shortName": "ParticipantsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ParticipantsClient"
+        },
+        "method": {
+          "shortName": "SuggestFaqAnswers",
+          "fullName": "google.cloud.dialogflow.v2beta1.Participants.SuggestFaqAnswers",
+          "service": {
+            "shortName": "Participants",
+            "fullName": "google.cloud.dialogflow.v2beta1.Participants"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Participants_SuggestSmartReplies_async",
+      "title": "dialogflow suggestSmartReplies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets smart replies for a participant based on specific historical messages.",
+      "canonical": true,
+      "file": "participants.suggest_smart_replies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SuggestSmartReplies",
+        "fullName": "google.cloud.dialogflow.v2beta1.Participants.SuggestSmartReplies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "current_text_input",
+            "type": ".google.cloud.dialogflow.v2beta1.TextInput"
+          },
+          {
+            "name": "latest_message",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "context_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.SuggestSmartRepliesResponse",
+        "client": {
+          "shortName": "ParticipantsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ParticipantsClient"
+        },
+        "method": {
+          "shortName": "SuggestSmartReplies",
+          "fullName": "google.cloud.dialogflow.v2beta1.Participants.SuggestSmartReplies",
+          "service": {
+            "shortName": "Participants",
+            "fullName": "google.cloud.dialogflow.v2beta1.Participants"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Participants_ListSuggestions_async",
+      "title": "dialogflow listSuggestions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deprecated: Use inline suggestion, event based suggestion or Suggestion* API instead. See [HumanAgentAssistantConfig.name][google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.name] for more details. Removal Date: 2020-09-01. Retrieves suggestions for live agents. This method should be used by human agent client software to fetch auto generated suggestions in real-time, while the conversation with an end user is in progress. The functionality is implemented in terms of the [list pagination](https://cloud.google.com/apis/design/design_patterns#list_pagination) design pattern. The client app should use the `next_page_token` field to fetch the next batch of suggestions. `suggestions` are sorted by `create_time` in descending order. To fetch latest suggestion, just set `page_size` to 1. To fetch new suggestions without duplication, send request with filter `create_time_epoch_microseconds > [first item's create_time of previous request]` and empty page_token.",
+      "canonical": true,
+      "file": "participants.list_suggestions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSuggestions",
+        "fullName": "google.cloud.dialogflow.v2beta1.Participants.ListSuggestions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListSuggestionsResponse",
+        "client": {
+          "shortName": "ParticipantsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ParticipantsClient"
+        },
+        "method": {
+          "shortName": "ListSuggestions",
+          "fullName": "google.cloud.dialogflow.v2beta1.Participants.ListSuggestions",
+          "service": {
+            "shortName": "Participants",
+            "fullName": "google.cloud.dialogflow.v2beta1.Participants"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Participants_CompileSuggestion_async",
+      "title": "dialogflow compileSuggestion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deprecated. use [SuggestArticles][google.cloud.dialogflow.v2beta1.Participants.SuggestArticles] and [SuggestFaqAnswers][google.cloud.dialogflow.v2beta1.Participants.SuggestFaqAnswers] instead. Gets suggestions for a participant based on specific historical messages. Note that [ListSuggestions][google.cloud.dialogflow.v2beta1.Participants.ListSuggestions] will only list the auto-generated suggestions, while [CompileSuggestion][google.cloud.dialogflow.v2beta1.Participants.CompileSuggestion] will try to compile suggestion based on the provided conversation context in the real time.",
+      "canonical": true,
+      "file": "participants.compile_suggestion.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CompileSuggestion",
+        "fullName": "google.cloud.dialogflow.v2beta1.Participants.CompileSuggestion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "latest_message",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "context_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.CompileSuggestionResponse",
+        "client": {
+          "shortName": "ParticipantsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.ParticipantsClient"
+        },
+        "method": {
+          "shortName": "CompileSuggestion",
+          "fullName": "google.cloud.dialogflow.v2beta1.Participants.CompileSuggestion",
+          "service": {
+            "shortName": "Participants",
+            "fullName": "google.cloud.dialogflow.v2beta1.Participants"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_SessionEntityTypes_ListSessionEntityTypes_async",
+      "title": "dialogflow listSessionEntityTypes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all session entity types in the specified session. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.",
+      "canonical": true,
+      "file": "session_entity_types.list_session_entity_types.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSessionEntityTypes",
+        "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes.ListSessionEntityTypes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListSessionEntityTypesResponse",
+        "client": {
+          "shortName": "SessionEntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypesClient"
+        },
+        "method": {
+          "shortName": "ListSessionEntityTypes",
+          "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes.ListSessionEntityTypes",
+          "service": {
+            "shortName": "SessionEntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_SessionEntityTypes_GetSessionEntityType_async",
+      "title": "dialogflow getSessionEntityType Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified session entity type. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.",
+      "canonical": true,
+      "file": "session_entity_types.get_session_entity_type.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSessionEntityType",
+        "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes.GetSessionEntityType",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.SessionEntityType",
+        "client": {
+          "shortName": "SessionEntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypesClient"
+        },
+        "method": {
+          "shortName": "GetSessionEntityType",
+          "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes.GetSessionEntityType",
+          "service": {
+            "shortName": "SessionEntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_SessionEntityTypes_CreateSessionEntityType_async",
+      "title": "dialogflow createSessionEntityType Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a session entity type. If the specified session entity type already exists, overrides the session entity type. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.",
+      "canonical": true,
+      "file": "session_entity_types.create_session_entity_type.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSessionEntityType",
+        "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes.CreateSessionEntityType",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "session_entity_type",
+            "type": ".google.cloud.dialogflow.v2beta1.SessionEntityType"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.SessionEntityType",
+        "client": {
+          "shortName": "SessionEntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypesClient"
+        },
+        "method": {
+          "shortName": "CreateSessionEntityType",
+          "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes.CreateSessionEntityType",
+          "service": {
+            "shortName": "SessionEntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_SessionEntityTypes_UpdateSessionEntityType_async",
+      "title": "dialogflow updateSessionEntityType Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified session entity type. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.",
+      "canonical": true,
+      "file": "session_entity_types.update_session_entity_type.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSessionEntityType",
+        "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes.UpdateSessionEntityType",
+        "async": true,
+        "parameters": [
+          {
+            "name": "session_entity_type",
+            "type": ".google.cloud.dialogflow.v2beta1.SessionEntityType"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.SessionEntityType",
+        "client": {
+          "shortName": "SessionEntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypesClient"
+        },
+        "method": {
+          "shortName": "UpdateSessionEntityType",
+          "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes.UpdateSessionEntityType",
+          "service": {
+            "shortName": "SessionEntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_SessionEntityTypes_DeleteSessionEntityType_async",
+      "title": "dialogflow deleteSessionEntityType Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified session entity type. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.",
+      "canonical": true,
+      "file": "session_entity_types.delete_session_entity_type.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSessionEntityType",
+        "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes.DeleteSessionEntityType",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "SessionEntityTypesClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypesClient"
+        },
+        "method": {
+          "shortName": "DeleteSessionEntityType",
+          "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes.DeleteSessionEntityType",
+          "service": {
+            "shortName": "SessionEntityTypes",
+            "fullName": "google.cloud.dialogflow.v2beta1.SessionEntityTypes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Sessions_DetectIntent_async",
+      "title": "dialogflow detectIntent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Processes a natural language query and returns structured, actionable data as a result. This method is not idempotent, because it may cause contexts and session entity types to be updated, which in turn might affect results of future queries. If you might use [Agent Assist](https://cloud.google.com/dialogflow/docs/#aa) or other CCAI products now or in the future, consider using [AnalyzeContent][google.cloud.dialogflow.v2beta1.Participants.AnalyzeContent] instead of `DetectIntent`. `AnalyzeContent` has additional functionality for Agent Assist and other CCAI products. Note: Always use agent versions for production traffic. See [Versions and environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).",
+      "canonical": true,
+      "file": "sessions.detect_intent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 103,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DetectIntent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Sessions.DetectIntent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "session",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query_params",
+            "type": ".google.cloud.dialogflow.v2beta1.QueryParameters"
+          },
+          {
+            "name": "query_input",
+            "type": ".google.cloud.dialogflow.v2beta1.QueryInput"
+          },
+          {
+            "name": "output_audio_config",
+            "type": ".google.cloud.dialogflow.v2beta1.OutputAudioConfig"
+          },
+          {
+            "name": "output_audio_config_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "input_audio",
+            "type": "TYPE_BYTES"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.DetectIntentResponse",
+        "client": {
+          "shortName": "SessionsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.SessionsClient"
+        },
+        "method": {
+          "shortName": "DetectIntent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Sessions.DetectIntent",
+          "service": {
+            "shortName": "Sessions",
+            "fullName": "google.cloud.dialogflow.v2beta1.Sessions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Sessions_StreamingDetectIntent_async",
+      "title": "dialogflow streamingDetectIntent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Processes a natural language query in audio format in a streaming fashion and returns structured, actionable data as a result. This method is only available via the gRPC API (not REST). If you might use [Agent Assist](https://cloud.google.com/dialogflow/docs/#aa) or other CCAI products now or in the future, consider using [StreamingAnalyzeContent][google.cloud.dialogflow.v2beta1.Participants.StreamingAnalyzeContent] instead of `StreamingDetectIntent`. `StreamingAnalyzeContent` has additional functionality for Agent Assist and other CCAI products. Note: Always use agent versions for production traffic. See [Versions and environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).",
+      "canonical": true,
+      "file": "sessions.streaming_detect_intent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 119,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StreamingDetectIntent",
+        "fullName": "google.cloud.dialogflow.v2beta1.Sessions.StreamingDetectIntent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "session",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query_params",
+            "type": ".google.cloud.dialogflow.v2beta1.QueryParameters"
+          },
+          {
+            "name": "query_input",
+            "type": ".google.cloud.dialogflow.v2beta1.QueryInput"
+          },
+          {
+            "name": "single_utterance",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "output_audio_config",
+            "type": ".google.cloud.dialogflow.v2beta1.OutputAudioConfig"
+          },
+          {
+            "name": "output_audio_config_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "input_audio",
+            "type": "TYPE_BYTES"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.StreamingDetectIntentResponse",
+        "client": {
+          "shortName": "SessionsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.SessionsClient"
+        },
+        "method": {
+          "shortName": "StreamingDetectIntent",
+          "fullName": "google.cloud.dialogflow.v2beta1.Sessions.StreamingDetectIntent",
+          "service": {
+            "shortName": "Sessions",
+            "fullName": "google.cloud.dialogflow.v2beta1.Sessions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Versions_ListVersions_async",
+      "title": "dialogflow listVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all versions of the specified agent.",
+      "canonical": true,
+      "file": "versions.list_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListVersions",
+        "fullName": "google.cloud.dialogflow.v2beta1.Versions.ListVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.ListVersionsResponse",
+        "client": {
+          "shortName": "VersionsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.VersionsClient"
+        },
+        "method": {
+          "shortName": "ListVersions",
+          "fullName": "google.cloud.dialogflow.v2beta1.Versions.ListVersions",
+          "service": {
+            "shortName": "Versions",
+            "fullName": "google.cloud.dialogflow.v2beta1.Versions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Versions_GetVersion_async",
+      "title": "dialogflow getVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified agent version.",
+      "canonical": true,
+      "file": "versions.get_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetVersion",
+        "fullName": "google.cloud.dialogflow.v2beta1.Versions.GetVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Version",
+        "client": {
+          "shortName": "VersionsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.VersionsClient"
+        },
+        "method": {
+          "shortName": "GetVersion",
+          "fullName": "google.cloud.dialogflow.v2beta1.Versions.GetVersion",
+          "service": {
+            "shortName": "Versions",
+            "fullName": "google.cloud.dialogflow.v2beta1.Versions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Versions_CreateVersion_async",
+      "title": "dialogflow createVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an agent version. The new version points to the agent instance in the \"default\" environment.",
+      "canonical": true,
+      "file": "versions.create_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateVersion",
+        "fullName": "google.cloud.dialogflow.v2beta1.Versions.CreateVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "version",
+            "type": ".google.cloud.dialogflow.v2beta1.Version"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Version",
+        "client": {
+          "shortName": "VersionsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.VersionsClient"
+        },
+        "method": {
+          "shortName": "CreateVersion",
+          "fullName": "google.cloud.dialogflow.v2beta1.Versions.CreateVersion",
+          "service": {
+            "shortName": "Versions",
+            "fullName": "google.cloud.dialogflow.v2beta1.Versions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Versions_UpdateVersion_async",
+      "title": "dialogflow updateVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified agent version. Note that this method does not allow you to update the state of the agent the given version points to. It allows you to update only mutable properties of the version resource.",
+      "canonical": true,
+      "file": "versions.update_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateVersion",
+        "fullName": "google.cloud.dialogflow.v2beta1.Versions.UpdateVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "version",
+            "type": ".google.cloud.dialogflow.v2beta1.Version"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2beta1.Version",
+        "client": {
+          "shortName": "VersionsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.VersionsClient"
+        },
+        "method": {
+          "shortName": "UpdateVersion",
+          "fullName": "google.cloud.dialogflow.v2beta1.Versions.UpdateVersion",
+          "service": {
+            "shortName": "Versions",
+            "fullName": "google.cloud.dialogflow.v2beta1.Versions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2beta1_generated_Versions_DeleteVersion_async",
+      "title": "dialogflow deleteVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete the specified agent version.",
+      "canonical": true,
+      "file": "versions.delete_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteVersion",
+        "fullName": "google.cloud.dialogflow.v2beta1.Versions.DeleteVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "VersionsClient",
+          "fullName": "google.cloud.dialogflow.v2beta1.VersionsClient"
+        },
+        "method": {
+          "shortName": "DeleteVersion",
+          "fullName": "google.cloud.dialogflow.v2beta1.Versions.DeleteVersion",
+          "service": {
+            "shortName": "Versions",
+            "fullName": "google.cloud.dialogflow.v2beta1.Versions"
+          }
+        }
+      }
+    }
+  ]
+}

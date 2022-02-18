@@ -3401,9 +3401,8 @@ export class ContextsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.contextsStub!.then(stub => {
+    if (this.contextsStub && !this._terminated) {
+      return this.contextsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

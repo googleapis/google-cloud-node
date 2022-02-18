@@ -3360,9 +3360,8 @@ export class ConversationProfilesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.conversationProfilesStub!.then(stub => {
+    if (this.conversationProfilesStub && !this._terminated) {
+      return this.conversationProfilesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

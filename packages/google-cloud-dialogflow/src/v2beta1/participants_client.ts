@@ -4033,9 +4033,8 @@ export class ParticipantsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.participantsStub!.then(stub => {
+    if (this.participantsStub && !this._terminated) {
+      return this.participantsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

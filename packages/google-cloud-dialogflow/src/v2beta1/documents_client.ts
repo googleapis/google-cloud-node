@@ -3892,9 +3892,8 @@ export class DocumentsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.documentsStub!.then(stub => {
+    if (this.documentsStub && !this._terminated) {
+      return this.documentsStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

@@ -156,13 +156,29 @@ describe('v2beta1.SessionEntityTypesClient', () => {
     assert(client.sessionEntityTypesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new sessionentitytypesModule.v2beta1.SessionEntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.sessionEntityTypesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new sessionentitytypesModule.v2beta1.SessionEntityTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.sessionEntityTypesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -314,6 +330,23 @@ describe('v2beta1.SessionEntityTypesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getSessionEntityType with closed client', async () => {
+      const client =
+        new sessionentitytypesModule.v2beta1.SessionEntityTypesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GetSessionEntityTypeRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSessionEntityType(request), expectedError);
+    });
   });
 
   describe('createSessionEntityType', () => {
@@ -430,6 +463,26 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         (client.innerApiCalls.createSessionEntityType as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createSessionEntityType with closed client', async () => {
+      const client =
+        new sessionentitytypesModule.v2beta1.SessionEntityTypesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.CreateSessionEntityTypeRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createSessionEntityType(request),
+        expectedError
       );
     });
   });
@@ -553,6 +606,27 @@ describe('v2beta1.SessionEntityTypesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateSessionEntityType with closed client', async () => {
+      const client =
+        new sessionentitytypesModule.v2beta1.SessionEntityTypesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.UpdateSessionEntityTypeRequest()
+      );
+      request.sessionEntityType = {};
+      request.sessionEntityType.name = '';
+      const expectedHeaderRequestParams = 'session_entity_type.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateSessionEntityType(request),
+        expectedError
+      );
+    });
   });
 
   describe('deleteSessionEntityType', () => {
@@ -669,6 +743,26 @@ describe('v2beta1.SessionEntityTypesClient', () => {
         (client.innerApiCalls.deleteSessionEntityType as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteSessionEntityType with closed client', async () => {
+      const client =
+        new sessionentitytypesModule.v2beta1.SessionEntityTypesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.DeleteSessionEntityTypeRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteSessionEntityType(request),
+        expectedError
       );
     });
   });
