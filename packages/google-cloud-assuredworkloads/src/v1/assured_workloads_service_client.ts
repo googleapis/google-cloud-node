@@ -1136,9 +1136,8 @@ export class AssuredWorkloadsServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.assuredWorkloadsServiceStub!.then(stub => {
+    if (this.assuredWorkloadsServiceStub && !this._terminated) {
+      return this.assuredWorkloadsServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

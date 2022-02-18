@@ -191,13 +191,29 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
     assert(client.assuredWorkloadsServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.assuredWorkloadsServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.assuredWorkloadsServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -351,6 +367,24 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateWorkload with closed client', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.UpdateWorkloadRequest()
+      );
+      request.workload = {};
+      request.workload.name = '';
+      const expectedHeaderRequestParams = 'workload.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateWorkload(request), expectedError);
+    });
   });
 
   describe('deleteWorkload', () => {
@@ -465,6 +499,23 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteWorkload with closed client', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.DeleteWorkloadRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteWorkload(request), expectedError);
+    });
   });
 
   describe('getWorkload', () => {
@@ -578,6 +629,23 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getWorkload with closed client', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.GetWorkloadRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getWorkload(request), expectedError);
     });
   });
 
