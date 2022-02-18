@@ -5344,9 +5344,8 @@ export class NotebookServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.notebookServiceStub!.then(stub => {
+    if (this.notebookServiceStub && !this._terminated) {
+      return this.notebookServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

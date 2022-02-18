@@ -185,12 +185,27 @@ describe('v1.NotebookServiceClient', () => {
     assert(client.notebookServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new notebookserviceModule.v1.NotebookServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.notebookServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new notebookserviceModule.v1.NotebookServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.notebookServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -336,6 +351,22 @@ describe('v1.NotebookServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getInstance with closed client', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.GetInstanceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getInstance(request), expectedError);
+    });
   });
 
   describe('isInstanceUpgradeable', () => {
@@ -451,6 +482,25 @@ describe('v1.NotebookServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes isInstanceUpgradeable with closed client', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.IsInstanceUpgradeableRequest()
+      );
+      request.notebookInstance = '';
+      const expectedHeaderRequestParams = 'notebook_instance=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.isInstanceUpgradeable(request),
+        expectedError
+      );
+    });
   });
 
   describe('getInstanceHealth', () => {
@@ -561,6 +611,22 @@ describe('v1.NotebookServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getInstanceHealth with closed client', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.GetInstanceHealthRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getInstanceHealth(request), expectedError);
     });
   });
 
@@ -673,6 +739,22 @@ describe('v1.NotebookServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getEnvironment with closed client', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.GetEnvironmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEnvironment(request), expectedError);
+    });
   });
 
   describe('getSchedule', () => {
@@ -784,6 +866,22 @@ describe('v1.NotebookServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getSchedule with closed client', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.GetScheduleRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSchedule(request), expectedError);
+    });
   });
 
   describe('getExecution', () => {
@@ -894,6 +992,22 @@ describe('v1.NotebookServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getExecution with closed client', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.notebooks.v1.GetExecutionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getExecution(request), expectedError);
     });
   });
 
