@@ -164,12 +164,27 @@ describe('v1.AddressesClient', () => {
     assert(client.addressesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new addressesModule.v1.AddressesClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.addressesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new addressesModule.v1.AddressesClient({
+      auth: googleAuth,
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.addressesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -312,6 +327,22 @@ describe('v1.AddressesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes delete with closed client', async () => {
+      const client = new addressesModule.v1.AddressesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteAddressRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -418,6 +449,22 @@ describe('v1.AddressesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client = new addressesModule.v1.AddressesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetAddressRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -526,6 +573,22 @@ describe('v1.AddressesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes insert with closed client', async () => {
+      const client = new addressesModule.v1.AddressesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertAddressRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
     });
   });
 

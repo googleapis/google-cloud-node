@@ -1649,9 +1649,8 @@ export class TargetPoolsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.targetPoolsStub!.then(stub => {
+    if (this.targetPoolsStub && !this._terminated) {
+      return this.targetPoolsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

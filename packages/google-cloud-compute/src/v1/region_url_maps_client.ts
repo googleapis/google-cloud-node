@@ -1208,9 +1208,8 @@ export class RegionUrlMapsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.regionUrlMapsStub!.then(stub => {
+    if (this.regionUrlMapsStub && !this._terminated) {
+      return this.regionUrlMapsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

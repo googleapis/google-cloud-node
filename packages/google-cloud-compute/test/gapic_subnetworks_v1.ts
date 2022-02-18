@@ -164,12 +164,27 @@ describe('v1.SubnetworksClient', () => {
     assert(client.subnetworksStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new subnetworksModule.v1.SubnetworksClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.subnetworksStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new subnetworksModule.v1.SubnetworksClient({
+      auth: googleAuth,
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.subnetworksStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -312,6 +327,22 @@ describe('v1.SubnetworksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes delete with closed client', async () => {
+      const client = new subnetworksModule.v1.SubnetworksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
+    });
   });
 
   describe('expandIpCidrRange', () => {
@@ -423,6 +454,22 @@ describe('v1.SubnetworksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes expandIpCidrRange with closed client', async () => {
+      const client = new subnetworksModule.v1.SubnetworksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.expandIpCidrRange(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -529,6 +576,22 @@ describe('v1.SubnetworksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client = new subnetworksModule.v1.SubnetworksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetSubnetworkRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -641,6 +704,22 @@ describe('v1.SubnetworksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new subnetworksModule.v1.SubnetworksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
+    });
   });
 
   describe('insert', () => {
@@ -749,6 +828,22 @@ describe('v1.SubnetworksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes insert with closed client', async () => {
+      const client = new subnetworksModule.v1.SubnetworksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
+    });
   });
 
   describe('patch', () => {
@@ -855,6 +950,22 @@ describe('v1.SubnetworksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes patch with closed client', async () => {
+      const client = new subnetworksModule.v1.SubnetworksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patch(request), expectedError);
     });
   });
 
@@ -966,6 +1077,22 @@ describe('v1.SubnetworksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new subnetworksModule.v1.SubnetworksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
 
@@ -1082,6 +1209,25 @@ describe('v1.SubnetworksClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setPrivateIpGoogleAccess with closed client', async () => {
+      const client = new subnetworksModule.v1.SubnetworksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.setPrivateIpGoogleAccess(request),
+        expectedError
+      );
+    });
   });
 
   describe('testIamPermissions', () => {
@@ -1193,6 +1339,22 @@ describe('v1.SubnetworksClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client = new subnetworksModule.v1.SubnetworksClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
 

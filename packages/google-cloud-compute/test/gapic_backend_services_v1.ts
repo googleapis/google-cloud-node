@@ -166,12 +166,27 @@ describe('v1.BackendServicesClient', () => {
     assert(client.backendServicesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new backendservicesModule.v1.BackendServicesClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.backendServicesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new backendservicesModule.v1.BackendServicesClient({
+      auth: googleAuth,
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.backendServicesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -317,6 +332,22 @@ describe('v1.BackendServicesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes addSignedUrlKey with closed client', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.addSignedUrlKey(request), expectedError);
+    });
   });
 
   describe('delete', () => {
@@ -424,6 +455,22 @@ describe('v1.BackendServicesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes delete with closed client', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
     });
   });
 
@@ -537,6 +584,22 @@ describe('v1.BackendServicesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteSignedUrlKey with closed client', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteSignedUrlKey(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -643,6 +706,22 @@ describe('v1.BackendServicesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -752,6 +831,22 @@ describe('v1.BackendServicesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getHealth with closed client', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetHealthBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getHealth(request), expectedError);
+    });
   });
 
   describe('insert', () => {
@@ -860,6 +955,22 @@ describe('v1.BackendServicesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes insert with closed client', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
+    });
   });
 
   describe('patch', () => {
@@ -966,6 +1077,22 @@ describe('v1.BackendServicesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes patch with closed client', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patch(request), expectedError);
     });
   });
 
@@ -1082,6 +1209,25 @@ describe('v1.BackendServicesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setEdgeSecurityPolicy with closed client', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.setEdgeSecurityPolicy(request),
+        expectedError
+      );
+    });
   });
 
   describe('setSecurityPolicy', () => {
@@ -1193,6 +1339,22 @@ describe('v1.BackendServicesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setSecurityPolicy with closed client', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setSecurityPolicy(request), expectedError);
+    });
   });
 
   describe('update', () => {
@@ -1300,6 +1462,22 @@ describe('v1.BackendServicesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes update with closed client', async () => {
+      const client = new backendservicesModule.v1.BackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.UpdateBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.update(request), expectedError);
     });
   });
 

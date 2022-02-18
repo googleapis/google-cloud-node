@@ -1489,9 +1489,8 @@ export class ReservationsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.reservationsStub!.then(stub => {
+    if (this.reservationsStub && !this._terminated) {
+      return this.reservationsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

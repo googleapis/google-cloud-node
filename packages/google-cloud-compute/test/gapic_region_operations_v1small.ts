@@ -103,12 +103,27 @@ describe('v1small.RegionOperationsClient', () => {
     assert(client.regionOperationsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new regionoperationsModule.v1small.RegionOperationsClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.regionOperationsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new regionoperationsModule.v1small.RegionOperationsClient({
+      auth: googleAuth,
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.regionOperationsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -250,6 +265,22 @@ describe('v1small.RegionOperationsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes get with closed client', async () => {
+      const client = new regionoperationsModule.v1small.RegionOperationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
+    });
   });
 
   describe('wait', () => {
@@ -356,6 +387,22 @@ describe('v1small.RegionOperationsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes wait with closed client', async () => {
+      const client = new regionoperationsModule.v1small.RegionOperationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.wait(request), expectedError);
     });
   });
 });

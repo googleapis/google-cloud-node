@@ -1000,9 +1000,8 @@ export class RegionTargetHttpProxiesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.regionTargetHttpProxiesStub!.then(stub => {
+    if (this.regionTargetHttpProxiesStub && !this._terminated) {
+      return this.regionTargetHttpProxiesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

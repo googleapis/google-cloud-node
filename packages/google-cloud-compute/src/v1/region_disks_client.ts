@@ -1787,9 +1787,8 @@ export class RegionDisksClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.regionDisksStub!.then(stub => {
+    if (this.regionDisksStub && !this._terminated) {
+      return this.regionDisksStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -1158,9 +1158,8 @@ export class HealthChecksClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.healthChecksStub!.then(stub => {
+    if (this.healthChecksStub && !this._terminated) {
+      return this.healthChecksStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

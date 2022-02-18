@@ -164,12 +164,27 @@ describe('v1.InterconnectsClient', () => {
     assert(client.interconnectsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new interconnectsModule.v1.InterconnectsClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.interconnectsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new interconnectsModule.v1.InterconnectsClient({
+      auth: googleAuth,
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.interconnectsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -312,6 +327,22 @@ describe('v1.InterconnectsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes delete with closed client', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteInterconnectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -418,6 +449,22 @@ describe('v1.InterconnectsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetInterconnectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -530,6 +577,22 @@ describe('v1.InterconnectsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getDiagnostics with closed client', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDiagnostics(request), expectedError);
+    });
   });
 
   describe('insert', () => {
@@ -638,6 +701,22 @@ describe('v1.InterconnectsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes insert with closed client', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertInterconnectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
+    });
   });
 
   describe('patch', () => {
@@ -744,6 +823,22 @@ describe('v1.InterconnectsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes patch with closed client', async () => {
+      const client = new interconnectsModule.v1.InterconnectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchInterconnectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patch(request), expectedError);
     });
   });
 

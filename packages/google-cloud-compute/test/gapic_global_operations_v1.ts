@@ -166,12 +166,27 @@ describe('v1.GlobalOperationsClient', () => {
     assert(client.globalOperationsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new globaloperationsModule.v1.GlobalOperationsClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.globalOperationsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new globaloperationsModule.v1.GlobalOperationsClient({
+      auth: googleAuth,
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.globalOperationsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -314,6 +329,22 @@ describe('v1.GlobalOperationsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes delete with closed client', async () => {
+      const client = new globaloperationsModule.v1.GlobalOperationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteGlobalOperationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -421,6 +452,22 @@ describe('v1.GlobalOperationsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes get with closed client', async () => {
+      const client = new globaloperationsModule.v1.GlobalOperationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetGlobalOperationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
+    });
   });
 
   describe('wait', () => {
@@ -527,6 +574,22 @@ describe('v1.GlobalOperationsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes wait with closed client', async () => {
+      const client = new globaloperationsModule.v1.GlobalOperationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.WaitGlobalOperationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.wait(request), expectedError);
     });
   });
 

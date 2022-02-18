@@ -170,13 +170,29 @@ describe('v1.RegionBackendServicesClient', () => {
     assert(client.regionBackendServicesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new regionbackendservicesModule.v1.RegionBackendServicesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.regionBackendServicesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new regionbackendservicesModule.v1.RegionBackendServicesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.regionBackendServicesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -324,6 +340,23 @@ describe('v1.RegionBackendServicesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes delete with closed client', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteRegionBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -433,6 +466,23 @@ describe('v1.RegionBackendServicesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRegionBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -545,6 +595,23 @@ describe('v1.RegionBackendServicesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getHealth with closed client', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getHealth(request), expectedError);
+    });
   });
 
   describe('insert', () => {
@@ -656,6 +723,23 @@ describe('v1.RegionBackendServicesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes insert with closed client', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertRegionBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
+    });
   });
 
   describe('patch', () => {
@@ -765,6 +849,23 @@ describe('v1.RegionBackendServicesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes patch with closed client', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRegionBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patch(request), expectedError);
     });
   });
 
@@ -876,6 +977,23 @@ describe('v1.RegionBackendServicesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes update with closed client', async () => {
+      const client =
+        new regionbackendservicesModule.v1.RegionBackendServicesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.UpdateRegionBackendServiceRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.update(request), expectedError);
     });
   });
 

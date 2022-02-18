@@ -624,9 +624,8 @@ export class InterconnectLocationsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.interconnectLocationsStub!.then(stub => {
+    if (this.interconnectLocationsStub && !this._terminated) {
+      return this.interconnectLocationsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

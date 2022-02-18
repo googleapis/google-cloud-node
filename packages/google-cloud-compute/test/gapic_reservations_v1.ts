@@ -164,12 +164,27 @@ describe('v1.ReservationsClient', () => {
     assert(client.reservationsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new reservationsModule.v1.ReservationsClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.reservationsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new reservationsModule.v1.ReservationsClient({
+      auth: googleAuth,
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.reservationsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -312,6 +327,22 @@ describe('v1.ReservationsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes delete with closed client', async () => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteReservationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -418,6 +449,22 @@ describe('v1.ReservationsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetReservationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -530,6 +577,22 @@ describe('v1.ReservationsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetIamPolicyReservationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
+    });
   });
 
   describe('insert', () => {
@@ -638,6 +701,22 @@ describe('v1.ReservationsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes insert with closed client', async () => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertReservationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
+    });
   });
 
   describe('resize', () => {
@@ -745,6 +824,22 @@ describe('v1.ReservationsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes resize with closed client', async () => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ResizeReservationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.resize(request), expectedError);
     });
   });
 
@@ -856,6 +951,22 @@ describe('v1.ReservationsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetIamPolicyReservationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
 
@@ -969,6 +1080,22 @@ describe('v1.ReservationsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.TestIamPermissionsReservationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
+    });
   });
 
   describe('update', () => {
@@ -1076,6 +1203,22 @@ describe('v1.ReservationsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes update with closed client', async () => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.UpdateReservationRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.update(request), expectedError);
     });
   });
 

@@ -1100,9 +1100,8 @@ export class TargetTcpProxiesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.targetTcpProxiesStub!.then(stub => {
+    if (this.targetTcpProxiesStub && !this._terminated) {
+      return this.targetTcpProxiesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

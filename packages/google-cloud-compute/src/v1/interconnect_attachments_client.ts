@@ -1075,9 +1075,8 @@ export class InterconnectAttachmentsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.interconnectAttachmentsStub!.then(stub => {
+    if (this.interconnectAttachmentsStub && !this._terminated) {
+      return this.interconnectAttachmentsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

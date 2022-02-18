@@ -166,12 +166,27 @@ describe('v1.RegionCommitmentsClient', () => {
     assert(client.regionCommitmentsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new regioncommitmentsModule.v1.RegionCommitmentsClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.regionCommitmentsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new regioncommitmentsModule.v1.RegionCommitmentsClient({
+      auth: googleAuth,
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.regionCommitmentsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -313,6 +328,22 @@ describe('v1.RegionCommitmentsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes get with closed client', async () => {
+      const client = new regioncommitmentsModule.v1.RegionCommitmentsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRegionCommitmentRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
+    });
   });
 
   describe('insert', () => {
@@ -421,6 +452,22 @@ describe('v1.RegionCommitmentsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes insert with closed client', async () => {
+      const client = new regioncommitmentsModule.v1.RegionCommitmentsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertRegionCommitmentRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
+    });
   });
 
   describe('update', () => {
@@ -528,6 +575,22 @@ describe('v1.RegionCommitmentsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes update with closed client', async () => {
+      const client = new regioncommitmentsModule.v1.RegionCommitmentsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.UpdateRegionCommitmentRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.update(request), expectedError);
     });
   });
 

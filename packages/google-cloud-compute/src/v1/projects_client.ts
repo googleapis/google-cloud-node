@@ -1992,9 +1992,8 @@ export class ProjectsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.projectsStub!.then(stub => {
+    if (this.projectsStub && !this._terminated) {
+      return this.projectsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -1757,9 +1757,8 @@ export class BackendServicesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.backendServicesStub!.then(stub => {
+    if (this.backendServicesStub && !this._terminated) {
+      return this.backendServicesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

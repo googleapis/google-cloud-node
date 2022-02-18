@@ -170,13 +170,29 @@ describe('v1.RegionSslCertificatesClient', () => {
     assert(client.regionSslCertificatesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new regionsslcertificatesModule.v1.RegionSslCertificatesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.regionSslCertificatesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new regionsslcertificatesModule.v1.RegionSslCertificatesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.regionSslCertificatesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -324,6 +340,23 @@ describe('v1.RegionSslCertificatesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes delete with closed client', async () => {
+      const client =
+        new regionsslcertificatesModule.v1.RegionSslCertificatesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteRegionSslCertificateRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -433,6 +466,23 @@ describe('v1.RegionSslCertificatesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client =
+        new regionsslcertificatesModule.v1.RegionSslCertificatesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRegionSslCertificateRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -544,6 +594,23 @@ describe('v1.RegionSslCertificatesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes insert with closed client', async () => {
+      const client =
+        new regionsslcertificatesModule.v1.RegionSslCertificatesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertRegionSslCertificateRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
     });
   });
 

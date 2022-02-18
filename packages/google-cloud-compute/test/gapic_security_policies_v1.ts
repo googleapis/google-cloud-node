@@ -166,12 +166,27 @@ describe('v1.SecurityPoliciesClient', () => {
     assert(client.securityPoliciesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.securityPoliciesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+      auth: googleAuth,
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.securityPoliciesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -314,6 +329,22 @@ describe('v1.SecurityPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes addRule with closed client', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.addRule(request), expectedError);
+    });
   });
 
   describe('delete', () => {
@@ -422,6 +453,22 @@ describe('v1.SecurityPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes delete with closed client', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -528,6 +575,22 @@ describe('v1.SecurityPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -637,6 +700,22 @@ describe('v1.SecurityPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getRule with closed client', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getRule(request), expectedError);
+    });
   });
 
   describe('insert', () => {
@@ -744,6 +823,22 @@ describe('v1.SecurityPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes insert with closed client', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
     });
   });
 
@@ -860,6 +955,25 @@ describe('v1.SecurityPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes listPreconfiguredExpressionSets with closed client', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.listPreconfiguredExpressionSets(request),
+        expectedError
+      );
+    });
   });
 
   describe('patch', () => {
@@ -966,6 +1080,22 @@ describe('v1.SecurityPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes patch with closed client', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patch(request), expectedError);
     });
   });
 
@@ -1074,6 +1204,22 @@ describe('v1.SecurityPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes patchRule with closed client', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patchRule(request), expectedError);
     });
   });
 
@@ -1185,6 +1331,22 @@ describe('v1.SecurityPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes removeRule with closed client', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.removeRule(request), expectedError);
     });
   });
 

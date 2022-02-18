@@ -825,9 +825,8 @@ export class RoutesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.routesStub!.then(stub => {
+    if (this.routesStub && !this._terminated) {
+      return this.routesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

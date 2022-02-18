@@ -164,12 +164,27 @@ describe('v1.ProjectsClient', () => {
     assert(client.projectsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new projectsModule.v1.ProjectsClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.projectsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new projectsModule.v1.ProjectsClient({
+      auth: googleAuth,
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.projectsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -315,6 +330,22 @@ describe('v1.ProjectsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes disableXpnHost with closed client', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DisableXpnHostProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.disableXpnHost(request), expectedError);
+    });
   });
 
   describe('disableXpnResource', () => {
@@ -427,6 +458,22 @@ describe('v1.ProjectsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes disableXpnResource with closed client', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DisableXpnResourceProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.disableXpnResource(request), expectedError);
+    });
   });
 
   describe('enableXpnHost', () => {
@@ -537,6 +584,22 @@ describe('v1.ProjectsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes enableXpnHost with closed client', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.EnableXpnHostProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.enableXpnHost(request), expectedError);
     });
   });
 
@@ -649,6 +712,22 @@ describe('v1.ProjectsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes enableXpnResource with closed client', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.EnableXpnResourceProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.enableXpnResource(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -755,6 +834,22 @@ describe('v1.ProjectsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -867,6 +962,22 @@ describe('v1.ProjectsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getXpnHost with closed client', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetXpnHostProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getXpnHost(request), expectedError);
+    });
   });
 
   describe('moveDisk', () => {
@@ -974,6 +1085,22 @@ describe('v1.ProjectsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes moveDisk with closed client', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.moveDisk(request), expectedError);
     });
   });
 
@@ -1085,6 +1212,22 @@ describe('v1.ProjectsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes moveInstance with closed client', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.moveInstance(request), expectedError);
     });
   });
 
@@ -1199,6 +1342,25 @@ describe('v1.ProjectsClient', () => {
         (client.innerApiCalls.setCommonInstanceMetadata as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setCommonInstanceMetadata with closed client', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.setCommonInstanceMetadata(request),
+        expectedError
       );
     });
   });
@@ -1316,6 +1478,25 @@ describe('v1.ProjectsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setDefaultNetworkTier with closed client', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.setDefaultNetworkTier(request),
+        expectedError
+      );
+    });
   });
 
   describe('setUsageExportBucket', () => {
@@ -1427,6 +1608,22 @@ describe('v1.ProjectsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setUsageExportBucket with closed client', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setUsageExportBucket(request), expectedError);
     });
   });
 

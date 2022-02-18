@@ -423,9 +423,8 @@ export class RegionInstancesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.regionInstancesStub!.then(stub => {
+    if (this.regionInstancesStub && !this._terminated) {
+      return this.regionInstancesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

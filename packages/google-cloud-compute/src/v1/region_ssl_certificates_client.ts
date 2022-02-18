@@ -873,9 +873,8 @@ export class RegionSslCertificatesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.regionSslCertificatesStub!.then(stub => {
+    if (this.regionSslCertificatesStub && !this._terminated) {
+      return this.regionSslCertificatesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

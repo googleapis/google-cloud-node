@@ -1530,9 +1530,8 @@ export class NetworkEndpointGroupsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.networkEndpointGroupsStub!.then(stub => {
+    if (this.networkEndpointGroupsStub && !this._terminated) {
+      return this.networkEndpointGroupsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

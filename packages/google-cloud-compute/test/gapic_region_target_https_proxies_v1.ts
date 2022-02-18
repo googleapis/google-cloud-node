@@ -172,13 +172,29 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
     assert(client.regionTargetHttpsProxiesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new regiontargethttpsproxiesModule.v1.RegionTargetHttpsProxiesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.regionTargetHttpsProxiesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new regiontargethttpsproxiesModule.v1.RegionTargetHttpsProxiesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.regionTargetHttpsProxiesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -326,6 +342,23 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes delete with closed client', async () => {
+      const client =
+        new regiontargethttpsproxiesModule.v1.RegionTargetHttpsProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteRegionTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -435,6 +468,23 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client =
+        new regiontargethttpsproxiesModule.v1.RegionTargetHttpsProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRegionTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -546,6 +596,23 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes insert with closed client', async () => {
+      const client =
+        new regiontargethttpsproxiesModule.v1.RegionTargetHttpsProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertRegionTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
     });
   });
 
@@ -662,6 +729,23 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setSslCertificates with closed client', async () => {
+      const client =
+        new regiontargethttpsproxiesModule.v1.RegionTargetHttpsProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetSslCertificatesRegionTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setSslCertificates(request), expectedError);
+    });
   });
 
   describe('setUrlMap', () => {
@@ -772,6 +856,23 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setUrlMap with closed client', async () => {
+      const client =
+        new regiontargethttpsproxiesModule.v1.RegionTargetHttpsProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetUrlMapRegionTargetHttpsProxyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setUrlMap(request), expectedError);
     });
   });
 

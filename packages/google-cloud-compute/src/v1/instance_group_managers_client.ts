@@ -3120,9 +3120,8 @@ export class InstanceGroupManagersClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.instanceGroupManagersStub!.then(stub => {
+    if (this.instanceGroupManagersStub && !this._terminated) {
+      return this.instanceGroupManagersStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

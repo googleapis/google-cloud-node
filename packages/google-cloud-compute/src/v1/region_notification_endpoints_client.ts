@@ -882,9 +882,8 @@ export class RegionNotificationEndpointsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.regionNotificationEndpointsStub!.then(stub => {
+    if (this.regionNotificationEndpointsStub && !this._terminated) {
+      return this.regionNotificationEndpointsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

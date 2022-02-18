@@ -1061,9 +1061,8 @@ export class SslPoliciesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.sslPoliciesStub!.then(stub => {
+    if (this.sslPoliciesStub && !this._terminated) {
+      return this.sslPoliciesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

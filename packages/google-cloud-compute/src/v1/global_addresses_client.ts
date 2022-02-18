@@ -849,9 +849,8 @@ export class GlobalAddressesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.globalAddressesStub!.then(stub => {
+    if (this.globalAddressesStub && !this._terminated) {
+      return this.globalAddressesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

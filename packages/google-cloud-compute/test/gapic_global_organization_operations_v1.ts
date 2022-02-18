@@ -177,7 +177,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
     assert(client.globalOrganizationOperationsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
         {
@@ -185,7 +185,25 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
           projectId: 'bogus',
         }
       );
-    client.close();
+    client.initialize();
+    assert(client.globalOrganizationOperationsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
+        {
+          auth: googleAuth,
+          projectId: 'bogus',
+        }
+      );
+    assert.strictEqual(client.globalOrganizationOperationsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -343,6 +361,25 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes delete with closed client', async () => {
+      const client =
+        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
+      );
+      request.operation = '';
+      const expectedHeaderRequestParams = 'operation=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -458,6 +495,25 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client =
+        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
+      );
+      request.operation = '';
+      const expectedHeaderRequestParams = 'operation=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 

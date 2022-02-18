@@ -177,7 +177,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
     assert(client.globalNetworkEndpointGroupsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient(
         {
@@ -185,7 +185,25 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
           projectId: 'bogus',
         }
       );
-    client.close();
+    client.initialize();
+    assert(client.globalNetworkEndpointGroupsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient(
+        {
+          auth: googleAuth,
+          projectId: 'bogus',
+        }
+      );
+    assert.strictEqual(client.globalNetworkEndpointGroupsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -350,6 +368,28 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes attachNetworkEndpoints with closed client', async () => {
+      const client =
+        new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.attachNetworkEndpoints(request),
+        expectedError
+      );
+    });
   });
 
   describe('delete', () => {
@@ -466,6 +506,25 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes delete with closed client', async () => {
+      const client =
+        new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
     });
   });
 
@@ -591,6 +650,28 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes detachNetworkEndpoints with closed client', async () => {
+      const client =
+        new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.detachNetworkEndpoints(request),
+        expectedError
+      );
+    });
   });
 
   describe('get', () => {
@@ -706,6 +787,25 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client =
+        new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -823,6 +923,25 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes insert with closed client', async () => {
+      const client =
+        new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
     });
   });
 

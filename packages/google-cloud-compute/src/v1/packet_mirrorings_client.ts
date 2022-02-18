@@ -1161,9 +1161,8 @@ export class PacketMirroringsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.packetMirroringsStub!.then(stub => {
+    if (this.packetMirroringsStub && !this._terminated) {
+      return this.packetMirroringsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

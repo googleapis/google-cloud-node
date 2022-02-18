@@ -672,9 +672,8 @@ export class NodeTypesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.nodeTypesStub!.then(stub => {
+    if (this.nodeTypesStub && !this._terminated) {
+      return this.nodeTypesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

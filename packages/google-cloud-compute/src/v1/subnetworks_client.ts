@@ -1808,9 +1808,8 @@ export class SubnetworksClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.subnetworksStub!.then(stub => {
+    if (this.subnetworksStub && !this._terminated) {
+      return this.subnetworksStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

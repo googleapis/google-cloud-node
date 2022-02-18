@@ -993,9 +993,8 @@ export class PublicAdvertisedPrefixesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.publicAdvertisedPrefixesStub!.then(stub => {
+    if (this.publicAdvertisedPrefixesStub && !this._terminated) {
+      return this.publicAdvertisedPrefixesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

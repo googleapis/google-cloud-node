@@ -166,12 +166,27 @@ describe('v1.FirewallPoliciesClient', () => {
     assert(client.firewallPoliciesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.firewallPoliciesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+      auth: googleAuth,
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.firewallPoliciesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -317,6 +332,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes addAssociation with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddAssociationFirewallPolicyRequest()
+      );
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'firewall_policy=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.addAssociation(request), expectedError);
+    });
   });
 
   describe('addRule', () => {
@@ -424,6 +455,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes addRule with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddRuleFirewallPolicyRequest()
+      );
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'firewall_policy=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.addRule(request), expectedError);
     });
   });
 
@@ -536,6 +583,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes cloneRules with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CloneRulesFirewallPolicyRequest()
+      );
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'firewall_policy=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.cloneRules(request), expectedError);
+    });
   });
 
   describe('delete', () => {
@@ -644,6 +707,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes delete with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteFirewallPolicyRequest()
+      );
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'firewall_policy=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -750,6 +829,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetFirewallPolicyRequest()
+      );
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'firewall_policy=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -862,6 +957,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getAssociation with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetAssociationFirewallPolicyRequest()
+      );
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'firewall_policy=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAssociation(request), expectedError);
+    });
   });
 
   describe('getIamPolicy', () => {
@@ -973,6 +1084,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetIamPolicyFirewallPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
+    });
   });
 
   describe('getRule', () => {
@@ -1081,6 +1208,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getRule with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRuleFirewallPolicyRequest()
+      );
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'firewall_policy=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getRule(request), expectedError);
+    });
   });
 
   describe('insert', () => {
@@ -1164,6 +1307,20 @@ describe('v1.FirewallPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes insert with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertFirewallPolicyRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
     });
   });
 
@@ -1251,6 +1408,20 @@ describe('v1.FirewallPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes listAssociations with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListAssociationsFirewallPolicyRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listAssociations(request), expectedError);
     });
   });
 
@@ -1359,6 +1530,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes move with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveFirewallPolicyRequest()
+      );
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'firewall_policy=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.move(request), expectedError);
+    });
   });
 
   describe('patch', () => {
@@ -1465,6 +1652,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes patch with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchFirewallPolicyRequest()
+      );
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'firewall_policy=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patch(request), expectedError);
     });
   });
 
@@ -1573,6 +1776,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes patchRule with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRuleFirewallPolicyRequest()
+      );
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'firewall_policy=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patchRule(request), expectedError);
     });
   });
 
@@ -1685,6 +1904,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes removeAssociation with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemoveAssociationFirewallPolicyRequest()
+      );
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'firewall_policy=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.removeAssociation(request), expectedError);
+    });
   });
 
   describe('removeRule', () => {
@@ -1795,6 +2030,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes removeRule with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemoveRuleFirewallPolicyRequest()
+      );
+      request.firewallPolicy = '';
+      const expectedHeaderRequestParams = 'firewall_policy=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.removeRule(request), expectedError);
     });
   });
 
@@ -1907,6 +2158,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetIamPolicyFirewallPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
+    });
   });
 
   describe('testIamPermissions', () => {
@@ -2018,6 +2285,22 @@ describe('v1.FirewallPoliciesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client = new firewallpoliciesModule.v1.FirewallPoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.TestIamPermissionsFirewallPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
 

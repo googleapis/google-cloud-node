@@ -172,13 +172,29 @@ describe('v1.RegionTargetHttpProxiesClient', () => {
     assert(client.regionTargetHttpProxiesStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new regiontargethttpproxiesModule.v1.RegionTargetHttpProxiesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.regionTargetHttpProxiesStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new regiontargethttpproxiesModule.v1.RegionTargetHttpProxiesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.regionTargetHttpProxiesStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -326,6 +342,23 @@ describe('v1.RegionTargetHttpProxiesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes delete with closed client', async () => {
+      const client =
+        new regiontargethttpproxiesModule.v1.RegionTargetHttpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteRegionTargetHttpProxyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
+    });
   });
 
   describe('get', () => {
@@ -435,6 +468,23 @@ describe('v1.RegionTargetHttpProxiesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client =
+        new regiontargethttpproxiesModule.v1.RegionTargetHttpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRegionTargetHttpProxyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -547,6 +597,23 @@ describe('v1.RegionTargetHttpProxiesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes insert with closed client', async () => {
+      const client =
+        new regiontargethttpproxiesModule.v1.RegionTargetHttpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertRegionTargetHttpProxyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
+    });
   });
 
   describe('setUrlMap', () => {
@@ -657,6 +724,23 @@ describe('v1.RegionTargetHttpProxiesClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setUrlMap with closed client', async () => {
+      const client =
+        new regiontargethttpproxiesModule.v1.RegionTargetHttpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetUrlMapRegionTargetHttpProxyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setUrlMap(request), expectedError);
     });
   });
 

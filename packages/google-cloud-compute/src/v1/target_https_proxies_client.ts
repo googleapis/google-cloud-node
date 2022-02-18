@@ -1535,9 +1535,8 @@ export class TargetHttpsProxiesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.targetHttpsProxiesStub!.then(stub => {
+    if (this.targetHttpsProxiesStub && !this._terminated) {
+      return this.targetHttpsProxiesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

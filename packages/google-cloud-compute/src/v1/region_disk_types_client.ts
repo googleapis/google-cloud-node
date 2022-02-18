@@ -617,9 +617,8 @@ export class RegionDiskTypesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.regionDiskTypesStub!.then(stub => {
+    if (this.regionDiskTypesStub && !this._terminated) {
+      return this.regionDiskTypesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

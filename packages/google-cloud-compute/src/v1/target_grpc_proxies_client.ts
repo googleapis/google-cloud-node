@@ -979,9 +979,8 @@ export class TargetGrpcProxiesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.targetGrpcProxiesStub!.then(stub => {
+    if (this.targetGrpcProxiesStub && !this._terminated) {
+      return this.targetGrpcProxiesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

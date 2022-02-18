@@ -1550,9 +1550,8 @@ export class SecurityPoliciesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.securityPoliciesStub!.then(stub => {
+    if (this.securityPoliciesStub && !this._terminated) {
+      return this.securityPoliciesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -1343,9 +1343,8 @@ export class UrlMapsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.urlMapsStub!.then(stub => {
+    if (this.urlMapsStub && !this._terminated) {
+      return this.urlMapsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -170,13 +170,29 @@ describe('v1.InstanceGroupManagersClient', () => {
     assert(client.instanceGroupManagersStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.instanceGroupManagersStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.instanceGroupManagersStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -327,6 +343,23 @@ describe('v1.InstanceGroupManagersClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes abandonInstances with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AbandonInstancesInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.abandonInstances(request), expectedError);
+    });
   });
 
   describe('applyUpdatesToInstances', () => {
@@ -445,6 +478,26 @@ describe('v1.InstanceGroupManagersClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes applyUpdatesToInstances with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.applyUpdatesToInstances(request),
+        expectedError
+      );
+    });
   });
 
   describe('createInstances', () => {
@@ -559,6 +612,23 @@ describe('v1.InstanceGroupManagersClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createInstances with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.CreateInstancesInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createInstances(request), expectedError);
+    });
   });
 
   describe('delete', () => {
@@ -669,6 +739,23 @@ describe('v1.InstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes delete with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.delete(request), expectedError);
     });
   });
 
@@ -783,6 +870,23 @@ describe('v1.InstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteInstances with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteInstancesInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteInstances(request), expectedError);
     });
   });
 
@@ -902,6 +1006,26 @@ describe('v1.InstanceGroupManagersClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deletePerInstanceConfigs with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeletePerInstanceConfigsInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deletePerInstanceConfigs(request),
+        expectedError
+      );
+    });
   });
 
   describe('get', () => {
@@ -1011,6 +1135,23 @@ describe('v1.InstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes get with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.get(request), expectedError);
     });
   });
 
@@ -1123,6 +1264,23 @@ describe('v1.InstanceGroupManagersClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes insert with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insert(request), expectedError);
+    });
   });
 
   describe('patch', () => {
@@ -1232,6 +1390,23 @@ describe('v1.InstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes patch with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.patch(request), expectedError);
     });
   });
 
@@ -1351,6 +1526,26 @@ describe('v1.InstanceGroupManagersClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes patchPerInstanceConfigs with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchPerInstanceConfigsInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.patchPerInstanceConfigs(request),
+        expectedError
+      );
+    });
   });
 
   describe('recreateInstances', () => {
@@ -1465,6 +1660,23 @@ describe('v1.InstanceGroupManagersClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes recreateInstances with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RecreateInstancesInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.recreateInstances(request), expectedError);
+    });
   });
 
   describe('resize', () => {
@@ -1575,6 +1787,23 @@ describe('v1.InstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes resize with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ResizeInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.resize(request), expectedError);
     });
   });
 
@@ -1691,6 +1920,23 @@ describe('v1.InstanceGroupManagersClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes setInstanceTemplate with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetInstanceTemplateInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setInstanceTemplate(request), expectedError);
+    });
   });
 
   describe('setTargetPools', () => {
@@ -1804,6 +2050,23 @@ describe('v1.InstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes setTargetPools with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetTargetPoolsInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setTargetPools(request), expectedError);
     });
   });
 
@@ -1921,6 +2184,26 @@ describe('v1.InstanceGroupManagersClient', () => {
         (client.innerApiCalls.updatePerInstanceConfigs as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updatePerInstanceConfigs with closed client', async () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsInstanceGroupManagerRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updatePerInstanceConfigs(request),
+        expectedError
       );
     });
   });

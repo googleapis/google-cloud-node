@@ -484,9 +484,8 @@ export class LicenseCodesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.licenseCodesStub!.then(stub => {
+    if (this.licenseCodesStub && !this._terminated) {
+      return this.licenseCodesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

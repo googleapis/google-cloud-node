@@ -932,9 +932,8 @@ export class TargetVpnGatewaysClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.targetVpnGatewaysStub!.then(stub => {
+    if (this.targetVpnGatewaysStub && !this._terminated) {
+      return this.targetVpnGatewaysStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

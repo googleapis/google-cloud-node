@@ -1242,9 +1242,8 @@ export class ResourcePoliciesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.resourcePoliciesStub!.then(stub => {
+    if (this.resourcePoliciesStub && !this._terminated) {
+      return this.resourcePoliciesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

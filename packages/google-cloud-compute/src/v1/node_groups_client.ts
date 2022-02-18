@@ -1927,9 +1927,8 @@ export class NodeGroupsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.nodeGroupsStub!.then(stub => {
+    if (this.nodeGroupsStub && !this._terminated) {
+      return this.nodeGroupsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

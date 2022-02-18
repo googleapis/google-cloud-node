@@ -502,9 +502,8 @@ export class RegionOperationsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.regionOperationsStub!.then(stub => {
+    if (this.regionOperationsStub && !this._terminated) {
+      return this.regionOperationsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

@@ -1813,9 +1813,8 @@ export class DisksClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.disksStub!.then(stub => {
+    if (this.disksStub && !this._terminated) {
+      return this.disksStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

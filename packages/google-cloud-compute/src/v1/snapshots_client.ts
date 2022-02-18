@@ -1249,9 +1249,8 @@ export class SnapshotsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.snapshotsStub!.then(stub => {
+    if (this.snapshotsStub && !this._terminated) {
+      return this.snapshotsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

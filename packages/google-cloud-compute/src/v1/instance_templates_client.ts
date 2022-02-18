@@ -1162,9 +1162,8 @@ export class InstanceTemplatesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.instanceTemplatesStub!.then(stub => {
+    if (this.instanceTemplatesStub && !this._terminated) {
+      return this.instanceTemplatesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

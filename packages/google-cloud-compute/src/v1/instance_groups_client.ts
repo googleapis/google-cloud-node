@@ -1536,9 +1536,8 @@ export class InstanceGroupsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.instanceGroupsStub!.then(stub => {
+    if (this.instanceGroupsStub && !this._terminated) {
+      return this.instanceGroupsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
