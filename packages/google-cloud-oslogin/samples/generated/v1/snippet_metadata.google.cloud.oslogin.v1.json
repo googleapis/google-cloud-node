@@ -1,0 +1,279 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-oslogin",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.oslogin.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "oslogin_v1_generated_OsLoginService_DeletePosixAccount_async",
+      "title": "OsLoginService deletePosixAccount Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a POSIX account.",
+      "canonical": true,
+      "file": "os_login_service.delete_posix_account.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePosixAccount",
+        "fullName": "google.cloud.oslogin.v1.OsLoginService.DeletePosixAccount",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "OsLoginServiceClient",
+          "fullName": "google.cloud.oslogin.v1.OsLoginServiceClient"
+        },
+        "method": {
+          "shortName": "DeletePosixAccount",
+          "fullName": "google.cloud.oslogin.v1.OsLoginService.DeletePosixAccount",
+          "service": {
+            "shortName": "OsLoginService",
+            "fullName": "google.cloud.oslogin.v1.OsLoginService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oslogin_v1_generated_OsLoginService_DeleteSshPublicKey_async",
+      "title": "OsLoginService deleteSshPublicKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an SSH public key.",
+      "canonical": true,
+      "file": "os_login_service.delete_ssh_public_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSshPublicKey",
+        "fullName": "google.cloud.oslogin.v1.OsLoginService.DeleteSshPublicKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "OsLoginServiceClient",
+          "fullName": "google.cloud.oslogin.v1.OsLoginServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteSshPublicKey",
+          "fullName": "google.cloud.oslogin.v1.OsLoginService.DeleteSshPublicKey",
+          "service": {
+            "shortName": "OsLoginService",
+            "fullName": "google.cloud.oslogin.v1.OsLoginService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oslogin_v1_generated_OsLoginService_GetLoginProfile_async",
+      "title": "OsLoginService getLoginProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the profile information used for logging in to a virtual machine on Google Compute Engine.",
+      "canonical": true,
+      "file": "os_login_service.get_login_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetLoginProfile",
+        "fullName": "google.cloud.oslogin.v1.OsLoginService.GetLoginProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "system_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oslogin.v1.LoginProfile",
+        "client": {
+          "shortName": "OsLoginServiceClient",
+          "fullName": "google.cloud.oslogin.v1.OsLoginServiceClient"
+        },
+        "method": {
+          "shortName": "GetLoginProfile",
+          "fullName": "google.cloud.oslogin.v1.OsLoginService.GetLoginProfile",
+          "service": {
+            "shortName": "OsLoginService",
+            "fullName": "google.cloud.oslogin.v1.OsLoginService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oslogin_v1_generated_OsLoginService_GetSshPublicKey_async",
+      "title": "OsLoginService getSshPublicKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves an SSH public key.",
+      "canonical": true,
+      "file": "os_login_service.get_ssh_public_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSshPublicKey",
+        "fullName": "google.cloud.oslogin.v1.OsLoginService.GetSshPublicKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oslogin.common.SshPublicKey",
+        "client": {
+          "shortName": "OsLoginServiceClient",
+          "fullName": "google.cloud.oslogin.v1.OsLoginServiceClient"
+        },
+        "method": {
+          "shortName": "GetSshPublicKey",
+          "fullName": "google.cloud.oslogin.v1.OsLoginService.GetSshPublicKey",
+          "service": {
+            "shortName": "OsLoginService",
+            "fullName": "google.cloud.oslogin.v1.OsLoginService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oslogin_v1_generated_OsLoginService_ImportSshPublicKey_async",
+      "title": "OsLoginService importSshPublicKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds an SSH public key and returns the profile information. Default POSIX account information is set when no username and UID exist as part of the login profile.",
+      "canonical": true,
+      "file": "os_login_service.import_ssh_public_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportSshPublicKey",
+        "fullName": "google.cloud.oslogin.v1.OsLoginService.ImportSshPublicKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ssh_public_key",
+            "type": ".google.cloud.oslogin.common.SshPublicKey"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.oslogin.v1.ImportSshPublicKeyResponse",
+        "client": {
+          "shortName": "OsLoginServiceClient",
+          "fullName": "google.cloud.oslogin.v1.OsLoginServiceClient"
+        },
+        "method": {
+          "shortName": "ImportSshPublicKey",
+          "fullName": "google.cloud.oslogin.v1.OsLoginService.ImportSshPublicKey",
+          "service": {
+            "shortName": "OsLoginService",
+            "fullName": "google.cloud.oslogin.v1.OsLoginService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "oslogin_v1_generated_OsLoginService_UpdateSshPublicKey_async",
+      "title": "OsLoginService updateSshPublicKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an SSH public key and returns the profile information. This method supports patch semantics.",
+      "canonical": true,
+      "file": "os_login_service.update_ssh_public_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSshPublicKey",
+        "fullName": "google.cloud.oslogin.v1.OsLoginService.UpdateSshPublicKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ssh_public_key",
+            "type": ".google.cloud.oslogin.common.SshPublicKey"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.oslogin.common.SshPublicKey",
+        "client": {
+          "shortName": "OsLoginServiceClient",
+          "fullName": "google.cloud.oslogin.v1.OsLoginServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateSshPublicKey",
+          "fullName": "google.cloud.oslogin.v1.OsLoginService.UpdateSshPublicKey",
+          "service": {
+            "shortName": "OsLoginService",
+            "fullName": "google.cloud.oslogin.v1.OsLoginService"
+          }
+        }
+      }
+    }
+  ]
+}
