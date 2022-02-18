@@ -1824,9 +1824,8 @@ export class GameServerClustersServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.gameServerClustersServiceStub!.then(stub => {
+    if (this.gameServerClustersServiceStub && !this._terminated) {
+      return this.gameServerClustersServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

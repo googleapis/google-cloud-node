@@ -185,12 +185,27 @@ describe('v1beta.RealmsServiceClient', () => {
     assert(client.realmsServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new realmsserviceModule.v1beta.RealmsServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.realmsServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.realmsServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -333,6 +348,22 @@ describe('v1beta.RealmsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getRealm with closed client', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1beta.GetRealmRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getRealm(request), expectedError);
+    });
   });
 
   describe('previewRealmUpdate', () => {
@@ -447,6 +478,23 @@ describe('v1beta.RealmsServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes previewRealmUpdate with closed client', async () => {
+      const client = new realmsserviceModule.v1beta.RealmsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1beta.PreviewRealmUpdateRequest()
+      );
+      request.realm = {};
+      request.realm.name = '';
+      const expectedHeaderRequestParams = 'realm.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.previewRealmUpdate(request), expectedError);
     });
   });
 

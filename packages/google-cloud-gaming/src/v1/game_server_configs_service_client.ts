@@ -1320,9 +1320,8 @@ export class GameServerConfigsServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.gameServerConfigsServiceStub!.then(stub => {
+    if (this.gameServerConfigsServiceStub && !this._terminated) {
+      return this.gameServerConfigsServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

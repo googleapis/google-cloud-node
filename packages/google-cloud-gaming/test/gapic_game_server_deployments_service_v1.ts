@@ -196,7 +196,7 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     assert(client.gameServerDeploymentsServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
         {
@@ -204,7 +204,25 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-    client.close();
+    client.initialize();
+    assert(client.gameServerDeploymentsServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+    assert.strictEqual(client.gameServerDeploymentsServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -369,6 +387,28 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getGameServerDeployment with closed client', async () => {
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1.GetGameServerDeploymentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getGameServerDeployment(request),
+        expectedError
+      );
+    });
   });
 
   describe('getGameServerDeploymentRollout', () => {
@@ -491,6 +531,28 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         (client.innerApiCalls.getGameServerDeploymentRollout as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getGameServerDeploymentRollout with closed client', async () => {
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1.GetGameServerDeploymentRolloutRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getGameServerDeploymentRollout(request),
+        expectedError
       );
     });
   });
@@ -622,6 +684,29 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes previewGameServerDeploymentRollout with closed client', async () => {
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutRequest()
+      );
+      request.rollout = {};
+      request.rollout.name = '';
+      const expectedHeaderRequestParams = 'rollout.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.previewGameServerDeploymentRollout(request),
+        expectedError
+      );
+    });
   });
 
   describe('fetchDeploymentState', () => {
@@ -742,6 +827,25 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes fetchDeploymentState with closed client', async () => {
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1.FetchDeploymentStateRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.fetchDeploymentState(request), expectedError);
     });
   });
 

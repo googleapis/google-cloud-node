@@ -191,13 +191,29 @@ describe('v1.GameServerClustersServiceClient', () => {
     assert(client.gameServerClustersServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new gameserverclustersserviceModule.v1.GameServerClustersServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-    client.close();
+    client.initialize();
+    assert(client.gameServerClustersServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new gameserverclustersserviceModule.v1.GameServerClustersServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+    assert.strictEqual(client.gameServerClustersServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -349,6 +365,23 @@ describe('v1.GameServerClustersServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getGameServerCluster with closed client', async () => {
+      const client =
+        new gameserverclustersserviceModule.v1.GameServerClustersServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1.GetGameServerClusterRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getGameServerCluster(request), expectedError);
+    });
   });
 
   describe('previewCreateGameServerCluster', () => {
@@ -467,6 +500,26 @@ describe('v1.GameServerClustersServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes previewCreateGameServerCluster with closed client', async () => {
+      const client =
+        new gameserverclustersserviceModule.v1.GameServerClustersServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.previewCreateGameServerCluster(request),
+        expectedError
+      );
+    });
   });
 
   describe('previewDeleteGameServerCluster', () => {
@@ -583,6 +636,26 @@ describe('v1.GameServerClustersServiceClient', () => {
         (client.innerApiCalls.previewDeleteGameServerCluster as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes previewDeleteGameServerCluster with closed client', async () => {
+      const client =
+        new gameserverclustersserviceModule.v1.GameServerClustersServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.previewDeleteGameServerCluster(request),
+        expectedError
       );
     });
   });
@@ -704,6 +777,27 @@ describe('v1.GameServerClustersServiceClient', () => {
         (client.innerApiCalls.previewUpdateGameServerCluster as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes previewUpdateGameServerCluster with closed client', async () => {
+      const client =
+        new gameserverclustersserviceModule.v1.GameServerClustersServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest()
+      );
+      request.gameServerCluster = {};
+      request.gameServerCluster.name = '';
+      const expectedHeaderRequestParams = 'game_server_cluster.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.previewUpdateGameServerCluster(request),
+        expectedError
       );
     });
   });

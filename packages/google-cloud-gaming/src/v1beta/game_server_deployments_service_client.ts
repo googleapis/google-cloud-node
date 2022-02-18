@@ -1995,9 +1995,8 @@ export class GameServerDeploymentsServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.gameServerDeploymentsServiceStub!.then(stub => {
+    if (this.gameServerDeploymentsServiceStub && !this._terminated) {
+      return this.gameServerDeploymentsServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
