@@ -90,12 +90,27 @@ describe('v1.IAMCredentialsClient', () => {
     assert(client.iAMCredentialsStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new iamcredentialsModule.v1.IAMCredentialsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.iAMCredentialsStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new iamcredentialsModule.v1.IAMCredentialsClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.iAMCredentialsStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -242,6 +257,22 @@ describe('v1.IAMCredentialsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes generateAccessToken with closed client', async () => {
+      const client = new iamcredentialsModule.v1.IAMCredentialsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.generateAccessToken(request), expectedError);
+    });
   });
 
   describe('generateIdToken', () => {
@@ -353,6 +384,22 @@ describe('v1.IAMCredentialsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes generateIdToken with closed client', async () => {
+      const client = new iamcredentialsModule.v1.IAMCredentialsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.generateIdToken(request), expectedError);
+    });
   });
 
   describe('signBlob', () => {
@@ -461,6 +508,22 @@ describe('v1.IAMCredentialsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes signBlob with closed client', async () => {
+      const client = new iamcredentialsModule.v1.IAMCredentialsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.credentials.v1.SignBlobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.signBlob(request), expectedError);
+    });
   });
 
   describe('signJwt', () => {
@@ -568,6 +631,22 @@ describe('v1.IAMCredentialsClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes signJwt with closed client', async () => {
+      const client = new iamcredentialsModule.v1.IAMCredentialsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.credentials.v1.SignJwtRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.signJwt(request), expectedError);
     });
   });
 });

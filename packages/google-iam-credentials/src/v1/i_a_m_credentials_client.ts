@@ -726,9 +726,8 @@ export class IAMCredentialsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.iAMCredentialsStub!.then(stub => {
+    if (this.iAMCredentialsStub && !this._terminated) {
+      return this.iAMCredentialsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
