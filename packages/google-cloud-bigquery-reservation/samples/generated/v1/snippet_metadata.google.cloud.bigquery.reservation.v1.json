@@ -1,0 +1,919 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-reservation",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.bigquery.reservation.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_CreateReservation_async",
+      "title": "ReservationService createReservation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new reservation resource.",
+      "canonical": true,
+      "file": "reservation_service.create_reservation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateReservation",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.CreateReservation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation",
+            "type": ".google.cloud.bigquery.reservation.v1.Reservation"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.Reservation",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "CreateReservation",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.CreateReservation",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_ListReservations_async",
+      "title": "ReservationService listReservations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the reservations for the project in the specified location.",
+      "canonical": true,
+      "file": "reservation_service.list_reservations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListReservations",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.ListReservations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.ListReservationsResponse",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "ListReservations",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.ListReservations",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_GetReservation_async",
+      "title": "ReservationService getReservation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns information about the reservation.",
+      "canonical": true,
+      "file": "reservation_service.get_reservation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetReservation",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.GetReservation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.Reservation",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "GetReservation",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.GetReservation",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_DeleteReservation_async",
+      "title": "ReservationService deleteReservation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a reservation. Returns `google.rpc.Code.FAILED_PRECONDITION` when reservation has assignments.",
+      "canonical": true,
+      "file": "reservation_service.delete_reservation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteReservation",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.DeleteReservation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteReservation",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.DeleteReservation",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_UpdateReservation_async",
+      "title": "ReservationService updateReservation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an existing reservation resource.",
+      "canonical": true,
+      "file": "reservation_service.update_reservation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateReservation",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.UpdateReservation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "reservation",
+            "type": ".google.cloud.bigquery.reservation.v1.Reservation"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.Reservation",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateReservation",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.UpdateReservation",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_CreateCapacityCommitment_async",
+      "title": "ReservationService createCapacityCommitment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new capacity commitment resource.",
+      "canonical": true,
+      "file": "reservation_service.create_capacity_commitment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCapacityCommitment",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.CreateCapacityCommitment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "capacity_commitment",
+            "type": ".google.cloud.bigquery.reservation.v1.CapacityCommitment"
+          },
+          {
+            "name": "enforce_single_admin_project_per_org",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "capacity_commitment_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.CapacityCommitment",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "CreateCapacityCommitment",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.CreateCapacityCommitment",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_ListCapacityCommitments_async",
+      "title": "ReservationService listCapacityCommitments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the capacity commitments for the admin project.",
+      "canonical": true,
+      "file": "reservation_service.list_capacity_commitments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCapacityCommitments",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.ListCapacityCommitments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsResponse",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "ListCapacityCommitments",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.ListCapacityCommitments",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_GetCapacityCommitment_async",
+      "title": "ReservationService getCapacityCommitment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns information about the capacity commitment.",
+      "canonical": true,
+      "file": "reservation_service.get_capacity_commitment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCapacityCommitment",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.GetCapacityCommitment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.CapacityCommitment",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "GetCapacityCommitment",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.GetCapacityCommitment",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_DeleteCapacityCommitment_async",
+      "title": "ReservationService deleteCapacityCommitment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a capacity commitment. Attempting to delete capacity commitment before its commitment_end_time will fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.",
+      "canonical": true,
+      "file": "reservation_service.delete_capacity_commitment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCapacityCommitment",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.DeleteCapacityCommitment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteCapacityCommitment",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.DeleteCapacityCommitment",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_UpdateCapacityCommitment_async",
+      "title": "ReservationService updateCapacityCommitment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an existing capacity commitment. Only `plan` and `renewal_plan` fields can be updated. Plan can only be changed to a plan of a longer commitment period. Attempting to change to a plan with shorter commitment period will fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.",
+      "canonical": true,
+      "file": "reservation_service.update_capacity_commitment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCapacityCommitment",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.UpdateCapacityCommitment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "capacity_commitment",
+            "type": ".google.cloud.bigquery.reservation.v1.CapacityCommitment"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.CapacityCommitment",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateCapacityCommitment",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.UpdateCapacityCommitment",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_SplitCapacityCommitment_async",
+      "title": "ReservationService splitCapacityCommitment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Splits capacity commitment to two commitments of the same plan and `commitment_end_time`. A common use case is to enable downgrading commitments. For example, in order to downgrade from 10000 slots to 8000, you might split a 10000 capacity commitment into commitments of 2000 and 8000. Then, you would change the plan of the first one to `FLEX` and then delete it.",
+      "canonical": true,
+      "file": "reservation_service.split_capacity_commitment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SplitCapacityCommitment",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.SplitCapacityCommitment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "slot_count",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentResponse",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "SplitCapacityCommitment",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.SplitCapacityCommitment",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_MergeCapacityCommitments_async",
+      "title": "ReservationService mergeCapacityCommitments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Merges capacity commitments of the same plan into a single commitment. The resulting capacity commitment has the greater commitment_end_time out of the to-be-merged capacity commitments. Attempting to merge capacity commitments of different plan will fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.",
+      "canonical": true,
+      "file": "reservation_service.merge_capacity_commitments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MergeCapacityCommitments",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.MergeCapacityCommitments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "capacity_commitment_ids",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.CapacityCommitment",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "MergeCapacityCommitments",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.MergeCapacityCommitments",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_CreateAssignment_async",
+      "title": "ReservationService createAssignment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an assignment object which allows the given project to submit jobs of a certain type using slots from the specified reservation. Currently a resource (project, folder, organization) can only have one assignment per each (job_type, location) combination, and that reservation will be used for all jobs of the matching type. Different assignments can be created on different levels of the projects, folders or organization hierarchy.  During query execution, the assignment is looked up at the project, folder and organization levels in that order. The first assignment found is applied to the query. When creating assignments, it does not matter if other assignments exist at higher levels. Example: * The organization `organizationA` contains two projects, `project1`   and `project2`. * Assignments for all three entities (`organizationA`, `project1`, and   `project2`) could all be created and mapped to the same or different   reservations. \"None\" assignments represent an absence of the assignment. Projects assigned to None use on-demand pricing. To create a \"None\" assignment, use \"none\" as a reservation_id in the parent. Example parent: `projects/myproject/locations/US/reservations/none`. Returns `google.rpc.Code.PERMISSION_DENIED` if user does not have 'bigquery.admin' permissions on the project using the reservation and the project that owns this reservation. Returns `google.rpc.Code.INVALID_ARGUMENT` when location of the assignment does not match location of the reservation.",
+      "canonical": true,
+      "file": "reservation_service.create_assignment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAssignment",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.CreateAssignment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "assignment",
+            "type": ".google.cloud.bigquery.reservation.v1.Assignment"
+          },
+          {
+            "name": "assignment_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.Assignment",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "CreateAssignment",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.CreateAssignment",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_ListAssignments_async",
+      "title": "ReservationService listAssignments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists assignments. Only explicitly created assignments will be returned. Example: * Organization `organizationA` contains two projects, `project1` and   `project2`. * Reservation `res1` exists and was created previously. * CreateAssignment was used previously to define the following   associations between entities and reservations: `<organizationA, res1>`   and `<project1, res1>` In this example, ListAssignments will just return the above two assignments for reservation `res1`, and no expansion/merge will happen. The wildcard \"-\" can be used for reservations in the request. In that case all assignments belongs to the specified project and location will be listed. **Note** \"-\" cannot be used for projects nor locations.",
+      "canonical": true,
+      "file": "reservation_service.list_assignments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAssignments",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.ListAssignments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.ListAssignmentsResponse",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "ListAssignments",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.ListAssignments",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_DeleteAssignment_async",
+      "title": "ReservationService deleteAssignment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a assignment. No expansion will happen. Example: * Organization `organizationA` contains two projects, `project1` and   `project2`. * Reservation `res1` exists and was created previously. * CreateAssignment was used previously to define the following   associations between entities and reservations: `<organizationA, res1>`   and `<project1, res1>` In this example, deletion of the `<organizationA, res1>` assignment won't affect the other assignment `<project1, res1>`. After said deletion, queries from `project1` will still use `res1` while queries from `project2` will switch to use on-demand mode.",
+      "canonical": true,
+      "file": "reservation_service.delete_assignment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAssignment",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.DeleteAssignment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteAssignment",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.DeleteAssignment",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_SearchAssignments_async",
+      "title": "ReservationService searchAssignments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deprecated: Looks up assignments for a specified resource for a particular region. If the request is about a project: 1. Assignments created on the project will be returned if they exist. 2. Otherwise assignments created on the closest ancestor will be    returned. 3. Assignments for different JobTypes will all be returned. The same logic applies if the request is about a folder. If the request is about an organization, then assignments created on the organization will be returned (organization doesn't have ancestors). Comparing to ListAssignments, there are some behavior differences: 1. permission on the assignee will be verified in this API. 2. Hierarchy lookup (project->folder->organization) happens in this API. 3. Parent here is `projects/*/locations/*`, instead of    `projects/*/locations/*reservations/*`. **Note** \"-\" cannot be used for projects nor locations.",
+      "canonical": true,
+      "file": "reservation_service.search_assignments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchAssignments",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.SearchAssignments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.SearchAssignmentsResponse",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "SearchAssignments",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.SearchAssignments",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_SearchAllAssignments_async",
+      "title": "ReservationService searchAllAssignments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Looks up assignments for a specified resource for a particular region. If the request is about a project: 1. Assignments created on the project will be returned if they exist. 2. Otherwise assignments created on the closest ancestor will be    returned. 3. Assignments for different JobTypes will all be returned. The same logic applies if the request is about a folder. If the request is about an organization, then assignments created on the organization will be returned (organization doesn't have ancestors). Comparing to ListAssignments, there are some behavior differences: 1. permission on the assignee will be verified in this API. 2. Hierarchy lookup (project->folder->organization) happens in this API. 3. Parent here is `projects/*/locations/*`, instead of    `projects/*/locations/*reservations/*`.",
+      "canonical": true,
+      "file": "reservation_service.search_all_assignments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchAllAssignments",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.SearchAllAssignments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "SearchAllAssignments",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.SearchAllAssignments",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_MoveAssignment_async",
+      "title": "ReservationService moveAssignment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Moves an assignment under a new reservation. This differs from removing an existing assignment and recreating a new one by providing a transactional change that ensures an assignee always has an associated reservation.",
+      "canonical": true,
+      "file": "reservation_service.move_assignment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MoveAssignment",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.MoveAssignment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "destination_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.Assignment",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "MoveAssignment",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.MoveAssignment",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_GetBiReservation_async",
+      "title": "ReservationService getBiReservation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a BI reservation.",
+      "canonical": true,
+      "file": "reservation_service.get_bi_reservation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBiReservation",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.GetBiReservation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.BiReservation",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "GetBiReservation",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.GetBiReservation",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryreservation_v1_generated_ReservationService_UpdateBiReservation_async",
+      "title": "ReservationService updateBiReservation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a BI reservation. Only fields specified in the `field_mask` are updated. A singleton BI reservation always exists with default size 0. In order to reserve BI capacity it needs to be updated to an amount greater than 0. In order to release BI capacity reservation size must be set to 0.",
+      "canonical": true,
+      "file": "reservation_service.update_bi_reservation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateBiReservation",
+        "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.UpdateBiReservation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "bi_reservation",
+            "type": ".google.cloud.bigquery.reservation.v1.BiReservation"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.reservation.v1.BiReservation",
+        "client": {
+          "shortName": "ReservationServiceClient",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateBiReservation",
+          "fullName": "google.cloud.bigquery.reservation.v1.ReservationService.UpdateBiReservation",
+          "service": {
+            "shortName": "ReservationService",
+            "fullName": "google.cloud.bigquery.reservation.v1.ReservationService"
+          }
+        }
+      }
+    }
+  ]
+}

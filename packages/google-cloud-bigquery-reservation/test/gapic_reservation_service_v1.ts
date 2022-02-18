@@ -153,12 +153,27 @@ describe('v1.ReservationServiceClient', () => {
     assert(client.reservationServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new reservationserviceModule.v1.ReservationServiceClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.reservationServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new reservationserviceModule.v1.ReservationServiceClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.reservationServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -304,6 +319,22 @@ describe('v1.ReservationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createReservation with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createReservation(request), expectedError);
+    });
   });
 
   describe('getReservation', () => {
@@ -415,6 +446,22 @@ describe('v1.ReservationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getReservation with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getReservation(request), expectedError);
+    });
   });
 
   describe('deleteReservation', () => {
@@ -525,6 +572,22 @@ describe('v1.ReservationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteReservation with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteReservation(request), expectedError);
     });
   });
 
@@ -640,6 +703,23 @@ describe('v1.ReservationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateReservation with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
+      );
+      request.reservation = {};
+      request.reservation.name = '';
+      const expectedHeaderRequestParams = 'reservation.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateReservation(request), expectedError);
+    });
   });
 
   describe('createCapacityCommitment', () => {
@@ -753,6 +833,25 @@ describe('v1.ReservationServiceClient', () => {
         (client.innerApiCalls.createCapacityCommitment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createCapacityCommitment with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createCapacityCommitment(request),
+        expectedError
       );
     });
   });
@@ -870,6 +969,25 @@ describe('v1.ReservationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getCapacityCommitment with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getCapacityCommitment(request),
+        expectedError
+      );
+    });
   });
 
   describe('deleteCapacityCommitment', () => {
@@ -983,6 +1101,25 @@ describe('v1.ReservationServiceClient', () => {
         (client.innerApiCalls.deleteCapacityCommitment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteCapacityCommitment with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteCapacityCommitment(request),
+        expectedError
       );
     });
   });
@@ -1103,6 +1240,26 @@ describe('v1.ReservationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateCapacityCommitment with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
+      );
+      request.capacityCommitment = {};
+      request.capacityCommitment.name = '';
+      const expectedHeaderRequestParams = 'capacity_commitment.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateCapacityCommitment(request),
+        expectedError
+      );
+    });
   });
 
   describe('splitCapacityCommitment', () => {
@@ -1216,6 +1373,25 @@ describe('v1.ReservationServiceClient', () => {
         (client.innerApiCalls.splitCapacityCommitment as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes splitCapacityCommitment with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.splitCapacityCommitment(request),
+        expectedError
       );
     });
   });
@@ -1333,6 +1509,25 @@ describe('v1.ReservationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes mergeCapacityCommitments with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.mergeCapacityCommitments(request),
+        expectedError
+      );
+    });
   });
 
   describe('createAssignment', () => {
@@ -1443,6 +1638,22 @@ describe('v1.ReservationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createAssignment with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createAssignment(request), expectedError);
     });
   });
 
@@ -1555,6 +1766,22 @@ describe('v1.ReservationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes deleteAssignment with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteAssignment(request), expectedError);
+    });
   });
 
   describe('moveAssignment', () => {
@@ -1666,6 +1893,22 @@ describe('v1.ReservationServiceClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes moveAssignment with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.moveAssignment(request), expectedError);
+    });
   });
 
   describe('getBiReservation', () => {
@@ -1776,6 +2019,22 @@ describe('v1.ReservationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getBiReservation with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBiReservation(request), expectedError);
     });
   });
 
@@ -1891,6 +2150,23 @@ describe('v1.ReservationServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes updateBiReservation with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
+      );
+      request.biReservation = {};
+      request.biReservation.name = '';
+      const expectedHeaderRequestParams = 'bi_reservation.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateBiReservation(request), expectedError);
     });
   });
 
