@@ -219,6 +219,11 @@
                               "type": "FormField",
                               "id": 11
                             },
+                            "symbols": {
+                              "rule": "repeated",
+                              "type": "Symbol",
+                              "id": 12
+                            },
                             "provenance": {
                               "type": "Provenance",
                               "id": 16
@@ -401,6 +406,19 @@
                                       }
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "Symbol": {
+                              "fields": {
+                                "layout": {
+                                  "type": "Layout",
+                                  "id": 1
+                                },
+                                "detectedLanguages": {
+                                  "rule": "repeated",
+                                  "type": "DetectedLanguage",
+                                  "id": 2
                                 }
                               }
                             },
@@ -636,7 +654,7 @@
                                   "type": "string",
                                   "id": 1,
                                   "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
@@ -3369,6 +3387,11 @@
                               "type": "FormField",
                               "id": 11
                             },
+                            "symbols": {
+                              "rule": "repeated",
+                              "type": "Symbol",
+                              "id": 12
+                            },
                             "provenance": {
                               "type": "Provenance",
                               "id": 16
@@ -3551,6 +3574,19 @@
                                       }
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "Symbol": {
+                              "fields": {
+                                "layout": {
+                                  "type": "Layout",
+                                  "id": 1
+                                },
+                                "detectedLanguages": {
+                                  "rule": "repeated",
+                                  "type": "DetectedLanguage",
+                                  "id": 2
                                 }
                               }
                             },
@@ -3786,7 +3822,7 @@
                                   "type": "string",
                                   "id": 1,
                                   "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
@@ -4968,24 +5004,6 @@
             "cc_enable_arenas": true
           },
           "nested": {
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -5071,6 +5089,24 @@
                   "type": "string",
                   "id": 2
                 }
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
               }
             },
             "methodSignature": {

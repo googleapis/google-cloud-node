@@ -1,0 +1,171 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-documentai",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.documentai.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "documentai_v1_generated_DocumentProcessorService_ProcessDocument_async",
+      "title": "DocumentProcessorService processDocument Sample",
+      "origin": "API_DEFINITION",
+      "description": " Processes a single document.",
+      "canonical": true,
+      "file": "document_processor_service.process_document.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ProcessDocument",
+        "fullName": "google.cloud.documentai.v1.DocumentProcessorService.ProcessDocument",
+        "async": true,
+        "parameters": [
+          {
+            "name": "inline_document",
+            "type": ".google.cloud.documentai.v1.Document"
+          },
+          {
+            "name": "raw_document",
+            "type": ".google.cloud.documentai.v1.RawDocument"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "skip_human_review",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.documentai.v1.ProcessResponse",
+        "client": {
+          "shortName": "DocumentProcessorServiceClient",
+          "fullName": "google.cloud.documentai.v1.DocumentProcessorServiceClient"
+        },
+        "method": {
+          "shortName": "ProcessDocument",
+          "fullName": "google.cloud.documentai.v1.DocumentProcessorService.ProcessDocument",
+          "service": {
+            "shortName": "DocumentProcessorService",
+            "fullName": "google.cloud.documentai.v1.DocumentProcessorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "documentai_v1_generated_DocumentProcessorService_BatchProcessDocuments_async",
+      "title": "DocumentProcessorService batchProcessDocuments Sample",
+      "origin": "API_DEFINITION",
+      "description": " LRO endpoint to batch process many documents. The output is written to Cloud Storage as JSON in the [Document] format.",
+      "canonical": true,
+      "file": "document_processor_service.batch_process_documents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchProcessDocuments",
+        "fullName": "google.cloud.documentai.v1.DocumentProcessorService.BatchProcessDocuments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_documents",
+            "type": ".google.cloud.documentai.v1.BatchDocumentsInputConfig"
+          },
+          {
+            "name": "document_output_config",
+            "type": ".google.cloud.documentai.v1.DocumentOutputConfig"
+          },
+          {
+            "name": "skip_human_review",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DocumentProcessorServiceClient",
+          "fullName": "google.cloud.documentai.v1.DocumentProcessorServiceClient"
+        },
+        "method": {
+          "shortName": "BatchProcessDocuments",
+          "fullName": "google.cloud.documentai.v1.DocumentProcessorService.BatchProcessDocuments",
+          "service": {
+            "shortName": "DocumentProcessorService",
+            "fullName": "google.cloud.documentai.v1.DocumentProcessorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "documentai_v1_generated_DocumentProcessorService_ReviewDocument_async",
+      "title": "DocumentProcessorService reviewDocument Sample",
+      "origin": "API_DEFINITION",
+      "description": " Send a document for Human Review. The input document should be processed by the specified processor.",
+      "canonical": true,
+      "file": "document_processor_service.review_document.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReviewDocument",
+        "fullName": "google.cloud.documentai.v1.DocumentProcessorService.ReviewDocument",
+        "async": true,
+        "parameters": [
+          {
+            "name": "inline_document",
+            "type": ".google.cloud.documentai.v1.Document"
+          },
+          {
+            "name": "human_review_config",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "enable_schema_validation",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "priority",
+            "type": ".google.cloud.documentai.v1.ReviewDocumentRequest.Priority"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DocumentProcessorServiceClient",
+          "fullName": "google.cloud.documentai.v1.DocumentProcessorServiceClient"
+        },
+        "method": {
+          "shortName": "ReviewDocument",
+          "fullName": "google.cloud.documentai.v1.DocumentProcessorService.ReviewDocument",
+          "service": {
+            "shortName": "DocumentProcessorService",
+            "fullName": "google.cloud.documentai.v1.DocumentProcessorService"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-documentai",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.documentai.v1beta2",
+        "version": "v1beta2"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "documentai_v1beta2_generated_DocumentUnderstandingService_BatchProcessDocuments_async",
+      "title": "DocumentUnderstandingService batchProcessDocuments Sample",
+      "origin": "API_DEFINITION",
+      "description": " LRO endpoint to batch process many documents. The output is written to Cloud Storage as JSON in the [Document] format.",
+      "canonical": true,
+      "file": "document_understanding_service.batch_process_documents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchProcessDocuments",
+        "fullName": "google.cloud.documentai.v1beta2.DocumentUnderstandingService.BatchProcessDocuments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DocumentUnderstandingServiceClient",
+          "fullName": "google.cloud.documentai.v1beta2.DocumentUnderstandingServiceClient"
+        },
+        "method": {
+          "shortName": "BatchProcessDocuments",
+          "fullName": "google.cloud.documentai.v1beta2.DocumentUnderstandingService.BatchProcessDocuments",
+          "service": {
+            "shortName": "DocumentUnderstandingService",
+            "fullName": "google.cloud.documentai.v1beta2.DocumentUnderstandingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "documentai_v1beta2_generated_DocumentUnderstandingService_ProcessDocument_async",
+      "title": "DocumentUnderstandingService processDocument Sample",
+      "origin": "API_DEFINITION",
+      "description": " Processes a single document.",
+      "canonical": true,
+      "file": "document_understanding_service.process_document.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 93,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ProcessDocument",
+        "fullName": "google.cloud.documentai.v1beta2.DocumentUnderstandingService.ProcessDocument",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_config",
+            "type": ".google.cloud.documentai.v1beta2.InputConfig"
+          },
+          {
+            "name": "output_config",
+            "type": ".google.cloud.documentai.v1beta2.OutputConfig"
+          },
+          {
+            "name": "document_type",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "table_extraction_params",
+            "type": ".google.cloud.documentai.v1beta2.TableExtractionParams"
+          },
+          {
+            "name": "form_extraction_params",
+            "type": ".google.cloud.documentai.v1beta2.FormExtractionParams"
+          },
+          {
+            "name": "entity_extraction_params",
+            "type": ".google.cloud.documentai.v1beta2.EntityExtractionParams"
+          },
+          {
+            "name": "ocr_params",
+            "type": ".google.cloud.documentai.v1beta2.OcrParams"
+          },
+          {
+            "name": "automl_params",
+            "type": ".google.cloud.documentai.v1beta2.AutoMlParams"
+          }
+        ],
+        "resultType": ".google.cloud.documentai.v1beta2.Document",
+        "client": {
+          "shortName": "DocumentUnderstandingServiceClient",
+          "fullName": "google.cloud.documentai.v1beta2.DocumentUnderstandingServiceClient"
+        },
+        "method": {
+          "shortName": "ProcessDocument",
+          "fullName": "google.cloud.documentai.v1beta2.DocumentUnderstandingService.ProcessDocument",
+          "service": {
+            "shortName": "DocumentUnderstandingService",
+            "fullName": "google.cloud.documentai.v1beta2.DocumentUnderstandingService"
+          }
+        }
+      }
+    }
+  ]
+}

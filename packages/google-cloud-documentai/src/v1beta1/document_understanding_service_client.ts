@@ -468,9 +468,8 @@ export class DocumentUnderstandingServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.documentUnderstandingServiceStub!.then(stub => {
+    if (this.documentUnderstandingServiceStub && !this._terminated) {
+      return this.documentUnderstandingServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

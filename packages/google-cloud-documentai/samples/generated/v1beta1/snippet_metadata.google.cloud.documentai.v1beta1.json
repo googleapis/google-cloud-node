@@ -1,0 +1,59 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-documentai",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.documentai.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "documentai_v1beta1_generated_DocumentUnderstandingService_BatchProcessDocuments_async",
+      "title": "DocumentUnderstandingService batchProcessDocuments Sample",
+      "origin": "API_DEFINITION",
+      "description": " LRO endpoint to batch process many documents.",
+      "canonical": true,
+      "file": "document_understanding_service.batch_process_documents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchProcessDocuments",
+        "fullName": "google.cloud.documentai.v1beta1.DocumentUnderstandingService.BatchProcessDocuments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DocumentUnderstandingServiceClient",
+          "fullName": "google.cloud.documentai.v1beta1.DocumentUnderstandingServiceClient"
+        },
+        "method": {
+          "shortName": "BatchProcessDocuments",
+          "fullName": "google.cloud.documentai.v1beta1.DocumentUnderstandingService.BatchProcessDocuments",
+          "service": {
+            "shortName": "DocumentUnderstandingService",
+            "fullName": "google.cloud.documentai.v1beta1.DocumentUnderstandingService"
+          }
+        }
+      }
+    }
+  ]
+}

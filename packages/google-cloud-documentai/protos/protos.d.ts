@@ -556,6 +556,9 @@ export namespace google {
                         /** Page formFields */
                         formFields?: (google.cloud.documentai.v1.Document.Page.IFormField[]|null);
 
+                        /** Page symbols */
+                        symbols?: (google.cloud.documentai.v1.Document.Page.ISymbol[]|null);
+
                         /** Page provenance */
                         provenance?: (google.cloud.documentai.v1.Document.IProvenance|null);
                     }
@@ -607,6 +610,9 @@ export namespace google {
 
                         /** Page formFields. */
                         public formFields: google.cloud.documentai.v1.Document.Page.IFormField[];
+
+                        /** Page symbols. */
+                        public symbols: google.cloud.documentai.v1.Document.Page.ISymbol[];
 
                         /** Page provenance. */
                         public provenance?: (google.cloud.documentai.v1.Document.IProvenance|null);
@@ -1638,6 +1644,102 @@ export namespace google {
                                     HYPHEN = 3
                                 }
                             }
+                        }
+
+                        /** Properties of a Symbol. */
+                        interface ISymbol {
+
+                            /** Symbol layout */
+                            layout?: (google.cloud.documentai.v1.Document.Page.ILayout|null);
+
+                            /** Symbol detectedLanguages */
+                            detectedLanguages?: (google.cloud.documentai.v1.Document.Page.IDetectedLanguage[]|null);
+                        }
+
+                        /** Represents a Symbol. */
+                        class Symbol implements ISymbol {
+
+                            /**
+                             * Constructs a new Symbol.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1.Document.Page.ISymbol);
+
+                            /** Symbol layout. */
+                            public layout?: (google.cloud.documentai.v1.Document.Page.ILayout|null);
+
+                            /** Symbol detectedLanguages. */
+                            public detectedLanguages: google.cloud.documentai.v1.Document.Page.IDetectedLanguage[];
+
+                            /**
+                             * Creates a new Symbol instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Symbol instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1.Document.Page.ISymbol): google.cloud.documentai.v1.Document.Page.Symbol;
+
+                            /**
+                             * Encodes the specified Symbol message. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.Symbol.verify|verify} messages.
+                             * @param message Symbol message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1.Document.Page.ISymbol, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Symbol message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.Symbol.verify|verify} messages.
+                             * @param message Symbol message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1.Document.Page.ISymbol, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Symbol message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Symbol
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.Document.Page.Symbol;
+
+                            /**
+                             * Decodes a Symbol message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Symbol
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.Document.Page.Symbol;
+
+                            /**
+                             * Verifies a Symbol message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Symbol message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Symbol
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.Document.Page.Symbol;
+
+                            /**
+                             * Creates a plain object from a Symbol message. Also converts values to other types if specified.
+                             * @param message Symbol
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1.Document.Page.Symbol, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Symbol to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
                         }
 
                         /** Properties of a VisualElement. */
@@ -15238,6 +15340,9 @@ export namespace google {
                         /** Page formFields */
                         formFields?: (google.cloud.documentai.v1beta3.Document.Page.IFormField[]|null);
 
+                        /** Page symbols */
+                        symbols?: (google.cloud.documentai.v1beta3.Document.Page.ISymbol[]|null);
+
                         /** Page provenance */
                         provenance?: (google.cloud.documentai.v1beta3.Document.IProvenance|null);
                     }
@@ -15289,6 +15394,9 @@ export namespace google {
 
                         /** Page formFields. */
                         public formFields: google.cloud.documentai.v1beta3.Document.Page.IFormField[];
+
+                        /** Page symbols. */
+                        public symbols: google.cloud.documentai.v1beta3.Document.Page.ISymbol[];
 
                         /** Page provenance. */
                         public provenance?: (google.cloud.documentai.v1beta3.Document.IProvenance|null);
@@ -16320,6 +16428,102 @@ export namespace google {
                                     HYPHEN = 3
                                 }
                             }
+                        }
+
+                        /** Properties of a Symbol. */
+                        interface ISymbol {
+
+                            /** Symbol layout */
+                            layout?: (google.cloud.documentai.v1beta3.Document.Page.ILayout|null);
+
+                            /** Symbol detectedLanguages */
+                            detectedLanguages?: (google.cloud.documentai.v1beta3.Document.Page.IDetectedLanguage[]|null);
+                        }
+
+                        /** Represents a Symbol. */
+                        class Symbol implements ISymbol {
+
+                            /**
+                             * Constructs a new Symbol.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta3.Document.Page.ISymbol);
+
+                            /** Symbol layout. */
+                            public layout?: (google.cloud.documentai.v1beta3.Document.Page.ILayout|null);
+
+                            /** Symbol detectedLanguages. */
+                            public detectedLanguages: google.cloud.documentai.v1beta3.Document.Page.IDetectedLanguage[];
+
+                            /**
+                             * Creates a new Symbol instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Symbol instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta3.Document.Page.ISymbol): google.cloud.documentai.v1beta3.Document.Page.Symbol;
+
+                            /**
+                             * Encodes the specified Symbol message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.Page.Symbol.verify|verify} messages.
+                             * @param message Symbol message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta3.Document.Page.ISymbol, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Symbol message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.Page.Symbol.verify|verify} messages.
+                             * @param message Symbol message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.Page.ISymbol, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Symbol message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Symbol
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.Page.Symbol;
+
+                            /**
+                             * Decodes a Symbol message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Symbol
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.Page.Symbol;
+
+                            /**
+                             * Verifies a Symbol message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Symbol message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Symbol
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.Page.Symbol;
+
+                            /**
+                             * Creates a plain object from a Symbol message. Also converts values to other types if specified.
+                             * @param message Symbol
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta3.Document.Page.Symbol, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Symbol to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
                         }
 
                         /** Properties of a VisualElement. */
@@ -22432,18 +22636,6 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
-        }
-
         /** Properties of a Http. */
         interface IHttp {
 
@@ -22781,6 +22973,18 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7
         }
 
         /** Properties of a ResourceDescriptor. */

@@ -124,7 +124,7 @@ describe('v1beta1.DocumentUnderstandingServiceClient', () => {
     assert(client.documentUnderstandingServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new documentunderstandingserviceModule.v1beta1.DocumentUnderstandingServiceClient(
         {
@@ -132,7 +132,25 @@ describe('v1beta1.DocumentUnderstandingServiceClient', () => {
           projectId: 'bogus',
         }
       );
-    client.close();
+    client.initialize();
+    assert(client.documentUnderstandingServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new documentunderstandingserviceModule.v1beta1.DocumentUnderstandingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+    assert.strictEqual(client.documentUnderstandingServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {

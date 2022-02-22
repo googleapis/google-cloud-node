@@ -133,7 +133,7 @@ describe('v1beta2.DocumentUnderstandingServiceClient', () => {
     assert(client.documentUnderstandingServiceStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new documentunderstandingserviceModule.v1beta2.DocumentUnderstandingServiceClient(
         {
@@ -141,7 +141,25 @@ describe('v1beta2.DocumentUnderstandingServiceClient', () => {
           projectId: 'bogus',
         }
       );
-    client.close();
+    client.initialize();
+    assert(client.documentUnderstandingServiceStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new documentunderstandingserviceModule.v1beta2.DocumentUnderstandingServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+    assert.strictEqual(client.documentUnderstandingServiceStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -301,6 +319,25 @@ describe('v1beta2.DocumentUnderstandingServiceClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes processDocument with closed client', async () => {
+      const client =
+        new documentunderstandingserviceModule.v1beta2.DocumentUnderstandingServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta2.ProcessDocumentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.processDocument(request), expectedError);
     });
   });
 
