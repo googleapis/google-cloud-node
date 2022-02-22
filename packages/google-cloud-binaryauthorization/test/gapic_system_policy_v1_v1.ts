@@ -90,12 +90,27 @@ describe('v1.SystemPolicyV1Client', () => {
     assert(client.systemPolicyV1Stub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new systempolicyv1Module.v1.SystemPolicyV1Client({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.systemPolicyV1Stub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new systempolicyv1Module.v1.SystemPolicyV1Client({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.systemPolicyV1Stub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -240,6 +255,22 @@ describe('v1.SystemPolicyV1Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getSystemPolicy with closed client', async () => {
+      const client = new systempolicyv1Module.v1.SystemPolicyV1Client({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.binaryauthorization.v1.GetSystemPolicyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSystemPolicy(request), expectedError);
     });
   });
 

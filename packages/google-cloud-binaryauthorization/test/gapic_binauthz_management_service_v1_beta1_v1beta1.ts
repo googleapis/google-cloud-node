@@ -164,7 +164,7 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     assert(client.binauthzManagementServiceV1Beta1Stub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client =
       new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
         {
@@ -172,7 +172,25 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           projectId: 'bogus',
         }
       );
-    client.close();
+    client.initialize();
+    assert(client.binauthzManagementServiceV1Beta1Stub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client =
+      new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+    assert.strictEqual(client.binauthzManagementServiceV1Beta1Stub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -330,6 +348,25 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getPolicy with closed client', async () => {
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPolicy(request), expectedError);
+    });
   });
 
   describe('updatePolicy', () => {
@@ -453,6 +490,26 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updatePolicy with closed client', async () => {
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest()
+      );
+      request.policy = {};
+      request.policy.name = '';
+      const expectedHeaderRequestParams = 'policy.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updatePolicy(request), expectedError);
+    });
   });
 
   describe('createAttestor', () => {
@@ -573,6 +630,25 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes createAttestor with closed client', async () => {
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createAttestor(request), expectedError);
+    });
   });
 
   describe('getAttestor', () => {
@@ -692,6 +768,25 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getAttestor with closed client', async () => {
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAttestor(request), expectedError);
     });
   });
 
@@ -816,6 +911,26 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes updateAttestor with closed client', async () => {
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest()
+      );
+      request.attestor = {};
+      request.attestor.name = '';
+      const expectedHeaderRequestParams = 'attestor.name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateAttestor(request), expectedError);
+    });
   });
 
   describe('deleteAttestor', () => {
@@ -935,6 +1050,25 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes deleteAttestor with closed client', async () => {
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteAttestor(request), expectedError);
     });
   });
 

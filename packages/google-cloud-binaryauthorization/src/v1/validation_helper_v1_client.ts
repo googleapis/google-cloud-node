@@ -536,9 +536,8 @@ export class ValidationHelperV1Client {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.validationHelperV1Stub!.then(stub => {
+    if (this.validationHelperV1Stub && !this._terminated) {
+      return this.validationHelperV1Stub.then(stub => {
         this._terminated = true;
         stub.close();
       });
