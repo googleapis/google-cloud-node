@@ -185,12 +185,27 @@ describe('v1.ServiceManagerClient', () => {
     assert(client.serviceManagerStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new servicemanagerModule.v1.ServiceManagerClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.serviceManagerStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new servicemanagerModule.v1.ServiceManagerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.serviceManagerStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -336,6 +351,22 @@ describe('v1.ServiceManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getService with closed client', async () => {
+      const client = new servicemanagerModule.v1.ServiceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.api.servicemanagement.v1.GetServiceRequest()
+      );
+      request.serviceName = '';
+      const expectedHeaderRequestParams = 'service_name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getService(request), expectedError);
+    });
   });
 
   describe('getServiceConfig', () => {
@@ -443,6 +474,22 @@ describe('v1.ServiceManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getServiceConfig with closed client', async () => {
+      const client = new servicemanagerModule.v1.ServiceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.api.servicemanagement.v1.GetServiceConfigRequest()
+      );
+      request.serviceName = '';
+      const expectedHeaderRequestParams = 'service_name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getServiceConfig(request), expectedError);
     });
   });
 
@@ -552,6 +599,22 @@ describe('v1.ServiceManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes createServiceConfig with closed client', async () => {
+      const client = new servicemanagerModule.v1.ServiceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.api.servicemanagement.v1.CreateServiceConfigRequest()
+      );
+      request.serviceName = '';
+      const expectedHeaderRequestParams = 'service_name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createServiceConfig(request), expectedError);
     });
   });
 
@@ -664,6 +727,22 @@ describe('v1.ServiceManagerClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getServiceRollout with closed client', async () => {
+      const client = new servicemanagerModule.v1.ServiceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.api.servicemanagement.v1.GetServiceRolloutRequest()
+      );
+      request.serviceName = '';
+      const expectedHeaderRequestParams = 'service_name=';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getServiceRollout(request), expectedError);
+    });
   });
 
   describe('generateConfigReport', () => {
@@ -751,6 +830,20 @@ describe('v1.ServiceManagerClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes generateConfigReport with closed client', async () => {
+      const client = new servicemanagerModule.v1.ServiceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.api.servicemanagement.v1.GenerateConfigReportRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.generateConfigReport(request), expectedError);
     });
   });
 

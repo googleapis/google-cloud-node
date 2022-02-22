@@ -2296,9 +2296,8 @@ export class ServiceManagerClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.serviceManagerStub!.then(stub => {
+    if (this.serviceManagerStub && !this._terminated) {
+      return this.serviceManagerStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
