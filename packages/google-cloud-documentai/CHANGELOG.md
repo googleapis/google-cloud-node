@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/nodejs-document-ai/compare/v3.2.1...v3.3.0) (2022-02-22)
+
+
+### Features
+
+* add `symbols` field, and auto-format comments ([ec5edb7](https://github.com/googleapis/nodejs-document-ai/commit/ec5edb79f3efc5bef40a55dc30e342ce8ffa0cb8))
+* add `symbols` field, and auto-format comments ([ec5edb7](https://github.com/googleapis/nodejs-document-ai/commit/ec5edb79f3efc5bef40a55dc30e342ce8ffa0cb8))
+* add question_id field in ReviewDocumentOperationMetadata ([#304](https://github.com/googleapis/nodejs-document-ai/issues/304)) ([e10cd03](https://github.com/googleapis/nodejs-document-ai/commit/e10cd0349295483ca2628af661a3ce18c75382ac))
+* add question_id field in ReviewDocumentOperationMetadata ([#308](https://github.com/googleapis/nodejs-document-ai/issues/308)) ([675aff9](https://github.com/googleapis/nodejs-document-ai/commit/675aff978cf6d0b685816a76f75d0562af9bef0b))
+
 ### [3.2.1](https://github.com/googleapis/nodejs-document-ai/compare/v3.2.0...v3.2.1) (2022-01-13)
 
 
