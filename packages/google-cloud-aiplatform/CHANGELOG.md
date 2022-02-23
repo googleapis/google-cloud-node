@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.0](https://github.com/googleapis/nodejs-ai-platform/compare/v1.15.0...v1.16.0) (2022-02-22)
+
+
+### Features
+
+* add TPU_V2 & TPU_V3 values to AcceleratorType in aiplatform v1/v1beta1 accelerator_type.proto ([#269](https://github.com/googleapis/nodejs-ai-platform/issues/269)) ([6e9290f](https://github.com/googleapis/nodejs-ai-platform/commit/6e9290f8ce1c85dacae6d23a1bedb46d37a0d3cd))
+
 ## [1.15.0](https://github.com/googleapis/nodejs-ai-platform/compare/v1.14.1...v1.15.0) (2022-02-08)
 
 
