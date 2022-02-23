@@ -2,7 +2,7 @@
 
 [npm history][1]
 
-[1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
+[1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
 ### [5.18.2](https://github.com/googleapis/nodejs-storage/compare/v5.18.1...v5.18.2) (2022-02-16)
 
