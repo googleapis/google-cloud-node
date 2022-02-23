@@ -46466,6 +46466,7 @@
                          * @interface IResourceOptions
                          * @property {string|null} [connectVersion] ResourceOptions connectVersion
                          * @property {boolean|null} [v1beta1Crd] ResourceOptions v1beta1Crd
+                         * @property {string|null} [k8sVersion] ResourceOptions k8sVersion
                          */
     
                         /**
@@ -46500,6 +46501,14 @@
                         ResourceOptions.prototype.v1beta1Crd = false;
     
                         /**
+                         * ResourceOptions k8sVersion.
+                         * @member {string} k8sVersion
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @instance
+                         */
+                        ResourceOptions.prototype.k8sVersion = "";
+    
+                        /**
                          * Creates a new ResourceOptions instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
@@ -46527,6 +46536,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.connectVersion);
                             if (message.v1beta1Crd != null && Object.hasOwnProperty.call(message, "v1beta1Crd"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.v1beta1Crd);
+                            if (message.k8sVersion != null && Object.hasOwnProperty.call(message, "k8sVersion"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.k8sVersion);
                             return writer;
                         };
     
@@ -46566,6 +46577,9 @@
                                     break;
                                 case 2:
                                     message.v1beta1Crd = reader.bool();
+                                    break;
+                                case 3:
+                                    message.k8sVersion = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -46608,6 +46622,9 @@
                             if (message.v1beta1Crd != null && message.hasOwnProperty("v1beta1Crd"))
                                 if (typeof message.v1beta1Crd !== "boolean")
                                     return "v1beta1Crd: boolean expected";
+                            if (message.k8sVersion != null && message.hasOwnProperty("k8sVersion"))
+                                if (!$util.isString(message.k8sVersion))
+                                    return "k8sVersion: string expected";
                             return null;
                         };
     
@@ -46627,6 +46644,8 @@
                                 message.connectVersion = String(object.connectVersion);
                             if (object.v1beta1Crd != null)
                                 message.v1beta1Crd = Boolean(object.v1beta1Crd);
+                            if (object.k8sVersion != null)
+                                message.k8sVersion = String(object.k8sVersion);
                             return message;
                         };
     
@@ -46646,11 +46665,14 @@
                             if (options.defaults) {
                                 object.connectVersion = "";
                                 object.v1beta1Crd = false;
+                                object.k8sVersion = "";
                             }
                             if (message.connectVersion != null && message.hasOwnProperty("connectVersion"))
                                 object.connectVersion = message.connectVersion;
                             if (message.v1beta1Crd != null && message.hasOwnProperty("v1beta1Crd"))
                                 object.v1beta1Crd = message.v1beta1Crd;
+                            if (message.k8sVersion != null && message.hasOwnProperty("k8sVersion"))
+                                object.k8sVersion = message.k8sVersion;
                             return object;
                         };
     

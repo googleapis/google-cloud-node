@@ -18369,6 +18369,9 @@ export namespace google {
 
                     /** ResourceOptions v1beta1Crd */
                     v1beta1Crd?: (boolean|null);
+
+                    /** ResourceOptions k8sVersion */
+                    k8sVersion?: (string|null);
                 }
 
                 /** Represents a ResourceOptions. */
@@ -18385,6 +18388,9 @@ export namespace google {
 
                     /** ResourceOptions v1beta1Crd. */
                     public v1beta1Crd: boolean;
+
+                    /** ResourceOptions k8sVersion. */
+                    public k8sVersion: string;
 
                     /**
                      * Creates a new ResourceOptions instance using the specified properties.
