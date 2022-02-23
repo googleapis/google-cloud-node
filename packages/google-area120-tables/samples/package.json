@@ -13,7 +13,11 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google/area120-tables": "^1.3.0"
+    "@google/area120-tables": "^1.3.0",
+    "google-auth-library": "^7.14.0",
+    "google-gax": "^2.30.0",
+    "open": "^8.4.0",
+    "server-destroy": "^1.0.1"
   },
   "devDependencies": {
     "c8": "^7.1.0",

@@ -85,6 +85,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-area120-tab
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-area120-tables/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-area120-tables&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart_installed_oauth2.js | [source code](https://github.com/googleapis/nodejs-area120-tables/blob/main/samples/quickstart_installed_oauth2.js.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-area120-tables&page=editor&open_in_editor=samples/quickstart_installed_oauth2.js.js,samples/README.md) |
 
 
 

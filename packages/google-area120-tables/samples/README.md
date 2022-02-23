@@ -13,6 +13,7 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Quickstart](#quickstart)
+  * [Quickstart_installed_oauth2.js](#quickstart_installed_oauth2.js)
 
 ## Before you begin
 
@@ -39,6 +40,23 @@ __Usage:__
 
 
 `node samples/quickstart.js`
+
+
+-----
+
+
+
+
+### Quickstart_installed_oauth2.js
+
+View the [source code](https://github.com/googleapis/nodejs-area120-tables/blob/main/samples/quickstart_installed_oauth2.js.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-area120-tables&page=editor&open_in_editor=samples/quickstart_installed_oauth2.js.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/quickstart_installed_oauth2.js.js`
 
 
 
