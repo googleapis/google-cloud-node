@@ -536,7 +536,7 @@ export class Storage extends Service {
    *     retry a conditionally idempotent operation.
    * @property {string} [userAgent] The value to be prepended to the User-Agent
    *     header in API requests.
-   * @property {object} [authClient] GoogleAuth client to reuse instead of creating a new one.
+   * @property {object} [authClient] `AuthClient` or `GoogleAuth` client to reuse instead of creating a new one.
    * @property {number} [timeout] The amount of time in milliseconds to wait per http request before timing out.
    * @property {object[]} [interceptors_] Array of custom request interceptors to be returned in the order they were assigned.
    * @property {string} [apiEndpoint = storage.google.com] The API endpoint of the service used to make requests.
@@ -561,7 +561,20 @@ export class Storage extends Service {
    *   keyFilename: '/path/to/keyfile.json'
    * });
    * ```
-
+   *
+   * @example
+   * Create a client with an `AuthClient` (e.g. `DownscopedClient`)
+   * ```
+   * const {DownscopedClient} = require('google-auth-library');
+   * const authClient = new DownscopedClient({...});
+   *
+   * const storage = new Storage({authClient});
+   * ```
+   *
+   * Additional samples:
+   * - https://github.com/googleapis/google-auth-library-nodejs#sample-usage-1
+   * - https://github.com/googleapis/google-auth-library-nodejs/blob/main/samples/downscopedclient.js
+   *
    * @param {StorageOptions} [options] Configuration options.
    */
   constructor(options: StorageOptions = {}) {
