@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/nodejs-datastream/compare/v0.2.0...v1.0.0) (2022-02-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* Adding public Datastream client based on v1 API version: https://cloud.google.com/datastream/docs (#26)
+
+### Features
+
+* Adding public Datastream client based on v1 API version: https://cloud.google.com/datastream/docs ([#26](https://github.com/googleapis/nodejs-datastream/issues/26)) ([d795c6c](https://github.com/googleapis/nodejs-datastream/commit/d795c6cc12e265f435c7edb4e6dee9ccd15555fb))
+
 ## 0.2.0 (2021-10-07)
 
 
