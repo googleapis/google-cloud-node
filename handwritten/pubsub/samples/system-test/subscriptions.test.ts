@@ -33,6 +33,7 @@ describe('subscriptions', () => {
   const subscriptionNameSeven = `sub7-${runId}`;
   const subscriptionNameEight = `sub8-${runId}`;
   const subscriptionNameDetach = `testdetachsubsxyz-${runId}`;
+  const subscriptionNameFiltered = `testfilteredsub-${runId}`;
   const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
   const fullSubscriptionNameOne = `projects/${projectId}/subscriptions/${subscriptionNameOne}`;
   const fullSubscriptionNameTwo = `projects/${projectId}/subscriptions/${subscriptionNameTwo}`;
@@ -66,6 +67,21 @@ describe('subscriptions', () => {
       )} ${topicNameOne} ${subscriptionNameOne}`
     );
     assert.include(output, `Subscription ${subscriptionNameOne} created.`);
+    const [subscriptions] = await pubsub.topic(topicNameOne).getSubscriptions();
+    assert.strictEqual(subscriptions[0].name, fullSubscriptionNameOne);
+  });
+
+  it('should create a subscription with filtering', async () => {
+    const filter = 'attributes.author="unknown"';
+    const output = execSync(
+      `${commandFor(
+        'createSubscriptionWithFiltering'
+      )} ${topicNameOne} ${subscriptionNameFiltered} '${filter}'`
+    );
+    assert.include(
+      output,
+      `Created subscription ${subscriptionNameFiltered} with filter ${filter}`
+    );
     const [subscriptions] = await pubsub.topic(topicNameOne).getSubscriptions();
     assert.strictEqual(subscriptions[0].name, fullSubscriptionNameOne);
   });

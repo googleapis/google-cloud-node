@@ -25,6 +25,7 @@ guides.
   * [Create Push Subscription](#create-push-subscription)
   * [Create Subscription](#create-subscription)
   * [Create Subscription With Dead Letter Policy](#create-subscription-with-dead-letter-policy)
+  * [Create Subscription With Filtering](#create-subscription-with-filtering)
   * [Create Subscription with ordering enabled](#create-subscription-with-ordering-enabled)
   * [Create Topic](#create-topic)
   * [Create Topic With Schema](#create-topic-with-schema)
@@ -171,6 +172,25 @@ __Usage:__
 
 
 `node createSubscriptionWithDeadLetterPolicy.js <topic-name-or-id> <subscription-name-or-id> <dead-letter-topic-name-or-id>`
+
+
+-----
+
+
+
+
+### Create Subscription With Filtering
+
+Creates a new subscription with filtering.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createSubscriptionWithFiltering.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createSubscriptionWithFiltering.js,samples/README.md)
+
+__Usage:__
+
+
+`node createSubscriptionWithFiltering.js <topic-name-or-id> <subscription-name-or-id> <filter-string>`
 
 
 -----
