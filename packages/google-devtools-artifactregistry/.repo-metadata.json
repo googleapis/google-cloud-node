@@ -1,6 +1,6 @@
 {
-  "default_version": "v1beta2",
-  "release_level": "preview",
+  "default_version": "v1",
+  "release_level": "ga",
   "requires_billing": true,
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/artifact-registry/latest",
   "codeowner_team": "@googleapis/aap-dpes",
