@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/nodejs-service-control/compare/v1.2.1...v1.3.0) (2022-02-23)
+
+
+### Features
+
+* add KMS configuration in settings ([#107](https://github.com/googleapis/nodejs-service-control/issues/107)) ([c2cc91a](https://github.com/googleapis/nodejs-service-control/commit/c2cc91a4a03e4f5752e72357526010807ba9e834))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-service-control/compare/v1.2.0...v1.2.1) (2021-09-10)
 
 
