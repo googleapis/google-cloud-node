@@ -43,7 +43,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  The GKE Hub MembershipService handles the registration of many Kubernetes
- *  clusters to Google Cloud, represented with the {@link google.cloud.gkehub.v1beta1.Membership|Membership} resource.
+ *  clusters to Google Cloud, represented with the
+ *  {@link google.cloud.gkehub.v1beta1.Membership|Membership} resource.
  *
  *  GKE Hub is currently only available in the global region.
  *
@@ -484,12 +485,13 @@ export class GkeHubMembershipServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The Membership resource name the Agent will associate with, in the format
-   *   `projects/* /locations/* /memberships/*`.
+   *   Required. The Membership resource name the Agent will associate with, in
+   *   the format `projects/* /locations/* /memberships/*`.
    * @param {google.cloud.gkehub.v1beta1.ConnectAgent} [request.connectAgent]
    *   Optional. The connect agent to generate manifest for.
    * @param {string} [request.version]
-   *   Optional. The Connect agent version to use. Defaults to the most current version.
+   *   Optional. The Connect agent version to use. Defaults to the most current
+   *   version.
    * @param {boolean} [request.isUpgrade]
    *   Optional. If true, generate the resources for upgrade only. Some resources
    *   generated only for installation (e.g. secrets) will be excluded.
@@ -599,14 +601,15 @@ export class GkeHubMembershipServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent (project and location) where the Memberships will be created.
-   *   Specified in the format `projects/* /locations/*`.
+   *   Required. The parent (project and location) where the Memberships will be
+   *   created. Specified in the format `projects/* /locations/*`.
    * @param {string} [request.crManifest]
-   *   Optional. The YAML of the membership CR in the cluster. Empty if the membership
-   *   CR does not exist.
+   *   Optional. The YAML of the membership CR in the cluster. Empty if the
+   *   membership CR does not exist.
    * @param {string} request.intendedMembership
-   *   Required. The intended membership name under the `parent`. This method only does
-   *   validation in anticipation of a CreateMembership call with the same name.
+   *   Required. The intended membership name under the `parent`. This method only
+   *   does validation in anticipation of a CreateMembership call with the same
+   *   name.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -829,11 +832,11 @@ export class GkeHubMembershipServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent (project and location) where the Memberships will be created.
-   *   Specified in the format `projects/* /locations/*`.
+   *   Required. The parent (project and location) where the Memberships will be
+   *   created. Specified in the format `projects/* /locations/*`.
    * @param {string} request.membershipId
-   *   Required. Client chosen ID for the membership. `membership_id` must be a valid RFC
-   *   1123 compliant DNS label:
+   *   Required. Client chosen ID for the membership. `membership_id` must be a
+   *   valid RFC 1123 compliant DNS label:
    *
    *     1. At most 63 characters in length
    *     2. It must consist of lower case alphanumeric characters or `-`
@@ -1152,8 +1155,8 @@ export class GkeHubMembershipServiceClient {
    *   Required. The membership resource name in the format:
    *   `projects/[project_id]/locations/global/memberships/[membership_id]`
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update. At least one field path must be specified in this
-   *   mask.
+   *   Required. Mask of fields to update. At least one field path must be
+   *   specified in this mask.
    * @param {google.cloud.gkehub.v1beta1.Membership} request.resource
    *   Required. Only fields specified in update_mask are updated.
    *   If you specify a field in the update_mask but don't specify its value here
@@ -1313,19 +1316,19 @@ export class GkeHubMembershipServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent (project and location) where the Memberships will be listed.
-   *   Specified in the format `projects/* /locations/*`.
+   *   Required. The parent (project and location) where the Memberships will be
+   *   listed. Specified in the format `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. When requesting a 'page' of resources, `page_size` specifies number of
-   *   resources to return. If unspecified or set to 0, all resources will
-   *   be returned.
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
    * @param {string} [request.pageToken]
    *   Optional. Token returned by previous call to `ListMemberships` which
    *   specifies the position in the list from where to continue listing the
    *   resources.
    * @param {string} [request.filter]
-   *   Optional. Lists Memberships that match the filter expression, following the syntax
-   *   outlined in https://google.aip.dev/160.
+   *   Optional. Lists Memberships that match the filter expression, following the
+   *   syntax outlined in https://google.aip.dev/160.
    *
    *   Examples:
    *
@@ -1440,19 +1443,19 @@ export class GkeHubMembershipServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent (project and location) where the Memberships will be listed.
-   *   Specified in the format `projects/* /locations/*`.
+   *   Required. The parent (project and location) where the Memberships will be
+   *   listed. Specified in the format `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. When requesting a 'page' of resources, `page_size` specifies number of
-   *   resources to return. If unspecified or set to 0, all resources will
-   *   be returned.
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
    * @param {string} [request.pageToken]
    *   Optional. Token returned by previous call to `ListMemberships` which
    *   specifies the position in the list from where to continue listing the
    *   resources.
    * @param {string} [request.filter]
-   *   Optional. Lists Memberships that match the filter expression, following the syntax
-   *   outlined in https://google.aip.dev/160.
+   *   Optional. Lists Memberships that match the filter expression, following the
+   *   syntax outlined in https://google.aip.dev/160.
    *
    *   Examples:
    *
@@ -1515,19 +1518,19 @@ export class GkeHubMembershipServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent (project and location) where the Memberships will be listed.
-   *   Specified in the format `projects/* /locations/*`.
+   *   Required. The parent (project and location) where the Memberships will be
+   *   listed. Specified in the format `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. When requesting a 'page' of resources, `page_size` specifies number of
-   *   resources to return. If unspecified or set to 0, all resources will
-   *   be returned.
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
    * @param {string} [request.pageToken]
    *   Optional. Token returned by previous call to `ListMemberships` which
    *   specifies the position in the list from where to continue listing the
    *   resources.
    * @param {string} [request.filter]
-   *   Optional. Lists Memberships that match the filter expression, following the syntax
-   *   outlined in https://google.aip.dev/160.
+   *   Optional. Lists Memberships that match the filter expression, following the
+   *   syntax outlined in https://google.aip.dev/160.
    *
    *   Examples:
    *

@@ -31,8 +31,8 @@ function main(name, updateMask, resource) {
    */
   // const name = 'abc123'
   /**
-   *  Required. Mask of fields to update. At least one field path must be specified in this
-   *  mask.
+   *  Required. Mask of fields to update. At least one field path must be
+   *  specified in this mask.
    */
   // const updateMask = {}
   /**

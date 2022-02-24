@@ -26,8 +26,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Membership resource name the Agent will associate with, in the format
-   *  `projects/* /locations/* /memberships/*`.
+   *  Required. The Membership resource name the Agent will associate with, in
+   *  the format `projects/* /locations/* /memberships/*`.
    */
   // const name = 'abc123'
   /**
@@ -35,7 +35,8 @@ function main(name) {
    */
   // const connectAgent = {}
   /**
-   *  Optional. The Connect agent version to use. Defaults to the most current version.
+   *  Optional. The Connect agent version to use. Defaults to the most current
+   *  version.
    */
   // const version = 'abc123'
   /**
