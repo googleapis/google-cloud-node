@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.3](https://github.com/googleapis/nodejs-artifact-registry/compare/v1.2.2...v1.2.3) (2022-02-03)
+
+
+### Bug Fixes
+
+* **artifactregistry:** add missing HTTP rules to service config ([#109](https://github.com/googleapis/nodejs-artifact-registry/issues/109)) ([d718ff7](https://github.com/googleapis/nodejs-artifact-registry/commit/d718ff7cdd230c08dd79943ff118232ba87febb3))
+
 ### [1.2.2](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.2.1...v1.2.2) (2021-12-30)
 
 
