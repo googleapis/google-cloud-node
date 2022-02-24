@@ -19,8 +19,8 @@
 import * as v1 from './v1';
 import * as v1beta2 from './v1beta2';
 
-const ArtifactRegistryClient = v1beta2.ArtifactRegistryClient;
-type ArtifactRegistryClient = v1beta2.ArtifactRegistryClient;
+const ArtifactRegistryClient = v1.ArtifactRegistryClient;
+type ArtifactRegistryClient = v1.ArtifactRegistryClient;
 
 export {v1, v1beta2, ArtifactRegistryClient};
 export default {v1, v1beta2, ArtifactRegistryClient};

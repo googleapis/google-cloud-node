@@ -4,7 +4,7 @@
 
 # [Artifact Registry: Node.js Client](https://github.com/googleapis/nodejs-artifact-registry)
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/artifact-registry.svg)](https://www.npmjs.org/package/@google-cloud/artifact-registry)
 
 
@@ -121,14 +121,16 @@ for versions compatible with Node.js 8.
 This library follows [Semantic Versioning](http://semver.org/).
 
 
+This library is considered to be **General Availability (GA)**. This means it
+is stable; the code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **GA** libraries
+are addressed with the highest priority.
 
 
 
 
 
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
 
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
