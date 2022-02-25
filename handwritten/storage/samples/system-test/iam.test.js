@@ -36,7 +36,7 @@ const expression =
 
 before(async () => {
   await bucket.create();
-  // UniformBucketLevelAccess must be enabled to add a condiitonal binding.
+  // UniformBucketLevelAccess must be enabled to add a conditional binding.
   await bucket.setMetadata({
     iamConfiguration: {
       uniformBucketLevelAccess: {

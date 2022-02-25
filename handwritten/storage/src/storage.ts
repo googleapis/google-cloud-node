@@ -1085,7 +1085,7 @@ export class Storage extends Service {
   /**
    * @typedef {array} GetBucketsResponse
    * @property {Bucket[]} 0 Array of {@link Bucket} instances.
-   * @property {objcet} 1 nextQuery A query object to receive more results.
+   * @property {object} 1 nextQuery A query object to receive more results.
    * @property {object} 2 The full API response.
    */
   /**
@@ -1413,7 +1413,7 @@ export class Storage extends Service {
    * supply the project's ID as `projectId` in the `options` argument.
    *
    * @param {string} accessId The HMAC key's access ID.
-   * @param {HmacKeyOptions} options HmacKey constructor owptions.
+   * @param {HmacKeyOptions} options HmacKey constructor options.
    * @returns {HmacKey}
    * @see HmacKey
    *

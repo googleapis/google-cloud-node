@@ -56,7 +56,7 @@ function main(
       destination: destFileName,
     };
 
-    // Descrypts and downloads the file. This can only be done with the key used
+    // Decrypts and downloads the file. This can only be done with the key used
     // to encrypt and upload the file.
     await storage
       .bucket(bucketName)

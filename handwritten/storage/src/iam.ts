@@ -288,7 +288,7 @@ class Iam {
    * @throws {Error} If no policy is provided.
    *
    * @param {Policy} policy The policy.
-   * @param {SetPolicyOptions} [options] Configuration opbject.
+   * @param {SetPolicyOptions} [options] Configuration options.
    * @param {SetPolicyCallback} callback Callback function.
    * @returns {Promise<SetPolicyResponse>}
    *

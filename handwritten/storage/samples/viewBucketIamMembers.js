@@ -47,7 +47,7 @@ function main(bucketName = 'my-bucket') {
 
       const condition = binding.condition;
       if (condition) {
-        console.log('  Condiiton:');
+        console.log('  Condition:');
         console.log(`    Title: ${condition.title}`);
         console.log(`    Description: ${condition.description}`);
         console.log(`    Expression: ${condition.expression}`);
