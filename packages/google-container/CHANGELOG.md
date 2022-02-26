@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-cloud-container/compare/v2.6.0...v3.0.0) (2022-02-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* revert bad publishing (#510)
+
+### Bug Fixes
+
+* revert bad publishing ([#510](https://github.com/googleapis/nodejs-cloud-container/issues/510)) ([541fc5b](https://github.com/googleapis/nodejs-cloud-container/commit/541fc5b3637b9dc3c1af722f1c931e6d63129f9f))
+* reverting unintentional breaking change: GetOpenIdConfigRequest, GetOpenIdConfigResponse ([#512](https://github.com/googleapis/nodejs-cloud-container/issues/512)) ([8ed44d7](https://github.com/googleapis/nodejs-cloud-container/commit/8ed44d74d8ec61d49c8f46b78169f1585c02a862))
+
 ## [2.6.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.5.0...v2.6.0) (2021-12-09)
 
 
