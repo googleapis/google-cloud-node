@@ -2,7 +2,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/media-translation/latest",
   "api_id": "mediatranslation.googleapis.com",
   "distribution_name": "@google-cloud/media-translation",
-  "release_level": "beta",
+  "release_level": "preview",
   "default_version": "v1beta1",
   "language": "nodejs",
   "name_pretty": "Cloud Media Translation",
@@ -10,5 +10,7 @@
   "product_documentation": "https://cloud.google.com/translate/media/docs/",
   "requires_billing": true,
   "name": "mediatranslation",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559749"
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559749",
+  "api_shortname": "mediatranslation",
+  "library_type": "GAPIC_AUTO"
 }
