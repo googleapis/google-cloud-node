@@ -148,6 +148,7 @@ describe('logging-bunyan', () => {
       assert.strictEqual(fakeLoggingOptions_, optionsWithoutLogName);
       assert.strictEqual(fakeLogName_, 'bunyan_log');
       assert.deepStrictEqual(fakeLogOptions_, {
+        defaultWriteDeleteCallback: undefined,
         removeCircular: true,
         maxEntrySize: 250000,
       });

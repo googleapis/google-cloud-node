@@ -171,6 +171,7 @@ export class LoggingBunyan extends Writable {
       // 250,000 has been chosen to keep us comfortably within the
       // 256,000 limit.
       maxEntrySize: options.maxEntrySize || 250000,
+      defaultWriteDeleteCallback: options.defaultCallback,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }) as any;
 
