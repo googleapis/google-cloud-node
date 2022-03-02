@@ -106,7 +106,7 @@ export async function middleware(
     ),
   };
 
-  function makeChildLogger(trace: string, span?: string, sampled?: boolean) {
+  function makeChildLogger(trace: string, span?: string) {
     return logger.child(
       {[LOGGING_TRACE_KEY]: trace, [LOGGING_SPAN_KEY]: span},
       true /* simple child */

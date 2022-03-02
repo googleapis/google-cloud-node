@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import {ApiResponseCallback} from '@google-cloud/logging/build/src/log';
+
 export interface Options {
   /**
    * The name of the log that will receive messages written to this bunyan
@@ -78,6 +80,10 @@ export interface Options {
   apiEndpoint?: string;
   // An attempt will be made to truncate messages larger than maxEntrySize.
   maxEntrySize?: number;
+
+  // A default global callback to be used for {@link LoggingBunyan} write calls
+  // when callback is not supplied by caller in function parameters
+  defaultCallback?: ApiResponseCallback;
 }
 
 export interface MonitoredResource {
