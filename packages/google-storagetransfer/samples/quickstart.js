@@ -16,6 +16,11 @@
 async function main(projectId = 'my-project', gcsSourceBucket, gcsSinkBucket) {
   // [START storagetransfer_quickstart]
 
+  // Imports the Google Cloud client library
+  const {
+    StorageTransferServiceClient,
+  } = require('@google-cloud/storage-transfer');
+
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
@@ -28,14 +33,12 @@ async function main(projectId = 'my-project', gcsSourceBucket, gcsSinkBucket) {
   // The ID of the GCS bucket to transfer data to
   // const gcsSinkBucket = 'my-sink-bucket'
 
-  // Imports the Google Cloud client library
-  const {
-    StorageTransferServiceClient,
-  } = require('@google-cloud/storage-transfer');
-
   // Creates a client
   const client = new StorageTransferServiceClient();
 
+  /**
+   * Creates a one-time transfer job.
+   */
   async function quickstart() {
     // Creates a request to transfer from the source bucket to
     // the sink bucket
@@ -51,18 +54,16 @@ async function main(projectId = 'my-project', gcsSourceBucket, gcsSinkBucket) {
     };
 
     // Runs the request and creates the job
-    const response = await client.createTransferJob(createRequest);
-
-    const jobName = response[0].name;
+    const [transferJob] = await client.createTransferJob(createRequest);
 
     const runRequest = {
-      jobName: jobName,
+      jobName: transferJob.name,
       projectId: projectId,
     };
     await client.runTransferJob(runRequest);
 
     console.log(
-      `Created and ran a transfer job from ${gcsSourceBucket} to ${gcsSinkBucket} with name ${jobName}`
+      `Created and ran a transfer job from ${gcsSourceBucket} to ${gcsSinkBucket} with name ${transferJob.name}`
     );
   }
 
@@ -70,10 +71,8 @@ async function main(projectId = 'my-project', gcsSourceBucket, gcsSinkBucket) {
   // [END storagetransfer_quickstart]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err.message);
-  process.exitCode = 1;
-});
+main(...process.argv.slice(2));
+
 process.on('unhandledRejection', err => {
   console.error(err.message);
   process.exitCode = 1;

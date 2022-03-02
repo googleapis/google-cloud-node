@@ -58,6 +58,11 @@ npm install @google-cloud/storage-transfer
 
 ```javascript
 
+// Imports the Google Cloud client library
+const {
+  StorageTransferServiceClient,
+} = require('@google-cloud/storage-transfer');
+
 /**
  * TODO(developer): Uncomment the following lines before running the sample.
  */
@@ -70,14 +75,12 @@ npm install @google-cloud/storage-transfer
 // The ID of the GCS bucket to transfer data to
 // const gcsSinkBucket = 'my-sink-bucket'
 
-// Imports the Google Cloud client library
-const {
-  StorageTransferServiceClient,
-} = require('@google-cloud/storage-transfer');
-
 // Creates a client
 const client = new StorageTransferServiceClient();
 
+/**
+ * Creates a one-time transfer job.
+ */
 async function quickstart() {
   // Creates a request to transfer from the source bucket to
   // the sink bucket
@@ -93,18 +96,16 @@ async function quickstart() {
   };
 
   // Runs the request and creates the job
-  const response = await client.createTransferJob(createRequest);
-
-  const jobName = response[0].name;
+  const [transferJob] = await client.createTransferJob(createRequest);
 
   const runRequest = {
-    jobName: jobName,
+    jobName: transferJob.name,
     projectId: projectId,
   };
   await client.runTransferJob(runRequest);
 
   console.log(
-    `Created and ran a transfer job from ${gcsSourceBucket} to ${gcsSinkBucket} with name ${jobName}`
+    `Created and ran a transfer job from ${gcsSourceBucket} to ${gcsSinkBucket} with name ${transferJob.name}`
   );
 }
 
@@ -120,7 +121,12 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-storage-tra
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Aws-request | [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/aws-request.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/aws-request.js,samples/README.md) |
+| Check-latest-transfer-operation | [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/check-latest-transfer-operation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/check-latest-transfer-operation.js,samples/README.md) |
+| Get-transfer-job-with-retries | [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/get-transfer-job-with-retries.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/get-transfer-job-with-retries.js,samples/README.md) |
+| Nearline-request | [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/nearline-request.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/nearline-request.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Transfer-check | [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/transfer-check.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/transfer-check.js,samples/README.md) |
 
 
 

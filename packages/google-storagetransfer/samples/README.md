@@ -12,7 +12,12 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Aws-request](#aws-request)
+  * [Check-latest-transfer-operation](#check-latest-transfer-operation)
+  * [Get-transfer-job-with-retries](#get-transfer-job-with-retries)
+  * [Nearline-request](#nearline-request)
   * [Quickstart](#quickstart)
+  * [Transfer-check](#transfer-check)
 
 ## Before you begin
 
@@ -29,6 +34,74 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
+### Aws-request
+
+View the [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/aws-request.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/aws-request.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/aws-request.js`
+
+
+-----
+
+
+
+
+### Check-latest-transfer-operation
+
+View the [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/check-latest-transfer-operation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/check-latest-transfer-operation.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/check-latest-transfer-operation.js`
+
+
+-----
+
+
+
+
+### Get-transfer-job-with-retries
+
+View the [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/get-transfer-job-with-retries.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/get-transfer-job-with-retries.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-transfer-job-with-retries.js`
+
+
+-----
+
+
+
+
+### Nearline-request
+
+View the [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/nearline-request.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/nearline-request.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/nearline-request.js`
+
+
+-----
+
+
+
+
 ### Quickstart
 
 View the [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/quickstart.js).
@@ -39,6 +112,23 @@ __Usage:__
 
 
 `node samples/quickstart.js`
+
+
+-----
+
+
+
+
+### Transfer-check
+
+View the [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/transfer-check.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/transfer-check.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/transfer-check.js`
 
 
 

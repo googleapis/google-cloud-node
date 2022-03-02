@@ -10,16 +10,17 @@
     "*.js"
   ],
   "scripts": {
-    "test": "c8 mocha --timeout 600000 test/*.js"
+    "test": "c8 mocha ---parallel --timeout 600000 test/*.test.js"
   },
   "dependencies": {
     "@google-cloud/storage-transfer": "^1.1.1"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
+    "@google-cloud/storage": "^5.15.3",
+    "aws-sdk": "^2.1073.0",
     "c8": "^7.1.0",
+    "chai": "^4.2.0",
     "mocha": "^9.0.0",
-    "uuid": "^8.0.0",
-    "@google-cloud/storage": "^5.15.3"
+    "uuid": "^8.0.0"
   }
 }
