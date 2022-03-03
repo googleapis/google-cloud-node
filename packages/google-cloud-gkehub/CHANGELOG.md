@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-gke-hub/compare/v2.1.0...v2.2.0) (2022-03-02)
+
+
+### Features
+
+* added support for k8s_version field ([#128](https://github.com/googleapis/nodejs-gke-hub/issues/128)) ([d1d08cb](https://github.com/googleapis/nodejs-gke-hub/commit/d1d08cbbbc52db593078619aef8636dbc32d8dce))
+* added support for k8s_version field ([#130](https://github.com/googleapis/nodejs-gke-hub/issues/130)) ([79f9560](https://github.com/googleapis/nodejs-gke-hub/commit/79f9560d2c078c2b45fc1a6f07d2796fd232df4e))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-gke-hub/compare/v2.0.0...v2.1.0) (2022-02-03)
 
 
