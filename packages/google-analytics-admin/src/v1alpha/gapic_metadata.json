@@ -90,56 +90,6 @@
                 "batchDeleteUserLinks"
               ]
             },
-            "GetWebDataStream": {
-              "methods": [
-                "getWebDataStream"
-              ]
-            },
-            "DeleteWebDataStream": {
-              "methods": [
-                "deleteWebDataStream"
-              ]
-            },
-            "UpdateWebDataStream": {
-              "methods": [
-                "updateWebDataStream"
-              ]
-            },
-            "CreateWebDataStream": {
-              "methods": [
-                "createWebDataStream"
-              ]
-            },
-            "GetIosAppDataStream": {
-              "methods": [
-                "getIosAppDataStream"
-              ]
-            },
-            "DeleteIosAppDataStream": {
-              "methods": [
-                "deleteIosAppDataStream"
-              ]
-            },
-            "UpdateIosAppDataStream": {
-              "methods": [
-                "updateIosAppDataStream"
-              ]
-            },
-            "GetAndroidAppDataStream": {
-              "methods": [
-                "getAndroidAppDataStream"
-              ]
-            },
-            "DeleteAndroidAppDataStream": {
-              "methods": [
-                "deleteAndroidAppDataStream"
-              ]
-            },
-            "UpdateAndroidAppDataStream": {
-              "methods": [
-                "updateAndroidAppDataStream"
-              ]
-            },
             "CreateFirebaseLink": {
               "methods": [
                 "createFirebaseLink"
@@ -373,27 +323,6 @@
                 "auditUserLinks",
                 "auditUserLinksStream",
                 "auditUserLinksAsync"
-              ]
-            },
-            "ListWebDataStreams": {
-              "methods": [
-                "listWebDataStreams",
-                "listWebDataStreamsStream",
-                "listWebDataStreamsAsync"
-              ]
-            },
-            "ListIosAppDataStreams": {
-              "methods": [
-                "listIosAppDataStreams",
-                "listIosAppDataStreamsStream",
-                "listIosAppDataStreamsAsync"
-              ]
-            },
-            "ListAndroidAppDataStreams": {
-              "methods": [
-                "listAndroidAppDataStreams",
-                "listAndroidAppDataStreamsStream",
-                "listAndroidAppDataStreamsAsync"
               ]
             },
             "ListFirebaseLinks": {
@@ -551,56 +480,6 @@
                 "batchDeleteUserLinks"
               ]
             },
-            "GetWebDataStream": {
-              "methods": [
-                "getWebDataStream"
-              ]
-            },
-            "DeleteWebDataStream": {
-              "methods": [
-                "deleteWebDataStream"
-              ]
-            },
-            "UpdateWebDataStream": {
-              "methods": [
-                "updateWebDataStream"
-              ]
-            },
-            "CreateWebDataStream": {
-              "methods": [
-                "createWebDataStream"
-              ]
-            },
-            "GetIosAppDataStream": {
-              "methods": [
-                "getIosAppDataStream"
-              ]
-            },
-            "DeleteIosAppDataStream": {
-              "methods": [
-                "deleteIosAppDataStream"
-              ]
-            },
-            "UpdateIosAppDataStream": {
-              "methods": [
-                "updateIosAppDataStream"
-              ]
-            },
-            "GetAndroidAppDataStream": {
-              "methods": [
-                "getAndroidAppDataStream"
-              ]
-            },
-            "DeleteAndroidAppDataStream": {
-              "methods": [
-                "deleteAndroidAppDataStream"
-              ]
-            },
-            "UpdateAndroidAppDataStream": {
-              "methods": [
-                "updateAndroidAppDataStream"
-              ]
-            },
             "CreateFirebaseLink": {
               "methods": [
                 "createFirebaseLink"
@@ -834,27 +713,6 @@
                 "auditUserLinks",
                 "auditUserLinksStream",
                 "auditUserLinksAsync"
-              ]
-            },
-            "ListWebDataStreams": {
-              "methods": [
-                "listWebDataStreams",
-                "listWebDataStreamsStream",
-                "listWebDataStreamsAsync"
-              ]
-            },
-            "ListIosAppDataStreams": {
-              "methods": [
-                "listIosAppDataStreams",
-                "listIosAppDataStreamsStream",
-                "listIosAppDataStreamsAsync"
-              ]
-            },
-            "ListAndroidAppDataStreams": {
-              "methods": [
-                "listAndroidAppDataStreams",
-                "listAndroidAppDataStreamsStream",
-                "listAndroidAppDataStreamsAsync"
               ]
             },
             "ListFirebaseLinks": {
