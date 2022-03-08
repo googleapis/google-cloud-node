@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/nodejs-service-management/compare/v0.3.1...v0.4.0) (2022-03-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove EnableService and DisableService RPC methods and related protos from service management API
+
+### Features
+
+* Remove EnableService and DisableService RPC methods and related protos from service management API  ([d3919ab](https://github.com/googleapis/nodejs-service-management/commit/d3919abbf7ba458cc71e8038604f56d598571fe4))
+
 ### [0.3.1](https://www.github.com/googleapis/nodejs-service-management/compare/v0.3.0...v0.3.1) (2021-09-10)
 
 
