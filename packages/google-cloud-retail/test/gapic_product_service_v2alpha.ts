@@ -362,7 +362,6 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.CreateProductRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createProduct(request), expectedError);
@@ -489,7 +488,6 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.GetProductRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getProduct(request), expectedError);
@@ -620,7 +618,6 @@ describe('v2alpha.ProductServiceClient', () => {
       );
       request.product = {};
       request.product.name = '';
-      const expectedHeaderRequestParams = 'product.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateProduct(request), expectedError);
@@ -747,7 +744,6 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.DeleteProductRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteProduct(request), expectedError);

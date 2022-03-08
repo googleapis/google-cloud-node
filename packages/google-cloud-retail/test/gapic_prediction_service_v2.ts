@@ -264,7 +264,6 @@ describe('v2.PredictionServiceClient', () => {
         new protos.google.cloud.retail.v2.PredictRequest()
       );
       request.placement = '';
-      const expectedHeaderRequestParams = 'placement=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.predict(request), expectedError);

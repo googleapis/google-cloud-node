@@ -334,7 +334,6 @@ describe('v2beta.CatalogServiceClient', () => {
       );
       request.catalog = {};
       request.catalog.name = '';
-      const expectedHeaderRequestParams = 'catalog.name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateCatalog(request), expectedError);
@@ -461,7 +460,6 @@ describe('v2beta.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2beta.SetDefaultBranchRequest()
       );
       request.catalog = '';
-      const expectedHeaderRequestParams = 'catalog=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setDefaultBranch(request), expectedError);
@@ -588,7 +586,6 @@ describe('v2beta.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2beta.GetDefaultBranchRequest()
       );
       request.catalog = '';
-      const expectedHeaderRequestParams = 'catalog=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDefaultBranch(request), expectedError);

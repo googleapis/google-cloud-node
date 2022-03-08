@@ -299,7 +299,6 @@ describe('v2.UserEventServiceClient', () => {
         new protos.google.cloud.retail.v2.WriteUserEventRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.writeUserEvent(request), expectedError);
@@ -423,7 +422,6 @@ describe('v2.UserEventServiceClient', () => {
         new protos.google.cloud.retail.v2.CollectUserEventRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.collectUserEvent(request), expectedError);

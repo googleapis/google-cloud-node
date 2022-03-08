@@ -304,7 +304,6 @@ describe('v2alpha.CompletionServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.CompleteQueryRequest()
       );
       request.catalog = '';
-      const expectedHeaderRequestParams = 'catalog=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.completeQuery(request), expectedError);
