@@ -10,7 +10,7 @@
             "objc_class_prefix": "GRA",
             "(google.api.resource_definition).type": "grafeas.io/Project",
             "(google.api.resource_definition).pattern": "projects/{project}",
-            "java_outer_classname": "InTotoStatementProto"
+            "java_outer_classname": "CvssProto"
           },
           "nested": {
             "NoteKind": {
