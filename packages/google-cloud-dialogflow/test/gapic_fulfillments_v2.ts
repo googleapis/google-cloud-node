@@ -404,6 +404,84 @@ describe('v2.FulfillmentsClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('conversationDataset', () => {
+      const fakePath = '/rendered/path/conversationDataset';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        conversation_dataset: 'conversationDatasetValue',
+      };
+      const client = new fulfillmentsModule.v2.FulfillmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.conversationDatasetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.conversationDatasetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('conversationDatasetPath', () => {
+        const result = client.conversationDatasetPath(
+          'projectValue',
+          'locationValue',
+          'conversationDatasetValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.conversationDatasetPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromConversationDatasetName', () => {
+        const result = client.matchProjectFromConversationDatasetName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.conversationDatasetPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromConversationDatasetName', () => {
+        const result =
+          client.matchLocationFromConversationDatasetName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.conversationDatasetPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationDatasetFromConversationDatasetName', () => {
+        const result =
+          client.matchConversationDatasetFromConversationDatasetName(fakePath);
+        assert.strictEqual(result, 'conversationDatasetValue');
+        assert(
+          (
+            client.pathTemplates.conversationDatasetPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectAgent', () => {
       const fakePath = '/rendered/path/projectAgent';
       const expectedParameters = {
@@ -1338,6 +1416,140 @@ describe('v2.FulfillmentsClient', () => {
         assert(
           (
             client.pathTemplates.projectConversationMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectConversationModel', () => {
+      const fakePath = '/rendered/path/projectConversationModel';
+      const expectedParameters = {
+        project: 'projectValue',
+        conversation_model: 'conversationModelValue',
+      };
+      const client = new fulfillmentsModule.v2.FulfillmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectConversationModelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectConversationModelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectConversationModelPath', () => {
+        const result = client.projectConversationModelPath(
+          'projectValue',
+          'conversationModelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectConversationModelPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectConversationModelName', () => {
+        const result =
+          client.matchProjectFromProjectConversationModelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectConversationModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationModelFromProjectConversationModelName', () => {
+        const result =
+          client.matchConversationModelFromProjectConversationModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationModelValue');
+        assert(
+          (
+            client.pathTemplates.projectConversationModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectConversationModelEvaluationsEvaluation', () => {
+      const fakePath =
+        '/rendered/path/projectConversationModelEvaluationsEvaluation';
+      const expectedParameters = {
+        project: 'projectValue',
+        conversation_model: 'conversationModelValue',
+      };
+      const client = new fulfillmentsModule.v2.FulfillmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectConversationModelEvaluationsEvaluationPath', () => {
+        const result = client.projectConversationModelEvaluationsEvaluationPath(
+          'projectValue',
+          'conversationModelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectConversationModelEvaluationsEvaluationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectConversationModelEvaluationsEvaluationName', () => {
+        const result =
+          client.matchProjectFromProjectConversationModelEvaluationsEvaluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectConversationModelEvaluationsEvaluationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationModelFromProjectConversationModelEvaluationsEvaluationName', () => {
+        const result =
+          client.matchConversationModelFromProjectConversationModelEvaluationsEvaluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationModelValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectConversationModelEvaluationsEvaluationPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2821,6 +3033,176 @@ describe('v2.FulfillmentsClient', () => {
         assert(
           (
             client.pathTemplates.projectLocationConversationMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConversationModel', () => {
+      const fakePath = '/rendered/path/projectLocationConversationModel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        conversation_model: 'conversationModelValue',
+      };
+      const client = new fulfillmentsModule.v2.FulfillmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationConversationModelPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationConversationModelPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationConversationModelPath', () => {
+        const result = client.projectLocationConversationModelPath(
+          'projectValue',
+          'locationValue',
+          'conversationModelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationModelPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConversationModelName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConversationModelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConversationModelName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConversationModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationModelFromProjectLocationConversationModelName', () => {
+        const result =
+          client.matchConversationModelFromProjectLocationConversationModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationModelValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConversationModelEvaluationsEvaluation', () => {
+      const fakePath =
+        '/rendered/path/projectLocationConversationModelEvaluationsEvaluation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        conversation_model: 'conversationModelValue',
+      };
+      const client = new fulfillmentsModule.v2.FulfillmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationConversationModelEvaluationsEvaluationPath', () => {
+        const result =
+          client.projectLocationConversationModelEvaluationsEvaluationPath(
+            'projectValue',
+            'locationValue',
+            'conversationModelValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationModelEvaluationsEvaluationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConversationModelEvaluationsEvaluationName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConversationModelEvaluationsEvaluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationModelEvaluationsEvaluationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConversationModelEvaluationsEvaluationName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConversationModelEvaluationsEvaluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationModelEvaluationsEvaluationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationModelFromProjectLocationConversationModelEvaluationsEvaluationName', () => {
+        const result =
+          client.matchConversationModelFromProjectLocationConversationModelEvaluationsEvaluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationModelValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationModelEvaluationsEvaluationPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

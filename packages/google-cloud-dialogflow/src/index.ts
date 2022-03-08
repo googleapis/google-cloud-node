@@ -25,6 +25,10 @@ const AnswerRecordsClient = v2.AnswerRecordsClient;
 type AnswerRecordsClient = v2.AnswerRecordsClient;
 const ContextsClient = v2.ContextsClient;
 type ContextsClient = v2.ContextsClient;
+const ConversationDatasetsClient = v2.ConversationDatasetsClient;
+type ConversationDatasetsClient = v2.ConversationDatasetsClient;
+const ConversationModelsClient = v2.ConversationModelsClient;
+type ConversationModelsClient = v2.ConversationModelsClient;
 const ConversationProfilesClient = v2.ConversationProfilesClient;
 type ConversationProfilesClient = v2.ConversationProfilesClient;
 const ConversationsClient = v2.ConversationsClient;
@@ -56,6 +60,8 @@ export {
   AgentsClient,
   AnswerRecordsClient,
   ContextsClient,
+  ConversationDatasetsClient,
+  ConversationModelsClient,
   ConversationProfilesClient,
   ConversationsClient,
   DocumentsClient,
@@ -75,6 +81,8 @@ export default {
   AgentsClient,
   AnswerRecordsClient,
   ContextsClient,
+  ConversationDatasetsClient,
+  ConversationModelsClient,
   ConversationProfilesClient,
   ConversationsClient,
   DocumentsClient,

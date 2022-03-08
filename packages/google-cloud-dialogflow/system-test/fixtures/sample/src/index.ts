@@ -20,6 +20,8 @@ import {
   AgentsClient,
   AnswerRecordsClient,
   ContextsClient,
+  ConversationDatasetsClient,
+  ConversationModelsClient,
   ConversationProfilesClient,
   ConversationsClient,
   DocumentsClient,
@@ -42,6 +44,14 @@ function doStuffWithAnswerRecordsClient(client: AnswerRecordsClient) {
   client.close();
 }
 function doStuffWithContextsClient(client: ContextsClient) {
+  client.close();
+}
+function doStuffWithConversationDatasetsClient(
+  client: ConversationDatasetsClient
+) {
+  client.close();
+}
+function doStuffWithConversationModelsClient(client: ConversationModelsClient) {
   client.close();
 }
 function doStuffWithConversationProfilesClient(
@@ -93,6 +103,12 @@ function main() {
   // check that the client instance can be created
   const contextsClient = new ContextsClient();
   doStuffWithContextsClient(contextsClient);
+  // check that the client instance can be created
+  const conversationDatasetsClient = new ConversationDatasetsClient();
+  doStuffWithConversationDatasetsClient(conversationDatasetsClient);
+  // check that the client instance can be created
+  const conversationModelsClient = new ConversationModelsClient();
+  doStuffWithConversationModelsClient(conversationModelsClient);
   // check that the client instance can be created
   const conversationProfilesClient = new ConversationProfilesClient();
   doStuffWithConversationProfilesClient(conversationProfilesClient);

@@ -234,7 +234,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 60,
+          "end": 65,
           "type": "FULL"
         }
       ],
@@ -278,7 +278,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 61,
+          "end": 66,
           "type": "FULL"
         }
       ],
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 61,
+          "end": 66,
           "type": "FULL"
         }
       ],
@@ -760,6 +760,606 @@
       }
     },
     {
+      "regionTag": "dialogflow_v2_generated_ConversationDatasets_CreateConversationDataset_async",
+      "title": "dialogflow createConversationDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new conversation dataset. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: [CreateConversationDatasetOperationMetadata][google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata] - `response`: [ConversationDataset][google.cloud.dialogflow.v2.ConversationDataset]",
+      "canonical": true,
+      "file": "conversation_datasets.create_conversation_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConversationDataset",
+        "fullName": "google.cloud.dialogflow.v2.ConversationDatasets.CreateConversationDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "conversation_dataset",
+            "type": ".google.cloud.dialogflow.v2.ConversationDataset"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConversationDatasetsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationDatasetsClient"
+        },
+        "method": {
+          "shortName": "CreateConversationDataset",
+          "fullName": "google.cloud.dialogflow.v2.ConversationDatasets.CreateConversationDataset",
+          "service": {
+            "shortName": "ConversationDatasets",
+            "fullName": "google.cloud.dialogflow.v2.ConversationDatasets"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationDatasets_GetConversationDataset_async",
+      "title": "dialogflow getConversationDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified conversation dataset.",
+      "canonical": true,
+      "file": "conversation_datasets.get_conversation_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConversationDataset",
+        "fullName": "google.cloud.dialogflow.v2.ConversationDatasets.GetConversationDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.ConversationDataset",
+        "client": {
+          "shortName": "ConversationDatasetsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationDatasetsClient"
+        },
+        "method": {
+          "shortName": "GetConversationDataset",
+          "fullName": "google.cloud.dialogflow.v2.ConversationDatasets.GetConversationDataset",
+          "service": {
+            "shortName": "ConversationDatasets",
+            "fullName": "google.cloud.dialogflow.v2.ConversationDatasets"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationDatasets_ListConversationDatasets_async",
+      "title": "dialogflow listConversationDatasets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the list of all conversation datasets in the specified project and location.",
+      "canonical": true,
+      "file": "conversation_datasets.list_conversation_datasets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConversationDatasets",
+        "fullName": "google.cloud.dialogflow.v2.ConversationDatasets.ListConversationDatasets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.ListConversationDatasetsResponse",
+        "client": {
+          "shortName": "ConversationDatasetsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationDatasetsClient"
+        },
+        "method": {
+          "shortName": "ListConversationDatasets",
+          "fullName": "google.cloud.dialogflow.v2.ConversationDatasets.ListConversationDatasets",
+          "service": {
+            "shortName": "ConversationDatasets",
+            "fullName": "google.cloud.dialogflow.v2.ConversationDatasets"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationDatasets_DeleteConversationDataset_async",
+      "title": "dialogflow deleteConversationDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified conversation dataset. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: [DeleteConversationDatasetOperationMetadata][google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata] - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)",
+      "canonical": true,
+      "file": "conversation_datasets.delete_conversation_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConversationDataset",
+        "fullName": "google.cloud.dialogflow.v2.ConversationDatasets.DeleteConversationDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConversationDatasetsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationDatasetsClient"
+        },
+        "method": {
+          "shortName": "DeleteConversationDataset",
+          "fullName": "google.cloud.dialogflow.v2.ConversationDatasets.DeleteConversationDataset",
+          "service": {
+            "shortName": "ConversationDatasets",
+            "fullName": "google.cloud.dialogflow.v2.ConversationDatasets"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationDatasets_ImportConversationData_async",
+      "title": "dialogflow importConversationData Sample",
+      "origin": "API_DEFINITION",
+      "description": " Import data into the specified conversation dataset. Note that it is not allowed to import data to a conversation dataset that already has data in it. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: [ImportConversationDataOperationMetadata][google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata] - `response`: [ImportConversationDataOperationResponse][google.cloud.dialogflow.v2.ImportConversationDataOperationResponse]",
+      "canonical": true,
+      "file": "conversation_datasets.import_conversation_data.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportConversationData",
+        "fullName": "google.cloud.dialogflow.v2.ConversationDatasets.ImportConversationData",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_config",
+            "type": ".google.cloud.dialogflow.v2.InputConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConversationDatasetsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationDatasetsClient"
+        },
+        "method": {
+          "shortName": "ImportConversationData",
+          "fullName": "google.cloud.dialogflow.v2.ConversationDatasets.ImportConversationData",
+          "service": {
+            "shortName": "ConversationDatasets",
+            "fullName": "google.cloud.dialogflow.v2.ConversationDatasets"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationModels_CreateConversationModel_async",
+      "title": "dialogflow createConversationModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a model. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: [CreateConversationModelOperationMetadata][google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata] - `response`: [ConversationModel][google.cloud.dialogflow.v2.ConversationModel]",
+      "canonical": true,
+      "file": "conversation_models.create_conversation_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConversationModel",
+        "fullName": "google.cloud.dialogflow.v2.ConversationModels.CreateConversationModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "conversation_model",
+            "type": ".google.cloud.dialogflow.v2.ConversationModel"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConversationModelsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModelsClient"
+        },
+        "method": {
+          "shortName": "CreateConversationModel",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModels.CreateConversationModel",
+          "service": {
+            "shortName": "ConversationModels",
+            "fullName": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationModels_GetConversationModel_async",
+      "title": "dialogflow getConversationModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets conversation model.",
+      "canonical": true,
+      "file": "conversation_models.get_conversation_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConversationModel",
+        "fullName": "google.cloud.dialogflow.v2.ConversationModels.GetConversationModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.ConversationModel",
+        "client": {
+          "shortName": "ConversationModelsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModelsClient"
+        },
+        "method": {
+          "shortName": "GetConversationModel",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModels.GetConversationModel",
+          "service": {
+            "shortName": "ConversationModels",
+            "fullName": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationModels_ListConversationModels_async",
+      "title": "dialogflow listConversationModels Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists conversation models.",
+      "canonical": true,
+      "file": "conversation_models.list_conversation_models.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConversationModels",
+        "fullName": "google.cloud.dialogflow.v2.ConversationModels.ListConversationModels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.ListConversationModelsResponse",
+        "client": {
+          "shortName": "ConversationModelsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModelsClient"
+        },
+        "method": {
+          "shortName": "ListConversationModels",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModels.ListConversationModels",
+          "service": {
+            "shortName": "ConversationModels",
+            "fullName": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationModels_DeleteConversationModel_async",
+      "title": "dialogflow deleteConversationModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a model. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: [DeleteConversationModelOperationMetadata][google.cloud.dialogflow.v2.DeleteConversationModelOperationMetadata] - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)",
+      "canonical": true,
+      "file": "conversation_models.delete_conversation_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConversationModel",
+        "fullName": "google.cloud.dialogflow.v2.ConversationModels.DeleteConversationModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConversationModelsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModelsClient"
+        },
+        "method": {
+          "shortName": "DeleteConversationModel",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModels.DeleteConversationModel",
+          "service": {
+            "shortName": "ConversationModels",
+            "fullName": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationModels_DeployConversationModel_async",
+      "title": "dialogflow deployConversationModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deploys a model. If a model is already deployed, deploying it has no effect. A model can only serve prediction requests after it gets deployed. For article suggestion, custom model will not be used unless it is deployed. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: [DeployConversationModelOperationMetadata][google.cloud.dialogflow.v2.DeployConversationModelOperationMetadata] - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)",
+      "canonical": true,
+      "file": "conversation_models.deploy_conversation_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeployConversationModel",
+        "fullName": "google.cloud.dialogflow.v2.ConversationModels.DeployConversationModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConversationModelsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModelsClient"
+        },
+        "method": {
+          "shortName": "DeployConversationModel",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModels.DeployConversationModel",
+          "service": {
+            "shortName": "ConversationModels",
+            "fullName": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationModels_UndeployConversationModel_async",
+      "title": "dialogflow undeployConversationModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Undeploys a model. If the model is not deployed this method has no effect. If the model is currently being used:   - For article suggestion, article suggestion will fallback to the default     model if model is undeployed. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: [UndeployConversationModelOperationMetadata][google.cloud.dialogflow.v2.UndeployConversationModelOperationMetadata] - `response`: An [Empty   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)",
+      "canonical": true,
+      "file": "conversation_models.undeploy_conversation_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UndeployConversationModel",
+        "fullName": "google.cloud.dialogflow.v2.ConversationModels.UndeployConversationModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConversationModelsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModelsClient"
+        },
+        "method": {
+          "shortName": "UndeployConversationModel",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModels.UndeployConversationModel",
+          "service": {
+            "shortName": "ConversationModels",
+            "fullName": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationModels_GetConversationModelEvaluation_async",
+      "title": "dialogflow getConversationModelEvaluation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an evaluation of conversation model.",
+      "canonical": true,
+      "file": "conversation_models.get_conversation_model_evaluation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConversationModelEvaluation",
+        "fullName": "google.cloud.dialogflow.v2.ConversationModels.GetConversationModelEvaluation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.ConversationModelEvaluation",
+        "client": {
+          "shortName": "ConversationModelsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModelsClient"
+        },
+        "method": {
+          "shortName": "GetConversationModelEvaluation",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModels.GetConversationModelEvaluation",
+          "service": {
+            "shortName": "ConversationModels",
+            "fullName": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationModels_ListConversationModelEvaluations_async",
+      "title": "dialogflow listConversationModelEvaluations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists evaluations of a conversation model.",
+      "canonical": true,
+      "file": "conversation_models.list_conversation_model_evaluations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConversationModelEvaluations",
+        "fullName": "google.cloud.dialogflow.v2.ConversationModels.ListConversationModelEvaluations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.v2.ListConversationModelEvaluationsResponse",
+        "client": {
+          "shortName": "ConversationModelsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModelsClient"
+        },
+        "method": {
+          "shortName": "ListConversationModelEvaluations",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModels.ListConversationModelEvaluations",
+          "service": {
+            "shortName": "ConversationModels",
+            "fullName": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationModels_CreateConversationModelEvaluation_async",
+      "title": "dialogflow createConversationModelEvaluation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates evaluation of a conversation model.",
+      "canonical": true,
+      "file": "conversation_models.create_conversation_model_evaluation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConversationModelEvaluation",
+        "fullName": "google.cloud.dialogflow.v2.ConversationModels.CreateConversationModelEvaluation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "conversation_model_evaluation",
+            "type": ".google.cloud.dialogflow.v2.ConversationModelEvaluation"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConversationModelsClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModelsClient"
+        },
+        "method": {
+          "shortName": "CreateConversationModelEvaluation",
+          "fullName": "google.cloud.dialogflow.v2.ConversationModels.CreateConversationModelEvaluation",
+          "service": {
+            "shortName": "ConversationModels",
+            "fullName": "google.cloud.dialogflow.v2.ConversationModels"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "dialogflow_v2_generated_ConversationProfiles_ListConversationProfiles_async",
       "title": "dialogflow listConversationProfiles Sample",
       "origin": "API_DEFINITION",
@@ -968,6 +1568,102 @@
         "method": {
           "shortName": "DeleteConversationProfile",
           "fullName": "google.cloud.dialogflow.v2.ConversationProfiles.DeleteConversationProfile",
+          "service": {
+            "shortName": "ConversationProfiles",
+            "fullName": "google.cloud.dialogflow.v2.ConversationProfiles"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationProfiles_SetSuggestionFeatureConfig_async",
+      "title": "dialogflow setSuggestionFeatureConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds or updates a suggestion feature in a conversation profile. If the conversation profile contains the type of suggestion feature for the participant role, it will update it. Otherwise it will insert the suggestion feature. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: [SetSuggestionFeatureConfigOperationMetadata][google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata] - `response`: [ConversationProfile][google.cloud.dialogflow.v2.ConversationProfile] If a long running operation to add or update suggestion feature config for the same conversation profile, participant role and suggestion feature type exists, please cancel the existing long running operation before sending such request, otherwise the request will be rejected.",
+      "canonical": true,
+      "file": "conversation_profiles.set_suggestion_feature_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetSuggestionFeatureConfig",
+        "fullName": "google.cloud.dialogflow.v2.ConversationProfiles.SetSuggestionFeatureConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "conversation_profile",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "participant_role",
+            "type": ".google.cloud.dialogflow.v2.Participant.Role"
+          },
+          {
+            "name": "suggestion_feature_config",
+            "type": ".google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionFeatureConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConversationProfilesClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationProfilesClient"
+        },
+        "method": {
+          "shortName": "SetSuggestionFeatureConfig",
+          "fullName": "google.cloud.dialogflow.v2.ConversationProfiles.SetSuggestionFeatureConfig",
+          "service": {
+            "shortName": "ConversationProfiles",
+            "fullName": "google.cloud.dialogflow.v2.ConversationProfiles"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v2_generated_ConversationProfiles_ClearSuggestionFeatureConfig_async",
+      "title": "dialogflow clearSuggestionFeatureConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Clears a suggestion feature from a conversation profile for the given participant role. This method is a [long-running operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations). The returned `Operation` type has the following method-specific fields: - `metadata`: [ClearSuggestionFeatureConfigOperationMetadata][google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata] - `response`: [ConversationProfile][google.cloud.dialogflow.v2.ConversationProfile]",
+      "canonical": true,
+      "file": "conversation_profiles.clear_suggestion_feature_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ClearSuggestionFeatureConfig",
+        "fullName": "google.cloud.dialogflow.v2.ConversationProfiles.ClearSuggestionFeatureConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "conversation_profile",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "participant_role",
+            "type": ".google.cloud.dialogflow.v2.Participant.Role"
+          },
+          {
+            "name": "suggestion_feature_type",
+            "type": ".google.cloud.dialogflow.v2.SuggestionFeature.Type"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConversationProfilesClient",
+          "fullName": "google.cloud.dialogflow.v2.ConversationProfilesClient"
+        },
+        "method": {
+          "shortName": "ClearSuggestionFeatureConfig",
+          "fullName": "google.cloud.dialogflow.v2.ConversationProfiles.ClearSuggestionFeatureConfig",
           "service": {
             "shortName": "ConversationProfiles",
             "fullName": "google.cloud.dialogflow.v2.ConversationProfiles"

@@ -229,6 +229,186 @@
         }
       }
     },
+    "ConversationDatasets": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConversationDatasetsClient",
+          "rpcs": {
+            "GetConversationDataset": {
+              "methods": [
+                "getConversationDataset"
+              ]
+            },
+            "CreateConversationDataset": {
+              "methods": [
+                "createConversationDataset"
+              ]
+            },
+            "DeleteConversationDataset": {
+              "methods": [
+                "deleteConversationDataset"
+              ]
+            },
+            "ImportConversationData": {
+              "methods": [
+                "importConversationData"
+              ]
+            },
+            "ListConversationDatasets": {
+              "methods": [
+                "listConversationDatasets",
+                "listConversationDatasetsStream",
+                "listConversationDatasetsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConversationDatasetsClient",
+          "rpcs": {
+            "GetConversationDataset": {
+              "methods": [
+                "getConversationDataset"
+              ]
+            },
+            "CreateConversationDataset": {
+              "methods": [
+                "createConversationDataset"
+              ]
+            },
+            "DeleteConversationDataset": {
+              "methods": [
+                "deleteConversationDataset"
+              ]
+            },
+            "ImportConversationData": {
+              "methods": [
+                "importConversationData"
+              ]
+            },
+            "ListConversationDatasets": {
+              "methods": [
+                "listConversationDatasets",
+                "listConversationDatasetsStream",
+                "listConversationDatasetsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ConversationModels": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConversationModelsClient",
+          "rpcs": {
+            "GetConversationModel": {
+              "methods": [
+                "getConversationModel"
+              ]
+            },
+            "GetConversationModelEvaluation": {
+              "methods": [
+                "getConversationModelEvaluation"
+              ]
+            },
+            "CreateConversationModel": {
+              "methods": [
+                "createConversationModel"
+              ]
+            },
+            "DeleteConversationModel": {
+              "methods": [
+                "deleteConversationModel"
+              ]
+            },
+            "DeployConversationModel": {
+              "methods": [
+                "deployConversationModel"
+              ]
+            },
+            "UndeployConversationModel": {
+              "methods": [
+                "undeployConversationModel"
+              ]
+            },
+            "CreateConversationModelEvaluation": {
+              "methods": [
+                "createConversationModelEvaluation"
+              ]
+            },
+            "ListConversationModels": {
+              "methods": [
+                "listConversationModels",
+                "listConversationModelsStream",
+                "listConversationModelsAsync"
+              ]
+            },
+            "ListConversationModelEvaluations": {
+              "methods": [
+                "listConversationModelEvaluations",
+                "listConversationModelEvaluationsStream",
+                "listConversationModelEvaluationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConversationModelsClient",
+          "rpcs": {
+            "GetConversationModel": {
+              "methods": [
+                "getConversationModel"
+              ]
+            },
+            "GetConversationModelEvaluation": {
+              "methods": [
+                "getConversationModelEvaluation"
+              ]
+            },
+            "CreateConversationModel": {
+              "methods": [
+                "createConversationModel"
+              ]
+            },
+            "DeleteConversationModel": {
+              "methods": [
+                "deleteConversationModel"
+              ]
+            },
+            "DeployConversationModel": {
+              "methods": [
+                "deployConversationModel"
+              ]
+            },
+            "UndeployConversationModel": {
+              "methods": [
+                "undeployConversationModel"
+              ]
+            },
+            "CreateConversationModelEvaluation": {
+              "methods": [
+                "createConversationModelEvaluation"
+              ]
+            },
+            "ListConversationModels": {
+              "methods": [
+                "listConversationModels",
+                "listConversationModelsStream",
+                "listConversationModelsAsync"
+              ]
+            },
+            "ListConversationModelEvaluations": {
+              "methods": [
+                "listConversationModelEvaluations",
+                "listConversationModelEvaluationsStream",
+                "listConversationModelEvaluationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ConversationProfiles": {
       "clients": {
         "grpc": {
@@ -252,6 +432,16 @@
             "DeleteConversationProfile": {
               "methods": [
                 "deleteConversationProfile"
+              ]
+            },
+            "SetSuggestionFeatureConfig": {
+              "methods": [
+                "setSuggestionFeatureConfig"
+              ]
+            },
+            "ClearSuggestionFeatureConfig": {
+              "methods": [
+                "clearSuggestionFeatureConfig"
               ]
             },
             "ListConversationProfiles": {
@@ -284,6 +474,16 @@
             "DeleteConversationProfile": {
               "methods": [
                 "deleteConversationProfile"
+              ]
+            },
+            "SetSuggestionFeatureConfig": {
+              "methods": [
+                "setSuggestionFeatureConfig"
+              ]
+            },
+            "ClearSuggestionFeatureConfig": {
+              "methods": [
+                "clearSuggestionFeatureConfig"
               ]
             },
             "ListConversationProfiles": {

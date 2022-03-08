@@ -25,7 +25,7 @@ import * as conversationprofilesModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -49,6 +49,38 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubPageStreamingCall<ResponseType>(
@@ -779,6 +811,414 @@ describe('v2.ConversationProfilesClient', () => {
     });
   });
 
+  describe('setSuggestionFeatureConfig', () => {
+    it('invokes setSuggestionFeatureConfig without error', async () => {
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest()
+      );
+      request.conversationProfile = '';
+      const expectedHeaderRequestParams = 'conversation_profile=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.setSuggestionFeatureConfig =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.setSuggestionFeatureConfig(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setSuggestionFeatureConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setSuggestionFeatureConfig without error using callback', async () => {
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest()
+      );
+      request.conversationProfile = '';
+      const expectedHeaderRequestParams = 'conversation_profile=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.setSuggestionFeatureConfig =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setSuggestionFeatureConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.dialogflow.v2.IConversationProfile,
+              protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.dialogflow.v2.IConversationProfile,
+        protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setSuggestionFeatureConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes setSuggestionFeatureConfig with call error', async () => {
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest()
+      );
+      request.conversationProfile = '';
+      const expectedHeaderRequestParams = 'conversation_profile=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setSuggestionFeatureConfig = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.setSuggestionFeatureConfig(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.setSuggestionFeatureConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setSuggestionFeatureConfig with LRO error', async () => {
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest()
+      );
+      request.conversationProfile = '';
+      const expectedHeaderRequestParams = 'conversation_profile=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setSuggestionFeatureConfig = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.setSuggestionFeatureConfig(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.setSuggestionFeatureConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkSetSuggestionFeatureConfigProgress without error', async () => {
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkSetSuggestionFeatureConfigProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkSetSuggestionFeatureConfigProgress with error', async () => {
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkSetSuggestionFeatureConfigProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('clearSuggestionFeatureConfig', () => {
+    it('invokes clearSuggestionFeatureConfig without error', async () => {
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest()
+      );
+      request.conversationProfile = '';
+      const expectedHeaderRequestParams = 'conversation_profile=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.clearSuggestionFeatureConfig =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.clearSuggestionFeatureConfig(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes clearSuggestionFeatureConfig without error using callback', async () => {
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest()
+      );
+      request.conversationProfile = '';
+      const expectedHeaderRequestParams = 'conversation_profile=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.clearSuggestionFeatureConfig =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.clearSuggestionFeatureConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.dialogflow.v2.IConversationProfile,
+              protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.dialogflow.v2.IConversationProfile,
+        protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes clearSuggestionFeatureConfig with call error', async () => {
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest()
+      );
+      request.conversationProfile = '';
+      const expectedHeaderRequestParams = 'conversation_profile=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.clearSuggestionFeatureConfig = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.clearSuggestionFeatureConfig(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes clearSuggestionFeatureConfig with LRO error', async () => {
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest()
+      );
+      request.conversationProfile = '';
+      const expectedHeaderRequestParams = 'conversation_profile=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.clearSuggestionFeatureConfig = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.clearSuggestionFeatureConfig(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkClearSuggestionFeatureConfigProgress without error', async () => {
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkClearSuggestionFeatureConfigProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkClearSuggestionFeatureConfigProgress with error', async () => {
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkClearSuggestionFeatureConfigProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listConversationProfiles', () => {
     it('invokes listConversationProfiles without error', async () => {
       const client =
@@ -1184,6 +1624,85 @@ describe('v2.ConversationProfilesClient', () => {
         assert(
           (
             client.pathTemplates.cXSecuritySettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('conversationDataset', () => {
+      const fakePath = '/rendered/path/conversationDataset';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        conversation_dataset: 'conversationDatasetValue',
+      };
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.conversationDatasetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.conversationDatasetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('conversationDatasetPath', () => {
+        const result = client.conversationDatasetPath(
+          'projectValue',
+          'locationValue',
+          'conversationDatasetValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.conversationDatasetPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromConversationDatasetName', () => {
+        const result = client.matchProjectFromConversationDatasetName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.conversationDatasetPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromConversationDatasetName', () => {
+        const result =
+          client.matchLocationFromConversationDatasetName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.conversationDatasetPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationDatasetFromConversationDatasetName', () => {
+        const result =
+          client.matchConversationDatasetFromConversationDatasetName(fakePath);
+        assert.strictEqual(result, 'conversationDatasetValue');
+        assert(
+          (
+            client.pathTemplates.conversationDatasetPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2178,6 +2697,142 @@ describe('v2.ConversationProfilesClient', () => {
         assert(
           (
             client.pathTemplates.projectConversationMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectConversationModel', () => {
+      const fakePath = '/rendered/path/projectConversationModel';
+      const expectedParameters = {
+        project: 'projectValue',
+        conversation_model: 'conversationModelValue',
+      };
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectConversationModelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectConversationModelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectConversationModelPath', () => {
+        const result = client.projectConversationModelPath(
+          'projectValue',
+          'conversationModelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectConversationModelPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectConversationModelName', () => {
+        const result =
+          client.matchProjectFromProjectConversationModelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectConversationModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationModelFromProjectConversationModelName', () => {
+        const result =
+          client.matchConversationModelFromProjectConversationModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationModelValue');
+        assert(
+          (
+            client.pathTemplates.projectConversationModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectConversationModelEvaluationsEvaluation', () => {
+      const fakePath =
+        '/rendered/path/projectConversationModelEvaluationsEvaluation';
+      const expectedParameters = {
+        project: 'projectValue',
+        conversation_model: 'conversationModelValue',
+      };
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectConversationModelEvaluationsEvaluationPath', () => {
+        const result = client.projectConversationModelEvaluationsEvaluationPath(
+          'projectValue',
+          'conversationModelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectConversationModelEvaluationsEvaluationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectConversationModelEvaluationsEvaluationName', () => {
+        const result =
+          client.matchProjectFromProjectConversationModelEvaluationsEvaluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectConversationModelEvaluationsEvaluationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationModelFromProjectConversationModelEvaluationsEvaluationName', () => {
+        const result =
+          client.matchConversationModelFromProjectConversationModelEvaluationsEvaluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationModelValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectConversationModelEvaluationsEvaluationPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -3678,6 +4333,178 @@ describe('v2.ConversationProfilesClient', () => {
         assert(
           (
             client.pathTemplates.projectLocationConversationMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConversationModel', () => {
+      const fakePath = '/rendered/path/projectLocationConversationModel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        conversation_model: 'conversationModelValue',
+      };
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationConversationModelPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationConversationModelPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationConversationModelPath', () => {
+        const result = client.projectLocationConversationModelPath(
+          'projectValue',
+          'locationValue',
+          'conversationModelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationModelPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConversationModelName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConversationModelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConversationModelName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConversationModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationModelFromProjectLocationConversationModelName', () => {
+        const result =
+          client.matchConversationModelFromProjectLocationConversationModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationModelValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConversationModelEvaluationsEvaluation', () => {
+      const fakePath =
+        '/rendered/path/projectLocationConversationModelEvaluationsEvaluation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        conversation_model: 'conversationModelValue',
+      };
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationConversationModelEvaluationsEvaluationPath', () => {
+        const result =
+          client.projectLocationConversationModelEvaluationsEvaluationPath(
+            'projectValue',
+            'locationValue',
+            'conversationModelValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationModelEvaluationsEvaluationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConversationModelEvaluationsEvaluationName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConversationModelEvaluationsEvaluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationModelEvaluationsEvaluationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConversationModelEvaluationsEvaluationName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConversationModelEvaluationsEvaluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationModelEvaluationsEvaluationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationModelFromProjectLocationConversationModelEvaluationsEvaluationName', () => {
+        const result =
+          client.matchConversationModelFromProjectLocationConversationModelEvaluationsEvaluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationModelValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationModelEvaluationsEvaluationPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

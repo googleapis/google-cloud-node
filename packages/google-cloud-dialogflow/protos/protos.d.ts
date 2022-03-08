@@ -6161,186 +6161,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a GcsSources. */
-                interface IGcsSources {
-
-                    /** GcsSources uris */
-                    uris?: (string[]|null);
-                }
-
-                /** Represents a GcsSources. */
-                class GcsSources implements IGcsSources {
-
-                    /**
-                     * Constructs a new GcsSources.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dialogflow.v2.IGcsSources);
-
-                    /** GcsSources uris. */
-                    public uris: string[];
-
-                    /**
-                     * Creates a new GcsSources instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GcsSources instance
-                     */
-                    public static create(properties?: google.cloud.dialogflow.v2.IGcsSources): google.cloud.dialogflow.v2.GcsSources;
-
-                    /**
-                     * Encodes the specified GcsSources message. Does not implicitly {@link google.cloud.dialogflow.v2.GcsSources.verify|verify} messages.
-                     * @param message GcsSources message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dialogflow.v2.IGcsSources, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GcsSources message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.GcsSources.verify|verify} messages.
-                     * @param message GcsSources message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IGcsSources, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GcsSources message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GcsSources
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.GcsSources;
-
-                    /**
-                     * Decodes a GcsSources message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GcsSources
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.GcsSources;
-
-                    /**
-                     * Verifies a GcsSources message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GcsSources message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GcsSources
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.GcsSources;
-
-                    /**
-                     * Creates a plain object from a GcsSources message. Also converts values to other types if specified.
-                     * @param message GcsSources
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dialogflow.v2.GcsSources, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GcsSources to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GcsDestination. */
-                interface IGcsDestination {
-
-                    /** GcsDestination uri */
-                    uri?: (string|null);
-                }
-
-                /** Represents a GcsDestination. */
-                class GcsDestination implements IGcsDestination {
-
-                    /**
-                     * Constructs a new GcsDestination.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dialogflow.v2.IGcsDestination);
-
-                    /** GcsDestination uri. */
-                    public uri: string;
-
-                    /**
-                     * Creates a new GcsDestination instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GcsDestination instance
-                     */
-                    public static create(properties?: google.cloud.dialogflow.v2.IGcsDestination): google.cloud.dialogflow.v2.GcsDestination;
-
-                    /**
-                     * Encodes the specified GcsDestination message. Does not implicitly {@link google.cloud.dialogflow.v2.GcsDestination.verify|verify} messages.
-                     * @param message GcsDestination message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dialogflow.v2.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GcsDestination message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.GcsDestination.verify|verify} messages.
-                     * @param message GcsDestination message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GcsDestination message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GcsDestination
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.GcsDestination;
-
-                    /**
-                     * Decodes a GcsDestination message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GcsDestination
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.GcsDestination;
-
-                    /**
-                     * Verifies a GcsDestination message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GcsDestination message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GcsDestination
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.GcsDestination;
-
-                    /**
-                     * Creates a plain object from a GcsDestination message. Also converts values to other types if specified.
-                     * @param message GcsDestination
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dialogflow.v2.GcsDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GcsDestination to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Represents a Sessions */
                 class Sessions extends $protobuf.rpc.Service {
 
@@ -17250,6 +17070,4506 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Represents a ConversationDatasets */
+                class ConversationDatasets extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ConversationDatasets service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ConversationDatasets service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ConversationDatasets;
+
+                    /**
+                     * Calls CreateConversationDataset.
+                     * @param request CreateConversationDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createConversationDataset(request: google.cloud.dialogflow.v2.ICreateConversationDatasetRequest, callback: google.cloud.dialogflow.v2.ConversationDatasets.CreateConversationDatasetCallback): void;
+
+                    /**
+                     * Calls CreateConversationDataset.
+                     * @param request CreateConversationDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createConversationDataset(request: google.cloud.dialogflow.v2.ICreateConversationDatasetRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetConversationDataset.
+                     * @param request GetConversationDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConversationDataset
+                     */
+                    public getConversationDataset(request: google.cloud.dialogflow.v2.IGetConversationDatasetRequest, callback: google.cloud.dialogflow.v2.ConversationDatasets.GetConversationDatasetCallback): void;
+
+                    /**
+                     * Calls GetConversationDataset.
+                     * @param request GetConversationDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getConversationDataset(request: google.cloud.dialogflow.v2.IGetConversationDatasetRequest): Promise<google.cloud.dialogflow.v2.ConversationDataset>;
+
+                    /**
+                     * Calls ListConversationDatasets.
+                     * @param request ListConversationDatasetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListConversationDatasetsResponse
+                     */
+                    public listConversationDatasets(request: google.cloud.dialogflow.v2.IListConversationDatasetsRequest, callback: google.cloud.dialogflow.v2.ConversationDatasets.ListConversationDatasetsCallback): void;
+
+                    /**
+                     * Calls ListConversationDatasets.
+                     * @param request ListConversationDatasetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listConversationDatasets(request: google.cloud.dialogflow.v2.IListConversationDatasetsRequest): Promise<google.cloud.dialogflow.v2.ListConversationDatasetsResponse>;
+
+                    /**
+                     * Calls DeleteConversationDataset.
+                     * @param request DeleteConversationDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteConversationDataset(request: google.cloud.dialogflow.v2.IDeleteConversationDatasetRequest, callback: google.cloud.dialogflow.v2.ConversationDatasets.DeleteConversationDatasetCallback): void;
+
+                    /**
+                     * Calls DeleteConversationDataset.
+                     * @param request DeleteConversationDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteConversationDataset(request: google.cloud.dialogflow.v2.IDeleteConversationDatasetRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ImportConversationData.
+                     * @param request ImportConversationDataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public importConversationData(request: google.cloud.dialogflow.v2.IImportConversationDataRequest, callback: google.cloud.dialogflow.v2.ConversationDatasets.ImportConversationDataCallback): void;
+
+                    /**
+                     * Calls ImportConversationData.
+                     * @param request ImportConversationDataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importConversationData(request: google.cloud.dialogflow.v2.IImportConversationDataRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace ConversationDatasets {
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationDatasets#createConversationDataset}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateConversationDatasetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationDatasets#getConversationDataset}.
+                     * @param error Error, if any
+                     * @param [response] ConversationDataset
+                     */
+                    type GetConversationDatasetCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2.ConversationDataset) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationDatasets#listConversationDatasets}.
+                     * @param error Error, if any
+                     * @param [response] ListConversationDatasetsResponse
+                     */
+                    type ListConversationDatasetsCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2.ListConversationDatasetsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationDatasets#deleteConversationDataset}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteConversationDatasetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationDatasets#importConversationData}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ImportConversationDataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a ConversationInfo. */
+                interface IConversationInfo {
+
+                    /** ConversationInfo languageCode */
+                    languageCode?: (string|null);
+                }
+
+                /** Represents a ConversationInfo. */
+                class ConversationInfo implements IConversationInfo {
+
+                    /**
+                     * Constructs a new ConversationInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IConversationInfo);
+
+                    /** ConversationInfo languageCode. */
+                    public languageCode: string;
+
+                    /**
+                     * Creates a new ConversationInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationInfo instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IConversationInfo): google.cloud.dialogflow.v2.ConversationInfo;
+
+                    /**
+                     * Encodes the specified ConversationInfo message. Does not implicitly {@link google.cloud.dialogflow.v2.ConversationInfo.verify|verify} messages.
+                     * @param message ConversationInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IConversationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ConversationInfo.verify|verify} messages.
+                     * @param message ConversationInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IConversationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ConversationInfo;
+
+                    /**
+                     * Decodes a ConversationInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ConversationInfo;
+
+                    /**
+                     * Verifies a ConversationInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ConversationInfo;
+
+                    /**
+                     * Creates a plain object from a ConversationInfo message. Also converts values to other types if specified.
+                     * @param message ConversationInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ConversationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an InputConfig. */
+                interface IInputConfig {
+
+                    /** InputConfig gcsSource */
+                    gcsSource?: (google.cloud.dialogflow.v2.IGcsSources|null);
+                }
+
+                /** Represents an InputConfig. */
+                class InputConfig implements IInputConfig {
+
+                    /**
+                     * Constructs a new InputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IInputConfig);
+
+                    /** InputConfig gcsSource. */
+                    public gcsSource?: (google.cloud.dialogflow.v2.IGcsSources|null);
+
+                    /** InputConfig source. */
+                    public source?: "gcsSource";
+
+                    /**
+                     * Creates a new InputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InputConfig instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IInputConfig): google.cloud.dialogflow.v2.InputConfig;
+
+                    /**
+                     * Encodes the specified InputConfig message. Does not implicitly {@link google.cloud.dialogflow.v2.InputConfig.verify|verify} messages.
+                     * @param message InputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IInputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InputConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.InputConfig.verify|verify} messages.
+                     * @param message InputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IInputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.InputConfig;
+
+                    /**
+                     * Decodes an InputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.InputConfig;
+
+                    /**
+                     * Verifies an InputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.InputConfig;
+
+                    /**
+                     * Creates a plain object from an InputConfig message. Also converts values to other types if specified.
+                     * @param message InputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.InputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ConversationDataset. */
+                interface IConversationDataset {
+
+                    /** ConversationDataset name */
+                    name?: (string|null);
+
+                    /** ConversationDataset displayName */
+                    displayName?: (string|null);
+
+                    /** ConversationDataset description */
+                    description?: (string|null);
+
+                    /** ConversationDataset createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversationDataset inputConfig */
+                    inputConfig?: (google.cloud.dialogflow.v2.IInputConfig|null);
+
+                    /** ConversationDataset conversationInfo */
+                    conversationInfo?: (google.cloud.dialogflow.v2.IConversationInfo|null);
+
+                    /** ConversationDataset conversationCount */
+                    conversationCount?: (number|Long|string|null);
+                }
+
+                /** Represents a ConversationDataset. */
+                class ConversationDataset implements IConversationDataset {
+
+                    /**
+                     * Constructs a new ConversationDataset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IConversationDataset);
+
+                    /** ConversationDataset name. */
+                    public name: string;
+
+                    /** ConversationDataset displayName. */
+                    public displayName: string;
+
+                    /** ConversationDataset description. */
+                    public description: string;
+
+                    /** ConversationDataset createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversationDataset inputConfig. */
+                    public inputConfig?: (google.cloud.dialogflow.v2.IInputConfig|null);
+
+                    /** ConversationDataset conversationInfo. */
+                    public conversationInfo?: (google.cloud.dialogflow.v2.IConversationInfo|null);
+
+                    /** ConversationDataset conversationCount. */
+                    public conversationCount: (number|Long|string);
+
+                    /**
+                     * Creates a new ConversationDataset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationDataset instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IConversationDataset): google.cloud.dialogflow.v2.ConversationDataset;
+
+                    /**
+                     * Encodes the specified ConversationDataset message. Does not implicitly {@link google.cloud.dialogflow.v2.ConversationDataset.verify|verify} messages.
+                     * @param message ConversationDataset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IConversationDataset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationDataset message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ConversationDataset.verify|verify} messages.
+                     * @param message ConversationDataset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IConversationDataset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationDataset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationDataset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ConversationDataset;
+
+                    /**
+                     * Decodes a ConversationDataset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationDataset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ConversationDataset;
+
+                    /**
+                     * Verifies a ConversationDataset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationDataset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationDataset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ConversationDataset;
+
+                    /**
+                     * Creates a plain object from a ConversationDataset message. Also converts values to other types if specified.
+                     * @param message ConversationDataset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ConversationDataset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationDataset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateConversationDatasetRequest. */
+                interface ICreateConversationDatasetRequest {
+
+                    /** CreateConversationDatasetRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateConversationDatasetRequest conversationDataset */
+                    conversationDataset?: (google.cloud.dialogflow.v2.IConversationDataset|null);
+                }
+
+                /** Represents a CreateConversationDatasetRequest. */
+                class CreateConversationDatasetRequest implements ICreateConversationDatasetRequest {
+
+                    /**
+                     * Constructs a new CreateConversationDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.ICreateConversationDatasetRequest);
+
+                    /** CreateConversationDatasetRequest parent. */
+                    public parent: string;
+
+                    /** CreateConversationDatasetRequest conversationDataset. */
+                    public conversationDataset?: (google.cloud.dialogflow.v2.IConversationDataset|null);
+
+                    /**
+                     * Creates a new CreateConversationDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConversationDatasetRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.ICreateConversationDatasetRequest): google.cloud.dialogflow.v2.CreateConversationDatasetRequest;
+
+                    /**
+                     * Encodes the specified CreateConversationDatasetRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.CreateConversationDatasetRequest.verify|verify} messages.
+                     * @param message CreateConversationDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.ICreateConversationDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConversationDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.CreateConversationDatasetRequest.verify|verify} messages.
+                     * @param message CreateConversationDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.ICreateConversationDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConversationDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConversationDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.CreateConversationDatasetRequest;
+
+                    /**
+                     * Decodes a CreateConversationDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConversationDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.CreateConversationDatasetRequest;
+
+                    /**
+                     * Verifies a CreateConversationDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConversationDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConversationDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.CreateConversationDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a CreateConversationDatasetRequest message. Also converts values to other types if specified.
+                     * @param message CreateConversationDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.CreateConversationDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConversationDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetConversationDatasetRequest. */
+                interface IGetConversationDatasetRequest {
+
+                    /** GetConversationDatasetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetConversationDatasetRequest. */
+                class GetConversationDatasetRequest implements IGetConversationDatasetRequest {
+
+                    /**
+                     * Constructs a new GetConversationDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IGetConversationDatasetRequest);
+
+                    /** GetConversationDatasetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetConversationDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetConversationDatasetRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IGetConversationDatasetRequest): google.cloud.dialogflow.v2.GetConversationDatasetRequest;
+
+                    /**
+                     * Encodes the specified GetConversationDatasetRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.GetConversationDatasetRequest.verify|verify} messages.
+                     * @param message GetConversationDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IGetConversationDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetConversationDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.GetConversationDatasetRequest.verify|verify} messages.
+                     * @param message GetConversationDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IGetConversationDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetConversationDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetConversationDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.GetConversationDatasetRequest;
+
+                    /**
+                     * Decodes a GetConversationDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetConversationDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.GetConversationDatasetRequest;
+
+                    /**
+                     * Verifies a GetConversationDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetConversationDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetConversationDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.GetConversationDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a GetConversationDatasetRequest message. Also converts values to other types if specified.
+                     * @param message GetConversationDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.GetConversationDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetConversationDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListConversationDatasetsRequest. */
+                interface IListConversationDatasetsRequest {
+
+                    /** ListConversationDatasetsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListConversationDatasetsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListConversationDatasetsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListConversationDatasetsRequest. */
+                class ListConversationDatasetsRequest implements IListConversationDatasetsRequest {
+
+                    /**
+                     * Constructs a new ListConversationDatasetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IListConversationDatasetsRequest);
+
+                    /** ListConversationDatasetsRequest parent. */
+                    public parent: string;
+
+                    /** ListConversationDatasetsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListConversationDatasetsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListConversationDatasetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConversationDatasetsRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IListConversationDatasetsRequest): google.cloud.dialogflow.v2.ListConversationDatasetsRequest;
+
+                    /**
+                     * Encodes the specified ListConversationDatasetsRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.ListConversationDatasetsRequest.verify|verify} messages.
+                     * @param message ListConversationDatasetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IListConversationDatasetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConversationDatasetsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ListConversationDatasetsRequest.verify|verify} messages.
+                     * @param message ListConversationDatasetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IListConversationDatasetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConversationDatasetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConversationDatasetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ListConversationDatasetsRequest;
+
+                    /**
+                     * Decodes a ListConversationDatasetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConversationDatasetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ListConversationDatasetsRequest;
+
+                    /**
+                     * Verifies a ListConversationDatasetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConversationDatasetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConversationDatasetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ListConversationDatasetsRequest;
+
+                    /**
+                     * Creates a plain object from a ListConversationDatasetsRequest message. Also converts values to other types if specified.
+                     * @param message ListConversationDatasetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ListConversationDatasetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConversationDatasetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListConversationDatasetsResponse. */
+                interface IListConversationDatasetsResponse {
+
+                    /** ListConversationDatasetsResponse conversationDatasets */
+                    conversationDatasets?: (google.cloud.dialogflow.v2.IConversationDataset[]|null);
+
+                    /** ListConversationDatasetsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListConversationDatasetsResponse. */
+                class ListConversationDatasetsResponse implements IListConversationDatasetsResponse {
+
+                    /**
+                     * Constructs a new ListConversationDatasetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IListConversationDatasetsResponse);
+
+                    /** ListConversationDatasetsResponse conversationDatasets. */
+                    public conversationDatasets: google.cloud.dialogflow.v2.IConversationDataset[];
+
+                    /** ListConversationDatasetsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListConversationDatasetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConversationDatasetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IListConversationDatasetsResponse): google.cloud.dialogflow.v2.ListConversationDatasetsResponse;
+
+                    /**
+                     * Encodes the specified ListConversationDatasetsResponse message. Does not implicitly {@link google.cloud.dialogflow.v2.ListConversationDatasetsResponse.verify|verify} messages.
+                     * @param message ListConversationDatasetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IListConversationDatasetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConversationDatasetsResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ListConversationDatasetsResponse.verify|verify} messages.
+                     * @param message ListConversationDatasetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IListConversationDatasetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConversationDatasetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConversationDatasetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ListConversationDatasetsResponse;
+
+                    /**
+                     * Decodes a ListConversationDatasetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConversationDatasetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ListConversationDatasetsResponse;
+
+                    /**
+                     * Verifies a ListConversationDatasetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConversationDatasetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConversationDatasetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ListConversationDatasetsResponse;
+
+                    /**
+                     * Creates a plain object from a ListConversationDatasetsResponse message. Also converts values to other types if specified.
+                     * @param message ListConversationDatasetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ListConversationDatasetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConversationDatasetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteConversationDatasetRequest. */
+                interface IDeleteConversationDatasetRequest {
+
+                    /** DeleteConversationDatasetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteConversationDatasetRequest. */
+                class DeleteConversationDatasetRequest implements IDeleteConversationDatasetRequest {
+
+                    /**
+                     * Constructs a new DeleteConversationDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IDeleteConversationDatasetRequest);
+
+                    /** DeleteConversationDatasetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteConversationDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteConversationDatasetRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IDeleteConversationDatasetRequest): google.cloud.dialogflow.v2.DeleteConversationDatasetRequest;
+
+                    /**
+                     * Encodes the specified DeleteConversationDatasetRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.DeleteConversationDatasetRequest.verify|verify} messages.
+                     * @param message DeleteConversationDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IDeleteConversationDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteConversationDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.DeleteConversationDatasetRequest.verify|verify} messages.
+                     * @param message DeleteConversationDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IDeleteConversationDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteConversationDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteConversationDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.DeleteConversationDatasetRequest;
+
+                    /**
+                     * Decodes a DeleteConversationDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteConversationDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.DeleteConversationDatasetRequest;
+
+                    /**
+                     * Verifies a DeleteConversationDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteConversationDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteConversationDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.DeleteConversationDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteConversationDatasetRequest message. Also converts values to other types if specified.
+                     * @param message DeleteConversationDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.DeleteConversationDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteConversationDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ImportConversationDataRequest. */
+                interface IImportConversationDataRequest {
+
+                    /** ImportConversationDataRequest name */
+                    name?: (string|null);
+
+                    /** ImportConversationDataRequest inputConfig */
+                    inputConfig?: (google.cloud.dialogflow.v2.IInputConfig|null);
+                }
+
+                /** Represents an ImportConversationDataRequest. */
+                class ImportConversationDataRequest implements IImportConversationDataRequest {
+
+                    /**
+                     * Constructs a new ImportConversationDataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IImportConversationDataRequest);
+
+                    /** ImportConversationDataRequest name. */
+                    public name: string;
+
+                    /** ImportConversationDataRequest inputConfig. */
+                    public inputConfig?: (google.cloud.dialogflow.v2.IInputConfig|null);
+
+                    /**
+                     * Creates a new ImportConversationDataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportConversationDataRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IImportConversationDataRequest): google.cloud.dialogflow.v2.ImportConversationDataRequest;
+
+                    /**
+                     * Encodes the specified ImportConversationDataRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.ImportConversationDataRequest.verify|verify} messages.
+                     * @param message ImportConversationDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IImportConversationDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportConversationDataRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ImportConversationDataRequest.verify|verify} messages.
+                     * @param message ImportConversationDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IImportConversationDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportConversationDataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportConversationDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ImportConversationDataRequest;
+
+                    /**
+                     * Decodes an ImportConversationDataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportConversationDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ImportConversationDataRequest;
+
+                    /**
+                     * Verifies an ImportConversationDataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportConversationDataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportConversationDataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ImportConversationDataRequest;
+
+                    /**
+                     * Creates a plain object from an ImportConversationDataRequest message. Also converts values to other types if specified.
+                     * @param message ImportConversationDataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ImportConversationDataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportConversationDataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ImportConversationDataOperationMetadata. */
+                interface IImportConversationDataOperationMetadata {
+
+                    /** ImportConversationDataOperationMetadata conversationDataset */
+                    conversationDataset?: (string|null);
+
+                    /** ImportConversationDataOperationMetadata partialFailures */
+                    partialFailures?: (google.rpc.IStatus[]|null);
+
+                    /** ImportConversationDataOperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an ImportConversationDataOperationMetadata. */
+                class ImportConversationDataOperationMetadata implements IImportConversationDataOperationMetadata {
+
+                    /**
+                     * Constructs a new ImportConversationDataOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IImportConversationDataOperationMetadata);
+
+                    /** ImportConversationDataOperationMetadata conversationDataset. */
+                    public conversationDataset: string;
+
+                    /** ImportConversationDataOperationMetadata partialFailures. */
+                    public partialFailures: google.rpc.IStatus[];
+
+                    /** ImportConversationDataOperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ImportConversationDataOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportConversationDataOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IImportConversationDataOperationMetadata): google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata;
+
+                    /**
+                     * Encodes the specified ImportConversationDataOperationMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata.verify|verify} messages.
+                     * @param message ImportConversationDataOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IImportConversationDataOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportConversationDataOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata.verify|verify} messages.
+                     * @param message ImportConversationDataOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IImportConversationDataOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportConversationDataOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportConversationDataOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata;
+
+                    /**
+                     * Decodes an ImportConversationDataOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportConversationDataOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata;
+
+                    /**
+                     * Verifies an ImportConversationDataOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportConversationDataOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportConversationDataOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata;
+
+                    /**
+                     * Creates a plain object from an ImportConversationDataOperationMetadata message. Also converts values to other types if specified.
+                     * @param message ImportConversationDataOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportConversationDataOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ImportConversationDataOperationResponse. */
+                interface IImportConversationDataOperationResponse {
+
+                    /** ImportConversationDataOperationResponse conversationDataset */
+                    conversationDataset?: (string|null);
+
+                    /** ImportConversationDataOperationResponse importCount */
+                    importCount?: (number|null);
+                }
+
+                /** Represents an ImportConversationDataOperationResponse. */
+                class ImportConversationDataOperationResponse implements IImportConversationDataOperationResponse {
+
+                    /**
+                     * Constructs a new ImportConversationDataOperationResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IImportConversationDataOperationResponse);
+
+                    /** ImportConversationDataOperationResponse conversationDataset. */
+                    public conversationDataset: string;
+
+                    /** ImportConversationDataOperationResponse importCount. */
+                    public importCount: number;
+
+                    /**
+                     * Creates a new ImportConversationDataOperationResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportConversationDataOperationResponse instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IImportConversationDataOperationResponse): google.cloud.dialogflow.v2.ImportConversationDataOperationResponse;
+
+                    /**
+                     * Encodes the specified ImportConversationDataOperationResponse message. Does not implicitly {@link google.cloud.dialogflow.v2.ImportConversationDataOperationResponse.verify|verify} messages.
+                     * @param message ImportConversationDataOperationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IImportConversationDataOperationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportConversationDataOperationResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ImportConversationDataOperationResponse.verify|verify} messages.
+                     * @param message ImportConversationDataOperationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IImportConversationDataOperationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportConversationDataOperationResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportConversationDataOperationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ImportConversationDataOperationResponse;
+
+                    /**
+                     * Decodes an ImportConversationDataOperationResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportConversationDataOperationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ImportConversationDataOperationResponse;
+
+                    /**
+                     * Verifies an ImportConversationDataOperationResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportConversationDataOperationResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportConversationDataOperationResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ImportConversationDataOperationResponse;
+
+                    /**
+                     * Creates a plain object from an ImportConversationDataOperationResponse message. Also converts values to other types if specified.
+                     * @param message ImportConversationDataOperationResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ImportConversationDataOperationResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportConversationDataOperationResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateConversationDatasetOperationMetadata. */
+                interface ICreateConversationDatasetOperationMetadata {
+                }
+
+                /** Represents a CreateConversationDatasetOperationMetadata. */
+                class CreateConversationDatasetOperationMetadata implements ICreateConversationDatasetOperationMetadata {
+
+                    /**
+                     * Constructs a new CreateConversationDatasetOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.ICreateConversationDatasetOperationMetadata);
+
+                    /**
+                     * Creates a new CreateConversationDatasetOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConversationDatasetOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.ICreateConversationDatasetOperationMetadata): google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata;
+
+                    /**
+                     * Encodes the specified CreateConversationDatasetOperationMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata.verify|verify} messages.
+                     * @param message CreateConversationDatasetOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.ICreateConversationDatasetOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConversationDatasetOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata.verify|verify} messages.
+                     * @param message CreateConversationDatasetOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.ICreateConversationDatasetOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConversationDatasetOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConversationDatasetOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata;
+
+                    /**
+                     * Decodes a CreateConversationDatasetOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConversationDatasetOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata;
+
+                    /**
+                     * Verifies a CreateConversationDatasetOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConversationDatasetOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConversationDatasetOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateConversationDatasetOperationMetadata message. Also converts values to other types if specified.
+                     * @param message CreateConversationDatasetOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConversationDatasetOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteConversationDatasetOperationMetadata. */
+                interface IDeleteConversationDatasetOperationMetadata {
+                }
+
+                /** Represents a DeleteConversationDatasetOperationMetadata. */
+                class DeleteConversationDatasetOperationMetadata implements IDeleteConversationDatasetOperationMetadata {
+
+                    /**
+                     * Constructs a new DeleteConversationDatasetOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IDeleteConversationDatasetOperationMetadata);
+
+                    /**
+                     * Creates a new DeleteConversationDatasetOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteConversationDatasetOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IDeleteConversationDatasetOperationMetadata): google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata;
+
+                    /**
+                     * Encodes the specified DeleteConversationDatasetOperationMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata.verify|verify} messages.
+                     * @param message DeleteConversationDatasetOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IDeleteConversationDatasetOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteConversationDatasetOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata.verify|verify} messages.
+                     * @param message DeleteConversationDatasetOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IDeleteConversationDatasetOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteConversationDatasetOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteConversationDatasetOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata;
+
+                    /**
+                     * Decodes a DeleteConversationDatasetOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteConversationDatasetOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata;
+
+                    /**
+                     * Verifies a DeleteConversationDatasetOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteConversationDatasetOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteConversationDatasetOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteConversationDatasetOperationMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteConversationDatasetOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteConversationDatasetOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GcsSources. */
+                interface IGcsSources {
+
+                    /** GcsSources uris */
+                    uris?: (string[]|null);
+                }
+
+                /** Represents a GcsSources. */
+                class GcsSources implements IGcsSources {
+
+                    /**
+                     * Constructs a new GcsSources.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IGcsSources);
+
+                    /** GcsSources uris. */
+                    public uris: string[];
+
+                    /**
+                     * Creates a new GcsSources instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsSources instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IGcsSources): google.cloud.dialogflow.v2.GcsSources;
+
+                    /**
+                     * Encodes the specified GcsSources message. Does not implicitly {@link google.cloud.dialogflow.v2.GcsSources.verify|verify} messages.
+                     * @param message GcsSources message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IGcsSources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsSources message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.GcsSources.verify|verify} messages.
+                     * @param message GcsSources message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IGcsSources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsSources message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsSources
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.GcsSources;
+
+                    /**
+                     * Decodes a GcsSources message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsSources
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.GcsSources;
+
+                    /**
+                     * Verifies a GcsSources message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsSources message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsSources
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.GcsSources;
+
+                    /**
+                     * Creates a plain object from a GcsSources message. Also converts values to other types if specified.
+                     * @param message GcsSources
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.GcsSources, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsSources to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GcsDestination. */
+                interface IGcsDestination {
+
+                    /** GcsDestination uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents a GcsDestination. */
+                class GcsDestination implements IGcsDestination {
+
+                    /**
+                     * Constructs a new GcsDestination.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IGcsDestination);
+
+                    /** GcsDestination uri. */
+                    public uri: string;
+
+                    /**
+                     * Creates a new GcsDestination instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsDestination instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IGcsDestination): google.cloud.dialogflow.v2.GcsDestination;
+
+                    /**
+                     * Encodes the specified GcsDestination message. Does not implicitly {@link google.cloud.dialogflow.v2.GcsDestination.verify|verify} messages.
+                     * @param message GcsDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsDestination message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.GcsDestination.verify|verify} messages.
+                     * @param message GcsDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsDestination message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.GcsDestination;
+
+                    /**
+                     * Decodes a GcsDestination message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.GcsDestination;
+
+                    /**
+                     * Verifies a GcsDestination message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsDestination message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsDestination
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.GcsDestination;
+
+                    /**
+                     * Creates a plain object from a GcsDestination message. Also converts values to other types if specified.
+                     * @param message GcsDestination
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.GcsDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsDestination to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ConversationEvent. */
+                interface IConversationEvent {
+
+                    /** ConversationEvent conversation */
+                    conversation?: (string|null);
+
+                    /** ConversationEvent type */
+                    type?: (google.cloud.dialogflow.v2.ConversationEvent.Type|keyof typeof google.cloud.dialogflow.v2.ConversationEvent.Type|null);
+
+                    /** ConversationEvent errorStatus */
+                    errorStatus?: (google.rpc.IStatus|null);
+
+                    /** ConversationEvent newMessagePayload */
+                    newMessagePayload?: (google.cloud.dialogflow.v2.IMessage|null);
+                }
+
+                /** Represents a ConversationEvent. */
+                class ConversationEvent implements IConversationEvent {
+
+                    /**
+                     * Constructs a new ConversationEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IConversationEvent);
+
+                    /** ConversationEvent conversation. */
+                    public conversation: string;
+
+                    /** ConversationEvent type. */
+                    public type: (google.cloud.dialogflow.v2.ConversationEvent.Type|keyof typeof google.cloud.dialogflow.v2.ConversationEvent.Type);
+
+                    /** ConversationEvent errorStatus. */
+                    public errorStatus?: (google.rpc.IStatus|null);
+
+                    /** ConversationEvent newMessagePayload. */
+                    public newMessagePayload?: (google.cloud.dialogflow.v2.IMessage|null);
+
+                    /** ConversationEvent payload. */
+                    public payload?: "newMessagePayload";
+
+                    /**
+                     * Creates a new ConversationEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationEvent instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IConversationEvent): google.cloud.dialogflow.v2.ConversationEvent;
+
+                    /**
+                     * Encodes the specified ConversationEvent message. Does not implicitly {@link google.cloud.dialogflow.v2.ConversationEvent.verify|verify} messages.
+                     * @param message ConversationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IConversationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationEvent message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ConversationEvent.verify|verify} messages.
+                     * @param message ConversationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IConversationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ConversationEvent;
+
+                    /**
+                     * Decodes a ConversationEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ConversationEvent;
+
+                    /**
+                     * Verifies a ConversationEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ConversationEvent;
+
+                    /**
+                     * Creates a plain object from a ConversationEvent message. Also converts values to other types if specified.
+                     * @param message ConversationEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ConversationEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ConversationEvent {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        CONVERSATION_STARTED = 1,
+                        CONVERSATION_FINISHED = 2,
+                        HUMAN_INTERVENTION_NEEDED = 3,
+                        NEW_MESSAGE = 5,
+                        UNRECOVERABLE_ERROR = 4
+                    }
+                }
+
+                /** Represents a ConversationModels */
+                class ConversationModels extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ConversationModels service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ConversationModels service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ConversationModels;
+
+                    /**
+                     * Calls CreateConversationModel.
+                     * @param request CreateConversationModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createConversationModel(request: google.cloud.dialogflow.v2.ICreateConversationModelRequest, callback: google.cloud.dialogflow.v2.ConversationModels.CreateConversationModelCallback): void;
+
+                    /**
+                     * Calls CreateConversationModel.
+                     * @param request CreateConversationModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createConversationModel(request: google.cloud.dialogflow.v2.ICreateConversationModelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetConversationModel.
+                     * @param request GetConversationModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConversationModel
+                     */
+                    public getConversationModel(request: google.cloud.dialogflow.v2.IGetConversationModelRequest, callback: google.cloud.dialogflow.v2.ConversationModels.GetConversationModelCallback): void;
+
+                    /**
+                     * Calls GetConversationModel.
+                     * @param request GetConversationModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getConversationModel(request: google.cloud.dialogflow.v2.IGetConversationModelRequest): Promise<google.cloud.dialogflow.v2.ConversationModel>;
+
+                    /**
+                     * Calls ListConversationModels.
+                     * @param request ListConversationModelsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListConversationModelsResponse
+                     */
+                    public listConversationModels(request: google.cloud.dialogflow.v2.IListConversationModelsRequest, callback: google.cloud.dialogflow.v2.ConversationModels.ListConversationModelsCallback): void;
+
+                    /**
+                     * Calls ListConversationModels.
+                     * @param request ListConversationModelsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listConversationModels(request: google.cloud.dialogflow.v2.IListConversationModelsRequest): Promise<google.cloud.dialogflow.v2.ListConversationModelsResponse>;
+
+                    /**
+                     * Calls DeleteConversationModel.
+                     * @param request DeleteConversationModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteConversationModel(request: google.cloud.dialogflow.v2.IDeleteConversationModelRequest, callback: google.cloud.dialogflow.v2.ConversationModels.DeleteConversationModelCallback): void;
+
+                    /**
+                     * Calls DeleteConversationModel.
+                     * @param request DeleteConversationModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteConversationModel(request: google.cloud.dialogflow.v2.IDeleteConversationModelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeployConversationModel.
+                     * @param request DeployConversationModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deployConversationModel(request: google.cloud.dialogflow.v2.IDeployConversationModelRequest, callback: google.cloud.dialogflow.v2.ConversationModels.DeployConversationModelCallback): void;
+
+                    /**
+                     * Calls DeployConversationModel.
+                     * @param request DeployConversationModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deployConversationModel(request: google.cloud.dialogflow.v2.IDeployConversationModelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UndeployConversationModel.
+                     * @param request UndeployConversationModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public undeployConversationModel(request: google.cloud.dialogflow.v2.IUndeployConversationModelRequest, callback: google.cloud.dialogflow.v2.ConversationModels.UndeployConversationModelCallback): void;
+
+                    /**
+                     * Calls UndeployConversationModel.
+                     * @param request UndeployConversationModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public undeployConversationModel(request: google.cloud.dialogflow.v2.IUndeployConversationModelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetConversationModelEvaluation.
+                     * @param request GetConversationModelEvaluationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConversationModelEvaluation
+                     */
+                    public getConversationModelEvaluation(request: google.cloud.dialogflow.v2.IGetConversationModelEvaluationRequest, callback: google.cloud.dialogflow.v2.ConversationModels.GetConversationModelEvaluationCallback): void;
+
+                    /**
+                     * Calls GetConversationModelEvaluation.
+                     * @param request GetConversationModelEvaluationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getConversationModelEvaluation(request: google.cloud.dialogflow.v2.IGetConversationModelEvaluationRequest): Promise<google.cloud.dialogflow.v2.ConversationModelEvaluation>;
+
+                    /**
+                     * Calls ListConversationModelEvaluations.
+                     * @param request ListConversationModelEvaluationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListConversationModelEvaluationsResponse
+                     */
+                    public listConversationModelEvaluations(request: google.cloud.dialogflow.v2.IListConversationModelEvaluationsRequest, callback: google.cloud.dialogflow.v2.ConversationModels.ListConversationModelEvaluationsCallback): void;
+
+                    /**
+                     * Calls ListConversationModelEvaluations.
+                     * @param request ListConversationModelEvaluationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listConversationModelEvaluations(request: google.cloud.dialogflow.v2.IListConversationModelEvaluationsRequest): Promise<google.cloud.dialogflow.v2.ListConversationModelEvaluationsResponse>;
+
+                    /**
+                     * Calls CreateConversationModelEvaluation.
+                     * @param request CreateConversationModelEvaluationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createConversationModelEvaluation(request: google.cloud.dialogflow.v2.ICreateConversationModelEvaluationRequest, callback: google.cloud.dialogflow.v2.ConversationModels.CreateConversationModelEvaluationCallback): void;
+
+                    /**
+                     * Calls CreateConversationModelEvaluation.
+                     * @param request CreateConversationModelEvaluationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createConversationModelEvaluation(request: google.cloud.dialogflow.v2.ICreateConversationModelEvaluationRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace ConversationModels {
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationModels#createConversationModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateConversationModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationModels#getConversationModel}.
+                     * @param error Error, if any
+                     * @param [response] ConversationModel
+                     */
+                    type GetConversationModelCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2.ConversationModel) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationModels#listConversationModels}.
+                     * @param error Error, if any
+                     * @param [response] ListConversationModelsResponse
+                     */
+                    type ListConversationModelsCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2.ListConversationModelsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationModels#deleteConversationModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteConversationModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationModels#deployConversationModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeployConversationModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationModels#undeployConversationModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UndeployConversationModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationModels#getConversationModelEvaluation}.
+                     * @param error Error, if any
+                     * @param [response] ConversationModelEvaluation
+                     */
+                    type GetConversationModelEvaluationCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2.ConversationModelEvaluation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationModels#listConversationModelEvaluations}.
+                     * @param error Error, if any
+                     * @param [response] ListConversationModelEvaluationsResponse
+                     */
+                    type ListConversationModelEvaluationsCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2.ListConversationModelEvaluationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationModels#createConversationModelEvaluation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateConversationModelEvaluationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a ConversationModel. */
+                interface IConversationModel {
+
+                    /** ConversationModel name */
+                    name?: (string|null);
+
+                    /** ConversationModel displayName */
+                    displayName?: (string|null);
+
+                    /** ConversationModel createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversationModel datasets */
+                    datasets?: (google.cloud.dialogflow.v2.IInputDataset[]|null);
+
+                    /** ConversationModel state */
+                    state?: (google.cloud.dialogflow.v2.ConversationModel.State|keyof typeof google.cloud.dialogflow.v2.ConversationModel.State|null);
+
+                    /** ConversationModel languageCode */
+                    languageCode?: (string|null);
+
+                    /** ConversationModel articleSuggestionModelMetadata */
+                    articleSuggestionModelMetadata?: (google.cloud.dialogflow.v2.IArticleSuggestionModelMetadata|null);
+
+                    /** ConversationModel smartReplyModelMetadata */
+                    smartReplyModelMetadata?: (google.cloud.dialogflow.v2.ISmartReplyModelMetadata|null);
+                }
+
+                /** Represents a ConversationModel. */
+                class ConversationModel implements IConversationModel {
+
+                    /**
+                     * Constructs a new ConversationModel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IConversationModel);
+
+                    /** ConversationModel name. */
+                    public name: string;
+
+                    /** ConversationModel displayName. */
+                    public displayName: string;
+
+                    /** ConversationModel createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversationModel datasets. */
+                    public datasets: google.cloud.dialogflow.v2.IInputDataset[];
+
+                    /** ConversationModel state. */
+                    public state: (google.cloud.dialogflow.v2.ConversationModel.State|keyof typeof google.cloud.dialogflow.v2.ConversationModel.State);
+
+                    /** ConversationModel languageCode. */
+                    public languageCode: string;
+
+                    /** ConversationModel articleSuggestionModelMetadata. */
+                    public articleSuggestionModelMetadata?: (google.cloud.dialogflow.v2.IArticleSuggestionModelMetadata|null);
+
+                    /** ConversationModel smartReplyModelMetadata. */
+                    public smartReplyModelMetadata?: (google.cloud.dialogflow.v2.ISmartReplyModelMetadata|null);
+
+                    /** ConversationModel modelMetadata. */
+                    public modelMetadata?: ("articleSuggestionModelMetadata"|"smartReplyModelMetadata");
+
+                    /**
+                     * Creates a new ConversationModel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationModel instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IConversationModel): google.cloud.dialogflow.v2.ConversationModel;
+
+                    /**
+                     * Encodes the specified ConversationModel message. Does not implicitly {@link google.cloud.dialogflow.v2.ConversationModel.verify|verify} messages.
+                     * @param message ConversationModel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IConversationModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationModel message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ConversationModel.verify|verify} messages.
+                     * @param message ConversationModel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IConversationModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationModel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationModel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ConversationModel;
+
+                    /**
+                     * Decodes a ConversationModel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationModel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ConversationModel;
+
+                    /**
+                     * Verifies a ConversationModel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationModel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationModel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ConversationModel;
+
+                    /**
+                     * Creates a plain object from a ConversationModel message. Also converts values to other types if specified.
+                     * @param message ConversationModel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ConversationModel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationModel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ConversationModel {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        UNDEPLOYED = 2,
+                        DEPLOYING = 3,
+                        DEPLOYED = 4,
+                        UNDEPLOYING = 5,
+                        DELETING = 6,
+                        FAILED = 7,
+                        PENDING = 8
+                    }
+
+                    /** ModelType enum. */
+                    enum ModelType {
+                        MODEL_TYPE_UNSPECIFIED = 0,
+                        SMART_REPLY_DUAL_ENCODER_MODEL = 2,
+                        SMART_REPLY_BERT_MODEL = 6
+                    }
+                }
+
+                /** Properties of a ConversationModelEvaluation. */
+                interface IConversationModelEvaluation {
+
+                    /** ConversationModelEvaluation name */
+                    name?: (string|null);
+
+                    /** ConversationModelEvaluation displayName */
+                    displayName?: (string|null);
+
+                    /** ConversationModelEvaluation evaluationConfig */
+                    evaluationConfig?: (google.cloud.dialogflow.v2.IEvaluationConfig|null);
+
+                    /** ConversationModelEvaluation createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversationModelEvaluation smartReplyMetrics */
+                    smartReplyMetrics?: (google.cloud.dialogflow.v2.ISmartReplyMetrics|null);
+                }
+
+                /** Represents a ConversationModelEvaluation. */
+                class ConversationModelEvaluation implements IConversationModelEvaluation {
+
+                    /**
+                     * Constructs a new ConversationModelEvaluation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IConversationModelEvaluation);
+
+                    /** ConversationModelEvaluation name. */
+                    public name: string;
+
+                    /** ConversationModelEvaluation displayName. */
+                    public displayName: string;
+
+                    /** ConversationModelEvaluation evaluationConfig. */
+                    public evaluationConfig?: (google.cloud.dialogflow.v2.IEvaluationConfig|null);
+
+                    /** ConversationModelEvaluation createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversationModelEvaluation smartReplyMetrics. */
+                    public smartReplyMetrics?: (google.cloud.dialogflow.v2.ISmartReplyMetrics|null);
+
+                    /** ConversationModelEvaluation metrics. */
+                    public metrics?: "smartReplyMetrics";
+
+                    /**
+                     * Creates a new ConversationModelEvaluation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationModelEvaluation instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IConversationModelEvaluation): google.cloud.dialogflow.v2.ConversationModelEvaluation;
+
+                    /**
+                     * Encodes the specified ConversationModelEvaluation message. Does not implicitly {@link google.cloud.dialogflow.v2.ConversationModelEvaluation.verify|verify} messages.
+                     * @param message ConversationModelEvaluation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IConversationModelEvaluation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationModelEvaluation message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ConversationModelEvaluation.verify|verify} messages.
+                     * @param message ConversationModelEvaluation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IConversationModelEvaluation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationModelEvaluation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationModelEvaluation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ConversationModelEvaluation;
+
+                    /**
+                     * Decodes a ConversationModelEvaluation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationModelEvaluation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ConversationModelEvaluation;
+
+                    /**
+                     * Verifies a ConversationModelEvaluation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationModelEvaluation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationModelEvaluation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ConversationModelEvaluation;
+
+                    /**
+                     * Creates a plain object from a ConversationModelEvaluation message. Also converts values to other types if specified.
+                     * @param message ConversationModelEvaluation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ConversationModelEvaluation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationModelEvaluation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an EvaluationConfig. */
+                interface IEvaluationConfig {
+
+                    /** EvaluationConfig datasets */
+                    datasets?: (google.cloud.dialogflow.v2.IInputDataset[]|null);
+
+                    /** EvaluationConfig smartReplyConfig */
+                    smartReplyConfig?: (google.cloud.dialogflow.v2.EvaluationConfig.ISmartReplyConfig|null);
+
+                    /** EvaluationConfig smartComposeConfig */
+                    smartComposeConfig?: (google.cloud.dialogflow.v2.EvaluationConfig.ISmartComposeConfig|null);
+                }
+
+                /** Represents an EvaluationConfig. */
+                class EvaluationConfig implements IEvaluationConfig {
+
+                    /**
+                     * Constructs a new EvaluationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IEvaluationConfig);
+
+                    /** EvaluationConfig datasets. */
+                    public datasets: google.cloud.dialogflow.v2.IInputDataset[];
+
+                    /** EvaluationConfig smartReplyConfig. */
+                    public smartReplyConfig?: (google.cloud.dialogflow.v2.EvaluationConfig.ISmartReplyConfig|null);
+
+                    /** EvaluationConfig smartComposeConfig. */
+                    public smartComposeConfig?: (google.cloud.dialogflow.v2.EvaluationConfig.ISmartComposeConfig|null);
+
+                    /** EvaluationConfig modelSpecificConfig. */
+                    public modelSpecificConfig?: ("smartReplyConfig"|"smartComposeConfig");
+
+                    /**
+                     * Creates a new EvaluationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvaluationConfig instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IEvaluationConfig): google.cloud.dialogflow.v2.EvaluationConfig;
+
+                    /**
+                     * Encodes the specified EvaluationConfig message. Does not implicitly {@link google.cloud.dialogflow.v2.EvaluationConfig.verify|verify} messages.
+                     * @param message EvaluationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IEvaluationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvaluationConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.EvaluationConfig.verify|verify} messages.
+                     * @param message EvaluationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IEvaluationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvaluationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvaluationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.EvaluationConfig;
+
+                    /**
+                     * Decodes an EvaluationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvaluationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.EvaluationConfig;
+
+                    /**
+                     * Verifies an EvaluationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvaluationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvaluationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.EvaluationConfig;
+
+                    /**
+                     * Creates a plain object from an EvaluationConfig message. Also converts values to other types if specified.
+                     * @param message EvaluationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.EvaluationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvaluationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace EvaluationConfig {
+
+                    /** Properties of a SmartReplyConfig. */
+                    interface ISmartReplyConfig {
+
+                        /** SmartReplyConfig allowlistDocument */
+                        allowlistDocument?: (string|null);
+
+                        /** SmartReplyConfig maxResultCount */
+                        maxResultCount?: (number|null);
+                    }
+
+                    /** Represents a SmartReplyConfig. */
+                    class SmartReplyConfig implements ISmartReplyConfig {
+
+                        /**
+                         * Constructs a new SmartReplyConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.v2.EvaluationConfig.ISmartReplyConfig);
+
+                        /** SmartReplyConfig allowlistDocument. */
+                        public allowlistDocument: string;
+
+                        /** SmartReplyConfig maxResultCount. */
+                        public maxResultCount: number;
+
+                        /**
+                         * Creates a new SmartReplyConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SmartReplyConfig instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.v2.EvaluationConfig.ISmartReplyConfig): google.cloud.dialogflow.v2.EvaluationConfig.SmartReplyConfig;
+
+                        /**
+                         * Encodes the specified SmartReplyConfig message. Does not implicitly {@link google.cloud.dialogflow.v2.EvaluationConfig.SmartReplyConfig.verify|verify} messages.
+                         * @param message SmartReplyConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.v2.EvaluationConfig.ISmartReplyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SmartReplyConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.EvaluationConfig.SmartReplyConfig.verify|verify} messages.
+                         * @param message SmartReplyConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.v2.EvaluationConfig.ISmartReplyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SmartReplyConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SmartReplyConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.EvaluationConfig.SmartReplyConfig;
+
+                        /**
+                         * Decodes a SmartReplyConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SmartReplyConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.EvaluationConfig.SmartReplyConfig;
+
+                        /**
+                         * Verifies a SmartReplyConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SmartReplyConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SmartReplyConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.EvaluationConfig.SmartReplyConfig;
+
+                        /**
+                         * Creates a plain object from a SmartReplyConfig message. Also converts values to other types if specified.
+                         * @param message SmartReplyConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.v2.EvaluationConfig.SmartReplyConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SmartReplyConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a SmartComposeConfig. */
+                    interface ISmartComposeConfig {
+
+                        /** SmartComposeConfig allowlistDocument */
+                        allowlistDocument?: (string|null);
+
+                        /** SmartComposeConfig maxResultCount */
+                        maxResultCount?: (number|null);
+                    }
+
+                    /** Represents a SmartComposeConfig. */
+                    class SmartComposeConfig implements ISmartComposeConfig {
+
+                        /**
+                         * Constructs a new SmartComposeConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.v2.EvaluationConfig.ISmartComposeConfig);
+
+                        /** SmartComposeConfig allowlistDocument. */
+                        public allowlistDocument: string;
+
+                        /** SmartComposeConfig maxResultCount. */
+                        public maxResultCount: number;
+
+                        /**
+                         * Creates a new SmartComposeConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SmartComposeConfig instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.v2.EvaluationConfig.ISmartComposeConfig): google.cloud.dialogflow.v2.EvaluationConfig.SmartComposeConfig;
+
+                        /**
+                         * Encodes the specified SmartComposeConfig message. Does not implicitly {@link google.cloud.dialogflow.v2.EvaluationConfig.SmartComposeConfig.verify|verify} messages.
+                         * @param message SmartComposeConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.v2.EvaluationConfig.ISmartComposeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SmartComposeConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.EvaluationConfig.SmartComposeConfig.verify|verify} messages.
+                         * @param message SmartComposeConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.v2.EvaluationConfig.ISmartComposeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SmartComposeConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SmartComposeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.EvaluationConfig.SmartComposeConfig;
+
+                        /**
+                         * Decodes a SmartComposeConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SmartComposeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.EvaluationConfig.SmartComposeConfig;
+
+                        /**
+                         * Verifies a SmartComposeConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SmartComposeConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SmartComposeConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.EvaluationConfig.SmartComposeConfig;
+
+                        /**
+                         * Creates a plain object from a SmartComposeConfig message. Also converts values to other types if specified.
+                         * @param message SmartComposeConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.v2.EvaluationConfig.SmartComposeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SmartComposeConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of an InputDataset. */
+                interface IInputDataset {
+
+                    /** InputDataset dataset */
+                    dataset?: (string|null);
+                }
+
+                /** Represents an InputDataset. */
+                class InputDataset implements IInputDataset {
+
+                    /**
+                     * Constructs a new InputDataset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IInputDataset);
+
+                    /** InputDataset dataset. */
+                    public dataset: string;
+
+                    /**
+                     * Creates a new InputDataset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InputDataset instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IInputDataset): google.cloud.dialogflow.v2.InputDataset;
+
+                    /**
+                     * Encodes the specified InputDataset message. Does not implicitly {@link google.cloud.dialogflow.v2.InputDataset.verify|verify} messages.
+                     * @param message InputDataset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IInputDataset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InputDataset message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.InputDataset.verify|verify} messages.
+                     * @param message InputDataset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IInputDataset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InputDataset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InputDataset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.InputDataset;
+
+                    /**
+                     * Decodes an InputDataset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InputDataset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.InputDataset;
+
+                    /**
+                     * Verifies an InputDataset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InputDataset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InputDataset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.InputDataset;
+
+                    /**
+                     * Creates a plain object from an InputDataset message. Also converts values to other types if specified.
+                     * @param message InputDataset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.InputDataset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InputDataset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ArticleSuggestionModelMetadata. */
+                interface IArticleSuggestionModelMetadata {
+
+                    /** ArticleSuggestionModelMetadata trainingModelType */
+                    trainingModelType?: (google.cloud.dialogflow.v2.ConversationModel.ModelType|keyof typeof google.cloud.dialogflow.v2.ConversationModel.ModelType|null);
+                }
+
+                /** Represents an ArticleSuggestionModelMetadata. */
+                class ArticleSuggestionModelMetadata implements IArticleSuggestionModelMetadata {
+
+                    /**
+                     * Constructs a new ArticleSuggestionModelMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IArticleSuggestionModelMetadata);
+
+                    /** ArticleSuggestionModelMetadata trainingModelType. */
+                    public trainingModelType: (google.cloud.dialogflow.v2.ConversationModel.ModelType|keyof typeof google.cloud.dialogflow.v2.ConversationModel.ModelType);
+
+                    /**
+                     * Creates a new ArticleSuggestionModelMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ArticleSuggestionModelMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IArticleSuggestionModelMetadata): google.cloud.dialogflow.v2.ArticleSuggestionModelMetadata;
+
+                    /**
+                     * Encodes the specified ArticleSuggestionModelMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.ArticleSuggestionModelMetadata.verify|verify} messages.
+                     * @param message ArticleSuggestionModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IArticleSuggestionModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ArticleSuggestionModelMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ArticleSuggestionModelMetadata.verify|verify} messages.
+                     * @param message ArticleSuggestionModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IArticleSuggestionModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ArticleSuggestionModelMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ArticleSuggestionModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ArticleSuggestionModelMetadata;
+
+                    /**
+                     * Decodes an ArticleSuggestionModelMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ArticleSuggestionModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ArticleSuggestionModelMetadata;
+
+                    /**
+                     * Verifies an ArticleSuggestionModelMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ArticleSuggestionModelMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ArticleSuggestionModelMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ArticleSuggestionModelMetadata;
+
+                    /**
+                     * Creates a plain object from an ArticleSuggestionModelMetadata message. Also converts values to other types if specified.
+                     * @param message ArticleSuggestionModelMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ArticleSuggestionModelMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ArticleSuggestionModelMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SmartReplyModelMetadata. */
+                interface ISmartReplyModelMetadata {
+
+                    /** SmartReplyModelMetadata trainingModelType */
+                    trainingModelType?: (google.cloud.dialogflow.v2.ConversationModel.ModelType|keyof typeof google.cloud.dialogflow.v2.ConversationModel.ModelType|null);
+                }
+
+                /** Represents a SmartReplyModelMetadata. */
+                class SmartReplyModelMetadata implements ISmartReplyModelMetadata {
+
+                    /**
+                     * Constructs a new SmartReplyModelMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.ISmartReplyModelMetadata);
+
+                    /** SmartReplyModelMetadata trainingModelType. */
+                    public trainingModelType: (google.cloud.dialogflow.v2.ConversationModel.ModelType|keyof typeof google.cloud.dialogflow.v2.ConversationModel.ModelType);
+
+                    /**
+                     * Creates a new SmartReplyModelMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SmartReplyModelMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.ISmartReplyModelMetadata): google.cloud.dialogflow.v2.SmartReplyModelMetadata;
+
+                    /**
+                     * Encodes the specified SmartReplyModelMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.SmartReplyModelMetadata.verify|verify} messages.
+                     * @param message SmartReplyModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.ISmartReplyModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SmartReplyModelMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.SmartReplyModelMetadata.verify|verify} messages.
+                     * @param message SmartReplyModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.ISmartReplyModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SmartReplyModelMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SmartReplyModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.SmartReplyModelMetadata;
+
+                    /**
+                     * Decodes a SmartReplyModelMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SmartReplyModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.SmartReplyModelMetadata;
+
+                    /**
+                     * Verifies a SmartReplyModelMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SmartReplyModelMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SmartReplyModelMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.SmartReplyModelMetadata;
+
+                    /**
+                     * Creates a plain object from a SmartReplyModelMetadata message. Also converts values to other types if specified.
+                     * @param message SmartReplyModelMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.SmartReplyModelMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SmartReplyModelMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SmartReplyMetrics. */
+                interface ISmartReplyMetrics {
+
+                    /** SmartReplyMetrics allowlistCoverage */
+                    allowlistCoverage?: (number|null);
+
+                    /** SmartReplyMetrics topNMetrics */
+                    topNMetrics?: (google.cloud.dialogflow.v2.SmartReplyMetrics.ITopNMetrics[]|null);
+
+                    /** SmartReplyMetrics conversationCount */
+                    conversationCount?: (number|Long|string|null);
+                }
+
+                /** Represents a SmartReplyMetrics. */
+                class SmartReplyMetrics implements ISmartReplyMetrics {
+
+                    /**
+                     * Constructs a new SmartReplyMetrics.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.ISmartReplyMetrics);
+
+                    /** SmartReplyMetrics allowlistCoverage. */
+                    public allowlistCoverage: number;
+
+                    /** SmartReplyMetrics topNMetrics. */
+                    public topNMetrics: google.cloud.dialogflow.v2.SmartReplyMetrics.ITopNMetrics[];
+
+                    /** SmartReplyMetrics conversationCount. */
+                    public conversationCount: (number|Long|string);
+
+                    /**
+                     * Creates a new SmartReplyMetrics instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SmartReplyMetrics instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.ISmartReplyMetrics): google.cloud.dialogflow.v2.SmartReplyMetrics;
+
+                    /**
+                     * Encodes the specified SmartReplyMetrics message. Does not implicitly {@link google.cloud.dialogflow.v2.SmartReplyMetrics.verify|verify} messages.
+                     * @param message SmartReplyMetrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.ISmartReplyMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SmartReplyMetrics message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.SmartReplyMetrics.verify|verify} messages.
+                     * @param message SmartReplyMetrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.ISmartReplyMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SmartReplyMetrics message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SmartReplyMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.SmartReplyMetrics;
+
+                    /**
+                     * Decodes a SmartReplyMetrics message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SmartReplyMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.SmartReplyMetrics;
+
+                    /**
+                     * Verifies a SmartReplyMetrics message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SmartReplyMetrics message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SmartReplyMetrics
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.SmartReplyMetrics;
+
+                    /**
+                     * Creates a plain object from a SmartReplyMetrics message. Also converts values to other types if specified.
+                     * @param message SmartReplyMetrics
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.SmartReplyMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SmartReplyMetrics to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace SmartReplyMetrics {
+
+                    /** Properties of a TopNMetrics. */
+                    interface ITopNMetrics {
+
+                        /** TopNMetrics n */
+                        n?: (number|null);
+
+                        /** TopNMetrics recall */
+                        recall?: (number|null);
+                    }
+
+                    /** Represents a TopNMetrics. */
+                    class TopNMetrics implements ITopNMetrics {
+
+                        /**
+                         * Constructs a new TopNMetrics.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.v2.SmartReplyMetrics.ITopNMetrics);
+
+                        /** TopNMetrics n. */
+                        public n: number;
+
+                        /** TopNMetrics recall. */
+                        public recall: number;
+
+                        /**
+                         * Creates a new TopNMetrics instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TopNMetrics instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.v2.SmartReplyMetrics.ITopNMetrics): google.cloud.dialogflow.v2.SmartReplyMetrics.TopNMetrics;
+
+                        /**
+                         * Encodes the specified TopNMetrics message. Does not implicitly {@link google.cloud.dialogflow.v2.SmartReplyMetrics.TopNMetrics.verify|verify} messages.
+                         * @param message TopNMetrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.v2.SmartReplyMetrics.ITopNMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TopNMetrics message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.SmartReplyMetrics.TopNMetrics.verify|verify} messages.
+                         * @param message TopNMetrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.v2.SmartReplyMetrics.ITopNMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TopNMetrics message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TopNMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.SmartReplyMetrics.TopNMetrics;
+
+                        /**
+                         * Decodes a TopNMetrics message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TopNMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.SmartReplyMetrics.TopNMetrics;
+
+                        /**
+                         * Verifies a TopNMetrics message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TopNMetrics message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TopNMetrics
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.SmartReplyMetrics.TopNMetrics;
+
+                        /**
+                         * Creates a plain object from a TopNMetrics message. Also converts values to other types if specified.
+                         * @param message TopNMetrics
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.v2.SmartReplyMetrics.TopNMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TopNMetrics to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a CreateConversationModelRequest. */
+                interface ICreateConversationModelRequest {
+
+                    /** CreateConversationModelRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateConversationModelRequest conversationModel */
+                    conversationModel?: (google.cloud.dialogflow.v2.IConversationModel|null);
+                }
+
+                /** Represents a CreateConversationModelRequest. */
+                class CreateConversationModelRequest implements ICreateConversationModelRequest {
+
+                    /**
+                     * Constructs a new CreateConversationModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.ICreateConversationModelRequest);
+
+                    /** CreateConversationModelRequest parent. */
+                    public parent: string;
+
+                    /** CreateConversationModelRequest conversationModel. */
+                    public conversationModel?: (google.cloud.dialogflow.v2.IConversationModel|null);
+
+                    /**
+                     * Creates a new CreateConversationModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConversationModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.ICreateConversationModelRequest): google.cloud.dialogflow.v2.CreateConversationModelRequest;
+
+                    /**
+                     * Encodes the specified CreateConversationModelRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.CreateConversationModelRequest.verify|verify} messages.
+                     * @param message CreateConversationModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.ICreateConversationModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConversationModelRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.CreateConversationModelRequest.verify|verify} messages.
+                     * @param message CreateConversationModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.ICreateConversationModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConversationModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConversationModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.CreateConversationModelRequest;
+
+                    /**
+                     * Decodes a CreateConversationModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConversationModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.CreateConversationModelRequest;
+
+                    /**
+                     * Verifies a CreateConversationModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConversationModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConversationModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.CreateConversationModelRequest;
+
+                    /**
+                     * Creates a plain object from a CreateConversationModelRequest message. Also converts values to other types if specified.
+                     * @param message CreateConversationModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.CreateConversationModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConversationModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetConversationModelRequest. */
+                interface IGetConversationModelRequest {
+
+                    /** GetConversationModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetConversationModelRequest. */
+                class GetConversationModelRequest implements IGetConversationModelRequest {
+
+                    /**
+                     * Constructs a new GetConversationModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IGetConversationModelRequest);
+
+                    /** GetConversationModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetConversationModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetConversationModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IGetConversationModelRequest): google.cloud.dialogflow.v2.GetConversationModelRequest;
+
+                    /**
+                     * Encodes the specified GetConversationModelRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.GetConversationModelRequest.verify|verify} messages.
+                     * @param message GetConversationModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IGetConversationModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetConversationModelRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.GetConversationModelRequest.verify|verify} messages.
+                     * @param message GetConversationModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IGetConversationModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetConversationModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetConversationModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.GetConversationModelRequest;
+
+                    /**
+                     * Decodes a GetConversationModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetConversationModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.GetConversationModelRequest;
+
+                    /**
+                     * Verifies a GetConversationModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetConversationModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetConversationModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.GetConversationModelRequest;
+
+                    /**
+                     * Creates a plain object from a GetConversationModelRequest message. Also converts values to other types if specified.
+                     * @param message GetConversationModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.GetConversationModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetConversationModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListConversationModelsRequest. */
+                interface IListConversationModelsRequest {
+
+                    /** ListConversationModelsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListConversationModelsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListConversationModelsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListConversationModelsRequest. */
+                class ListConversationModelsRequest implements IListConversationModelsRequest {
+
+                    /**
+                     * Constructs a new ListConversationModelsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IListConversationModelsRequest);
+
+                    /** ListConversationModelsRequest parent. */
+                    public parent: string;
+
+                    /** ListConversationModelsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListConversationModelsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListConversationModelsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConversationModelsRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IListConversationModelsRequest): google.cloud.dialogflow.v2.ListConversationModelsRequest;
+
+                    /**
+                     * Encodes the specified ListConversationModelsRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.ListConversationModelsRequest.verify|verify} messages.
+                     * @param message ListConversationModelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IListConversationModelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConversationModelsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ListConversationModelsRequest.verify|verify} messages.
+                     * @param message ListConversationModelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IListConversationModelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConversationModelsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConversationModelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ListConversationModelsRequest;
+
+                    /**
+                     * Decodes a ListConversationModelsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConversationModelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ListConversationModelsRequest;
+
+                    /**
+                     * Verifies a ListConversationModelsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConversationModelsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConversationModelsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ListConversationModelsRequest;
+
+                    /**
+                     * Creates a plain object from a ListConversationModelsRequest message. Also converts values to other types if specified.
+                     * @param message ListConversationModelsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ListConversationModelsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConversationModelsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListConversationModelsResponse. */
+                interface IListConversationModelsResponse {
+
+                    /** ListConversationModelsResponse conversationModels */
+                    conversationModels?: (google.cloud.dialogflow.v2.IConversationModel[]|null);
+
+                    /** ListConversationModelsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListConversationModelsResponse. */
+                class ListConversationModelsResponse implements IListConversationModelsResponse {
+
+                    /**
+                     * Constructs a new ListConversationModelsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IListConversationModelsResponse);
+
+                    /** ListConversationModelsResponse conversationModels. */
+                    public conversationModels: google.cloud.dialogflow.v2.IConversationModel[];
+
+                    /** ListConversationModelsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListConversationModelsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConversationModelsResponse instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IListConversationModelsResponse): google.cloud.dialogflow.v2.ListConversationModelsResponse;
+
+                    /**
+                     * Encodes the specified ListConversationModelsResponse message. Does not implicitly {@link google.cloud.dialogflow.v2.ListConversationModelsResponse.verify|verify} messages.
+                     * @param message ListConversationModelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IListConversationModelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConversationModelsResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ListConversationModelsResponse.verify|verify} messages.
+                     * @param message ListConversationModelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IListConversationModelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConversationModelsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConversationModelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ListConversationModelsResponse;
+
+                    /**
+                     * Decodes a ListConversationModelsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConversationModelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ListConversationModelsResponse;
+
+                    /**
+                     * Verifies a ListConversationModelsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConversationModelsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConversationModelsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ListConversationModelsResponse;
+
+                    /**
+                     * Creates a plain object from a ListConversationModelsResponse message. Also converts values to other types if specified.
+                     * @param message ListConversationModelsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ListConversationModelsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConversationModelsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteConversationModelRequest. */
+                interface IDeleteConversationModelRequest {
+
+                    /** DeleteConversationModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteConversationModelRequest. */
+                class DeleteConversationModelRequest implements IDeleteConversationModelRequest {
+
+                    /**
+                     * Constructs a new DeleteConversationModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IDeleteConversationModelRequest);
+
+                    /** DeleteConversationModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteConversationModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteConversationModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IDeleteConversationModelRequest): google.cloud.dialogflow.v2.DeleteConversationModelRequest;
+
+                    /**
+                     * Encodes the specified DeleteConversationModelRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.DeleteConversationModelRequest.verify|verify} messages.
+                     * @param message DeleteConversationModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IDeleteConversationModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteConversationModelRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.DeleteConversationModelRequest.verify|verify} messages.
+                     * @param message DeleteConversationModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IDeleteConversationModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteConversationModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteConversationModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.DeleteConversationModelRequest;
+
+                    /**
+                     * Decodes a DeleteConversationModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteConversationModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.DeleteConversationModelRequest;
+
+                    /**
+                     * Verifies a DeleteConversationModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteConversationModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteConversationModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.DeleteConversationModelRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteConversationModelRequest message. Also converts values to other types if specified.
+                     * @param message DeleteConversationModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.DeleteConversationModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteConversationModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeployConversationModelRequest. */
+                interface IDeployConversationModelRequest {
+
+                    /** DeployConversationModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeployConversationModelRequest. */
+                class DeployConversationModelRequest implements IDeployConversationModelRequest {
+
+                    /**
+                     * Constructs a new DeployConversationModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IDeployConversationModelRequest);
+
+                    /** DeployConversationModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeployConversationModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployConversationModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IDeployConversationModelRequest): google.cloud.dialogflow.v2.DeployConversationModelRequest;
+
+                    /**
+                     * Encodes the specified DeployConversationModelRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.DeployConversationModelRequest.verify|verify} messages.
+                     * @param message DeployConversationModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IDeployConversationModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployConversationModelRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.DeployConversationModelRequest.verify|verify} messages.
+                     * @param message DeployConversationModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IDeployConversationModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployConversationModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployConversationModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.DeployConversationModelRequest;
+
+                    /**
+                     * Decodes a DeployConversationModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployConversationModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.DeployConversationModelRequest;
+
+                    /**
+                     * Verifies a DeployConversationModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployConversationModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployConversationModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.DeployConversationModelRequest;
+
+                    /**
+                     * Creates a plain object from a DeployConversationModelRequest message. Also converts values to other types if specified.
+                     * @param message DeployConversationModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.DeployConversationModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployConversationModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UndeployConversationModelRequest. */
+                interface IUndeployConversationModelRequest {
+
+                    /** UndeployConversationModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an UndeployConversationModelRequest. */
+                class UndeployConversationModelRequest implements IUndeployConversationModelRequest {
+
+                    /**
+                     * Constructs a new UndeployConversationModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IUndeployConversationModelRequest);
+
+                    /** UndeployConversationModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new UndeployConversationModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UndeployConversationModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IUndeployConversationModelRequest): google.cloud.dialogflow.v2.UndeployConversationModelRequest;
+
+                    /**
+                     * Encodes the specified UndeployConversationModelRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.UndeployConversationModelRequest.verify|verify} messages.
+                     * @param message UndeployConversationModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IUndeployConversationModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UndeployConversationModelRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.UndeployConversationModelRequest.verify|verify} messages.
+                     * @param message UndeployConversationModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IUndeployConversationModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UndeployConversationModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UndeployConversationModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.UndeployConversationModelRequest;
+
+                    /**
+                     * Decodes an UndeployConversationModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UndeployConversationModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.UndeployConversationModelRequest;
+
+                    /**
+                     * Verifies an UndeployConversationModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UndeployConversationModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UndeployConversationModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.UndeployConversationModelRequest;
+
+                    /**
+                     * Creates a plain object from an UndeployConversationModelRequest message. Also converts values to other types if specified.
+                     * @param message UndeployConversationModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.UndeployConversationModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UndeployConversationModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetConversationModelEvaluationRequest. */
+                interface IGetConversationModelEvaluationRequest {
+
+                    /** GetConversationModelEvaluationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetConversationModelEvaluationRequest. */
+                class GetConversationModelEvaluationRequest implements IGetConversationModelEvaluationRequest {
+
+                    /**
+                     * Constructs a new GetConversationModelEvaluationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IGetConversationModelEvaluationRequest);
+
+                    /** GetConversationModelEvaluationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetConversationModelEvaluationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetConversationModelEvaluationRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IGetConversationModelEvaluationRequest): google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest;
+
+                    /**
+                     * Encodes the specified GetConversationModelEvaluationRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest.verify|verify} messages.
+                     * @param message GetConversationModelEvaluationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IGetConversationModelEvaluationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetConversationModelEvaluationRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest.verify|verify} messages.
+                     * @param message GetConversationModelEvaluationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IGetConversationModelEvaluationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetConversationModelEvaluationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetConversationModelEvaluationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest;
+
+                    /**
+                     * Decodes a GetConversationModelEvaluationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetConversationModelEvaluationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest;
+
+                    /**
+                     * Verifies a GetConversationModelEvaluationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetConversationModelEvaluationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetConversationModelEvaluationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest;
+
+                    /**
+                     * Creates a plain object from a GetConversationModelEvaluationRequest message. Also converts values to other types if specified.
+                     * @param message GetConversationModelEvaluationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetConversationModelEvaluationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListConversationModelEvaluationsRequest. */
+                interface IListConversationModelEvaluationsRequest {
+
+                    /** ListConversationModelEvaluationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListConversationModelEvaluationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListConversationModelEvaluationsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListConversationModelEvaluationsRequest. */
+                class ListConversationModelEvaluationsRequest implements IListConversationModelEvaluationsRequest {
+
+                    /**
+                     * Constructs a new ListConversationModelEvaluationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IListConversationModelEvaluationsRequest);
+
+                    /** ListConversationModelEvaluationsRequest parent. */
+                    public parent: string;
+
+                    /** ListConversationModelEvaluationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListConversationModelEvaluationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListConversationModelEvaluationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConversationModelEvaluationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IListConversationModelEvaluationsRequest): google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest;
+
+                    /**
+                     * Encodes the specified ListConversationModelEvaluationsRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest.verify|verify} messages.
+                     * @param message ListConversationModelEvaluationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IListConversationModelEvaluationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConversationModelEvaluationsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest.verify|verify} messages.
+                     * @param message ListConversationModelEvaluationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IListConversationModelEvaluationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConversationModelEvaluationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConversationModelEvaluationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest;
+
+                    /**
+                     * Decodes a ListConversationModelEvaluationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConversationModelEvaluationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest;
+
+                    /**
+                     * Verifies a ListConversationModelEvaluationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConversationModelEvaluationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConversationModelEvaluationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListConversationModelEvaluationsRequest message. Also converts values to other types if specified.
+                     * @param message ListConversationModelEvaluationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConversationModelEvaluationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListConversationModelEvaluationsResponse. */
+                interface IListConversationModelEvaluationsResponse {
+
+                    /** ListConversationModelEvaluationsResponse conversationModelEvaluations */
+                    conversationModelEvaluations?: (google.cloud.dialogflow.v2.IConversationModelEvaluation[]|null);
+
+                    /** ListConversationModelEvaluationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListConversationModelEvaluationsResponse. */
+                class ListConversationModelEvaluationsResponse implements IListConversationModelEvaluationsResponse {
+
+                    /**
+                     * Constructs a new ListConversationModelEvaluationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IListConversationModelEvaluationsResponse);
+
+                    /** ListConversationModelEvaluationsResponse conversationModelEvaluations. */
+                    public conversationModelEvaluations: google.cloud.dialogflow.v2.IConversationModelEvaluation[];
+
+                    /** ListConversationModelEvaluationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListConversationModelEvaluationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConversationModelEvaluationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IListConversationModelEvaluationsResponse): google.cloud.dialogflow.v2.ListConversationModelEvaluationsResponse;
+
+                    /**
+                     * Encodes the specified ListConversationModelEvaluationsResponse message. Does not implicitly {@link google.cloud.dialogflow.v2.ListConversationModelEvaluationsResponse.verify|verify} messages.
+                     * @param message ListConversationModelEvaluationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IListConversationModelEvaluationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConversationModelEvaluationsResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ListConversationModelEvaluationsResponse.verify|verify} messages.
+                     * @param message ListConversationModelEvaluationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IListConversationModelEvaluationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConversationModelEvaluationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConversationModelEvaluationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ListConversationModelEvaluationsResponse;
+
+                    /**
+                     * Decodes a ListConversationModelEvaluationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConversationModelEvaluationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ListConversationModelEvaluationsResponse;
+
+                    /**
+                     * Verifies a ListConversationModelEvaluationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConversationModelEvaluationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConversationModelEvaluationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ListConversationModelEvaluationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListConversationModelEvaluationsResponse message. Also converts values to other types if specified.
+                     * @param message ListConversationModelEvaluationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ListConversationModelEvaluationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConversationModelEvaluationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateConversationModelEvaluationRequest. */
+                interface ICreateConversationModelEvaluationRequest {
+
+                    /** CreateConversationModelEvaluationRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateConversationModelEvaluationRequest conversationModelEvaluation */
+                    conversationModelEvaluation?: (google.cloud.dialogflow.v2.IConversationModelEvaluation|null);
+                }
+
+                /** Represents a CreateConversationModelEvaluationRequest. */
+                class CreateConversationModelEvaluationRequest implements ICreateConversationModelEvaluationRequest {
+
+                    /**
+                     * Constructs a new CreateConversationModelEvaluationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.ICreateConversationModelEvaluationRequest);
+
+                    /** CreateConversationModelEvaluationRequest parent. */
+                    public parent: string;
+
+                    /** CreateConversationModelEvaluationRequest conversationModelEvaluation. */
+                    public conversationModelEvaluation?: (google.cloud.dialogflow.v2.IConversationModelEvaluation|null);
+
+                    /**
+                     * Creates a new CreateConversationModelEvaluationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConversationModelEvaluationRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.ICreateConversationModelEvaluationRequest): google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest;
+
+                    /**
+                     * Encodes the specified CreateConversationModelEvaluationRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest.verify|verify} messages.
+                     * @param message CreateConversationModelEvaluationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.ICreateConversationModelEvaluationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConversationModelEvaluationRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest.verify|verify} messages.
+                     * @param message CreateConversationModelEvaluationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.ICreateConversationModelEvaluationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConversationModelEvaluationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConversationModelEvaluationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest;
+
+                    /**
+                     * Decodes a CreateConversationModelEvaluationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConversationModelEvaluationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest;
+
+                    /**
+                     * Verifies a CreateConversationModelEvaluationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConversationModelEvaluationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConversationModelEvaluationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest;
+
+                    /**
+                     * Creates a plain object from a CreateConversationModelEvaluationRequest message. Also converts values to other types if specified.
+                     * @param message CreateConversationModelEvaluationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConversationModelEvaluationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateConversationModelOperationMetadata. */
+                interface ICreateConversationModelOperationMetadata {
+
+                    /** CreateConversationModelOperationMetadata conversationModel */
+                    conversationModel?: (string|null);
+
+                    /** CreateConversationModelOperationMetadata state */
+                    state?: (google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata.State|keyof typeof google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata.State|null);
+
+                    /** CreateConversationModelOperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CreateConversationModelOperationMetadata. */
+                class CreateConversationModelOperationMetadata implements ICreateConversationModelOperationMetadata {
+
+                    /**
+                     * Constructs a new CreateConversationModelOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.ICreateConversationModelOperationMetadata);
+
+                    /** CreateConversationModelOperationMetadata conversationModel. */
+                    public conversationModel: string;
+
+                    /** CreateConversationModelOperationMetadata state. */
+                    public state: (google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata.State|keyof typeof google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata.State);
+
+                    /** CreateConversationModelOperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new CreateConversationModelOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConversationModelOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.ICreateConversationModelOperationMetadata): google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata;
+
+                    /**
+                     * Encodes the specified CreateConversationModelOperationMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata.verify|verify} messages.
+                     * @param message CreateConversationModelOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.ICreateConversationModelOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConversationModelOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata.verify|verify} messages.
+                     * @param message CreateConversationModelOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.ICreateConversationModelOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConversationModelOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConversationModelOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata;
+
+                    /**
+                     * Decodes a CreateConversationModelOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConversationModelOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata;
+
+                    /**
+                     * Verifies a CreateConversationModelOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConversationModelOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConversationModelOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateConversationModelOperationMetadata message. Also converts values to other types if specified.
+                     * @param message CreateConversationModelOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConversationModelOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace CreateConversationModelOperationMetadata {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 1,
+                        SUCCEEDED = 2,
+                        FAILED = 3,
+                        CANCELLED = 4,
+                        CANCELLING = 5,
+                        TRAINING = 6
+                    }
+                }
+
+                /** Properties of a DeployConversationModelOperationMetadata. */
+                interface IDeployConversationModelOperationMetadata {
+
+                    /** DeployConversationModelOperationMetadata conversationModel */
+                    conversationModel?: (string|null);
+
+                    /** DeployConversationModelOperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DeployConversationModelOperationMetadata. */
+                class DeployConversationModelOperationMetadata implements IDeployConversationModelOperationMetadata {
+
+                    /**
+                     * Constructs a new DeployConversationModelOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IDeployConversationModelOperationMetadata);
+
+                    /** DeployConversationModelOperationMetadata conversationModel. */
+                    public conversationModel: string;
+
+                    /** DeployConversationModelOperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new DeployConversationModelOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployConversationModelOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IDeployConversationModelOperationMetadata): google.cloud.dialogflow.v2.DeployConversationModelOperationMetadata;
+
+                    /**
+                     * Encodes the specified DeployConversationModelOperationMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.DeployConversationModelOperationMetadata.verify|verify} messages.
+                     * @param message DeployConversationModelOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IDeployConversationModelOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployConversationModelOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.DeployConversationModelOperationMetadata.verify|verify} messages.
+                     * @param message DeployConversationModelOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IDeployConversationModelOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployConversationModelOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployConversationModelOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.DeployConversationModelOperationMetadata;
+
+                    /**
+                     * Decodes a DeployConversationModelOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployConversationModelOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.DeployConversationModelOperationMetadata;
+
+                    /**
+                     * Verifies a DeployConversationModelOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployConversationModelOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployConversationModelOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.DeployConversationModelOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a DeployConversationModelOperationMetadata message. Also converts values to other types if specified.
+                     * @param message DeployConversationModelOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.DeployConversationModelOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployConversationModelOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UndeployConversationModelOperationMetadata. */
+                interface IUndeployConversationModelOperationMetadata {
+
+                    /** UndeployConversationModelOperationMetadata conversationModel */
+                    conversationModel?: (string|null);
+
+                    /** UndeployConversationModelOperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an UndeployConversationModelOperationMetadata. */
+                class UndeployConversationModelOperationMetadata implements IUndeployConversationModelOperationMetadata {
+
+                    /**
+                     * Constructs a new UndeployConversationModelOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IUndeployConversationModelOperationMetadata);
+
+                    /** UndeployConversationModelOperationMetadata conversationModel. */
+                    public conversationModel: string;
+
+                    /** UndeployConversationModelOperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new UndeployConversationModelOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UndeployConversationModelOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IUndeployConversationModelOperationMetadata): google.cloud.dialogflow.v2.UndeployConversationModelOperationMetadata;
+
+                    /**
+                     * Encodes the specified UndeployConversationModelOperationMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.UndeployConversationModelOperationMetadata.verify|verify} messages.
+                     * @param message UndeployConversationModelOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IUndeployConversationModelOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UndeployConversationModelOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.UndeployConversationModelOperationMetadata.verify|verify} messages.
+                     * @param message UndeployConversationModelOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IUndeployConversationModelOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UndeployConversationModelOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UndeployConversationModelOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.UndeployConversationModelOperationMetadata;
+
+                    /**
+                     * Decodes an UndeployConversationModelOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UndeployConversationModelOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.UndeployConversationModelOperationMetadata;
+
+                    /**
+                     * Verifies an UndeployConversationModelOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UndeployConversationModelOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UndeployConversationModelOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.UndeployConversationModelOperationMetadata;
+
+                    /**
+                     * Creates a plain object from an UndeployConversationModelOperationMetadata message. Also converts values to other types if specified.
+                     * @param message UndeployConversationModelOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.UndeployConversationModelOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UndeployConversationModelOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteConversationModelOperationMetadata. */
+                interface IDeleteConversationModelOperationMetadata {
+
+                    /** DeleteConversationModelOperationMetadata conversationModel */
+                    conversationModel?: (string|null);
+
+                    /** DeleteConversationModelOperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DeleteConversationModelOperationMetadata. */
+                class DeleteConversationModelOperationMetadata implements IDeleteConversationModelOperationMetadata {
+
+                    /**
+                     * Constructs a new DeleteConversationModelOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IDeleteConversationModelOperationMetadata);
+
+                    /** DeleteConversationModelOperationMetadata conversationModel. */
+                    public conversationModel: string;
+
+                    /** DeleteConversationModelOperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new DeleteConversationModelOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteConversationModelOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IDeleteConversationModelOperationMetadata): google.cloud.dialogflow.v2.DeleteConversationModelOperationMetadata;
+
+                    /**
+                     * Encodes the specified DeleteConversationModelOperationMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.DeleteConversationModelOperationMetadata.verify|verify} messages.
+                     * @param message DeleteConversationModelOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IDeleteConversationModelOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteConversationModelOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.DeleteConversationModelOperationMetadata.verify|verify} messages.
+                     * @param message DeleteConversationModelOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IDeleteConversationModelOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteConversationModelOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteConversationModelOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.DeleteConversationModelOperationMetadata;
+
+                    /**
+                     * Decodes a DeleteConversationModelOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteConversationModelOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.DeleteConversationModelOperationMetadata;
+
+                    /**
+                     * Verifies a DeleteConversationModelOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteConversationModelOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteConversationModelOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.DeleteConversationModelOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteConversationModelOperationMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteConversationModelOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.DeleteConversationModelOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteConversationModelOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateConversationModelEvaluationOperationMetadata. */
+                interface ICreateConversationModelEvaluationOperationMetadata {
+
+                    /** CreateConversationModelEvaluationOperationMetadata conversationModelEvaluation */
+                    conversationModelEvaluation?: (string|null);
+
+                    /** CreateConversationModelEvaluationOperationMetadata conversationModel */
+                    conversationModel?: (string|null);
+
+                    /** CreateConversationModelEvaluationOperationMetadata state */
+                    state?: (google.cloud.dialogflow.v2.CreateConversationModelEvaluationOperationMetadata.State|keyof typeof google.cloud.dialogflow.v2.CreateConversationModelEvaluationOperationMetadata.State|null);
+
+                    /** CreateConversationModelEvaluationOperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CreateConversationModelEvaluationOperationMetadata. */
+                class CreateConversationModelEvaluationOperationMetadata implements ICreateConversationModelEvaluationOperationMetadata {
+
+                    /**
+                     * Constructs a new CreateConversationModelEvaluationOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.ICreateConversationModelEvaluationOperationMetadata);
+
+                    /** CreateConversationModelEvaluationOperationMetadata conversationModelEvaluation. */
+                    public conversationModelEvaluation: string;
+
+                    /** CreateConversationModelEvaluationOperationMetadata conversationModel. */
+                    public conversationModel: string;
+
+                    /** CreateConversationModelEvaluationOperationMetadata state. */
+                    public state: (google.cloud.dialogflow.v2.CreateConversationModelEvaluationOperationMetadata.State|keyof typeof google.cloud.dialogflow.v2.CreateConversationModelEvaluationOperationMetadata.State);
+
+                    /** CreateConversationModelEvaluationOperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new CreateConversationModelEvaluationOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConversationModelEvaluationOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.ICreateConversationModelEvaluationOperationMetadata): google.cloud.dialogflow.v2.CreateConversationModelEvaluationOperationMetadata;
+
+                    /**
+                     * Encodes the specified CreateConversationModelEvaluationOperationMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.CreateConversationModelEvaluationOperationMetadata.verify|verify} messages.
+                     * @param message CreateConversationModelEvaluationOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.ICreateConversationModelEvaluationOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConversationModelEvaluationOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.CreateConversationModelEvaluationOperationMetadata.verify|verify} messages.
+                     * @param message CreateConversationModelEvaluationOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.ICreateConversationModelEvaluationOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConversationModelEvaluationOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConversationModelEvaluationOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.CreateConversationModelEvaluationOperationMetadata;
+
+                    /**
+                     * Decodes a CreateConversationModelEvaluationOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConversationModelEvaluationOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.CreateConversationModelEvaluationOperationMetadata;
+
+                    /**
+                     * Verifies a CreateConversationModelEvaluationOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConversationModelEvaluationOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConversationModelEvaluationOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.CreateConversationModelEvaluationOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateConversationModelEvaluationOperationMetadata message. Also converts values to other types if specified.
+                     * @param message CreateConversationModelEvaluationOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.CreateConversationModelEvaluationOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConversationModelEvaluationOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace CreateConversationModelEvaluationOperationMetadata {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        INITIALIZING = 1,
+                        RUNNING = 2,
+                        CANCELLED = 3,
+                        SUCCEEDED = 4,
+                        FAILED = 5
+                    }
+                }
+
                 /** Represents a ConversationProfiles */
                 class ConversationProfiles extends $protobuf.rpc.Service {
 
@@ -17339,6 +21659,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteConversationProfile(request: google.cloud.dialogflow.v2.IDeleteConversationProfileRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls SetSuggestionFeatureConfig.
+                     * @param request SetSuggestionFeatureConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public setSuggestionFeatureConfig(request: google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigRequest, callback: google.cloud.dialogflow.v2.ConversationProfiles.SetSuggestionFeatureConfigCallback): void;
+
+                    /**
+                     * Calls SetSuggestionFeatureConfig.
+                     * @param request SetSuggestionFeatureConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setSuggestionFeatureConfig(request: google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ClearSuggestionFeatureConfig.
+                     * @param request ClearSuggestionFeatureConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public clearSuggestionFeatureConfig(request: google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigRequest, callback: google.cloud.dialogflow.v2.ConversationProfiles.ClearSuggestionFeatureConfigCallback): void;
+
+                    /**
+                     * Calls ClearSuggestionFeatureConfig.
+                     * @param request ClearSuggestionFeatureConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public clearSuggestionFeatureConfig(request: google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace ConversationProfiles {
@@ -17377,6 +21725,20 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteConversationProfileCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationProfiles#setSuggestionFeatureConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SetSuggestionFeatureConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2.ConversationProfiles#clearSuggestionFeatureConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ClearSuggestionFeatureConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a ConversationProfile. */
@@ -20001,128 +24363,424 @@ export namespace google {
                     }
                 }
 
-                /** Properties of a ConversationEvent. */
-                interface IConversationEvent {
+                /** Properties of a SetSuggestionFeatureConfigRequest. */
+                interface ISetSuggestionFeatureConfigRequest {
 
-                    /** ConversationEvent conversation */
-                    conversation?: (string|null);
+                    /** SetSuggestionFeatureConfigRequest conversationProfile */
+                    conversationProfile?: (string|null);
 
-                    /** ConversationEvent type */
-                    type?: (google.cloud.dialogflow.v2.ConversationEvent.Type|keyof typeof google.cloud.dialogflow.v2.ConversationEvent.Type|null);
+                    /** SetSuggestionFeatureConfigRequest participantRole */
+                    participantRole?: (google.cloud.dialogflow.v2.Participant.Role|keyof typeof google.cloud.dialogflow.v2.Participant.Role|null);
 
-                    /** ConversationEvent errorStatus */
-                    errorStatus?: (google.rpc.IStatus|null);
-
-                    /** ConversationEvent newMessagePayload */
-                    newMessagePayload?: (google.cloud.dialogflow.v2.IMessage|null);
+                    /** SetSuggestionFeatureConfigRequest suggestionFeatureConfig */
+                    suggestionFeatureConfig?: (google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ISuggestionFeatureConfig|null);
                 }
 
-                /** Represents a ConversationEvent. */
-                class ConversationEvent implements IConversationEvent {
+                /** Represents a SetSuggestionFeatureConfigRequest. */
+                class SetSuggestionFeatureConfigRequest implements ISetSuggestionFeatureConfigRequest {
 
                     /**
-                     * Constructs a new ConversationEvent.
+                     * Constructs a new SetSuggestionFeatureConfigRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.dialogflow.v2.IConversationEvent);
+                    constructor(properties?: google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigRequest);
 
-                    /** ConversationEvent conversation. */
-                    public conversation: string;
+                    /** SetSuggestionFeatureConfigRequest conversationProfile. */
+                    public conversationProfile: string;
 
-                    /** ConversationEvent type. */
-                    public type: (google.cloud.dialogflow.v2.ConversationEvent.Type|keyof typeof google.cloud.dialogflow.v2.ConversationEvent.Type);
+                    /** SetSuggestionFeatureConfigRequest participantRole. */
+                    public participantRole: (google.cloud.dialogflow.v2.Participant.Role|keyof typeof google.cloud.dialogflow.v2.Participant.Role);
 
-                    /** ConversationEvent errorStatus. */
-                    public errorStatus?: (google.rpc.IStatus|null);
-
-                    /** ConversationEvent newMessagePayload. */
-                    public newMessagePayload?: (google.cloud.dialogflow.v2.IMessage|null);
-
-                    /** ConversationEvent payload. */
-                    public payload?: "newMessagePayload";
+                    /** SetSuggestionFeatureConfigRequest suggestionFeatureConfig. */
+                    public suggestionFeatureConfig?: (google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ISuggestionFeatureConfig|null);
 
                     /**
-                     * Creates a new ConversationEvent instance using the specified properties.
+                     * Creates a new SetSuggestionFeatureConfigRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns ConversationEvent instance
+                     * @returns SetSuggestionFeatureConfigRequest instance
                      */
-                    public static create(properties?: google.cloud.dialogflow.v2.IConversationEvent): google.cloud.dialogflow.v2.ConversationEvent;
+                    public static create(properties?: google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigRequest): google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest;
 
                     /**
-                     * Encodes the specified ConversationEvent message. Does not implicitly {@link google.cloud.dialogflow.v2.ConversationEvent.verify|verify} messages.
-                     * @param message ConversationEvent message or plain object to encode
+                     * Encodes the specified SetSuggestionFeatureConfigRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest.verify|verify} messages.
+                     * @param message SetSuggestionFeatureConfigRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.dialogflow.v2.IConversationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified ConversationEvent message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ConversationEvent.verify|verify} messages.
-                     * @param message ConversationEvent message or plain object to encode
+                     * Encodes the specified SetSuggestionFeatureConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest.verify|verify} messages.
+                     * @param message SetSuggestionFeatureConfigRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IConversationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a ConversationEvent message from the specified reader or buffer.
+                     * Decodes a SetSuggestionFeatureConfigRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns ConversationEvent
+                     * @returns SetSuggestionFeatureConfigRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ConversationEvent;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest;
 
                     /**
-                     * Decodes a ConversationEvent message from the specified reader or buffer, length delimited.
+                     * Decodes a SetSuggestionFeatureConfigRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns ConversationEvent
+                     * @returns SetSuggestionFeatureConfigRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ConversationEvent;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest;
 
                     /**
-                     * Verifies a ConversationEvent message.
+                     * Verifies a SetSuggestionFeatureConfigRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a ConversationEvent message from a plain object. Also converts values to their respective internal types.
+                     * Creates a SetSuggestionFeatureConfigRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns ConversationEvent
+                     * @returns SetSuggestionFeatureConfigRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ConversationEvent;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest;
 
                     /**
-                     * Creates a plain object from a ConversationEvent message. Also converts values to other types if specified.
-                     * @param message ConversationEvent
+                     * Creates a plain object from a SetSuggestionFeatureConfigRequest message. Also converts values to other types if specified.
+                     * @param message SetSuggestionFeatureConfigRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.dialogflow.v2.ConversationEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this ConversationEvent to JSON.
+                     * Converts this SetSuggestionFeatureConfigRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                namespace ConversationEvent {
+                /** Properties of a ClearSuggestionFeatureConfigRequest. */
+                interface IClearSuggestionFeatureConfigRequest {
 
-                    /** Type enum. */
-                    enum Type {
-                        TYPE_UNSPECIFIED = 0,
-                        CONVERSATION_STARTED = 1,
-                        CONVERSATION_FINISHED = 2,
-                        HUMAN_INTERVENTION_NEEDED = 3,
-                        NEW_MESSAGE = 5,
-                        UNRECOVERABLE_ERROR = 4
-                    }
+                    /** ClearSuggestionFeatureConfigRequest conversationProfile */
+                    conversationProfile?: (string|null);
+
+                    /** ClearSuggestionFeatureConfigRequest participantRole */
+                    participantRole?: (google.cloud.dialogflow.v2.Participant.Role|keyof typeof google.cloud.dialogflow.v2.Participant.Role|null);
+
+                    /** ClearSuggestionFeatureConfigRequest suggestionFeatureType */
+                    suggestionFeatureType?: (google.cloud.dialogflow.v2.SuggestionFeature.Type|keyof typeof google.cloud.dialogflow.v2.SuggestionFeature.Type|null);
+                }
+
+                /** Represents a ClearSuggestionFeatureConfigRequest. */
+                class ClearSuggestionFeatureConfigRequest implements IClearSuggestionFeatureConfigRequest {
+
+                    /**
+                     * Constructs a new ClearSuggestionFeatureConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigRequest);
+
+                    /** ClearSuggestionFeatureConfigRequest conversationProfile. */
+                    public conversationProfile: string;
+
+                    /** ClearSuggestionFeatureConfigRequest participantRole. */
+                    public participantRole: (google.cloud.dialogflow.v2.Participant.Role|keyof typeof google.cloud.dialogflow.v2.Participant.Role);
+
+                    /** ClearSuggestionFeatureConfigRequest suggestionFeatureType. */
+                    public suggestionFeatureType: (google.cloud.dialogflow.v2.SuggestionFeature.Type|keyof typeof google.cloud.dialogflow.v2.SuggestionFeature.Type);
+
+                    /**
+                     * Creates a new ClearSuggestionFeatureConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ClearSuggestionFeatureConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigRequest): google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest;
+
+                    /**
+                     * Encodes the specified ClearSuggestionFeatureConfigRequest message. Does not implicitly {@link google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest.verify|verify} messages.
+                     * @param message ClearSuggestionFeatureConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ClearSuggestionFeatureConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest.verify|verify} messages.
+                     * @param message ClearSuggestionFeatureConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ClearSuggestionFeatureConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ClearSuggestionFeatureConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest;
+
+                    /**
+                     * Decodes a ClearSuggestionFeatureConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ClearSuggestionFeatureConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest;
+
+                    /**
+                     * Verifies a ClearSuggestionFeatureConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ClearSuggestionFeatureConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ClearSuggestionFeatureConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest;
+
+                    /**
+                     * Creates a plain object from a ClearSuggestionFeatureConfigRequest message. Also converts values to other types if specified.
+                     * @param message ClearSuggestionFeatureConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ClearSuggestionFeatureConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SetSuggestionFeatureConfigOperationMetadata. */
+                interface ISetSuggestionFeatureConfigOperationMetadata {
+
+                    /** SetSuggestionFeatureConfigOperationMetadata conversationProfile */
+                    conversationProfile?: (string|null);
+
+                    /** SetSuggestionFeatureConfigOperationMetadata participantRole */
+                    participantRole?: (google.cloud.dialogflow.v2.Participant.Role|keyof typeof google.cloud.dialogflow.v2.Participant.Role|null);
+
+                    /** SetSuggestionFeatureConfigOperationMetadata suggestionFeatureType */
+                    suggestionFeatureType?: (google.cloud.dialogflow.v2.SuggestionFeature.Type|keyof typeof google.cloud.dialogflow.v2.SuggestionFeature.Type|null);
+
+                    /** SetSuggestionFeatureConfigOperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SetSuggestionFeatureConfigOperationMetadata. */
+                class SetSuggestionFeatureConfigOperationMetadata implements ISetSuggestionFeatureConfigOperationMetadata {
+
+                    /**
+                     * Constructs a new SetSuggestionFeatureConfigOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata);
+
+                    /** SetSuggestionFeatureConfigOperationMetadata conversationProfile. */
+                    public conversationProfile: string;
+
+                    /** SetSuggestionFeatureConfigOperationMetadata participantRole. */
+                    public participantRole: (google.cloud.dialogflow.v2.Participant.Role|keyof typeof google.cloud.dialogflow.v2.Participant.Role);
+
+                    /** SetSuggestionFeatureConfigOperationMetadata suggestionFeatureType. */
+                    public suggestionFeatureType: (google.cloud.dialogflow.v2.SuggestionFeature.Type|keyof typeof google.cloud.dialogflow.v2.SuggestionFeature.Type);
+
+                    /** SetSuggestionFeatureConfigOperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SetSuggestionFeatureConfigOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SetSuggestionFeatureConfigOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata): google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata;
+
+                    /**
+                     * Encodes the specified SetSuggestionFeatureConfigOperationMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata.verify|verify} messages.
+                     * @param message SetSuggestionFeatureConfigOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SetSuggestionFeatureConfigOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata.verify|verify} messages.
+                     * @param message SetSuggestionFeatureConfigOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SetSuggestionFeatureConfigOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SetSuggestionFeatureConfigOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata;
+
+                    /**
+                     * Decodes a SetSuggestionFeatureConfigOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SetSuggestionFeatureConfigOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata;
+
+                    /**
+                     * Verifies a SetSuggestionFeatureConfigOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SetSuggestionFeatureConfigOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SetSuggestionFeatureConfigOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a SetSuggestionFeatureConfigOperationMetadata message. Also converts values to other types if specified.
+                     * @param message SetSuggestionFeatureConfigOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SetSuggestionFeatureConfigOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ClearSuggestionFeatureConfigOperationMetadata. */
+                interface IClearSuggestionFeatureConfigOperationMetadata {
+
+                    /** ClearSuggestionFeatureConfigOperationMetadata conversationProfile */
+                    conversationProfile?: (string|null);
+
+                    /** ClearSuggestionFeatureConfigOperationMetadata participantRole */
+                    participantRole?: (google.cloud.dialogflow.v2.Participant.Role|keyof typeof google.cloud.dialogflow.v2.Participant.Role|null);
+
+                    /** ClearSuggestionFeatureConfigOperationMetadata suggestionFeatureType */
+                    suggestionFeatureType?: (google.cloud.dialogflow.v2.SuggestionFeature.Type|keyof typeof google.cloud.dialogflow.v2.SuggestionFeature.Type|null);
+
+                    /** ClearSuggestionFeatureConfigOperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ClearSuggestionFeatureConfigOperationMetadata. */
+                class ClearSuggestionFeatureConfigOperationMetadata implements IClearSuggestionFeatureConfigOperationMetadata {
+
+                    /**
+                     * Constructs a new ClearSuggestionFeatureConfigOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata);
+
+                    /** ClearSuggestionFeatureConfigOperationMetadata conversationProfile. */
+                    public conversationProfile: string;
+
+                    /** ClearSuggestionFeatureConfigOperationMetadata participantRole. */
+                    public participantRole: (google.cloud.dialogflow.v2.Participant.Role|keyof typeof google.cloud.dialogflow.v2.Participant.Role);
+
+                    /** ClearSuggestionFeatureConfigOperationMetadata suggestionFeatureType. */
+                    public suggestionFeatureType: (google.cloud.dialogflow.v2.SuggestionFeature.Type|keyof typeof google.cloud.dialogflow.v2.SuggestionFeature.Type);
+
+                    /** ClearSuggestionFeatureConfigOperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ClearSuggestionFeatureConfigOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ClearSuggestionFeatureConfigOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata): google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata;
+
+                    /**
+                     * Encodes the specified ClearSuggestionFeatureConfigOperationMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata.verify|verify} messages.
+                     * @param message ClearSuggestionFeatureConfigOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ClearSuggestionFeatureConfigOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata.verify|verify} messages.
+                     * @param message ClearSuggestionFeatureConfigOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ClearSuggestionFeatureConfigOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ClearSuggestionFeatureConfigOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata;
+
+                    /**
+                     * Decodes a ClearSuggestionFeatureConfigOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ClearSuggestionFeatureConfigOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata;
+
+                    /**
+                     * Verifies a ClearSuggestionFeatureConfigOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ClearSuggestionFeatureConfigOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ClearSuggestionFeatureConfigOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a ClearSuggestionFeatureConfigOperationMetadata message. Also converts values to other types if specified.
+                     * @param message ClearSuggestionFeatureConfigOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ClearSuggestionFeatureConfigOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Represents a Documents */
@@ -20346,6 +25004,9 @@ export namespace google {
 
                     /** Document metadata */
                     metadata?: ({ [k: string]: string }|null);
+
+                    /** Document state */
+                    state?: (google.cloud.dialogflow.v2.Document.State|keyof typeof google.cloud.dialogflow.v2.Document.State|null);
                 }
 
                 /** Represents a Document. */
@@ -20383,6 +25044,9 @@ export namespace google {
 
                     /** Document metadata. */
                     public metadata: { [k: string]: string };
+
+                    /** Document state. */
+                    public state: (google.cloud.dialogflow.v2.Document.State|keyof typeof google.cloud.dialogflow.v2.Document.State);
 
                     /** Document source. */
                     public source?: ("contentUri"|"rawContent");
@@ -20465,7 +25129,8 @@ export namespace google {
                         KNOWLEDGE_TYPE_UNSPECIFIED = 0,
                         FAQ = 1,
                         EXTRACTIVE_QA = 2,
-                        ARTICLE_SUGGESTION = 3
+                        ARTICLE_SUGGESTION = 3,
+                        AGENT_FACING_SMART_REPLY = 4
                     }
 
                     /** Properties of a ReloadStatus. */
@@ -20562,6 +25227,16 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        UPDATING = 3,
+                        RELOADING = 4,
+                        DELETING = 5
                     }
                 }
 
@@ -21666,6 +26341,96 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of an ExportOperationMetadata. */
+                interface IExportOperationMetadata {
+
+                    /** ExportOperationMetadata exportedGcsDestination */
+                    exportedGcsDestination?: (google.cloud.dialogflow.v2.IGcsDestination|null);
+                }
+
+                /** Represents an ExportOperationMetadata. */
+                class ExportOperationMetadata implements IExportOperationMetadata {
+
+                    /**
+                     * Constructs a new ExportOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.IExportOperationMetadata);
+
+                    /** ExportOperationMetadata exportedGcsDestination. */
+                    public exportedGcsDestination?: (google.cloud.dialogflow.v2.IGcsDestination|null);
+
+                    /**
+                     * Creates a new ExportOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.IExportOperationMetadata): google.cloud.dialogflow.v2.ExportOperationMetadata;
+
+                    /**
+                     * Encodes the specified ExportOperationMetadata message. Does not implicitly {@link google.cloud.dialogflow.v2.ExportOperationMetadata.verify|verify} messages.
+                     * @param message ExportOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.IExportOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.ExportOperationMetadata.verify|verify} messages.
+                     * @param message ExportOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.IExportOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.ExportOperationMetadata;
+
+                    /**
+                     * Decodes an ExportOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.ExportOperationMetadata;
+
+                    /**
+                     * Verifies an ExportOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.ExportOperationMetadata;
+
+                    /**
+                     * Creates a plain object from an ExportOperationMetadata message. Also converts values to other types if specified.
+                     * @param message ExportOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.ExportOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a KnowledgeOperationMetadata. */
                 interface IKnowledgeOperationMetadata {
 
@@ -21674,6 +26439,9 @@ export namespace google {
 
                     /** KnowledgeOperationMetadata knowledgeBase */
                     knowledgeBase?: (string|null);
+
+                    /** KnowledgeOperationMetadata exportOperationMetadata */
+                    exportOperationMetadata?: (google.cloud.dialogflow.v2.IExportOperationMetadata|null);
                 }
 
                 /** Represents a KnowledgeOperationMetadata. */
@@ -21690,6 +26458,12 @@ export namespace google {
 
                     /** KnowledgeOperationMetadata knowledgeBase. */
                     public knowledgeBase: string;
+
+                    /** KnowledgeOperationMetadata exportOperationMetadata. */
+                    public exportOperationMetadata?: (google.cloud.dialogflow.v2.IExportOperationMetadata|null);
+
+                    /** KnowledgeOperationMetadata operationMetadata. */
+                    public operationMetadata?: "exportOperationMetadata";
 
                     /**
                      * Creates a new KnowledgeOperationMetadata instance using the specified properties.
@@ -59165,102 +63939,6 @@ export namespace google {
             public toJSON(): { [k: string]: any };
         }
 
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
         /** Properties of a Struct. */
         interface IStruct {
 
@@ -59564,6 +64242,102 @@ export namespace google {
 
             /**
              * Converts this ListValue to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };

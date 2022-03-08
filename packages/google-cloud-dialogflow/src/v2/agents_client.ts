@@ -166,6 +166,9 @@ export class AgentsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      conversationDatasetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversationDatasets/{conversation_dataset}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -211,6 +214,13 @@ export class AgentsClient {
       projectConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversations/{conversation}/messages/{message}'
       ),
+      projectConversationModelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/conversationModels/{conversation_model}'
+      ),
+      projectConversationModelEvaluationsEvaluationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/conversationModels/{conversation_model}/evaluations/evaluation'
+        ),
       projectConversationParticipantPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/conversations/{conversation}/participants/{participant}'
@@ -271,6 +281,14 @@ export class AgentsClient {
       projectLocationConversationMessagePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
+        ),
+      projectLocationConversationModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversationModels/{conversation_model}'
+        ),
+      projectLocationConversationModelEvaluationsEvaluationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversationModels/{conversation_model}/evaluations/evaluation'
         ),
       projectLocationConversationParticipantPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -1036,6 +1054,12 @@ export class AgentsClient {
    *   URI to export the agent to.
    *   The format of this URI must be `gs://<bucket-name>/<object-name>`.
    *   If left unspecified, the serialized agent is returned inline.
+   *
+   *   Dialogflow performs a write operation for the Cloud Storage object
+   *   on the caller's behalf, so your request authentication must
+   *   have write permissions for the object. For more information, see
+   *   [Dialogflow access
+   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1201,6 +1225,12 @@ export class AgentsClient {
    * @param {string} request.agentUri
    *   The URI to a Google Cloud Storage file containing the agent to import.
    *   Note: The URI must start with "gs://".
+   *
+   *   Dialogflow performs a read operation for the Cloud Storage object
+   *   on the caller's behalf, so your request authentication must
+   *   have read permissions for the object. For more information, see
+   *   [Dialogflow access
+   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
    * @param {Buffer} request.agentContent
    *   Zip compressed raw byte content for agent.
    * @param {object} [options]
@@ -1364,6 +1394,12 @@ export class AgentsClient {
    * @param {string} request.agentUri
    *   The URI to a Google Cloud Storage file containing the agent to restore.
    *   Note: The URI must start with "gs://".
+   *
+   *   Dialogflow performs a read operation for the Cloud Storage object
+   *   on the caller's behalf, so your request authentication must
+   *   have read permissions for the object. For more information, see
+   *   [Dialogflow access
+   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
    * @param {Buffer} request.agentContent
    *   Zip compressed raw byte content for agent.
    * @param {object} [options]
@@ -1697,6 +1733,67 @@ export class AgentsClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified conversationDataset resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation_dataset
+   * @returns {string} Resource name string.
+   */
+  conversationDatasetPath(
+    project: string,
+    location: string,
+    conversationDataset: string
+  ) {
+    return this.pathTemplates.conversationDatasetPathTemplate.render({
+      project: project,
+      location: location,
+      conversation_dataset: conversationDataset,
+    });
+  }
+
+  /**
+   * Parse the project from ConversationDataset resource.
+   *
+   * @param {string} conversationDatasetName
+   *   A fully-qualified path representing ConversationDataset resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromConversationDatasetName(conversationDatasetName: string) {
+    return this.pathTemplates.conversationDatasetPathTemplate.match(
+      conversationDatasetName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ConversationDataset resource.
+   *
+   * @param {string} conversationDatasetName
+   *   A fully-qualified path representing ConversationDataset resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromConversationDatasetName(conversationDatasetName: string) {
+    return this.pathTemplates.conversationDatasetPathTemplate.match(
+      conversationDatasetName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation_dataset from ConversationDataset resource.
+   *
+   * @param {string} conversationDatasetName
+   *   A fully-qualified path representing ConversationDataset resource.
+   * @returns {string} A string representing the conversation_dataset.
+   */
+  matchConversationDatasetFromConversationDatasetName(
+    conversationDatasetName: string
+  ) {
+    return this.pathTemplates.conversationDatasetPathTemplate.match(
+      conversationDatasetName
+    ).conversation_dataset;
+  }
 
   /**
    * Return a fully-qualified project resource name string.
@@ -2423,6 +2520,99 @@ export class AgentsClient {
     return this.pathTemplates.projectConversationMessagePathTemplate.match(
       projectConversationMessageName
     ).message;
+  }
+
+  /**
+   * Return a fully-qualified projectConversationModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} conversation_model
+   * @returns {string} Resource name string.
+   */
+  projectConversationModelPath(project: string, conversationModel: string) {
+    return this.pathTemplates.projectConversationModelPathTemplate.render({
+      project: project,
+      conversation_model: conversationModel,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectConversationModel resource.
+   *
+   * @param {string} projectConversationModelName
+   *   A fully-qualified path representing project_conversation_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConversationModelName(
+    projectConversationModelName: string
+  ) {
+    return this.pathTemplates.projectConversationModelPathTemplate.match(
+      projectConversationModelName
+    ).project;
+  }
+
+  /**
+   * Parse the conversation_model from ProjectConversationModel resource.
+   *
+   * @param {string} projectConversationModelName
+   *   A fully-qualified path representing project_conversation_model resource.
+   * @returns {string} A string representing the conversation_model.
+   */
+  matchConversationModelFromProjectConversationModelName(
+    projectConversationModelName: string
+  ) {
+    return this.pathTemplates.projectConversationModelPathTemplate.match(
+      projectConversationModelName
+    ).conversation_model;
+  }
+
+  /**
+   * Return a fully-qualified projectConversationModelEvaluationsEvaluation resource name string.
+   *
+   * @param {string} project
+   * @param {string} conversation_model
+   * @returns {string} Resource name string.
+   */
+  projectConversationModelEvaluationsEvaluationPath(
+    project: string,
+    conversationModel: string
+  ) {
+    return this.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.render(
+      {
+        project: project,
+        conversation_model: conversationModel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectConversationModelEvaluationsEvaluation resource.
+   *
+   * @param {string} projectConversationModelEvaluationsEvaluationName
+   *   A fully-qualified path representing project_conversation_model_evaluations_evaluation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConversationModelEvaluationsEvaluationName(
+    projectConversationModelEvaluationsEvaluationName: string
+  ) {
+    return this.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.match(
+      projectConversationModelEvaluationsEvaluationName
+    ).project;
+  }
+
+  /**
+   * Parse the conversation_model from ProjectConversationModelEvaluationsEvaluation resource.
+   *
+   * @param {string} projectConversationModelEvaluationsEvaluationName
+   *   A fully-qualified path representing project_conversation_model_evaluations_evaluation resource.
+   * @returns {string} A string representing the conversation_model.
+   */
+  matchConversationModelFromProjectConversationModelEvaluationsEvaluationName(
+    projectConversationModelEvaluationsEvaluationName: string
+  ) {
+    return this.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.match(
+      projectConversationModelEvaluationsEvaluationName
+    ).conversation_model;
   }
 
   /**
@@ -3618,6 +3808,140 @@ export class AgentsClient {
     return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
       projectLocationConversationMessageName
     ).message;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversationModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation_model
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationModelPath(
+    project: string,
+    location: string,
+    conversationModel: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation_model: conversationModel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversationModel resource.
+   *
+   * @param {string} projectLocationConversationModelName
+   *   A fully-qualified path representing project_location_conversation_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationModelName(
+    projectLocationConversationModelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(
+      projectLocationConversationModelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversationModel resource.
+   *
+   * @param {string} projectLocationConversationModelName
+   *   A fully-qualified path representing project_location_conversation_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationModelName(
+    projectLocationConversationModelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(
+      projectLocationConversationModelName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation_model from ProjectLocationConversationModel resource.
+   *
+   * @param {string} projectLocationConversationModelName
+   *   A fully-qualified path representing project_location_conversation_model resource.
+   * @returns {string} A string representing the conversation_model.
+   */
+  matchConversationModelFromProjectLocationConversationModelName(
+    projectLocationConversationModelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(
+      projectLocationConversationModelName
+    ).conversation_model;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversationModelEvaluationsEvaluation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation_model
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationModelEvaluationsEvaluationPath(
+    project: string,
+    location: string,
+    conversationModel: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation_model: conversationModel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversationModelEvaluationsEvaluation resource.
+   *
+   * @param {string} projectLocationConversationModelEvaluationsEvaluationName
+   *   A fully-qualified path representing project_location_conversation_model_evaluations_evaluation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationModelEvaluationsEvaluationName(
+    projectLocationConversationModelEvaluationsEvaluationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationsEvaluationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversationModelEvaluationsEvaluation resource.
+   *
+   * @param {string} projectLocationConversationModelEvaluationsEvaluationName
+   *   A fully-qualified path representing project_location_conversation_model_evaluations_evaluation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationModelEvaluationsEvaluationName(
+    projectLocationConversationModelEvaluationsEvaluationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationsEvaluationName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation_model from ProjectLocationConversationModelEvaluationsEvaluation resource.
+   *
+   * @param {string} projectLocationConversationModelEvaluationsEvaluationName
+   *   A fully-qualified path representing project_location_conversation_model_evaluations_evaluation resource.
+   * @returns {string} A string representing the conversation_model.
+   */
+  matchConversationModelFromProjectLocationConversationModelEvaluationsEvaluationName(
+    projectLocationConversationModelEvaluationsEvaluationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationsEvaluationName
+    ).conversation_model;
   }
 
   /**

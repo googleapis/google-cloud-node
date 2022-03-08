@@ -23,6 +23,7 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
@@ -37,7 +38,7 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './conversation_profiles_client_config.json';
-
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -63,6 +64,7 @@ export class ConversationProfilesClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   conversationProfilesStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -167,6 +169,9 @@ export class ConversationProfilesClient {
       cXSecuritySettingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/securitySettings/{security_settings}'
       ),
+      conversationDatasetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversationDatasets/{conversation_dataset}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -212,6 +217,13 @@ export class ConversationProfilesClient {
       projectConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversations/{conversation}/messages/{message}'
       ),
+      projectConversationModelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/conversationModels/{conversation_model}'
+      ),
+      projectConversationModelEvaluationsEvaluationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/conversationModels/{conversation_model}/evaluations/evaluation'
+        ),
       projectConversationParticipantPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/conversations/{conversation}/participants/{participant}'
@@ -273,6 +285,14 @@ export class ConversationProfilesClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
         ),
+      projectLocationConversationModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversationModels/{conversation_model}'
+        ),
+      projectLocationConversationModelEvaluationsEvaluationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversationModels/{conversation_model}/evaluations/evaluation'
+        ),
       projectLocationConversationParticipantPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}'
@@ -299,6 +319,52 @@ export class ConversationProfilesClient {
         'pageToken',
         'nextPageToken',
         'conversationProfiles'
+      ),
+    };
+
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+
+    this.operationsClient = this._gaxModule
+      .lro({
+        auth: this.auth,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      })
+      .operationsClient(opts);
+    const setSuggestionFeatureConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2.ConversationProfile'
+    ) as gax.protobuf.Type;
+    const setSuggestionFeatureConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata'
+    ) as gax.protobuf.Type;
+    const clearSuggestionFeatureConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2.ConversationProfile'
+    ) as gax.protobuf.Type;
+    const clearSuggestionFeatureConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      setSuggestionFeatureConfig: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        setSuggestionFeatureConfigResponse.decode.bind(
+          setSuggestionFeatureConfigResponse
+        ),
+        setSuggestionFeatureConfigMetadata.decode.bind(
+          setSuggestionFeatureConfigMetadata
+        )
+      ),
+      clearSuggestionFeatureConfig: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        clearSuggestionFeatureConfigResponse.decode.bind(
+          clearSuggestionFeatureConfigResponse
+        ),
+        clearSuggestionFeatureConfigMetadata.decode.bind(
+          clearSuggestionFeatureConfigMetadata
+        )
       ),
     };
 
@@ -357,6 +423,8 @@ export class ConversationProfilesClient {
       'createConversationProfile',
       'updateConversationProfile',
       'deleteConversationProfile',
+      'setSuggestionFeatureConfig',
+      'clearSuggestionFeatureConfig',
     ];
     for (const methodName of conversationProfilesStubMethods) {
       const callPromise = this.conversationProfilesStub.then(
@@ -373,7 +441,10 @@ export class ConversationProfilesClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -865,6 +936,325 @@ export class ConversationProfilesClient {
   }
 
   /**
+   * Adds or updates a suggestion feature in a conversation profile.
+   * If the conversation profile contains the type of suggestion feature for
+   * the participant role, it will update it. Otherwise it will insert the
+   * suggestion feature.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: {@link google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata|SetSuggestionFeatureConfigOperationMetadata}
+   * - `response`: {@link google.cloud.dialogflow.v2.ConversationProfile|ConversationProfile}
+   *
+   * If a long running operation to add or update suggestion feature
+   * config for the same conversation profile, participant role and suggestion
+   * feature type exists, please cancel the existing long running operation
+   * before sending such request, otherwise the request will be rejected.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.conversationProfile
+   *   Required. The Conversation Profile to add or update the suggestion feature
+   *   config. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversationProfiles/<Conversation Profile ID>`.
+   * @param {google.cloud.dialogflow.v2.Participant.Role} request.participantRole
+   *   Required. The participant role to add or update the suggestion feature
+   *   config. Only HUMAN_AGENT or END_USER can be used.
+   * @param {google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionFeatureConfig} request.suggestionFeatureConfig
+   *   Required. The suggestion feature config to add or update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/conversation_profiles.set_suggestion_feature_config.js</caption>
+   * region_tag:dialogflow_v2_generated_ConversationProfiles_SetSuggestionFeatureConfig_async
+   */
+  setSuggestionFeatureConfig(
+    request?: protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IConversationProfile,
+        protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  setSuggestionFeatureConfig(
+    request: protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IConversationProfile,
+        protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setSuggestionFeatureConfig(
+    request: protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IConversationProfile,
+        protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setSuggestionFeatureConfig(
+    request?: protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IConversationProfile,
+            protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IConversationProfile,
+        protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IConversationProfile,
+        protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        conversation_profile: request.conversationProfile || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.setSuggestionFeatureConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `setSuggestionFeatureConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/conversation_profiles.set_suggestion_feature_config.js</caption>
+   * region_tag:dialogflow_v2_generated_ConversationProfiles_SetSuggestionFeatureConfig_async
+   */
+  async checkSetSuggestionFeatureConfigProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.v2.ConversationProfile,
+      protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.setSuggestionFeatureConfig,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.v2.ConversationProfile,
+      protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata
+    >;
+  }
+  /**
+   * Clears a suggestion feature from a conversation profile for the given
+   * participant role.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: {@link google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata|ClearSuggestionFeatureConfigOperationMetadata}
+   * - `response`: {@link google.cloud.dialogflow.v2.ConversationProfile|ConversationProfile}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.conversationProfile
+   *   Required. The Conversation Profile to add or update the suggestion feature
+   *   config. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversationProfiles/<Conversation Profile ID>`.
+   * @param {google.cloud.dialogflow.v2.Participant.Role} request.participantRole
+   *   Required. The participant role to remove the suggestion feature
+   *   config. Only HUMAN_AGENT or END_USER can be used.
+   * @param {google.cloud.dialogflow.v2.SuggestionFeature.Type} request.suggestionFeatureType
+   *   Required. The type of the suggestion feature to remove.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/conversation_profiles.clear_suggestion_feature_config.js</caption>
+   * region_tag:dialogflow_v2_generated_ConversationProfiles_ClearSuggestionFeatureConfig_async
+   */
+  clearSuggestionFeatureConfig(
+    request?: protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IConversationProfile,
+        protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  clearSuggestionFeatureConfig(
+    request: protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IConversationProfile,
+        protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  clearSuggestionFeatureConfig(
+    request: protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IConversationProfile,
+        protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  clearSuggestionFeatureConfig(
+    request?: protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IConversationProfile,
+            protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IConversationProfile,
+        protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IConversationProfile,
+        protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        conversation_profile: request.conversationProfile || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.clearSuggestionFeatureConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `clearSuggestionFeatureConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/conversation_profiles.clear_suggestion_feature_config.js</caption>
+   * region_tag:dialogflow_v2_generated_ConversationProfiles_ClearSuggestionFeatureConfig_async
+   */
+  async checkClearSuggestionFeatureConfigProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.v2.ConversationProfile,
+      protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.clearSuggestionFeatureConfig,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.v2.ConversationProfile,
+      protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata
+    >;
+  }
+  /**
    * Returns the list of all conversation profiles in the specified project.
    *
    * @param {Object} request
@@ -1126,6 +1516,67 @@ export class ConversationProfilesClient {
     return this.pathTemplates.cXSecuritySettingsPathTemplate.match(
       cXSecuritySettingsName
     ).security_settings;
+  }
+
+  /**
+   * Return a fully-qualified conversationDataset resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation_dataset
+   * @returns {string} Resource name string.
+   */
+  conversationDatasetPath(
+    project: string,
+    location: string,
+    conversationDataset: string
+  ) {
+    return this.pathTemplates.conversationDatasetPathTemplate.render({
+      project: project,
+      location: location,
+      conversation_dataset: conversationDataset,
+    });
+  }
+
+  /**
+   * Parse the project from ConversationDataset resource.
+   *
+   * @param {string} conversationDatasetName
+   *   A fully-qualified path representing ConversationDataset resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromConversationDatasetName(conversationDatasetName: string) {
+    return this.pathTemplates.conversationDatasetPathTemplate.match(
+      conversationDatasetName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ConversationDataset resource.
+   *
+   * @param {string} conversationDatasetName
+   *   A fully-qualified path representing ConversationDataset resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromConversationDatasetName(conversationDatasetName: string) {
+    return this.pathTemplates.conversationDatasetPathTemplate.match(
+      conversationDatasetName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation_dataset from ConversationDataset resource.
+   *
+   * @param {string} conversationDatasetName
+   *   A fully-qualified path representing ConversationDataset resource.
+   * @returns {string} A string representing the conversation_dataset.
+   */
+  matchConversationDatasetFromConversationDatasetName(
+    conversationDatasetName: string
+  ) {
+    return this.pathTemplates.conversationDatasetPathTemplate.match(
+      conversationDatasetName
+    ).conversation_dataset;
   }
 
   /**
@@ -1853,6 +2304,99 @@ export class ConversationProfilesClient {
     return this.pathTemplates.projectConversationMessagePathTemplate.match(
       projectConversationMessageName
     ).message;
+  }
+
+  /**
+   * Return a fully-qualified projectConversationModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} conversation_model
+   * @returns {string} Resource name string.
+   */
+  projectConversationModelPath(project: string, conversationModel: string) {
+    return this.pathTemplates.projectConversationModelPathTemplate.render({
+      project: project,
+      conversation_model: conversationModel,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectConversationModel resource.
+   *
+   * @param {string} projectConversationModelName
+   *   A fully-qualified path representing project_conversation_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConversationModelName(
+    projectConversationModelName: string
+  ) {
+    return this.pathTemplates.projectConversationModelPathTemplate.match(
+      projectConversationModelName
+    ).project;
+  }
+
+  /**
+   * Parse the conversation_model from ProjectConversationModel resource.
+   *
+   * @param {string} projectConversationModelName
+   *   A fully-qualified path representing project_conversation_model resource.
+   * @returns {string} A string representing the conversation_model.
+   */
+  matchConversationModelFromProjectConversationModelName(
+    projectConversationModelName: string
+  ) {
+    return this.pathTemplates.projectConversationModelPathTemplate.match(
+      projectConversationModelName
+    ).conversation_model;
+  }
+
+  /**
+   * Return a fully-qualified projectConversationModelEvaluationsEvaluation resource name string.
+   *
+   * @param {string} project
+   * @param {string} conversation_model
+   * @returns {string} Resource name string.
+   */
+  projectConversationModelEvaluationsEvaluationPath(
+    project: string,
+    conversationModel: string
+  ) {
+    return this.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.render(
+      {
+        project: project,
+        conversation_model: conversationModel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectConversationModelEvaluationsEvaluation resource.
+   *
+   * @param {string} projectConversationModelEvaluationsEvaluationName
+   *   A fully-qualified path representing project_conversation_model_evaluations_evaluation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConversationModelEvaluationsEvaluationName(
+    projectConversationModelEvaluationsEvaluationName: string
+  ) {
+    return this.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.match(
+      projectConversationModelEvaluationsEvaluationName
+    ).project;
+  }
+
+  /**
+   * Parse the conversation_model from ProjectConversationModelEvaluationsEvaluation resource.
+   *
+   * @param {string} projectConversationModelEvaluationsEvaluationName
+   *   A fully-qualified path representing project_conversation_model_evaluations_evaluation resource.
+   * @returns {string} A string representing the conversation_model.
+   */
+  matchConversationModelFromProjectConversationModelEvaluationsEvaluationName(
+    projectConversationModelEvaluationsEvaluationName: string
+  ) {
+    return this.pathTemplates.projectConversationModelEvaluationsEvaluationPathTemplate.match(
+      projectConversationModelEvaluationsEvaluationName
+    ).conversation_model;
   }
 
   /**
@@ -3051,6 +3595,140 @@ export class ConversationProfilesClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationConversationModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation_model
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationModelPath(
+    project: string,
+    location: string,
+    conversationModel: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation_model: conversationModel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversationModel resource.
+   *
+   * @param {string} projectLocationConversationModelName
+   *   A fully-qualified path representing project_location_conversation_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationModelName(
+    projectLocationConversationModelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(
+      projectLocationConversationModelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversationModel resource.
+   *
+   * @param {string} projectLocationConversationModelName
+   *   A fully-qualified path representing project_location_conversation_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationModelName(
+    projectLocationConversationModelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(
+      projectLocationConversationModelName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation_model from ProjectLocationConversationModel resource.
+   *
+   * @param {string} projectLocationConversationModelName
+   *   A fully-qualified path representing project_location_conversation_model resource.
+   * @returns {string} A string representing the conversation_model.
+   */
+  matchConversationModelFromProjectLocationConversationModelName(
+    projectLocationConversationModelName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(
+      projectLocationConversationModelName
+    ).conversation_model;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversationModelEvaluationsEvaluation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation_model
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationModelEvaluationsEvaluationPath(
+    project: string,
+    location: string,
+    conversationModel: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation_model: conversationModel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversationModelEvaluationsEvaluation resource.
+   *
+   * @param {string} projectLocationConversationModelEvaluationsEvaluationName
+   *   A fully-qualified path representing project_location_conversation_model_evaluations_evaluation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationModelEvaluationsEvaluationName(
+    projectLocationConversationModelEvaluationsEvaluationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationsEvaluationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversationModelEvaluationsEvaluation resource.
+   *
+   * @param {string} projectLocationConversationModelEvaluationsEvaluationName
+   *   A fully-qualified path representing project_location_conversation_model_evaluations_evaluation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationModelEvaluationsEvaluationName(
+    projectLocationConversationModelEvaluationsEvaluationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationsEvaluationName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation_model from ProjectLocationConversationModelEvaluationsEvaluation resource.
+   *
+   * @param {string} projectLocationConversationModelEvaluationsEvaluationName
+   *   A fully-qualified path representing project_location_conversation_model_evaluations_evaluation resource.
+   * @returns {string} A string representing the conversation_model.
+   */
+  matchConversationModelFromProjectLocationConversationModelEvaluationsEvaluationName(
+    projectLocationConversationModelEvaluationsEvaluationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationsEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationsEvaluationName
+    ).conversation_model;
+  }
+
+  /**
    * Return a fully-qualified projectLocationConversationParticipant resource name string.
    *
    * @param {string} project
@@ -3363,6 +4041,7 @@ export class ConversationProfilesClient {
       return this.conversationProfilesStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();
