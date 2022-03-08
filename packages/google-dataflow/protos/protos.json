@@ -423,18 +423,18 @@
                       "requestType": "CreateJobRequest",
                       "responseType": "Job",
                       "options": {
-                        "(google.api.http).post": "/v1b3/projects/{project_id}/jobs",
+                        "(google.api.http).post": "/v1b3/projects/{project_id}/locations/{location}/jobs",
                         "(google.api.http).body": "job",
-                        "(google.api.http).additional_bindings.post": "/v1b3/projects/{project_id}/locations/{location}/jobs",
+                        "(google.api.http).additional_bindings.post": "/v1b3/projects/{project_id}/jobs",
                         "(google.api.http).additional_bindings.body": "job"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "post": "/v1b3/projects/{project_id}/jobs",
+                            "post": "/v1b3/projects/{project_id}/locations/{location}/jobs",
                             "body": "job",
                             "additional_bindings": {
-                              "post": "/v1b3/projects/{project_id}/locations/{location}/jobs",
+                              "post": "/v1b3/projects/{project_id}/jobs",
                               "body": "job"
                             }
                           }
@@ -445,15 +445,15 @@
                       "requestType": "GetJobRequest",
                       "responseType": "Job",
                       "options": {
-                        "(google.api.http).get": "/v1b3/projects/{project_id}/jobs/{job_id}",
-                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}"
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/jobs/{job_id}"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "get": "/v1b3/projects/{project_id}/jobs/{job_id}",
+                            "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}",
                             "additional_bindings": {
-                              "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}"
+                              "get": "/v1b3/projects/{project_id}/jobs/{job_id}"
                             }
                           }
                         }
@@ -463,18 +463,18 @@
                       "requestType": "UpdateJobRequest",
                       "responseType": "Job",
                       "options": {
-                        "(google.api.http).put": "/v1b3/projects/{project_id}/jobs/{job_id}",
+                        "(google.api.http).put": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}",
                         "(google.api.http).body": "job",
-                        "(google.api.http).additional_bindings.put": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}",
+                        "(google.api.http).additional_bindings.put": "/v1b3/projects/{project_id}/jobs/{job_id}",
                         "(google.api.http).additional_bindings.body": "job"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "put": "/v1b3/projects/{project_id}/jobs/{job_id}",
+                            "put": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}",
                             "body": "job",
                             "additional_bindings": {
-                              "put": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}",
+                              "put": "/v1b3/projects/{project_id}/jobs/{job_id}",
                               "body": "job"
                             }
                           }
@@ -485,15 +485,15 @@
                       "requestType": "ListJobsRequest",
                       "responseType": "ListJobsResponse",
                       "options": {
-                        "(google.api.http).get": "/v1b3/projects/{project_id}/jobs",
-                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/jobs"
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/locations/{location}/jobs",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/jobs"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "get": "/v1b3/projects/{project_id}/jobs",
+                            "get": "/v1b3/projects/{project_id}/locations/{location}/jobs",
                             "additional_bindings": {
-                              "get": "/v1b3/projects/{project_id}/locations/{location}/jobs"
+                              "get": "/v1b3/projects/{project_id}/jobs"
                             }
                           }
                         }
@@ -521,18 +521,18 @@
                       "requestType": "SnapshotJobRequest",
                       "responseType": "Snapshot",
                       "options": {
-                        "(google.api.http).post": "/v1b3/projects/{project_id}/jobs/{job_id}:snapshot",
+                        "(google.api.http).post": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}:snapshot",
                         "(google.api.http).body": "*",
-                        "(google.api.http).additional_bindings.post": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}:snapshot",
+                        "(google.api.http).additional_bindings.post": "/v1b3/projects/{project_id}/jobs/{job_id}:snapshot",
                         "(google.api.http).additional_bindings.body": "*"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "post": "/v1b3/projects/{project_id}/jobs/{job_id}:snapshot",
+                            "post": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}:snapshot",
                             "body": "*",
                             "additional_bindings": {
-                              "post": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}:snapshot",
+                              "post": "/v1b3/projects/{project_id}/jobs/{job_id}:snapshot",
                               "body": "*"
                             }
                           }
@@ -1282,15 +1282,15 @@
                       "requestType": "GetSnapshotRequest",
                       "responseType": "Snapshot",
                       "options": {
-                        "(google.api.http).get": "/v1b3/projects/{project_id}/snapshots/{snapshot_id}",
-                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/snapshots/{snapshot_id}"
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/locations/{location}/snapshots/{snapshot_id}",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/snapshots/{snapshot_id}"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "get": "/v1b3/projects/{project_id}/snapshots/{snapshot_id}",
+                            "get": "/v1b3/projects/{project_id}/locations/{location}/snapshots/{snapshot_id}",
                             "additional_bindings": {
-                              "get": "/v1b3/projects/{project_id}/locations/{location}/snapshots/{snapshot_id}"
+                              "get": "/v1b3/projects/{project_id}/snapshots/{snapshot_id}"
                             }
                           }
                         }
@@ -1300,15 +1300,15 @@
                       "requestType": "DeleteSnapshotRequest",
                       "responseType": "DeleteSnapshotResponse",
                       "options": {
-                        "(google.api.http).delete": "/v1b3/projects/{project_id}/snapshots",
-                        "(google.api.http).additional_bindings.delete": "/v1b3/projects/{project_id}/locations/{location}/snapshots/{snapshot_id}"
+                        "(google.api.http).delete": "/v1b3/projects/{project_id}/locations/{location}/snapshots/{snapshot_id}",
+                        "(google.api.http).additional_bindings.delete": "/v1b3/projects/{project_id}/snapshots"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "delete": "/v1b3/projects/{project_id}/snapshots",
+                            "delete": "/v1b3/projects/{project_id}/locations/{location}/snapshots/{snapshot_id}",
                             "additional_bindings": {
-                              "delete": "/v1b3/projects/{project_id}/locations/{location}/snapshots/{snapshot_id}"
+                              "delete": "/v1b3/projects/{project_id}/snapshots"
                             }
                           }
                         }
@@ -1318,19 +1318,19 @@
                       "requestType": "ListSnapshotsRequest",
                       "responseType": "ListSnapshotsResponse",
                       "options": {
-                        "(google.api.http).get": "/v1b3/projects/{project_id}/snapshots",
-                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/snapshots"
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/snapshots",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/snapshots"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "get": "/v1b3/projects/{project_id}/snapshots",
+                            "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/snapshots",
                             "additional_bindings": [
                               {
                                 "get": "/v1b3/projects/{project_id}/locations/{location}/snapshots"
                               },
                               {
-                                "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/snapshots"
+                                "get": "/v1b3/projects/{project_id}/snapshots"
                               }
                             ]
                           }
@@ -1480,15 +1480,15 @@
                       "requestType": "ListJobMessagesRequest",
                       "responseType": "ListJobMessagesResponse",
                       "options": {
-                        "(google.api.http).get": "/v1b3/projects/{project_id}/jobs/{job_id}/messages",
-                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/messages"
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/messages",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/jobs/{job_id}/messages"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "get": "/v1b3/projects/{project_id}/jobs/{job_id}/messages",
+                            "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/messages",
                             "additional_bindings": {
-                              "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/messages"
+                              "get": "/v1b3/projects/{project_id}/jobs/{job_id}/messages"
                             }
                           }
                         }
@@ -1660,15 +1660,15 @@
                       "requestType": "GetJobMetricsRequest",
                       "responseType": "JobMetrics",
                       "options": {
-                        "(google.api.http).get": "/v1b3/projects/{project_id}/jobs/{job_id}/metrics",
-                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/metrics"
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/metrics",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/jobs/{job_id}/metrics"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "get": "/v1b3/projects/{project_id}/jobs/{job_id}/metrics",
+                            "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/metrics",
                             "additional_bindings": {
-                              "get": "/v1b3/projects/{project_id}/locations/{location}/jobs/{job_id}/metrics"
+                              "get": "/v1b3/projects/{project_id}/jobs/{job_id}/metrics"
                             }
                           }
                         }
@@ -2260,18 +2260,18 @@
                       "requestType": "CreateJobFromTemplateRequest",
                       "responseType": "Job",
                       "options": {
-                        "(google.api.http).post": "/v1b3/projects/{project_id}/templates",
+                        "(google.api.http).post": "/v1b3/projects/{project_id}/locations/{location}/templates",
                         "(google.api.http).body": "*",
-                        "(google.api.http).additional_bindings.post": "/v1b3/projects/{project_id}/locations/{location}/templates",
+                        "(google.api.http).additional_bindings.post": "/v1b3/projects/{project_id}/templates",
                         "(google.api.http).additional_bindings.body": "*"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "post": "/v1b3/projects/{project_id}/templates",
+                            "post": "/v1b3/projects/{project_id}/locations/{location}/templates",
                             "body": "*",
                             "additional_bindings": {
-                              "post": "/v1b3/projects/{project_id}/locations/{location}/templates",
+                              "post": "/v1b3/projects/{project_id}/templates",
                               "body": "*"
                             }
                           }
@@ -2282,18 +2282,18 @@
                       "requestType": "LaunchTemplateRequest",
                       "responseType": "LaunchTemplateResponse",
                       "options": {
-                        "(google.api.http).post": "/v1b3/projects/{project_id}/templates:launch",
+                        "(google.api.http).post": "/v1b3/projects/{project_id}/locations/{location}/templates:launch",
                         "(google.api.http).body": "launch_parameters",
-                        "(google.api.http).additional_bindings.post": "/v1b3/projects/{project_id}/locations/{location}/templates:launch",
+                        "(google.api.http).additional_bindings.post": "/v1b3/projects/{project_id}/templates:launch",
                         "(google.api.http).additional_bindings.body": "launch_parameters"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "post": "/v1b3/projects/{project_id}/templates:launch",
+                            "post": "/v1b3/projects/{project_id}/locations/{location}/templates:launch",
                             "body": "launch_parameters",
                             "additional_bindings": {
-                              "post": "/v1b3/projects/{project_id}/locations/{location}/templates:launch",
+                              "post": "/v1b3/projects/{project_id}/templates:launch",
                               "body": "launch_parameters"
                             }
                           }
@@ -2304,15 +2304,15 @@
                       "requestType": "GetTemplateRequest",
                       "responseType": "GetTemplateResponse",
                       "options": {
-                        "(google.api.http).get": "/v1b3/projects/{project_id}/templates:get",
-                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/locations/{location}/templates:get"
+                        "(google.api.http).get": "/v1b3/projects/{project_id}/locations/{location}/templates:get",
+                        "(google.api.http).additional_bindings.get": "/v1b3/projects/{project_id}/templates:get"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "get": "/v1b3/projects/{project_id}/templates:get",
+                            "get": "/v1b3/projects/{project_id}/locations/{location}/templates:get",
                             "additional_bindings": {
-                              "get": "/v1b3/projects/{project_id}/locations/{location}/templates:get"
+                              "get": "/v1b3/projects/{project_id}/templates:get"
                             }
                           }
                         }
