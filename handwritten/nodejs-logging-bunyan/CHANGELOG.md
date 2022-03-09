@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+### [3.2.2](https://github.com/googleapis/nodejs-logging-bunyan/compare/v3.2.1...v3.2.2) (2022-03-09)
+
+
+### Bug Fixes
+
+* Use defaultCallback in LoggingBunyan class ([#601](https://github.com/googleapis/nodejs-logging-bunyan/issues/601)) ([f4c01ab](https://github.com/googleapis/nodejs-logging-bunyan/commit/f4c01abe9ee46d89494caa03618500f3a11ee78a))
+
 ### [3.2.1](https://github.com/googleapis/nodejs-logging-bunyan/compare/v3.2.0...v3.2.1) (2022-03-02)
 
 
