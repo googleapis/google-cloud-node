@@ -24,6 +24,8 @@ import {Logging, detectServiceContext} from '@google-cloud/logging';
 
 import * as types from './types/core';
 
+import {ApiResponseCallback} from '@google-cloud/logging/build/src/log';
+
 // Map of Stackdriver logging levels.
 const BUNYAN_TO_STACKDRIVER: Map<number, string> = new Map([
   [60, 'CRITICAL'],
@@ -157,6 +159,7 @@ export class LoggingBunyan extends Writable {
   private logName: string;
   private resource: types.MonitoredResource | undefined;
   private serviceContext?: types.ServiceContext;
+  private defaultCallback?: ApiResponseCallback;
   stackdriverLog: types.StackdriverLog; // TODO: add type for @google-cloud/logging
   constructor(options?: types.Options) {
     options = options || {};
@@ -164,6 +167,7 @@ export class LoggingBunyan extends Writable {
     this.logName = options.logName || 'bunyan_log';
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
+    this.defaultCallback = options.defaultCallback;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.stackdriverLog = new Logging(options as any).log(this.logName, {
       removeCircular: true,
@@ -171,7 +175,6 @@ export class LoggingBunyan extends Writable {
       // 250,000 has been chosen to keep us comfortably within the
       // 256,000 limit.
       maxEntrySize: options.maxEntrySize || 250000,
-      defaultWriteDeleteCallback: options.defaultCallback,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }) as any;
 
@@ -347,7 +350,7 @@ export class LoggingBunyan extends Writable {
    */
   _write(record: types.BunyanLogRecord, encoding: string, callback: Function) {
     const entry = this.formatEntry_(record);
-    this.stackdriverLog.write(entry, callback);
+    this.stackdriverLog.write(entry, this.defaultCallback ?? callback);
   }
 
   /**
@@ -373,7 +376,7 @@ export class LoggingBunyan extends Writable {
       }
     );
 
-    this.stackdriverLog.write(entries, callback);
+    this.stackdriverLog.write(entries, this.defaultCallback ?? callback);
   }
 }
 
