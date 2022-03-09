@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [4.1.3](https://github.com/googleapis/nodejs-logging-winston/compare/v4.1.2...v4.1.3) (2022-03-09)
+
+
+### Bug Fixes
+
+* Use defaultCallback in LoggingCommon class ([#672](https://github.com/googleapis/nodejs-logging-winston/issues/672)) ([4bc7baa](https://github.com/googleapis/nodejs-logging-winston/commit/4bc7baaa2dcc5d67e2c524f21bfe0c80ef99e8c4))
+
 ### [4.1.2](https://github.com/googleapis/nodejs-logging-winston/compare/v4.1.1...v4.1.2) (2022-02-16)
 
 
