@@ -32,6 +32,8 @@ describe('Stackdriver Trace Log Correlation', () => {
   let setCurrentContextId: (id: string) => void;
   // The Stackdriver Logging Winston transport library.
   let loggingWinstonLib: typeof loggingWinstonLibTypes;
+  // The flag indicating if callback was called or not
+  let isCallbackCalled: boolean;
 
   class FakeLogging {
     constructor() {}
@@ -63,6 +65,7 @@ describe('Stackdriver Trace Log Correlation', () => {
 
   beforeEach(() => {
     seenContextIds.length = 0;
+    isCallbackCalled = false;
     setCurrentContextId = (() => {
       let currentContextId: string;
       global._google_trace_agent = {
@@ -124,6 +127,22 @@ describe('Stackdriver Trace Log Correlation', () => {
       assert.throws(() => {
         assert.deepStrictEqual(seenContextIds, ['1', '2']);
       });
+      done();
+    });
+  });
+
+  it('Calls default callback when present', done => {
+    const transport = new loggingWinstonLib.LoggingWinston({
+      defaultCallback: () => {
+        isCallbackCalled = true;
+      },
+    });
+    const logger = winston.createLogger({
+      transports: [transport],
+    });
+    logger.log({level: 'info', message: 'hello'});
+    setImmediate(() => {
+      assert.strictEqual(isCallbackCalled, true);
       done();
     });
   });
