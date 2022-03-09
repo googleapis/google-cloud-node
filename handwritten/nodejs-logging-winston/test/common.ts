@@ -158,20 +158,6 @@ describe('logging-common', () => {
       assert.deepStrictEqual(fakeLogOptions_, {
         removeCircular: true,
         maxEntrySize: 250000,
-        defaultWriteDeleteCallback: undefined,
-      });
-    });
-
-    it('should set default callback', () => {
-      const optionsWithDefaultCallback = Object.assign({}, OPTIONS, {
-        defaultCallback: () => {},
-      });
-      new loggingCommonLib.LoggingCommon(optionsWithDefaultCallback);
-
-      assert.deepStrictEqual(fakeLogOptions_, {
-        removeCircular: true,
-        maxEntrySize: 250000,
-        defaultWriteDeleteCallback: optionsWithDefaultCallback.defaultCallback,
       });
     });
 

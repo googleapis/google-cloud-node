@@ -115,6 +115,7 @@ export class LoggingCommon {
   private serviceContext: ServiceContext | undefined;
   private prefix: string | undefined;
   private labels: object | undefined;
+  private defaultCallback?: Callback;
   // LOGGING_TRACE_KEY is Cloud Logging specific and has the format:
   // logging.googleapis.com/trace
   static readonly LOGGING_TRACE_KEY = LOGGING_TRACE_KEY;
@@ -139,13 +140,12 @@ export class LoggingCommon {
       // 250,000 has been chosen to keep us comfortably within the
       // 256,000 limit.
       maxEntrySize: options.maxEntrySize || 250000,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      defaultWriteDeleteCallback: options.defaultCallback,
     });
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
     this.prefix = options.prefix;
     this.labels = options.labels;
+    this.defaultCallback = options.defaultCallback;
   }
 
   log(
@@ -257,7 +257,10 @@ export class LoggingCommon {
     }
 
     const entry = this.stackdriverLog.entry(entryMetadata, data);
-    this.stackdriverLog[stackdriverLevel](entry, callback);
+    this.stackdriverLog[stackdriverLevel](
+      entry,
+      this.defaultCallback ?? callback
+    );
   }
 }
 
