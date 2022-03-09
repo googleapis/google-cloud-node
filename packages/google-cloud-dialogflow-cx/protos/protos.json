@@ -3517,6 +3517,13 @@
                               "options": {
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
                               }
+                            },
+                            "page": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Page"
+                              }
                             }
                           }
                         },
