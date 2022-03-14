@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [3.6.1](https://github.com/googleapis/nodejs-grafeas/compare/v3.6.0...v3.6.1) (2022-03-14)
+
+
+### Bug Fixes
+
+* Make the library compatible with the latest version of the vulnerability occurrence proto ([4268b06](https://github.com/googleapis/nodejs-grafeas/commit/4268b06cd0e34faaaeb7e806fbb22d8906c653de))
+
 ## [3.6.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.5.0...v3.6.0) (2021-11-03)
 
 
