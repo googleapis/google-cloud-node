@@ -1,0 +1,58 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Cloud Build config file for samples/system tests.
+#
+# To run samples test use the following command:
+# gcloud builds submit . \
+#   --config ci/cloudbuild/cloudbuild.yaml
+#
+# To run system test use the following command:
+# gcloud builds submit . \
+#   --config ci/cloudbuild/cloudbuild.yaml \
+#   --substitutions="_TEST_NAME=system"
+
+options:
+  dynamic_substitutions: true
+  env: [
+    'TEST_NAME=${_TEST_NAME}',
+    'PROJECT_ID=${PROJECT_ID}',
+    'GCLOUD_PROJECT=${PROJECT_ID}',
+    'GOOGLE_CLOUD_PROJECT=${PROJECT_ID}',
+    'BUILD_ID=${BUILD_ID}',
+    'BRANCH_NAME=${BRANCH_NAME}',
+    'COMMIT_SHA=${COMMIT_SHA}',
+    'PR_NUMBER=${_PR_NUMBER}',
+    'REPO_NAME={$REPO_NAME}',
+    'TRIGGER_TYPE=${_TRIGGER_TYPE}',
+    'HOME=/workspace',
+    'NPM_CONFIG_PREFIX=/workspace/.npm-global'
+  ]
+
+substitutions:
+  _TRIGGER_TYPE: 'manual'
+  _TRIGGER_SOURCE: '${_PR_NUMBER:-main}'
+  _LOGS_BUCKET: 'nodejs-libs-publiclogs'
+  _TEST_NAME: 'samples'
+  _PR_NUMBER: 'manual'
+
+timeout: 12000s
+
+logsBucket: 'gs://${_LOGS_BUCKET}/logs/nodejs-libs/${REPO_NAME}/${_TRIGGER_SOURCE}/${COMMIT_SHA}/${_TEST_NAME}'
+
+serviceAccount: 'projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com'
+
+steps:
+  - name: 'node:14'
+    entrypoint: 'ci/cloudbuild/test.sh'
