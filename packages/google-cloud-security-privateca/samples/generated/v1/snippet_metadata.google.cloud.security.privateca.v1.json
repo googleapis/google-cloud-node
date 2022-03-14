@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 71,
+          "end": 77,
           "type": "FULL"
         }
       ],
@@ -665,6 +665,10 @@
           },
           {
             "name": "ignore_active_certificates",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "skip_grace_period",
             "type": "TYPE_BOOL"
           }
         ],
