@@ -92,6 +92,24 @@ export namespace google {
                     type SynthesizeSpeechCallback = (error: (Error|null), response?: google.cloud.texttospeech.v1.SynthesizeSpeechResponse) => void;
                 }
 
+                /** SsmlVoiceGender enum. */
+                enum SsmlVoiceGender {
+                    SSML_VOICE_GENDER_UNSPECIFIED = 0,
+                    MALE = 1,
+                    FEMALE = 2,
+                    NEUTRAL = 3
+                }
+
+                /** AudioEncoding enum. */
+                enum AudioEncoding {
+                    AUDIO_ENCODING_UNSPECIFIED = 0,
+                    LINEAR16 = 1,
+                    MP3 = 2,
+                    OGG_OPUS = 3,
+                    MULAW = 5,
+                    ALAW = 6
+                }
+
                 /** Properties of a ListVoicesRequest. */
                 interface IListVoicesRequest {
 
@@ -180,24 +198,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** SsmlVoiceGender enum. */
-                enum SsmlVoiceGender {
-                    SSML_VOICE_GENDER_UNSPECIFIED = 0,
-                    MALE = 1,
-                    FEMALE = 2,
-                    NEUTRAL = 3
-                }
-
-                /** AudioEncoding enum. */
-                enum AudioEncoding {
-                    AUDIO_ENCODING_UNSPECIFIED = 0,
-                    LINEAR16 = 1,
-                    MP3 = 2,
-                    OGG_OPUS = 3,
-                    MULAW = 5,
-                    ALAW = 6
                 }
 
                 /** Properties of a ListVoicesResponse. */
@@ -610,6 +610,9 @@ export namespace google {
 
                     /** VoiceSelectionParams ssmlGender */
                     ssmlGender?: (google.cloud.texttospeech.v1.SsmlVoiceGender|keyof typeof google.cloud.texttospeech.v1.SsmlVoiceGender|null);
+
+                    /** VoiceSelectionParams customVoice */
+                    customVoice?: (google.cloud.texttospeech.v1.ICustomVoiceParams|null);
                 }
 
                 /** Represents a VoiceSelectionParams. */
@@ -629,6 +632,9 @@ export namespace google {
 
                     /** VoiceSelectionParams ssmlGender. */
                     public ssmlGender: (google.cloud.texttospeech.v1.SsmlVoiceGender|keyof typeof google.cloud.texttospeech.v1.SsmlVoiceGender);
+
+                    /** VoiceSelectionParams customVoice. */
+                    public customVoice?: (google.cloud.texttospeech.v1.ICustomVoiceParams|null);
 
                     /**
                      * Creates a new VoiceSelectionParams instance using the specified properties.
@@ -819,6 +825,112 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CustomVoiceParams. */
+                interface ICustomVoiceParams {
+
+                    /** CustomVoiceParams model */
+                    model?: (string|null);
+
+                    /** CustomVoiceParams reportedUsage */
+                    reportedUsage?: (google.cloud.texttospeech.v1.CustomVoiceParams.ReportedUsage|keyof typeof google.cloud.texttospeech.v1.CustomVoiceParams.ReportedUsage|null);
+                }
+
+                /** Represents a CustomVoiceParams. */
+                class CustomVoiceParams implements ICustomVoiceParams {
+
+                    /**
+                     * Constructs a new CustomVoiceParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.texttospeech.v1.ICustomVoiceParams);
+
+                    /** CustomVoiceParams model. */
+                    public model: string;
+
+                    /** CustomVoiceParams reportedUsage. */
+                    public reportedUsage: (google.cloud.texttospeech.v1.CustomVoiceParams.ReportedUsage|keyof typeof google.cloud.texttospeech.v1.CustomVoiceParams.ReportedUsage);
+
+                    /**
+                     * Creates a new CustomVoiceParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomVoiceParams instance
+                     */
+                    public static create(properties?: google.cloud.texttospeech.v1.ICustomVoiceParams): google.cloud.texttospeech.v1.CustomVoiceParams;
+
+                    /**
+                     * Encodes the specified CustomVoiceParams message. Does not implicitly {@link google.cloud.texttospeech.v1.CustomVoiceParams.verify|verify} messages.
+                     * @param message CustomVoiceParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.texttospeech.v1.ICustomVoiceParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomVoiceParams message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.CustomVoiceParams.verify|verify} messages.
+                     * @param message CustomVoiceParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.texttospeech.v1.ICustomVoiceParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomVoiceParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomVoiceParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1.CustomVoiceParams;
+
+                    /**
+                     * Decodes a CustomVoiceParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomVoiceParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1.CustomVoiceParams;
+
+                    /**
+                     * Verifies a CustomVoiceParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomVoiceParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomVoiceParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1.CustomVoiceParams;
+
+                    /**
+                     * Creates a plain object from a CustomVoiceParams message. Also converts values to other types if specified.
+                     * @param message CustomVoiceParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.texttospeech.v1.CustomVoiceParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomVoiceParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace CustomVoiceParams {
+
+                    /** ReportedUsage enum. */
+                    enum ReportedUsage {
+                        REPORTED_USAGE_UNSPECIFIED = 0,
+                        REALTIME = 1,
+                        OFFLINE = 2
+                    }
                 }
 
                 /** Properties of a SynthesizeSpeechResponse. */

@@ -167,6 +167,46 @@
                         return TextToSpeech;
                     })();
     
+                    /**
+                     * SsmlVoiceGender enum.
+                     * @name google.cloud.texttospeech.v1.SsmlVoiceGender
+                     * @enum {number}
+                     * @property {number} SSML_VOICE_GENDER_UNSPECIFIED=0 SSML_VOICE_GENDER_UNSPECIFIED value
+                     * @property {number} MALE=1 MALE value
+                     * @property {number} FEMALE=2 FEMALE value
+                     * @property {number} NEUTRAL=3 NEUTRAL value
+                     */
+                    v1.SsmlVoiceGender = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SSML_VOICE_GENDER_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MALE"] = 1;
+                        values[valuesById[2] = "FEMALE"] = 2;
+                        values[valuesById[3] = "NEUTRAL"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * AudioEncoding enum.
+                     * @name google.cloud.texttospeech.v1.AudioEncoding
+                     * @enum {number}
+                     * @property {number} AUDIO_ENCODING_UNSPECIFIED=0 AUDIO_ENCODING_UNSPECIFIED value
+                     * @property {number} LINEAR16=1 LINEAR16 value
+                     * @property {number} MP3=2 MP3 value
+                     * @property {number} OGG_OPUS=3 OGG_OPUS value
+                     * @property {number} MULAW=5 MULAW value
+                     * @property {number} ALAW=6 ALAW value
+                     */
+                    v1.AudioEncoding = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "AUDIO_ENCODING_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "LINEAR16"] = 1;
+                        values[valuesById[2] = "MP3"] = 2;
+                        values[valuesById[3] = "OGG_OPUS"] = 3;
+                        values[valuesById[5] = "MULAW"] = 5;
+                        values[valuesById[6] = "ALAW"] = 6;
+                        return values;
+                    })();
+    
                     v1.ListVoicesRequest = (function() {
     
                         /**
@@ -352,46 +392,6 @@
                         };
     
                         return ListVoicesRequest;
-                    })();
-    
-                    /**
-                     * SsmlVoiceGender enum.
-                     * @name google.cloud.texttospeech.v1.SsmlVoiceGender
-                     * @enum {number}
-                     * @property {number} SSML_VOICE_GENDER_UNSPECIFIED=0 SSML_VOICE_GENDER_UNSPECIFIED value
-                     * @property {number} MALE=1 MALE value
-                     * @property {number} FEMALE=2 FEMALE value
-                     * @property {number} NEUTRAL=3 NEUTRAL value
-                     */
-                    v1.SsmlVoiceGender = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "SSML_VOICE_GENDER_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "MALE"] = 1;
-                        values[valuesById[2] = "FEMALE"] = 2;
-                        values[valuesById[3] = "NEUTRAL"] = 3;
-                        return values;
-                    })();
-    
-                    /**
-                     * AudioEncoding enum.
-                     * @name google.cloud.texttospeech.v1.AudioEncoding
-                     * @enum {number}
-                     * @property {number} AUDIO_ENCODING_UNSPECIFIED=0 AUDIO_ENCODING_UNSPECIFIED value
-                     * @property {number} LINEAR16=1 LINEAR16 value
-                     * @property {number} MP3=2 MP3 value
-                     * @property {number} OGG_OPUS=3 OGG_OPUS value
-                     * @property {number} MULAW=5 MULAW value
-                     * @property {number} ALAW=6 ALAW value
-                     */
-                    v1.AudioEncoding = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "AUDIO_ENCODING_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "LINEAR16"] = 1;
-                        values[valuesById[2] = "MP3"] = 2;
-                        values[valuesById[3] = "OGG_OPUS"] = 3;
-                        values[valuesById[5] = "MULAW"] = 5;
-                        values[valuesById[6] = "ALAW"] = 6;
-                        return values;
                     })();
     
                     v1.ListVoicesResponse = (function() {
@@ -1385,6 +1385,7 @@
                          * @property {string|null} [languageCode] VoiceSelectionParams languageCode
                          * @property {string|null} [name] VoiceSelectionParams name
                          * @property {google.cloud.texttospeech.v1.SsmlVoiceGender|null} [ssmlGender] VoiceSelectionParams ssmlGender
+                         * @property {google.cloud.texttospeech.v1.ICustomVoiceParams|null} [customVoice] VoiceSelectionParams customVoice
                          */
     
                         /**
@@ -1427,6 +1428,14 @@
                         VoiceSelectionParams.prototype.ssmlGender = 0;
     
                         /**
+                         * VoiceSelectionParams customVoice.
+                         * @member {google.cloud.texttospeech.v1.ICustomVoiceParams|null|undefined} customVoice
+                         * @memberof google.cloud.texttospeech.v1.VoiceSelectionParams
+                         * @instance
+                         */
+                        VoiceSelectionParams.prototype.customVoice = null;
+    
+                        /**
                          * Creates a new VoiceSelectionParams instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.texttospeech.v1.VoiceSelectionParams
@@ -1456,6 +1465,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
                             if (message.ssmlGender != null && Object.hasOwnProperty.call(message, "ssmlGender"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.ssmlGender);
+                            if (message.customVoice != null && Object.hasOwnProperty.call(message, "customVoice"))
+                                $root.google.cloud.texttospeech.v1.CustomVoiceParams.encode(message.customVoice, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -1498,6 +1509,9 @@
                                     break;
                                 case 3:
                                     message.ssmlGender = reader.int32();
+                                    break;
+                                case 4:
+                                    message.customVoice = $root.google.cloud.texttospeech.v1.CustomVoiceParams.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1550,6 +1564,11 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.customVoice != null && message.hasOwnProperty("customVoice")) {
+                                var error = $root.google.cloud.texttospeech.v1.CustomVoiceParams.verify(message.customVoice);
+                                if (error)
+                                    return "customVoice." + error;
+                            }
                             return null;
                         };
     
@@ -1587,6 +1606,11 @@
                                 message.ssmlGender = 3;
                                 break;
                             }
+                            if (object.customVoice != null) {
+                                if (typeof object.customVoice !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1.VoiceSelectionParams.customVoice: object expected");
+                                message.customVoice = $root.google.cloud.texttospeech.v1.CustomVoiceParams.fromObject(object.customVoice);
+                            }
                             return message;
                         };
     
@@ -1607,6 +1631,7 @@
                                 object.languageCode = "";
                                 object.name = "";
                                 object.ssmlGender = options.enums === String ? "SSML_VOICE_GENDER_UNSPECIFIED" : 0;
+                                object.customVoice = null;
                             }
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
@@ -1614,6 +1639,8 @@
                                 object.name = message.name;
                             if (message.ssmlGender != null && message.hasOwnProperty("ssmlGender"))
                                 object.ssmlGender = options.enums === String ? $root.google.cloud.texttospeech.v1.SsmlVoiceGender[message.ssmlGender] : message.ssmlGender;
+                            if (message.customVoice != null && message.hasOwnProperty("customVoice"))
+                                object.customVoice = $root.google.cloud.texttospeech.v1.CustomVoiceParams.toObject(message.customVoice, options);
                             return object;
                         };
     
@@ -1977,6 +2004,250 @@
                         };
     
                         return AudioConfig;
+                    })();
+    
+                    v1.CustomVoiceParams = (function() {
+    
+                        /**
+                         * Properties of a CustomVoiceParams.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @interface ICustomVoiceParams
+                         * @property {string|null} [model] CustomVoiceParams model
+                         * @property {google.cloud.texttospeech.v1.CustomVoiceParams.ReportedUsage|null} [reportedUsage] CustomVoiceParams reportedUsage
+                         */
+    
+                        /**
+                         * Constructs a new CustomVoiceParams.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @classdesc Represents a CustomVoiceParams.
+                         * @implements ICustomVoiceParams
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1.ICustomVoiceParams=} [properties] Properties to set
+                         */
+                        function CustomVoiceParams(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomVoiceParams model.
+                         * @member {string} model
+                         * @memberof google.cloud.texttospeech.v1.CustomVoiceParams
+                         * @instance
+                         */
+                        CustomVoiceParams.prototype.model = "";
+    
+                        /**
+                         * CustomVoiceParams reportedUsage.
+                         * @member {google.cloud.texttospeech.v1.CustomVoiceParams.ReportedUsage} reportedUsage
+                         * @memberof google.cloud.texttospeech.v1.CustomVoiceParams
+                         * @instance
+                         */
+                        CustomVoiceParams.prototype.reportedUsage = 0;
+    
+                        /**
+                         * Creates a new CustomVoiceParams instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1.CustomVoiceParams
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.ICustomVoiceParams=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1.CustomVoiceParams} CustomVoiceParams instance
+                         */
+                        CustomVoiceParams.create = function create(properties) {
+                            return new CustomVoiceParams(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomVoiceParams message. Does not implicitly {@link google.cloud.texttospeech.v1.CustomVoiceParams.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1.CustomVoiceParams
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.ICustomVoiceParams} message CustomVoiceParams message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomVoiceParams.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.model);
+                            if (message.reportedUsage != null && Object.hasOwnProperty.call(message, "reportedUsage"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.reportedUsage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomVoiceParams message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.CustomVoiceParams.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1.CustomVoiceParams
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.ICustomVoiceParams} message CustomVoiceParams message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomVoiceParams.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomVoiceParams message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1.CustomVoiceParams
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1.CustomVoiceParams} CustomVoiceParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomVoiceParams.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1.CustomVoiceParams();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.model = reader.string();
+                                    break;
+                                case 3:
+                                    message.reportedUsage = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomVoiceParams message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1.CustomVoiceParams
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1.CustomVoiceParams} CustomVoiceParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomVoiceParams.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomVoiceParams message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1.CustomVoiceParams
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomVoiceParams.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                if (!$util.isString(message.model))
+                                    return "model: string expected";
+                            if (message.reportedUsage != null && message.hasOwnProperty("reportedUsage"))
+                                switch (message.reportedUsage) {
+                                default:
+                                    return "reportedUsage: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomVoiceParams message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1.CustomVoiceParams
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1.CustomVoiceParams} CustomVoiceParams
+                         */
+                        CustomVoiceParams.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1.CustomVoiceParams)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1.CustomVoiceParams();
+                            if (object.model != null)
+                                message.model = String(object.model);
+                            switch (object.reportedUsage) {
+                            case "REPORTED_USAGE_UNSPECIFIED":
+                            case 0:
+                                message.reportedUsage = 0;
+                                break;
+                            case "REALTIME":
+                            case 1:
+                                message.reportedUsage = 1;
+                                break;
+                            case "OFFLINE":
+                            case 2:
+                                message.reportedUsage = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomVoiceParams message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1.CustomVoiceParams
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.CustomVoiceParams} message CustomVoiceParams
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomVoiceParams.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.model = "";
+                                object.reportedUsage = options.enums === String ? "REPORTED_USAGE_UNSPECIFIED" : 0;
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = message.model;
+                            if (message.reportedUsage != null && message.hasOwnProperty("reportedUsage"))
+                                object.reportedUsage = options.enums === String ? $root.google.cloud.texttospeech.v1.CustomVoiceParams.ReportedUsage[message.reportedUsage] : message.reportedUsage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomVoiceParams to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1.CustomVoiceParams
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomVoiceParams.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * ReportedUsage enum.
+                         * @name google.cloud.texttospeech.v1.CustomVoiceParams.ReportedUsage
+                         * @enum {number}
+                         * @property {number} REPORTED_USAGE_UNSPECIFIED=0 REPORTED_USAGE_UNSPECIFIED value
+                         * @property {number} REALTIME=1 REALTIME value
+                         * @property {number} OFFLINE=2 OFFLINE value
+                         */
+                        CustomVoiceParams.ReportedUsage = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REPORTED_USAGE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "REALTIME"] = 1;
+                            values[valuesById[2] = "OFFLINE"] = 2;
+                            return values;
+                        })();
+    
+                        return CustomVoiceParams;
                     })();
     
                     v1.SynthesizeSpeechResponse = (function() {

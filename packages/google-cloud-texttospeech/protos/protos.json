@@ -66,17 +66,6 @@
                         }
                       }
                     },
-                    "ListVoicesRequest": {
-                      "fields": {
-                        "languageCode": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
                     "SsmlVoiceGender": {
                       "values": {
                         "SSML_VOICE_GENDER_UNSPECIFIED": 0,
@@ -93,6 +82,17 @@
                         "OGG_OPUS": 3,
                         "MULAW": 5,
                         "ALAW": 6
+                      }
+                    },
+                    "ListVoicesRequest": {
+                      "fields": {
+                        "languageCode": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
                       }
                     },
                     "ListVoicesResponse": {
@@ -186,6 +186,10 @@
                         "ssmlGender": {
                           "type": "SsmlVoiceGender",
                           "id": 3
+                        },
+                        "customVoice": {
+                          "type": "CustomVoiceParams",
+                          "id": 4
                         }
                       }
                     },
@@ -232,6 +236,34 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CustomVoiceParams": {
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "automl.googleapis.com/Model"
+                          }
+                        },
+                        "reportedUsage": {
+                          "type": "ReportedUsage",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ReportedUsage": {
+                          "values": {
+                            "REPORTED_USAGE_UNSPECIFIED": 0,
+                            "REALTIME": 1,
+                            "OFFLINE": 2
                           }
                         }
                       }
