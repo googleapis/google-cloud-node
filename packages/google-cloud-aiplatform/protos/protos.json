@@ -3457,6 +3457,96 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "monitoringConfig": {
+                          "type": "FeaturestoreMonitoringConfig",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FeaturestoreMonitoringConfig": {
+                      "fields": {
+                        "snapshotAnalysis": {
+                          "type": "SnapshotAnalysis",
+                          "id": 1
+                        },
+                        "importFeaturesAnalysis": {
+                          "type": "ImportFeaturesAnalysis",
+                          "id": 2
+                        },
+                        "numericalThresholdConfig": {
+                          "type": "ThresholdConfig",
+                          "id": 3
+                        },
+                        "categoricalThresholdConfig": {
+                          "type": "ThresholdConfig",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "SnapshotAnalysis": {
+                          "fields": {
+                            "disabled": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "monitoringIntervalDays": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "stalenessDays": {
+                              "type": "int32",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "ImportFeaturesAnalysis": {
+                          "fields": {
+                            "state": {
+                              "type": "State",
+                              "id": 1
+                            },
+                            "anomalyDetectionBaseline": {
+                              "type": "Baseline",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "DEFAULT": 1,
+                                "ENABLED": 2,
+                                "DISABLED": 3
+                              }
+                            },
+                            "Baseline": {
+                              "values": {
+                                "BASELINE_UNSPECIFIED": 0,
+                                "LATEST_STATS": 1,
+                                "MOST_RECENT_SNAPSHOT_STATS": 2,
+                                "PREVIOUS_IMPORT_FEATURES_STATS": 3
+                              }
+                            }
+                          }
+                        },
+                        "ThresholdConfig": {
+                          "oneofs": {
+                            "threshold": {
+                              "oneof": [
+                                "value"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "value": {
+                              "type": "double",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
@@ -3632,9 +3722,51 @@
                         "etag": {
                           "type": "string",
                           "id": 7
+                        },
+                        "disableMonitoring": {
+                          "type": "bool",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "monitoringStatsAnomalies": {
+                          "rule": "repeated",
+                          "type": "MonitoringStatsAnomaly",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
+                        "MonitoringStatsAnomaly": {
+                          "fields": {
+                            "objective": {
+                              "type": "Objective",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "featureStatsAnomaly": {
+                              "type": "FeatureStatsAnomaly",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Objective": {
+                              "values": {
+                                "OBJECTIVE_UNSPECIFIED": 0,
+                                "IMPORT_FEATURE_ANALYSIS": 1,
+                                "SNAPSHOT_ANALYSIS": 2
+                              }
+                            }
+                          }
+                        },
                         "ValueType": {
                           "values": {
                             "VALUE_TYPE_UNSPECIFIED": 0,
@@ -4749,6 +4881,10 @@
                         "workerCount": {
                           "type": "int32",
                           "id": 11
+                        },
+                        "disableIngestionAnalysis": {
+                          "type": "bool",
+                          "id": 12
                         }
                       },
                       "nested": {
@@ -20666,6 +20802,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "disableMonitoring": {
+                          "type": "bool",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "monitoringStats": {
                           "rule": "repeated",
                           "type": "FeatureStatsAnomaly",
@@ -20673,9 +20816,44 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "monitoringStatsAnomalies": {
+                          "rule": "repeated",
+                          "type": "MonitoringStatsAnomaly",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
+                        "MonitoringStatsAnomaly": {
+                          "fields": {
+                            "objective": {
+                              "type": "Objective",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "featureStatsAnomaly": {
+                              "type": "FeatureStatsAnomaly",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Objective": {
+                              "values": {
+                                "OBJECTIVE_UNSPECIFIED": 0,
+                                "IMPORT_FEATURE_ANALYSIS": 1,
+                                "SNAPSHOT_ANALYSIS": 2
+                              }
+                            }
+                          }
+                        },
                         "ValueType": {
                           "values": {
                             "VALUE_TYPE_UNSPECIFIED": 0,
@@ -20697,6 +20875,18 @@
                         "snapshotAnalysis": {
                           "type": "SnapshotAnalysis",
                           "id": 1
+                        },
+                        "importFeaturesAnalysis": {
+                          "type": "ImportFeaturesAnalysis",
+                          "id": 2
+                        },
+                        "numericalThresholdConfig": {
+                          "type": "ThresholdConfig",
+                          "id": 3
+                        },
+                        "categoricalThresholdConfig": {
+                          "type": "ThresholdConfig",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -20716,6 +20906,55 @@
                             "monitoringIntervalDays": {
                               "type": "int32",
                               "id": 3
+                            },
+                            "stalenessDays": {
+                              "type": "int32",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "ImportFeaturesAnalysis": {
+                          "fields": {
+                            "state": {
+                              "type": "State",
+                              "id": 1
+                            },
+                            "anomalyDetectionBaseline": {
+                              "type": "Baseline",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "DEFAULT": 1,
+                                "ENABLED": 2,
+                                "DISABLED": 3
+                              }
+                            },
+                            "Baseline": {
+                              "values": {
+                                "BASELINE_UNSPECIFIED": 0,
+                                "LATEST_STATS": 1,
+                                "MOST_RECENT_SNAPSHOT_STATS": 2,
+                                "PREVIOUS_IMPORT_FEATURES_STATS": 3
+                              }
+                            }
+                          }
+                        },
+                        "ThresholdConfig": {
+                          "oneofs": {
+                            "threshold": {
+                              "oneof": [
+                                "value"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "value": {
+                              "type": "double",
+                              "id": 1
                             }
                           }
                         }
@@ -21931,6 +22170,10 @@
                         "workerCount": {
                           "type": "int32",
                           "id": 11
+                        },
+                        "disableIngestionAnalysis": {
+                          "type": "bool",
+                          "id": 12
                         }
                       },
                       "nested": {

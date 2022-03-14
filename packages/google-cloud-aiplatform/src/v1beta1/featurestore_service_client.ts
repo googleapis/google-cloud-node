@@ -808,7 +808,12 @@ export class FeaturestoreServiceClient {
    *     * `description`
    *     * `labels`
    *     * `monitoring_config.snapshot_analysis.disabled`
-   *     * `monitoring_config.snapshot_analysis.monitoring_interval`
+   *     * `monitoring_config.snapshot_analysis.monitoring_interval_days`
+   *     * `monitoring_config.snapshot_analysis.staleness_days`
+   *     * `monitoring_config.import_features_analysis.state`
+   *     * `monitoring_config.import_features_analysis.anomaly_detection_baseline`
+   *     * `monitoring_config.numerical_threshold_config.value`
+   *     * `monitoring_config.categorical_threshold_config.value`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1015,8 +1020,7 @@ export class FeaturestoreServiceClient {
    *
    *     * `description`
    *     * `labels`
-   *     * `monitoring_config.snapshot_analysis.disabled`
-   *     * `monitoring_config.snapshot_analysis.monitoring_interval`
+   *     * `disable_monitoring`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2327,6 +2331,8 @@ export class FeaturestoreServiceClient {
    *   serving. The value must be positive, and less than or equal to 100.
    *   If not set, defaults to using 1 worker. The low count ensures minimal
    *   impact on online serving performance.
+   * @param {boolean} request.disableIngestionAnalysis
+   *   If true, API doesn't start ingestion analysis pipeline.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

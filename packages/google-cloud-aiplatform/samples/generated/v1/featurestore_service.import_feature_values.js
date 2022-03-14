@@ -76,6 +76,10 @@ function main(entityType, featureSpecs) {
    *  impact on online serving performance.
    */
   // const workerCount = 1234
+  /**
+   *  If true, API doesn't start ingestion analysis pipeline.
+   */
+  // const disableIngestionAnalysis = true
 
   // Imports the Aiplatform library
   const {FeaturestoreServiceClient} = require('@google-cloud/aiplatform').v1;

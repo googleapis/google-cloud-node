@@ -43,8 +43,7 @@ function main(feature) {
    *  Updatable fields:
    *    * `description`
    *    * `labels`
-   *    * `monitoring_config.snapshot_analysis.disabled`
-   *    * `monitoring_config.snapshot_analysis.monitoring_interval`
+   *    * `disable_monitoring`
    */
   // const updateMask = {}
 
