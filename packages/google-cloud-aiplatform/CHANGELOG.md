@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.17.0](https://github.com/googleapis/nodejs-ai-platform/compare/v1.16.0...v1.17.0) (2022-03-14)
+
+
+### Features
+
+* add monitoring_config to EntityType in aiplatform v1 entity_type.proto ([#277](https://github.com/googleapis/nodejs-ai-platform/issues/277)) ([d9b8b06](https://github.com/googleapis/nodejs-ai-platform/commit/d9b8b06644dccf50a8d796ecd175d87a27466350))
+* add PredictRequestResponseLoggingConfig to Endpoint in aiplatform v1 endpoint.proto ([#275](https://github.com/googleapis/nodejs-ai-platform/issues/275)) ([3e5dc67](https://github.com/googleapis/nodejs-ai-platform/commit/3e5dc673ce93c4f7323f86a4f303d10dd1dd0655))
+
 ## [1.16.0](https://github.com/googleapis/nodejs-ai-platform/compare/v1.15.0...v1.16.0) (2022-02-22)
 
 
