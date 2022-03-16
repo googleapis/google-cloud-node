@@ -30,6 +30,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "GetInstanceAuthString": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateInstance": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
@@ -61,6 +66,11 @@
           "retry_params_name": "default"
         },
         "DeleteInstance": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RescheduleMaintenance": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

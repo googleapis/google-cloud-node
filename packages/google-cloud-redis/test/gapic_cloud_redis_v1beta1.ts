@@ -360,7 +360,6 @@ describe('v1beta1.CloudRedisClient', () => {
         new protos.google.cloud.redis.v1beta1.GetInstanceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getInstance(request), expectedError);
@@ -491,7 +490,6 @@ describe('v1beta1.CloudRedisClient', () => {
         new protos.google.cloud.redis.v1beta1.GetInstanceAuthStringRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

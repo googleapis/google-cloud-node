@@ -100,6 +100,46 @@
       }
     },
     {
+      "regionTag": "redis_v1_generated_CloudRedis_GetInstanceAuthString_async",
+      "title": "CloudRedis getInstanceAuthString Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the AUTH string for a Redis instance. If AUTH is not enabled for the instance the response will be empty. This information is not included in the details returned to GetInstance.",
+      "canonical": true,
+      "file": "cloud_redis.get_instance_auth_string.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInstanceAuthString",
+        "fullName": "google.cloud.redis.v1.CloudRedis.GetInstanceAuthString",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.redis.v1.InstanceAuthString",
+        "client": {
+          "shortName": "CloudRedisClient",
+          "fullName": "google.cloud.redis.v1.CloudRedisClient"
+        },
+        "method": {
+          "shortName": "GetInstanceAuthString",
+          "fullName": "google.cloud.redis.v1.CloudRedis.GetInstanceAuthString",
+          "service": {
+            "shortName": "CloudRedis",
+            "fullName": "google.cloud.redis.v1.CloudRedis"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "redis_v1_generated_CloudRedis_CreateInstance_async",
       "title": "CloudRedis createInstance Sample",
       "origin": "API_DEFINITION",
@@ -400,6 +440,54 @@
         "method": {
           "shortName": "DeleteInstance",
           "fullName": "google.cloud.redis.v1.CloudRedis.DeleteInstance",
+          "service": {
+            "shortName": "CloudRedis",
+            "fullName": "google.cloud.redis.v1.CloudRedis"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "redis_v1_generated_CloudRedis_RescheduleMaintenance_async",
+      "title": "CloudRedis rescheduleMaintenance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Reschedule maintenance for a given instance in a given project and location.",
+      "canonical": true,
+      "file": "cloud_redis.reschedule_maintenance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RescheduleMaintenance",
+        "fullName": "google.cloud.redis.v1.CloudRedis.RescheduleMaintenance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reschedule_type",
+            "type": ".google.cloud.redis.v1.RescheduleMaintenanceRequest.RescheduleType"
+          },
+          {
+            "name": "schedule_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudRedisClient",
+          "fullName": "google.cloud.redis.v1.CloudRedisClient"
+        },
+        "method": {
+          "shortName": "RescheduleMaintenance",
+          "fullName": "google.cloud.redis.v1.CloudRedis.RescheduleMaintenance",
           "service": {
             "shortName": "CloudRedis",
             "fullName": "google.cloud.redis.v1.CloudRedis"

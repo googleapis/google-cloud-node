@@ -15,6 +15,11 @@
                 "getInstance"
               ]
             },
+            "GetInstanceAuthString": {
+              "methods": [
+                "getInstanceAuthString"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
@@ -48,6 +53,11 @@
             "DeleteInstance": {
               "methods": [
                 "deleteInstance"
+              ]
+            },
+            "RescheduleMaintenance": {
+              "methods": [
+                "rescheduleMaintenance"
               ]
             },
             "ListInstances": {
@@ -67,6 +77,11 @@
                 "getInstance"
               ]
             },
+            "GetInstanceAuthString": {
+              "methods": [
+                "getInstanceAuthString"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
@@ -100,6 +115,11 @@
             "DeleteInstance": {
               "methods": [
                 "deleteInstance"
+              ]
+            },
+            "RescheduleMaintenance": {
+              "methods": [
+                "rescheduleMaintenance"
               ]
             },
             "ListInstances": {
