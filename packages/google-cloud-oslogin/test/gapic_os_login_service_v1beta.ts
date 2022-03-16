@@ -268,7 +268,6 @@ describe('v1beta.OsLoginServiceClient', () => {
         new protos.google.cloud.oslogin.v1beta.DeletePosixAccountRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deletePosixAccount(request), expectedError);
@@ -396,7 +395,6 @@ describe('v1beta.OsLoginServiceClient', () => {
         new protos.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteSshPublicKey(request), expectedError);
@@ -523,7 +521,6 @@ describe('v1beta.OsLoginServiceClient', () => {
         new protos.google.cloud.oslogin.v1beta.GetLoginProfileRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getLoginProfile(request), expectedError);
@@ -650,7 +647,6 @@ describe('v1beta.OsLoginServiceClient', () => {
         new protos.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSshPublicKey(request), expectedError);
@@ -778,7 +774,6 @@ describe('v1beta.OsLoginServiceClient', () => {
         new protos.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.importSshPublicKey(request), expectedError);
@@ -906,7 +901,6 @@ describe('v1beta.OsLoginServiceClient', () => {
         new protos.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSshPublicKey(request), expectedError);
