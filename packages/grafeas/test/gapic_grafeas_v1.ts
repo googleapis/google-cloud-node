@@ -328,7 +328,6 @@ describe('v1.GrafeasClient', () => {
         new protos.grafeas.v1.GetOccurrenceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getOccurrence(request), expectedError);
@@ -455,7 +454,6 @@ describe('v1.GrafeasClient', () => {
         new protos.grafeas.v1.DeleteOccurrenceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteOccurrence(request), expectedError);
@@ -582,7 +580,6 @@ describe('v1.GrafeasClient', () => {
         new protos.grafeas.v1.CreateOccurrenceRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createOccurrence(request), expectedError);
@@ -713,7 +710,6 @@ describe('v1.GrafeasClient', () => {
         new protos.grafeas.v1.BatchCreateOccurrencesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -843,7 +839,6 @@ describe('v1.GrafeasClient', () => {
         new protos.grafeas.v1.UpdateOccurrenceRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateOccurrence(request), expectedError);
@@ -967,7 +962,6 @@ describe('v1.GrafeasClient', () => {
         new protos.grafeas.v1.GetOccurrenceNoteRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getOccurrenceNote(request), expectedError);
@@ -1088,7 +1082,6 @@ describe('v1.GrafeasClient', () => {
         new protos.grafeas.v1.GetNoteRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getNote(request), expectedError);
@@ -1215,7 +1208,6 @@ describe('v1.GrafeasClient', () => {
         new protos.grafeas.v1.DeleteNoteRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteNote(request), expectedError);
@@ -1339,7 +1331,6 @@ describe('v1.GrafeasClient', () => {
         new protos.grafeas.v1.CreateNoteRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createNote(request), expectedError);
@@ -1466,7 +1457,6 @@ describe('v1.GrafeasClient', () => {
         new protos.grafeas.v1.BatchCreateNotesRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchCreateNotes(request), expectedError);
@@ -1590,7 +1580,6 @@ describe('v1.GrafeasClient', () => {
         new protos.grafeas.v1.UpdateNoteRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateNote(request), expectedError);
