@@ -362,7 +362,6 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.GetChannelRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getChannel(request), expectedError);
@@ -486,7 +485,6 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.GetInputRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getInput(request), expectedError);
@@ -613,7 +611,6 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.CreateEventRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createEvent(request), expectedError);
@@ -737,7 +734,6 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.GetEventRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEvent(request), expectedError);
@@ -864,7 +860,6 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.DeleteEventRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteEvent(request), expectedError);
