@@ -365,7 +365,6 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ListBrandsRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listBrands(request), expectedError);
@@ -504,7 +503,6 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.CreateBrandRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createBrand(request), expectedError);
@@ -640,7 +638,6 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.GetBrandRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBrand(request), expectedError);
@@ -783,7 +780,6 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -929,7 +925,6 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1077,7 +1072,6 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1223,7 +1217,6 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
