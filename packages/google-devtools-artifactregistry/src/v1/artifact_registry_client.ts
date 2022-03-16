@@ -949,9 +949,8 @@ export class ArtifactRegistryClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.artifactRegistryStub!.then(stub => {
+    if (this.artifactRegistryStub && !this._terminated) {
+      return this.artifactRegistryStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

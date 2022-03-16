@@ -20,13 +20,13 @@
 
 'use strict';
 
-function main() {
-  // [START artifactregistry_v1beta2_generated_ArtifactRegistry_GetPackage_async]
+function main(name) {
+  // [START artifactregistry_v1beta2_generated_ArtifactRegistry_GetProjectSettings_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the package to retrieve.
+   *  Required. The name of the projectSettings resource.
    */
   // const name = 'abc123'
 
@@ -36,18 +36,19 @@ function main() {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function callGetPackage() {
+  async function callGetProjectSettings() {
     // Construct request
     const request = {
+      name,
     };
 
     // Run request
-    const response = await artifactregistryClient.getPackage(request);
+    const response = await artifactregistryClient.getProjectSettings(request);
     console.log(response);
   }
 
-  callGetPackage();
-  // [END artifactregistry_v1beta2_generated_ArtifactRegistry_GetPackage_async]
+  callGetProjectSettings();
+  // [END artifactregistry_v1beta2_generated_ArtifactRegistry_GetProjectSettings_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -153,12 +153,27 @@ describe('v1.ArtifactRegistryClient', () => {
     assert(client.artifactRegistryStub);
   });
 
-  it('has close method', () => {
+  it('has close method for the initialized client', done => {
     const client = new artifactregistryModule.v1.ArtifactRegistryClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    client.close();
+    client.initialize();
+    assert(client.artifactRegistryStub);
+    client.close().then(() => {
+      done();
+    });
+  });
+
+  it('has close method for the non-initialized client', done => {
+    const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.artifactRegistryStub, undefined);
+    client.close().then(() => {
+      done();
+    });
   });
 
   it('has getProjectId method', async () => {
@@ -303,6 +318,21 @@ describe('v1.ArtifactRegistryClient', () => {
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
+    });
+
+    it('invokes getRepository with closed client', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetRepositoryRequest()
+      );
+      request.name = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getRepository(request), expectedError);
     });
   });
 

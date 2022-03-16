@@ -70,6 +70,26 @@
                 "testIamPermissions"
               ]
             },
+            "GetProjectSettings": {
+              "methods": [
+                "getProjectSettings"
+              ]
+            },
+            "UpdateProjectSettings": {
+              "methods": [
+                "updateProjectSettings"
+              ]
+            },
+            "ImportAptArtifacts": {
+              "methods": [
+                "importAptArtifacts"
+              ]
+            },
+            "ImportYumArtifacts": {
+              "methods": [
+                "importYumArtifacts"
+              ]
+            },
             "CreateRepository": {
               "methods": [
                 "createRepository"
@@ -188,6 +208,26 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "GetProjectSettings": {
+              "methods": [
+                "getProjectSettings"
+              ]
+            },
+            "UpdateProjectSettings": {
+              "methods": [
+                "updateProjectSettings"
+              ]
+            },
+            "ImportAptArtifacts": {
+              "methods": [
+                "importAptArtifacts"
+              ]
+            },
+            "ImportYumArtifacts": {
+              "methods": [
+                "importYumArtifacts"
               ]
             },
             "CreateRepository": {

@@ -21,14 +21,18 @@
 'use strict';
 
 function main() {
-  // [START artifactregistry_v1beta2_generated_ArtifactRegistry_GetPackage_async]
+  // [START artifactregistry_v1beta2_generated_ArtifactRegistry_ImportAptArtifacts_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the package to retrieve.
+   *  Google Cloud Storage location where input content is located.
    */
-  // const name = 'abc123'
+  // const gcsSource = {}
+  /**
+   *  The name of the parent resource where the artifacts will be imported.
+   */
+  // const parent = 'abc123'
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1beta2;
@@ -36,18 +40,19 @@ function main() {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function callGetPackage() {
+  async function callImportAptArtifacts() {
     // Construct request
     const request = {
     };
 
     // Run request
-    const response = await artifactregistryClient.getPackage(request);
+    const [operation] = await artifactregistryClient.importAptArtifacts(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callGetPackage();
-  // [END artifactregistry_v1beta2_generated_ArtifactRegistry_GetPackage_async]
+  callImportAptArtifacts();
+  // [END artifactregistry_v1beta2_generated_ArtifactRegistry_ImportAptArtifacts_async]
 }
 
 process.on('unhandledRejection', err => {

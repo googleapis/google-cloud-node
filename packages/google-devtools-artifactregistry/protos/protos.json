@@ -256,12 +256,139 @@
                     "csharp_namespace": "Google.Cloud.ArtifactRegistry.V1Beta2",
                     "go_package": "google.golang.org/genproto/googleapis/devtools/artifactregistry/v1beta2;artifactregistry",
                     "java_multiple_files": true,
-                    "java_outer_classname": "SettingsProto",
+                    "java_outer_classname": "YumArtifactProto",
                     "java_package": "com.google.devtools.artifactregistry.v1beta2",
                     "php_namespace": "Google\\Cloud\\ArtifactRegistry\\V1beta2",
                     "ruby_package": "Google::Cloud::ArtifactRegistry::V1beta2"
                   },
                   "nested": {
+                    "AptArtifact": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/AptArtifact",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/aptArtifacts/{apt_artifact}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "packageName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "packageType": {
+                          "type": "PackageType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "architecture": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "component": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "controlFile": {
+                          "type": "bytes",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PackageType": {
+                          "values": {
+                            "PACKAGE_TYPE_UNSPECIFIED": 0,
+                            "BINARY": 1,
+                            "SOURCE": 2
+                          }
+                        }
+                      }
+                    },
+                    "ImportAptArtifactsGcsSource": {
+                      "fields": {
+                        "uris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "useWildcards": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ImportAptArtifactsRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "ImportAptArtifactsGcsSource",
+                          "id": 2
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ImportAptArtifactsErrorInfo": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "ImportAptArtifactsGcsSource",
+                          "id": 1
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ImportAptArtifactsResponse": {
+                      "fields": {
+                        "aptArtifacts": {
+                          "rule": "repeated",
+                          "type": "AptArtifact",
+                          "id": 1
+                        },
+                        "errors": {
+                          "rule": "repeated",
+                          "type": "ImportAptArtifactsErrorInfo",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ImportAptArtifactsMetadata": {
+                      "fields": {}
+                    },
                     "Hash": {
                       "fields": {
                         "type": {
@@ -277,7 +404,8 @@
                         "HashType": {
                           "values": {
                             "HASH_TYPE_UNSPECIFIED": 0,
-                            "SHA256": 1
+                            "SHA256": 1,
+                            "MD5": 2
                           }
                         }
                       }
@@ -426,7 +554,18 @@
                         "(google.api.resource).type": "artifactregistry.googleapis.com/Repository",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}"
                       },
+                      "oneofs": {
+                        "formatConfig": {
+                          "oneof": [
+                            "mavenConfig"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "mavenConfig": {
+                          "type": "MavenRepositoryConfig",
+                          "id": 9
+                        },
                         "name": {
                           "type": "string",
                           "id": 1
@@ -458,10 +597,36 @@
                         }
                       },
                       "nested": {
+                        "MavenRepositoryConfig": {
+                          "fields": {
+                            "allowSnapshotOverwrites": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "versionPolicy": {
+                              "type": "VersionPolicy",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "VersionPolicy": {
+                              "values": {
+                                "VERSION_POLICY_UNSPECIFIED": 0,
+                                "RELEASE": 1,
+                                "SNAPSHOT": 2
+                              }
+                            }
+                          }
+                        },
                         "Format": {
                           "values": {
                             "FORMAT_UNSPECIFIED": 0,
-                            "DOCKER": 1
+                            "DOCKER": 1,
+                            "MAVEN": 2,
+                            "NPM": 3,
+                            "APT": 5,
+                            "YUM": 6,
+                            "PYTHON": 8
                           }
                         }
                       }
@@ -470,7 +635,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "artifactregistry.googleapis.com/Repository"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -499,7 +668,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Repository"
+                          }
                         }
                       }
                     },
@@ -507,7 +680,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "artifactregistry.googleapis.com/Repository"
+                          }
                         },
                         "repositoryId": {
                           "type": "string",
@@ -535,7 +712,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Repository"
+                          }
                         }
                       }
                     },
@@ -545,6 +726,54 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only"
                       },
                       "methods": {
+                        "ImportAptArtifacts": {
+                          "requestType": "ImportAptArtifactsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta2/{parent=projects/*/locations/*/repositories/*}/aptArtifacts:import",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.devtools.artifactregistry.v1beta2.ImportAptArtifactsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.artifactregistry.v1beta2.ImportAptArtifactsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{parent=projects/*/locations/*/repositories/*}/aptArtifacts:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.devtools.artifactregistry.v1beta2.ImportAptArtifactsResponse",
+                                "metadata_type": "google.devtools.artifactregistry.v1beta2.ImportAptArtifactsMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ImportYumArtifacts": {
+                          "requestType": "ImportYumArtifactsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta2/{parent=projects/*/locations/*/repositories/*}/yumArtifacts:import",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.devtools.artifactregistry.v1beta2.ImportYumArtifactsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.artifactregistry.v1beta2.ImportYumArtifactsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{parent=projects/*/locations/*/repositories/*}/yumArtifacts:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.devtools.artifactregistry.v1beta2.ImportYumArtifactsResponse",
+                                "metadata_type": "google.devtools.artifactregistry.v1beta2.ImportYumArtifactsMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ListRepositories": {
                           "requestType": "ListRepositoriesRequest",
                           "responseType": "ListRepositoriesResponse",
@@ -588,8 +817,8 @@
                             "(google.api.http).post": "/v1beta2/{parent=projects/*/locations/*}/repositories",
                             "(google.api.http).body": "repository",
                             "(google.api.method_signature)": "parent,repository,repository_id",
-                            "(google.longrunning.operation_info).response_type": "Repository",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).response_type": "google.devtools.artifactregistry.v1beta2.Repository",
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.artifactregistry.v1beta2.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -603,8 +832,8 @@
                             },
                             {
                               "(google.longrunning.operation_info)": {
-                                "response_type": "Repository",
-                                "metadata_type": "OperationMetadata"
+                                "response_type": "google.devtools.artifactregistry.v1beta2.Repository",
+                                "metadata_type": "google.devtools.artifactregistry.v1beta2.OperationMetadata"
                               }
                             }
                           ]
@@ -636,7 +865,7 @@
                             "(google.api.http).delete": "/v1beta2/{name=projects/*/locations/*/repositories/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.artifactregistry.v1beta2.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -650,7 +879,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.devtools.artifactregistry.v1beta2.OperationMetadata"
                               }
                             }
                           ]
@@ -698,7 +927,7 @@
                             "(google.api.http).delete": "/v1beta2/{name=projects/*/locations/*/repositories/*/packages/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.artifactregistry.v1beta2.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -712,7 +941,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.devtools.artifactregistry.v1beta2.OperationMetadata"
                               }
                             }
                           ]
@@ -760,7 +989,7 @@
                             "(google.api.http).delete": "/v1beta2/{name=projects/*/locations/*/repositories/*/packages/*/versions/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.artifactregistry.v1beta2.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -774,7 +1003,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.devtools.artifactregistry.v1beta2.OperationMetadata"
                               }
                             }
                           ]
@@ -954,13 +1183,105 @@
                               }
                             }
                           ]
+                        },
+                        "GetProjectSettings": {
+                          "requestType": "GetProjectSettingsRequest",
+                          "responseType": "ProjectSettings",
+                          "options": {
+                            "(google.api.http).get": "/v1beta2/{name=projects/*/projectSettings}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{name=projects/*/projectSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateProjectSettings": {
+                          "requestType": "UpdateProjectSettingsRequest",
+                          "responseType": "ProjectSettings",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta2/{project_settings.name=projects/*/projectSettings}",
+                            "(google.api.http).body": "project_settings",
+                            "(google.api.method_signature)": "project_settings,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta2/{project_settings.name=projects/*/projectSettings}",
+                                "body": "project_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project_settings,update_mask"
+                            }
+                          ]
                         }
                       }
                     },
                     "OperationMetadata": {
                       "fields": {}
                     },
+                    "ProjectSettings": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/ProjectSettings",
+                        "(google.api.resource).pattern": "projects/{project}/projectSettings"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "legacyRedirectionState": {
+                          "type": "RedirectionState",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "RedirectionState": {
+                          "values": {
+                            "REDIRECTION_STATE_UNSPECIFIED": 0,
+                            "REDIRECTION_FROM_GCR_IO_DISABLED": 1,
+                            "REDIRECTION_FROM_GCR_IO_ENABLED": 2,
+                            "REDIRECTION_FROM_GCR_IO_FINALIZED": 3
+                          }
+                        }
+                      }
+                    },
+                    "GetProjectSettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/ProjectSettings"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateProjectSettingsRequest": {
+                      "fields": {
+                        "projectSettings": {
+                          "type": "ProjectSettings",
+                          "id": 2
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 3
+                        }
+                      }
+                    },
                     "Tag": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/Tag",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/tags/{tag}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1049,7 +1370,18 @@
                         }
                       }
                     },
+                    "VersionView": {
+                      "values": {
+                        "VERSION_VIEW_UNSPECIFIED": 0,
+                        "BASIC": 1,
+                        "FULL": 2
+                      }
+                    },
                     "Version": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/Version",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/versions/{version}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1071,14 +1403,14 @@
                           "rule": "repeated",
                           "type": "Tag",
                           "id": 7
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Struct",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
-                      }
-                    },
-                    "VersionView": {
-                      "values": {
-                        "VERSION_VIEW_UNSPECIFIED": 0,
-                        "BASIC": 1,
-                        "FULL": 2
                       }
                     },
                     "ListVersionsRequest": {
@@ -1098,6 +1430,13 @@
                         "view": {
                           "type": "VersionView",
                           "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1137,6 +1476,119 @@
                           "id": 2
                         }
                       }
+                    },
+                    "YumArtifact": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/YumArtifact",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/yumArtifacts/{yum_artifact}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "packageName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "packageType": {
+                          "type": "PackageType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "architecture": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PackageType": {
+                          "values": {
+                            "PACKAGE_TYPE_UNSPECIFIED": 0,
+                            "BINARY": 1,
+                            "SOURCE": 2
+                          }
+                        }
+                      }
+                    },
+                    "ImportYumArtifactsGcsSource": {
+                      "fields": {
+                        "uris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "useWildcards": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ImportYumArtifactsRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "ImportYumArtifactsGcsSource",
+                          "id": 2
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ImportYumArtifactsErrorInfo": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "ImportYumArtifactsGcsSource",
+                          "id": 1
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ImportYumArtifactsResponse": {
+                      "fields": {
+                        "yumArtifacts": {
+                          "rule": "repeated",
+                          "type": "YumArtifact",
+                          "id": 1
+                        },
+                        "errors": {
+                          "rule": "repeated",
+                          "type": "ImportYumArtifactsErrorInfo",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ImportYumArtifactsMetadata": {
+                      "fields": {}
                     }
                   }
                 }
@@ -2273,15 +2725,6 @@
                 }
               }
             },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -2308,6 +2751,78 @@
             },
             "Empty": {
               "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
             }
           }
         },
