@@ -577,7 +577,6 @@ describe('v1.WebRiskServiceClient', () => {
         new protos.google.cloud.webrisk.v1.CreateSubmissionRequest()
       );
       request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createSubmission(request), expectedError);
