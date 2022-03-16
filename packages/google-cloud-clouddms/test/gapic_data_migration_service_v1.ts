@@ -379,7 +379,6 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.GetMigrationJobRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getMigrationJob(request), expectedError);
@@ -510,7 +509,6 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.GenerateSshScriptRequest()
       );
       request.migrationJob = '';
-      const expectedHeaderRequestParams = 'migration_job=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.generateSshScript(request), expectedError);
@@ -642,7 +640,6 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.GetConnectionProfileRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConnectionProfile(request), expectedError);
