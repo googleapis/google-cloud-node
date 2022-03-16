@@ -360,7 +360,6 @@ describe('v1.IDSClient', () => {
         new protos.google.cloud.ids.v1.GetEndpointRequest()
       );
       request.name = '';
-      const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEndpoint(request), expectedError);
